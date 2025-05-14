@@ -29,14 +29,19 @@ func dealPlayerHand():
 	
 	
 	for i in range(MAX_HAND_SIZE):
-	
-		var cardScene = CardOgre.instantiate()
-		if i > 2:
-			cardScene = CardPikeman.instantiate()
-		$PlayerHand.add_child(cardScene)
+		drawCard($PlayerHand)
+		
 	updatePlayerHandOffsets()
 		
-		
+
+func drawCard(targetHand:Node2D):
+	
+	var cardScene = CardOgre.instantiate()
+	if randi_range(0,5) > 2:
+		cardScene = CardPikeman.instantiate()
+	targetHand.add_child(cardScene)
+
+	
 
 func updatePlayerHandOffsets():
 	var x_offset := 0
@@ -71,7 +76,7 @@ func _input(e: InputEvent) -> void:
 			if currentDraggedCard:
 				currentDraggedCard = finishDraggingCard()
 			else:
-				currentDraggedCard = fetchCardOnClick()
+				startDraggingCard()
 				
 			print("left clikc")	
 			prints("dragged card: ", currentDraggedCard)
@@ -81,9 +86,48 @@ func _input(e: InputEvent) -> void:
 
 
 
-func connectCardSignal(card:Card):
-	card.connect("hoverOn", onHoverCard)
-	card.connect("hoverOff", onHoverCardOff)
+
+func startDraggingCard():
+	var card:Card = fetchCardOnClick()
+	if not card:
+		return
+	if not card.mySlot:
+		currentDraggedCard = card
+	else:
+		currentDraggedCard = null
+		
+		
+
+func finishDraggingCard() -> Node:
+	var success := false
+	
+	#### FIND CARD SLOT
+	var results = fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
+	if results.size() > 0:
+		var selectedSlot:CardSlot = getCollidedObject(results[0])
+		
+		#### AVAILABLE SLOT WAS FOUND, SET CARD TO IT
+		if selectedSlot.isAvailable:
+			if main.checkSlotPlayer(selectedSlot):
+				currentDraggedCard.position = selectedSlot.position
+				currentDraggedCard.mySlot = selectedSlot
+				selectedSlot.toggleAvailable(false)
+				success = true
+				
+				currentDraggedCard.reparent($PlayerBoard)
+				
+	#### CLEAR SLOT FROM CARD'S END
+	if not success:
+		if currentDraggedCard:
+			if currentDraggedCard.mySlot:
+				currentDraggedCard.mySlot.toggleAvailable(true)
+				currentDraggedCard.mySlot = null
+	updatePlayerHandOffsets()
+	return null
+
+
+
+
 	
 
 func onHoverCard(card:Card):
@@ -148,37 +192,12 @@ func fetchCardOnClick() -> Card:
 
 
 
-func finishDraggingCard() -> Node:
-	var success := false
-	
-	#### FIND CARD SLOT
-	var results = fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
-	if results.size() > 0:
-		var selectedSlot:CardSlot = getCollidedObject(results[0])
-		
-		#### AVAILABLE SLOT WAS FOUND, SET CARD TO IT
-		if selectedSlot.isAvailable:
-			if main.checkSlotPlayer(selectedSlot):
-				currentDraggedCard.position = selectedSlot.position
-				currentDraggedCard.mySlot = selectedSlot
-				selectedSlot.toggleAvailable(false)
-				success = true
-				
-				currentDraggedCard.reparent($PlayerBoard)
-			
-			
-			
-	#### CLEAR SLOT FROM CARD'S END
-	if not success:
-		if currentDraggedCard:
-			if currentDraggedCard.mySlot:
-				currentDraggedCard.mySlot.toggleAvailable(true)
-				currentDraggedCard.mySlot = null
-	
-	updatePlayerHandOffsets()
-	return null
-
-
 
 func getCollidedObject(result):
 	return result.collider.get_parent()
+	
+
+
+func connectCardSignal(card:Card):
+	card.connect("hoverOn", onHoverCard)
+	card.connect("hoverOff", onHoverCardOff)
