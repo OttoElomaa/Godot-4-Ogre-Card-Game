@@ -1,15 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=14 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
 [ext_resource type="Script" uid="uid://doyn8i1dunq2s" path="res://GameScenes/battle_system.gd" id="2_8jxey"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/UI-border-ninepatchrect-texture.png" id="3_015nr"]
+[ext_resource type="Texture2D" uid="uid://b1gyte5n4pqp6" path="res://Art/portrait-sorcerer.png" id="3_hffy6"]
 [ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://GameScenes/tableCardSlot.tscn" id="4_c6j12"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="5_hys5q"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="6_m0cpn"]
 [ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="8_2brjh"]
 [ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="9_7ijru"]
-[ext_resource type="Texture2D" uid="uid://cg87l0yc8bagd" path="res://Art/game-mana-health-holder-texture.png" id="10_2brjh"]
+[ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/game-mana-health-holder-texture-v2.png" id="10_2brjh"]
+[ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSetHeaderHealth.tres" id="11_jh5rg"]
+[ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="12_hffy6"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8jxey")
@@ -21,6 +24,65 @@ script = ExtResource("2_8jxey")
 z_index = 5
 points = PackedVector2Array(-287, 209, -492, 528)
 default_color = Color(1, 0.67451, 0.341176, 1)
+
+[node name="Scenery" type="Node2D" parent="BattleSystem"]
+z_index = -5
+
+[node name="PlayerSprite" type="Sprite2D" parent="BattleSystem/Scenery"]
+position = Vector2(138, 1126)
+texture = ExtResource("3_hffy6")
+
+[node name="EnemySprite" type="Sprite2D" parent="BattleSystem/Scenery"]
+position = Vector2(1080, 131)
+texture = ExtResource("3_hffy6")
+
+[node name="PlayerResourceHolderSprite" type="Sprite2D" parent="BattleSystem/Scenery"]
+position = Vector2(189, 1141)
+texture = ExtResource("10_2brjh")
+
+[node name="EnemyResourceHolderSprite2" type="Sprite2D" parent="BattleSystem/Scenery"]
+position = Vector2(1134, 146)
+texture = ExtResource("10_2brjh")
+
+[node name="PlayerHealthLabel" type="Label" parent="BattleSystem/Scenery"]
+texture_filter = 1
+offset_left = 218.0
+offset_top = 1215.0
+offset_right = 265.0
+offset_bottom = 1263.0
+text = "99"
+label_settings = ExtResource("11_jh5rg")
+horizontal_alignment = 1
+
+[node name="EnemyHealthLabel" type="Label" parent="BattleSystem/Scenery"]
+texture_filter = 1
+offset_left = 1164.0
+offset_top = 219.0
+offset_right = 1211.0
+offset_bottom = 267.0
+text = "99"
+label_settings = ExtResource("11_jh5rg")
+horizontal_alignment = 1
+
+[node name="PlayerManaLabel" type="Label" parent="BattleSystem/Scenery"]
+texture_filter = 1
+offset_left = 260.0
+offset_top = 1020.0
+offset_right = 307.0
+offset_bottom = 1068.0
+text = "88"
+label_settings = ExtResource("12_hffy6")
+horizontal_alignment = 1
+
+[node name="EnemyManaLabel" type="Label" parent="BattleSystem/Scenery"]
+texture_filter = 1
+offset_left = 1204.0
+offset_top = 27.0
+offset_right = 1251.0
+offset_bottom = 75.0
+text = "88"
+label_settings = ExtResource("12_hffy6")
+horizontal_alignment = 1
 
 [node name="CardsManager" type="Node2D" parent="."]
 script = ExtResource("1_n4faa")
@@ -162,17 +224,6 @@ theme_override_styles/normal = ExtResource("9_7ijru")
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 zoom = Vector2(0.8, 0.8)
-
-[node name="Scenery" type="Node2D" parent="."]
-z_index = -5
-
-[node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Scenery"]
-position = Vector2(190, 1120)
-texture = ExtResource("10_2brjh")
-
-[node name="EnemyResourceHolderSprite2" type="Sprite2D" parent="Scenery"]
-position = Vector2(1082, 151)
-texture = ExtResource("10_2brjh")
 
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]

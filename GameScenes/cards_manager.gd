@@ -18,6 +18,8 @@ var screenSize:Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO)
 var currentDraggedCard:Card = null
 var currentHoveredCards = []
 
+var dumbHandDrawCounter := 0
+
 
 func _ready() -> void:
 	screenSize = get_viewport_rect()
@@ -28,14 +30,18 @@ func _ready() -> void:
 
 
 func dealPlayerHand():
+	dumbHandDrawCounter = 5
 	for i in range(MAX_HAND_SIZE):
 		drawCard($PlayerHand)	
 	updatePlayerHandOffsets()
 
 
 func dealEnemyHand():
+	dumbHandDrawCounter = 0
 	for i in range(MAX_HAND_SIZE):
 		var card = drawCard($EnemyHand)
+		dumbHandDrawCounter += 1
+		
 		card.removeMouseInteraction()
 		card.toggleFrontSide(false)
 	updatePlayerHandOffsets()
@@ -45,7 +51,10 @@ func dealEnemyHand():
 func drawCard(targetHand:Node2D):
 	
 	var cardScene = CardOgre.instantiate()
-	if randi_range(0,5) > 2:
+	#if randi_range(0,5) > 2:
+	if dumbHandDrawCounter < 1:
+		cardScene = CardPikeman.instantiate()
+	elif randi_range(0,5) > 3:
 		cardScene = CardPikeman.instantiate()
 	targetHand.add_child(cardScene)
 	return cardScene
@@ -135,12 +144,15 @@ func finishDraggingCard() -> Node:
 		var selectedSlot:CardSlot = getCollidedObject(results[0])
 		
 		#### AVAILABLE SLOT WAS FOUND, SET CARD TO IT
+		var c = currentDraggedCard
 		if selectedSlot.isAvailable:
 			if main.checkSlotPlayer(selectedSlot):
-				placeCardInSlot(currentDraggedCard, selectedSlot)
-				success = true
-				
-				currentDraggedCard.reparent($PlayerBoard)
+				if c.manaCost <= battleSystem.playerMana:
+					placeCardInSlot(c, selectedSlot)
+					c.reparent($PlayerBoard)
+					battleSystem.playerMana -= c.manaCost
+					battleSystem.updateResourceLabels()
+					success = true
 				
 	#### CLEAR SLOT FROM CARD'S END
 	if not success:

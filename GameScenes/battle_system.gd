@@ -9,16 +9,34 @@ var cardsManager:Node = null
 @onready var attackLine := $AttackLine
 var COLLISION_MASK_CARD := 1
 
+var turnCount := 0
 var playerMana := 0
 var enemyMana := 0
 
-var playerHealth := 0
-var enemyHealth := 0
+var playerHealth := 20
+var enemyHealth := 20
 
 var attackLineShown: bool = false
 var currentAttackingCard: Card = null
 
 
+
+
+func _ready() -> void:
+	
+	turnCount += 1
+	playerMana = turnCount
+	enemyMana = turnCount
+	updateResourceLabels()
+	
+	
+	
+
+func updateResourceLabels():
+	$Scenery/PlayerHealthLabel.text = "%d" % playerHealth
+	$Scenery/PlayerManaLabel.text = "%d" % playerMana
+	$Scenery/EnemyHealthLabel.text = "%d" % enemyHealth
+	$Scenery/EnemyManaLabel.text = "%d" % enemyMana
 
 func _input(e: InputEvent) -> void:
 	
@@ -95,6 +113,11 @@ func togglePlayerAttackMode(enable:bool, card:Card):
 
 func _on_end_turn_button_pressed() -> void:
 	enemyPlayTurn()
+	
+	turnCount += 1
+	playerMana = turnCount
+	enemyMana = turnCount
+	updateResourceLabels()
 	cardsManager.startPlayerTurn()
 	
 
@@ -102,7 +125,10 @@ func enemyPlayTurn():
 	
 	var enemyHandCards = cardsManager.getEnemyHandCards()
 	for card:Card in enemyHandCards:
-		playEnemyCard(card)
+		if card.manaCost <= enemyMana:
+			var success = playEnemyCard(card)
+			if success:
+				enemyMana -= card.manaCost
 		
 				
 
@@ -111,7 +137,8 @@ func playEnemyCard(card:Card):
 		if slot.isAvailable:
 			cardsManager.placeCardInSlot(card, slot)
 			card.reparent(cardsManager.get_node("EnemyBoard"))
-			return
+			return true
+	return false
 
 
 

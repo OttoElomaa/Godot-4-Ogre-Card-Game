@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dcu6qrjgwyyf3" path="res://Art/card-art-ogre.png" id="2_jmfi3"]
 
 [node name="Card-Cr-Ogre" instance=ExtResource("1_1h6lf")]
+manaCost = 3
 startingDamage = 3
 startingHealth = 4
 

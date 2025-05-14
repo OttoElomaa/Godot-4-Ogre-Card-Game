@@ -15,6 +15,7 @@ enum CardActionStates {
 	ACTIVE, PASSIVE, RESTING
 }
 
+@export var manaCost := 0
 @export var startingDamage := 0
 @export var startingHealth := 0
 var damage := 0
