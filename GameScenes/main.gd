@@ -24,6 +24,23 @@ func _ready() -> void:
 		slot.slotType = CardSlotTypes.ENEMY
 
 
+
+func fetchMouseOverObjects(collisionMask: int):
+	
+	#### WORLD STATE
+	var spaceState = get_world_2d().direct_space_state
+	#### MOUSE POSITION
+	var params = PhysicsPointQueryParameters2D.new()
+	params.position = get_global_mouse_position()
+	params.collide_with_areas = true
+	params.collision_mask = collisionMask
+	
+	#### INTERSECT THEM
+	var result = spaceState.intersect_point(params)
+	return result
+
+
+
 func checkSlotPlayer(slot:CardSlot):
 	return slot.slotType == CardSlotTypes.PLAYER
 

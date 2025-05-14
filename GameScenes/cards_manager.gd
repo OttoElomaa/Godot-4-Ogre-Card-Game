@@ -61,8 +61,8 @@ func updatePlayerHandOffsets():
 	x_offset = 0
 	for c in $EnemyHand.get_children():
 		c.position = $EnemyHandPosition.position + Vector2(x_offset, 0)
-		c.scale = Vector2(0.6, 0.6)
-		x_offset += 130
+		#c.scale = Vector2(0.6, 0.6)
+		x_offset += 80
 	
 
 
@@ -123,7 +123,7 @@ func finishDraggingCard() -> Node:
 	var success := false
 	
 	#### FIND CARD SLOT
-	var results = fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
+	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
 	if results.size() > 0:
 		var selectedSlot:CardSlot = getCollidedObject(results[0])
 		
@@ -180,25 +180,9 @@ func toggleCardHighlight(card:Card, toHighlight:bool):
 		
 
 
-func fetchMouseOverObjects(collisionMask: int):
-	
-	#### WORLD STATE
-	var spaceState = get_world_2d().direct_space_state
-	#### MOUSE POSITION
-	var params = PhysicsPointQueryParameters2D.new()
-	params.position = get_global_mouse_position()
-	params.collide_with_areas = true
-	params.collision_mask = collisionMask
-	
-	#### INTERSECT THEM
-	var result = spaceState.intersect_point(params)
-	return result
-	
-
-
 func fetchCardOnClick() -> Card:
 	#### GET CARDS AT MOUSE POSITION
-	var result = fetchMouseOverObjects(COLLISION_MASK_CARD)
+	var result = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if result.size() > 0:
 		var topCard = getCollidedObject(result[0])
 		

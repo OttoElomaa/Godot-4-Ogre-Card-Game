@@ -40,7 +40,7 @@ script = ExtResource("1_n4faa")
 position = Vector2(530, 1295)
 
 [node name="EnemyHandPosition" type="Marker2D" parent="CardsManager"]
-position = Vector2(1454, 217)
+position = Vector2(1449, 109)
 
 [node name="PlayerSlots" type="Node2D" parent="."]
 z_index = -1
