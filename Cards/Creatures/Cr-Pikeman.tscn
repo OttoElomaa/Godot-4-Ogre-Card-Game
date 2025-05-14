@@ -7,5 +7,5 @@
 startingDamage = 2
 startingHealth = 1
 
-[node name="Art" parent="." index="1"]
+[node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_r2e3n")

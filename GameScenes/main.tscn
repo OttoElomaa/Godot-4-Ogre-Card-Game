@@ -16,6 +16,11 @@ script = ExtResource("1_8jxey")
 [node name="BattleSystem" type="Node2D" parent="."]
 script = ExtResource("2_8jxey")
 
+[node name="AttackLine" type="Line2D" parent="BattleSystem"]
+z_index = 5
+points = PackedVector2Array(442, 139, 1236, 185)
+default_color = Color(1, 0.67451, 0.341176, 1)
+
 [node name="CardsManager" type="Node2D" parent="."]
 script = ExtResource("1_n4faa")
 

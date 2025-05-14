@@ -11,6 +11,7 @@ signal hoverOff
 
 var mySlot: CardSlot = null
 var myOffset := Vector2.ZERO
+var allowInteract := true
 
 
 func _ready() -> void:
@@ -19,8 +20,8 @@ func _ready() -> void:
 	
 	myOffset = get_parent().position
 	
-	$StatsPanel/HBox/PowerLabel.text = "%d" % startingDamage
-	$StatsPanel/HBox/HealthLabel.text = "%d" % startingHealth
+	$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % startingDamage
+	$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % startingHealth
 	
 
 
@@ -30,3 +31,20 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	emit_signal("hoverOff", self)
+
+
+
+func removeMouseInteraction():
+	#$Area2D.queue_free()
+	allowInteract = false
+
+
+func checkInteractAllowed():
+	return allowInteract
+
+
+func toggleFrontSide(toShow:bool):
+	if toShow:
+		$Frontside.show()
+	else:
+		$Frontside.hide()

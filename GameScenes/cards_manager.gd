@@ -35,7 +35,9 @@ func dealPlayerHand():
 
 func dealEnemyHand():
 	for i in range(MAX_HAND_SIZE):
-		drawCard($EnemyHand)	
+		var card = drawCard($EnemyHand)
+		card.removeMouseInteraction()
+		card.toggleFrontSide(false)
 	updatePlayerHandOffsets()
 
 		
@@ -46,6 +48,7 @@ func drawCard(targetHand:Node2D):
 	if randi_range(0,5) > 2:
 		cardScene = CardPikeman.instantiate()
 	targetHand.add_child(cardScene)
+	return cardScene
 
 	
 
@@ -101,12 +104,18 @@ func _input(e: InputEvent) -> void:
 
 func startDraggingCard():
 	var card:Card = fetchCardOnClick()
+	#### CHECK IF DRAGGING IS ALLOWED
 	if not card:
 		return
+	if not card.checkInteractAllowed():
+		return
+	
+	#### ONLY IF IT'S NOT SLOTTED	
 	if not card.mySlot:
 		currentDraggedCard = card
 	else:
 		currentDraggedCard = null
+		battleSystem.togglePlayerAttackMode(true, card)
 		
 		
 
@@ -138,6 +147,9 @@ func finishDraggingCard() -> Node:
 
 func placeCardInSlot(card:Card, slot:CardSlot):
 	card.position = slot.position
+	card.scale = Vector2.ONE
+	card.toggleFrontSide(true)
+	
 	card.mySlot = slot
 	slot.toggleAvailable(false)
 
