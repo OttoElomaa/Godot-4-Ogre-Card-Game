@@ -11,6 +11,8 @@ var MAX_HAND_SIZE := 7
 
 
 var main:Node = null
+var battleSystem:Node = null
+
 var screenSize:Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO)
 
 var currentDraggedCard:Card = null
@@ -18,20 +20,24 @@ var currentHoveredCards = []
 
 
 func _ready() -> void:
-	main = get_parent()
 	screenSize = get_viewport_rect()
 	
 	dealPlayerHand()
+	dealEnemyHand()
 	
 
 
 func dealPlayerHand():
-	
-	
 	for i in range(MAX_HAND_SIZE):
-		drawCard($PlayerHand)
-		
+		drawCard($PlayerHand)	
 	updatePlayerHandOffsets()
+
+
+func dealEnemyHand():
+	for i in range(MAX_HAND_SIZE):
+		drawCard($EnemyHand)	
+	updatePlayerHandOffsets()
+
 		
 
 func drawCard(targetHand:Node2D):
@@ -48,6 +54,12 @@ func updatePlayerHandOffsets():
 	for c in $PlayerHand.get_children():
 		c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
 		x_offset += 180
+	
+	x_offset = 0
+	for c in $EnemyHand.get_children():
+		c.position = $EnemyHandPosition.position + Vector2(x_offset, 0)
+		c.scale = Vector2(0.6, 0.6)
+		x_offset += 130
 	
 
 
@@ -109,9 +121,7 @@ func finishDraggingCard() -> Node:
 		#### AVAILABLE SLOT WAS FOUND, SET CARD TO IT
 		if selectedSlot.isAvailable:
 			if main.checkSlotPlayer(selectedSlot):
-				currentDraggedCard.position = selectedSlot.position
-				currentDraggedCard.mySlot = selectedSlot
-				selectedSlot.toggleAvailable(false)
+				placeCardInSlot(currentDraggedCard, selectedSlot)
 				success = true
 				
 				currentDraggedCard.reparent($PlayerBoard)
@@ -126,7 +136,10 @@ func finishDraggingCard() -> Node:
 	return null
 
 
-
+func placeCardInSlot(card:Card, slot:CardSlot):
+	card.position = slot.position
+	card.mySlot = slot
+	slot.toggleAvailable(false)
 
 	
 
@@ -201,3 +214,15 @@ func getCollidedObject(result):
 func connectCardSignal(card:Card):
 	card.connect("hoverOn", onHoverCard)
 	card.connect("hoverOff", onHoverCardOff)
+
+
+func startPlayerTurn():
+	drawCard($PlayerHand)
+	updatePlayerHandOffsets()
+
+
+func getEnemyHandCards():
+	return $EnemyHand.get_children()
+	
+	
+	

@@ -11,6 +11,12 @@ enum CardStates {
 
 func _ready() -> void:
 	
+	$CardsManager.main = self
+	$CardsManager.battleSystem = $BattleSystem
+	
+	$BattleSystem.main = self
+	$BattleSystem.cardsManager = $CardsManager
+	
 	for slot:CardSlot in $PlayerSlots.get_children():
 		slot.slotType = CardSlotTypes.PLAYER
 	
@@ -23,6 +29,10 @@ func checkSlotPlayer(slot:CardSlot):
 
 func checkSlotEnemy(slot:CardSlot):
 	return slot.slotType == CardSlotTypes.ENEMY
+
+
+func getEnemySlots():
+	return $EnemySlots.get_children()
 
 
 #### USE EXIT BUTTON TO CLOSE THE GAME
