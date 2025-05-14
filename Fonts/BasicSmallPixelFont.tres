@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dnmve288k8de2"]
+
+[ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Resources/Fonts/monaco/monaco.ttf" id="1_npms7"]
+
+[resource]
+default_font = ExtResource("1_npms7")
+default_font_size = 32

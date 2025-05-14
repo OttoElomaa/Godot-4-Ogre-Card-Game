@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://knljw27a4uiu"]
+
+[ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Resources/Fonts/stepalange-font/Stepalange-x3BLm.otf" id="1_icp23"]
+
+[resource]
+default_font = ExtResource("1_icp23")
+default_font_size = 28

@@ -1,0 +1,10 @@
+Fonts from FontSpace
+
+Stepalange by Szymon Furjan
+license: SIL Open Font License (OFL)
+link: https://www.fontspace.com/stepalange-font-f104612
+
+The FontStruction “Monaco”
+(http://fontstruct.com/fontstructions/show/753435) by Jamie Place is licensed
+under a Creative Commons Attribution Share Alike license
+(http://creativecommons.org/licenses/by-sa/3.0/).

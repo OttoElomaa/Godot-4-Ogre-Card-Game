@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bybi82ik7ric5"]
+
+[ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Fonts/monaco/monaco.ttf" id="1_0i3gf"]
+
+[resource]
+font = ExtResource("1_0i3gf")
+font_size = 48
+font_color = Color(0.322783, 0.27264, 0.205567, 1)

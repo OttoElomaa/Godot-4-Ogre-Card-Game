@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://4clxhxygbncp"]
+
+[ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Resources/Fonts/monaco/monaco.ttf" id="1_kac4w"]
+
+[resource]
+font = ExtResource("1_kac4w")
+font_size = 32

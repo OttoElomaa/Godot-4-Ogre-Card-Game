@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ctkfud23u7av3"]
+
+[ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Resources/Fonts/stepalange-font/Stepalange-x3BLm.otf" id="1_rjb60"]
+
+[resource]
+default_font = ExtResource("1_rjb60")
+default_font_size = 28

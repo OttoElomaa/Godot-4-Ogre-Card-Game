@@ -1,0 +1,126 @@
+[gd_scene load_steps=10 format=3 uid="uid://d0m41055ikape"]
+
+[ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
+[ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
+[ext_resource type="PackedScene" uid="uid://l3rpd1xyh67i" path="res://Cards/Creatures/Cr-Ogre.tscn" id="2_ktgld"]
+[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/UI-border-ninepatchrect-texture.png" id="3_015nr"]
+[ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://GameScenes/tableCardSlot.tscn" id="4_c6j12"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="5_hys5q"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="6_m0cpn"]
+[ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="8_2brjh"]
+[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="9_7ijru"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_8jxey")
+
+[node name="PlayerSlots" type="Node2D" parent="."]
+
+[node name="TableCardSlot" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+position = Vector2(293, 881)
+
+[node name="TableCardSlot2" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+position = Vector2(523, 881)
+
+[node name="TableCardSlot3" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+position = Vector2(753, 881)
+
+[node name="TableCardSlot4" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+position = Vector2(983, 881)
+
+[node name="TableCardSlot5" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+position = Vector2(1213, 881)
+
+[node name="TableCardSlot6" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+position = Vector2(1443, 881)
+
+[node name="EnemySlots" type="Node2D" parent="."]
+
+[node name="TableCardSlot" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+position = Vector2(291, 461)
+
+[node name="TableCardSlot2" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+position = Vector2(521, 461)
+
+[node name="TableCardSlot3" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+position = Vector2(751, 461)
+
+[node name="TableCardSlot4" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+position = Vector2(981, 461)
+
+[node name="TableCardSlot5" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+position = Vector2(1211, 461)
+
+[node name="TableCardSlot6" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+position = Vector2(1441, 461)
+
+[node name="CardsManager" type="Node2D" parent="."]
+script = ExtResource("1_n4faa")
+
+[node name="PlayerDeck" type="Node2D" parent="CardsManager"]
+
+[node name="EnemyDeck" type="Node2D" parent="CardsManager"]
+
+[node name="PlayerHand" type="Node2D" parent="CardsManager"]
+
+[node name="EnemyHand" type="Node2D" parent="CardsManager"]
+
+[node name="PlayerBoard" type="Node2D" parent="CardsManager"]
+
+[node name="Card-Cr-Ogre" parent="CardsManager/PlayerBoard" instance=ExtResource("2_ktgld")]
+position = Vector2(1882, 253)
+
+[node name="EnemyBoard" type="Node2D" parent="CardsManager"]
+
+[node name="PlayerHandPosition" type="Marker2D" parent="CardsManager"]
+position = Vector2(242, 1302)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_015nr")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="ExitPane" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/ExitPane"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("5_hys5q")
+
+[node name="Label" type="Label" parent="CanvasLayer/ExitPane/Panel"]
+layout_mode = 2
+text = "Exit Game"
+label_settings = ExtResource("6_m0cpn")
+horizontal_alignment = 1
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/ExitPane/Panel"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("8_2brjh")
+theme_override_styles/normal = ExtResource("9_7ijru")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(0.8, 0.8)
+
+[connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]

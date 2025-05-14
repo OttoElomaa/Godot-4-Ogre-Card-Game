@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://mxfejwivkelm"]
+
+[ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
+[ext_resource type="Texture2D" uid="uid://dpqhi5cjnnq65" path="res://Art/card-background-texture-V2.png" id="2_7bc8n"]
+[ext_resource type="Texture2D" uid="uid://b7g66n14xrpak" path="res://Art/card-art-base-card-idk.png" id="3_trd61"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="4_7bc8n"]
+[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="4_w0fdq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kd3xj"]
+size = Vector2(220, 330)
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_i5yq8")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_7bc8n")
+
+[node name="Art" type="Sprite2D" parent="."]
+position = Vector2(0, -53)
+texture = ExtResource("3_trd61")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_kd3xj")
+
+[node name="StatsPanel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = 128.0
+offset_right = 49.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("4_w0fdq")
+
+[node name="HBox" type="HBoxContainer" parent="StatsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="PowerLabel" type="Label" parent="StatsPanel/HBox"]
+layout_mode = 2
+text = "22"
+label_settings = ExtResource("4_7bc8n")
+
+[node name="DashLabel" type="Label" parent="StatsPanel/HBox"]
+layout_mode = 2
+text = "/"
+label_settings = ExtResource("4_7bc8n")
+
+[node name="HealthLabel" type="Label" parent="StatsPanel/HBox"]
+layout_mode = 2
+text = "33"
+label_settings = ExtResource("4_7bc8n")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
