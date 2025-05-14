@@ -87,13 +87,16 @@ func _physics_process(delta: float) -> void:
 
 func _input(e: InputEvent) -> void:
 	
+	if States.gameState != States.GameStates.PLAY:
+		return
+	
 	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
 		if e.is_pressed():
 			
 			if currentDraggedCard:
 				currentDraggedCard = finishDraggingCard()
 			else:
-				startDraggingCard()
+				startDraggingCardOrAttack()
 				
 			print("left clikc")	
 			prints("dragged card: ", currentDraggedCard)
@@ -104,7 +107,7 @@ func _input(e: InputEvent) -> void:
 
 
 
-func startDraggingCard():
+func startDraggingCardOrAttack():
 	var card:Card = fetchCardOnClick()
 	#### CHECK IF DRAGGING IS ALLOWED
 	if not card:
@@ -115,6 +118,8 @@ func startDraggingCard():
 	#### ONLY IF IT'S NOT SLOTTED	
 	if not card.mySlot:
 		currentDraggedCard = card
+		
+	#### SLOTTED CARDS WILL ATTACK INSTEAD
 	else:
 		currentDraggedCard = null
 		battleSystem.togglePlayerAttackMode(true, card)

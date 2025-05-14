@@ -22,10 +22,11 @@ var currentAttackingCard: Card = null
 
 func _input(e: InputEvent) -> void:
 	
+	if States.gameState != States.GameStates.ATTACK:
+		return
 	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
 		if e.is_pressed():
-			if States.gameState == States.GameStates.ATTACK:
-				handlePlayerAttack()
+			handlePlayerAttack()
 
 
 func _physics_process(delta: float) -> void:
@@ -40,19 +41,46 @@ func handlePlayerAttack():
 	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if results.size() > 0:
 		var target:Card = getCollidedObject(results[0])
+		#### INVALID TARGET - END TARGETING ANYWAY
+		if not target.mySlot:
+			if target != currentAttackingCard:
+				endAttackState()
+			return
+		if main.checkSlotPlayer(target.mySlot):
+			if target != currentAttackingCard:
+				endAttackState()
+			return
+		
+		#### VALID TARGET - RESOLVE ATTACK
 		if main.checkSlotEnemy(target.mySlot):
-			attackLineShown = false
-			States.gameState = States.GameStates.PLAY
 			prints("Player card targets enemy card: ", currentAttackingCard, target)
+			endAttackState()
+			resolveAttack(currentAttackingCard, target)
 			
-			var cardsToDestroy := []
-			if currentAttackingCard.checkHasLethalOn(target):
-				cardsToDestroy.append(target)
-			if target.checkHasLethalOn(currentAttackingCard):
-				cardsToDestroy.append(currentAttackingCard)
-			for c in cardsToDestroy:
-				c.queue_free()
 
+	#attackLineShown = false
+
+	
+
+
+func resolveAttack(attackCard:Card, targetCard:Card):
+	var cardsToDestroy := []
+	if attackCard.checkHasLethalOn(targetCard):
+		cardsToDestroy.append(targetCard)
+	if targetCard.checkHasLethalOn(attackCard):
+		cardsToDestroy.append(attackCard)
+	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
+	for c:Card in cardsToDestroy:
+		c.mySlot.isAvailable = true
+		c.queue_free()
+
+
+func endAttackState():
+	attackLineShown = false
+	$AttackLine.hide()
+	States.gameState = States.GameStates.PLAY
+	
+	
 
 func togglePlayerAttackMode(enable:bool, card:Card):
 	
@@ -61,6 +89,7 @@ func togglePlayerAttackMode(enable:bool, card:Card):
 		States.gameState = States.GameStates.ATTACK
 		
 		attackLineShown = enable
+		$AttackLine.show()
 		attackLine.points[0] = card.position
 
 
