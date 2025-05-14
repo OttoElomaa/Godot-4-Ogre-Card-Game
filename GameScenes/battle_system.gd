@@ -17,8 +17,10 @@ func _physics_process(delta: float) -> void:
 	
 
 func togglePlayerAttackMode(enable:bool, card:Card):
-	attackLineShown = enable
-	attackLine.points[0] = card.position
+	
+	if card.checkActive():
+		attackLineShown = enable
+		attackLine.points[0] = card.position
 
 
 func _on_end_turn_button_pressed() -> void:

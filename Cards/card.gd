@@ -5,13 +5,24 @@ class_name Card
 signal hoverOn
 signal hoverOff
 
+#### ACTIVE = Combatant, can be targeted, protects player from being targeted
+#### PASSIVE = Can't be targeted, doesn't protect
+#### RESTING = Can't take card actions this turn, such as attack or cast.
+#### RESTING IS TRIGGERED by entering the field, attacking, or casting
+#### --> Unless "Haste/Vigilant" kind of effects
+#### ACTIVE / PASSIVE IS TRIGGERED in a right click menu on top of card
+enum CardActionStates {
+	ACTIVE, PASSIVE, RESTING
+}
 
 @export var startingDamage := 0
 @export var startingHealth := 0
 
 var mySlot: CardSlot = null
 var myOffset := Vector2.ZERO
+
 var allowInteract := true
+var actionState: CardActionStates = CardActionStates.ACTIVE
 
 
 func _ready() -> void:
@@ -39,7 +50,7 @@ func removeMouseInteraction():
 	allowInteract = false
 
 
-func checkInteractAllowed():
+func checkInteractAllowed() -> bool:
 	return allowInteract
 
 
@@ -48,3 +59,9 @@ func toggleFrontSide(toShow:bool):
 		$Frontside.show()
 	else:
 		$Frontside.hide()
+
+
+func checkActive() -> bool:
+	if actionState == CardActionStates.ACTIVE:
+		return true
+	return false
