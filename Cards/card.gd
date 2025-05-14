@@ -17,6 +17,8 @@ enum CardActionStates {
 
 @export var startingDamage := 0
 @export var startingHealth := 0
+var damage := 0
+var health := 0
 
 var mySlot: CardSlot = null
 var myOffset := Vector2.ZERO
@@ -29,6 +31,8 @@ func _ready() -> void:
 	var cardManager = get_parent().get_parent()
 	cardManager.connectCardSignal(self)
 	
+	damage = startingDamage
+	health = startingHealth
 	myOffset = get_parent().position
 	
 	$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % startingDamage
@@ -65,3 +69,7 @@ func checkActive() -> bool:
 	if actionState == CardActionStates.ACTIVE:
 		return true
 	return false
+
+
+func checkHasLethalOn(card:Card):
+	return (damage > card.health)

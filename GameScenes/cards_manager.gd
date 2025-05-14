@@ -78,6 +78,8 @@ func _physics_process(delta: float) -> void:
 	#### HIGHLIGHT A CARD ON HOVER -> Not when mouse over a stack of cards
 	if currentHoveredCards.size() == 1:
 		var card = currentHoveredCards[0]
+		if not MyTools.checkNodeValidity(card):
+			return
 		#if card == checkMouseOverCard():
 		card.scale = Vector2(1.05, 1.05)
 		card.z_index = 2

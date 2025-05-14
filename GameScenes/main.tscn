@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=11 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
@@ -9,6 +9,7 @@
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="6_m0cpn"]
 [ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="8_2brjh"]
 [ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="9_7ijru"]
+[ext_resource type="Texture2D" uid="uid://cg87l0yc8bagd" path="res://Art/game-mana-health-holder-texture.png" id="10_2brjh"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8jxey")
@@ -18,7 +19,7 @@ script = ExtResource("2_8jxey")
 
 [node name="AttackLine" type="Line2D" parent="BattleSystem"]
 z_index = 5
-points = PackedVector2Array(442, 139, 1236, 185)
+points = PackedVector2Array(-287, 209, -492, 528)
 default_color = Color(1, 0.67451, 0.341176, 1)
 
 [node name="CardsManager" type="Node2D" parent="."]
@@ -161,6 +162,17 @@ theme_override_styles/normal = ExtResource("9_7ijru")
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 zoom = Vector2(0.8, 0.8)
+
+[node name="Scenery" type="Node2D" parent="."]
+z_index = -5
+
+[node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Scenery"]
+position = Vector2(190, 1120)
+texture = ExtResource("10_2brjh")
+
+[node name="EnemyResourceHolderSprite2" type="Sprite2D" parent="Scenery"]
+position = Vector2(1082, 151)
+texture = ExtResource("10_2brjh")
 
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]

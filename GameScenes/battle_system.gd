@@ -9,6 +9,12 @@ var cardsManager:Node = null
 @onready var attackLine := $AttackLine
 var COLLISION_MASK_CARD := 1
 
+var playerMana := 0
+var enemyMana := 0
+
+var playerHealth := 0
+var enemyHealth := 0
+
 var attackLineShown: bool = false
 var currentAttackingCard: Card = null
 
@@ -34,9 +40,18 @@ func handlePlayerAttack():
 	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if results.size() > 0:
 		var target:Card = getCollidedObject(results[0])
-		if main.checkSlotPlayer(target.mySlot):
+		if main.checkSlotEnemy(target.mySlot):
 			attackLineShown = false
 			States.gameState = States.GameStates.PLAY
+			prints("Player card targets enemy card: ", currentAttackingCard, target)
+			
+			var cardsToDestroy := []
+			if currentAttackingCard.checkHasLethalOn(target):
+				cardsToDestroy.append(target)
+			if target.checkHasLethalOn(currentAttackingCard):
+				cardsToDestroy.append(currentAttackingCard)
+			for c in cardsToDestroy:
+				c.queue_free()
 
 
 func togglePlayerAttackMode(enable:bool, card:Card):
