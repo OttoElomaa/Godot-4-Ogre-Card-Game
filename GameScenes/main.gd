@@ -46,6 +46,25 @@ func fetchMouseOverObjects(collisionMask: int):
 
 
 
+func toggleCardActionMenu(enable:bool, card:Card):
+	
+	if enable:
+		if card != null:
+			$ActionMenuCanvas.offset = get_global_mouse_position() * $Camera2D.zoom.x
+			$ActionMenuCanvas.show()
+	else:
+		$ActionMenuCanvas.hide()
+
+
+func updateUi(turnCount:int):
+	toggleCardActionMenu(false, null)
+	
+	$CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel.text = boardName
+	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
+
+
+########################################################################################
+
 func checkSlotPlayer(slot:CardSlot):
 	return slot.slotType == CardSlotTypes.PLAYER
 
@@ -57,11 +76,8 @@ func getEnemySlots():
 	return $EnemySlots.get_children()
 
 
-func updateUi(turnCount:int):
-	$CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel.text = boardName
-	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
 
-
+#################################################################################
 #### USE EXIT BUTTON TO CLOSE THE GAME
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()

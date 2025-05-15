@@ -102,19 +102,22 @@ func _input(e: InputEvent) -> void:
 	if States.gameState != States.GameStates.PLAY:
 		return
 	
-	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
+	if e is InputEventMouseButton: 
 		if e.is_pressed():
-			
-			if currentDraggedCard:
-				currentDraggedCard = finishDraggingCard()
-			else:
-				startDraggingCardOrAttack()
+			if e.button_index == MOUSE_BUTTON_LEFT:
+				if currentDraggedCard:
+					currentDraggedCard = finishDraggingCard()
+				else:
+					startDraggingCardOrAttack()
+					
+				print("left clikc")	
+				prints("dragged card: ", currentDraggedCard)
 				
-			print("left clikc")	
-			prints("dragged card: ", currentDraggedCard)
+			elif e.button_index == MOUSE_BUTTON_RIGHT:
+				main.toggleCardActionMenu(true, fetchCardOnClick() )
 			
-		elif e.is_released():
-			print("left relese")
+		#elif e.is_released():
+			#print("left relese")
 
 
 
