@@ -113,8 +113,10 @@ func handlePlayerAttack():
 
 
 func handlePlayerAttackEnemy():
-	enemyHealth -= currentAttackingCard.damage
-	currentAttackingCard.rest()
+	var c = currentAttackingCard
+	enemyHealth -= c.damage
+	c.playAttackAnimation()
+	c.rest()
 
 
 func handlePlayerAttackCreature(results:Array):
@@ -131,8 +133,9 @@ func handlePlayerAttackCreature(results:Array):
 		return
 	
 	#### VALID TARGET - RESOLVE ATTACK
+	#prints("Player card targets enemy card: ", currentAttackingCard, target)
 	if main.checkSlotEnemy(target.mySlot):
-		prints("Player card targets enemy card: ", currentAttackingCard, target)
+		currentAttackingCard.playAttackAnimation()
 		endAttackState()
 		resolveAttack(currentAttackingCard, target)
 		

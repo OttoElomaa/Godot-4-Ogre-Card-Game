@@ -33,18 +33,19 @@ func dealPlayerHand():
 	dumbHandDrawCounter = 5
 	for i in range(MAX_HAND_SIZE):
 		drawCard($PlayerHand)	
-	updatePlayerHandOffsets()
+	updatePlayerHandVisuals()
 
 
 func dealEnemyHand():
 	dumbHandDrawCounter = 0
 	for i in range(MAX_HAND_SIZE):
-		var card = drawCard($EnemyHand)
+		var card:Card = drawCard($EnemyHand)
 		dumbHandDrawCounter += 1
 		
+		card.toggleEnemyStatus(true)
 		card.removeMouseInteraction()
 		card.toggleFrontSide(false)
-	updatePlayerHandOffsets()
+	updatePlayerHandVisuals()
 
 		
 
@@ -60,12 +61,13 @@ func drawCard(targetHand:Node2D):
 	return cardScene
 
 	
-
-func updatePlayerHandOffsets():
+#### OFFSETS, SHOW MANA COSTS, ETC.
+func updatePlayerHandVisuals():
 	var x_offset := 0
 	for c in $PlayerHand.get_children():
 		c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
 		x_offset += 180
+		c.toggleManaCostIndicator(true)
 	
 	x_offset = 0
 	for c in $EnemyHand.get_children():
@@ -160,7 +162,7 @@ func finishDraggingCard() -> Node:
 			if currentDraggedCard.mySlot:
 				currentDraggedCard.mySlot.toggleAvailable(true)
 				currentDraggedCard.mySlot = null
-	updatePlayerHandOffsets()
+	updatePlayerHandVisuals()
 	return null
 
 
@@ -168,6 +170,7 @@ func placeCardInSlot(card:Card, slot:CardSlot):
 	card.position = slot.position
 	card.scale = Vector2.ONE
 	card.toggleFrontSide(true)
+	card.toggleManaCostIndicator(false)
 	
 	card.mySlot = slot
 	slot.toggleAvailable(false)
@@ -234,7 +237,7 @@ func connectCardSignal(card:Card):
 
 func startPlayerTurn():
 	drawCard($PlayerHand)
-	updatePlayerHandOffsets()
+	updatePlayerHandVisuals()
 
 
 func wakePlayerCards():

@@ -26,6 +26,7 @@ var myOffset := Vector2.ZERO
 
 var allowInteract := true
 var actionState: CardActionStates = CardActionStates.ACTIVE
+var isEnemyCard := false
 
 
 func _ready() -> void:
@@ -80,7 +81,7 @@ func checkNotResting():
 
 func rest():
 	actionState = CardActionStates.RESTING
-	rotation_degrees = 25
+	#rotation_degrees = 25
 
 func wake():
 	actionState = CardActionStates.ACTIVE
@@ -89,3 +90,30 @@ func wake():
 
 func checkHasLethalOn(card:Card):
 	return (damage > card.health)
+
+
+func toggleManaCostIndicator(enable:bool):
+	if enable:
+		$Frontside/ManaCost.show()
+		$Frontside/ManaCost/ManaCostLabel.text = "%d" % manaCost
+	else:
+		$Frontside/ManaCost.hide()
+
+
+func toggleEnemyStatus(enabled:bool):
+	isEnemyCard = enabled
+
+
+func playAttackAnimation():
+	if isEnemyCard:
+		$BodyAnimations.play("EnemyAttack")
+	else:
+		$BodyAnimations.play("PlayerAttack")
+	$BodyAnimations/AnimationsTimer.start()
+
+
+#### FOR RESTING
+func _on_animations_timer_timeout() -> void:
+	#rotation_degrees = 25
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "rotation_degrees", 25, 0.2)
