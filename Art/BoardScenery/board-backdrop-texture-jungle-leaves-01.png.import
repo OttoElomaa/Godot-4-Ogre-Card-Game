@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw5c676y2fis8"
-path="res://.godot/imported/art-achra-bestiary.png-ea1e0db26989c697b2cc719e7b78c16a.ctex"
+uid="uid://sge30r6aur2x"
+path="res://.godot/imported/board-backdrop-texture-jungle-leaves-01.png-385c2f35443af2e72162326542194602.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/art-achra-bestiary.png"
-dest_files=["res://.godot/imported/art-achra-bestiary.png-ea1e0db26989c697b2cc719e7b78c16a.ctex"]
+source_file="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png"
+dest_files=["res://.godot/imported/board-backdrop-texture-jungle-leaves-01.png-385c2f35443af2e72162326542194602.ctex"]
 
 [params]
 

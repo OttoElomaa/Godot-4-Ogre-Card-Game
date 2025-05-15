@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlg7x4i3jv20p"
-path="res://.godot/imported/card-backside-texture.png-414a9315bf0db3144f99b8018cf09d64.ctex"
+uid="uid://qngukrd0n58y"
+path="res://.godot/imported/card-mana-cost-indicator-texture.png-42afbd4a57438faca1af86b7f8c32618.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/card-backside-texture.png"
-dest_files=["res://.godot/imported/card-backside-texture.png-414a9315bf0db3144f99b8018cf09d64.ctex"]
+source_file="res://Art/CardComponents/card-mana-cost-indicator-texture.png"
+dest_files=["res://.godot/imported/card-mana-cost-indicator-texture.png-42afbd4a57438faca1af86b7f8c32618.ctex"]
 
 [params]
 

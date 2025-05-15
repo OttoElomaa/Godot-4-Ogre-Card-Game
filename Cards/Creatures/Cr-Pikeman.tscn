@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dk4etb0x0xce3"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_hwuew"]
-[ext_resource type="Texture2D" uid="uid://ycjlvok6deon" path="res://Art/card-art-creature-pikeman.png" id="2_r2e3n"]
+[ext_resource type="Texture2D" uid="uid://ycjlvok6deon" path="res://Art/CardArt/card-art-creature-pikeman.png" id="2_r2e3n"]
 
 [node name="Card-Cr-Pikeman" instance=ExtResource("1_hwuew")]
 manaCost = 1

@@ -68,6 +68,7 @@ func updatePlayerHandVisuals():
 		c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
 		x_offset += 180
 		c.toggleManaCostIndicator(true)
+		c.toggleActionStateIndicator(false)
 	
 	x_offset = 0
 	for c in $EnemyHand.get_children():
@@ -167,13 +168,17 @@ func finishDraggingCard() -> Node:
 
 
 func placeCardInSlot(card:Card, slot:CardSlot):
+	#### CARD VISUAL STUFF
 	card.position = slot.position
 	card.scale = Vector2.ONE
 	card.toggleFrontSide(true)
 	card.toggleManaCostIndicator(false)
+	card.toggleActionStateIndicator(true)
 	
+	#### SLOT STUFF, AND TAP CARD
 	card.mySlot = slot
 	slot.toggleAvailable(false)
+	card.restAndAnimate()
 
 	
 

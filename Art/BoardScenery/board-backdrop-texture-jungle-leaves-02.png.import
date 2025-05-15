@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn8jedugya4ww"
-path="res://.godot/imported/board-backdrop-texture-ruins-corner-02.png-796f57140d6664cf4e75a36de41ce6f5.ctex"
+uid="uid://yy4b6om5as5s"
+path="res://.godot/imported/board-backdrop-texture-jungle-leaves-02.png-ce4d34ec66bc627b9982ea142027b8b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/board-backdrop-texture-ruins-corner-02.png"
-dest_files=["res://.godot/imported/board-backdrop-texture-ruins-corner-02.png-796f57140d6664cf4e75a36de41ce6f5.ctex"]
+source_file="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-02.png"
+dest_files=["res://.godot/imported/board-backdrop-texture-jungle-leaves-02.png-ce4d34ec66bc627b9982ea142027b8b5.ctex"]
 
 [params]
 

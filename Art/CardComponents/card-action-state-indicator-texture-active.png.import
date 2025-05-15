@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpqhi5cjnnq65"
-path="res://.godot/imported/card-background-texture-V2.png-01211bea8042234bf3129608d43abd8d.ctex"
+uid="uid://xlcm32jn5w27"
+path="res://.godot/imported/card-action-state-indicator-texture-active.png-702a1293d69317d4982c43debf7cb4e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/card-background-texture-V2.png"
-dest_files=["res://.godot/imported/card-background-texture-V2.png-01211bea8042234bf3129608d43abd8d.ctex"]
+source_file="res://Art/CardComponents/card-action-state-indicator-texture-active.png"
+dest_files=["res://.godot/imported/card-action-state-indicator-texture-active.png-702a1293d69317d4982c43debf7cb4e3.ctex"]
 
 [params]
 

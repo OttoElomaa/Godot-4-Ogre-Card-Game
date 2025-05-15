@@ -83,14 +83,24 @@ func rest():
 	actionState = CardActionStates.RESTING
 	#rotation_degrees = 25
 
+func restAndAnimate():
+	actionState = CardActionStates.RESTING
+	rotateRestingCard(true)
+
+
 func wake():
 	actionState = CardActionStates.ACTIVE
-	rotation_degrees = 0
+	rotateRestingCard(false)
 
 
 func checkHasLethalOn(card:Card):
 	return (damage > card.health)
 
+func toggleEnemyStatus(enabled:bool):
+	isEnemyCard = enabled
+	
+
+###########################################################################
 
 func toggleManaCostIndicator(enable:bool):
 	if enable:
@@ -100,8 +110,12 @@ func toggleManaCostIndicator(enable:bool):
 		$Frontside/ManaCost.hide()
 
 
-func toggleEnemyStatus(enabled:bool):
-	isEnemyCard = enabled
+func toggleActionStateIndicator(enable:bool):
+	if enable:
+		$Frontside/ActionState.show()
+		#$Frontside/ManaCost/ManaCostLabel.text = "%d" % manaCost
+	else:
+		$Frontside/ActionState.hide()
 
 
 func playAttackAnimation():
@@ -114,6 +128,14 @@ func playAttackAnimation():
 
 #### FOR RESTING
 func _on_animations_timer_timeout() -> void:
-	#rotation_degrees = 25
+	rotateRestingCard(true)
+	
+
+
+
+func rotateRestingCard(willRest:bool):
+	var degreesGoal = 0
+	if willRest:
+		degreesGoal = 25
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "rotation_degrees", 25, 0.2)
+	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)

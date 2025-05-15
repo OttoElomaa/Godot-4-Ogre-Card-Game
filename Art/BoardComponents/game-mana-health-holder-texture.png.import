@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ycjlvok6deon"
-path="res://.godot/imported/card-art-creature-pikeman.png-8364b0877a77e97324f7d31379444231.ctex"
+uid="uid://cg87l0yc8bagd"
+path="res://.godot/imported/game-mana-health-holder-texture.png-1ee2a0951bda15ca4a7e74451dc0c554.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/card-art-creature-pikeman.png"
-dest_files=["res://.godot/imported/card-art-creature-pikeman.png-8364b0877a77e97324f7d31379444231.ctex"]
+source_file="res://Art/BoardComponents/game-mana-health-holder-texture.png"
+dest_files=["res://.godot/imported/game-mana-health-holder-texture.png-1ee2a0951bda15ca4a7e74451dc0c554.ctex"]
 
 [params]
 

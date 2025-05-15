@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iro7vjuquihg"
-path="res://.godot/imported/board-backdrop-texture-ruins-corner-01.png-5c7265085f1c3641f8d92c1c32750aea.ctex"
+uid="uid://bv6t2gvsftvsp"
+path="res://.godot/imported/card-slot-empty-texture.png-11d4a04f9459b800343950e390f0ecb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/board-backdrop-texture-ruins-corner-01.png"
-dest_files=["res://.godot/imported/board-backdrop-texture-ruins-corner-01.png-5c7265085f1c3641f8d92c1c32750aea.ctex"]
+source_file="res://Art/BoardComponents/card-slot-empty-texture.png"
+dest_files=["res://.godot/imported/card-slot-empty-texture.png-11d4a04f9459b800343950e390f0ecb5.ctex"]
 
 [params]
 

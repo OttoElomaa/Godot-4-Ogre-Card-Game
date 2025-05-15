@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qngukrd0n58y"
-path="res://.godot/imported/card-mana-cost-indicator-texture.png-9c060f0300274b61c608857377e5502f.ctex"
+uid="uid://dn8jedugya4ww"
+path="res://.godot/imported/board-backdrop-texture-ruins-corner-02.png-9d89766a897474de20dc00fbcbaa8a02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/card-mana-cost-indicator-texture.png"
-dest_files=["res://.godot/imported/card-mana-cost-indicator-texture.png-9c060f0300274b61c608857377e5502f.ctex"]
+source_file="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-02.png"
+dest_files=["res://.godot/imported/board-backdrop-texture-ruins-corner-02.png-9d89766a897474de20dc00fbcbaa8a02.ctex"]
 
 [params]
 

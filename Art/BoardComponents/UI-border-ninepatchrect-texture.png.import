@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg87l0yc8bagd"
-path="res://.godot/imported/game-mana-health-holder-texture.png-c7392900966e611db7bfdfd221359bf6.ctex"
+uid="uid://6b1b3mtorr35"
+path="res://.godot/imported/UI-border-ninepatchrect-texture.png-19d250421a15190fd9787ff984e96276.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/game-mana-health-holder-texture.png"
-dest_files=["res://.godot/imported/game-mana-health-holder-texture.png-c7392900966e611db7bfdfd221359bf6.ctex"]
+source_file="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png"
+dest_files=["res://.godot/imported/UI-border-ninepatchrect-texture.png-19d250421a15190fd9787ff984e96276.ctex"]
 
 [params]
 

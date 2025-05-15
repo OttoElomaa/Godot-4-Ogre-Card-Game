@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0a382rqeqt5t"
-path="res://.godot/imported/game-mana-health-holder-texture-v2.png-5836df8b5bb19646d7bb63205b529e94.ctex"
+uid="uid://dss7gbtoyrnwu"
+path="res://.godot/imported/card-action-state-indicator-texture-active.png-4b627ce16ea7938f31cd667eb96d79c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/game-mana-health-holder-texture-v2.png"
-dest_files=["res://.godot/imported/game-mana-health-holder-texture-v2.png-5836df8b5bb19646d7bb63205b529e94.ctex"]
+source_file="res://Art/card-action-state-indicator-texture-active.png"
+dest_files=["res://.godot/imported/card-action-state-indicator-texture-active.png-4b627ce16ea7938f31cd667eb96d79c3.ctex"]
 
 [params]
 

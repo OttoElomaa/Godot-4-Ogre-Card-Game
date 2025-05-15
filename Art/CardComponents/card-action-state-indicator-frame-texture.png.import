@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m57jecwha7ix"
-path="res://.godot/imported/portrait-adversary-01.png-51b84f7f2d15ba9710143227ff5193e4.ctex"
+uid="uid://ccx2ko1eonipr"
+path="res://.godot/imported/card-action-state-indicator-frame-texture.png-1223028557c4a661b145488ab57acdbf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/portrait-adversary-01.png"
-dest_files=["res://.godot/imported/portrait-adversary-01.png-51b84f7f2d15ba9710143227ff5193e4.ctex"]
+source_file="res://Art/CardComponents/card-action-state-indicator-frame-texture.png"
+dest_files=["res://.godot/imported/card-action-state-indicator-frame-texture.png-1223028557c4a661b145488ab57acdbf.ctex"]
 
 [params]
 

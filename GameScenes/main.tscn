@@ -3,19 +3,19 @@
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
 [ext_resource type="Script" uid="uid://doyn8i1dunq2s" path="res://GameScenes/battle_system.gd" id="2_8jxey"]
-[ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/portrait-hero-01.png" id="3_8s1e5"]
-[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/UI-border-ninepatchrect-texture.png" id="3_015nr"]
-[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/portrait-adversary-01.png" id="4_bw8dm"]
+[ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_8s1e5"]
+[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="3_015nr"]
+[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_bw8dm"]
 [ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://GameScenes/tableCardSlot.tscn" id="4_c6j12"]
-[ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/board-backdrop-texture-jungle-leaves-01.png" id="4_ehjh8"]
-[ext_resource type="Texture2D" uid="uid://yy4b6om5as5s" path="res://Art/board-backdrop-texture-jungle-leaves-02.png" id="5_47kpv"]
-[ext_resource type="Texture2D" uid="uid://iro7vjuquihg" path="res://Art/board-backdrop-texture-ruins-corner-01.png" id="5_dj0be"]
+[ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="4_ehjh8"]
+[ext_resource type="Texture2D" uid="uid://yy4b6om5as5s" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-02.png" id="5_47kpv"]
+[ext_resource type="Texture2D" uid="uid://iro7vjuquihg" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-01.png" id="5_dj0be"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="5_hys5q"]
-[ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/board-backdrop-texture-ruins-corner-02.png" id="6_j87nl"]
+[ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-02.png" id="6_j87nl"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="6_m0cpn"]
 [ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="8_2brjh"]
 [ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="9_7ijru"]
-[ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/game-mana-health-holder-texture-v2.png" id="10_2brjh"]
+[ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/BoardComponents/game-mana-health-holder-texture-v2.png" id="10_2brjh"]
 [ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSetHeaderHealth.tres" id="11_jh5rg"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="12_hffy6"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="19_47kpv"]
@@ -131,6 +131,10 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleSystem/EnemyPortraitArea"]
 position = Vector2(1097, 141.5)
 shape = SubResource("RectangleShape2D_dj0be")
+
+[node name="EnemyTurnTimer" type="Timer" parent="BattleSystem"]
+wait_time = 1.5
+one_shot = true
 
 [node name="CardsManager" type="Node2D" parent="."]
 script = ExtResource("1_n4faa")
@@ -329,5 +333,6 @@ horizontal_alignment = 1
 anchor_mode = 0
 zoom = Vector2(0.8, 0.8)
 
+[connection signal="timeout" from="BattleSystem/EnemyTurnTimer" to="BattleSystem" method="_on_enemy_turn_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]

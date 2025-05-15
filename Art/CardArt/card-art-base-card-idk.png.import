@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1gyte5n4pqp6"
-path="res://.godot/imported/portrait-sorcerer.png-42d06a9ec32372391217705db4b48cf7.ctex"
+uid="uid://b7g66n14xrpak"
+path="res://.godot/imported/card-art-base-card-idk.png-b4a7bb1db4094cce1f7218452c4bc419.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/portrait-sorcerer.png"
-dest_files=["res://.godot/imported/portrait-sorcerer.png-42d06a9ec32372391217705db4b48cf7.ctex"]
+source_file="res://Art/CardArt/card-art-base-card-idk.png"
+dest_files=["res://.godot/imported/card-art-base-card-idk.png-b4a7bb1db4094cce1f7218452c4bc419.ctex"]
 
 [params]
 

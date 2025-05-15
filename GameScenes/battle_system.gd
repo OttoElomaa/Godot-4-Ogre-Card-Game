@@ -60,20 +60,13 @@ func _physics_process(delta: float) -> void:
 func _on_end_turn_button_pressed() -> void:
 	passTurn()
 	
-
+	
+#### PLAY ENEMY TURN, THEN AFTER TIMER WAIT, START PLAYER TURN
 func passTurn():
 	cardsManager.wakeEnemyCards()
+	$EnemyTurnTimer.start()
 	enemyPlayTurn()
 	
-	turnCount += 1
-	playerMana = turnCount
-	enemyMana = turnCount
-	updateResourceLabels()
-	
-	cardsManager.wakePlayerCards()
-	main.updateUi(turnCount)
-	cardsManager.startPlayerTurn()
-
 
 
 func enemyPlayTurn():
@@ -93,6 +86,18 @@ func playEnemyCard(card:Card):
 			card.reparent(cardsManager.get_node("EnemyBoard"))
 			return true
 	return false
+
+
+#### START PLAYER'S TURN AFTER ENEMY ACTION
+func _on_enemy_turn_timer_timeout() -> void:
+	turnCount += 1
+	playerMana = turnCount
+	enemyMana = turnCount
+	updateResourceLabels()
+	
+	cardsManager.wakePlayerCards()
+	main.updateUi(turnCount)
+	cardsManager.startPlayerTurn()
 
 
 #############################################################################
@@ -117,6 +122,7 @@ func handlePlayerAttackEnemy():
 	enemyHealth -= c.damage
 	c.playAttackAnimation()
 	c.rest()
+	endAttackState()
 
 
 func handlePlayerAttackCreature(results:Array):

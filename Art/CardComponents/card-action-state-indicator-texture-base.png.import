@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sge30r6aur2x"
-path="res://.godot/imported/board-backdrop-texture-jungle-leaves-01.png-695d55277379eabf7a0e51491fb7dd90.ctex"
+uid="uid://n70p1d10ugfj"
+path="res://.godot/imported/card-action-state-indicator-texture-base.png-e722aa9f70a32ff234724d9e7ce56c17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/board-backdrop-texture-jungle-leaves-01.png"
-dest_files=["res://.godot/imported/board-backdrop-texture-jungle-leaves-01.png-695d55277379eabf7a0e51491fb7dd90.ctex"]
+source_file="res://Art/CardComponents/card-action-state-indicator-texture-base.png"
+dest_files=["res://.godot/imported/card-action-state-indicator-texture-base.png-e722aa9f70a32ff234724d9e7ce56c17.ctex"]
 
 [params]
 

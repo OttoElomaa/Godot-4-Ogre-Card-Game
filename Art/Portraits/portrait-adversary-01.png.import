@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv6t2gvsftvsp"
-path="res://.godot/imported/card-slot-empty-texture.png-64d24a0e4031b23de3e8853b5f32f7cc.ctex"
+uid="uid://m57jecwha7ix"
+path="res://.godot/imported/portrait-adversary-01.png-4786e2f0567ce2f47355f1e64880c17b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/card-slot-empty-texture.png"
-dest_files=["res://.godot/imported/card-slot-empty-texture.png-64d24a0e4031b23de3e8853b5f32f7cc.ctex"]
+source_file="res://Art/Portraits/portrait-adversary-01.png"
+dest_files=["res://.godot/imported/portrait-adversary-01.png-4786e2f0567ce2f47355f1e64880c17b.ctex"]
 
 [params]
 
