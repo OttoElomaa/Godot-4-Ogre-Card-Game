@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=22 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/UI-border-ninepatchrect-texture.png" id="3_015nr"]
 [ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/portrait-adversary-01.png" id="4_bw8dm"]
 [ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://GameScenes/tableCardSlot.tscn" id="4_c6j12"]
+[ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/board-backdrop-texture-jungle-leaves-01.png" id="4_ehjh8"]
+[ext_resource type="Texture2D" uid="uid://yy4b6om5as5s" path="res://Art/board-backdrop-texture-jungle-leaves-02.png" id="5_47kpv"]
 [ext_resource type="Texture2D" uid="uid://iro7vjuquihg" path="res://Art/board-backdrop-texture-ruins-corner-01.png" id="5_dj0be"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="5_hys5q"]
 [ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/board-backdrop-texture-ruins-corner-02.png" id="6_j87nl"]
@@ -16,9 +18,18 @@
 [ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/game-mana-health-holder-texture-v2.png" id="10_2brjh"]
 [ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSetHeaderHealth.tres" id="11_jh5rg"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="12_hffy6"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="19_47kpv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0uhk"]
+bg_color = Color(0.947752, 0.911757, 0.861921, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8jxey")
@@ -35,6 +46,14 @@ texture = ExtResource("5_dj0be")
 [node name="LowerCornerDecor" type="Sprite2D" parent="Visuals/Scenery"]
 position = Vector2(2090, 1008)
 texture = ExtResource("6_j87nl")
+
+[node name="Leaves" type="Sprite2D" parent="Visuals/Scenery"]
+position = Vector2(201, 715)
+texture = ExtResource("4_ehjh8")
+
+[node name="Leaves2" type="Sprite2D" parent="Visuals/Scenery"]
+position = Vector2(2211, 1071)
+texture = ExtResource("5_47kpv")
 
 [node name="Core" type="Node2D" parent="Visuals"]
 
@@ -105,6 +124,7 @@ label_settings = ExtResource("12_hffy6")
 horizontal_alignment = 1
 
 [node name="EnemyPortraitArea" type="Area2D" parent="BattleSystem"]
+visible = false
 collision_layer = 4
 collision_mask = 4
 
@@ -199,10 +219,10 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/ExitPane"]
 custom_minimum_size = Vector2(200, 80)
@@ -228,10 +248,10 @@ offset_top = -50.0
 offset_right = 220.0
 offset_bottom = 50.0
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/EndTurnPane"]
 custom_minimum_size = Vector2(200, 80)
@@ -248,6 +268,62 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_styles/hover = ExtResource("8_2brjh")
 theme_override_styles/normal = ExtResource("9_7ijru")
+
+[node name="LevelInfoPanel" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 220.0
+offset_bottom = 100.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/LevelInfoPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/LevelInfoPanel/VBox"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c0uhk")
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/LevelInfoPanel/VBox/Panel"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel/HBox"]
+layout_mode = 2
+text = "  Game board  -"
+label_settings = ExtResource("19_47kpv")
+horizontal_alignment = 1
+
+[node name="BoardNameLabel" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel/HBox"]
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("19_47kpv")
+horizontal_alignment = 1
+
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/LevelInfoPanel/VBox"]
+custom_minimum_size = Vector2(340, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c0uhk")
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox"]
+layout_mode = 2
+text = "  Turn  -"
+label_settings = ExtResource("19_47kpv")
+horizontal_alignment = 1
+
+[node name="TurnCountLabel" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox"]
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("19_47kpv")
+horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

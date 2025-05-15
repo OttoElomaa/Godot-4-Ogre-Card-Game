@@ -9,6 +9,9 @@ enum CardStates {
 	DECK, HAND, BOARD, GRAVEYARD
 }
 
+var boardName := "Old Ruins"
+
+
 func _ready() -> void:
 	
 	$CardsManager.main = self
@@ -16,6 +19,8 @@ func _ready() -> void:
 	
 	$BattleSystem.main = self
 	$BattleSystem.cardsManager = $CardsManager
+	
+	updateUi($BattleSystem.turnCount)
 	
 	for slot:CardSlot in $PlayerSlots.get_children():
 		slot.slotType = CardSlotTypes.PLAYER
@@ -50,6 +55,11 @@ func checkSlotEnemy(slot:CardSlot):
 
 func getEnemySlots():
 	return $EnemySlots.get_children()
+
+
+func updateUi(turnCount:int):
+	$CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel.text = boardName
+	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
 
 
 #### USE EXIT BUTTON TO CLOSE THE GAME

@@ -71,6 +71,7 @@ func passTurn():
 	updateResourceLabels()
 	
 	cardsManager.wakePlayerCards()
+	main.updateUi(turnCount)
 	cardsManager.startPlayerTurn()
 
 
