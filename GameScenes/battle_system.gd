@@ -8,6 +8,7 @@ var cardsManager:Node = null
 
 @onready var attackLine := $AttackLine
 var COLLISION_MASK_CARD := 1
+var COLLISION_MASK_ENEMY_PORTRAIT := 4
 
 var turnCount := 0
 var playerMana := 0
@@ -58,23 +59,40 @@ func handlePlayerAttack():
 	#### GET CARDS AT MOUSE POSITION
 	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if results.size() > 0:
-		var target:Card = getCollidedObject(results[0])
-		#### INVALID TARGET - END TARGETING ANYWAY
-		if not target.mySlot:
-			if target != currentAttackingCard:
-				endAttackState()
-			return
-		if main.checkSlotPlayer(target.mySlot):
-			if target != currentAttackingCard:
-				endAttackState()
-			return
-		
-		#### VALID TARGET - RESOLVE ATTACK
-		if main.checkSlotEnemy(target.mySlot):
-			prints("Player card targets enemy card: ", currentAttackingCard, target)
+		handlePlayerAttackCreature(results)
+		return
+	
+	#### CHECK IF ENEMY PORTRAIT AT MOUSE POSITION
+	results = main.fetchMouseOverObjects(COLLISION_MASK_ENEMY_PORTRAIT)
+	if results.size() > 0:
+		handlePlayerAttackEnemy()
+		updateResourceLabels()
+		return
+
+
+func handlePlayerAttackEnemy():
+	enemyHealth -= currentAttackingCard.damage
+
+
+func handlePlayerAttackCreature(results:Array):
+	
+	var target:Card = getCollidedObject(results[0])
+	#### INVALID TARGET - END TARGETING ANYWAY
+	if not target.mySlot:
+		if target != currentAttackingCard:
 			endAttackState()
-			resolveAttack(currentAttackingCard, target)
-			
+		return
+	if main.checkSlotPlayer(target.mySlot):
+		if target != currentAttackingCard:
+			endAttackState()
+		return
+	
+	#### VALID TARGET - RESOLVE ATTACK
+	if main.checkSlotEnemy(target.mySlot):
+		prints("Player card targets enemy card: ", currentAttackingCard, target)
+		endAttackState()
+		resolveAttack(currentAttackingCard, target)
+		
 
 	#attackLineShown = false
 

@@ -30,6 +30,7 @@ window/size/mode=3
 
 2d_physics/layer_1="cards"
 2d_physics/layer_2="card slots"
+2d_physics/layer_3="enemy portrait"
 
 [rendering]
 
