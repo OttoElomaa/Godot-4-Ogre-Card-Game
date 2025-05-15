@@ -230,11 +230,22 @@ func connectCardSignal(card:Card):
 	card.connect("hoverOn", onHoverCard)
 	card.connect("hoverOff", onHoverCardOff)
 
+####################################################
 
 func startPlayerTurn():
 	drawCard($PlayerHand)
 	updatePlayerHandOffsets()
 
+
+func wakePlayerCards():
+	for c in $PlayerBoard.get_children():
+		c.wake()
+	
+func wakeEnemyCards():
+	for c in $EnemyBoard.get_children():
+		c.wake()
+
+####################################################
 
 func getEnemyHandCards():
 	return $EnemyHand.get_children()

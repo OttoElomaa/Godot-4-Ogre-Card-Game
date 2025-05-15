@@ -32,12 +32,13 @@ func _ready() -> void:
 	
 	
 	
-
 func updateResourceLabels():
 	$Scenery/PlayerHealthLabel.text = "%d" % playerHealth
 	$Scenery/PlayerManaLabel.text = "%d" % playerMana
 	$Scenery/EnemyHealthLabel.text = "%d" % enemyHealth
 	$Scenery/EnemyManaLabel.text = "%d" % enemyMana
+
+
 
 func _input(e: InputEvent) -> void:
 	
@@ -54,6 +55,46 @@ func _physics_process(delta: float) -> void:
 		attackLine.points[1] = get_global_mouse_position()
 	
 
+#######################################################################
+
+func _on_end_turn_button_pressed() -> void:
+	passTurn()
+	
+
+func passTurn():
+	cardsManager.wakeEnemyCards()
+	enemyPlayTurn()
+	
+	turnCount += 1
+	playerMana = turnCount
+	enemyMana = turnCount
+	updateResourceLabels()
+	
+	cardsManager.wakePlayerCards()
+	cardsManager.startPlayerTurn()
+
+
+
+func enemyPlayTurn():
+	var enemyHandCards = cardsManager.getEnemyHandCards()
+	for card:Card in enemyHandCards:
+		if card.manaCost <= enemyMana:
+			var success = playEnemyCard(card)
+			if success:
+				enemyMana -= card.manaCost
+		
+				
+
+func playEnemyCard(card:Card):
+	for slot:CardSlot in main.getEnemySlots():
+		if slot.isAvailable:
+			cardsManager.placeCardInSlot(card, slot)
+			card.reparent(cardsManager.get_node("EnemyBoard"))
+			return true
+	return false
+
+
+#############################################################################
 
 func handlePlayerAttack():
 	#### GET CARDS AT MOUSE POSITION
@@ -72,6 +113,7 @@ func handlePlayerAttack():
 
 func handlePlayerAttackEnemy():
 	enemyHealth -= currentAttackingCard.damage
+	currentAttackingCard.rest()
 
 
 func handlePlayerAttackCreature(results:Array):
@@ -105,7 +147,9 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 		cardsToDestroy.append(targetCard)
 	if targetCard.checkHasLethalOn(attackCard):
 		cardsToDestroy.append(attackCard)
+		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
+	currentAttackingCard.rest()
 	for c:Card in cardsToDestroy:
 		c.mySlot.isAvailable = true
 		c.queue_free()
@@ -120,7 +164,7 @@ func endAttackState():
 
 func togglePlayerAttackMode(enable:bool, card:Card):
 	
-	if card.checkActive():
+	if card.checkNotResting():
 		currentAttackingCard = card
 		States.gameState = States.GameStates.ATTACK
 		
@@ -129,36 +173,11 @@ func togglePlayerAttackMode(enable:bool, card:Card):
 		attackLine.points[0] = card.position
 
 
-func _on_end_turn_button_pressed() -> void:
-	enemyPlayTurn()
-	
-	turnCount += 1
-	playerMana = turnCount
-	enemyMana = turnCount
-	updateResourceLabels()
-	cardsManager.startPlayerTurn()
-	
-
-func enemyPlayTurn():
-	
-	var enemyHandCards = cardsManager.getEnemyHandCards()
-	for card:Card in enemyHandCards:
-		if card.manaCost <= enemyMana:
-			var success = playEnemyCard(card)
-			if success:
-				enemyMana -= card.manaCost
-		
-				
-
-func playEnemyCard(card:Card):
-	for slot:CardSlot in main.getEnemySlots():
-		if slot.isAvailable:
-			cardsManager.placeCardInSlot(card, slot)
-			card.reparent(cardsManager.get_node("EnemyBoard"))
-			return true
-	return false
-
-
+############################################################################
 
 func getCollidedObject(result):
 	return result.collider.get_parent()
+	
+	
+	
+	

@@ -72,5 +72,20 @@ func checkActive() -> bool:
 	return false
 
 
+func checkNotResting():
+	if actionState == CardActionStates.RESTING:
+		return false
+	return true
+
+
+func rest():
+	actionState = CardActionStates.RESTING
+	rotation_degrees = 25
+
+func wake():
+	actionState = CardActionStates.ACTIVE
+	rotation_degrees = 0
+
+
 func checkHasLethalOn(card:Card):
 	return (damage > card.health)
