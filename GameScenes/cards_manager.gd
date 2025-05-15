@@ -272,6 +272,29 @@ func getEnemyHandCards() -> Array:
 
 func getEnemyBoardCards() -> Array:
 	return $EnemyBoard.get_children()
+
+
+func getPlayerBoardCards() -> Array:
+	return $PlayerBoard.get_children()
+
+
+
+func getPlayerBlockers():
+	var blockers := []
+	for c:Card in getPlayerBoardCards():
+		if c.checkNotResting():
+			if c.checkActive():
+				blockers.append(c)
+	return blockers
+				
 	
+
+func getEnemyBlockers():
+	var blockers := []
+	for c:Card in getEnemyBoardCards():
+		if c.checkNotResting():
+			if c.checkActive():
+				blockers.append(c)
+	return blockers	
 	
 	

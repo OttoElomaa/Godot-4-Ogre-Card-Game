@@ -81,7 +81,11 @@ func enemyPlayTurn():
 	#### ATTACK WITH CARDS ON BOARD
 	var enemyBoardCards = cardsManager.getEnemyBoardCards()
 	for card:Card in enemyBoardCards:
-		if card.checkNotResting() and card.checkNotTraveling():
+		#### NECESSARY CHECKS AND SET CURRENT ATTACKING CARD
+		if not MyTools.checkNodeValidity(card):
+			pass
+		elif card.checkNotResting() and card.checkNotTraveling():
+			#currentAttackingCard = card
 			handleEnemyAttackPlayer(card)
 		
 				
@@ -141,6 +145,11 @@ func handlePlayerAttack():
 
 
 func handlePlayerAttackEnemy():
+	#### ENEMY HAS BLOCKERS, CAN'T ATTACK ENEMY
+	if cardsManager.getEnemyBlockers().size() > 0:
+		endAttackState()
+		return
+	#### ATTACK THE ENEMY
 	var c = currentAttackingCard
 	enemyHealth -= c.damage
 	c.playAttackAnimation()
@@ -149,10 +158,21 @@ func handlePlayerAttackEnemy():
 
 
 func handleEnemyAttackPlayer(attackCard: Card):
+	
 	var c = attackCard
-	playerHealth -= c.damage
-	c.playAttackAnimation()
-	c.rest()
+		
+	#### PLAYER HAS BLOCKERS, ATTACK FIRST BLOCKER
+	var blockers = cardsManager.getPlayerBlockers()
+	if blockers.size() > 0:
+		resolveAttack(c, blockers[0])
+		c.playAttackAnimation()
+		c.rest()
+	
+	#### NO BLOCKERS, ATTACK PLAYER
+	else:
+		playerHealth -= c.damage
+		c.playAttackAnimation()
+		c.rest()
 	
 
 
@@ -191,7 +211,7 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 		cardsToDestroy.append(attackCard)
 		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
-	currentAttackingCard.rest()
+	attackCard.rest()
 	for c:Card in cardsToDestroy:
 		c.mySlot.isAvailable = true
 		c.queue_free()
