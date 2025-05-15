@@ -70,12 +70,19 @@ func passTurn():
 
 
 func enemyPlayTurn():
+	#### PLAY CARDS FROM HAND
 	var enemyHandCards = cardsManager.getEnemyHandCards()
 	for card:Card in enemyHandCards:
 		if card.manaCost <= enemyMana:
 			var success = playEnemyCard(card)
 			if success:
 				enemyMana -= card.manaCost
+	
+	#### ATTACK WITH CARDS ON BOARD
+	var enemyBoardCards = cardsManager.getEnemyBoardCards()
+	for card:Card in enemyBoardCards:
+		if card.checkNotResting() and card.checkNotTraveling():
+			handleEnemyAttackPlayer(card)
 		
 				
 
@@ -101,8 +108,24 @@ func _on_enemy_turn_timer_timeout() -> void:
 
 
 #############################################################################
+#### PLAYER ATTACK FUNCTIONS
 
+#### TURN ON PLAYER ATTACK MODE
+func togglePlayerAttackMode(enable:bool, card:Card):
+	
+	if card.checkNotResting() and card.checkNotTraveling():
+		currentAttackingCard = card
+		States.gameState = States.GameStates.ATTACK
+		
+		attackLineShown = enable
+		$AttackLine.show()
+		attackLine.points[0] = card.position
+
+
+
+#### PROCESS ATTACK TARGET (ENEMY, OR ENEMY CARD)
 func handlePlayerAttack():
+	
 	#### GET CARDS AT MOUSE POSITION
 	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if results.size() > 0:
@@ -125,6 +148,14 @@ func handlePlayerAttackEnemy():
 	endAttackState()
 
 
+func handleEnemyAttackPlayer(attackCard: Card):
+	var c = attackCard
+	playerHealth -= c.damage
+	c.playAttackAnimation()
+	c.rest()
+	
+
+
 func handlePlayerAttackCreature(results:Array):
 	
 	var target:Card = getCollidedObject(results[0])
@@ -141,9 +172,10 @@ func handlePlayerAttackCreature(results:Array):
 	#### VALID TARGET - RESOLVE ATTACK
 	#prints("Player card targets enemy card: ", currentAttackingCard, target)
 	if main.checkSlotEnemy(target.mySlot):
-		currentAttackingCard.playAttackAnimation()
-		endAttackState()
-		resolveAttack(currentAttackingCard, target)
+		if target.checkValidTarget():
+			currentAttackingCard.playAttackAnimation()
+			endAttackState()
+			resolveAttack(currentAttackingCard, target)
 		
 
 	#attackLineShown = false
@@ -171,17 +203,6 @@ func endAttackState():
 	States.gameState = States.GameStates.PLAY
 	
 	
-
-func togglePlayerAttackMode(enable:bool, card:Card):
-	
-	if card.checkNotResting():
-		currentAttackingCard = card
-		States.gameState = States.GameStates.ATTACK
-		
-		attackLineShown = enable
-		$AttackLine.show()
-		attackLine.points[0] = card.position
-
 
 ############################################################################
 

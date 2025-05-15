@@ -11,6 +11,8 @@ enum CardStates {
 
 var boardName := "Old Ruins"
 
+var actionMenuCard: Card = null
+
 
 func _ready() -> void:
 	
@@ -50,6 +52,7 @@ func toggleCardActionMenu(enable:bool, card:Card):
 	
 	if enable:
 		if card != null:
+			actionMenuCard = card
 			$ActionMenuCanvas.offset = get_global_mouse_position() * $Camera2D.zoom.x
 			$ActionMenuCanvas.show()
 	else:
@@ -81,3 +84,8 @@ func getEnemySlots():
 #### USE EXIT BUTTON TO CLOSE THE GAME
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_toggle_defend_button_pressed() -> void:
+	actionMenuCard.switchStates()
+	toggleCardActionMenu(false, null)

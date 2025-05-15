@@ -12,7 +12,7 @@ signal hoverOff
 #### --> Unless "Haste/Vigilant" kind of effects
 #### ACTIVE / PASSIVE IS TRIGGERED in a right click menu on top of card
 enum CardActionStates {
-	ACTIVE, PASSIVE, RESTING
+	ACTIVE, PASSIVE, RESTING, TRAVELING
 }
 
 @export var manaCost := 0
@@ -21,12 +21,16 @@ enum CardActionStates {
 var damage := 0
 var health := 0
 
+@onready var stateHandler := $Frontside/ActionState
+
+var isEnemyCard := false
 var mySlot: CardSlot = null
 var myOffset := Vector2.ZERO
 
 var allowInteract := true
 var actionState: CardActionStates = CardActionStates.ACTIVE
-var isEnemyCard := false
+var isTraveling := false
+
 
 
 func _ready() -> void:
@@ -67,17 +71,7 @@ func toggleFrontSide(toShow:bool):
 		$Frontside.hide()
 
 
-func checkActive() -> bool:
-	if actionState == CardActionStates.ACTIVE:
-		return true
-	return false
-
-
-func checkNotResting():
-	if actionState == CardActionStates.RESTING:
-		return false
-	return true
-
+#############################################################
 
 func rest():
 	actionState = CardActionStates.RESTING
@@ -89,9 +83,71 @@ func restAndAnimate():
 
 
 func wake():
-	actionState = CardActionStates.ACTIVE
+	statesActive()
 	rotateRestingCard(false)
 
+########################################################
+
+func switchStates():
+	if actionState == CardActionStates.ACTIVE:
+		statesPassive()
+	elif actionState == CardActionStates.PASSIVE:
+		statesActive()
+
+
+func statesActive():
+	actionState = CardActionStates.ACTIVE
+	stateHandler.get_node("ActiveIcon").show()
+	stateHandler.get_node("PassiveIcon").hide()
+	
+	
+func statesPassive():
+	actionState = CardActionStates.PASSIVE
+	stateHandler.get_node("ActiveIcon").hide()
+	stateHandler.get_node("PassiveIcon").show()
+	
+
+
+func toggleTraveling(enabled:bool):
+	isTraveling = enabled
+	if enabled:
+		stateHandler.get_node("TravelingIcon").show()
+	else:
+		stateHandler.get_node("TravelingIcon").hide()
+
+
+func statesTurnOffTravel() -> bool:
+	if isTraveling:
+		toggleTraveling(false)
+		return true
+	return false
+
+##################################
+
+func checkActive() -> bool:
+	if actionState == CardActionStates.ACTIVE:
+		return true
+	return false
+
+
+func checkNotResting() -> bool:
+	if actionState == CardActionStates.RESTING:
+		return false
+	return true
+
+func checkNotTraveling() -> bool:
+	if isTraveling:
+		return false
+	return true
+
+func checkValidTarget() -> bool:
+	if checkNotResting():
+		if checkActive():
+			return true
+	return false
+
+
+########################################################
 
 func checkHasLethalOn(card:Card):
 	return (damage > card.health)

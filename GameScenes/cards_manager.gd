@@ -181,7 +181,8 @@ func placeCardInSlot(card:Card, slot:CardSlot):
 	#### SLOT STUFF, AND TAP CARD
 	card.mySlot = slot
 	slot.toggleAvailable(false)
-	card.restAndAnimate()
+	card.toggleTraveling(true)
+	card.statesActive()
 
 	
 
@@ -249,17 +250,28 @@ func startPlayerTurn():
 
 
 func wakePlayerCards():
-	for c in $PlayerBoard.get_children():
-		c.wake()
+	for c:Card in $PlayerBoard.get_children():
+		if c.statesTurnOffTravel():
+			pass
+		else:
+			c.wake()
 	
 func wakeEnemyCards():
-	for c in $EnemyBoard.get_children():
-		c.wake()
+	for c:Card in $EnemyBoard.get_children():
+		if c.statesTurnOffTravel():
+			pass
+		else:
+			c.wake()
+		
 
 ####################################################
 
-func getEnemyHandCards():
+func getEnemyHandCards() -> Array:
 	return $EnemyHand.get_children()
+
+
+func getEnemyBoardCards() -> Array:
+	return $EnemyBoard.get_children()
 	
 	
 	

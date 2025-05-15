@@ -350,33 +350,33 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("9_7ijru")
 
-[node name="Panel" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu"]
+[node name="CastPanel" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu"]
 custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("5_hys5q")
 
-[node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/Panel"]
+[node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/CastPanel"]
 texture_filter = 1
 layout_mode = 2
 text = "Cast"
 label_settings = ExtResource("6_m0cpn")
 horizontal_alignment = 1
 
-[node name="ActionButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/Panel"]
+[node name="CastButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/CastPanel"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("8_2brjh")
 theme_override_styles/normal = ExtResource("9_7ijru")
 
-[node name="Panel2" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu"]
+[node name="DefendPanel" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu"]
 custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = ExtResource("5_hys5q")
 
-[node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/Panel2"]
+[node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/DefendPanel"]
 texture_filter = 1
 layout_mode = 2
 text = "Toggle 
@@ -384,7 +384,7 @@ Defend"
 label_settings = ExtResource("6_m0cpn")
 horizontal_alignment = 1
 
-[node name="ActionButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/Panel2"]
+[node name="ToggleDefendButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/DefendPanel"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("8_2brjh")
 theme_override_styles/normal = ExtResource("9_7ijru")
@@ -392,3 +392,4 @@ theme_override_styles/normal = ExtResource("9_7ijru")
 [connection signal="timeout" from="BattleSystem/EnemyTurnTimer" to="BattleSystem" method="_on_enemy_turn_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]
