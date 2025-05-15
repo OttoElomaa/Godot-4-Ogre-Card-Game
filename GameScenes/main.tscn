@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=15 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
 [ext_resource type="Script" uid="uid://doyn8i1dunq2s" path="res://GameScenes/battle_system.gd" id="2_8jxey"]
+[ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/portrait-hero-01.png" id="3_8s1e5"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/UI-border-ninepatchrect-texture.png" id="3_015nr"]
-[ext_resource type="Texture2D" uid="uid://b1gyte5n4pqp6" path="res://Art/portrait-sorcerer.png" id="3_hffy6"]
+[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/portrait-adversary-01.png" id="4_bw8dm"]
 [ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://GameScenes/tableCardSlot.tscn" id="4_c6j12"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="5_hys5q"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="6_m0cpn"]
@@ -30,11 +31,11 @@ z_index = -5
 
 [node name="PlayerSprite" type="Sprite2D" parent="BattleSystem/Scenery"]
 position = Vector2(138, 1126)
-texture = ExtResource("3_hffy6")
+texture = ExtResource("3_8s1e5")
 
 [node name="EnemySprite" type="Sprite2D" parent="BattleSystem/Scenery"]
 position = Vector2(1080, 131)
-texture = ExtResource("3_hffy6")
+texture = ExtResource("4_bw8dm")
 
 [node name="PlayerResourceHolderSprite" type="Sprite2D" parent="BattleSystem/Scenery"]
 position = Vector2(189, 1141)
