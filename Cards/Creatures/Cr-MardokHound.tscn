@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwj4lr0i67frt"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_kp5c2"]
+[ext_resource type="Texture2D" uid="uid://dxwwujckku1ic" path="res://Art/CardArt/card-art-creature-mardok-houndbeast.png" id="2_kp5c2"]
+
+[node name="Card-Cr-MardokHound" instance=ExtResource("1_kp5c2")]
+manaCost = 3
+startingDamage = 2
+startingHealth = 2
+hasSunder = true
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_kp5c2")

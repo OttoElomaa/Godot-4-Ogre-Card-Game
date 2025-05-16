@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7v3m7qb227jv"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_wr60q"]
+[ext_resource type="Texture2D" uid="uid://bm48rqyud4hpd" path="res://Art/CardArt/card-art-creature-ruk-raider.png" id="2_wr60q"]
+
+[node name="Card-Cr-RukRaider" instance=ExtResource("1_wr60q")]
+manaCost = 3
+startingDamage = 2
+startingHealth = 2
+hasDuelist = true
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_wr60q")

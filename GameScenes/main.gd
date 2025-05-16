@@ -22,6 +22,7 @@ func _ready() -> void:
 	$BattleSystem.main = self
 	$BattleSystem.cardsManager = $CardsManager
 	
+	$CardsManager.setup()
 	updateUi($BattleSystem.turnCount)
 	
 	for slot:CardSlot in $PlayerSlots.get_children():
@@ -78,6 +79,20 @@ func checkSlotEnemy(slot:CardSlot):
 func getEnemySlots():
 	return $EnemySlots.get_children()
 
+##################################################################
+
+func loadRandomCard(folderPath:String) -> Node:
+	
+	var dir := DirAccess.open(folderPath)
+
+	var file_names := dir.get_files()
+	
+	var size = file_names.size()
+	var rng = randi_range(0, size - 1)
+	var random_file := file_names[rng]
+	
+	var card:PackedScene = load(folderPath + random_file)
+	return card.instantiate()
 
 
 #################################################################################

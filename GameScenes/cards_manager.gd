@@ -8,6 +8,7 @@ var STARTING_HAND_SIZE := 4
 
 @onready var CardOgre: PackedScene = preload("res://Cards/Creatures/Cr-Ogre.tscn")
 @onready var CardPikeman: PackedScene = preload("res://Cards/Creatures/Cr-Pikeman.tscn")
+@onready var CardRukRaider: PackedScene = preload("res://Cards/Creatures/Cr-RukRaider.tscn")
 
 
 var main:Node = null
@@ -23,7 +24,10 @@ var dumbHandDrawCounter := 0
 
 func _ready() -> void:
 	screenSize = get_viewport_rect()
-	
+
+
+
+func setup():	
 	dealPlayerHand()
 	dealEnemyHand()
 	
@@ -52,11 +56,11 @@ func dealEnemyHand():
 func drawCard(targetHand:Node2D):
 	
 	var cardScene = CardOgre.instantiate()
-	#if randi_range(0,5) > 2:
 	if dumbHandDrawCounter < 1:
 		cardScene = CardPikeman.instantiate()
-	elif randi_range(0,5) > 3:
-		cardScene = CardPikeman.instantiate()
+	else:
+		cardScene = main.loadRandomCard("res://Cards/Creatures/")
+		
 	targetHand.add_child(cardScene)
 	return cardScene
 
