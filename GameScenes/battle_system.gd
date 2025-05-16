@@ -164,6 +164,7 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	#### PLAYER HAS BLOCKERS, ATTACK FIRST BLOCKER
 	var blockers = cardsManager.getPlayerBlockers()
 	if blockers.size() > 0:
+		
 		resolveAttack(c, blockers[0])
 		c.playAttackAnimation()
 		c.rest()
@@ -228,7 +229,12 @@ func endAttackState():
 
 func getCollidedObject(result):
 	return result.collider.get_parent()
-	
+
+
+#func findValidTargetCardsInArray(cards:Array):
+	#var validCards := []
+	#for c in cards:
+		#if MyTools.checkNodeValidity(c):
 	
 	
 	

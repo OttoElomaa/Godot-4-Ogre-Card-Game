@@ -4,7 +4,7 @@ extends Node2D
 var COLLISION_MASK_CARD := 1
 var COLLISION_MASK_CARD_SLOT := 2
 
-var MAX_HAND_SIZE := 7
+var STARTING_HAND_SIZE := 4
 
 @onready var CardOgre: PackedScene = preload("res://Cards/Creatures/Cr-Ogre.tscn")
 @onready var CardPikeman: PackedScene = preload("res://Cards/Creatures/Cr-Pikeman.tscn")
@@ -31,14 +31,14 @@ func _ready() -> void:
 
 func dealPlayerHand():
 	dumbHandDrawCounter = 5
-	for i in range(MAX_HAND_SIZE):
+	for i in range(STARTING_HAND_SIZE):
 		drawCard($PlayerHand)	
 	updatePlayerHandVisuals()
 
 
 func dealEnemyHand():
 	dumbHandDrawCounter = 0
-	for i in range(MAX_HAND_SIZE):
+	for i in range(STARTING_HAND_SIZE):
 		var card:Card = drawCard($EnemyHand)
 		dumbHandDrawCounter += 1
 		
@@ -267,15 +267,19 @@ func wakeEnemyCards():
 ####################################################
 
 func getEnemyHandCards() -> Array:
-	return $EnemyHand.get_children()
+	var cards = $EnemyHand.get_children()
+	return findValidNodesInArray(cards)
 
 
 func getEnemyBoardCards() -> Array:
-	return $EnemyBoard.get_children()
+	var cards = $EnemyBoard.get_children()
+	return findValidNodesInArray(cards)
 
 
 func getPlayerBoardCards() -> Array:
-	return $PlayerBoard.get_children()
+	var cards = $PlayerBoard.get_children()
+	return findValidNodesInArray(cards)
+	
 
 
 
@@ -297,4 +301,10 @@ func getEnemyBlockers():
 				blockers.append(c)
 	return blockers	
 	
-	
+
+func findValidNodesInArray(cards:Array):
+	var validCards := []
+	for c in cards:
+		if MyTools.checkNodeValidity(c):
+			validCards.append(c)
+	return validCards

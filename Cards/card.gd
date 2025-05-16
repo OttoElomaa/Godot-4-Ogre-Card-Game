@@ -32,6 +32,10 @@ var actionState: CardActionStates = CardActionStates.ACTIVE
 var isTraveling := false
 
 
+@export var hasSunder := false
+@export var hasDuelist := false
+
+
 
 func _ready() -> void:
 	var cardManager = get_parent().get_parent()
@@ -43,6 +47,14 @@ func _ready() -> void:
 	
 	$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % startingDamage
 	$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % startingHealth
+	
+	var l = $Frontside/EffectsLabel
+	var text = ""
+	if hasSunder:
+		text += "Sunder"
+	if hasDuelist:
+		text += "Duelist"
+	l.text = text
 	
 
 
