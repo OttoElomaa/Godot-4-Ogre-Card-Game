@@ -168,9 +168,12 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	var blockers = cardsManager.getPlayerBlockers()
 	if blockers.size() > 0:
 		var target = blockers[0]
-		resolveAttack(c, target)
-		c.playAttackAnimation()
-		c.rest()
+		#### IF ATTACKER DESTROYED, NO ANIMATIONS
+		if resolveAttack(c, target):
+			pass
+		else:
+			c.playAttackAnimation()
+			c.rest()
 	
 	#### NO BLOCKERS, ATTACK PLAYER
 	else:
@@ -212,7 +215,7 @@ func handlePlayerAttackCreature(results:Array):
 
 #### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
-func resolveAttack(attackCard:Card, targetCard:Card):
+func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
 	var cardsToDestroy := []
@@ -221,12 +224,20 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 	if attackCard.takeDamageAndCheckLethal(targetCard):
 		cardsToDestroy.append(attackCard)
 	
+	#### DON'T ANIMATE DESTROYED ATTACKER
+	var attackerDestroyed := false
+	if attackCard in cardsToDestroy:
+		attackerDestroyed = true
+	else:
+		attackCard.rest()
 		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
-	attackCard.rest()
 	for c:Card in cardsToDestroy:
 		c.mySlot.isAvailable = true
 		c.destroyCardOne()
+	
+	return attackerDestroyed
+
 
 
 func endAttackState():

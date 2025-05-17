@@ -324,3 +324,4 @@ func findValidNodesInArray(cards:Array):
 
 func moveToDiscard(card:Card):
 	card.reparent($Discard)
+	card.position = Vector2.ZERO

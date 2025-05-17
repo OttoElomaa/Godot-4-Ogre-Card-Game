@@ -272,4 +272,4 @@ func destroyCardTwo():
 	#self.queue_free()
 	
 	cardsManager.moveToDiscard(self)
-	position = Vector2.ZERO
+	

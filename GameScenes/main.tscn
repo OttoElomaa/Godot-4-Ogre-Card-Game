@@ -161,6 +161,8 @@ position = Vector2(1449, 109)
 [node name="Discard" type="Node2D" parent="CardsManager"]
 position = Vector2(-584, -252)
 
+[node name="DiscardPosition" type="Marker2D" parent="CardsManager/Discard"]
+
 [node name="PlayerSlots" type="Node2D" parent="."]
 z_index = -1
 
