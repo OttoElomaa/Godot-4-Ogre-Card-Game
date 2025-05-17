@@ -37,7 +37,7 @@ func dealPlayerHand():
 	dumbHandDrawCounter = 5
 	for i in range(STARTING_HAND_SIZE):
 		drawCard($PlayerHand)	
-	updatePlayerHandVisuals()
+	updateHandCardsVisuals()
 
 
 func dealEnemyHand():
@@ -49,7 +49,7 @@ func dealEnemyHand():
 		card.toggleEnemyStatus(true)
 		card.removeMouseInteraction()
 		card.toggleFrontSide(false)
-	updatePlayerHandVisuals()
+	updateHandCardsVisuals()
 
 		
 
@@ -66,7 +66,7 @@ func drawCard(targetHand:Node2D):
 
 	
 #### OFFSETS, SHOW MANA COSTS, ETC.
-func updatePlayerHandVisuals():
+func updateHandCardsVisuals():
 	var x_offset := 0
 	for c in $PlayerHand.get_children():
 		c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
@@ -170,7 +170,7 @@ func finishDraggingCard() -> Node:
 			if currentDraggedCard.mySlot:
 				currentDraggedCard.mySlot.toggleAvailable(true)
 				currentDraggedCard.mySlot = null
-	updatePlayerHandVisuals()
+	updateHandCardsVisuals()
 	return null
 
 
@@ -249,25 +249,26 @@ func connectCardSignal(card:Card):
 ####################################################
 
 func startPlayerTurn():
+	wakeBoardCards($PlayerBoard)
 	drawCard($PlayerHand)
-	updatePlayerHandVisuals()
+	updateHandCardsVisuals()
 
 
-func wakePlayerCards():
-	for c:Card in $PlayerBoard.get_children():
+func startEnemyTurn():
+	wakeBoardCards($EnemyBoard)
+	drawCard($EnemyHand)
+	updateHandCardsVisuals()
+
+
+func wakeBoardCards(board:Node):
+	for c:Card in board.get_children():
 		if c.statesTurnOffTravel():
 			pass
 		else:
 			c.wake()
-	
-func wakeEnemyCards():
-	for c:Card in $EnemyBoard.get_children():
-		if c.statesTurnOffTravel():
-			pass
-		else:
-			c.wake()
+
+
 		
-
 ####################################################
 
 func getEnemyHandCards() -> Array:

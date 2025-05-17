@@ -161,8 +161,29 @@ func checkValidTarget() -> bool:
 
 ########################################################
 
-func checkHasLethalOn(card:Card):
-	return (damage > card.health)
+#func checkHasLethalOn(card:Card):
+	#return (damage > card.health)
+
+#### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
+func takeDamageAndCheckLethal(card:Card) -> bool:
+	
+	#### HANDLE DESTROYED STATUS	
+	var selfDestroyed := false
+	if card.damage >= health:
+		selfDestroyed = true
+	
+	#### HANDLE DAMAGE -> SUNDER Keyword
+	if card.hasSunder:
+		health -= card.damage
+	
+	#### UPDATE VISUALS AND RETURN DESTROYED STATUS
+	updateCardLabels()
+	return selfDestroyed
+
+
+#func takeDamage(damage:int):
+	
+
 
 func toggleEnemyStatus(enabled:bool):
 	isEnemyCard = enabled
@@ -199,7 +220,7 @@ func _on_animations_timer_timeout() -> void:
 	rotateRestingCard(true)
 	
 
-
+#######################################################################
 
 func rotateRestingCard(willRest:bool):
 	var degreesGoal = 0
@@ -207,3 +228,8 @@ func rotateRestingCard(willRest:bool):
 		degreesGoal = 25
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
+
+
+func updateCardLabels():
+	$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % health
+	$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % damage

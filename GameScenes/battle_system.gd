@@ -60,7 +60,8 @@ func _on_end_turn_button_pressed() -> void:
 	
 #### PLAY ENEMY TURN, THEN AFTER TIMER WAIT, START PLAYER TURN
 func passTurn():
-	cardsManager.wakeEnemyCards()
+	cardsManager.startEnemyTurn()
+	#cardsManager.wakeEnemyCards()
 	$EnemyTurnTimer.start()
 	enemyPlayTurn()
 	
@@ -103,7 +104,6 @@ func _on_enemy_turn_timer_timeout() -> void:
 	enemyMana = turnCount
 	updateResourceLabels()
 	
-	cardsManager.wakePlayerCards()
 	main.updateUi(turnCount)
 	cardsManager.startPlayerTurn()
 
@@ -200,13 +200,23 @@ func handlePlayerAttackCreature(results:Array):
 
 	
 
-
+#### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
+#### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card):
+	
+	#### DEAL DAMAGE IF SUNDER
+	#if attackCard.hasSunder:
+	var targetKilled:bool = targetCard.takeDamageAndCheckLethal(attackCard)
+	var attackerKilled:bool = attackCard.takeDamageAndCheckLethal(targetCard)
+	
+	#### WHICH CARDS TOOK LETHAL DAMAGE?
 	var cardsToDestroy := []
-	if attackCard.checkHasLethalOn(targetCard):
-		cardsToDestroy.append(targetCard)
-	if targetCard.checkHasLethalOn(attackCard):
-		cardsToDestroy.append(attackCard)
+	if targetKilled:
+		if not (targetCard.hasDuelist and attackerKilled):
+			cardsToDestroy.append(targetCard)
+	if attackerKilled:
+		if not (attackCard.hasDuelist and targetKilled):
+			cardsToDestroy.append(attackCard)
 		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
 	attackCard.rest()
