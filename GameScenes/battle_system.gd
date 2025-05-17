@@ -62,7 +62,8 @@ func _on_end_turn_button_pressed() -> void:
 func passTurn():
 	cardsManager.startEnemyTurn()
 	#cardsManager.wakeEnemyCards()
-	$EnemyTurnTimer.start()
+	$EnemyStartCombatTimer.start()
+	$EndEnemyTurnTimer.start()
 	enemyPlayTurn()
 	
 
@@ -76,6 +77,9 @@ func enemyPlayTurn():
 			if success:
 				enemyMana -= card.manaCost
 	
+	
+
+func timeoutEnemyStartCombat() -> void:
 	#### ATTACK WITH CARDS ON BOARD
 	var enemyBoardCards = cardsManager.getEnemyBoardCards()
 	for card:Card in enemyBoardCards:
@@ -85,7 +89,6 @@ func enemyPlayTurn():
 		elif card.checkNotResting() and card.checkNotTraveling():
 			#currentAttackingCard = card
 			handleEnemyAttackPlayer(card)
-		
 				
 
 func playEnemyCard(card:Card):
@@ -98,7 +101,7 @@ func playEnemyCard(card:Card):
 
 
 #### START PLAYER'S TURN AFTER ENEMY ACTION
-func _on_enemy_turn_timer_timeout() -> void:
+func timeoutEndEnemyTurn() -> void:
 	turnCount += 1
 	playerMana = turnCount
 	enemyMana = turnCount
@@ -106,7 +109,6 @@ func _on_enemy_turn_timer_timeout() -> void:
 	
 	main.updateUi(turnCount)
 	cardsManager.startPlayerTurn()
-
 
 #############################################################################
 #### PLAYER ATTACK FUNCTIONS
@@ -236,12 +238,3 @@ func endAttackState():
 
 func getCollidedObject(result):
 	return result.collider.get_parent()
-
-
-#func findValidTargetCardsInArray(cards:Array):
-	#var validCards := []
-	#for c in cards:
-		#if MyTools.checkNodeValidity(c):
-	
-	
-	

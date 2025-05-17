@@ -256,7 +256,8 @@ func startPlayerTurn():
 
 func startEnemyTurn():
 	wakeBoardCards($EnemyBoard)
-	drawCard($EnemyHand)
+	var newCard = drawCard($EnemyHand)
+	newCard.toggleEnemyStatus(true)
 	updateHandCardsVisuals()
 
 

@@ -129,8 +129,12 @@ z_index = 5
 points = PackedVector2Array(-287, 209, -492, 528)
 default_color = Color(1, 0.67451, 0.341176, 1)
 
-[node name="EnemyTurnTimer" type="Timer" parent="BattleSystem"]
-wait_time = 1.5
+[node name="EnemyStartCombatTimer" type="Timer" parent="BattleSystem"]
+wait_time = 0.4
+one_shot = true
+
+[node name="EndEnemyTurnTimer" type="Timer" parent="BattleSystem"]
+wait_time = 2.0
 one_shot = true
 
 [node name="CardsManager" type="Node2D" parent="."]
@@ -386,7 +390,8 @@ layout_mode = 2
 theme_override_styles/hover = ExtResource("8_2brjh")
 theme_override_styles/normal = ExtResource("9_7ijru")
 
-[connection signal="timeout" from="BattleSystem/EnemyTurnTimer" to="BattleSystem" method="_on_enemy_turn_timer_timeout"]
+[connection signal="timeout" from="BattleSystem/EnemyStartCombatTimer" to="BattleSystem" method="timeoutEnemyStartCombat"]
+[connection signal="timeout" from="BattleSystem/EndEnemyTurnTimer" to="BattleSystem" method="timeoutEndEnemyTurn"]
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]
