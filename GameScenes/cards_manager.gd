@@ -60,7 +60,8 @@ func drawCard(targetHand:Node2D):
 		cardScene = CardPikeman.instantiate()
 	else:
 		cardScene = main.loadRandomCard("res://Cards/Creatures/")
-		
+	
+	cardScene.cardsManager = self	
 	targetHand.add_child(cardScene)
 	return cardScene
 
@@ -118,7 +119,9 @@ func _input(e: InputEvent) -> void:
 				prints("dragged card: ", currentDraggedCard)
 				
 			elif e.button_index == MOUSE_BUTTON_RIGHT:
-				main.toggleCardActionMenu(true, fetchCardOnClick() )
+				var card = fetchCardOnClick()
+				if MyTools.checkNodeValidity(card):
+					main.toggleCardActionMenu(true, card)
 			
 		#elif e.is_released():
 			#print("left relese")
@@ -317,3 +320,7 @@ func findValidNodesInArray(cards:Array):
 		if MyTools.checkNodeValidity(c):
 			validCards.append(c)
 	return validCards
+
+
+func moveToDiscard(card:Card):
+	card.reparent($Discard)

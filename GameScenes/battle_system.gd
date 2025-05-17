@@ -72,10 +72,11 @@ func enemyPlayTurn():
 	#### PLAY CARDS FROM HAND
 	var enemyHandCards = cardsManager.getEnemyHandCards()
 	for card:Card in enemyHandCards:
-		if card.manaCost <= enemyMana:
-			var success = playEnemyCard(card)
-			if success:
-				enemyMana -= card.manaCost
+		if MyTools.checkNodeValidity(card):
+			if card.manaCost <= enemyMana:
+				var success = playEnemyCard(card)
+				if success:
+					enemyMana -= card.manaCost
 	
 	
 
@@ -115,6 +116,9 @@ func timeoutEndEnemyTurn() -> void:
 
 #### TURN ON PLAYER ATTACK MODE
 func togglePlayerAttackMode(enable:bool, card:Card):
+	
+	if not MyTools.checkNodeValidity(card):
+		return
 	
 	if card.checkNotResting() and card.checkNotTraveling():
 		currentAttackingCard = card
@@ -163,8 +167,8 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	#### PLAYER HAS BLOCKERS, ATTACK FIRST BLOCKER
 	var blockers = cardsManager.getPlayerBlockers()
 	if blockers.size() > 0:
-		
-		resolveAttack(c, blockers[0])
+		var target = blockers[0]
+		resolveAttack(c, target)
 		c.playAttackAnimation()
 		c.rest()
 	
@@ -180,6 +184,10 @@ func handlePlayerAttackCreature(results:Array):
 	
 	var target:Card = getCollidedObject(results[0])
 	#### INVALID TARGET - END TARGETING ANYWAY
+	if not MyTools.checkNodeValidity(target):
+		endAttackState()
+		return
+	#### DON'T END TARGETING if it registers CLICKING ON SAME ATTACKING CARD ITSELF
 	if not target.mySlot:
 		if target != currentAttackingCard:
 			endAttackState()
@@ -218,7 +226,7 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 	attackCard.rest()
 	for c:Card in cardsToDestroy:
 		c.mySlot.isAvailable = true
-		c.queue_free()
+		c.destroyCardOne()
 
 
 func endAttackState():

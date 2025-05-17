@@ -12,7 +12,7 @@ signal hoverOff
 #### --> Unless "Haste/Vigilant" kind of effects
 #### ACTIVE / PASSIVE IS TRIGGERED in a right click menu on top of card
 enum CardActionStates {
-	ACTIVE, PASSIVE, RESTING, TRAVELING, DESTROYED
+	ACTIVE, PASSIVE, DESTROYED
 }
 
 @export var manaCost := 0
@@ -22,6 +22,7 @@ var damage := 0
 var health := 0
 
 @onready var stateHandler := $Frontside/ActionState
+var cardsManager:Node = null
 
 var isEnemyCard := false
 var mySlot: CardSlot = null
@@ -118,7 +119,10 @@ func statesPassive():
 	actionState = CardActionStates.PASSIVE
 	stateHandler.get_node("ActiveIcon").hide()
 	stateHandler.get_node("PassiveIcon").show()
-	
+
+
+func statesDestroy():
+	actionState = CardActionStates.DESTROYED	
 
 
 func toggleTraveling(enabled:bool):
@@ -154,6 +158,10 @@ func checkNotTraveling() -> bool:
 
 #func checkValidTarget() -> bool:
 	#return checkActive()
+func checkAlive():
+	if actionState == CardActionStates.DESTROYED:
+		return false
+	return true
 
 
 ########################################################
@@ -252,3 +260,16 @@ func rotateRestingCard(willRest:bool):
 func updateCardLabels():
 	$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % health
 	$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % damage
+
+
+
+func destroyCardOne():
+	statesDestroy()
+	$BodyAnimations.play("DestroyBoardCard")
+	
+
+func destroyCardTwo():
+	#self.queue_free()
+	
+	cardsManager.moveToDiscard(self)
+	position = Vector2.ZERO

@@ -10,5 +10,9 @@ func checkNodeValidity(node) -> bool:
 		return false
 	if node.is_queued_for_deletion():
 		return false
+	#### SPECIFIC TO CARDS
+	if node is Card:
+		if not node.checkAlive():
+			return false
 	
 	return true
