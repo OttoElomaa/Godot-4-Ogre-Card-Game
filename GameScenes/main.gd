@@ -24,6 +24,7 @@ func _ready() -> void:
 	
 	$CardsManager.setup()
 	updateUi($BattleSystem.turnCount)
+	$BattleSystem.updateResourceLabels()
 	
 	for slot:CardSlot in $PlayerSlots.get_children():
 		slot.slotType = CardSlotTypes.PLAYER
@@ -60,12 +61,20 @@ func toggleCardActionMenu(enable:bool, card:Card):
 		$ActionMenuCanvas.hide()
 
 
+##########################################################################################
+
 func updateUi(turnCount:int):
 	toggleCardActionMenu(false, null)
 	
 	$CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel.text = boardName
 	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
 
+
+func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
+	$Portraits/PlayerHealthLabel.text = "%d" % playerHealth
+	$Portraits/PlayerManaLabel.text = "%d" % playerMana
+	$Portraits/EnemyHealthLabel.text = "%d" % enemyHealth
+	$Portraits/EnemyManaLabel.text = "%d" % enemyMana
 
 ########################################################################################
 

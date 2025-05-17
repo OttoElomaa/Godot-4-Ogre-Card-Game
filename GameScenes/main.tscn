@@ -34,6 +34,72 @@ border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8jxey")
 
+[node name="Portraits" type="Node2D" parent="."]
+
+[node name="PlayerSprite" type="Sprite2D" parent="Portraits"]
+position = Vector2(138, 1126)
+texture = ExtResource("3_8s1e5")
+
+[node name="EnemySprite" type="Sprite2D" parent="Portraits"]
+position = Vector2(1080, 131)
+texture = ExtResource("4_bw8dm")
+
+[node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Portraits"]
+position = Vector2(189, 1141)
+texture = ExtResource("10_2brjh")
+
+[node name="EnemyResourceHolderSprite2" type="Sprite2D" parent="Portraits"]
+position = Vector2(1134, 146)
+texture = ExtResource("10_2brjh")
+
+[node name="PlayerHealthLabel" type="Label" parent="Portraits"]
+texture_filter = 1
+offset_left = 213.0
+offset_top = 1208.0
+offset_right = 269.0
+offset_bottom = 1265.0
+text = "99"
+label_settings = ExtResource("11_jh5rg")
+horizontal_alignment = 1
+
+[node name="EnemyHealthLabel" type="Label" parent="Portraits"]
+texture_filter = 1
+offset_left = 1159.0
+offset_top = 215.0
+offset_right = 1215.0
+offset_bottom = 272.0
+text = "99"
+label_settings = ExtResource("11_jh5rg")
+horizontal_alignment = 1
+
+[node name="PlayerManaLabel" type="Label" parent="Portraits"]
+texture_filter = 1
+offset_left = 255.0
+offset_top = 1016.0
+offset_right = 312.0
+offset_bottom = 1073.0
+text = "88"
+label_settings = ExtResource("12_hffy6")
+horizontal_alignment = 1
+
+[node name="EnemyManaLabel" type="Label" parent="Portraits"]
+texture_filter = 1
+offset_left = 1201.0
+offset_top = 22.0
+offset_right = 1258.0
+offset_bottom = 79.0
+text = "88"
+label_settings = ExtResource("12_hffy6")
+horizontal_alignment = 1
+
+[node name="EnemyPortraitArea" type="Area2D" parent="Portraits"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portraits/EnemyPortraitArea"]
+position = Vector2(1097, 141.5)
+shape = SubResource("RectangleShape2D_dj0be")
+
 [node name="Visuals" type="Node2D" parent="."]
 z_index = -5
 
@@ -55,24 +121,6 @@ texture = ExtResource("4_ehjh8")
 position = Vector2(2211, 1071)
 texture = ExtResource("5_47kpv")
 
-[node name="Core" type="Node2D" parent="Visuals"]
-
-[node name="PlayerSprite" type="Sprite2D" parent="Visuals/Core"]
-position = Vector2(138, 1126)
-texture = ExtResource("3_8s1e5")
-
-[node name="EnemySprite" type="Sprite2D" parent="Visuals/Core"]
-position = Vector2(1080, 131)
-texture = ExtResource("4_bw8dm")
-
-[node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Visuals/Core"]
-position = Vector2(189, 1141)
-texture = ExtResource("10_2brjh")
-
-[node name="EnemyResourceHolderSprite2" type="Sprite2D" parent="Visuals/Core"]
-position = Vector2(1134, 146)
-texture = ExtResource("10_2brjh")
-
 [node name="BattleSystem" type="Node2D" parent="."]
 script = ExtResource("2_8jxey")
 
@@ -80,57 +128,6 @@ script = ExtResource("2_8jxey")
 z_index = 5
 points = PackedVector2Array(-287, 209, -492, 528)
 default_color = Color(1, 0.67451, 0.341176, 1)
-
-[node name="Scenery" type="Node2D" parent="BattleSystem"]
-
-[node name="PlayerHealthLabel" type="Label" parent="BattleSystem/Scenery"]
-texture_filter = 1
-offset_left = 213.0
-offset_top = 1208.0
-offset_right = 269.0
-offset_bottom = 1265.0
-text = "99"
-label_settings = ExtResource("11_jh5rg")
-horizontal_alignment = 1
-
-[node name="EnemyHealthLabel" type="Label" parent="BattleSystem/Scenery"]
-texture_filter = 1
-offset_left = 1159.0
-offset_top = 215.0
-offset_right = 1215.0
-offset_bottom = 272.0
-text = "99"
-label_settings = ExtResource("11_jh5rg")
-horizontal_alignment = 1
-
-[node name="PlayerManaLabel" type="Label" parent="BattleSystem/Scenery"]
-texture_filter = 1
-offset_left = 255.0
-offset_top = 1016.0
-offset_right = 312.0
-offset_bottom = 1073.0
-text = "88"
-label_settings = ExtResource("12_hffy6")
-horizontal_alignment = 1
-
-[node name="EnemyManaLabel" type="Label" parent="BattleSystem/Scenery"]
-texture_filter = 1
-offset_left = 1201.0
-offset_top = 22.0
-offset_right = 1258.0
-offset_bottom = 79.0
-text = "88"
-label_settings = ExtResource("12_hffy6")
-horizontal_alignment = 1
-
-[node name="EnemyPortraitArea" type="Area2D" parent="BattleSystem"]
-visible = false
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleSystem/EnemyPortraitArea"]
-position = Vector2(1097, 141.5)
-shape = SubResource("RectangleShape2D_dj0be")
 
 [node name="EnemyTurnTimer" type="Timer" parent="BattleSystem"]
 wait_time = 1.5

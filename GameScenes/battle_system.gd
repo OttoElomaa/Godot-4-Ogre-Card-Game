@@ -28,15 +28,12 @@ func _ready() -> void:
 	turnCount += 1
 	playerMana = turnCount
 	enemyMana = turnCount
-	updateResourceLabels()
+	#updateResourceLabels()
 	
 	
 	
 func updateResourceLabels():
-	$Scenery/PlayerHealthLabel.text = "%d" % playerHealth
-	$Scenery/PlayerManaLabel.text = "%d" % playerMana
-	$Scenery/EnemyHealthLabel.text = "%d" % enemyHealth
-	$Scenery/EnemyManaLabel.text = "%d" % enemyMana
+	main.updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana)
 
 
 
