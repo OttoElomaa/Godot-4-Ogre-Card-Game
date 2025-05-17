@@ -12,7 +12,7 @@ signal hoverOff
 #### --> Unless "Haste/Vigilant" kind of effects
 #### ACTIVE / PASSIVE IS TRIGGERED in a right click menu on top of card
 enum CardActionStates {
-	ACTIVE, PASSIVE, RESTING, TRAVELING
+	ACTIVE, PASSIVE, RESTING, TRAVELING, DESTROYED
 }
 
 @export var manaCost := 0
@@ -162,19 +162,46 @@ func checkNotTraveling() -> bool:
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
 func takeDamageAndCheckLethal(card:Card) -> bool:
 	
-	#### HANDLE DESTROYED STATUS	
+	#### FOR SUNDER DAMAGE GOING BELOW ZERO
+	var isBrittle := false
+	if health <= 0:
+		isBrittle = true
+	
+	#### CHECK DESTROYED STATUS	
 	var selfDestroyed := false
-	if card.damage >= health:
+	if card.checkHasLethal(self):
 		selfDestroyed = true
 	
 	#### HANDLE DAMAGE -> SUNDER Keyword
 	if card.hasSunder:
 		health -= card.damage
 	
+	#### SUNDER CAN'T DESTROY CARD, UNLESS IT WAS ALREADY ZERO
+	if health < 0:
+		if isBrittle:
+			selfDestroyed = true
+		else:
+			health = 0
+	
 	#### UPDATE VISUALS AND RETURN DESTROYED STATUS
 	updateCardLabels()
 	return selfDestroyed
 
+
+func checkHasLethal(otherCard:Card):
+	var hasLethal := false
+	if checkLethalTwo(otherCard):
+		#### NO TRADE; ENEMY CARD DESTROYED
+		if not otherCard.checkLethalTwo(self):
+			hasLethal = true
+		#### IF NO DUELIST, MUTUAL DESTRUCTION = TRADE
+		elif not otherCard.hasDuelist:
+			hasLethal = true
+		
+	return hasLethal
+
+func checkLethalTwo(card:Card):
+	return damage >= card.health
 
 
 func toggleEnemyStatus(enabled:bool):

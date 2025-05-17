@@ -33,6 +33,12 @@ func _ready() -> void:
 		slot.slotType = CardSlotTypes.ENEMY
 
 
+func _unhandled_input(e: InputEvent) -> void:
+	if e is InputEventMouseButton: 
+		if e.is_pressed():
+			if States.gameState == States.GameStates.CARD_ACT_MENU:
+				toggleCardActionMenu(false, null)
+
 
 func fetchMouseOverObjects(collisionMask: int):
 	
@@ -54,10 +60,13 @@ func toggleCardActionMenu(enable:bool, card:Card):
 	
 	if enable:
 		if card != null:
+			#### TURN ON CARD ACTION MENU
+			States.gameState = States.GameStates.CARD_ACT_MENU
 			actionMenuCard = card
 			$ActionMenuCanvas.offset = get_global_mouse_position() * $Camera2D.zoom.x
 			$ActionMenuCanvas.show()
 	else:
+		States.gameState = States.GameStates.PLAY
 		$ActionMenuCanvas.hide()
 
 

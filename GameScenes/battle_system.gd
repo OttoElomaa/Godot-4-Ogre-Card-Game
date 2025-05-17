@@ -38,7 +38,7 @@ func updateResourceLabels():
 
 
 func _input(e: InputEvent) -> void:
-	
+	#### ONLY PROCESS ATTACK STATE HERE
 	if States.gameState != States.GameStates.ATTACK:
 		return
 	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
@@ -206,19 +206,13 @@ func handlePlayerAttackCreature(results:Array):
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card):
 	
-	#### DEAL DAMAGE IF SUNDER
-	#if attackCard.hasSunder:
-	var targetKilled:bool = targetCard.takeDamageAndCheckLethal(attackCard)
-	var attackerKilled:bool = attackCard.takeDamageAndCheckLethal(targetCard)
-	
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
 	var cardsToDestroy := []
-	if targetKilled:
-		if not (targetCard.hasDuelist and attackerKilled):
-			cardsToDestroy.append(targetCard)
-	if attackerKilled:
-		if not (attackCard.hasDuelist and targetKilled):
-			cardsToDestroy.append(attackCard)
+	if targetCard.takeDamageAndCheckLethal(attackCard):
+		cardsToDestroy.append(targetCard)
+	if attackCard.takeDamageAndCheckLethal(targetCard):
+		cardsToDestroy.append(attackCard)
+	
 		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
 	attackCard.rest()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=20 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Texture2D" uid="uid://dpqhi5cjnnq65" path="res://Art/CardComponents/card-background-texture-V2.png" id="2_7bc8n"]
 [ext_resource type="Texture2D" uid="uid://dlg7x4i3jv20p" path="res://Art/CardComponents/card-backside-texture.png" id="2_p0ugb"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://GameScenes/cardEffectHolder.gd" id="2_r3tma"]
 [ext_resource type="Texture2D" uid="uid://b7g66n14xrpak" path="res://Art/CardArt/card-art-base-card-idk.png" id="3_trd61"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="4_7bc8n"]
 [ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="4_w0fdq"]
@@ -107,6 +108,14 @@ _data = {
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_i5yq8")
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="Cast" type="Node" parent="Effects"]
+script = ExtResource("2_r3tma")
+
+[node name="BattleArt" type="Node" parent="Effects"]
+script = ExtResource("2_r3tma")
 
 [node name="Backside" type="Sprite2D" parent="."]
 texture = ExtResource("2_p0ugb")

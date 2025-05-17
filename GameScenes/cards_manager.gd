@@ -102,7 +102,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(e: InputEvent) -> void:
-	
+	#### ONLY PROCESS 'PLAY' STATE HERE
 	if States.gameState != States.GameStates.PLAY:
 		return
 	
@@ -176,7 +176,12 @@ func finishDraggingCard() -> Node:
 
 func placeCardInSlot(card:Card, slot:CardSlot):
 	#### CARD VISUAL STUFF
-	card.position = slot.position
+	if main.checkSlotPlayer(slot):
+		card.position = slot.position
+	else:
+		var tween = get_tree().create_tween()
+		tween.tween_property(card, "position", slot.position, 0.2)
+	
 	card.scale = Vector2.ONE
 	card.toggleFrontSide(true)
 	card.toggleManaCostIndicator(false)
