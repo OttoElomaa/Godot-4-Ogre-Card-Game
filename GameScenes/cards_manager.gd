@@ -262,10 +262,8 @@ func startEnemyTurn():
 
 func wakeBoardCards(board:Node):
 	for c:Card in board.get_children():
-		if c.statesTurnOffTravel():
-			pass
-		else:
-			c.wake()
+		c.toggleTraveling(false)
+		c.wake()
 
 
 		

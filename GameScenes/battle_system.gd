@@ -190,7 +190,7 @@ func handlePlayerAttackCreature(results:Array):
 	#### VALID TARGET - RESOLVE ATTACK
 	#prints("Player card targets enemy card: ", currentAttackingCard, target)
 	if main.checkSlotEnemy(target.mySlot):
-		if target.checkValidTarget():
+		if target.checkActive():
 			currentAttackingCard.playAttackAnimation()
 			endAttackState()
 			resolveAttack(currentAttackingCard, target)

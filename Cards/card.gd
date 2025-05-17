@@ -29,7 +29,9 @@ var myOffset := Vector2.ZERO
 
 var allowInteract := true
 var actionState: CardActionStates = CardActionStates.ACTIVE
+
 var isTraveling := false
+var resting := false
 
 
 @export var hasSunder := false
@@ -86,16 +88,15 @@ func toggleFrontSide(toShow:bool):
 #############################################################
 
 func rest():
-	actionState = CardActionStates.RESTING
-	#rotation_degrees = 25
+	resting = true
 
 func restAndAnimate():
-	actionState = CardActionStates.RESTING
+	resting = true
 	rotateRestingCard(true)
 
 
 func wake():
-	statesActive()
+	resting = false
 	rotateRestingCard(false)
 
 ########################################################
@@ -128,41 +129,35 @@ func toggleTraveling(enabled:bool):
 		stateHandler.get_node("TravelingIcon").hide()
 
 
-func statesTurnOffTravel() -> bool:
-	if isTraveling:
-		toggleTraveling(false)
-		return true
-	return false
+#func turnOffTravel() -> bool:
+	#if isTraveling:
+		#toggleTraveling(false)
+		#return true
+	#return false
 
 ##################################
 
 func checkActive() -> bool:
 	if actionState == CardActionStates.ACTIVE:
-		return true
+		if checkNotResting():
+			return true
 	return false
 
 
 func checkNotResting() -> bool:
-	if actionState == CardActionStates.RESTING:
-		return false
-	return true
+	return !resting
 
 func checkNotTraveling() -> bool:
 	if isTraveling:
 		return false
 	return true
 
-func checkValidTarget() -> bool:
-	if checkNotResting():
-		if checkActive():
-			return true
-	return false
+#func checkValidTarget() -> bool:
+	#return checkActive()
 
 
 ########################################################
 
-#func checkHasLethalOn(card:Card):
-	#return (damage > card.health)
 
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
 func takeDamageAndCheckLethal(card:Card) -> bool:
@@ -180,9 +175,6 @@ func takeDamageAndCheckLethal(card:Card) -> bool:
 	updateCardLabels()
 	return selfDestroyed
 
-
-#func takeDamage(damage:int):
-	
 
 
 func toggleEnemyStatus(enabled:bool):
