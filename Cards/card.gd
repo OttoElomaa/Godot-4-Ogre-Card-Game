@@ -90,6 +90,7 @@ func toggleFrontSide(toShow:bool):
 
 func rest():
 	resting = true
+	$BodyAnimations/RestTimer.start()
 
 func restAndAnimate():
 	resting = true
@@ -239,13 +240,12 @@ func playAttackAnimation():
 		$BodyAnimations.play("EnemyAttack")
 	else:
 		$BodyAnimations.play("PlayerAttack")
-	$BodyAnimations/AnimationsTimer.start()
-
-
-#### FOR RESTING
-func _on_animations_timer_timeout() -> void:
-	rotateRestingCard(true)
 	
+
+
+#### FOR RESTING	
+func timeoutRestAnimation() -> void:
+	rotateRestingCard(true)
 
 #######################################################################
 
@@ -264,8 +264,8 @@ func updateCardLabels():
 
 
 func destroyCardOne():
-	statesDestroy()
-	$BodyAnimations.play("DestroyBoardCard")
+	if actionState == CardActionStates.DESTROYED:
+		$BodyAnimations.play("DestroyBoardCard")
 	
 
 func destroyCardTwo():

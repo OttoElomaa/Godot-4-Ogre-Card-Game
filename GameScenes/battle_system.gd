@@ -160,23 +160,27 @@ func handlePlayerAttackEnemy():
 	endAttackState()
 
 
+#### BTW, PlayAttackAnimation CALLS THE CARD DESTROY COMMAND
 func handleEnemyAttackPlayer(attackCard: Card):
 	
 	var c = attackCard
 		
-	#### PLAYER HAS BLOCKERS, ATTACK FIRST BLOCKER
-	var blockers = cardsManager.getPlayerBlockers()
-	if blockers.size() > 0:
-		var target = blockers[0]
+	#### PLAYER HAS BLOCKERS, FIND KILLABLE BLOCKER
+	var blockers:Array = cardsManager.getPlayerBlockers()
+	var target:Card = null
+	for other in blockers:
+		if c.checkHasLethal(other):
+			target = other
+	
+	#### TARGET FOUND, ATTACK TARGET CARD
+	if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
-		if resolveAttack(c, target):
-			pass
-		else:
-			c.playAttackAnimation()
+		c.playAttackAnimation()
+		if not resolveAttack(c, target):
 			c.rest()
 	
 	#### NO BLOCKERS, ATTACK PLAYER
-	else:
+	elif blockers.is_empty():
 		playerHealth -= c.damage
 		c.playAttackAnimation()
 		c.rest()
@@ -224,7 +228,7 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	if attackCard.takeDamageAndCheckLethal(targetCard):
 		cardsToDestroy.append(attackCard)
 	
-	#### DON'T ANIMATE DESTROYED ATTACKER
+	#### DON'T REST-ANIMATE DESTROYED ATTACKER CARD
 	var attackerDestroyed := false
 	if attackCard in cardsToDestroy:
 		attackerDestroyed = true
@@ -234,8 +238,14 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
 	for c:Card in cardsToDestroy:
 		c.mySlot.isAvailable = true
-		c.destroyCardOne()
+		#c.destroyCardOne()
+		c.statesDestroy()
 	
+	#### PROCESS TARGET CARD'S STATUS
+	if targetCard in cardsToDestroy:
+		targetCard.destroyCardOne()
+	
+		
 	return attackerDestroyed
 
 
