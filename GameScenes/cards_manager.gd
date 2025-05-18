@@ -11,7 +11,7 @@ var STARTING_HAND_SIZE := 4
 @onready var CardRukRaider: PackedScene = preload("res://Cards/Creatures/Cr-RukRaider.tscn")
 
 
-var main:Node = null
+var main:GameBoard = null
 var battleSystem:Node = null
 
 var screenSize:Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO)
@@ -257,6 +257,7 @@ func connectCardSignal(card:Card):
 ####################################################
 
 func startPlayerTurn():
+	main.showPlayerTurnPopup()
 	wakeBoardCards($PlayerBoard)
 	drawCard($PlayerHand)
 	updateHandCardsVisuals()

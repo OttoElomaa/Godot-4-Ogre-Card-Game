@@ -1,4 +1,5 @@
 extends Node2D
+class_name GameBoard
 
 
 enum CardSlotTypes {
@@ -70,20 +71,7 @@ func toggleCardActionMenu(enable:bool, card:Card):
 		$ActionMenuCanvas.hide()
 
 
-##########################################################################################
 
-func updateUi(turnCount:int):
-	toggleCardActionMenu(false, null)
-	
-	$CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel.text = boardName
-	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
-
-
-func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
-	$Portraits/PlayerHealthLabel.text = "%d" % playerHealth
-	$Portraits/PlayerManaLabel.text = "%d" % playerMana
-	$Portraits/EnemyHealthLabel.text = "%d" % enemyHealth
-	$Portraits/EnemyManaLabel.text = "%d" % enemyMana
 
 ########################################################################################
 
@@ -122,3 +110,26 @@ func _on_exit_button_pressed() -> void:
 func _on_toggle_defend_button_pressed() -> void:
 	actionMenuCard.switchStates()
 	toggleCardActionMenu(false, null)
+	
+
+
+
+##########################################################################################
+
+func updateUi(turnCount:int):
+	toggleCardActionMenu(false, null)
+	
+	$CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel.text = boardName
+	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
+
+
+func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
+	$Portraits/PlayerHealthLabel.text = "%d" % playerHealth
+	$Portraits/PlayerManaLabel.text = "%d" % playerMana
+	$Portraits/EnemyHealthLabel.text = "%d" % enemyHealth
+	$Portraits/EnemyManaLabel.text = "%d" % enemyMana
+
+
+
+func showPlayerTurnPopup():
+	$Visuals/YourTurnPopup/PopupAnimation.play("ShowPopup")

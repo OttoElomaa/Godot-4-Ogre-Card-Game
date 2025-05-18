@@ -3,7 +3,7 @@ extends Node2D
 
 
 
-var main:Node = null
+var main:GameBoard = null
 var cardsManager:Node = null
 
 @onready var attackLine := $AttackLine

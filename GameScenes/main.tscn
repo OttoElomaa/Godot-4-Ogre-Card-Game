@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=26 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
@@ -23,6 +23,90 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
+
+[sub_resource type="Animation" id="Animation_c0uhk"]
+resource_name = "ShowPopup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Canvas:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Canvas:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -100)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Canvas/PopupPanel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fjy3t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Canvas:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Canvas:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Canvas/PopupPanel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_on7x6"]
+_data = {
+&"RESET": SubResource("Animation_fjy3t"),
+&"ShowPopup": SubResource("Animation_c0uhk")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0uhk"]
 bg_color = Color(0.947752, 0.911757, 0.861921, 1)
@@ -123,6 +207,7 @@ position = Vector2(2211, 1071)
 texture = ExtResource("5_47kpv")
 
 [node name="YourTurnPopup" type="Node2D" parent="Visuals"]
+position = Vector2(0, -200)
 
 [node name="Canvas" type="CanvasLayer" parent="Visuals/YourTurnPopup"]
 visible = false
@@ -134,28 +219,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = -40.0
-offset_right = 75.0
-offset_bottom = 40.0
+offset_left = -150.0
+offset_top = -51.5
+offset_right = 150.0
+offset_bottom = 51.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_styles/panel = ExtResource("5_hys5q")
 
-[node name="Label" type="Label" parent="Visuals/YourTurnPopup/Canvas/PopupPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="Visuals/YourTurnPopup/Canvas/PopupPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="Visuals/YourTurnPopup/Canvas/PopupPanel/MarginContainer"]
 texture_filter = 1
 layout_mode = 2
 text = "Your turn!"
 label_settings = ExtResource("12_c0uhk")
 horizontal_alignment = 1
 
-[node name="CastButton" type="Button" parent="Visuals/YourTurnPopup/Canvas/PopupPanel"]
-layout_mode = 2
-theme_override_styles/hover = ExtResource("8_2brjh")
-theme_override_styles/normal = ExtResource("9_7ijru")
+[node name="PopupAnimation" type="AnimationPlayer" parent="Visuals/YourTurnPopup"]
+libraries = {
+&"": SubResource("AnimationLibrary_on7x6")
+}
 
 [node name="BattleSystem" type="Node2D" parent="."]
 script = ExtResource("2_8jxey")
