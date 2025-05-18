@@ -7,13 +7,18 @@ signal hoverOff
 
 #### ACTIVE = Combatant, can be targeted, protects player from being targeted
 #### PASSIVE = Can't be targeted, doesn't protect
-#### RESTING = Can't take card actions this turn, such as attack or cast.
-#### RESTING IS TRIGGERED by entering the field, attacking, or casting
-#### --> Unless "Haste/Vigilant" kind of effects
 #### ACTIVE / PASSIVE IS TRIGGERED in a right click menu on top of card
+#### DESTROYED STATUS when the card is beaten in combat or otherwise destroyed
+#### INERT REFERS to SPELLS and other cards that can't attack or cast
 enum CardActionStates {
-	ACTIVE, PASSIVE, DESTROYED
+	ACTIVE, PASSIVE, DESTROYED, INERT
 }
+
+enum CardTypes {
+	CREATURE, SPELL,
+}
+###########################################
+@export var cardType := CardTypes.CREATURE
 
 @export var manaCost := 0
 @export var startingDamage := 0
@@ -21,22 +26,26 @@ enum CardActionStates {
 var damage := 0
 var health := 0
 
+@export var hasSunder := false
+@export var hasDuelist := false
+
+###############################################
+#### RESTING = Can't take card actions this turn, such as attack or cast.
+#### RESTING IS TRIGGERED by attacking, or casting --> Unless "Haste/Vigilant" kind of effects
+#### TRAVELING IS TRIGGERED by entering. It's summoning sickness
+var actionState: CardActionStates = CardActionStates.ACTIVE
+var isTraveling := false
+var resting := false
+var allowInteract := true
+
+var mySlot: CardSlot = null
+var isEnemyCard := false
+var myOffset := Vector2.ZERO
+##########################################################
 @onready var stateHandler := $Frontside/ActionState
 var cardsManager:Node = null
 
-var isEnemyCard := false
-var mySlot: CardSlot = null
-var myOffset := Vector2.ZERO
 
-var allowInteract := true
-var actionState: CardActionStates = CardActionStates.ACTIVE
-
-var isTraveling := false
-var resting := false
-
-
-@export var hasSunder := false
-@export var hasDuelist := false
 
 
 
@@ -48,8 +57,16 @@ func _ready() -> void:
 	health = startingHealth
 	myOffset = get_parent().position
 	
-	$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % startingDamage
-	$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % startingHealth
+	if cardType == CardTypes.CREATURE:
+		$Frontside/Background/Creature.show()
+		$Frontside/Background/Spell.hide()
+		$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % startingDamage
+		$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % startingHealth
+	else:
+		$Frontside/Background/Creature.hide()
+		$Frontside/Background/Spell.show()
+		$Frontside/StatsPanel.hide()
+		$Frontside/ActionState.hide()
 	
 	var l = $Frontside/EffectsLabel
 	var text = ""
@@ -59,6 +76,13 @@ func _ready() -> void:
 		text += "Duelist"
 	l.text = text
 	
+
+
+func basicSetup():
+	match cardType:
+		CardTypes.SPELL:
+			statesInert()
+			
 
 
 func _on_area_2d_mouse_entered() -> void:
@@ -122,6 +146,13 @@ func statesPassive():
 	stateHandler.get_node("PassiveIcon").show()
 
 
+func statesInert():
+	actionState = CardActionStates.INERT
+	var s = $Frontside/ActionState
+	s.get_node("ActiveIcon").hide()
+	s.get_node("PassiveIcon").hide()
+	
+
 func statesDestroy():
 	actionState = CardActionStates.DESTROYED	
 
@@ -142,30 +173,40 @@ func toggleTraveling(enabled:bool):
 
 ##################################
 
-func checkActive() -> bool:
+func checkCanBlock() -> bool:
+	#assert(1==2,"where is this called")
 	if actionState == CardActionStates.ACTIVE:
-		if checkNotResting():
+		if not checkResting():
 			return true
 	return false
 
 
-func checkNotResting() -> bool:
-	return !resting
+func checkCanAct():
+	if not checkInert():
+		if checkAlive():
+			if not checkResting():
+				if not checkTraveling():
+					return true
+	return false
+				
 
-func checkNotTraveling() -> bool:
-	if isTraveling:
-		return false
-	return true
+func checkInert() -> bool:
+	if actionState == CardActionStates.INERT:
+		return true
+	return false
 
-#func checkValidTarget() -> bool:
-	#return checkActive()
+func checkResting() -> bool:
+	return resting
+
+func checkTraveling() -> bool:
+	return isTraveling
+
+
 func checkAlive():
-	if actionState == CardActionStates.DESTROYED:
-		return false
-	return true
-
-
+	return !(actionState == CardActionStates.DESTROYED)
+		
 ########################################################
+
 
 
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE

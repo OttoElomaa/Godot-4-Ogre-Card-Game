@@ -191,13 +191,22 @@ func placeCardInSlot(card:Card, slot:CardSlot):
 	card.scale = Vector2.ONE
 	card.toggleFrontSide(true)
 	card.toggleManaCostIndicator(false)
-	card.toggleActionStateIndicator(true)
 	
-	#### SLOT STUFF, AND TAP CARD
+		
+	#### SLOT STUFF
 	card.mySlot = slot
 	slot.toggleAvailable(false)
+	
+	#### ONLY IF CREATURE...
+	if card.checkInert():
+		return
+	#### ...SET ACTION STATE AND TRAVEL STATE	
+	card.toggleActionStateIndicator(true)
 	card.toggleTraveling(true)
-	card.statesActive()
+	if main.checkSlotEnemy(slot): #### ENEMY CARDS ATTACK BY DEFAULT, PLAYER'S CARDS PASSIVE BY DFT
+		card.statesActive()
+	else:
+		card.statesPassive()
 
 	
 
@@ -303,9 +312,8 @@ func getPlayerBoardCards() -> Array:
 func getPlayerBlockers():
 	var blockers := []
 	for c:Card in getPlayerBoardCards():
-		if c.checkNotResting():
-			if c.checkActive():
-				blockers.append(c)
+		if c.checkCanBlock():
+			blockers.append(c)
 	return blockers
 				
 	
@@ -313,9 +321,8 @@ func getPlayerBlockers():
 func getEnemyBlockers():
 	var blockers := []
 	for c:Card in getEnemyBoardCards():
-		if c.checkNotResting():
-			if c.checkActive():
-				blockers.append(c)
+		if c.checkCanBlock():
+			blockers.append(c)
 	return blockers	
 	
 

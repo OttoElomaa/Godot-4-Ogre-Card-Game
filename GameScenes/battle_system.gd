@@ -84,13 +84,11 @@ func timeoutEnemyStartCombat() -> void:
 	#### ATTACK WITH CARDS ON BOARD
 	var enemyBoardCards = cardsManager.getEnemyBoardCards()
 	for card:Card in enemyBoardCards:
-		#### NECESSARY CHECKS AND SET CURRENT ATTACKING CARD
-		if not MyTools.checkNodeValidity(card):
+		if not MyTools.checkNodeValidity(card):  #### CHECK IF VALID
 			pass
-		elif card.checkNotResting() and card.checkNotTraveling():
-			#currentAttackingCard = card
+		elif card.checkCanAct(): #### CAN IT ACT
 			handleEnemyAttackPlayer(card)
-				
+			#currentAttackingCard = card
 
 func playEnemyCard(card:Card):
 	for slot:CardSlot in main.getEnemySlots():
@@ -120,7 +118,7 @@ func togglePlayerAttackMode(enable:bool, card:Card):
 	if not MyTools.checkNodeValidity(card):
 		return
 	
-	if card.checkNotResting() and card.checkNotTraveling():
+	if card.checkCanAct():
 		currentAttackingCard = card
 		States.gameState = States.GameStates.ATTACK
 		
@@ -194,28 +192,28 @@ func handlePlayerAttackCreature(results:Array):
 	if not MyTools.checkNodeValidity(target):
 		endAttackState()
 		return
+		
 	#### DON'T END TARGETING if it registers CLICKING ON SAME ATTACKING CARD ITSELF
+	var end := false
 	if not target.mySlot:
-		if target != currentAttackingCard:
-			endAttackState()
-		return
-	if main.checkSlotPlayer(target.mySlot):
+		end = true
+	elif not main.checkSlotEnemy(target.mySlot):
+		end = true
+	elif not target.checkCanBlock():
+		end = true
+		
+	if end:
 		if target != currentAttackingCard:
 			endAttackState()
 		return
 	
 	#### VALID TARGET - RESOLVE ATTACK
-	#prints("Player card targets enemy card: ", currentAttackingCard, target)
-	if main.checkSlotEnemy(target.mySlot):
-		if target.checkActive():
-			currentAttackingCard.playAttackAnimation()
-			endAttackState()
-			resolveAttack(currentAttackingCard, target)
+	currentAttackingCard.playAttackAnimation()
+	endAttackState()
+	resolveAttack(currentAttackingCard, target)
 		
 
-	#attackLineShown = false
-
-	
+		
 
 #### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT

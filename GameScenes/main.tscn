@@ -272,8 +272,10 @@ one_shot = true
 script = ExtResource("1_n4faa")
 
 [node name="PlayerDeck" type="Node2D" parent="CardsManager"]
+position = Vector2(-500, 0)
 
 [node name="EnemyDeck" type="Node2D" parent="CardsManager"]
+position = Vector2(-300, 0)
 
 [node name="PlayerHand" type="Node2D" parent="CardsManager"]
 
