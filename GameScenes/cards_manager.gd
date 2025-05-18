@@ -36,7 +36,7 @@ func setup():
 func dealPlayerHand():
 	dumbHandDrawCounter = 0
 	for i in range(STARTING_HAND_SIZE):
-		drawCard($PlayerHand)
+		drawCard($PlayerDeck, $PlayerHand)
 		dumbHandDrawCounter += 1
 	updateHandCardsVisuals()
 
@@ -44,7 +44,7 @@ func dealPlayerHand():
 func dealEnemyHand():
 	dumbHandDrawCounter = 0
 	for i in range(STARTING_HAND_SIZE):
-		var card:Card = drawCard($EnemyHand)
+		var card:Card = drawCard($EnemyDeck, $EnemyHand)
 		dumbHandDrawCounter += 1
 		
 		card.toggleEnemyStatus(true)
@@ -54,17 +54,19 @@ func dealEnemyHand():
 
 		
 
-func drawCard(targetHand:Node2D):
+func drawCard(sourceDeck:Node,targetHand:Node):
 	
-	var cardScene = CardOgre.instantiate()
-	if dumbHandDrawCounter < 1:
-		cardScene = CardPikeman.instantiate()
-	else:
-		cardScene = main.loadRandomCard("res://Cards/Creatures/")
-	
+	if sourceDeck.get_child_count() < 1:
+		assert(1==2,"testing launch crash 2")
+		return
+		
+	var cardScene = sourceDeck.get_child(0)	
 	cardScene.cardsManager = self	
-	targetHand.add_child(cardScene)
+	
+	cardScene.reparent(targetHand)
+	#assert(1==2,"testing launch crash")
 	return cardScene
+
 
 	
 #### OFFSETS, SHOW MANA COSTS, ETC.
@@ -260,13 +262,13 @@ func connectCardSignal(card:Card):
 func startPlayerTurn():
 	main.showPlayerTurnPopup()
 	wakeBoardCards($PlayerBoard)
-	drawCard($PlayerHand)
+	drawCard($PlayerDeck, $PlayerHand)
 	updateHandCardsVisuals()
 
 
 func startEnemyTurn():
 	wakeBoardCards($EnemyBoard)
-	var newCard = drawCard($EnemyHand)
+	var newCard = drawCard($EnemyDeck, $EnemyHand)
 	newCard.toggleEnemyStatus(true)
 	newCard.toggleFrontSide(false)
 	updateHandCardsVisuals()

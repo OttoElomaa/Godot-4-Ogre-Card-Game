@@ -1,0 +1,33 @@
+extends Node
+
+
+
+var counter := 0
+
+func createCard(path:String):
+	var cardPacked = load(path)
+	return cardPacked.instantiate()
+	
+
+
+func createDesertDeck():
+	
+	counter = 0
+	var card:Card = null
+	var cards := []
+	
+	for i in range(20):
+		cards.append(createCard("res://Cards/Creatures/Cr-Pikeman.tscn"))
+	for i in range(10):
+		cards.append(createCard("res://Cards/Creatures/Cr-Ogre.tscn"))
+	for i in range(10):
+		cards.append(createCard("res://Cards/Creatures/Cr-RukRaider.tscn"))
+	for i in range(10):
+		cards.append(createCard("res://Cards/Creatures/Cr-MardokHound.tscn"))
+	
+	prints("created cards: ", cards)
+	cards.shuffle()
+	return cards
+	
+	
+	

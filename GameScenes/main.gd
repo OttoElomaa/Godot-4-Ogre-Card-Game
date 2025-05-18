@@ -23,13 +23,28 @@ func _ready() -> void:
 	$BattleSystem.main = self
 	$BattleSystem.cardsManager = $CardsManager
 	
+	var idk = 0
+	var playerDeckCards:Array = $CardLoader.createDesertDeck()
+	for card in playerDeckCards:
+		$CardsManager/PlayerDeck.add_child(card)
+		
+	var enemyDeckCards:Array = $CardLoader.createDesertDeck()
+	for card in enemyDeckCards:
+		print("reparent success")
+		$CardsManager/EnemyDeck.add_child(card)
+	
+	#await(get_tree().create_timer(0.2))
+	
 	$CardsManager.setup()
+	
+
+	#### UI STUFF
 	updateUi($BattleSystem.turnCount)
 	$BattleSystem.updateResourceLabels()
 	
+	#### SET SLOTS STATUS
 	for slot:CardSlot in $PlayerSlots.get_children():
 		slot.slotType = CardSlotTypes.PLAYER
-	
 	for slot:CardSlot in $EnemySlots.get_children():
 		slot.slotType = CardSlotTypes.ENEMY
 

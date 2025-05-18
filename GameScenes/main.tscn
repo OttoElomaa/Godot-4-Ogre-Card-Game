@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=27 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
 [ext_resource type="Script" uid="uid://doyn8i1dunq2s" path="res://GameScenes/battle_system.gd" id="2_8jxey"]
+[ext_resource type="Script" uid="uid://x5hp1ama1l5h" path="res://GameScenes/card_loader.gd" id="2_fjy3t"]
 [ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_8s1e5"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="3_015nr"]
 [ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_bw8dm"]
@@ -118,6 +119,9 @@ border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8jxey")
+
+[node name="CardLoader" type="Node" parent="."]
+script = ExtResource("2_fjy3t")
 
 [node name="Portraits" type="Node2D" parent="."]
 
