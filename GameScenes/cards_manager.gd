@@ -34,9 +34,10 @@ func setup():
 
 
 func dealPlayerHand():
-	dumbHandDrawCounter = 5
+	dumbHandDrawCounter = 0
 	for i in range(STARTING_HAND_SIZE):
-		drawCard($PlayerHand)	
+		drawCard($PlayerHand)
+		dumbHandDrawCounter += 1
 	updateHandCardsVisuals()
 
 

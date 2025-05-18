@@ -192,6 +192,11 @@ func takeDamageAndCheckLethal(card:Card) -> bool:
 		else:
 			health = 0
 	
+	#### ANY CARD CAN DESTROY A CARD WITH 0 HEALTH
+	if isBrittle:
+		if card.damage > 0:
+			selfDestroyed = true
+	
 	#### UPDATE VISUALS AND RETURN DESTROYED STATUS
 	updateCardLabels()
 	return selfDestroyed
@@ -205,6 +210,8 @@ func checkHasLethal(otherCard:Card):
 			hasLethal = true
 		#### IF NO DUELIST, MUTUAL DESTRUCTION = TRADE
 		elif not otherCard.hasDuelist:
+			hasLethal = true
+		elif damage > 0 and otherCard.health <= 0:
 			hasLethal = true
 		
 	return hasLethal
