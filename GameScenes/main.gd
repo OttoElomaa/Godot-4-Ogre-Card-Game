@@ -82,7 +82,8 @@ func toggleCardActionMenu(enable:bool, card:Card):
 			$ActionMenuCanvas.offset = get_global_mouse_position() * $Camera2D.zoom.x
 			$ActionMenuCanvas.show()
 	else:
-		States.gameState = States.GameStates.PLAY
+		if States.gameState == States.GameStates.CARD_ACT_MENU:
+			States.gameState = States.GameStates.PLAY
 		$ActionMenuCanvas.hide()
 
 

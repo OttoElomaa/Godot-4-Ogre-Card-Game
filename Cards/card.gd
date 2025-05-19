@@ -23,8 +23,12 @@ enum CardTypes {
 @export var manaCost := 0
 @export var startingDamage := 0
 @export var startingHealth := 0
+
 var damage := 0
 var health := 0
+var tempDamage := 0
+var tempHealth := 0
+
 
 @export var hasSunder := false
 @export var hasDuelist := false
@@ -59,6 +63,9 @@ func _ready() -> void:
 	
 	damage = startingDamage
 	health = startingHealth
+	
+	turnStartReset()
+	
 	myOffset = get_parent().position
 	
 	if cardType == CardTypes.CREATURE:
@@ -95,6 +102,13 @@ func basicSetup():
 		CardTypes.SPELL:
 			statesInert()
 			
+
+func turnStartReset():
+	tempDamage = damage
+	tempHealth = health
+	
+	updateCardLabels()
+
 
 
 func _on_area_2d_mouse_entered() -> void:
@@ -226,7 +240,7 @@ func takeDamageAndCheckLethal(card:Card) -> bool:
 	
 	#### FOR SUNDER DAMAGE GOING BELOW ZERO
 	var isBrittle := false
-	if health <= 0:
+	if tempHealth <= 0:
 		isBrittle = true
 	
 	#### CHECK DESTROYED STATUS	
@@ -236,10 +250,11 @@ func takeDamageAndCheckLethal(card:Card) -> bool:
 	
 	#### HANDLE DAMAGE -> SUNDER Keyword
 	if card.hasSunder:
-		health -= card.damage
+		health -= card.tempDamage
+		tempHealth -= card.tempDamage
 	
 	#### SUNDER CAN'T DESTROY CARD, UNLESS IT WAS ALREADY ZERO
-	if health < 0:
+	if tempHealth < 0:
 		if isBrittle:
 			selfDestroyed = true
 		else:
@@ -247,7 +262,7 @@ func takeDamageAndCheckLethal(card:Card) -> bool:
 	
 	#### ANY CARD CAN DESTROY A CARD WITH 0 HEALTH
 	if isBrittle:
-		if card.damage > 0:
+		if card.tempDamage > 0:
 			selfDestroyed = true
 	
 	#### UPDATE VISUALS AND RETURN DESTROYED STATUS
@@ -264,13 +279,13 @@ func checkHasLethal(otherCard:Card):
 		#### IF NO DUELIST, MUTUAL DESTRUCTION = TRADE
 		elif not otherCard.hasDuelist:
 			hasLethal = true
-		elif damage > 0 and otherCard.health <= 0:
+		elif tempDamage > 0 and otherCard.tempHealth <= 0:
 			hasLethal = true
 		
 	return hasLethal
 
 func checkLethalTwo(card:Card):
-	return damage >= card.health
+	return tempDamage >= card.tempHealth
 
 
 func toggleEnemyStatus(enabled:bool):
@@ -318,8 +333,8 @@ func rotateRestingCard(willRest:bool):
 
 
 func updateCardLabels():
-	$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % health
-	$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % damage
+	$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % tempHealth
+	$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % tempDamage
 
 
 

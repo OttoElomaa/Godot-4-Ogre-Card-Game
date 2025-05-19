@@ -146,7 +146,8 @@ func handlePlayerAttack():
 	#### GET CARDS AT MOUSE POSITION
 	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if results.size() > 0:
-		handlePlayerAttackCreature(results)
+		var target:Card = getCollidedObject(results[0])
+		handlePlayerAttackCreature(target)
 		return
 	
 	#### CHECK IF ENEMY PORTRAIT AT MOUSE POSITION
@@ -158,12 +159,20 @@ func handlePlayerAttack():
 
 
 func handlePlayerCast():
+	print("Click - Player trying to cast")
+	
 	#### GET CARDS AT MOUSE POSITION
 	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
+	prints("Cards found for casting: ", results.size())
 	
-	for card in results:
-		currentCastingCard.castNode.handlePlayerAttackCreature(results)
-		return
+	for r in results:
+		var target:Card = getCollidedObject(r)
+		prints("Cast target card: ", target)
+		if currentCastingCard.castNode.cast(target):
+			currentCastingCard.rest()
+			currentCastingCard = null
+			endCastState()
+			return
 
 
 
@@ -207,9 +216,9 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	
 
 
-func handlePlayerAttackCreature(results:Array):
+func handlePlayerAttackCreature(target:Card):
 	
-	var target:Card = getCollidedObject(results[0])
+	
 	#### INVALID TARGET - END TARGETING ANYWAY
 	if not MyTools.checkNodeValidity(target):
 		endAttackState()
@@ -271,11 +280,15 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 
 
 func endAttackState():
-	attackLineShown = false
-	$AttackLine.hide()
-	States.gameState = States.GameStates.PLAY
+	if States.gameState == States.GameStates.ATTACK:
+		attackLineShown = false
+		$AttackLine.hide()
+		States.gameState = States.GameStates.PLAY
 	
-	
+func endCastState():
+	castLineShown = false
+	$CastLine.hide()
+	States.gameState = States.GameStates.PLAY	
 
 ############################################################################
 

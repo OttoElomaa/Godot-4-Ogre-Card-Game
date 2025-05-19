@@ -285,6 +285,7 @@ func startEnemyTurn():
 
 func wakeBoardCards(board:Node):
 	for c:Card in board.get_children():
+		c.turnStartReset()
 		c.toggleTraveling(false)
 		c.wake()
 

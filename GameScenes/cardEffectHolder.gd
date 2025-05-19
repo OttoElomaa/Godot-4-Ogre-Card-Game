@@ -13,6 +13,7 @@ enum TargetOptions {NONE, ALLIES, ENEMIES}
 @export var bolsterDamage := 0
 @export var bolsterHealth := 0
 
+var isEnemy := false
 
 
 
@@ -35,8 +36,15 @@ func createText() -> String:
 
 
 
-func processPlayerCast(target:Card):
-	pass
+func cast(target:Card) -> bool:
+	
+	if bolsterDamage > 0 or bolsterHealth > 0:
+		target.tempDamage += bolsterDamage
+		target.tempHealth += bolsterHealth
+		target.updateCardLabels()
+		return true
+	
+	return false
 
 
 

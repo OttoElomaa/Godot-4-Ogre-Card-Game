@@ -33,6 +33,8 @@ func createDesertDeck():
 	prints("created cards: ", cards)
 	for c:Card in cards:
 		c.basicSetup()
+		#c.turnStartReset()
+		
 	cards.shuffle()
 	return cards
 	
