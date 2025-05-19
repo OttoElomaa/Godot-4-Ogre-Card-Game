@@ -41,8 +41,12 @@ var allowInteract := true
 var mySlot: CardSlot = null
 var isEnemyCard := false
 var myOffset := Vector2.ZERO
+
 ##########################################################
 @onready var stateHandler := $Frontside/ActionState
+@onready var castNode := $Effects/Cast
+@onready var battleArtNode := $Effects/BattleArt
+
 var cardsManager:Node = null
 
 
@@ -74,7 +78,15 @@ func _ready() -> void:
 		text += "Sunder"
 	if hasDuelist:
 		text += "Duelist"
+	
+	var castText = castNode.createText()	
+	text += castText
+	
 	l.text = text
+	
+	
+	
+	
 	
 
 

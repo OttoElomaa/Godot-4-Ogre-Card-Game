@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctjoy83adq33o"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_lcboh"]
+[ext_resource type="Texture2D" uid="uid://bl33hix47cn41" path="res://Art/CardArt/card-art-creature-slagh-rider.png" id="2_lcboh"]
+
+[node name="Card-Cr-SlaghRider" instance=ExtResource("1_lcboh")]
+manaCost = 2
+startingDamage = 1
+startingHealth = 2
+
+[node name="Cast" parent="Effects" index="0"]
+bolsterDamage = 2
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_lcboh")

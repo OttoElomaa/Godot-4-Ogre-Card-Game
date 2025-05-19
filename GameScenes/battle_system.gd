@@ -43,11 +43,17 @@ func updateResourceLabels():
 
 func _input(e: InputEvent) -> void:
 	#### ONLY PROCESS ATTACK STATE HERE
-	if States.gameState != States.GameStates.ATTACK:
-		return
-	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
-		if e.is_pressed():
-			handlePlayerAttack()
+	if States.gameState == States.GameStates.ATTACK:
+		
+		if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
+			if e.is_pressed():
+				handlePlayerAttack()
+				
+	if States.gameState == States.GameStates.CAST:
+		
+		if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
+			if e.is_pressed():
+				handlePlayerCast()
 
 
 func _physics_process(delta: float) -> void:
@@ -149,6 +155,16 @@ func handlePlayerAttack():
 		handlePlayerAttackEnemy()
 		updateResourceLabels()
 		return
+
+
+func handlePlayerCast():
+	#### GET CARDS AT MOUSE POSITION
+	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
+	
+	for card in results:
+		currentCastingCard.castNode.handlePlayerAttackCreature(results)
+		return
+
 
 
 func handlePlayerAttackEnemy():
