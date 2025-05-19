@@ -7,6 +7,7 @@ var main:GameBoard = null
 var cardsManager:Node = null
 
 @onready var attackLine := $AttackLine
+@onready var castLine := $CastLine
 var COLLISION_MASK_CARD := 1
 var COLLISION_MASK_ENEMY_PORTRAIT := 4
 
@@ -19,6 +20,9 @@ var enemyHealth := 20
 
 var attackLineShown: bool = false
 var currentAttackingCard: Card = null
+
+var castLineShown: bool = false
+var currentCastingCard: Card = null
 
 
 
@@ -50,6 +54,8 @@ func _physics_process(delta: float) -> void:
 	
 	if attackLineShown:
 		attackLine.points[1] = get_global_mouse_position()
+	if castLineShown:
+		castLine.points[1] = get_global_mouse_position()
 	
 
 #######################################################################
@@ -259,3 +265,15 @@ func endAttackState():
 
 func getCollidedObject(result):
 	return result.collider.get_parent()
+
+
+func cardCastButtonPressed() -> void:
+	
+	currentCastingCard = main.actionMenuCard
+	castLineShown = true
+	States.gameState = States.GameStates.CAST
+	
+	$CastLine.show()
+	castLine.points[0] = currentCastingCard.position
+	main.toggleCardActionMenu(false, null)
+	
