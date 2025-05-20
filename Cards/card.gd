@@ -207,14 +207,15 @@ func checkCanBlock() -> bool:
 	return false
 
 
-func checkCanAct():
+func checkCanAct() -> bool:
 	if not checkInert():
 		if checkAlive():
 			if not checkResting():
 				if not checkTraveling():
 					return true
 	return false
-				
+
+
 
 func checkInert() -> bool:
 	if actionState == CardActionStates.INERT:

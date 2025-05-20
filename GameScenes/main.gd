@@ -74,13 +74,27 @@ func fetchMouseOverObjects(collisionMask: int):
 
 func toggleCardActionMenu(enable:bool, card:Card):
 	
+	#### TOGGLE TRUE - IF CARD FOUND,
 	if enable:
-		if card != null:
+		if card:
+			if card.mySlot:  #### IS IT PLAYER CARD?
+				if not checkSlotPlayer(card.mySlot): 
+					return
+				
 			#### TURN ON CARD ACTION MENU
 			States.gameState = States.GameStates.CARD_ACT_MENU
 			actionMenuCard = card
 			$ActionMenuCanvas.offset = get_global_mouse_position() * $Camera2D.zoom.x
 			$ActionMenuCanvas.show()
+			
+			#### CAST BUTTON
+			var castButton := $ActionMenuCanvas/CardActionMenu/CastPanel
+			if card.castNode.checkActive():
+				castButton.show()
+			else:
+				castButton.hide()
+	
+	#### TOGGLE FALSE = TOGGLE OFF
 	else:
 		if States.gameState == States.GameStates.CARD_ACT_MENU:
 			States.gameState = States.GameStates.PLAY

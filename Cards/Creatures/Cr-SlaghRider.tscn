@@ -9,6 +9,7 @@ startingDamage = 1
 startingHealth = 2
 
 [node name="Cast" parent="Effects" index="0"]
+isActive = true
 bolsterDamage = 2
 
 [node name="Art" parent="Frontside" index="1"]

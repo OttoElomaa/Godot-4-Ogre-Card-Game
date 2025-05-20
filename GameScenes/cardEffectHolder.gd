@@ -2,7 +2,10 @@ extends Node
 
 enum TargetOptions {NONE, ALLIES, ENEMIES}
 
+
+@export var isActive := false
 @export var targetGroup := TargetOptions.NONE
+
 
 @export var hasTap := false
 @export var inflict := 0
@@ -34,6 +37,10 @@ func createText() -> String:
 	
 	return text
 
+
+
+func checkActive():
+	return isActive
 
 
 func cast(target:Card) -> bool:
