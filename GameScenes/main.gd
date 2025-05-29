@@ -163,3 +163,8 @@ func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
 
 func showPlayerTurnPopup():
 	$Visuals/YourTurnPopup/PopupAnimation.play("ShowPopup")
+
+
+func addLogMessage(text:String, color:Color) -> void:
+	
+	$CanvasLayer/BattleLogPane.addMessage(text, color)

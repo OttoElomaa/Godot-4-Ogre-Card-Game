@@ -120,6 +120,8 @@ func timeoutEndEnemyTurn() -> void:
 	
 	main.updateUi(turnCount)
 	cardsManager.startPlayerTurn()
+	
+	main.addLogMessage("Player turn!", Color.WHITE)
 
 #############################################################################
 #### PLAYER ATTACK FUNCTIONS

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://csw63ytv6teic"]
+
+[ext_resource type="Script" uid="uid://btvr6ube321ot" path="res://GameScenes/basic_log_message.gd" id="1_2cby4"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="1_lwlgo"]
+[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="1_v6uv3"]
+
+[node name="Message" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_v6uv3")
+script = ExtResource("1_2cby4")
+
+[node name="Text" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "This is a log entry."
+label_settings = ExtResource("1_lwlgo")
+autowrap_mode = 2
