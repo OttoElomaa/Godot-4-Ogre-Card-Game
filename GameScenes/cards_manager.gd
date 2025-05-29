@@ -6,6 +6,9 @@ var COLLISION_MASK_CARD_SLOT := 2
 
 var STARTING_HAND_SIZE := 4
 
+var CARD_NORMAL_SCALE := Vector2(1,1)
+var CARD_HIGHLIGHTED_SCALE := Vector2(1.2, 1.2)
+
 @onready var CardOgre: PackedScene = preload("res://Cards/Creatures/Cr-Ogre.tscn")
 @onready var CardPikeman: PackedScene = preload("res://Cards/Creatures/Cr-Pikeman.tscn")
 @onready var CardRukRaider: PackedScene = preload("res://Cards/Creatures/Cr-RukRaider.tscn")
@@ -98,11 +101,8 @@ func _physics_process(delta: float) -> void:
 	#### HIGHLIGHT A CARD ON HOVER -> Not when mouse over a stack of cards
 	if currentHoveredCards.size() == 1:
 		var card = currentHoveredCards[0]
-		if not MyTools.checkNodeValidity(card):
-			return
-		#if card == checkMouseOverCard():
-		card.scale = Vector2(1.05, 1.05)
-		card.z_index = 2
+		toggleCardHighlight(card, true)
+		
 
 
 func _input(e: InputEvent) -> void:
@@ -221,17 +221,20 @@ func onHoverCardOff(card:Card):
 
 
 func toggleCardHighlight(card:Card, toHighlight:bool):
+	if not MyTools.checkNodeValidity(card):
+		return
+			
 	if toHighlight:
-		currentHoveredCards.append(card)	
+		if not card in currentHoveredCards:
+			currentHoveredCards.append(card)	
 	else:
 		currentHoveredCards.erase(card)
-		card.scale = Vector2(1, 1)
+		card.scale = CARD_NORMAL_SCALE
 		card.z_index = 1
 		
 	if toHighlight:
-		if currentHoveredCards.size() == 1:
-			card.scale = Vector2(1.05, 1.05)
-			card.z_index = 2
+		card.scale = CARD_HIGHLIGHTED_SCALE
+		card.z_index = 2
 		
 
 
