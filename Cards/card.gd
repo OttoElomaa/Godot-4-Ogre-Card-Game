@@ -18,6 +18,7 @@ enum CardTypes {
 	CREATURE, SPELL,
 }
 ###########################################
+@export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE
 
 @export var manaCost := 0

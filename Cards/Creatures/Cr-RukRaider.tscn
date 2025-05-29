@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bm48rqyud4hpd" path="res://Art/CardArt/card-art-creature-ruk-raider.png" id="2_wr60q"]
 
 [node name="Card-Cr-RukRaider" instance=ExtResource("1_wr60q")]
+cardName = "Ruk Raider"
 manaCost = 3
 startingDamage = 2
 startingHealth = 2

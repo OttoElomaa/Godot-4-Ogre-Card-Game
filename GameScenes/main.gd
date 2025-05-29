@@ -165,6 +165,13 @@ func showPlayerTurnPopup():
 	$Visuals/YourTurnPopup/PopupAnimation.play("ShowPopup")
 
 
+
+func showCardInfo(card:Card):
+	
+	$CanvasLayer/CardInfoPane/Panel/NameLabel.text = card.cardName
+
+
+
 func addLogMessage(text:String, color:Color) -> void:
 	
 	$CanvasLayer/BattleLogPane.addMessage(text, color)

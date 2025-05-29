@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bl33hix47cn41" path="res://Art/CardArt/card-art-creature-slagh-rider.png" id="2_lcboh"]
 
 [node name="Card-Cr-SlaghRider" instance=ExtResource("1_lcboh")]
+cardName = "Slagh Rider"
 manaCost = 2
 startingDamage = 1
 startingHealth = 2

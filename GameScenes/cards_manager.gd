@@ -214,6 +214,9 @@ func onHoverCard(card:Card):
 	prints("hover on card: ", card)
 	toggleCardHighlight(card, true)
 	
+	main.showCardInfo(card)
+	
+	
 
 func onHoverCardOff(card:Card):
 	prints("hover on card off: ", card)

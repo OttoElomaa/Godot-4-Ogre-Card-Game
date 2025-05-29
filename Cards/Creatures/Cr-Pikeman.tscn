@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ycjlvok6deon" path="res://Art/CardArt/card-art-creature-pikeman.png" id="2_r2e3n"]
 
 [node name="Card-Cr-Pikeman" instance=ExtResource("1_hwuew")]
+cardName = "Pike Thrall"
 manaCost = 1
 startingDamage = 2
 startingHealth = 1
