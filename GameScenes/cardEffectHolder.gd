@@ -3,6 +3,8 @@ extends Node
 enum TargetOptions {NONE, ALLIES, ENEMIES}
 
 
+@export var nodeKeyword := "Action type"
+
 @export var isActive := false
 @export var targetGroup := TargetOptions.NONE
 
@@ -32,8 +34,12 @@ func createText() -> String:
 			text += "Bolster"
 		text += " %d/%d" % [bolsterDamage, bolsterHealth]
 	
+	if hasTap:
+		text += "Tap target"
+	
+	#### AT THE END, COMPILE TEXT
 	if text != "":
-		text = "Cast: %s" % text
+		text = "%s: %s" % [nodeKeyword, text]
 	
 	return text
 
@@ -51,9 +57,17 @@ func cast(target:Card) -> bool:
 		target.updateCardLabels()
 		return true
 	
+	if hasTap:
+		target.rest()
+	
 	return false
 
 
+func activate(target:Card) -> bool:
+	
+	if target.checkAlive():
+		return cast(target)
+	return false
 
 
 func processPlayerBattleArt(target:Card):

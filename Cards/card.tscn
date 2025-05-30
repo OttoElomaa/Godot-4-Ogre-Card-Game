@@ -223,9 +223,11 @@ script = ExtResource("1_i5yq8")
 
 [node name="Cast" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")
+nodeKeyword = "Cast"
 
 [node name="BattleArt" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")
+nodeKeyword = "Battle Art"
 
 [node name="Backside" type="Sprite2D" parent="."]
 texture = ExtResource("2_p0ugb")

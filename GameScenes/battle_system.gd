@@ -267,6 +267,9 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 		attackerDestroyed = true
 	else:
 		attackCard.rest()
+	
+	#### HANDLE ATTACKER COMBAT ARTS
+	attackCard.battleArtNode.activate(targetCard)
 		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
 	for c:Card in cardsToDestroy:
@@ -278,7 +281,7 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	if targetCard in cardsToDestroy:
 		targetCard.destroyCardOne()
 	
-		
+	
 	return attackerDestroyed
 
 

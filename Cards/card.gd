@@ -104,6 +104,12 @@ func createEffectText():
 	var castText = castNode.createText()	
 	text += castText
 	
+	if castText != "":
+		text += "\n"
+	
+	var battleArtText = battleArtNode.createText()	
+	text += battleArtText
+	
 	effectText = text
 	l.text = effectText
 	
