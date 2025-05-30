@@ -104,19 +104,21 @@ func _physics_process(delta: float) -> void:
 	#### HIGHLIGHT A CARD ON HOVER -> Not when mouse over a stack of cards
 	#if currentHoveredCards.size() == 1 and hoverCheckNeeded:
 	if hoverCheckNeeded and not currentHoveredCards.is_empty():
-		var lastIndex := currentHoveredCards.size() - 1
-		
-		for i in range(currentHoveredCards.size()):
-			if i != lastIndex:
-				toggleHighlightTwo(false, currentHoveredCards[i])
-				
-		var card = currentHoveredCards[lastIndex]
-		toggleHighlightTwo(true, card)
-		
-		mainCardInfoShown = true
-		main.toggleCardInfo(true, card)
-		hoverCheckNeeded = false
+		if not currentDraggedCard:
+			var lastIndex := currentHoveredCards.size() - 1
+			
+			for i in range(currentHoveredCards.size()):
+				if i != lastIndex:
+					toggleHighlightTwo(false, currentHoveredCards[i])
+					
+			var card = currentHoveredCards[lastIndex]
+			toggleHighlightTwo(true, card)
+			
+			mainCardInfoShown = true
+			main.toggleCardInfo(true, card)
+			hoverCheckNeeded = false
 	
+	#### THIS HIDES CARD INFO WHEN NO CARDS ARE HOVERED -> No need for info panel
 	if mainCardInfoShown:
 		if currentHoveredCards.is_empty():
 			mainCardInfoShown = false
@@ -225,7 +227,8 @@ func placeCardInSlot(card:Card, slot:CardSlot):
 		card.statesActive()
 	else:
 		card.statesPassive()
-
+	
+	main.addLogMessage("%s played on board" % card.cardName, Color.WHITE)
 	
 
 func onHoverCard(card:Card):

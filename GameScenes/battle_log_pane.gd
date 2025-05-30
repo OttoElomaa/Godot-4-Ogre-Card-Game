@@ -4,8 +4,8 @@ extends MarginContainer
 
 var LogMessage = load("res://GameScenes/BasicLogMessage.tscn")
 
-@onready var scroller := $Panel/Scroll
-@onready var rows := $Panel/Scroll/Rows
+@onready var scroller := $Panel/Margin/Scroll
+@onready var rows := $Panel/Margin/Scroll/Rows
 
 func addMessage(text:String, color:Color) -> void:
 	
