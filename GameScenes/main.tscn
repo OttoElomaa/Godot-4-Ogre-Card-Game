@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=30 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
@@ -22,6 +22,8 @@
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="12_hffy6"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="19_47kpv"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/battle_log_pane.gd" id="21_on7x6"]
+[ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSet-Header-OffWhiteYellow50.tres" id="21_q5r8w"]
+[ext_resource type="Texture2D" uid="uid://b7g66n14xrpak" path="res://Art/CardArt/card-art-base-card-idk.png" id="22_j8g12"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -402,17 +404,45 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 20
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/CardInfoPane"]
-custom_minimum_size = Vector2(200, 80)
+custom_minimum_size = Vector2(200, 500)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("5_hys5q")
 
-[node name="NameLabel" type="Label" parent="CanvasLayer/CardInfoPane/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CardInfoPane/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Card Name"
+label_settings = ExtResource("21_q5r8w")
+horizontal_alignment = 1
+
+[node name="CardArt" type="TextureRect" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+texture = ExtResource("22_j8g12")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="EmptyLine" type="Label" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+label_settings = ExtResource("6_m0cpn")
+horizontal_alignment = 1
+
+[node name="EffectText" type="Label" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Effect text goes here."
 label_settings = ExtResource("6_m0cpn")
 horizontal_alignment = 1
 

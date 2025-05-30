@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=24 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Texture2D" uid="uid://dpqhi5cjnnq65" path="res://Art/CardComponents/card-background-texture-V2.png" id="2_7bc8n"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cq6ndvj18kyn0" path="res://Art/CardComponents/card-action-state-indicator-frame-texture-V2.png" id="8_cvyu6"]
 [ext_resource type="Texture2D" uid="uid://ddt6oiu5vk81d" path="res://Art/CardComponents/card-action-state-indicator-texture-passive.png" id="8_gi0db"]
 [ext_resource type="Texture2D" uid="uid://c6fbvpdul76bl" path="res://Art/CardComponents/card-action-state-indicator-texture-traveling-V2.png" id="9_gi0db"]
+[ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="9_i3xqw"]
+[ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSet-Header-OffWhiteYellow50.tres" id="9_l781d"]
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSetSmallBrownCardText.tres" id="13_j3lys"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kd3xj"]
@@ -244,7 +246,6 @@ position = Vector2(0, -53)
 texture = ExtResource("3_trd61")
 
 [node name="ManaCost" type="Node2D" parent="Frontside"]
-visible = false
 position = Vector2(0, -174)
 scale = Vector2(0.8, 0.8)
 
@@ -266,6 +267,28 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "88"
 label_settings = ExtResource("6_u70hd")
+horizontal_alignment = 1
+
+[node name="CardName" type="Node2D" parent="Frontside"]
+position = Vector2(0, -220)
+
+[node name="Shadow" type="Sprite2D" parent="Frontside/CardName"]
+texture = ExtResource("9_i3xqw")
+
+[node name="Label" type="Label" parent="Frontside/CardName"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.5
+offset_top = -28.5
+offset_right = 120.5
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Card Name"
+label_settings = ExtResource("9_l781d")
 horizontal_alignment = 1
 
 [node name="ActionState" type="Node2D" parent="Frontside"]

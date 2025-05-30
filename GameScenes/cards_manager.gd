@@ -23,6 +23,8 @@ var currentDraggedCard:Card = null
 var currentHoveredCards = []
 
 var dumbHandDrawCounter := 0
+var mainCardInfoShown := false
+
 
 
 func _ready() -> void:
@@ -102,7 +104,11 @@ func _physics_process(delta: float) -> void:
 	if currentHoveredCards.size() == 1:
 		var card = currentHoveredCards[0]
 		toggleCardHighlight(card, true)
-		
+	
+	if mainCardInfoShown:
+		if currentHoveredCards.is_empty():
+			mainCardInfoShown = false
+			main.toggleCardInfo(false, null)
 
 
 func _input(e: InputEvent) -> void:
@@ -214,14 +220,19 @@ func onHoverCard(card:Card):
 	prints("hover on card: ", card)
 	toggleCardHighlight(card, true)
 	
-	main.showCardInfo(card)
+	card.toggleCardName(true)
+	mainCardInfoShown = true
+	main.toggleCardInfo(true, card)
 	
 	
 
 func onHoverCardOff(card:Card):
 	prints("hover on card off: ", card)
 	toggleCardHighlight(card, false)
-
+	
+	card.toggleCardName(false)
+	
+	
 
 func toggleCardHighlight(card:Card, toHighlight:bool):
 	if not MyTools.checkNodeValidity(card):

@@ -21,6 +21,10 @@ enum CardTypes {
 @export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE
 
+var cardArt:
+	get:
+		return $Frontside/Art.texture
+
 @export var manaCost := 0
 @export var startingDamage := 0
 @export var startingHealth := 0
@@ -30,6 +34,7 @@ var health := 0
 var tempDamage := 0
 var tempHealth := 0
 
+var effectText := ""
 
 @export var hasSunder := false
 @export var hasDuelist := false
@@ -80,6 +85,15 @@ func _ready() -> void:
 		$Frontside/StatsPanel.hide()
 		$Frontside/ActionState.hide()
 	
+	createEffectText()
+	
+	$Frontside/CardName/Label.text = cardName
+	$Frontside/CardName.hide()
+	
+	
+	
+func createEffectText():
+	
 	var l = $Frontside/EffectsLabel
 	var text = ""
 	if hasSunder:
@@ -90,14 +104,12 @@ func _ready() -> void:
 	var castText = castNode.createText()	
 	text += castText
 	
-	l.text = text
+	effectText = text
+	l.text = effectText
 	
 	
 	
 	
-	
-
-
 func basicSetup():
 	match cardType:
 		CardTypes.SPELL:
@@ -109,6 +121,7 @@ func turnStartReset():
 	tempHealth = health
 	
 	updateCardLabels()
+
 
 
 
@@ -349,4 +362,8 @@ func destroyCardTwo():
 	#self.queue_free()
 	
 	cardsManager.moveToDiscard(self)
-	
+
+
+
+func toggleCardName(enable:bool):
+	$Frontside/CardName.visible = enable

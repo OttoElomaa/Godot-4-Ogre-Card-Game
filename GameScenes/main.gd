@@ -41,6 +41,7 @@ func _ready() -> void:
 	#### UI STUFF
 	updateUi($BattleSystem.turnCount)
 	$BattleSystem.updateResourceLabels()
+	toggleCardInfo(false, null)
 	
 	#### SET SLOTS STATUS
 	for slot:CardSlot in $PlayerSlots.get_children():
@@ -166,9 +167,20 @@ func showPlayerTurnPopup():
 
 
 
-func showCardInfo(card:Card):
+func toggleCardInfo(enable:bool, card:Card):
+	var cardInfo := $CanvasLayer/CardInfoPane
 	
-	$CanvasLayer/CardInfoPane/Panel/NameLabel.text = card.cardName
+	#### HIDE
+	if not enable:
+		cardInfo.hide()
+		return
+		
+	#### SHOW
+	cardInfo.show()
+	cardInfo.get_node("Panel/MarginContainer/VBoxContainer/NameLabel").text = card.cardName
+	cardInfo.get_node("Panel/MarginContainer/VBoxContainer/CardArt").texture = card.cardArt
+	cardInfo.get_node("Panel/MarginContainer/VBoxContainer/EffectText").text = card.effectText
+	
 
 
 
