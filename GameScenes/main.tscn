@@ -412,35 +412,35 @@ custom_minimum_size = Vector2(200, 500)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("5_hys5q")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CardInfoPane/Panel"]
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/CardInfoPane/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/CardInfoPane/Panel/Margin"]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
 layout_mode = 2
 text = "Card Name"
 label_settings = ExtResource("21_q5r8w")
 horizontal_alignment = 1
 
-[node name="CardArt" type="TextureRect" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer/VBoxContainer"]
+[node name="CardArt" type="TextureRect" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 texture = ExtResource("22_j8g12")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="EmptyLine" type="Label" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer/VBoxContainer"]
+[node name="EmptyLine" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
 layout_mode = 2
 label_settings = ExtResource("6_m0cpn")
 horizontal_alignment = 1
 
-[node name="EffectText" type="Label" parent="CanvasLayer/CardInfoPane/Panel/MarginContainer/VBoxContainer"]
+[node name="EffectText" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
 layout_mode = 2
 text = "Effect text goes here."
 label_settings = ExtResource("6_m0cpn")

@@ -177,9 +177,9 @@ func toggleCardInfo(enable:bool, card:Card):
 		
 	#### SHOW
 	cardInfo.show()
-	cardInfo.get_node("Panel/MarginContainer/VBoxContainer/NameLabel").text = card.cardName
-	cardInfo.get_node("Panel/MarginContainer/VBoxContainer/CardArt").texture = card.cardArt
-	cardInfo.get_node("Panel/MarginContainer/VBoxContainer/EffectText").text = card.effectText
+	cardInfo.get_node("Panel/Margin/VBox/NameLabel").text = card.cardName
+	cardInfo.get_node("Panel/Margin/VBox/CardArt").texture = card.cardArt
+	cardInfo.get_node("Panel/Margin/VBox/EffectText").text = card.effectText
 	
 
 

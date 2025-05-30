@@ -24,6 +24,7 @@ var currentHoveredCards = []
 
 var dumbHandDrawCounter := 0
 var mainCardInfoShown := false
+var hoverCheckNeeded := false
 
 
 
@@ -101,9 +102,20 @@ func _physics_process(delta: float) -> void:
 		#c.position.y = clamp(c.position.y, screenSize.position.y, screenSize.end.y)
 	
 	#### HIGHLIGHT A CARD ON HOVER -> Not when mouse over a stack of cards
-	if currentHoveredCards.size() == 1:
-		var card = currentHoveredCards[0]
-		toggleCardHighlight(card, true)
+	#if currentHoveredCards.size() == 1 and hoverCheckNeeded:
+	if hoverCheckNeeded and not currentHoveredCards.is_empty():
+		var lastIndex := currentHoveredCards.size() - 1
+		
+		for i in range(currentHoveredCards.size()):
+			if i != lastIndex:
+				toggleHighlightTwo(false, currentHoveredCards[i])
+				
+		var card = currentHoveredCards[lastIndex]
+		toggleHighlightTwo(true, card)
+		
+		mainCardInfoShown = true
+		main.toggleCardInfo(true, card)
+		hoverCheckNeeded = false
 	
 	if mainCardInfoShown:
 		if currentHoveredCards.is_empty():
@@ -221,16 +233,19 @@ func onHoverCard(card:Card):
 	toggleCardHighlight(card, true)
 	
 	card.toggleCardName(true)
-	mainCardInfoShown = true
-	main.toggleCardInfo(true, card)
+	hoverCheckNeeded = true
+	#mainCardInfoShown = true
+	#main.toggleCardInfo(true, card)
 	
 	
 
 func onHoverCardOff(card:Card):
 	prints("hover on card off: ", card)
 	toggleCardHighlight(card, false)
+	toggleHighlightTwo(false, card)
 	
 	card.toggleCardName(false)
+	hoverCheckNeeded = true
 	
 	
 
@@ -243,12 +258,16 @@ func toggleCardHighlight(card:Card, toHighlight:bool):
 			currentHoveredCards.append(card)	
 	else:
 		currentHoveredCards.erase(card)
-		card.scale = CARD_NORMAL_SCALE
-		card.z_index = 1
 		
-	if toHighlight:
+
+
+func toggleHighlightTwo(enable:bool, card:Card):		
+	if enable:
 		card.scale = CARD_HIGHLIGHTED_SCALE
 		card.z_index = 2
+	else:
+		card.scale = CARD_NORMAL_SCALE
+		card.z_index = 1
 		
 
 
