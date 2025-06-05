@@ -83,6 +83,8 @@ func passTurn():
 func enemyPlayTurn():
 	#### PLAY CARDS FROM HAND
 	var enemyHandCards = cardsManager.getEnemyHandCards()
+	
+	
 	for card:Card in enemyHandCards:
 		if MyTools.checkNodeValidity(card):
 			if card.manaCost <= enemyMana:
@@ -95,12 +97,17 @@ func enemyPlayTurn():
 func timeoutEnemyStartCombat() -> void:
 	#### ATTACK WITH CARDS ON BOARD
 	var enemyBoardCards = cardsManager.getEnemyBoardCards()
-	for card:Card in enemyBoardCards:
-		if not MyTools.checkNodeValidity(card):  #### CHECK IF VALID
-			pass
-		elif card.checkCanAct(): #### CAN IT ACT
-			handleEnemyAttackPlayer(card)
-			#currentAttackingCard = card
+	#### RUN MULTIPLE ROUNDS SO All enemy cards have TIME TO REACT if another enemy CARD DOES SOMETHING
+	for i in range(3):
+		for card:Card in enemyBoardCards:
+			
+			if not MyTools.checkNodeValidity(card):  #### CHECK IF VALID
+				pass
+			elif card.checkCanAct(): #### CAN IT ACT
+				handleEnemyAttackPlayer(card)
+				#currentAttackingCard = card
+
+
 
 func playEnemyCard(card:Card):
 	for slot:CardSlot in main.getEnemySlots():
