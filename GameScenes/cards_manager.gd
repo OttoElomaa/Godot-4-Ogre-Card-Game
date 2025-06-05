@@ -172,6 +172,7 @@ func startDraggingCardOrAttack():
 	#### ONLY IF IT'S NOT SLOTTED	
 	if not card.mySlot:
 		currentDraggedCard = card
+		card.z_index = 5
 		
 	#### SLOTTED CARDS WILL ATTACK INSTEAD
 	else:
@@ -182,12 +183,12 @@ func startDraggingCardOrAttack():
 
 func handleFinishDraggingCard() -> Node:
 	var success := false
+	var c = currentDraggedCard
 	
 	#### FIND CARD SLOT
 	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
 	if results.size() > 0:
 		var selectedSlot:CardSlot = getCollidedObject(results[0])
-		var c = currentDraggedCard
 		
 		#### CARD IS NOT SPELL: SET CARD To Found AVAILABLE SLOT
 		if not c.isSpell:
@@ -198,13 +199,17 @@ func handleFinishDraggingCard() -> Node:
 		else:
 			success = handlePlayRitual(c, selectedSlot)
 			
+	
+	if success:
+		c.z_index = 1
 			
-	#### CLEAR SLOT FROM CARD'S END
+	#### CLEAR SLOT FROM CARD'S END -> Why? What?
 	if not success:
 		if currentDraggedCard:
 			if currentDraggedCard.mySlot:
 				currentDraggedCard.mySlot.toggleAvailable(true)
 				currentDraggedCard.mySlot = null
+				
 	updateHandCardsVisuals()
 	return null
 
@@ -218,14 +223,8 @@ func handlePlayRitual(c:Card, slot:CardSlot) -> bool:
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
-	placeCardInSlot(c, slot)
-	battleSystem.playerMana -= c.manaCost
-	
-	#### CARD VISUAL STUFF
-	
-	battleSystem.updateResourceLabels()
-			
-	#if success: 
+	placeCardInSlot(c, slot)	
+		 
 	if not main.checkSlotPlayer(slot):
 		var tween = get_tree().create_tween()
 		tween.tween_property(c, "position", slot.position, 0.2)
@@ -236,7 +235,8 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 		c.position = slot.position
 		c.reparent($PlayerBoard)
 		battleSystem.playerMana -= c.manaCost
-			
+	
+	battleSystem.updateResourceLabels()		
 	return true
 
 
@@ -246,7 +246,6 @@ func placeCardInSlot(card:Card, slot:CardSlot) -> bool:
 	card.toggleFrontSide(true)
 	card.toggleManaCostIndicator(false)
 	
-		
 	#### SLOT STUFF
 	card.mySlot = slot
 	slot.toggleAvailable(false)
