@@ -36,8 +36,8 @@ var tempHealth := 0
 
 var effectText := ""
 
-@export var hasSunder := false
-@export var hasDuelist := false
+
+
 
 ###############################################
 #### RESTING = Can't take card actions this turn, such as attack or cast.
@@ -52,12 +52,26 @@ var mySlot: CardSlot = null
 var isEnemyCard := false
 var myOffset := Vector2.ZERO
 
+var cardsManager:Node = null
+
 ##########################################################
 @onready var stateHandler := $Frontside/ActionState
+
 @onready var castNode := $Effects/Cast
 @onready var battleArtNode := $Effects/BattleArt
+@onready var ritualNode := $Effects/Ritual
 
-var cardsManager:Node = null
+@onready var keywordHandler := $KeywordHandler
+
+var hasSunder:
+	get:
+		return keywordHandler.hasSunder()
+		
+var hasDuelist:
+	get:
+		return keywordHandler.hasDuelist()
+
+
 
 
 

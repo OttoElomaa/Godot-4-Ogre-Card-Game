@@ -8,6 +8,8 @@ cardName = "Ur-Hound"
 manaCost = 4
 startingDamage = 2
 startingHealth = 2
+
+[node name="Keyword" parent="KeywordHandler/MyKeywords" index="0"]
 hasSunder = true
 
 [node name="Art" parent="Frontside" index="1"]

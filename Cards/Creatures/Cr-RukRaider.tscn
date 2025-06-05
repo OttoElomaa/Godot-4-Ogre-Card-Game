@@ -8,6 +8,8 @@ cardName = "Ruk Raider"
 manaCost = 3
 startingDamage = 2
 startingHealth = 2
+
+[node name="Keyword" parent="KeywordHandler/MyKeywords" index="0"]
 hasDuelist = true
 
 [node name="Art" parent="Frontside" index="1"]

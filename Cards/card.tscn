@@ -1,11 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=26 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Texture2D" uid="uid://dpqhi5cjnnq65" path="res://Art/CardComponents/card-background-texture-V2.png" id="2_7bc8n"]
 [ext_resource type="Texture2D" uid="uid://dlg7x4i3jv20p" path="res://Art/CardComponents/card-backside-texture.png" id="2_p0ugb"]
-[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://GameScenes/cardEffectHolder.gd" id="2_r3tma"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://Cards/cardEffectNode.gd" id="2_r3tma"]
+[ext_resource type="Script" uid="uid://kbmh20bwbb3u" path="res://Cards/keyword_handler.gd" id="3_lcq1x"]
 [ext_resource type="Texture2D" uid="uid://b7g66n14xrpak" path="res://Art/CardArt/card-art-base-card-idk.png" id="3_trd61"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="4_7bc8n"]
+[ext_resource type="PackedScene" uid="uid://camlvr52j6gkf" path="res://Cards/keyword.tscn" id="4_qt84u"]
 [ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="4_w0fdq"]
 [ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_6ma8t"]
 [ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="5_jsedn"]
@@ -225,9 +227,23 @@ script = ExtResource("1_i5yq8")
 script = ExtResource("2_r3tma")
 nodeKeyword = "Cast"
 
+[node name="Ritual" type="Node" parent="Effects"]
+script = ExtResource("2_r3tma")
+nodeKeyword = "Cast"
+
 [node name="BattleArt" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")
 nodeKeyword = "Battle Art"
+
+[node name="KeywordHandler" type="Node" parent="."]
+script = ExtResource("3_lcq1x")
+
+[node name="MyKeywords" type="Node" parent="KeywordHandler"]
+
+[node name="Keyword" parent="KeywordHandler/MyKeywords" instance=ExtResource("4_qt84u")]
+isPermanent = true
+
+[node name="KeywordsToGrant" type="Node" parent="KeywordHandler"]
 
 [node name="Backside" type="Sprite2D" parent="."]
 texture = ExtResource("2_p0ugb")
