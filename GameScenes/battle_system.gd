@@ -104,9 +104,8 @@ func timeoutEnemyStartCombat() -> void:
 
 func playEnemyCard(card:Card):
 	for slot:CardSlot in main.getEnemySlots():
-		if slot.isAvailable:
-			cardsManager.placeCardInSlot(card, slot)
-			card.reparent(cardsManager.get_node("EnemyBoard"))
+		if slot.isAvailable and card.manaCost <= enemyMana:
+			cardsManager.handlePlaceCardInSlot(card, slot)
 			return true
 	return false
 

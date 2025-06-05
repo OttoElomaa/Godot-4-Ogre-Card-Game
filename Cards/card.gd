@@ -17,6 +17,13 @@ enum CardActionStates {
 enum CardTypes {
 	CREATURE, SPELL,
 }
+
+var isSpell:
+	get:
+		return cardType == CardTypes.SPELL
+
+
+
 ###########################################
 @export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE

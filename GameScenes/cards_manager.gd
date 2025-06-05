@@ -90,6 +90,10 @@ func updateHandCardsVisuals():
 		#c.scale = Vector2(0.6, 0.6)
 		x_offset += 80
 	
+	
+	
+#c.position.x = clamp(c.position.x, screenSize.position.x, screenSize.end.x)
+#c.position.y = clamp(c.position.y, screenSize.position.y, screenSize.end.y)
 
 
 func _physics_process(delta: float) -> void:
@@ -98,22 +102,23 @@ func _physics_process(delta: float) -> void:
 	var c = currentDraggedCard
 	if c:
 		c.position = get_global_mouse_position()
-		#c.position.x = clamp(c.position.x, screenSize.position.x, screenSize.end.x)
-		#c.position.y = clamp(c.position.y, screenSize.position.y, screenSize.end.y)
-	
+		
 	#### HIGHLIGHT A CARD ON HOVER -> Not when mouse over a stack of cards
-	#if currentHoveredCards.size() == 1 and hoverCheckNeeded:
+	#### CHECK IS INITIATED Only on HOVER ON/OFF. -> turns on HoverCheckNeeded
 	if hoverCheckNeeded and not currentHoveredCards.is_empty():
-		if not currentDraggedCard:
-			var lastIndex := currentHoveredCards.size() - 1
+		if not currentDraggedCard: #### TURN These Checks OFF WHEN DRAGGING
 			
+			#### TURN OFF HIGHLIGHT For All Cards In Stack EXCEPT TOP CARD (Last Index)
+			var lastIndex := currentHoveredCards.size() - 1
 			for i in range(currentHoveredCards.size()):
 				if i != lastIndex:
 					toggleHighlightTwo(false, currentHoveredCards[i])
-					
+			
+			#### TURN ON HIGHLIGHT For TOP CARD		
 			var card = currentHoveredCards[lastIndex]
 			toggleHighlightTwo(true, card)
 			
+			#### SHOW TOP CARD'S INFO, TURN OFF HOVER CHECK
 			mainCardInfoShown = true
 			main.toggleCardInfo(true, card)
 			hoverCheckNeeded = false
@@ -130,17 +135,21 @@ func _input(e: InputEvent) -> void:
 	if States.gameState != States.GameStates.PLAY:
 		return
 	
+	#### CLICK PROCESSING
 	if e is InputEventMouseButton: 
 		if e.is_pressed():
+			
+			#### LEFT CLICK PROCESSING
 			if e.button_index == MOUSE_BUTTON_LEFT:
 				if currentDraggedCard:
-					currentDraggedCard = finishDraggingCard()
+					currentDraggedCard = handleFinishDraggingCard()
 				else:
 					startDraggingCardOrAttack()
 					
 				print("left clikc")	
 				prints("dragged card: ", currentDraggedCard)
-				
+			
+			#### RIGHT CLICK PROCESSING -> CARD ACTION MENU	
 			elif e.button_index == MOUSE_BUTTON_RIGHT:
 				var card = fetchCardOnClick()
 				if MyTools.checkNodeValidity(card):
@@ -171,25 +180,25 @@ func startDraggingCardOrAttack():
 		
 		
 
-func finishDraggingCard() -> Node:
+func handleFinishDraggingCard() -> Node:
 	var success := false
 	
 	#### FIND CARD SLOT
 	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
 	if results.size() > 0:
 		var selectedSlot:CardSlot = getCollidedObject(results[0])
-		
-		#### AVAILABLE SLOT WAS FOUND, SET CARD TO IT
 		var c = currentDraggedCard
-		if selectedSlot.isAvailable:
-			if main.checkSlotPlayer(selectedSlot):
-				if c.manaCost <= battleSystem.playerMana:
-					placeCardInSlot(c, selectedSlot)
-					c.reparent($PlayerBoard)
-					battleSystem.playerMana -= c.manaCost
-					battleSystem.updateResourceLabels()
-					success = true
-				
+		
+		#### CARD IS NOT SPELL: SET CARD To Found AVAILABLE SLOT
+		if not c.isSpell:
+			if selectedSlot.isAvailable and c.manaCost <= battleSystem.playerMana:
+				if main.checkSlotPlayer(selectedSlot):
+					success = handlePlaceCardInSlot(c, selectedSlot)
+		#### CARD IS SPELL:
+		else:
+			success = handlePlayRitual(c, selectedSlot)
+			
+			
 	#### CLEAR SLOT FROM CARD'S END
 	if not success:
 		if currentDraggedCard:
@@ -200,13 +209,38 @@ func finishDraggingCard() -> Node:
 	return null
 
 
-func placeCardInSlot(card:Card, slot:CardSlot):
+
+func handlePlayRitual(c:Card, slot:CardSlot) -> bool:
+	
+	return false
+
+
+
+func handlePlaceCardInSlot(c:Card, slot:CardSlot):
+	
+	placeCardInSlot(c, slot)
+	battleSystem.playerMana -= c.manaCost
+	
 	#### CARD VISUAL STUFF
-	if main.checkSlotPlayer(slot):
-		card.position = slot.position
-	else:
+	
+	battleSystem.updateResourceLabels()
+			
+	#if success: 
+	if not main.checkSlotPlayer(slot):
 		var tween = get_tree().create_tween()
-		tween.tween_property(card, "position", slot.position, 0.2)
+		tween.tween_property(c, "position", slot.position, 0.2)
+		
+		c.reparent($EnemyBoard)
+		battleSystem.enemyMana -= c.manaCost
+	else:
+		c.position = slot.position
+		c.reparent($PlayerBoard)
+		battleSystem.playerMana -= c.manaCost
+			
+	return true
+
+
+func placeCardInSlot(card:Card, slot:CardSlot) -> bool:
 	
 	card.scale = Vector2.ONE
 	card.toggleFrontSide(true)
@@ -219,8 +253,9 @@ func placeCardInSlot(card:Card, slot:CardSlot):
 	
 	#### ONLY IF CREATURE...
 	if card.checkInert():
-		return
-	#### ...SET ACTION STATE AND TRAVEL STATE	
+		return true
+		
+	#### SET ACTION STATE AND TRAVEL STATE	
 	card.toggleActionStateIndicator(true)
 	card.toggleTraveling(true)
 	if main.checkSlotEnemy(slot): #### ENEMY CARDS ATTACK BY DEFAULT, PLAYER'S CARDS PASSIVE BY DFT
@@ -229,6 +264,8 @@ func placeCardInSlot(card:Card, slot:CardSlot):
 		card.statesPassive()
 	
 	main.addLogMessage("%s played on board" % card.cardName, Color.WHITE)
+	return true
+	
 	
 
 func onHoverCard(card:Card):
