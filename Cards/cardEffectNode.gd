@@ -25,7 +25,8 @@ var isEnemy := false
 func createText() -> String:
 	
 	var text = ""
-	
+	if not isActive:
+		return text
 	
 	#### ADD INFLICT
 	if inflict > 0:
@@ -61,25 +62,46 @@ func checkActive():
 	return isActive
 
 
-func cast(target:Card) -> bool:
-	
-	if bolsterDamage > 0 or bolsterHealth > 0:
-		target.tempDamage += bolsterDamage
-		target.tempHealth += bolsterHealth
-		target.updateCardLabels()
-		return true
-	
-	if hasTap:
-		target.rest()
-	
-	return false
-
 
 func activate(target:Card) -> bool:
 	
 	if target.checkAlive():
 		return cast(target)
 	return false
+
+
+
+func cast(target:Card) -> bool:
+	var success := false
+	
+	#### INFLICT
+	if inflict > 0:
+		target.tempHealth -= inflict
+		target.health -= inflict
+		success = true
+	elif inflictCreature > 0:
+		target.tempHealth -= inflictCreature
+		target.health -= inflictCreature
+		success = true
+	
+	#### BOLSTER
+	if bolsterDamage > 0 or bolsterHealth > 0:
+		target.tempDamage += bolsterDamage
+		target.tempHealth += bolsterHealth
+		success = true
+	
+	if hasTap:
+		target.rest()
+		success = true
+	
+	target.updateCardLabels()
+	if target.tempHealth <= 0:
+		target.destroyAndAnimate(true)
+	
+	return success
+
+
+
 
 
 func processPlayerBattleArt(target:Card):

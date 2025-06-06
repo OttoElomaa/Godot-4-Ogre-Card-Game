@@ -13,6 +13,7 @@ startingHealth = 1
 bolsterHealth = 2
 
 [node name="BattleArt" parent="Effects" index="2"]
+isActive = true
 hasTap = true
 
 [node name="Art" parent="Frontside" index="1"]

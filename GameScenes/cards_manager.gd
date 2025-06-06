@@ -185,8 +185,23 @@ func handleFinishDraggingCard() -> Node:
 	var success := false
 	var c = currentDraggedCard
 	
+	#### HANDLE RITUAL USE CASE
+	var resultCards:Array = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
+	var target:Card = null
+	
+	if not resultCards.is_empty():
+		for res in resultCards:
+			if not getCollidedObject(res) == currentDraggedCard:
+				target = getCollidedObject(res)
+		
+		if target and c.isSpell:
+			success = battleSystem.handlePlayerRitual(c, target)
+	if success:
+		c.destroyAndAnimate(true)
+	
+	#### HANDLE ATTACKING
 	#### FIND CARD SLOT
-	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
+	var results:Array = main.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
 	if results.size() > 0:
 		var selectedSlot:CardSlot = getCollidedObject(results[0])
 		
@@ -195,9 +210,10 @@ func handleFinishDraggingCard() -> Node:
 			if selectedSlot.isAvailable and c.manaCost <= battleSystem.playerMana:
 				if main.checkSlotPlayer(selectedSlot):
 					success = handlePlaceCardInSlot(c, selectedSlot)
+		
 		#### CARD IS SPELL:
-		else:
-			success = handlePlayRitual(c, selectedSlot)
+		#else:
+			#success = handlePlayRitual(c, selectedSlot)
 			
 	
 	if success:

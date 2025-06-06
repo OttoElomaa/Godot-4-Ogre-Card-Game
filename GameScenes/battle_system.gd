@@ -166,6 +166,26 @@ func handlePlayerAttack():
 		return
 
 
+
+func handlePlayerRitual(c:Card, target:Card) -> bool:
+	
+	#### GET CARD in SLOT
+	if target:
+		var success = c.ritualNode.activate(target)
+		#if success:
+			#c.destroyAndAnimate(true)
+		return success
+	
+	#### IF CARD=NULL, TARGET ENEMY PORTRAIT
+	else:
+		handlePlayerAttackEnemy()
+		updateResourceLabels()
+		return true
+	
+	return false
+
+
+
 func handlePlayerCast():
 	print("Click - Player trying to cast")
 	
@@ -279,15 +299,11 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
 	for c:Card in cardsToDestroy:
-		c.mySlot.isAvailable = true
-		#c.destroyCardOne()
-		c.statesDestroy()
-	
-	#### PROCESS TARGET CARD'S STATUS
-	if targetCard in cardsToDestroy:
-		targetCard.destroyCardOne()
-	
-	
+		if c == attackCard:
+			c.destroyAndAnimate(false)
+		else:
+			c.destroyAndAnimate(true)
+		
 	return attackerDestroyed
 
 

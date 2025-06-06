@@ -155,7 +155,7 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"destroyCardOne"
+"method": &"animateDestroyCard"
 }]
 }
 

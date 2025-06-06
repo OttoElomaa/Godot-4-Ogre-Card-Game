@@ -388,14 +388,21 @@ func updateCardLabels():
 
 
 
-func destroyCardOne():
+func destroyAndAnimate(toAnimate:bool):
+	if not isSpell:
+		mySlot.isAvailable = true
+		
+	statesDestroy()
+	if toAnimate:
+		animateDestroyCard()
+
+
+func animateDestroyCard():
 	if actionState == CardActionStates.DESTROYED:
 		$BodyAnimations.play("DestroyBoardCard")
 	
 
 func destroyCardTwo():
-	#self.queue_free()
-	
 	cardsManager.moveToDiscard(self)
 
 
