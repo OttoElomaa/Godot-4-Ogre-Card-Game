@@ -15,12 +15,12 @@ enum CardActionStates {
 }
 
 enum CardTypes {
-	CREATURE, SPELL,
+	CREATURE, RITUAL,
 }
 
 var isSpell:
 	get:
-		return cardType == CardTypes.SPELL
+		return cardType == CardTypes.RITUAL
 
 
 
@@ -117,19 +117,28 @@ func createEffectText():
 	
 	var l = $Frontside/EffectsLabel
 	var text = ""
+	
+	#### CHECK FROM KEYWORDS HANDLER
 	if hasSunder:
 		text += "Sunder"
 	if hasDuelist:
 		text += "Duelist"
 	
-	var castText = castNode.createText()	
-	text += castText
+	#### CHECK CAST, BATTLE ART, and RITUAL NODES
+	if isSpell:
+		var ritualText = ritualNode.createText()	
+		text += ritualText
 	
-	if castText != "":
-		text += "\n"
-	
-	var battleArtText = battleArtNode.createText()	
-	text += battleArtText
+	#### IF NOT RITUAL, CREATE THE REST
+	else:
+		var castText = castNode.createText()	
+		text += castText
+		
+		if castText != "":
+			text += "\n"
+		
+		var battleArtText = battleArtNode.createText()	
+		text += battleArtText
 	
 	effectText = text
 	l.text = effectText
@@ -138,9 +147,8 @@ func createEffectText():
 	
 	
 func basicSetup():
-	match cardType:
-		CardTypes.SPELL:
-			statesInert()
+	if isSpell:
+		statesInert()
 			
 
 func turnStartReset():

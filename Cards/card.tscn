@@ -229,7 +229,7 @@ nodeKeyword = "Cast"
 
 [node name="Ritual" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")
-nodeKeyword = "Cast"
+nodeKeyword = "Ritual"
 
 [node name="BattleArt" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")

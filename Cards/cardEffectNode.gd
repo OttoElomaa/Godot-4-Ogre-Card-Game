@@ -26,7 +26,18 @@ func createText() -> String:
 	
 	var text = ""
 	
-	#### ADD OTHERS AS WELL
+	
+	#### ADD INFLICT
+	if inflict > 0:
+		text += "Inflict %d" % inflict
+	elif inflictPlayer > 0:
+		text += "Inflict Player %d" % inflictPlayer
+	elif inflictCreature > 0:
+		text += "Inflict Creature %d" % inflictCreature
+	#text += ", "
+	
+	
+	#### ADD BOLSTER
 	if bolsterDamage > 0 or bolsterHealth > 0:
 		if bolstersAllAllies:
 			text += "Bolster Allies"
@@ -41,6 +52,7 @@ func createText() -> String:
 	if text != "":
 		text = "%s: %s" % [nodeKeyword, text]
 	
+	text.rstrip(", ")
 	return text
 
 

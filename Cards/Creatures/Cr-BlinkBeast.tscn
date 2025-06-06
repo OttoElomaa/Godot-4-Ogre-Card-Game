@@ -12,7 +12,7 @@ startingHealth = 1
 [node name="Cast" parent="Effects" index="0"]
 bolsterHealth = 2
 
-[node name="BattleArt" parent="Effects" index="1"]
+[node name="BattleArt" parent="Effects" index="2"]
 hasTap = true
 
 [node name="Art" parent="Frontside" index="1"]

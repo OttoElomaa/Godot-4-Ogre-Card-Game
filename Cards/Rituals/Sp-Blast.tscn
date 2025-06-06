@@ -11,5 +11,10 @@ manaCost = 4
 [node name="Cast" parent="Effects" index="0"]
 inflict = 2
 
+[node name="Ritual" parent="Effects" index="1"]
+isActive = true
+targetGroup = 2
+inflict = 2
+
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_07d1u")
