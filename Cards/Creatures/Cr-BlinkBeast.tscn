@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dnvgrx8n5noeh"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_o7m1v"]
-[ext_resource type="Texture2D" uid="uid://cgg2fibqunpix" path="res://Art/CardArt/card-art-creature-blinkbeast.png" id="2_o7m1v"]
+[ext_resource type="Texture2D" uid="uid://n1kqgxe3iukd" path="res://Art/CardArt/card-art-creature-blinkbeast.jpg" id="2_o7m1v"]
 
 [node name="Card-Cr-Blinkbeast" instance=ExtResource("1_o7m1v")]
-cardName = "Ruk-thrall"
+cardName = "Blinkbeast"
 manaCost = 1
 startingDamage = 2
 startingHealth = 1
