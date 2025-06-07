@@ -235,6 +235,10 @@ nodeKeyword = "Ritual"
 script = ExtResource("2_r3tma")
 nodeKeyword = "Battle Art"
 
+[node name="Arrival" type="Node" parent="Effects"]
+script = ExtResource("2_r3tma")
+nodeKeyword = "Arrival"
+
 [node name="KeywordHandler" type="Node" parent="."]
 script = ExtResource("3_lcq1x")
 

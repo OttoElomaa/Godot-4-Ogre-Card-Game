@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8h8fv1enpgpb"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m612s"]
+[ext_resource type="Texture2D" uid="uid://c8fv2mu03csy" path="res://Art/CardArt/card-art-creature-deathknight.jpg" id="2_m612s"]
+
+[node name="Card-Cr-DeathKnight" instance=ExtResource("1_m612s")]
+cardName = "Death Knight"
+manaCost = 4
+startingDamage = 3
+startingHealth = 3
+
+[node name="Arrival" parent="Effects" index="3"]
+isActive = true
+inflict = 2
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_m612s")

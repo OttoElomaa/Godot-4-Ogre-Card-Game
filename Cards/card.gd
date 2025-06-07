@@ -67,6 +67,7 @@ var cardsManager:Node = null
 @onready var castNode := $Effects/Cast
 @onready var battleArtNode := $Effects/BattleArt
 @onready var ritualNode := $Effects/Ritual
+@onready var arrivalNode := $Effects/Arrival
 
 @onready var keywordHandler := $KeywordHandler
 
@@ -131,9 +132,13 @@ func createEffectText():
 	
 	#### IF NOT RITUAL, CREATE THE REST
 	else:
+		var arrivalText = arrivalNode.createText()	
+		text += arrivalText	
+		if arrivalText != "":
+			text += "\n"
+			
 		var castText = castNode.createText()	
 		text += castText
-		
 		if castText != "":
 			text += "\n"
 		
