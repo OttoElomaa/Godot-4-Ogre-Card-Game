@@ -86,7 +86,7 @@ var hasDuelist:
 
 
 func _ready() -> void:
-	var cardManager = get_parent().get_parent()
+	var cardManager = get_tree().get_first_node_in_group("cardManager")
 	cardManager.connectCardSignal(self)
 	
 	damage = startingDamage
@@ -94,7 +94,9 @@ func _ready() -> void:
 	
 	turnStartReset()
 	
-	myOffset = get_parent().position
+	var boardOrTempNode = get_parent()
+	if boardOrTempNode is Node2D:
+		myOffset = get_parent().position
 	
 	if cardType == CardTypes.CREATURE:
 		$Frontside/Background/Creature.show()
@@ -154,6 +156,12 @@ func createEffectText():
 func basicSetup():
 	if isSpell:
 		statesInert()
+	
+	#### SHARE INFO ON, IS CARD ENEMY
+	for node in $Effects.get_children():
+		if isEnemyCard:
+			node.isEnemy = true
+	
 			
 
 func turnStartReset():

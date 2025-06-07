@@ -116,6 +116,10 @@ func checkSlotEnemy(slot:CardSlot):
 func getEnemySlots():
 	return $EnemySlots.get_children()
 
+func getPlayerSlots():
+	return $PlayerSlots.get_children()
+
+
 ##################################################################
 
 func loadRandomCard(folderPath:String) -> Node:

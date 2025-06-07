@@ -112,6 +112,7 @@ func timeoutEnemyStartCombat() -> void:
 func playEnemyCard(card:Card):
 	for slot:CardSlot in main.getEnemySlots():
 		if slot.isAvailable and card.manaCost <= enemyMana:
+			
 			cardsManager.handlePlaceCardInSlot(card, slot)
 			return true
 	return false
@@ -294,8 +295,11 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	else:
 		attackCard.rest()
 	
+	
 	#### HANDLE ATTACKER COMBAT ARTS
 	attackCard.battleArtNode.activate(targetCard)
+	#### DEFENDER TOO RIGHT ????
+	targetCard.battleArtNode.activate(attackCard) 
 		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
 	for c:Card in cardsToDestroy:

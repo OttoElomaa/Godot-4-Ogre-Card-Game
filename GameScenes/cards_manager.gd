@@ -240,18 +240,23 @@ func handlePlayRitual(c:Card, slot:CardSlot) -> bool:
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
 	placeCardInSlot(c, slot)	
-		 
+	
+	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
 		var tween = get_tree().create_tween()
 		tween.tween_property(c, "position", slot.position, 0.2)
 		
 		c.reparent($EnemyBoard)
+		c.isEnemyCard = true
 		battleSystem.enemyMana -= c.manaCost
+	#### PLAYER CARD. REPARENT AND TAKE MANA COST
 	else:
 		c.position = slot.position
 		c.reparent($PlayerBoard)
 		battleSystem.playerMana -= c.manaCost
 	
+	c.basicSetup()
+	c.arrivalNode.activate(null)
 	battleSystem.updateResourceLabels()		
 	return true
 

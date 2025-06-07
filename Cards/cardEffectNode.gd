@@ -3,6 +3,8 @@ extends Node
 enum TargetOptions {NONE, ALLIES, ENEMIES}
 
 
+var isEnemy := false
+
 @export var nodeKeyword := "Action type"
 
 @export var isActive := false
@@ -18,7 +20,9 @@ enum TargetOptions {NONE, ALLIES, ENEMIES}
 @export var bolsterDamage := 0
 @export var bolsterHealth := 0
 
-var isEnemy := false
+@export var summonScene: PackedScene = null
+@export_multiline var summonString := "Summon a thing"
+
 
 
 
@@ -46,8 +50,15 @@ func createText() -> String:
 			text += "Bolster"
 		text += " %d/%d" % [bolsterDamage, bolsterHealth]
 	
+	#### ADD TAP
 	if hasTap:
 		text += "Tap target"
+	
+	#### ADD SUMMON
+	if summonScene:
+		text += summonString
+	
+	
 	
 	#### AT THE END, COMPILE TEXT
 	if text != "":
@@ -64,9 +75,12 @@ func checkActive():
 
 
 func activate(target:Card) -> bool:
-	
-	if target.checkAlive():
-		return cast(target)
+	if target:
+		if target.checkAlive():
+			return cast(target)
+	else:
+		return cast(null)
+		
 	return false
 
 
@@ -74,6 +88,21 @@ func activate(target:Card) -> bool:
 func cast(target:Card) -> bool:
 	var success := false
 	
+	########################################## TARGETLESS EFFECTS
+	#### SUMMON
+	if summonScene:
+		var creature:Card = summonScene.instantiate()
+		add_child(creature)   #### TEMP PARENT TO TRIGGER _READY
+		var slot:CardSlot = findEmptySlot()
+		if slot:
+			MyTools.handlePlaceCardInSlot(creature, slot)
+			success = true
+	
+	#### END OF TARGETLESS STUFF
+	if not target:
+		return success
+	
+	######################################### TARGETED EFFECTS
 	#### INFLICT
 	if inflict > 0:
 		target.tempHealth -= inflict
@@ -102,7 +131,11 @@ func cast(target:Card) -> bool:
 
 
 
-
-
-func processPlayerBattleArt(target:Card):
-	pass
+func findEmptySlot() -> CardSlot:
+	
+	var slots:Array = MyTools.findEmptyCardSlots(isEnemy)
+	
+	if slots.is_empty():
+		return null
+	else:
+		return slots[0]

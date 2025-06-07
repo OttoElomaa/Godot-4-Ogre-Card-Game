@@ -120,7 +120,7 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["gameboard"]]
 script = ExtResource("1_8jxey")
 
 [node name="CardLoader" type="Node" parent="."]
@@ -276,7 +276,7 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="CardsManager" type="Node2D" parent="."]
+[node name="CardsManager" type="Node2D" parent="." groups=["cardManager"]]
 script = ExtResource("1_n4faa")
 
 [node name="PlayerDeck" type="Node2D" parent="CardsManager"]
