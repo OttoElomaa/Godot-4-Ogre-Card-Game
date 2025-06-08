@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://5ls01gsi27ws"]
+
+[ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Fonts/stepalange-font/Stepalange-x3BLm.otf" id="1_4ouxm"]
+
+[resource]
+font = ExtResource("1_4ouxm")
+font_size = 40
+font_color = Color(0.321569, 0.27451, 0.203922, 1)
