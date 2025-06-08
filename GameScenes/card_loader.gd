@@ -25,15 +25,17 @@ func createDesertDeck():
 	for i in range(20):
 		cards.append(createCard("res://Cards/Creatures/Cr-MardokHound.tscn"))
 	
-	for i in range(20):
+	for i in range(10):
 		cards.append(createCard("res://Cards/Creatures/Cr-SlaghRider.tscn"))
 	for i in range(20):
 		cards.append(createCard("res://Cards/Rituals/Sp-Blast.tscn"))
 	
-	for i in range(20):
+	for i in range(10):
 		cards.append(createCard("res://Cards/Creatures/Cr-BlinkBeast.tscn"))
-	for i in range(30):
+	for i in range(20):
 		cards.append(createCard("res://Cards/Creatures/Cr-DeathKnight.tscn"))
+	for i in range(40):
+		cards.append(createCard("res://Cards/Creatures/Cr-Alhaja-Pious.tscn"))
 	
 	
 	prints("created cards: ", cards)

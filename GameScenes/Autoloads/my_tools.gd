@@ -44,7 +44,11 @@ func findEmptyCardSlots(isEnemy) -> Array:
 	
 	return emptySlots
 	
-	
+
+
+func handleDrawCard(isEnemy:bool):
+	var cardManager = get_tree().get_first_node_in_group("cardManager")
+	cardManager.checkIsEnemyAnddrawCard(isEnemy)
 	
 	
 	

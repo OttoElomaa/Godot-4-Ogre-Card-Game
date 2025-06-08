@@ -60,6 +60,13 @@ func dealEnemyHand():
 
 		
 
+func checkIsEnemyAnddrawCard(isEnemy:bool):
+	if isEnemy:
+		drawCard($EnemyDeck, $EnemyHand)
+	else:
+		drawCard($PlayerDeck, $PlayerHand)
+
+
 func drawCard(sourceDeck:Node,targetHand:Node):
 	
 	if sourceDeck.get_child_count() < 1:
@@ -68,9 +75,13 @@ func drawCard(sourceDeck:Node,targetHand:Node):
 		
 	var cardScene = sourceDeck.get_child(0)	
 	cardScene.cardsManager = self	
-	
 	cardScene.reparent(targetHand)
-	#assert(1==2,"testing launch crash")
+	
+	if sourceDeck == $EnemyDeck:
+		cardScene.toggleEnemyStatus(true)
+		cardScene.toggleFrontSide(false)
+	updateHandCardsVisuals()
+	
 	return cardScene
 
 
@@ -374,9 +385,7 @@ func startPlayerTurn():
 func startEnemyTurn():
 	wakeBoardCards($EnemyBoard)
 	var newCard = drawCard($EnemyDeck, $EnemyHand)
-	newCard.toggleEnemyStatus(true)
-	newCard.toggleFrontSide(false)
-	updateHandCardsVisuals()
+	
 
 
 func wakeBoardCards(board:Node):

@@ -43,8 +43,12 @@ var tempHealth := 0
 
 var effectText := ""
 
+##################################################
+var cardsManager:Node = null
 
-
+var mySlot: CardSlot = null
+var isEnemyCard := false
+var myOffset := Vector2.ZERO
 
 ###############################################
 #### RESTING = Can't take card actions this turn, such as attack or cast.
@@ -55,11 +59,9 @@ var isTraveling := false
 var resting := false
 var allowInteract := true
 
-var mySlot: CardSlot = null
-var isEnemyCard := false
-var myOffset := Vector2.ZERO
 
-var cardsManager:Node = null
+
+
 
 ##########################################################
 @onready var stateHandler := $Frontside/ActionState
@@ -86,8 +88,8 @@ var hasDuelist:
 
 
 func _ready() -> void:
-	var cardManager = get_tree().get_first_node_in_group("cardManager")
-	cardManager.connectCardSignal(self)
+	cardsManager = get_tree().get_first_node_in_group("cardManager")
+	cardsManager.connectCardSignal(self)
 	
 	damage = startingDamage
 	health = startingHealth
@@ -154,6 +156,7 @@ func createEffectText():
 	
 	
 func basicSetup():
+	
 	if isSpell:
 		statesInert()
 	

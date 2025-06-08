@@ -20,6 +20,8 @@ var isEnemy := false
 @export var bolsterDamage := 0
 @export var bolsterHealth := 0
 
+@export var drawCards := 0
+
 @export var summonScene: PackedScene = null
 @export_multiline var summonString := "Summon a thing"
 
@@ -53,6 +55,10 @@ func createText() -> String:
 	#### ADD TAP
 	if hasTap:
 		text += "Tap target"
+	
+	#### CARD DRAW
+	if drawCards > 0:
+		text += "Draw %d" % drawCards
 	
 	#### ADD SUMMON
 	if summonScene:
@@ -89,6 +95,12 @@ func cast(target:Card) -> bool:
 	var success := false
 	
 	########################################## TARGETLESS EFFECTS
+	#### CARD DRAW
+	if drawCards > 0:
+		for i in range(drawCards):
+			MyTools.handleDrawCard(isEnemy)
+		success = true
+	
 	#### SUMMON
 	if summonScene:
 		var creature:Card = summonScene.instantiate()
