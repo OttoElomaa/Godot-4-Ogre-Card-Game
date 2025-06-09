@@ -6,3 +6,12 @@ enum GameStates {
 }
 
 var gameState: GameStates = GameStates.PLAY
+
+
+
+func statesNone():
+	gameState = GameStates.NONE
+	
+
+func statesPlay():
+	gameState = GameStates.PLAY

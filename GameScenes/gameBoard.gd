@@ -17,6 +17,8 @@ var actionMenuCard: Card = null
 
 func _ready() -> void:
 	
+	States.statesPlay()
+	
 	$CardsManager.main = self
 	$CardsManager.battleSystem = $BattleSystem
 	

@@ -9,7 +9,7 @@ var bestiaryVisible := false
 
 func _ready() -> void:
 	
-	States.gameState = States.GameStates.NONE
+	States.statesNone()
 	$Bestiary.hide()
 
 
@@ -53,7 +53,7 @@ func buttonPressedToggleBestiary() -> void:
 				card.position = slot.position
 				$Bestiary/Cards.add_child(card)
 				
-				card.toggleManaCostIndicator(true)
+				card.turnOnBestiaryVisuals()
 				
 				counter += 1
 			

@@ -377,6 +377,20 @@ func toggleActionStateIndicator(enable:bool):
 		$Frontside/ActionState.hide()
 
 
+
+func turnOnBestiaryVisuals():
+	toggleManaCostIndicator(true)
+	toggleActionStateIndicator(false)
+	toggleTraveling(false)
+	
+	$Frontside/CardNameBestiary.show()
+	$Frontside/CardNameBestiary/Label.text = cardName
+	
+	updateCardLabels()
+
+
+#######################################################################################
+
 func playAttackAnimation():
 	if isEnemyCard:
 		$BodyAnimations.play("EnemyAttack")
