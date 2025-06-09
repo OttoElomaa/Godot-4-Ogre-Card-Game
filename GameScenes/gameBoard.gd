@@ -103,6 +103,13 @@ func toggleCardActionMenu(enable:bool, card:Card):
 
 
 
+func changeMana(amount:int, isEnemy:bool):
+	
+	if isEnemy:
+		$BattleSystem.enemyMana += amount
+	else:
+		$BattleSystem.playerMana += amount
+
 
 ########################################################################################
 

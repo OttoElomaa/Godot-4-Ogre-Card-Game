@@ -163,6 +163,7 @@ func basicSetup():
 	#### SHARE INFO ON, IS CARD ENEMY
 	for node in $Effects.get_children():
 		if isEnemyCard:
+			node.myCard = self
 			node.isEnemy = true
 	
 			

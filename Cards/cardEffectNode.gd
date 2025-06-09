@@ -2,7 +2,7 @@ extends Node
 
 enum TargetOptions {NONE, ALLIES, ENEMIES}
 
-
+var myCard: Card = null
 var isEnemy := false
 
 @export var nodeKeyword := "Action type"
@@ -108,6 +108,7 @@ func cast(target:Card) -> bool:
 		var slot:CardSlot = findEmptySlot()
 		if slot:
 			MyTools.handlePlaceCardInSlot(creature, slot)
+			MyTools.changeMana(creature.manaCost, isEnemy)
 			success = true
 	
 	#### END OF TARGETLESS STUFF

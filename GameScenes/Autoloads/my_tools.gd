@@ -49,7 +49,11 @@ func findEmptyCardSlots(isEnemy) -> Array:
 func handleDrawCard(isEnemy:bool):
 	var cardManager = get_tree().get_first_node_in_group("cardManager")
 	cardManager.checkIsEnemyAnddrawCard(isEnemy)
-	
+
+
+func changeMana(amount:int, isEnemy:bool):
+	var board = get_tree().get_first_node_in_group("gameboard")
+	board.changeMana(amount, isEnemy)
 	
 	
 	

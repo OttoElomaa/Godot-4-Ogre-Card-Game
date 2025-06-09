@@ -1,0 +1,122 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhgg2oefy2y6e"]
+
+[ext_resource type="Script" uid="uid://dojtnp1c1qm5h" path="res://GameScenes/main_menu.gd" id="1_jd835"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="2_b8l8w"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="3_wqb3i"]
+[ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="4_duqux"]
+[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="5_26mog"]
+[ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://GameScenes/tableCardSlot.tscn" id="6_b8l8w"]
+[ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="7_wqb3i"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_jd835")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StartMatchPane" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_right = 120.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/StartMatchPane"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_b8l8w")
+
+[node name="Label" type="Label" parent="CanvasLayer/StartMatchPane/Panel"]
+layout_mode = 2
+text = "Start Match"
+label_settings = ExtResource("3_wqb3i")
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="CanvasLayer/StartMatchPane/Panel"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("4_duqux")
+theme_override_styles/normal = ExtResource("5_26mog")
+
+[node name="ShowBestiaryPane" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_bottom = 120.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/ShowBestiaryPane"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_b8l8w")
+
+[node name="Label" type="Label" parent="CanvasLayer/ShowBestiaryPane/Panel"]
+layout_mode = 2
+text = "Toggle Bestiary"
+label_settings = ExtResource("3_wqb3i")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/ShowBestiaryPane/Panel"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("4_duqux")
+theme_override_styles/normal = ExtResource("5_26mog")
+
+[node name="Bestiary" type="Node2D" parent="."]
+
+[node name="Cards" type="Node2D" parent="Bestiary"]
+position = Vector2(0, 100)
+
+[node name="Slots" type="Node2D" parent="Bestiary"]
+z_index = -1
+position = Vector2(0, 100)
+
+[node name="BestiarySlot" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(498, 200)
+
+[node name="BestiarySlot2" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(728, 200)
+
+[node name="BestiarySlot3" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(958, 200)
+
+[node name="BestiarySlot4" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1188, 200)
+
+[node name="BestiarySlot5" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1418, 200)
+
+[node name="BestiarySlot6" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1648, 200)
+
+[node name="BestiarySlot7" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(498, 550)
+
+[node name="BestiarySlot8" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(728, 550)
+
+[node name="BestiarySlot9" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(958, 550)
+
+[node name="BestiarySlot10" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1188, 550)
+
+[node name="BestiarySlot11" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1418, 550)
+
+[node name="BestiarySlot12" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1648, 550)
+
+[node name="CardsManager" type="Node2D" parent="." groups=["cardManager"]]
+script = ExtResource("7_wqb3i")
+
+[connection signal="pressed" from="CanvasLayer/StartMatchPane/Panel/StartButton" to="." method="buttonPressedStartMatch"]
+[connection signal="pressed" from="CanvasLayer/ShowBestiaryPane/Panel/Button" to="." method="buttonPressedToggleBestiary"]

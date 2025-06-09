@@ -109,6 +109,9 @@ func updateHandCardsVisuals():
 
 func _physics_process(delta: float) -> void:
 	
+	if States.gameState == States.GameStates.NONE:
+		return
+	
 	#### MOVE CARD THAT WAS SELECTED FOR DRAGGING
 	var c = currentDraggedCard
 	if c:

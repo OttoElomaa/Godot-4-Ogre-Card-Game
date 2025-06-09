@@ -1,31 +1,31 @@
 [gd_scene load_steps=32 format=3 uid="uid://d0m41055ikape"]
 
-[ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/main.gd" id="1_8jxey"]
-[ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="1_n4faa"]
-[ext_resource type="Script" uid="uid://doyn8i1dunq2s" path="res://GameScenes/battle_system.gd" id="2_8jxey"]
-[ext_resource type="Script" uid="uid://x5hp1ama1l5h" path="res://GameScenes/card_loader.gd" id="2_fjy3t"]
-[ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_8s1e5"]
-[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="3_015nr"]
-[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_bw8dm"]
-[ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://GameScenes/tableCardSlot.tscn" id="4_c6j12"]
-[ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="4_ehjh8"]
-[ext_resource type="Texture2D" uid="uid://yy4b6om5as5s" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-02.png" id="5_47kpv"]
-[ext_resource type="Texture2D" uid="uid://iro7vjuquihg" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-01.png" id="5_dj0be"]
-[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="5_hys5q"]
-[ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-02.png" id="6_j87nl"]
-[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="6_m0cpn"]
-[ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="8_2brjh"]
-[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="9_7ijru"]
-[ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/BoardComponents/game-mana-health-holder-texture-v2.png" id="10_2brjh"]
-[ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSetHeaderHealth.tres" id="11_jh5rg"]
-[ext_resource type="LabelSettings" uid="uid://df882tsfd50yb" path="res://Fonts/LabelSettingYellowHeaderFont.tres" id="12_c0uhk"]
-[ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="12_hffy6"]
-[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="19_47kpv"]
-[ext_resource type="Texture2D" uid="uid://ihvc8fjeb5xc" path="res://Art/CardComponents/card-background-texture-V3b-ForInfoPane.jpg" id="21_k1054"]
-[ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/battle_log_pane.gd" id="21_on7x6"]
-[ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSet-Header-Brown.tres" id="22_3ahvd"]
-[ext_resource type="Texture2D" uid="uid://b7g66n14xrpak" path="res://Art/CardArt/card-art-base-card-idk.png" id="22_j8g12"]
-[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSetSmallBrownCardText.tres" id="24_gvq00"]
+[ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/gameBoard.gd" id="1_rf3o6"]
+[ext_resource type="Script" uid="uid://x5hp1ama1l5h" path="res://GameScenes/card_loader.gd" id="2_gftaw"]
+[ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
+[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_1qylb"]
+[ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/BoardComponents/game-mana-health-holder-texture-v2.png" id="5_4lnmq"]
+[ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSetHeaderHealth.tres" id="6_r88d6"]
+[ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="7_vfgb4"]
+[ext_resource type="Texture2D" uid="uid://iro7vjuquihg" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-01.png" id="8_mj3e8"]
+[ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-02.png" id="9_nxc8c"]
+[ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="10_223y2"]
+[ext_resource type="Texture2D" uid="uid://yy4b6om5as5s" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-02.png" id="11_0xags"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="12_i42kc"]
+[ext_resource type="LabelSettings" uid="uid://df882tsfd50yb" path="res://Fonts/LabelSettingYellowHeaderFont.tres" id="13_u7g0n"]
+[ext_resource type="Script" uid="uid://doyn8i1dunq2s" path="res://GameScenes/battle_system.gd" id="14_mv2fm"]
+[ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="15_h4god"]
+[ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://GameScenes/tableCardSlot.tscn" id="16_8xajj"]
+[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="17_7ll03"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="18_tppv1"]
+[ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
+[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
+[ext_resource type="Texture2D" uid="uid://ihvc8fjeb5xc" path="res://Art/CardComponents/card-background-texture-V3b-ForInfoPane.jpg" id="21_8ww6x"]
+[ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSet-Header-Brown.tres" id="22_fl608"]
+[ext_resource type="Texture2D" uid="uid://b7g66n14xrpak" path="res://Art/CardArt/card-art-base-card-idk.png" id="23_ytsuw"]
+[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSetSmallBrownCardText.tres" id="24_l7se8"]
+[ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/battle_log_pane.gd" id="25_gfnca"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -122,29 +122,29 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[node name="Main" type="Node2D" groups=["gameboard"]]
-script = ExtResource("1_8jxey")
+[node name="GameBoard" type="Node2D" groups=["gameboard"]]
+script = ExtResource("1_rf3o6")
 
 [node name="CardLoader" type="Node" parent="."]
-script = ExtResource("2_fjy3t")
+script = ExtResource("2_gftaw")
 
 [node name="Portraits" type="Node2D" parent="."]
 
 [node name="PlayerSprite" type="Sprite2D" parent="Portraits"]
 position = Vector2(138, 1126)
-texture = ExtResource("3_8s1e5")
+texture = ExtResource("3_1phva")
 
 [node name="EnemySprite" type="Sprite2D" parent="Portraits"]
 position = Vector2(1080, 131)
-texture = ExtResource("4_bw8dm")
+texture = ExtResource("4_1qylb")
 
 [node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Portraits"]
 position = Vector2(189, 1141)
-texture = ExtResource("10_2brjh")
+texture = ExtResource("5_4lnmq")
 
 [node name="EnemyResourceHolderSprite2" type="Sprite2D" parent="Portraits"]
 position = Vector2(1134, 146)
-texture = ExtResource("10_2brjh")
+texture = ExtResource("5_4lnmq")
 
 [node name="PlayerHealthLabel" type="Label" parent="Portraits"]
 texture_filter = 1
@@ -153,7 +153,7 @@ offset_top = 1208.0
 offset_right = 269.0
 offset_bottom = 1265.0
 text = "99"
-label_settings = ExtResource("11_jh5rg")
+label_settings = ExtResource("6_r88d6")
 horizontal_alignment = 1
 
 [node name="EnemyHealthLabel" type="Label" parent="Portraits"]
@@ -163,7 +163,7 @@ offset_top = 215.0
 offset_right = 1215.0
 offset_bottom = 272.0
 text = "99"
-label_settings = ExtResource("11_jh5rg")
+label_settings = ExtResource("6_r88d6")
 horizontal_alignment = 1
 
 [node name="PlayerManaLabel" type="Label" parent="Portraits"]
@@ -173,7 +173,7 @@ offset_top = 1016.0
 offset_right = 312.0
 offset_bottom = 1073.0
 text = "88"
-label_settings = ExtResource("12_hffy6")
+label_settings = ExtResource("7_vfgb4")
 horizontal_alignment = 1
 
 [node name="EnemyManaLabel" type="Label" parent="Portraits"]
@@ -183,7 +183,7 @@ offset_top = 22.0
 offset_right = 1258.0
 offset_bottom = 79.0
 text = "88"
-label_settings = ExtResource("12_hffy6")
+label_settings = ExtResource("7_vfgb4")
 horizontal_alignment = 1
 
 [node name="EnemyPortraitArea" type="Area2D" parent="Portraits"]
@@ -201,19 +201,19 @@ z_index = -5
 
 [node name="UpperCornerDecor" type="Sprite2D" parent="Visuals/Scenery"]
 position = Vector2(313, 344)
-texture = ExtResource("5_dj0be")
+texture = ExtResource("8_mj3e8")
 
 [node name="LowerCornerDecor" type="Sprite2D" parent="Visuals/Scenery"]
 position = Vector2(2090, 1008)
-texture = ExtResource("6_j87nl")
+texture = ExtResource("9_nxc8c")
 
 [node name="Leaves" type="Sprite2D" parent="Visuals/Scenery"]
 position = Vector2(201, 715)
-texture = ExtResource("4_ehjh8")
+texture = ExtResource("10_223y2")
 
 [node name="Leaves2" type="Sprite2D" parent="Visuals/Scenery"]
 position = Vector2(2211, 1071)
-texture = ExtResource("5_47kpv")
+texture = ExtResource("11_0xags")
 
 [node name="YourTurnPopup" type="Node2D" parent="Visuals"]
 position = Vector2(0, -200)
@@ -236,7 +236,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_styles/panel = ExtResource("5_hys5q")
+theme_override_styles/panel = ExtResource("12_i42kc")
 
 [node name="MarginContainer" type="MarginContainer" parent="Visuals/YourTurnPopup/Canvas/PopupPanel"]
 layout_mode = 2
@@ -249,7 +249,7 @@ theme_override_constants/margin_bottom = 20
 texture_filter = 1
 layout_mode = 2
 text = "Your turn!"
-label_settings = ExtResource("12_c0uhk")
+label_settings = ExtResource("13_u7g0n")
 horizontal_alignment = 1
 
 [node name="PopupAnimation" type="AnimationPlayer" parent="Visuals/YourTurnPopup"]
@@ -258,7 +258,7 @@ libraries = {
 }
 
 [node name="BattleSystem" type="Node2D" parent="."]
-script = ExtResource("2_8jxey")
+script = ExtResource("14_mv2fm")
 
 [node name="AttackLine" type="Line2D" parent="BattleSystem"]
 z_index = 5
@@ -279,7 +279,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="CardsManager" type="Node2D" parent="." groups=["cardManager"]]
-script = ExtResource("1_n4faa")
+script = ExtResource("15_h4god")
 
 [node name="PlayerDeck" type="Node2D" parent="CardsManager"]
 position = Vector2(-500, 0)
@@ -309,43 +309,43 @@ position = Vector2(-584, -252)
 [node name="PlayerSlots" type="Node2D" parent="."]
 z_index = -1
 
-[node name="TableCardSlot" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
 position = Vector2(498, 884)
 
-[node name="TableCardSlot2" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot2" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
 position = Vector2(728, 884)
 
-[node name="TableCardSlot3" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot3" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
 position = Vector2(958, 884)
 
-[node name="TableCardSlot4" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot4" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
 position = Vector2(1188, 884)
 
-[node name="TableCardSlot5" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot5" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
 position = Vector2(1418, 884)
 
-[node name="TableCardSlot6" parent="PlayerSlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot6" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
 position = Vector2(1648, 884)
 
 [node name="EnemySlots" type="Node2D" parent="."]
 z_index = -1
 
-[node name="TableCardSlot" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot" parent="EnemySlots" instance=ExtResource("16_8xajj")]
 position = Vector2(496, 464)
 
-[node name="TableCardSlot2" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot2" parent="EnemySlots" instance=ExtResource("16_8xajj")]
 position = Vector2(726, 464)
 
-[node name="TableCardSlot3" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot3" parent="EnemySlots" instance=ExtResource("16_8xajj")]
 position = Vector2(956, 464)
 
-[node name="TableCardSlot4" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot4" parent="EnemySlots" instance=ExtResource("16_8xajj")]
 position = Vector2(1186, 464)
 
-[node name="TableCardSlot5" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot5" parent="EnemySlots" instance=ExtResource("16_8xajj")]
 position = Vector2(1416, 464)
 
-[node name="TableCardSlot6" parent="EnemySlots" instance=ExtResource("4_c6j12")]
+[node name="TableCardSlot6" parent="EnemySlots" instance=ExtResource("16_8xajj")]
 position = Vector2(1646, 464)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -356,7 +356,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_015nr")
+texture = ExtResource("17_7ll03")
 patch_margin_left = 7
 patch_margin_top = 7
 patch_margin_right = 7
@@ -380,18 +380,18 @@ theme_override_constants/margin_bottom = 20
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/ExitPane"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-theme_override_styles/panel = ExtResource("5_hys5q")
+theme_override_styles/panel = ExtResource("12_i42kc")
 
 [node name="Label" type="Label" parent="CanvasLayer/ExitPane/Panel"]
 layout_mode = 2
 text = "Exit Game"
-label_settings = ExtResource("6_m0cpn")
+label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/ExitPane/Panel"]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("8_2brjh")
-theme_override_styles/normal = ExtResource("9_7ijru")
+theme_override_styles/hover = ExtResource("19_j663k")
+theme_override_styles/normal = ExtResource("20_tic85")
 
 [node name="CardInfoPane" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 6
@@ -412,11 +412,11 @@ theme_override_constants/margin_bottom = 20
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/CardInfoPane"]
 custom_minimum_size = Vector2(200, 500)
 layout_mode = 2
-theme_override_styles/panel = ExtResource("5_hys5q")
+theme_override_styles/panel = ExtResource("12_i42kc")
 
 [node name="CardBackgroundTexture" type="TextureRect" parent="CanvasLayer/CardInfoPane/Panel"]
 layout_mode = 2
-texture = ExtResource("21_k1054")
+texture = ExtResource("21_8ww6x")
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer/CardInfoPane/Panel"]
 layout_mode = 2
@@ -432,20 +432,20 @@ theme_override_constants/separation = 14
 [node name="NameLabel" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
 layout_mode = 2
 text = "Card Name"
-label_settings = ExtResource("22_3ahvd")
+label_settings = ExtResource("22_fl608")
 horizontal_alignment = 1
 
 [node name="CardArt" type="TextureRect" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-texture = ExtResource("22_j8g12")
+texture = ExtResource("23_ytsuw")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="EffectText" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
 layout_mode = 2
 text = "Effect text goes here."
-label_settings = ExtResource("24_gvq00")
+label_settings = ExtResource("24_l7se8")
 horizontal_alignment = 1
 
 [node name="BattleLogPane" type="MarginContainer" parent="CanvasLayer"]
@@ -462,12 +462,12 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
-script = ExtResource("21_on7x6")
+script = ExtResource("25_gfnca")
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/BattleLogPane"]
 custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
-theme_override_styles/panel = ExtResource("5_hys5q")
+theme_override_styles/panel = ExtResource("12_i42kc")
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer/BattleLogPane/Panel"]
 layout_mode = 2
@@ -501,18 +501,18 @@ theme_override_constants/margin_bottom = 20
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/EndTurnPane"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-theme_override_styles/panel = ExtResource("5_hys5q")
+theme_override_styles/panel = ExtResource("12_i42kc")
 
 [node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/Panel"]
 layout_mode = 2
 text = "End Turn"
-label_settings = ExtResource("6_m0cpn")
+label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/EndTurnPane/Panel"]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("8_2brjh")
-theme_override_styles/normal = ExtResource("9_7ijru")
+theme_override_styles/hover = ExtResource("19_j663k")
+theme_override_styles/normal = ExtResource("20_tic85")
 
 [node name="LevelInfoPanel" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 220.0
@@ -539,13 +539,13 @@ theme_override_constants/separation = 10
 [node name="Label" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel/HBox"]
 layout_mode = 2
 text = "  Game board  -"
-label_settings = ExtResource("19_47kpv")
+label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
 [node name="BoardNameLabel" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel/HBox"]
 layout_mode = 2
 text = "Goes Here"
-label_settings = ExtResource("19_47kpv")
+label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
 [node name="Panel2" type="PanelContainer" parent="CanvasLayer/LevelInfoPanel/VBox"]
@@ -561,13 +561,13 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox"]
 layout_mode = 2
 text = "  Turn  -"
-label_settings = ExtResource("19_47kpv")
+label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
 [node name="TurnCountLabel" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox"]
 layout_mode = 2
 text = "Goes Here"
-label_settings = ExtResource("19_47kpv")
+label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -582,25 +582,25 @@ offset_left = -75.0
 offset_top = -40.0
 offset_right = 75.0
 offset_bottom = 160.0
-theme_override_styles/panel = ExtResource("9_7ijru")
+theme_override_styles/panel = ExtResource("20_tic85")
 
 [node name="CastPanel" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu"]
 custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_styles/panel = ExtResource("5_hys5q")
+theme_override_styles/panel = ExtResource("12_i42kc")
 
 [node name="CastButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/CastPanel"]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("8_2brjh")
-theme_override_styles/normal = ExtResource("9_7ijru")
+theme_override_styles/hover = ExtResource("19_j663k")
+theme_override_styles/normal = ExtResource("20_tic85")
 
 [node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/CastPanel"]
 texture_filter = 1
 layout_mode = 2
 text = "Cast"
-label_settings = ExtResource("6_m0cpn")
+label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
 [node name="DefendPanel" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu"]
@@ -608,19 +608,19 @@ custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_styles/panel = ExtResource("5_hys5q")
+theme_override_styles/panel = ExtResource("12_i42kc")
 
 [node name="ToggleDefendButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/DefendPanel"]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("8_2brjh")
-theme_override_styles/normal = ExtResource("9_7ijru")
+theme_override_styles/hover = ExtResource("19_j663k")
+theme_override_styles/normal = ExtResource("20_tic85")
 
 [node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/DefendPanel"]
 texture_filter = 1
 layout_mode = 2
 text = "Toggle 
 Defend"
-label_settings = ExtResource("6_m0cpn")
+label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
 [connection signal="timeout" from="BattleSystem/EnemyStartCombatTimer" to="BattleSystem" method="timeoutEnemyStartCombat"]
