@@ -239,6 +239,10 @@ nodeKeyword = "Battle Art"
 script = ExtResource("2_r3tma")
 nodeKeyword = "Arrival"
 
+[node name="SpecialCondition" type="Node" parent="Effects"]
+script = ExtResource("2_r3tma")
+nodeKeyword = "Special Condition"
+
 [node name="KeywordHandler" type="Node" parent="."]
 script = ExtResource("3_lcq1x")
 

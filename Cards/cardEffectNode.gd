@@ -2,14 +2,24 @@ extends Node
 
 enum TargetOptions {NONE, ALLIES, ENEMIES}
 
+enum SpecialConditions {NONE, ON_RITUAL, ON_CREATURE_ARRIVAL, ON_CREATURE_DEATH, ON_ALLY_DEATH, ON_ENEMY_DEATH}
+
 var myCard: Card = null
 var isEnemy := false
 
 @export var nodeKeyword := "Action type"
 
 @export var isActive := false
-@export var targetGroup := TargetOptions.NONE
+#@export var targetGroup := TargetOptions.NONE
 
+#### ONLY FOR SPECIAL CONDITIONS NODE. STUFF LIKE,
+#### ON RITUAL, ON CREATURE DEATH, ETC.
+@export var specialCondition := SpecialConditions.NONE
+
+#### TRIGGER TYPE: For example, ON ANOTHER 'RATFOLK' ENTERING...
+@export var triggerTypeLine := "Card Type"
+#### EFFECT TYPE: For example, BOLSTER ALL OTHER 'SPIRITS'...
+@export var effectTypeLine := "Card Type"
 
 @export var hasTap := false
 @export var inflict := 0
@@ -142,6 +152,18 @@ func cast(target:Card) -> bool:
 	
 	return success
 
+
+
+func triggerConditionRitual():
+	pass
+
+
+func triggerConditionCreatureDeath():
+	pass
+
+
+func triggerConditionAllyDeath():
+	pass	
 
 
 func findEmptySlot() -> CardSlot:

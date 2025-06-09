@@ -73,6 +73,7 @@ var allowInteract := true
 @onready var battleArtNode := $Effects/BattleArt
 @onready var ritualNode := $Effects/Ritual
 @onready var arrivalNode := $Effects/Arrival
+@onready var specialTriggers := $Effects/SpecialCondition
 
 @onready var keywordHandler := $KeywordHandler
 

@@ -13,7 +13,6 @@ inflict = 2
 
 [node name="Ritual" parent="Effects" index="1"]
 isActive = true
-targetGroup = 2
 inflict = 2
 
 [node name="Art" parent="Frontside" index="1"]
