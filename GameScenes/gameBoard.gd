@@ -192,7 +192,10 @@ func toggleCardInfo(enable:bool, card:Card):
 	cardInfo.show()
 	cardInfo.get_node("Panel/Margin/VBox/NameLabel").text = card.cardName
 	cardInfo.get_node("Panel/Margin/VBox/CardArt").texture = card.cardArt
+	
+	cardInfo.get_node("Panel/Margin/VBox/SubTypeLine").text = "%s - %s" % [card.cardTypeStr,card.subTypeStr]
 	cardInfo.get_node("Panel/Margin/VBox/EffectText").text = card.effectText
+	cardInfo.get_node("Panel/Margin/VBox/AttackDefenseLabel").text = "%d - %d" % [card.damage,card.health]
 	
 
 

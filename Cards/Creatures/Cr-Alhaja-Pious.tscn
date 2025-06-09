@@ -5,6 +5,7 @@
 
 [node name="Card-Cr-PiousAlhaja" instance=ExtResource("1_l6qv3")]
 cardName = "Pious Alhaja"
+subTypeStr = "Alhaja Commoner"
 manaCost = 3
 startingDamage = 2
 startingHealth = 2

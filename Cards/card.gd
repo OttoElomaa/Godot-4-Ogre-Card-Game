@@ -27,6 +27,9 @@ var isSpell:
 ###########################################
 @export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE
+@export var subTypeStr := "Card Sub-Type"
+var subTypes := []
+var cardTypeStr := ""
 
 var cardArt:
 	get:
@@ -91,6 +94,8 @@ func _ready() -> void:
 	cardsManager = get_tree().get_first_node_in_group("cardManager")
 	cardsManager.connectCardSignal(self)
 	
+	subTypes = subTypeStr.split(" ")
+	
 	damage = startingDamage
 	health = startingHealth
 	
@@ -120,6 +125,21 @@ func _ready() -> void:
 	
 func createEffectText():
 	
+	
+	match cardType:
+		CardTypes.CREATURE:
+			cardTypeStr = "Creature"
+		CardTypes.RITUAL:
+			cardTypeStr = "Ritual"
+	
+	
+	subTypeStr = ""
+	for type in subTypes:
+		subTypeStr += type
+		subTypeStr += " "
+	subTypeStr.rstrip(" ")
+	
+	#################################### EFFECT TEXT
 	var l = $Frontside/EffectsLabel
 	var text = ""
 	

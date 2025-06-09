@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_6ma8t"]
 [ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="5_jsedn"]
 [ext_resource type="Texture2D" uid="uid://cdficndq8clk4" path="res://Art/CardComponents/card-backside-texture-v2-achra.jpg" id="5_lcq1x"]
-[ext_resource type="Texture2D" uid="uid://dbo04yx5ffla6" path="res://Art/CardComponents/card-background-texture-V3.png" id="6_lcq1x"]
+[ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="6_lcq1x"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="6_u70hd"]
 [ext_resource type="Texture2D" uid="uid://ddcgs1oy32v0i" path="res://Art/CardComponents/card-action-state-indicator-texture-active-V2.png" id="7_gi0db"]
 [ext_resource type="Texture2D" uid="uid://cq6ndvj18kyn0" path="res://Art/CardComponents/card-action-state-indicator-frame-texture-V2.png" id="8_cvyu6"]

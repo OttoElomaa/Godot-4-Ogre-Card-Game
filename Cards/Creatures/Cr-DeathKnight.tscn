@@ -6,6 +6,7 @@
 
 [node name="Card-Cr-DeathKnight" instance=ExtResource("1_m612s")]
 cardName = "Death Knight"
+subTypeStr = "Brud Warrior"
 manaCost = 4
 startingDamage = 3
 startingHealth = 3

@@ -20,7 +20,7 @@
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="18_tppv1"]
 [ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
 [ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
-[ext_resource type="Texture2D" uid="uid://ihvc8fjeb5xc" path="res://Art/CardComponents/card-background-texture-V3b-ForInfoPane.jpg" id="21_8ww6x"]
+[ext_resource type="Texture2D" uid="uid://bvnmf54c4ye2n" path="res://Art/CardComponents/card-background-texture-V4b-ForInfoPane.jpg" id="21_rf3o6"]
 [ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSet-Header-Brown.tres" id="22_fl608"]
 [ext_resource type="Texture2D" uid="uid://b7g66n14xrpak" path="res://Art/CardArt/card-art-base-card-idk.png" id="23_ytsuw"]
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSetSmallBrownCardText.tres" id="24_l7se8"]
@@ -416,7 +416,7 @@ theme_override_styles/panel = ExtResource("12_i42kc")
 
 [node name="CardBackgroundTexture" type="TextureRect" parent="CanvasLayer/CardInfoPane/Panel"]
 layout_mode = 2
-texture = ExtResource("21_8ww6x")
+texture = ExtResource("21_rf3o6")
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer/CardInfoPane/Panel"]
 layout_mode = 2
@@ -442,9 +442,28 @@ texture = ExtResource("23_ytsuw")
 expand_mode = 5
 stretch_mode = 4
 
+[node name="SubTypeLine" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
+layout_mode = 2
+text = "Effect text goes here."
+label_settings = ExtResource("24_l7se8")
+horizontal_alignment = 1
+
 [node name="EffectText" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
 layout_mode = 2
 text = "Effect text goes here."
+label_settings = ExtResource("24_l7se8")
+horizontal_alignment = 1
+
+[node name="EmptyLines" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
+layout_mode = 2
+text = "
+"
+label_settings = ExtResource("24_l7se8")
+horizontal_alignment = 1
+
+[node name="AttackDefenseLabel" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
+layout_mode = 2
+text = "Attack / Defense"
 label_settings = ExtResource("24_l7se8")
 horizontal_alignment = 1
 
