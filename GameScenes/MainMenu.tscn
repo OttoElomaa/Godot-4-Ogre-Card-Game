@@ -11,6 +11,9 @@
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_jd835")
 
+[node name="MenuCamera" type="Camera2D" parent="."]
+position = Vector2(1299, 540)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="StartMatchPane" type="MarginContainer" parent="CanvasLayer"]
@@ -114,6 +117,24 @@ position = Vector2(1418, 650)
 
 [node name="BestiarySlot12" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
 position = Vector2(1648, 650)
+
+[node name="BestiarySlot13" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(498, 1100)
+
+[node name="BestiarySlot14" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(728, 1100)
+
+[node name="BestiarySlot15" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(958, 1100)
+
+[node name="BestiarySlot16" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1188, 1100)
+
+[node name="BestiarySlot17" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1418, 1100)
+
+[node name="BestiarySlot18" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1648, 1100)
 
 [node name="CardsManager" type="Node2D" parent="." groups=["cardManager"]]
 script = ExtResource("7_wqb3i")
