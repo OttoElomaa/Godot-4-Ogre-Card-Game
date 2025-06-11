@@ -31,6 +31,8 @@ var isSpell:
 var subTypes := []
 var cardTypeStr := ""
 
+@export_multiline var flavorText := ""
+
 var cardArt:
 	get:
 		return $Frontside/Art.texture

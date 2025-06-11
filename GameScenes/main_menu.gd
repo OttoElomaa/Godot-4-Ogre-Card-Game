@@ -74,3 +74,7 @@ func buttonPressedToggleBestiary() -> void:
 			
 		
 		
+
+
+func buttonPressedExitGame() -> void:
+	get_tree().quit()

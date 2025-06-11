@@ -81,6 +81,9 @@ func passTurn():
 
 
 func enemyPlayTurn():
+	
+	main.addLogMessage("Opponent turn!", Color.html("524634"))
+	
 	#### PLAY CARDS FROM HAND
 	var enemyHandCards = cardsManager.getEnemyHandCards()
 	
@@ -128,7 +131,7 @@ func timeoutEndEnemyTurn() -> void:
 	main.updateUi(turnCount)
 	cardsManager.startPlayerTurn()
 	
-	main.addLogMessage("Player turn!", Color.WHITE)
+	main.addLogMessage("Player turn!", Color.html("524634"))
 
 #############################################################################
 #### PLAYER ATTACK FUNCTIONS

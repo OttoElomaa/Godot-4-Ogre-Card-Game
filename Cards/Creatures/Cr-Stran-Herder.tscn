@@ -6,6 +6,7 @@
 [node name="Card-Cr-StranHerder" instance=ExtResource("1_7amfs")]
 cardName = "Stran Herder"
 subTypeStr = "Stran Commoner"
+flavorText = "The Stran tribes travel the lands with their loyal Tugar herds."
 manaCost = 2
 startingDamage = 2
 startingHealth = 2

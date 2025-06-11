@@ -6,6 +6,7 @@
 [node name="Card-Cr-Pikeman" instance=ExtResource("1_hwuew")]
 cardName = "Ruk-thrall"
 subTypeStr = "Minion"
+flavorText = "The thralls of the Ruk cults, so easily forgotten."
 manaCost = 1
 startingDamage = 2
 startingHealth = 1

@@ -5,6 +5,7 @@
 
 [node name="Card-Cr-Blinkbeast" instance=ExtResource("1_o7m1v")]
 cardName = "Blinkbeast"
+flavorText = "A playful astral hunter from beyond Achra."
 manaCost = 1
 startingDamage = 2
 startingHealth = 1
