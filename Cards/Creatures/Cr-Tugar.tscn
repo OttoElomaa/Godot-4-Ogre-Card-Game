@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ufufchgvc1q8"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_mtfp6"]
+[ext_resource type="Texture2D" uid="uid://c3wwe11fgomi1" path="res://Art/CardArt/card-art-creature-tugarBeast.jpg" id="2_mtfp6"]
+
+[node name="Card-Cr-Tugar" instance=ExtResource("1_mtfp6")]
+cardName = "Tugar"
+subTypeStr = "Tugar Beast"
+manaCost = 3
+startingDamage = 2
+startingHealth = 3
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_mtfp6")

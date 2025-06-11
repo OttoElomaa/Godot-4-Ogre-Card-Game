@@ -73,6 +73,8 @@ var allowInteract := true
 @onready var battleArtNode := $Effects/BattleArt
 @onready var ritualNode := $Effects/Ritual
 @onready var arrivalNode := $Effects/Arrival
+@onready var onTurnNode := $Effects/OnTurn
+
 @onready var specialTriggers := $Effects/SpecialCondition
 
 @onready var keywordHandler := $KeywordHandler
@@ -100,7 +102,7 @@ func _ready() -> void:
 	damage = startingDamage
 	health = startingHealth
 	
-	turnStartReset()
+	handleTurnStartReset()
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
@@ -151,23 +153,30 @@ func createEffectText():
 		text += "Duelist"
 	
 	#### CHECK CAST, BATTLE ART, and RITUAL NODES
+	
+	#### IS IT RITUAL?
 	if isSpell:
 		var ritualText = ritualNode.createText()	
 		text += ritualText
 	
 	#### IF NOT RITUAL, CREATE THE REST
 	else:
-		var arrivalText = arrivalNode.createText()	
+		var arrivalText = arrivalNode.createText()	#### ARRIVAL
 		text += arrivalText	
 		if arrivalText != "":
 			text += "\n"
+		
+		var onTurnText = onTurnNode.createText()	#### ON TURN START
+		text += onTurnText
+		if onTurnText != "":
+			text += "\n"
 			
-		var castText = castNode.createText()	
+		var castText = castNode.createText()  #### CAST	
 		text += castText
 		if castText != "":
 			text += "\n"
 		
-		var battleArtText = battleArtNode.createText()	
+		var battleArtText = battleArtNode.createText()	#### BATTLE ART (Card Combat)
 		text += battleArtText
 	
 	effectText = text
@@ -189,13 +198,15 @@ func basicSetup():
 	
 			
 
-func turnStartReset():
+func handleTurnStartReset():
 	tempDamage = damage
 	tempHealth = health
 	
-	updateCardLabels()
 
-
+func handleTurnStartActions():
+	#### TRIGGER ON TURN START EFFECTS
+	if States.isStatePlay():
+		onTurnNode.activate(null)
 
 
 func _on_area_2d_mouse_entered() -> void:

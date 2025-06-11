@@ -56,10 +56,20 @@ func createText() -> String:
 	
 	#### ADD BOLSTER
 	if bolsterDamage > 0 or bolsterHealth > 0:
+		#### ALL ALLIES
 		if bolstersAllAllies:
-			text += "Bolster Allies"
+			if effectTypeLine != "":
+				text += "Bolster %s" % effectTypeLine
+			else:
+				text += "Bolster Allies"
+				
+		#### ONE ALLY - CAST ONLY? -> Needs Targeting
 		else:
-			text += "Bolster"
+			if effectTypeLine != "":
+				text += "Bolster Target %s" % effectTypeLine
+			else:
+				text += "Bolster"
+			
 		text += " %d/%d" % [bolsterDamage, bolsterHealth]
 	
 	#### ADD TAP
@@ -121,6 +131,20 @@ func cast(target:Card) -> bool:
 			MyTools.changeMana(creature.manaCost, isEnemy)
 			success = true
 	
+	var targets:Array = MyTools.getBoardCards(isEnemy)
+	if bolstersAllAllies:
+		if bolsterDamage > 0 or bolsterHealth > 0:
+			for card in targets:
+				if effectTypeLine == "":
+					card.tempDamage += bolsterDamage
+					card.tempHealth += bolsterHealth
+					success = true
+				elif effectTypeLine in card.subTypes:
+					card.tempDamage += bolsterDamage
+					card.tempHealth += bolsterHealth
+					success = true
+					
+	
 	#### END OF TARGETLESS STUFF
 	if not target:
 		return success
@@ -137,10 +161,11 @@ func cast(target:Card) -> bool:
 		success = true
 	
 	#### BOLSTER
-	if bolsterDamage > 0 or bolsterHealth > 0:
-		target.tempDamage += bolsterDamage
-		target.tempHealth += bolsterHealth
-		success = true
+	if not bolstersAllAllies:
+		if bolsterDamage > 0 or bolsterHealth > 0:
+			target.tempDamage += bolsterDamage
+			target.tempHealth += bolsterHealth
+			success = true
 	
 	if hasTap:
 		target.rest()

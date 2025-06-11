@@ -15,3 +15,7 @@ func statesNone():
 
 func statesPlay():
 	gameState = GameStates.PLAY
+
+
+func isStatePlay():
+	return gameState == GameStates.PLAY

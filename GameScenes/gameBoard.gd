@@ -2,6 +2,11 @@ extends Node2D
 class_name GameBoard
 
 
+
+@onready var cardsManager := $CardsManager
+@onready var battleSystem := $BattleSystem
+
+
 enum CardSlotTypes {
 	PLAYER, ENEMY
 }
@@ -24,6 +29,8 @@ func _ready() -> void:
 	
 	$BattleSystem.main = self
 	$BattleSystem.cardsManager = $CardsManager
+	
+	MyTools.gameBoardSetup(self)
 	
 	var idk = 0
 	var playerDeckCards:Array = $CardLoader.createDesertDeck()
@@ -195,7 +202,7 @@ func toggleCardInfo(enable:bool, card:Card):
 	
 	cardInfo.get_node("Panel/Margin/VBox/SubTypeLine").text = "%s - %s" % [card.cardTypeStr,card.subTypeStr]
 	cardInfo.get_node("Panel/Margin/VBox/EffectText").text = card.effectText
-	cardInfo.get_node("Panel/Margin/VBox/AttackDefenseLabel").text = "%d - %d" % [card.damage,card.health]
+	cardInfo.get_node("Panel/Margin/VBox/AttackDefenseLabel").text = "%d - %d" % [card.tempDamage,card.tempHealth]
 	
 
 

@@ -226,22 +226,38 @@ script = ExtResource("1_i5yq8")
 [node name="Cast" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")
 nodeKeyword = "Cast"
+triggerTypeLine = ""
+effectTypeLine = ""
 
 [node name="Ritual" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")
 nodeKeyword = "Ritual"
+triggerTypeLine = ""
+effectTypeLine = ""
 
 [node name="BattleArt" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")
 nodeKeyword = "Battle Art"
+triggerTypeLine = ""
+effectTypeLine = ""
 
 [node name="Arrival" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")
 nodeKeyword = "Arrival"
+triggerTypeLine = ""
+effectTypeLine = ""
+
+[node name="OnTurn" type="Node" parent="Effects"]
+script = ExtResource("2_r3tma")
+nodeKeyword = "On Turn"
+triggerTypeLine = ""
+effectTypeLine = ""
 
 [node name="SpecialCondition" type="Node" parent="Effects"]
 script = ExtResource("2_r3tma")
 nodeKeyword = "Special Condition"
+triggerTypeLine = ""
+effectTypeLine = ""
 
 [node name="KeywordHandler" type="Node" parent="."]
 script = ExtResource("3_lcq1x")

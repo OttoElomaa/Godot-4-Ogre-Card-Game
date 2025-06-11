@@ -392,11 +392,22 @@ func startEnemyTurn():
 
 
 func wakeBoardCards(board:Node):
+	#### RESETS AND CLEANUP
 	for c:Card in board.get_children():
-		c.turnStartReset()
+		c.handleTurnStartReset()
 		c.toggleTraveling(false)
 		c.wake()
-
+	#### STUFF LIKE ON-TURN-START TRIGGERS
+	for c:Card in board.get_children():
+		c.handleTurnStartActions()
+		
+	#### UPDATE ALL LABELS, IN CASE THEY WERE AFFECTED
+	for c:Card in MyTools.getBoardCards(true):
+		c.updateCardLabels()
+	for c:Card in MyTools.getBoardCards(false):
+		c.updateCardLabels()
+		
+	
 
 		
 ####################################################

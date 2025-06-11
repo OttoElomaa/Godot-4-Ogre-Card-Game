@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Card Game Tutorial"
+config/name="Cards of Achra"
 run/main_scene="uid://dhgg2oefy2y6e"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Art/icon.svg"
