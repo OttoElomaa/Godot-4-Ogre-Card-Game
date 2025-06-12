@@ -89,11 +89,12 @@ func drawCard(sourceDeck:Node,targetHand:Node):
 #### OFFSETS, SHOW MANA COSTS, ETC.
 func updateHandCardsVisuals():
 	var x_offset := 0
-	for c in $PlayerHand.get_children():
+	for c:Card in $PlayerHand.get_children():
 		c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
 		x_offset += 180
-		c.toggleManaCostIndicator(true)
-		c.toggleActionStateIndicator(false)
+		
+		c.statesHand()
+		c.updateCardVisuals()
 	
 	x_offset = 0
 	for c in $EnemyHand.get_children():
@@ -263,15 +264,22 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 		c.reparent($EnemyBoard)
 		c.isEnemyCard = true
 		battleSystem.enemyMana -= c.manaCost
+	
 	#### PLAYER CARD. REPARENT AND TAKE MANA COST
 	else:
 		c.position = slot.position
 		c.reparent($PlayerBoard)
 		battleSystem.playerMana -= c.manaCost
 	
+	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
 	c.basicSetup()
-	c.arrivalNode.activate(null)
-	battleSystem.updateResourceLabels()		
+	c.arrivalNode.activate(null)  #### TRIGGER
+	if c.hasShadow:
+		c.countersNode.togglePhased(true)
+		
+	c.updateCardVisuals()
+	battleSystem.updateResourceLabels()
+	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
 	return true
 
 
@@ -279,7 +287,6 @@ func placeCardInSlot(card:Card, slot:CardSlot) -> bool:
 	
 	card.scale = Vector2.ONE
 	card.toggleFrontSide(true)
-	card.toggleManaCostIndicator(false)
 	
 	#### SLOT STUFF
 	card.mySlot = slot
@@ -290,14 +297,12 @@ func placeCardInSlot(card:Card, slot:CardSlot) -> bool:
 		return true
 		
 	#### SET ACTION STATE AND TRAVEL STATE	
-	card.toggleActionStateIndicator(true)
 	card.toggleTraveling(true)
 	if main.checkSlotEnemy(slot): #### ENEMY CARDS ATTACK BY DEFAULT, PLAYER'S CARDS PASSIVE BY DFT
 		card.statesActive()
 	else:
 		card.statesPassive()
 	
-	main.addLogMessage("%s played on board" % card.cardName, Color.WHITE)
 	return true
 	
 	
@@ -403,9 +408,9 @@ func wakeBoardCards(board:Node):
 		
 	#### UPDATE ALL LABELS, IN CASE THEY WERE AFFECTED
 	for c:Card in MyTools.getBoardCards(true):
-		c.updateCardLabels()
+		c.updateCardVisuals()
 	for c:Card in MyTools.getBoardCards(false):
-		c.updateCardLabels()
+		c.updateCardVisuals()
 		
 	
 

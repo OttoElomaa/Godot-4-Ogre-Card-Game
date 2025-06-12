@@ -11,7 +11,7 @@ signal hoverOff
 #### DESTROYED STATUS when the card is beaten in combat or otherwise destroyed
 #### INERT REFERS to SPELLS and other cards that can't attack or cast
 enum CardActionStates {
-	ACTIVE, PASSIVE, DESTROYED, INERT
+	ACTIVE, PASSIVE, DESTROYED, INERT, HAND
 }
 
 enum CardTypes {
@@ -69,6 +69,7 @@ var allowInteract := true
 
 
 ##########################################################
+@onready var countersNode := $Counters
 @onready var stateHandler := $Frontside/ActionState
 
 @onready var castNode := $Effects/Cast
@@ -89,6 +90,9 @@ var hasDuelist:
 	get:
 		return keywordHandler.hasDuelist()
 
+var hasShadow:
+	get:
+		return keywordHandler.hasShadow()
 
 
 
@@ -153,6 +157,8 @@ func createEffectText():
 		text += "Sunder"
 	if hasDuelist:
 		text += "Duelist"
+	if hasShadow:
+		text += "Shadow"
 	
 	#### CHECK CAST, BATTLE ART, and RITUAL NODES
 	
@@ -209,6 +215,22 @@ func handleTurnStartActions():
 	#### TRIGGER ON TURN START EFFECTS
 	if States.isStatePlay():
 		onTurnNode.activate(null)
+
+
+
+func updateCardVisuals():
+	
+	updateCardLabels()
+	
+	if actionState == CardActionStates.HAND:
+		toggleManaCostIndicator(true)
+		toggleActionStateIndicator(false)
+	else:
+		toggleManaCostIndicator(false)
+		toggleActionStateIndicator(true)
+	
+	$Counters.updatePhasedVisuals()
+
 
 
 func _on_area_2d_mouse_entered() -> void:
@@ -281,6 +303,10 @@ func statesInert():
 
 func statesDestroy():
 	actionState = CardActionStates.DESTROYED	
+
+
+func statesHand():
+	actionState = CardActionStates.HAND
 
 
 func toggleTraveling(enabled:bool):

@@ -13,7 +13,7 @@ startingHealth = 2
 
 [node name="OnTurn" parent="Effects" index="4"]
 isActive = true
-effectTypeLine = "Tugar"
+effectTypeLine = "Beast"
 bolstersAllAllies = true
 bolsterDamage = 1
 bolsterHealth = 1
