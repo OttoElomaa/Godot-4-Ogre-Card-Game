@@ -191,8 +191,7 @@ func createEffectText():
 	l.text = effectText
 	
 	
-	
-	
+########################################################		
 func basicSetup():
 	
 	if isSpell:
@@ -218,6 +217,26 @@ func handleTurnStartActions():
 
 
 
+#### HANDLE CARD BEING PLAYED ON BOARD
+func handleArrival():
+	basicSetup()
+	arrivalNode.activate(null)  #### TRIGGER ARRIVAL NODE
+	if hasShadow:
+		countersNode.togglePhased(true)
+		statesPassive()
+		
+	updateCardVisuals()
+
+
+func setInitialActionState():
+	statesPassive()
+	
+	#### ENEMY CARDS ATTACK BY DEFAULT
+	if isEnemyCard: 
+		if not hasShadow:
+			statesActive()
+
+
 func updateCardVisuals():
 	
 	updateCardLabels()
@@ -233,6 +252,7 @@ func updateCardVisuals():
 
 
 
+#########################################################################
 func _on_area_2d_mouse_entered() -> void:
 	emit_signal("hoverOn", self)
 
@@ -260,14 +280,19 @@ func toggleFrontSide(toShow:bool):
 
 #############################################################
 
-func rest():
-	resting = true
-	$BodyAnimations/RestTimer.start()
+#func rest():
+	#resting = true
+	#$BodyAnimations/RestTimer.start()
 
-func restAndAnimate():
+#### HANDLE REST
+#### ANIMATE = ROTATE CARD IMMEDIATELY
+#### DON'T ANIMATE = PLAY ANIMATION ON DELAY?? Why?
+func restAndAnimate(toAnimate:bool):
 	resting = true
-	rotateRestingCard(true)
-
+	if toAnimate:
+		rotateRestingCard(true)
+	else:
+		$BodyAnimations/RestTimer.start()
 
 func wake():
 	resting = false
@@ -286,6 +311,8 @@ func statesActive():
 	actionState = CardActionStates.ACTIVE
 	stateHandler.get_node("ActiveIcon").show()
 	stateHandler.get_node("PassiveIcon").hide()
+	
+	countersNode.togglePhased(false)
 	
 	
 func statesPassive():
@@ -412,14 +439,24 @@ func checkHasLethal(otherCard:Card):
 	return hasLethal
 
 func checkLethalTwo(card:Card):
-	return tempDamage >= card.tempHealth
+	var combatDamage:int = getCombatDamage()
+	
+	return combatDamage >= card.tempHealth
 
 
-func toggleEnemyStatus(enabled:bool):
-	isEnemyCard = enabled
+func getCombatDamage():
+	var combatDamage = tempDamage
+	
+	if countersNode.isPhased:
+		combatDamage += 1
+		
+	return combatDamage
 	
 
 ###########################################################################
+func toggleEnemyStatus(enabled:bool):
+	isEnemyCard = enabled
+
 
 func toggleManaCostIndicator(enable:bool):
 	if enable:
@@ -461,7 +498,8 @@ func playAttackAnimation():
 
 #### FOR RESTING	
 func timeoutRestAnimation() -> void:
-	rotateRestingCard(true)
+	if resting:
+		rotateRestingCard(true)
 
 #######################################################################
 

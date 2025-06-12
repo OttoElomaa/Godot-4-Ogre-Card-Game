@@ -226,11 +226,6 @@ func handleFinishDraggingCard() -> Node:
 				if main.checkSlotPlayer(selectedSlot):
 					success = handlePlaceCardInSlot(c, selectedSlot)
 		
-		#### CARD IS SPELL:
-		#else:
-			#success = handlePlayRitual(c, selectedSlot)
-			
-	
 	if success:
 		c.z_index = 1
 			
@@ -272,12 +267,8 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 		battleSystem.playerMana -= c.manaCost
 	
 	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
-	c.basicSetup()
-	c.arrivalNode.activate(null)  #### TRIGGER
-	if c.hasShadow:
-		c.countersNode.togglePhased(true)
-		
-	c.updateCardVisuals()
+	c.handleArrival()
+
 	battleSystem.updateResourceLabels()
 	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
 	return true
@@ -298,11 +289,9 @@ func placeCardInSlot(card:Card, slot:CardSlot) -> bool:
 		
 	#### SET ACTION STATE AND TRAVEL STATE	
 	card.toggleTraveling(true)
-	if main.checkSlotEnemy(slot): #### ENEMY CARDS ATTACK BY DEFAULT, PLAYER'S CARDS PASSIVE BY DFT
-		card.statesActive()
-	else:
-		card.statesPassive()
 	
+	#### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
+	card.setInitialActionState()
 	return true
 	
 	

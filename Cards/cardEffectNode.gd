@@ -168,7 +168,7 @@ func cast(target:Card) -> bool:
 			success = true
 	
 	if hasTap:
-		target.rest()
+		target.restAndAnimate(false)
 		success = true
 	
 	target.updateCardLabels()

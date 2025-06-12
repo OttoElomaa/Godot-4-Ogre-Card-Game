@@ -11,6 +11,8 @@ var hasDoom := false
 
 func togglePhased(isPhased:bool):
 	self.isPhased = isPhased
+	updatePhasedVisuals()
+
 
 
 func updatePhasedVisuals():

@@ -201,7 +201,7 @@ func handlePlayerCast():
 		var target:Card = getCollidedObject(r)
 		prints("Cast target card: ", target)
 		if currentCastingCard.castNode.cast(target):
-			currentCastingCard.rest()
+			currentCastingCard.restAndAnimate(true)
 			currentCastingCard = null
 			endCastState()
 			return
@@ -210,15 +210,19 @@ func handlePlayerCast():
 
 func handlePlayerAttackEnemy():
 	#### ENEMY HAS BLOCKERS, CAN'T ATTACK ENEMY
-	if cardsManager.getEnemyBlockers().size() > 0:
+	if not cardsManager.getEnemyBlockers().is_empty():
 		endAttackState()
 		return
+		
 	#### ATTACK THE ENEMY
 	var c = currentAttackingCard
-	enemyHealth -= c.damage
+	var combatDamage = c.getCombatDamage()
+	enemyHealth -= combatDamage
+	
 	c.playAttackAnimation()
-	c.rest()
+	c.restAndAnimate(false)
 	endAttackState()
+	c.countersNode.togglePhased(false)
 
 
 #### BTW, PlayAttackAnimation CALLS THE CARD DESTROY COMMAND
@@ -240,13 +244,14 @@ func handleEnemyAttackPlayer(attackCard: Card):
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
 		c.playAttackAnimation()
 		if not resolveAttack(c, target):
-			c.rest()
+			c.restAndAnimate(false)
 	
 	#### NO BLOCKERS, ATTACK PLAYER
 	elif blockers.is_empty():
-		playerHealth -= c.damage
+		playerHealth -= c.getCombatDamage()
 		c.playAttackAnimation()
-		c.rest()
+		c.restAndAnimate(false)
+		c.countersNode.togglePhased(false)
 	
 
 
@@ -284,6 +289,8 @@ func handlePlayerAttackCreature(target:Card):
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	
+	
+	
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
 	var cardsToDestroy := []
 	if targetCard.takeDamageAndCheckLethal(attackCard):
@@ -296,13 +303,15 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	if attackCard in cardsToDestroy:
 		attackerDestroyed = true
 	else:
-		attackCard.rest()
+		attackCard.restAndAnimate(false)
 	
 	
 	#### HANDLE ATTACKER COMBAT ARTS
 	attackCard.battleArtNode.activate(targetCard)
 	#### DEFENDER TOO RIGHT ????
 	targetCard.battleArtNode.activate(attackCard) 
+	
+	attackCard.countersNode.togglePhased(false)
 		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
 	for c:Card in cardsToDestroy:
