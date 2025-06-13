@@ -90,7 +90,7 @@ func enemyPlayTurn():
 	
 	for card:Card in enemyHandCards:
 		if MyTools.checkNodeValidity(card):
-			if card.manaCost <= enemyMana and not card.isSpell:
+			if card.manaCost <= enemyMana and not card.isRitual:
 				var success = playEnemyCard(card)
 				if success:
 					enemyMana -= card.manaCost

@@ -9,9 +9,6 @@ var STARTING_HAND_SIZE := 4
 var CARD_NORMAL_SCALE := Vector2(1,1)
 var CARD_HIGHLIGHTED_SCALE := Vector2(1.2, 1.2)
 
-@onready var CardOgre: PackedScene = preload("res://Cards/Creatures/Cr-Ogre.tscn")
-@onready var CardPikeman: PackedScene = preload("res://Cards/Creatures/Cr-Pikeman.tscn")
-@onready var CardRukRaider: PackedScene = preload("res://Cards/Creatures/Cr-RukRaider.tscn")
 
 
 var main:GameBoard = null
@@ -221,7 +218,7 @@ func handleFinishDraggingCard() -> Node:
 		var selectedSlot:CardSlot = getCollidedObject(results[0])
 		
 		#### CARD IS NOT SPELL: SET CARD To Found AVAILABLE SLOT
-		if not c.isSpell:
+		if not c.isRitual:
 			if selectedSlot.isAvailable and c.manaCost <= battleSystem.playerMana:
 				if main.checkSlotPlayer(selectedSlot):
 					success = handlePlaceCardInSlot(c, selectedSlot)

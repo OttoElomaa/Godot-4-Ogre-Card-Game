@@ -53,11 +53,10 @@ func buttonPressedToggleBestiary() -> void:
 		bestiaryVisible = true
 		$Bestiary.show()
 		
-		var creatures:Array = loadCardsInFolder("res://Cards/Creatures/")
-		var rituals:Array = loadCardsInFolder("res://Cards/Rituals/")
+		var allCards:Array = loadCardsInFolder("res://Cards/Depths/")
+		allCards.append_array( loadCardsInFolder("res://Cards/GreenDefiance/") )
+		allCards.append_array( loadCardsInFolder("res://Cards/Wilds/") )
 		
-		var allCards = creatures
-		allCards.append_array(rituals)
 		
 		var counter := 0
 		var card:Card = null

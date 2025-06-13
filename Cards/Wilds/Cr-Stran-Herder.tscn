@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://qd3ll6tcjlep"]
 
-[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_7amfs"]
-[ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/card-art-creature-tugarTrainer.jpg" id="2_7amfs"]
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_bq7lr"]
+[ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/card-art-creature-tugarTrainer.jpg" id="2_g2kjf"]
 
-[node name="Card-Cr-StranHerder" instance=ExtResource("1_7amfs")]
+[node name="Card-Cr-StranHerder" instance=ExtResource("1_bq7lr")]
 cardName = "Stran Herder"
 subTypeStr = "Stran Commoner"
 flavorText = "The Stran tribes travel the lands with their loyal Tugar herds."
@@ -19,4 +19,4 @@ bolsterDamage = 1
 bolsterHealth = 1
 
 [node name="Art" parent="Frontside" index="1"]
-texture = ExtResource("2_7amfs")
+texture = ExtResource("2_g2kjf")

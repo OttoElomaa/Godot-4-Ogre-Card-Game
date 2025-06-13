@@ -18,7 +18,7 @@ enum CardTypes {
 	CREATURE, RITUAL,
 }
 
-var isSpell:
+var isRitual:
 	get:
 		return cardType == CardTypes.RITUAL
 
@@ -61,7 +61,7 @@ var myOffset := Vector2.ZERO
 #### TRAVELING IS TRIGGERED by entering. It's summoning sickness
 var actionState: CardActionStates = CardActionStates.ACTIVE
 var isTraveling := false
-var resting := false
+var isResting := false
 var allowInteract := true
 
 
@@ -163,7 +163,7 @@ func createEffectText():
 	#### CHECK CAST, BATTLE ART, and RITUAL NODES
 	
 	#### IS IT RITUAL?
-	if isSpell:
+	if isRitual:
 		var ritualText = ritualNode.createText()	
 		text += ritualText
 	
@@ -194,7 +194,7 @@ func createEffectText():
 ########################################################		
 func basicSetup():
 	
-	if isSpell:
+	if isRitual:
 		statesInert()
 	
 	#### SHARE INFO ON, IS CARD ENEMY
@@ -288,14 +288,14 @@ func toggleFrontSide(toShow:bool):
 #### ANIMATE = ROTATE CARD IMMEDIATELY
 #### DON'T ANIMATE = PLAY ANIMATION ON DELAY?? Why?
 func restAndAnimate(toAnimate:bool):
-	resting = true
+	isResting = true
 	if toAnimate:
 		rotateRestingCard(true)
 	else:
 		$BodyAnimations/RestTimer.start()
 
 func wake():
-	resting = false
+	isResting = false
 	rotateRestingCard(false)
 
 ########################################################
@@ -376,7 +376,7 @@ func checkInert() -> bool:
 	return false
 
 func checkResting() -> bool:
-	return resting
+	return isResting
 
 func checkTraveling() -> bool:
 	return isTraveling
@@ -498,7 +498,7 @@ func playAttackAnimation():
 
 #### FOR RESTING	
 func timeoutRestAnimation() -> void:
-	if resting:
+	if checkResting():
 		rotateRestingCard(true)
 
 #######################################################################
@@ -518,7 +518,7 @@ func updateCardLabels():
 
 
 func destroyAndAnimate(toAnimate:bool):
-	if not isSpell:
+	if not isRitual:
 		mySlot.isAvailable = true
 		
 	statesDestroy()
