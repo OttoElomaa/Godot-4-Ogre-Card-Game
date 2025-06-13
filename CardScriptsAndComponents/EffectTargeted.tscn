@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgchj318fykoy"]
+
+[ext_resource type="Script" uid="uid://bslvy7botsc75" path="res://CardScriptsAndComponents/effectScriptTargeted.gd" id="1_01pvy"]
+
+[node name="EffectTargeted" type="Node"]
+script = ExtResource("1_01pvy")

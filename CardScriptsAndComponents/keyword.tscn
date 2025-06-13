@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://camlvr52j6gkf"]
 
-[ext_resource type="Script" uid="uid://but6003joni3c" path="res://Cards/keywordNode.gd" id="1_7nfsn"]
+[ext_resource type="Script" uid="uid://but6003joni3c" path="res://CardScriptsAndComponents/keywordNode.gd" id="1_7nfsn"]
 
 [node name="Keyword" type="Node"]
 script = ExtResource("1_7nfsn")

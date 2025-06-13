@@ -200,7 +200,7 @@ func handlePlayerCast():
 	for r in results:
 		var target:Card = getCollidedObject(r)
 		prints("Cast target card: ", target)
-		if currentCastingCard.castNode.cast(target):
+		if currentCastingCard.castNode.activate(target):
 			currentCastingCard.restAndAnimate(true)
 			currentCastingCard = null
 			endCastState()

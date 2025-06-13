@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvshdygyjpncb"]
+[gd_scene load_steps=4 format=3 uid="uid://dvshdygyjpncb"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_l6qv3"]
+[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/EffectTargetless.tscn" id="2_1pf7u"]
 [ext_resource type="Texture2D" uid="uid://b0hp5ejpxal7t" path="res://Art/CardArt/card-art-creature-alhaja-Pious.jpg" id="2_l6qv3"]
 
 [node name="Card-Cr-PiousAlhaja" instance=ExtResource("1_l6qv3")]
@@ -10,9 +11,8 @@ manaCost = 3
 startingDamage = 2
 startingHealth = 2
 
-[node name="Arrival" parent="Effects" index="3"]
-isActive = true
-drawCards = 2
+[node name="EffectTargetless" parent="Effects/Arrival" index="0" instance=ExtResource("2_1pf7u")]
+drawCards = 1
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_l6qv3")

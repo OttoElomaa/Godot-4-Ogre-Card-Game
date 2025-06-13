@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuv0oahpdcxew"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_l4n6e"]
+[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/EffectTargetless.tscn" id="2_ip5c5"]
+[ext_resource type="Texture2D" uid="uid://bjqdhj2rq7hrj" path="res://Art/CardArt/card-art-ritual-ashem-medVohu.jpg" id="2_l4n6e"]
+
+[node name="Card-Ri-medVohu" instance=ExtResource("1_l4n6e")]
+cardName = "Med Vohu"
+cardType = 1
+manaCost = 3
+
+[node name="EffectTargetless" parent="Effects/Ritual" index="0" instance=ExtResource("2_ip5c5")]
+drawCards = 2
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_l4n6e")

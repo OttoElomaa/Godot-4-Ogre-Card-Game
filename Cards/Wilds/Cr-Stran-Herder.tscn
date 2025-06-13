@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://qd3ll6tcjlep"]
+[gd_scene load_steps=4 format=3 uid="uid://qd3ll6tcjlep"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_bq7lr"]
 [ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/card-art-creature-tugarTrainer.jpg" id="2_g2kjf"]
+[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/EffectTargetless.tscn" id="2_mwal1"]
 
 [node name="Card-Cr-StranHerder" instance=ExtResource("1_bq7lr")]
 cardName = "Stran Herder"
@@ -11,10 +12,8 @@ manaCost = 2
 startingDamage = 2
 startingHealth = 2
 
-[node name="OnTurn" parent="Effects" index="4"]
-isActive = true
+[node name="EffectTargetless" parent="Effects/OnTurn" index="0" instance=ExtResource("2_mwal1")]
 effectTypeLine = "Beast"
-bolstersAllAllies = true
 bolsterDamage = 1
 bolsterHealth = 1
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8h8fv1enpgpb"]
+[gd_scene load_steps=5 format=3 uid="uid://c8h8fv1enpgpb"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m612s"]
 [ext_resource type="PackedScene" uid="uid://b4tndl4w2i3lg" path="res://Cards/GreenDefiance/Cr-SkeletonWarrior.tscn" id="2_f3ejk"]
+[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/EffectTargetless.tscn" id="2_jrsq4"]
 [ext_resource type="Texture2D" uid="uid://c8fv2mu03csy" path="res://Art/CardArt/card-art-creature-deathknight.jpg" id="2_m612s"]
 
 [node name="Card-Cr-DeathKnight" instance=ExtResource("1_m612s")]
@@ -11,8 +12,7 @@ manaCost = 4
 startingDamage = 3
 startingHealth = 3
 
-[node name="Arrival" parent="Effects" index="3"]
-isActive = true
+[node name="EffectTargetless" parent="Effects/Arrival" index="0" instance=ExtResource("2_jrsq4")]
 summonScene = ExtResource("2_f3ejk")
 summonString = "Summon a skeleton"
 

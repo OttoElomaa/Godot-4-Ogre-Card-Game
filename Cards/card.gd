@@ -13,7 +13,6 @@ signal hoverOff
 enum CardActionStates {
 	ACTIVE, PASSIVE, DESTROYED, INERT, HAND
 }
-
 enum CardTypes {
 	CREATURE, RITUAL,
 }
@@ -22,9 +21,22 @@ var isRitual:
 	get:
 		return cardType == CardTypes.RITUAL
 
+###### NODE REFERENCES
+@onready var countersNode := $Counters
+@onready var stateHandler := $Frontside/ActionState
+
+@onready var castNode := $Effects/Cast
+@onready var battleArtNode := $Effects/BattleArt
+@onready var ritualNode := $Effects/Ritual
+@onready var arrivalNode := $Effects/Arrival
+@onready var onTurnNode := $Effects/OnTurn
+
+@onready var specialTriggers := $Effects/SpecialCondition
+
+@onready var keywordHandler := $KeywordHandler
 
 
-###########################################
+####################################### EXPORT VARIABLES
 @export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE
 @export var subTypeStr := "Card Sub-Type"
@@ -48,14 +60,8 @@ var tempHealth := 0
 
 var effectText := ""
 
-##################################################
-var cardsManager:Node = null
 
-var mySlot: CardSlot = null
-var isEnemyCard := false
-var myOffset := Vector2.ZERO
-
-###############################################
+######################################### CARD ACTION STATE
 #### RESTING = Can't take card actions this turn, such as attack or cast.
 #### RESTING IS TRIGGERED by attacking, or casting --> Unless "Haste/Vigilant" kind of effects
 #### TRAVELING IS TRIGGERED by entering. It's summoning sickness
@@ -66,35 +72,36 @@ var allowInteract := true
 
 
 
-
-
-##########################################################
-@onready var countersNode := $Counters
-@onready var stateHandler := $Frontside/ActionState
-
-@onready var castNode := $Effects/Cast
-@onready var battleArtNode := $Effects/BattleArt
-@onready var ritualNode := $Effects/Ritual
-@onready var arrivalNode := $Effects/Arrival
-@onready var onTurnNode := $Effects/OnTurn
-
-@onready var specialTriggers := $Effects/SpecialCondition
-
-@onready var keywordHandler := $KeywordHandler
-
-var hasSunder:
+####################################### KEYWORD HANDLER STUFF
+var hasSunder: bool:
 	get:
 		return keywordHandler.hasSunder()
 		
-var hasDuelist:
+var hasDuelist: bool:
 	get:
 		return keywordHandler.hasDuelist()
 
-var hasShadow:
+var hasShadow: bool:
 	get:
 		return keywordHandler.hasShadow()
 
 
+################################################## COUNTER NODE STUFF
+var isPhased: bool:
+	get:
+		return countersNode.isPhased
+	set(value):
+		countersNode.togglePhased(value)
+
+
+##########################################################
+
+
+var cardsManager:Node = null
+
+var mySlot: CardSlot = null
+var isEnemyCard := false
+var myOffset := Vector2.ZERO
 
 
 

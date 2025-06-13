@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5bwi4v428dkw"]
+
+[ext_resource type="Script" uid="uid://cxlptipo4mq7x" path="res://CardScriptsAndComponents/effectScriptTargetless.gd" id="1_4rj2w"]
+
+[node name="EffectTargetless" type="Node"]
+script = ExtResource("1_4rj2w")

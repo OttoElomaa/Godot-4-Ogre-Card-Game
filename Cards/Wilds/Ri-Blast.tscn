@@ -1,18 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bews6x4fcf3mr"]
+[gd_scene load_steps=4 format=3 uid="uid://bews6x4fcf3mr"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_07d1u"]
 [ext_resource type="Texture2D" uid="uid://be3k7rj1w72ah" path="res://Art/CardArt/card-art-spell-blast.png" id="2_07d1u"]
+[ext_resource type="PackedScene" uid="uid://cgchj318fykoy" path="res://CardScriptsAndComponents/EffectTargeted.tscn" id="2_k3mux"]
 
 [node name="Card-Sp-Blast" instance=ExtResource("1_07d1u")]
 cardName = "Blast"
 cardType = 1
 manaCost = 4
 
-[node name="Cast" parent="Effects" index="0"]
-inflict = 2
-
-[node name="Ritual" parent="Effects" index="1"]
-isActive = true
+[node name="EffectTargeted" parent="Effects/Ritual" index="0" instance=ExtResource("2_k3mux")]
 inflict = 2
 
 [node name="Art" parent="Frontside" index="1"]

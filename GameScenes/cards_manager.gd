@@ -206,7 +206,7 @@ func handleFinishDraggingCard() -> Node:
 			if not getCollidedObject(res) == currentDraggedCard:
 				target = getCollidedObject(res)
 		
-		if target and c.isSpell:
+		if target and c.isRitual:
 			success = battleSystem.handlePlayerRitual(c, target)
 	if success:
 		c.destroyAndAnimate(true)

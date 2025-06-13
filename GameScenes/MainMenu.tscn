@@ -5,7 +5,7 @@
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="3_wqb3i"]
 [ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="4_duqux"]
 [ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="5_26mog"]
-[ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://GameScenes/tableCardSlot.tscn" id="6_b8l8w"]
+[ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://CardScriptsAndComponents/tableCardSlot.tscn" id="6_b8l8w"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/cards_manager.gd" id="7_wqb3i"]
 
 [node name="MainMenu" type="Node2D"]

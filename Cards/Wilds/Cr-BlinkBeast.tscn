@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnvgrx8n5noeh"]
+[gd_scene load_steps=4 format=3 uid="uid://dnvgrx8n5noeh"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_o7m1v"]
+[ext_resource type="PackedScene" uid="uid://cgchj318fykoy" path="res://CardScriptsAndComponents/EffectTargeted.tscn" id="2_hrd7b"]
 [ext_resource type="Texture2D" uid="uid://n1kqgxe3iukd" path="res://Art/CardArt/card-art-creature-blinkbeast.jpg" id="2_o7m1v"]
 
 [node name="Card-Cr-Blinkbeast" instance=ExtResource("1_o7m1v")]
@@ -11,11 +12,7 @@ manaCost = 1
 startingDamage = 2
 startingHealth = 1
 
-[node name="Cast" parent="Effects" index="0"]
-bolsterHealth = 2
-
-[node name="BattleArt" parent="Effects" index="2"]
-isActive = true
+[node name="EffectTargeted" parent="Effects/BattleArt" index="0" instance=ExtResource("2_hrd7b")]
 hasTap = true
 
 [node name="Art" parent="Frontside" index="1"]
