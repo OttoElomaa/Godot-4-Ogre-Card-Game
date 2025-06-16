@@ -19,9 +19,13 @@ func _input(event: InputEvent) -> void:
 	if bestiaryVisible:
 		if event.is_action_pressed("ui_down"):
 			$MenuCamera.position += Vector2.DOWN * 50
+		elif event.is_action("scrollDown"):
+			$MenuCamera.position += Vector2.DOWN * 50	
+			
 		elif event.is_action_pressed("ui_up"):
-				$MenuCamera.position += Vector2.UP * 50
-	
+			$MenuCamera.position += Vector2.UP * 50
+		elif event.is_action("scrollUp"):
+			$MenuCamera.position += Vector2.UP * 50
 	
 
 

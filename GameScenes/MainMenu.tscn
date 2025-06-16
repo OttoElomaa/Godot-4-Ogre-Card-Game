@@ -102,58 +102,58 @@ z_index = -1
 position = Vector2(0, 100)
 
 [node name="BestiarySlot" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(498, 200)
+position = Vector2(498, 250)
 
 [node name="BestiarySlot2" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(728, 200)
+position = Vector2(728, 250)
 
 [node name="BestiarySlot3" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(958, 200)
+position = Vector2(958, 250)
 
 [node name="BestiarySlot4" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(1188, 200)
+position = Vector2(1188, 250)
 
 [node name="BestiarySlot5" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(1418, 200)
+position = Vector2(1418, 250)
 
 [node name="BestiarySlot6" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(1648, 200)
+position = Vector2(1648, 250)
 
 [node name="BestiarySlot7" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(498, 650)
+position = Vector2(498, 700)
 
 [node name="BestiarySlot8" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(728, 650)
+position = Vector2(728, 700)
 
 [node name="BestiarySlot9" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(958, 650)
+position = Vector2(958, 700)
 
 [node name="BestiarySlot10" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(1188, 650)
+position = Vector2(1188, 700)
 
 [node name="BestiarySlot11" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(1418, 650)
+position = Vector2(1418, 700)
 
 [node name="BestiarySlot12" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(1648, 650)
+position = Vector2(1648, 700)
 
 [node name="BestiarySlot13" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(498, 1100)
+position = Vector2(498, 1150)
 
 [node name="BestiarySlot14" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(728, 1100)
+position = Vector2(728, 1150)
 
 [node name="BestiarySlot15" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(958, 1100)
+position = Vector2(958, 1150)
 
 [node name="BestiarySlot16" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(1188, 1100)
+position = Vector2(1188, 1150)
 
 [node name="BestiarySlot17" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(1418, 1100)
+position = Vector2(1418, 1150)
 
 [node name="BestiarySlot18" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
-position = Vector2(1648, 1100)
+position = Vector2(1648, 1150)
 
 [node name="CardsManager" type="Node2D" parent="." groups=["cardManager"]]
 script = ExtResource("7_wqb3i")

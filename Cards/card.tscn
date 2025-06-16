@@ -337,10 +337,12 @@ horizontal_alignment = 1
 
 [node name="CardNameBestiary" type="Node2D" parent="Frontside"]
 visible = false
-position = Vector2(0, 200)
+position = Vector2(0, -216)
 
 [node name="Shadow" type="Sprite2D" parent="Frontside/CardNameBestiary"]
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("9_i3xqw")
+offset = Vector2(0, -20)
 
 [node name="Label" type="Label" parent="Frontside/CardNameBestiary"]
 anchors_preset = 8
