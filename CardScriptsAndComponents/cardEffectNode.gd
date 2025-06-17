@@ -14,18 +14,20 @@ var isEnemy := false
 
 
 func createText() -> String:
-	
 	var text = ""
+	
 	for script in get_children():
 		text += script.createText()
 		text += ", "
 	
 	#### AT THE END, COMPILE TEXT
-	text.rstrip(", ")
+	text = text.rstrip(", ")
 	if text != "":
 		text = "%s: %s" % [nodeKeyword, text]	
 	
 	return text
+
+
 
 func checkActive():
 	

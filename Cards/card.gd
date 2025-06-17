@@ -153,48 +153,53 @@ func createEffectText():
 	for type in subTypes:
 		subTypeStr += type
 		subTypeStr += " "
-	subTypeStr.rstrip(" ")
+	subTypeStr = subTypeStr.rstrip(" ")
 	
 	#################################### EFFECT TEXT
 	var l = $Frontside/EffectsLabel
-	var text = ""
+	#var text = ""
+	var effectTexts := []
 	
 	#### CHECK FROM KEYWORDS HANDLER
 	if hasSunder:
-		text += "Sunder"
+		effectTexts.append("Sunder") 
 	if hasDuelist:
-		text += "Duelist"
+		effectTexts.append("Duelist") 
 	if hasShadow:
-		text += "Shadow"
+		effectTexts.append("Shadow") 
 	
 	#### CHECK CAST, BATTLE ART, and RITUAL NODES
 	
 	#### IS IT RITUAL?
 	if isRitual:
 		var ritualText = ritualNode.createText()	
-		text += ritualText
+		effectTexts.append(ritualText) 
 	
 	#### IF NOT RITUAL, CREATE THE REST
 	else:
 		var arrivalText = arrivalNode.createText()	#### ARRIVAL
-		text += arrivalText	
-		if arrivalText != "":
-			text += "\n"
+		effectTexts.append(arrivalText)
 		
 		var onTurnText = onTurnNode.createText()	#### ON TURN START
-		text += onTurnText
-		if onTurnText != "":
-			text += "\n"
+		effectTexts.append(onTurnText) 
+		
 			
 		var castText = castNode.createText()  #### CAST	
-		text += castText
-		if castText != "":
-			text += "\n"
+		effectTexts.append(castText) 
+		
 		
 		var battleArtText = battleArtNode.createText()	#### BATTLE ART (Card Combat)
-		text += battleArtText
+		effectTexts.append(battleArtText) 
 	
-	effectText = text
+	effectText = ""
+	for text in effectTexts:
+		if text != "":
+			effectText += text
+			effectText += ". "
+	
+	effectText = effectText.rstrip(",. ")
+	effectText = effectText.lstrip(",. ")
+	#effectText = text
 	l.text = effectText
 	
 	

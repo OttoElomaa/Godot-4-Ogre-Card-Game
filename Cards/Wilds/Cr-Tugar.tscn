@@ -12,3 +12,9 @@ startingHealth = 3
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_mtfp6")
+
+[node name="EffectsLabel" parent="Frontside" index="6"]
+offset_left = -100.0
+offset_top = 15.0
+offset_right = 100.0
+offset_bottom = 121.0

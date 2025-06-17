@@ -57,8 +57,6 @@ func setup():
 func createText() -> String:
 	
 	var text = ""
-	#if not isActive:
-		#return text
 	
 	#### ADD INFLICT
 	if inflict > 0:
@@ -67,7 +65,6 @@ func createText() -> String:
 		text += "Inflict Player %d" % inflictPlayer
 	elif inflictCreature > 0:
 		text += "Inflict Creature %d" % inflictCreature
-	#text += ", "
 	
 	
 	#### ADD BOLSTER
