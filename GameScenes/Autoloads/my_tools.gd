@@ -57,6 +57,14 @@ func findEmptyCardSlots(isEnemy) -> Array:
 	
 
 
+func handleCardHover(isHovering:bool, card:Card):
+	if States.gameState == States.GameStates.BESTIARY:
+		pass
+	else:
+		cardsManager.toggleCardHover(isHovering, card)
+	
+
+
 func handleDrawCard(isEnemy:bool):	
 	cardsManager.checkIsEnemyAnddrawCard(isEnemy)
 

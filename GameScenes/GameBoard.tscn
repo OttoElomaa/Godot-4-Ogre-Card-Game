@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=29 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/gameBoard.gd" id="1_rf3o6"]
 [ext_resource type="Script" uid="uid://x5hp1ama1l5h" path="res://GameScenes/card_loader.gd" id="2_gftaw"]
@@ -18,12 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://CardScriptsAndComponents/tableCardSlot.tscn" id="16_8xajj"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="17_7ll03"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="18_tppv1"]
-[ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
-[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
-[ext_resource type="Texture2D" uid="uid://bvnmf54c4ye2n" path="res://Art/CardComponents/card-background-texture-V4b-ForInfoPane.jpg" id="21_rf3o6"]
-[ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSet-Header-Brown.tres" id="22_fl608"]
-[ext_resource type="Texture2D" uid="uid://b7g66n14xrpak" path="res://Art/CardArt/card-art-base-card-idk.png" id="23_ytsuw"]
-[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSetSmallBrownCardText.tres" id="24_l7se8"]
+[ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
+[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="21_ufaws"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/battle_log_pane.gd" id="25_gfnca"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
 
@@ -409,72 +406,8 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 20
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/CardInfoPane"]
-custom_minimum_size = Vector2(400, 600)
+[node name="CardInfoPanel" parent="CanvasLayer/CardInfoPane" instance=ExtResource("21_ufaws")]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("12_i42kc")
-
-[node name="CardBackgroundTexture" type="TextureRect" parent="CanvasLayer/CardInfoPane/Panel"]
-layout_mode = 2
-texture = ExtResource("21_rf3o6")
-
-[node name="Margin" type="MarginContainer" parent="CanvasLayer/CardInfoPane/Panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 22
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 22
-theme_override_constants/margin_bottom = 10
-
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/CardInfoPane/Panel/Margin"]
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="NameLabel" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-text = "Card Name"
-label_settings = ExtResource("22_fl608")
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="CardArt" type="TextureRect" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
-layout_mode = 2
-texture = ExtResource("23_ytsuw")
-expand_mode = 5
-stretch_mode = 4
-
-[node name="VBox2" type="VBoxContainer" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="SubTypeLine" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox/VBox2"]
-layout_mode = 2
-text = "Sub-type line goes here."
-label_settings = ExtResource("24_l7se8")
-horizontal_alignment = 1
-
-[node name="EffectText" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox/VBox2"]
-custom_minimum_size = Vector2(350, 0)
-layout_mode = 2
-text = "Effect text goes here."
-label_settings = ExtResource("24_l7se8")
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="FlavorTextLabel" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin/VBox/VBox2"]
-custom_minimum_size = Vector2(350, 0)
-layout_mode = 2
-text = "Flavor text"
-label_settings = ExtResource("24_l7se8")
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="AttackDefenseLabel" type="Label" parent="CanvasLayer/CardInfoPane/Panel/Margin"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Attack / Defense"
-label_settings = ExtResource("24_l7se8")
-horizontal_alignment = 1
 
 [node name="BattleLogPane" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 3

@@ -2,7 +2,7 @@ extends Node2D
 
 
 enum GameStates {
-	PLAY, ATTACK, CARD_ACT_MENU, CAST, NONE
+	PLAY, ATTACK, CARD_ACT_MENU, CAST, NONE, BESTIARY
 }
 
 var gameState: GameStates = GameStates.PLAY

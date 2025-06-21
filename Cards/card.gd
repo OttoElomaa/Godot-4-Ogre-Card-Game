@@ -266,11 +266,13 @@ func updateCardVisuals():
 
 #########################################################################
 func _on_area_2d_mouse_entered() -> void:
-	emit_signal("hoverOn", self)
+	#emit_signal("hoverOn", self)
+	MyTools.handleCardHover(true, self)
 
 
 func _on_area_2d_mouse_exited() -> void:
-	emit_signal("hoverOff", self)
+	#emit_signal("hoverOff", self)
+	MyTools.handleCardHover(false, self)
 
 
 

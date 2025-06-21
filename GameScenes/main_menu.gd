@@ -55,6 +55,7 @@ func buttonPressedToggleBestiary() -> void:
 	
 	if not bestiaryVisible:
 		bestiaryVisible = true
+		States.gameState = States.GameStates.BESTIARY
 		$Bestiary.show()
 		
 		var allCards:Array = loadCardsInFolder("res://Cards/Depths/")

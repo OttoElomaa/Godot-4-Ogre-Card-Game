@@ -293,24 +293,21 @@ func placeCardInSlot(card:Card, slot:CardSlot) -> bool:
 	
 	
 
-func onHoverCard(card:Card):
-	prints("hover on card: ", card)
-	toggleCardHighlight(card, true)
+func toggleCardHover(isHovering:bool, card:Card):
+	if isHovering:
+		prints("hover on card: ", card)
+		toggleCardHighlight(card, true)
+			
+	else:
+		prints("hover on card off: ", card)
+		toggleHighlightTwo(false, card)
 	
-	card.toggleCardName(true)
+	toggleCardHighlight(card, isHovering)	
+	card.toggleCardName(isHovering)	
 	hoverCheckNeeded = true
-	#mainCardInfoShown = true
-	#main.toggleCardInfo(true, card)
 	
 	
-
-func onHoverCardOff(card:Card):
-	prints("hover on card off: ", card)
-	toggleCardHighlight(card, false)
-	toggleHighlightTwo(false, card)
 	
-	card.toggleCardName(false)
-	hoverCheckNeeded = true
 	
 	
 
@@ -364,8 +361,9 @@ func getCollidedObject(result):
 
 
 func connectCardSignal(card:Card):
-	card.connect("hoverOn", onHoverCard)
-	card.connect("hoverOff", onHoverCardOff)
+	pass
+	#card.connect("hoverOn", onHoverCard)
+	#card.connect("hoverOff", onHoverCardOff)
 
 ####################################################
 

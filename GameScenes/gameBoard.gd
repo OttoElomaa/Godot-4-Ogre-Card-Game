@@ -188,27 +188,8 @@ func showPlayerTurnPopup():
 
 
 func toggleCardInfo(enable:bool, card:Card):
-	var cardInfo := $CanvasLayer/CardInfoPane
-	
-	#### HIDE
-	if not enable:
-		cardInfo.hide()
-		return
-		
-	#### SHOW
-	cardInfo.show()
-	cardInfo.get_node("Panel/Margin/VBox/NameLabel").text = card.cardName
-	cardInfo.get_node("Panel/Margin/VBox/CardArt").texture = card.cardArt
-	
-	cardInfo.get_node("Panel/Margin/VBox/VBox2/SubTypeLine").text = "%s - %s" % [card.cardTypeStr,card.subTypeStr]
-	
-	#if card.effectText != "":
-	cardInfo.get_node("Panel/Margin/VBox/VBox2/EffectText").text = card.effectText
-	
-	
-	cardInfo.get_node("Panel/Margin/VBox/VBox2/FlavorTextLabel").text = card.flavorText
-	
-	cardInfo.get_node("Panel/Margin/AttackDefenseLabel").text = "%d / %d" % [card.tempDamage,card.tempHealth]
+	var cardInfo := $CanvasLayer/CardInfoPane/CardInfoPanel
+	cardInfo.toggleCardInfo(enable, card)
 	
 
 
