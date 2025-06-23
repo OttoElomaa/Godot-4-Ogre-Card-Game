@@ -1,6 +1,27 @@
 extends EffectScript
 
 
+@export var drawCards := 0
+
+@export var summonScene: PackedScene = null
+@export_multiline var summonString := "Summon a thing"
+
+
+
+
+
+func createTextTwo() -> String:
+	var text := ""
+	
+	#### CARD DRAW
+	if drawCards > 0:
+		text += "Draw %d" % drawCards
+	
+	#### ADD SUMMON
+	if summonScene:
+		text += summonString
+	
+	return text
 
 
 
@@ -26,6 +47,8 @@ func activateTargetless():
 	
 	var targets:Array = MyTools.getBoardCards(isEnemy)
 	if targetGroup == TargetOptions.ALLIES:
+		
+		#### BOLSTER ALLIES
 		if bolsterDamage > 0 or bolsterHealth > 0:
 			for card in targets:
 				if effectTypeLine == "":

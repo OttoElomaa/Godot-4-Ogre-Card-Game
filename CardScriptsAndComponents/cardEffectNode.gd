@@ -12,6 +12,15 @@ var isEnemy := false
 
 
 
+func setup(card:Card):
+	myCard = card
+	isEnemy = card.isEnemyCard
+	
+	for script in get_children():
+		if script.has_method("setup"):
+			script.setup(card)
+	
+
 
 func createText() -> String:
 	var text = ""
@@ -48,6 +57,12 @@ func activate(target:Card) -> bool:
 			if script.has_method("activateTargeted"):
 				success = script.activateTargeted(target)
 	
+	if success:
+		if not self == myCard.payoffNode:
+			myCard.payoffNode.activate(null)
+	
+		MyTools.updateBoardCardsVisuals()
+		
 	return success
 
 

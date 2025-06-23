@@ -32,6 +32,7 @@ var isRitual:
 @onready var onTurnNode := $Effects/OnTurn
 
 @onready var specialTriggers := $Effects/SpecialCondition
+@onready var payoffNode := $Effects/Payoff
 
 @onready var keywordHandler := $KeywordHandler
 
@@ -191,6 +192,9 @@ func createEffectText():
 		var battleArtText = battleArtNode.createText()	#### BATTLE ART (Card Combat)
 		effectTexts.append(battleArtText) 
 	
+	var payoffText = payoffNode.createText()	#### BATTLE ART (Card Combat)
+	effectTexts.append(payoffText) 
+	
 	effectText = ""
 	for text in effectTexts:
 		if text != "":
@@ -211,9 +215,8 @@ func basicSetup():
 	
 	#### SHARE INFO ON, IS CARD ENEMY
 	for node in $Effects.get_children():
-		if isEnemyCard:
-			node.myCard = self
-			node.isEnemy = true
+		node.setup(self)
+	
 	
 			
 
@@ -470,6 +473,16 @@ func getCombatDamage():
 ###########################################################################
 func toggleEnemyStatus(enabled:bool):
 	isEnemyCard = enabled
+
+
+
+func isOnSameSide(card:Card) -> bool:
+	if isEnemyCard and card.isEnemyCard:
+		return true
+	if not isEnemyCard and not card.isEnemyCard:
+		return true
+	return false
+
 
 
 func toggleManaCostIndicator(enable:bool):

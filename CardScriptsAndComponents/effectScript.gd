@@ -32,24 +32,23 @@ var isEnemy := false
 
 
 ####################################### EFFECT - WHAT DOES IT DO
-@export var hasTap := false
 @export var inflict := 0
 @export var inflictPlayer := 0
 @export var inflictCreature := 0
 
+@export var hasTap := false
+
 @export var bolsterDamage := 0
 @export var bolsterHealth := 0
 
-@export var drawCards := 0
-
-@export var summonScene: PackedScene = null
-@export_multiline var summonString := "Summon a thing"
 
 
 
 
-func setup():
-	pass
+
+func setup(card:Card):
+	myCard = card
+	isEnemy = card.isEnemyCard
 
 
 
@@ -87,22 +86,19 @@ func createText() -> String:
 			
 		text += " %d/%d" % [bolsterDamage, bolsterHealth]
 	
+	
 	#### ADD TAP
 	if hasTap:
 		text += "Tap target"
 	
-	#### CARD DRAW
-	if drawCards > 0:
-		text += "Draw %d" % drawCards
-	
-	#### ADD SUMMON
-	if summonScene:
-		text += summonString
-	
+	#### ADD SCRIPT-SPECIFIC EFFECT TEXT
+	text += createTextTwo()
 	return text
 
 
 
+func createTextTwo() -> String:
+	return ""
 
 
 

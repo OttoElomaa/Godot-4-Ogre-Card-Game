@@ -81,4 +81,13 @@ func getBoardCards(isEnemy:bool):
 	else:
 		return cardsManager.getPlayerBoardCards()
 
+
+
+func updateBoardCardsVisuals():
+	for c:Card in getBoardCards(true):
+		c.updateCardVisuals()
+	for c:Card in getBoardCards(false):
+		c.updateCardVisuals()
+
+
 	

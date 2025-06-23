@@ -391,10 +391,8 @@ func wakeBoardCards(board:Node):
 		c.handleTurnStartActions()
 		
 	#### UPDATE ALL LABELS, IN CASE THEY WERE AFFECTED
-	for c:Card in MyTools.getBoardCards(true):
-		c.updateCardVisuals()
-	for c:Card in MyTools.getBoardCards(false):
-		c.updateCardVisuals()
+	MyTools.updateBoardCardsVisuals()
+	
 		
 	
 

@@ -2,11 +2,31 @@ extends EffectScript
 
 
 
+@export var hasSacrifice := false
+
+
+
+
+
+func createTextTwo() -> String:
+	var text := ""
+	
+	if hasSacrifice:
+		text += "Sacrifice target"
+	
+	return text
 
 
 
 func activateTargeted(target:Card):
 	var success := false
+	
+	
+	#### SACRIFICE
+	if hasSacrifice:
+		if myCard.isOnSameSide(target):
+			target.destroyAndAnimate(true)
+			success = true
 	
 	#### INFLICT
 	if inflict > 0:

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqej1t0pa88fs"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_6ny87"]
+[ext_resource type="PackedScene" uid="uid://cgchj318fykoy" path="res://CardScriptsAndComponents/EffectTargeted.tscn" id="2_1pg6l"]
+[ext_resource type="Texture2D" uid="uid://ubxsgqgvccky" path="res://Art/CardArt/card-art-creature-janinSpirit.jpg" id="3_ob4vk"]
+[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/EffectTargetless.tscn" id="3_vl6ci"]
+
+[node name="Card-Cr-JaninBargain" instance=ExtResource("1_6ny87")]
+cardName = "Janin Bargainer"
+subTypeStr = "Janin Spirit"
+flavorText = "Your kin will spread to the edges of Achra, like motes of sand..."
+manaCost = 3
+startingDamage = 1
+startingHealth = 3
+
+[node name="EffectTargeted" parent="Effects/Cast" index="0" instance=ExtResource("2_1pg6l")]
+hasSacrifice = true
+
+[node name="EffectTargetless" parent="Effects/Payoff" index="0" instance=ExtResource("3_vl6ci")]
+targetGroup = 2
+bolsterDamage = 2
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("3_ob4vk")
