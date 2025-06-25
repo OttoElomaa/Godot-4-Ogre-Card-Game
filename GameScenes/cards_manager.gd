@@ -370,12 +370,16 @@ func connectCardSignal(card:Card):
 func startPlayerTurn():
 	main.showPlayerTurnPopup()
 	wakeBoardCards($PlayerBoard)
+	arriveTravelingBoardCards($EnemyBoard)
+	
 	drawCard($PlayerDeck, $PlayerHand)
 	updateHandCardsVisuals()
 
 
 func startEnemyTurn():
 	wakeBoardCards($EnemyBoard)
+	arriveTravelingBoardCards($PlayerBoard)
+	
 	var newCard = drawCard($EnemyDeck, $EnemyHand)
 	
 
@@ -384,7 +388,6 @@ func wakeBoardCards(board:Node):
 	#### RESETS AND CLEANUP
 	for c:Card in board.get_children():
 		c.handleTurnStartReset()
-		c.toggleTraveling(false)
 		c.wake()
 	#### STUFF LIKE ON-TURN-START TRIGGERS
 	for c:Card in board.get_children():
@@ -394,7 +397,9 @@ func wakeBoardCards(board:Node):
 	MyTools.updateBoardCardsVisuals()
 	
 		
-	
+func arriveTravelingBoardCards(board:Node):
+	for c:Card in board.get_children():
+		c.toggleTraveling(false)
 
 		
 ####################################################
