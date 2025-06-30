@@ -366,7 +366,7 @@ horizontal_alignment = 1
 
 [node name="ActionState" type="Node2D" parent="Frontside"]
 z_index = 1
-position = Vector2(100, -164)
+position = Vector2(0, -174)
 scale = Vector2(0.6, 0.6)
 
 [node name="ActiveIcon" type="Sprite2D" parent="Frontside/ActionState"]

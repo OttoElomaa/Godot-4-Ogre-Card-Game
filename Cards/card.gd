@@ -327,7 +327,15 @@ func switchStates():
 func statesActive():
 	actionState = CardActionStates.ACTIVE
 	stateHandler.get_node("ActiveIcon").show()
+	stateHandler.get_node("ActionStateFrame").show()
+	
 	stateHandler.get_node("PassiveIcon").hide()
+	
+	#### POSITION AS INDICATOR
+	var activeOffset := -60
+	if isEnemyCard:
+		activeOffset *= -1
+	position.y = mySlot.position.y + activeOffset
 	
 	countersNode.togglePhased(false)
 	
@@ -335,7 +343,12 @@ func statesActive():
 func statesPassive():
 	actionState = CardActionStates.PASSIVE
 	stateHandler.get_node("ActiveIcon").hide()
-	stateHandler.get_node("PassiveIcon").show()
+	stateHandler.get_node("ActionStateFrame").hide()
+	
+	stateHandler.get_node("PassiveIcon").hide()
+	
+	#### POSITION AS INDICATOR
+	position.y = mySlot.position.y
 
 
 func statesInert():

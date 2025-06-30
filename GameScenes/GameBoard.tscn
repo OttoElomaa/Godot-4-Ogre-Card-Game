@@ -128,7 +128,7 @@ script = ExtResource("2_gftaw")
 [node name="Portraits" type="Node2D" parent="."]
 
 [node name="PlayerSprite" type="Sprite2D" parent="Portraits"]
-position = Vector2(140.5, 1321)
+position = Vector2(142.5, 1257)
 texture = ExtResource("3_1phva")
 
 [node name="EnemySprite" type="Sprite2D" parent="Portraits"]
@@ -136,7 +136,7 @@ position = Vector2(1080, 131)
 texture = ExtResource("4_1qylb")
 
 [node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Portraits"]
-position = Vector2(191.5, 1336)
+position = Vector2(193.5, 1272)
 texture = ExtResource("5_4lnmq")
 
 [node name="EnemyResourceHolderSprite2" type="Sprite2D" parent="Portraits"]
@@ -145,10 +145,10 @@ texture = ExtResource("5_4lnmq")
 
 [node name="PlayerHealthLabel" type="Label" parent="Portraits"]
 texture_filter = 1
-offset_left = 217.0
-offset_top = 1409.0
-offset_right = 273.0
-offset_bottom = 1466.0
+offset_left = 219.0
+offset_top = 1342.0
+offset_right = 275.0
+offset_bottom = 1399.0
 text = "99"
 label_settings = ExtResource("6_r88d6")
 horizontal_alignment = 1
@@ -165,10 +165,10 @@ horizontal_alignment = 1
 
 [node name="PlayerManaLabel" type="Label" parent="Portraits"]
 texture_filter = 1
-offset_left = 259.0
-offset_top = 1217.0
-offset_right = 316.0
-offset_bottom = 1274.0
+offset_left = 261.0
+offset_top = 1150.0
+offset_right = 318.0
+offset_bottom = 1207.0
 text = "88"
 label_settings = ExtResource("7_vfgb4")
 horizontal_alignment = 1
@@ -201,7 +201,7 @@ position = Vector2(313, 344)
 texture = ExtResource("8_mj3e8")
 
 [node name="LowerCornerDecor" type="Sprite2D" parent="Visuals/Scenery"]
-position = Vector2(2430, 1208)
+position = Vector2(2324, 1148)
 texture = ExtResource("9_nxc8c")
 
 [node name="Leaves" type="Sprite2D" parent="Visuals/Scenery"]
@@ -209,7 +209,7 @@ position = Vector2(201, 715)
 texture = ExtResource("10_223y2")
 
 [node name="Leaves2" type="Sprite2D" parent="Visuals/Scenery"]
-position = Vector2(2551, 1271)
+position = Vector2(2445, 1211)
 texture = ExtResource("11_0xags")
 
 [node name="YourTurnPopup" type="Node2D" parent="Visuals"]
@@ -539,7 +539,7 @@ horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-zoom = Vector2(0.7, 0.7)
+zoom = Vector2(0.73, 0.73)
 
 [node name="ActionMenuCanvas" type="CanvasLayer" parent="."]
 
