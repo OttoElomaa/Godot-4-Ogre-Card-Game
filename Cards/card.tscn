@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b7g66n14xrpak" path="res://Art/CardArt/card-art-base-card-idk.png" id="3_trd61"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="4_7bc8n"]
 [ext_resource type="PackedScene" uid="uid://camlvr52j6gkf" path="res://CardScriptsAndComponents/keyword.tscn" id="4_qt84u"]
-[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="4_w0fdq"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_w0fdq"]
 [ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_6ma8t"]
 [ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="5_jsedn"]
 [ext_resource type="Texture2D" uid="uid://cdficndq8clk4" path="res://Art/CardComponents/card-backside-texture-v2-achra.jpg" id="5_lcq1x"]

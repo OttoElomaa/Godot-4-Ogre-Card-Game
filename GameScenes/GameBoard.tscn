@@ -18,8 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://CardScriptsAndComponents/tableCardSlot.tscn" id="16_8xajj"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="17_7ll03"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="18_tppv1"]
-[ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
-[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
+[ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="21_ufaws"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/battle_log_pane.gd" id="25_gfnca"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
@@ -128,7 +128,7 @@ script = ExtResource("2_gftaw")
 [node name="Portraits" type="Node2D" parent="."]
 
 [node name="PlayerSprite" type="Sprite2D" parent="Portraits"]
-position = Vector2(138, 1126)
+position = Vector2(140.5, 1321)
 texture = ExtResource("3_1phva")
 
 [node name="EnemySprite" type="Sprite2D" parent="Portraits"]
@@ -136,7 +136,7 @@ position = Vector2(1080, 131)
 texture = ExtResource("4_1qylb")
 
 [node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Portraits"]
-position = Vector2(189, 1141)
+position = Vector2(191.5, 1336)
 texture = ExtResource("5_4lnmq")
 
 [node name="EnemyResourceHolderSprite2" type="Sprite2D" parent="Portraits"]
@@ -145,10 +145,10 @@ texture = ExtResource("5_4lnmq")
 
 [node name="PlayerHealthLabel" type="Label" parent="Portraits"]
 texture_filter = 1
-offset_left = 213.0
-offset_top = 1208.0
-offset_right = 269.0
-offset_bottom = 1265.0
+offset_left = 217.0
+offset_top = 1409.0
+offset_right = 273.0
+offset_bottom = 1466.0
 text = "99"
 label_settings = ExtResource("6_r88d6")
 horizontal_alignment = 1
@@ -165,10 +165,10 @@ horizontal_alignment = 1
 
 [node name="PlayerManaLabel" type="Label" parent="Portraits"]
 texture_filter = 1
-offset_left = 255.0
-offset_top = 1016.0
-offset_right = 312.0
-offset_bottom = 1073.0
+offset_left = 259.0
+offset_top = 1217.0
+offset_right = 316.0
+offset_bottom = 1274.0
 text = "88"
 label_settings = ExtResource("7_vfgb4")
 horizontal_alignment = 1
@@ -201,7 +201,7 @@ position = Vector2(313, 344)
 texture = ExtResource("8_mj3e8")
 
 [node name="LowerCornerDecor" type="Sprite2D" parent="Visuals/Scenery"]
-position = Vector2(2090, 1008)
+position = Vector2(2430, 1208)
 texture = ExtResource("9_nxc8c")
 
 [node name="Leaves" type="Sprite2D" parent="Visuals/Scenery"]
@@ -209,7 +209,7 @@ position = Vector2(201, 715)
 texture = ExtResource("10_223y2")
 
 [node name="Leaves2" type="Sprite2D" parent="Visuals/Scenery"]
-position = Vector2(2211, 1071)
+position = Vector2(2551, 1271)
 texture = ExtResource("11_0xags")
 
 [node name="YourTurnPopup" type="Node2D" parent="Visuals"]
@@ -293,7 +293,7 @@ position = Vector2(-300, 0)
 [node name="EnemyBoard" type="Node2D" parent="CardsManager"]
 
 [node name="PlayerHandPosition" type="Marker2D" parent="CardsManager"]
-position = Vector2(530, 1295)
+position = Vector2(527, 1544)
 
 [node name="EnemyHandPosition" type="Marker2D" parent="CardsManager"]
 position = Vector2(1449, 109)
@@ -307,22 +307,25 @@ position = Vector2(-584, -252)
 z_index = -1
 
 [node name="TableCardSlot" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
-position = Vector2(498, 884)
+position = Vector2(498, 1014)
 
 [node name="TableCardSlot2" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
-position = Vector2(728, 884)
+position = Vector2(728, 1014)
 
 [node name="TableCardSlot3" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
-position = Vector2(958, 884)
+position = Vector2(958, 1014)
 
 [node name="TableCardSlot4" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
-position = Vector2(1188, 884)
+position = Vector2(1188, 1014)
 
 [node name="TableCardSlot5" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
-position = Vector2(1418, 884)
+position = Vector2(1418, 1014)
 
 [node name="TableCardSlot6" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
-position = Vector2(1648, 884)
+position = Vector2(1648, 1014)
+
+[node name="TableCardSlot7" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
+position = Vector2(1878, 1014)
 
 [node name="EnemySlots" type="Node2D" parent="."]
 z_index = -1
@@ -344,6 +347,9 @@ position = Vector2(1416, 464)
 
 [node name="TableCardSlot6" parent="EnemySlots" instance=ExtResource("16_8xajj")]
 position = Vector2(1646, 464)
+
+[node name="TableCardSlot7" parent="EnemySlots" instance=ExtResource("16_8xajj")]
+position = Vector2(1876, 464)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -533,7 +539,7 @@ horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-zoom = Vector2(0.8, 0.8)
+zoom = Vector2(0.7, 0.7)
 
 [node name="ActionMenuCanvas" type="CanvasLayer" parent="."]
 
