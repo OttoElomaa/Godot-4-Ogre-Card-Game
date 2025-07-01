@@ -332,7 +332,7 @@ func statesActive():
 	stateHandler.get_node("PassiveIcon").hide()
 	
 	#### POSITION AS INDICATOR
-	var activeOffset := -60
+	var activeOffset := -50
 	if isEnemyCard:
 		activeOffset *= -1
 	position.y = mySlot.position.y + activeOffset
