@@ -327,8 +327,8 @@ func switchStates():
 func statesActive():
 	actionState = CardActionStates.ACTIVE
 	stateHandler.get_node("ActiveIcon").show()
-	stateHandler.get_node("ActionStateFrame").show()
 	
+	stateHandler.get_node("ActionStateFrame").hide()
 	stateHandler.get_node("PassiveIcon").hide()
 	
 	#### POSITION AS INDICATOR

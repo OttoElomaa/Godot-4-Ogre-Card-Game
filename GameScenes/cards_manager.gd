@@ -246,12 +246,15 @@ func handlePlayRitual(c:Card, slot:CardSlot) -> bool:
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
+	var originalPos = c.position
 	placeCardInSlot(c, slot)	
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
+		var newPos = c.position
+		c.position = originalPos
 		var tween = get_tree().create_tween()
-		tween.tween_property(c, "position", slot.position, 0.2)
+		tween.tween_property(c, "position", newPos, 0.2)
 		
 		c.reparent($EnemyBoard)
 		c.isEnemyCard = true
@@ -259,9 +262,10 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
 	#### PLAYER CARD. REPARENT AND TAKE MANA COST
 	else:
-		c.position = slot.position
+		#c.position = slot.position
 		c.reparent($PlayerBoard)
 		battleSystem.playerMana -= c.manaCost
+	
 	
 	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
 	c.handleArrival()
@@ -288,7 +292,9 @@ func placeCardInSlot(card:Card, slot:CardSlot) -> bool:
 	card.toggleTraveling(true)
 	
 	#### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
+	card.position = slot.position
 	card.setInitialActionState()
+	
 	return true
 	
 	
