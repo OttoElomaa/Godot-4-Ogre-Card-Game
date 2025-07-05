@@ -25,14 +25,7 @@ var isRitual:
 @onready var countersNode := $Counters
 @onready var stateHandler := $Frontside/ActionState
 
-@onready var castNode := $Effects/Cast
-@onready var battleArtNode := $Effects/BattleArt
-@onready var ritualNode := $Effects/Ritual
-@onready var arrivalNode := $Effects/Arrival
-@onready var onTurnNode := $Effects/OnTurn
-
-@onready var specialTriggers := $Effects/SpecialCondition
-@onready var payoffNode := $Effects/Payoff
+@onready var actions := $Actions
 
 @onready var keywordHandler := $KeywordHandler
 
@@ -133,6 +126,10 @@ func _ready() -> void:
 		$Frontside/StatsPanel.hide()
 		$Frontside/ActionState.hide()
 	
+	#### SETUP FOR ALL ACTION SCRIPTS
+	#### SHARE INFO ON, IS CARD ENEMY
+	$Actions.setup(self)
+	
 	createEffectText()
 	
 	$Frontside/CardName/Label.text = cardName
@@ -171,29 +168,10 @@ func createEffectText():
 	
 	#### CHECK CAST, BATTLE ART, and RITUAL NODES
 	
-	#### IS IT RITUAL?
-	if isRitual:
-		var ritualText = ritualNode.createText()	
-		effectTexts.append(ritualText) 
+	var actionHolderTexts := []
+	actionHolderTexts = actions.createActionText()
 	
-	#### IF NOT RITUAL, CREATE THE REST
-	else:
-		var arrivalText = arrivalNode.createText()	#### ARRIVAL
-		effectTexts.append(arrivalText)
-		
-		var onTurnText = onTurnNode.createText()	#### ON TURN START
-		effectTexts.append(onTurnText) 
-		
-			
-		var castText = castNode.createText()  #### CAST	
-		effectTexts.append(castText) 
-		
-		
-		var battleArtText = battleArtNode.createText()	#### BATTLE ART (Card Combat)
-		effectTexts.append(battleArtText) 
-	
-	var payoffText = payoffNode.createText()	#### BATTLE ART (Card Combat)
-	effectTexts.append(payoffText) 
+	effectTexts.append_array(actionHolderTexts)
 	
 	effectText = ""
 	for text in effectTexts:
@@ -213,9 +191,9 @@ func basicSetup():
 	if isRitual:
 		statesInert()
 	
+	#### SETUP FOR ALL ACTION SCRIPTS
 	#### SHARE INFO ON, IS CARD ENEMY
-	for node in $Effects.get_children():
-		node.setup(self)
+	$Actions.setup(self)
 	
 	
 			
@@ -228,14 +206,15 @@ func handleTurnStartReset():
 func handleTurnStartActions():
 	#### TRIGGER ON TURN START EFFECTS
 	if States.isStatePlay():
-		onTurnNode.activate(null)
+		actions.handleOnTurn(null)
 
 
 
 #### HANDLE CARD BEING PLAYED ON BOARD
 func handleArrival():
 	basicSetup()
-	arrivalNode.activate(null)  #### TRIGGER ARRIVAL NODE
+	actions.handleArrival(null) #### TRIGGER ARRIVAL NODE
+	
 	if hasShadow:
 		countersNode.togglePhased(true)
 		statesPassive()

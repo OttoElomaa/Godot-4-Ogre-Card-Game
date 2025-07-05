@@ -9,7 +9,7 @@ cardName = "Blast"
 cardType = 1
 manaCost = 4
 
-[node name="EffectTargeted" parent="Effects/Ritual" index="0" instance=ExtResource("2_k3mux")]
+[node name="Effects_Ritual#EffectTargeted" parent="Actions/Ritual" index="0" instance=ExtResource("2_k3mux")]
 inflict = 2
 
 [node name="Art" parent="Frontside" index="1"]

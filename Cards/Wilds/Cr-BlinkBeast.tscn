@@ -12,7 +12,7 @@ manaCost = 1
 startingDamage = 2
 startingHealth = 1
 
-[node name="EffectTargeted" parent="Effects/BattleArt" index="0" instance=ExtResource("2_hrd7b")]
+[node name="Effects_BattleArt#EffectTargeted" parent="Actions/BattleArt" index="0" instance=ExtResource("2_hrd7b")]
 hasTap = true
 
 [node name="Art" parent="Frontside" index="1"]

@@ -99,7 +99,7 @@ func toggleCardActionMenu(enable:bool, card:Card):
 			
 			#### CAST BUTTON
 			var castButton := $ActionMenuCanvas/CardActionMenu/CastPanel
-			if card.castNode.checkActive():
+			if card.actions.checkHasCast():
 				castButton.show()
 			else:
 				castButton.hide()

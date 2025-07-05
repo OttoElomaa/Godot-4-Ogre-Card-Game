@@ -9,7 +9,7 @@ cardName = "Med Vohu"
 cardType = 1
 manaCost = 3
 
-[node name="EffectTargetless" parent="Effects/Ritual" index="0" instance=ExtResource("2_ip5c5")]
+[node name="Effects_Ritual#EffectTargetless" parent="Actions/Ritual" index="0" instance=ExtResource("2_ip5c5")]
 drawCards = 2
 
 [node name="Art" parent="Frontside" index="1"]

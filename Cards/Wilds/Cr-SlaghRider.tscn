@@ -10,7 +10,7 @@ manaCost = 2
 startingDamage = 1
 startingHealth = 2
 
-[node name="EffectTargeted" parent="Effects/Cast" index="0" instance=ExtResource("2_4vpam")]
+[node name="Effects_Cast#EffectTargeted" parent="Actions/Cast" index="0" instance=ExtResource("2_4vpam")]
 targetGroup = 1
 bolsterDamage = 2
 

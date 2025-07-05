@@ -12,7 +12,7 @@ manaCost = 2
 startingDamage = 2
 startingHealth = 2
 
-[node name="EffectTargetless" parent="Effects/OnTurn" index="0" instance=ExtResource("2_mwal1")]
+[node name="Effects_OnTurn#EffectTargetless" parent="Actions/OnTurn" index="0" instance=ExtResource("2_mwal1")]
 effectTypeLine = "Beast"
 targetGroup = 2
 bolsterDamage = 1

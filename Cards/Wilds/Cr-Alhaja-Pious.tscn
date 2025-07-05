@@ -11,7 +11,7 @@ manaCost = 3
 startingDamage = 2
 startingHealth = 2
 
-[node name="EffectTargetless" parent="Effects/Arrival" index="0" instance=ExtResource("2_1pf7u")]
+[node name="Effects_Arrival#EffectTargetless" parent="Actions/Arrival" index="0" instance=ExtResource("2_1pf7u")]
 drawCards = 1
 
 [node name="Art" parent="Frontside" index="1"]

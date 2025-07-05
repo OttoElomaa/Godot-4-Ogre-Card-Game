@@ -12,7 +12,7 @@ manaCost = 4
 startingDamage = 3
 startingHealth = 3
 
-[node name="EffectTargetless" parent="Effects/Arrival" index="0" instance=ExtResource("2_jrsq4")]
+[node name="Effects_Arrival#EffectTargetless" parent="Actions/Arrival" index="0" instance=ExtResource("2_jrsq4")]
 summonScene = ExtResource("2_f3ejk")
 summonString = "Summon a skeleton"
 

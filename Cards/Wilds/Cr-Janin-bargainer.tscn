@@ -13,10 +13,10 @@ manaCost = 3
 startingDamage = 1
 startingHealth = 3
 
-[node name="EffectTargeted" parent="Effects/Cast" index="0" instance=ExtResource("2_1pg6l")]
+[node name="Effects_Cast#EffectTargeted" parent="Actions/Cast" index="0" instance=ExtResource("2_1pg6l")]
 hasSacrifice = true
 
-[node name="EffectTargetless" parent="Effects/Payoff" index="0" instance=ExtResource("3_vl6ci")]
+[node name="Effects_Payoff#EffectTargetless" parent="Actions/Payoff" index="0" instance=ExtResource("3_vl6ci")]
 targetGroup = 2
 bolsterDamage = 2
 

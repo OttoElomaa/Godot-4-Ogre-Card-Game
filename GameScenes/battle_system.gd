@@ -175,7 +175,7 @@ func handlePlayerRitual(c:Card, target:Card) -> bool:
 	
 	#### GET CARD in SLOT
 	if target:
-		var success = c.ritualNode.activate(target)
+		var success = c.actions.handleRitual(target)
 		#if success:
 			#c.destroyAndAnimate(true)
 		return success
@@ -200,7 +200,7 @@ func handlePlayerCast():
 	for r in results:
 		var target:Card = getCollidedObject(r)
 		prints("Cast target card: ", target)
-		if currentCastingCard.castNode.activate(target):
+		if currentCastingCard.actions.handleCast(target):
 			currentCastingCard.restAndAnimate(true)
 			currentCastingCard = null
 			endCastState()
@@ -307,9 +307,9 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	
 	
 	#### HANDLE ATTACKER COMBAT ARTS
-	attackCard.battleArtNode.activate(targetCard)
+	attackCard.actions.handleBattleArt(targetCard)
 	#### DEFENDER TOO RIGHT ????
-	targetCard.battleArtNode.activate(attackCard) 
+	targetCard.actions.handleBattleArt(attackCard)
 	
 	attackCard.countersNode.togglePhased(false)
 		
