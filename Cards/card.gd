@@ -322,9 +322,7 @@ func statesActive():
 func statesPassive():
 	actionState = CardActionStates.PASSIVE
 	stateHandler.get_node("ActiveIcon").hide()
-	stateHandler.get_node("ActionStateFrame").hide()
 	
-	stateHandler.get_node("PassiveIcon").hide()
 	
 	#### POSITION AS INDICATOR
 	position.y = mySlot.position.y
@@ -334,7 +332,7 @@ func statesInert():
 	actionState = CardActionStates.INERT
 	var s = $Frontside/ActionState
 	s.get_node("ActiveIcon").hide()
-	s.get_node("PassiveIcon").hide()
+	
 	
 
 func statesDestroy():

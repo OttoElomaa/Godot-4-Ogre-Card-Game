@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=27 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Script" uid="uid://c4juxj0muiopk" path="res://CardScriptsAndComponents/counters.gd" id="2_07jhh"]
@@ -15,8 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="6_lcq1x"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="6_u70hd"]
 [ext_resource type="Script" uid="uid://cwcen3irknv0t" path="res://CardScriptsAndComponents/effectScriptConditionsChecker.gd" id="7_5riqg"]
-[ext_resource type="Texture2D" uid="uid://cq6ndvj18kyn0" path="res://Art/CardComponents/card-action-state-indicator-frame-texture-V2.png" id="8_cvyu6"]
-[ext_resource type="Texture2D" uid="uid://ddt6oiu5vk81d" path="res://Art/CardComponents/card-action-state-indicator-texture-passive.png" id="8_gi0db"]
 [ext_resource type="Texture2D" uid="uid://c6fbvpdul76bl" path="res://Art/CardComponents/card-action-state-indicator-texture-traveling-V2.png" id="9_gi0db"]
 [ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="9_i3xqw"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSet-Header-OffWhiteYellow50.tres" id="9_l781d"]
@@ -360,18 +358,13 @@ scale = Vector2(0.6, 0.6)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("16_8geja")
 
-[node name="PassiveIcon" type="Sprite2D" parent="Frontside/ActionState"]
-texture = ExtResource("8_gi0db")
-
 [node name="TravelingIcon" type="Sprite2D" parent="Frontside/ActionState"]
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("9_gi0db")
 offset = Vector2(-110, -10)
 
-[node name="ActionStateFrame" type="Sprite2D" parent="Frontside/ActionState"]
-texture = ExtResource("8_cvyu6")
-
 [node name="EffectsLabel" type="Label" parent="Frontside"]
+custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
