@@ -1,6 +1,10 @@
 extends EffectScript
 
 
+
+@export var payMana := 0
+@export var payHealth := 0
+
 @export var drawCards := 0
 
 @export var summonScene: PackedScene = null

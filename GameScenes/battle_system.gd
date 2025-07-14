@@ -236,8 +236,7 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	for other in blockers:
 		if c.checkHasLethal(other): #### HAS LETHAL DAMAGE -> Attack
 			target = other
-		elif c.hasSunder:			#### CAN SUNDER -> Attack
-			target = other
+		
 	
 	#### TARGET FOUND, ATTACK TARGET CARD
 	if target:

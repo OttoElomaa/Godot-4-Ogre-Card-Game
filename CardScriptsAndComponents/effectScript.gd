@@ -35,6 +35,7 @@ var isEnemy := false
 @export var inflict := 0
 @export var inflictPlayer := 0
 @export var inflictCreature := 0
+@export var corrode := 0
 
 @export var hasTap := false
 
@@ -65,6 +66,14 @@ func createText() -> String:
 	elif inflictCreature > 0:
 		text += "Inflict Creature %d" % inflictCreature
 	
+	if corrode > 0:
+		text += "Corrode %d" % corrode
+	
+	
+	#### ADD TAP
+	if hasTap:
+		text += "Tap target"
+	
 	
 	#### ADD BOLSTER
 	if bolsterDamage > 0 or bolsterHealth > 0:
@@ -87,9 +96,7 @@ func createText() -> String:
 		text += " %d/%d" % [bolsterDamage, bolsterHealth]
 	
 	
-	#### ADD TAP
-	if hasTap:
-		text += "Tap target"
+	
 	
 	#### ADD SCRIPT-SPECIFIC EFFECT TEXT
 	text += createTextTwo()
@@ -99,8 +106,3 @@ func createText() -> String:
 
 func createTextTwo() -> String:
 	return ""
-
-
-
-func bolster(targets:Array):
-	pass

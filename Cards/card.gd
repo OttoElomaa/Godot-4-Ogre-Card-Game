@@ -67,9 +67,7 @@ var allowInteract := true
 
 
 ####################################### KEYWORD HANDLER STUFF
-var hasSunder: bool:
-	get:
-		return keywordHandler.hasSunder()
+
 		
 var hasDuelist: bool:
 	get:
@@ -159,8 +157,6 @@ func createEffectText():
 	var effectTexts := []
 	
 	#### CHECK FROM KEYWORDS HANDLER
-	if hasSunder:
-		effectTexts.append("Sunder") 
 	if hasDuelist:
 		effectTexts.append("Duelist") 
 	if hasShadow:
@@ -307,8 +303,6 @@ func statesActive():
 	actionState = CardActionStates.ACTIVE
 	stateHandler.get_node("ActiveIcon").show()
 	
-	stateHandler.get_node("ActionStateFrame").hide()
-	stateHandler.get_node("PassiveIcon").hide()
 	
 	#### POSITION AS INDICATOR
 	var activeOffset := -50
@@ -410,9 +404,8 @@ func takeDamageAndCheckLethal(card:Card) -> bool:
 		selfDestroyed = true
 	
 	#### HANDLE DAMAGE -> SUNDER Keyword
-	if card.hasSunder:
-		health -= card.tempDamage
-		tempHealth -= card.tempDamage
+		#health -= card.tempDamage
+		#tempHealth -= card.tempDamage
 	
 	#### SUNDER CAN'T DESTROY CARD, UNLESS IT WAS ALREADY ZERO
 	if tempHealth < 0:
@@ -427,7 +420,7 @@ func takeDamageAndCheckLethal(card:Card) -> bool:
 			selfDestroyed = true
 	
 	#### UPDATE VISUALS AND RETURN DESTROYED STATUS
-	updateCardLabels()
+	updateCardVisuals()
 	return selfDestroyed
 
 

@@ -10,6 +10,9 @@ extends Node
 
 @onready var specialTriggers := $SpecialCondition
 @onready var payoffNode := $Payoff
+@onready var costNode := $Cost
+
+
 
 var myCard: Card = null
 var isEnemy := false

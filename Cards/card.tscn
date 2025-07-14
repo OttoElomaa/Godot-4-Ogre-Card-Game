@@ -245,6 +245,8 @@ script = ExtResource("4_q2hgj")
 
 [node name="Payoff" type="Node" parent="Actions"]
 
+[node name="Cost" type="Node" parent="Actions"]
+
 [node name="SpecialCondition" type="Node" parent="Actions"]
 
 [node name="EffectConditionScript" type="Node" parent="Actions/SpecialCondition"]

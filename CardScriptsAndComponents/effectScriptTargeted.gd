@@ -31,11 +31,21 @@ func activateTargeted(target:Card):
 	#### INFLICT
 	if inflict > 0:
 		target.tempHealth -= inflict
-		target.health -= inflict
 		success = true
 	elif inflictCreature > 0:
 		target.tempHealth -= inflictCreature
-		target.health -= inflictCreature
+		success = true
+	
+	#### CORRODE
+	if corrode > 0:
+		target.tempHealth -= corrode
+		target.health -= corrode
+	
+	
+	
+	#### TAP
+	if hasTap:
+		target.restAndAnimate(false)
 		success = true
 	
 	#### BOLSTER
@@ -45,9 +55,7 @@ func activateTargeted(target:Card):
 		target.tempHealth += bolsterHealth
 		success = true
 	
-	if hasTap:
-		target.restAndAnimate(false)
-		success = true
+	
 	
 	target.updateCardLabels()
 	if target.tempHealth <= 0:
