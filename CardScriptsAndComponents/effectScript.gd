@@ -43,6 +43,7 @@ var isEnemy := false
 @export var bolsterHealth := 0
 
 
+@export var phaseOut := false
 
 
 

@@ -73,9 +73,7 @@ var hasDuelist: bool:
 	get:
 		return keywordHandler.hasDuelist()
 
-var hasShadow: bool:
-	get:
-		return keywordHandler.hasShadow()
+
 
 
 ################################################## COUNTER NODE STUFF
@@ -159,8 +157,7 @@ func createEffectText():
 	#### CHECK FROM KEYWORDS HANDLER
 	if hasDuelist:
 		effectTexts.append("Duelist") 
-	if hasShadow:
-		effectTexts.append("Shadow") 
+	
 	
 	#### CHECK CAST, BATTLE ART, and RITUAL NODES
 	
@@ -211,9 +208,9 @@ func handleArrival():
 	basicSetup()
 	actions.handleArrival(null) #### TRIGGER ARRIVAL NODE
 	
-	if hasShadow:
-		countersNode.togglePhased(true)
-		statesPassive()
+	#if hasShadow:
+		#countersNode.togglePhased(true)
+		#statesPassive()
 		
 	updateCardVisuals()
 
@@ -223,8 +220,8 @@ func setInitialActionState():
 	
 	#### ENEMY CARDS ATTACK BY DEFAULT
 	if isEnemyCard: 
-		if not hasShadow:
-			statesActive()
+		#if not hasShadow:
+		statesActive()
 
 
 func updateCardVisuals():

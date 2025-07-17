@@ -25,6 +25,9 @@ func createTextTwo() -> String:
 	if summonScene:
 		text += summonString
 	
+	if phaseOut:
+		text += "Phase out"
+	
 	return text
 
 
@@ -63,5 +66,10 @@ func activateTargetless():
 					card.tempDamage += bolsterDamage
 					card.tempHealth += bolsterHealth
 					success = true
+	
+	#### PHASE OUT SELF
+	if phaseOut:
+		myCard.countersNode.togglePhased(true)
+		myCard.statesPassive()
 					
 	return success
