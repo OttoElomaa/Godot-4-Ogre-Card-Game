@@ -30,19 +30,18 @@ func activateTargeted(target:Card):
 	
 	#### INFLICT
 	if inflict > 0:
-		target.tempHealth -= inflict
+		CardActions.inflict(target, inflict)
 		success = true
 	elif inflictCreature > 0:
-		target.tempHealth -= inflictCreature
+		CardActions.inflict(target, inflictCreature)
 		success = true
 	
 	#### CORRODE
 	if corrode > 0:
-		target.tempHealth -= corrode
-		target.health -= corrode
+		CardActions.corrode(target, corrode)
+		success = true
 	
-	
-	
+
 	#### TAP
 	if hasTap:
 		target.restAndAnimate(false)
@@ -58,7 +57,7 @@ func activateTargeted(target:Card):
 	
 	
 	target.updateCardLabels()
-	if target.tempHealth <= 0:
-		target.destroyAndAnimate(true)
+	#if target.tempHealth <= 0:
+		#target.destroyAndAnimate(true)
 	
 	return success

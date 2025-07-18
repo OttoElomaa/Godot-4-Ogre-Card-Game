@@ -17,8 +17,9 @@ config/icon="res://Art/icon.svg"
 
 [autoload]
 
-States="*res://GameScenes/Autoloads/States.tscn"
-MyTools="*res://GameScenes/Autoloads/MyTools.tscn"
+States="*res://GameAutoloads/States.tscn"
+MyTools="*res://GameAutoloads/MyTools.tscn"
+CardActions="*res://GameAutoloads/CardActions.tscn"
 
 [display]
 

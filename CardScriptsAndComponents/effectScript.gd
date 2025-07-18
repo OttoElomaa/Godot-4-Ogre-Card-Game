@@ -11,9 +11,9 @@ enum DetailedTargetingOptions {NONE, STRONGEST, WEAKEST,}
 
 
 
-var myEffectNode:
-	get:
-		return get_parent()
+var actionsNode: Node = null
+	#get:
+		#return get_parent().get_parent()
 		
 		
 var myCard: Card = null
@@ -51,6 +51,8 @@ var isEnemy := false
 func setup(card:Card):
 	myCard = card
 	isEnemy = card.isEnemyCard
+	
+	actionsNode = card.actions
 
 
 
