@@ -114,12 +114,12 @@ func _ready() -> void:
 	if cardType == CardTypes.CREATURE:
 		$Frontside/Background/Creature.show()
 		$Frontside/Background/Spell.hide()
-		$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % startingDamage
-		$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % startingHealth
+		$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % startingDamage
+		$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % startingHealth
 	else:
 		$Frontside/Background/Creature.hide()
 		$Frontside/Background/Spell.show()
-		$Frontside/StatsPanel.hide()
+		$Frontside/Resources.hide()
 		$Frontside/ActionState.hide()
 	
 	#### SETUP FOR ALL ACTION SCRIPTS
@@ -523,8 +523,28 @@ func rotateRestingCard(willRest:bool):
 
 
 func updateCardLabels():
-	$Frontside/StatsPanel/HBox/HealthLabel.text = "%d" % tempHealth
-	$Frontside/StatsPanel/HBox/PowerLabel.text = "%d" % tempDamage
+	
+	#### LABELS
+	$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % tempHealth
+	$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % tempDamage
+	
+	#### GLOW
+	var glow := $Frontside/Resources/Glow
+	glow.get_node("PowerGlowUp").hide()
+	glow.get_node("PowerGlowDown").hide()
+	glow.get_node("HealthGlowUp").hide()
+	glow.get_node("HealthGlowDown").hide()
+	
+	if tempDamage > startingDamage:
+		glow.get_node("PowerGlowUp").show()
+	elif tempDamage < startingDamage:
+		glow.get_node("PowerGlowDown").show()
+	
+	if tempHealth > startingHealth:
+		glow.get_node("HealthGlowUp").show()
+	elif tempHealth < startingHealth:
+		glow.get_node("HealthGlowDown").show()
+		
 
 
 

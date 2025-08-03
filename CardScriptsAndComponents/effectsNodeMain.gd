@@ -117,8 +117,13 @@ func activateNode(node:Node, target:Card):
 		if not node == payoffNode:
 			handlePayoff(target)
 	
-		MyTools.updateBoardCardsVisuals()
-		
+	
+	#### UPDATE VISUALS AFTER ACTION
+	MyTools.updateBoardCardsVisuals()
+	#myCard.updateCardVisuals()
+	#if target:
+		#target.updateCardVisuals()
+	
 	return success
 
 

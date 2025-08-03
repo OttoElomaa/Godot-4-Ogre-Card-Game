@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=29 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Script" uid="uid://c4juxj0muiopk" path="res://CardScriptsAndComponents/counters.gd" id="2_07jhh"]
@@ -20,6 +20,8 @@
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSet-Header-OffWhiteYellow50.tres" id="9_l781d"]
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSetSmallBrownCardText.tres" id="13_j3lys"]
 [ext_resource type="Texture2D" uid="uid://3s7fsmtkjp8v" path="res://Art/CardComponents/card-action-state-indicator-texture-active-V3.png" id="16_8geja"]
+[ext_resource type="Texture2D" uid="uid://cuy7g1fhndhpp" path="res://Art/CardComponents/resources-shading-down.png" id="19_07jhh"]
+[ext_resource type="Texture2D" uid="uid://cl6kjdnh2pqjl" path="res://Art/CardComponents/resources-shading-up.png" id="20_8geja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kd3xj"]
 size = Vector2(220, 330)
@@ -384,37 +386,61 @@ label_settings = ExtResource("13_j3lys")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="StatsPanel" type="PanelContainer" parent="Frontside"]
+[node name="Resources" type="Node2D" parent="Frontside"]
+position = Vector2(0, 128)
+
+[node name="Glow" type="Node2D" parent="Frontside/Resources"]
+
+[node name="PowerGlowDown" type="Sprite2D" parent="Frontside/Resources/Glow"]
+visible = false
+texture = ExtResource("19_07jhh")
+offset = Vector2(-30, 18)
+
+[node name="PowerGlowUp" type="Sprite2D" parent="Frontside/Resources/Glow"]
+texture = ExtResource("20_8geja")
+offset = Vector2(-30, 18)
+
+[node name="HealthGlowDown" type="Sprite2D" parent="Frontside/Resources/Glow"]
+texture = ExtResource("19_07jhh")
+offset = Vector2(30, 18)
+
+[node name="HealthGlowUp" type="Sprite2D" parent="Frontside/Resources/Glow"]
+visible = false
+texture = ExtResource("20_8geja")
+offset = Vector2(30, 18)
+
+[node name="Panel" type="PanelContainer" parent="Frontside/Resources"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -50.0
-offset_top = 128.0
 offset_right = 50.0
-offset_bottom = 168.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("4_w0fdq")
 
-[node name="HBox" type="HBoxContainer" parent="Frontside/StatsPanel"]
+[node name="HBox" type="HBoxContainer" parent="Frontside/Resources/Panel"]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 7
 alignment = 1
 
-[node name="PowerLabel" type="Label" parent="Frontside/StatsPanel/HBox"]
+[node name="PowerLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
 layout_mode = 2
 text = "22"
 label_settings = ExtResource("4_7bc8n")
+horizontal_alignment = 2
 
-[node name="DashLabel" type="Label" parent="Frontside/StatsPanel/HBox"]
+[node name="DashLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
 layout_mode = 2
 text = "/"
 label_settings = ExtResource("4_7bc8n")
+horizontal_alignment = 1
 
-[node name="HealthLabel" type="Label" parent="Frontside/StatsPanel/HBox"]
+[node name="HealthLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
 layout_mode = 2
 text = "33"
 label_settings = ExtResource("4_7bc8n")
