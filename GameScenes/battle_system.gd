@@ -234,8 +234,8 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	
 	#### PLAYER HAS BLOCKERS, FIND KILLABLE BLOCKER
 	for other in blockers:
-		if c.checkHasLethal(other): #### HAS LETHAL DAMAGE -> Attack
-			target = other
+		#if c.checkHasLethal(other): #### HAS LETHAL DAMAGE -> Attack
+		target = other
 		
 	
 	#### TARGET FOUND, ATTACK TARGET CARD
@@ -287,8 +287,6 @@ func handlePlayerAttackCreature(target:Card):
 #### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
-	
-	
 	
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
 	var cardsToDestroy := []

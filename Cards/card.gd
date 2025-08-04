@@ -390,58 +390,32 @@ func checkAlive():
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
 func takeDamageAndCheckLethal(card:Card) -> bool:
 	
-	#### FOR SUNDER DAMAGE GOING BELOW ZERO
-	var isBrittle := false
-	if tempHealth <= 0:
-		isBrittle = true
+	var selfCombatDamage:int = getCombatDamage()
+	var enemyCombatDamage:int = card.getCombatDamage()
 	
-	#### CHECK DESTROYED STATUS	
+	#### CHECK DESTROYED STATUS 1: DUELIST
 	var selfDestroyed := false
-	if card.checkHasLethal(self):
+	if keywordHandler.hasDuelist():
+		if selfCombatDamage >= card.tempHealth:
+			return selfDestroyed
+			
+	
+	#### DEAL DAMAGE
+	var damageTaken = enemyCombatDamage
+	
+	if tempHealth < damageTaken:
+		tempHealth = 0
+	else:
+		tempHealth -= damageTaken
+	
+	
+	#### CHECK DESTROYED STATUS
+	if tempHealth <= 0:
 		selfDestroyed = true
-	
-	
-	#### INFLICT/CORRODE CAN'T DESTROY CARD, UNLESS IT WAS ALREADY ZERO
-	#if tempHealth < 0:
-		#if isBrittle:
-			#selfDestroyed = true
-		#else:
-			#health = 0
-	
-	#### ANY CARD CAN DESTROY A CARD WITH 0 HEALTH
-	#if isBrittle:
-		#if card.tempDamage > 0:
-			#selfDestroyed = true
 	
 	#### UPDATE VISUALS AND RETURN DESTROYED STATUS
 	updateCardVisuals()
 	return selfDestroyed
-
-
-func checkHasLethal(targetCard:Card):
-	
-	var hasLethal := false
-	if checkLethalTwo(targetCard):
-		
-		#### NO TRADE; TARGET CARD DESTROYED
-		if not targetCard.checkLethalTwo(self):
-			hasLethal = true
-			
-		#### TARGET HAS NO DUELIST, MUTUAL DESTRUCTION = TRADE
-		elif not targetCard.hasDuelist:
-			hasLethal = true
-		
-		#### TARGET HAS DUELIST BUT HAS ZERO HEALTH -> CAN BE KILLED
-		elif tempDamage > 0 and targetCard.tempHealth <= 0:
-			hasLethal = true
-		
-	return hasLethal
-
-
-func checkLethalTwo(card:Card):
-	
-	var combatDamage:int = getCombatDamage()
-	return combatDamage >= card.tempHealth
 
 
 
