@@ -220,9 +220,10 @@ func handlePlayerAttackEnemy():
 	enemyHealth -= combatDamage
 	
 	c.playAttackAnimation()
-	c.restAndAnimate(false)
+	#c.restAndAnimate(false)
 	endAttackState()
 	c.countersNode.togglePhased(false)
+
 
 
 #### BTW, PlayAttackAnimation CALLS THE CARD DESTROY COMMAND
@@ -242,8 +243,8 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
 		c.playAttackAnimation()
-		if not resolveAttack(c, target):
-			c.restAndAnimate(false)
+		#if not resolveAttack(c, target):
+			#c.restAndAnimate(false)
 	
 	#### NO BLOCKERS, ATTACK PLAYER
 	elif blockers.is_empty():
@@ -295,6 +296,16 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	if attackCard.takeDamageAndCheckLethal(targetCard):
 		cardsToDestroy.append(attackCard)
 	
+	
+	#### HANDLE ATTACKER COMBAT ARTS
+	attackCard.actions.handleBattleArt(targetCard)
+	#### DEFENDER TOO RIGHT ????
+	targetCard.actions.handleBattleArt(attackCard)
+	
+	attackCard.countersNode.togglePhased(false)
+	
+	
+	
 	#### DON'T REST-ANIMATE DESTROYED ATTACKER CARD
 	var attackerDestroyed := false
 	if attackCard in cardsToDestroy:
@@ -303,13 +314,7 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 		attackCard.restAndAnimate(false)
 	
 	
-	#### HANDLE ATTACKER COMBAT ARTS
-	attackCard.actions.handleBattleArt(targetCard)
-	#### DEFENDER TOO RIGHT ????
-	targetCard.actions.handleBattleArt(attackCard)
 	
-	attackCard.countersNode.togglePhased(false)
-		
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
 	for c:Card in cardsToDestroy:
 		if c == attackCard:

@@ -224,19 +224,6 @@ func setInitialActionState():
 		statesActive()
 
 
-func updateCardVisuals():
-	
-	updateCardLabels()
-	
-	if actionState == CardActionStates.HAND:
-		toggleManaCostIndicator(true)
-		toggleActionStateIndicator(false)
-	else:
-		toggleManaCostIndicator(false)
-		toggleActionStateIndicator(true)
-	
-	$Counters.updatePhasedVisuals()
-
 
 
 #########################################################################
@@ -471,6 +458,7 @@ func turnOnBestiaryVisuals():
 	updateCardLabels()
 
 
+#### VISUALS - ANIMATIONS
 #######################################################################################
 
 func playAttackAnimation():
@@ -480,20 +468,29 @@ func playAttackAnimation():
 		$BodyAnimations.play("PlayerAttack")
 	
 
-
 #### FOR RESTING	
 func timeoutRestAnimation() -> void:
 	if checkResting():
 		rotateRestingCard(true)
 
+
+
+#### VISUALS
 #######################################################################
 
-func rotateRestingCard(willRest:bool):
-	var degreesGoal = 0
-	if willRest:
-		degreesGoal = 25
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
+func updateCardVisuals():
+	
+	updateCardLabels()
+	
+	if actionState == CardActionStates.HAND:
+		toggleManaCostIndicator(true)
+		toggleActionStateIndicator(false)
+	else:
+		toggleManaCostIndicator(false)
+		toggleActionStateIndicator(true)
+	
+	$Counters.updatePhasedVisuals()
+
 
 
 func updateCardLabels():
@@ -521,7 +518,7 @@ func updateCardLabels():
 		
 
 
-
+#### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 func destroyAndAnimate(toAnimate:bool):
 	if not isRitual:
 		mySlot.isAvailable = true
@@ -531,6 +528,7 @@ func destroyAndAnimate(toAnimate:bool):
 		animateDestroyCard()
 
 
+
 func animateDestroyCard():
 	if actionState == CardActionStates.DESTROYED:
 		$BodyAnimations.play("DestroyBoardCard")
@@ -538,6 +536,16 @@ func animateDestroyCard():
 
 func destroyCardTwo():
 	cardsManager.moveToDiscard(self)
+
+
+
+func rotateRestingCard(willRest:bool):
+	var degreesGoal = 0
+	if willRest:
+		degreesGoal = 25
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
+
 
 
 
