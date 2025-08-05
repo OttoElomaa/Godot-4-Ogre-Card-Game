@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvlgd0lcecyjx"
-path="res://.godot/imported/card-art-ritual-ashem-vendi.jpg-ee04073fe8d837f3aa795e585dd21bee.ctex"
+uid="uid://dxwwujckku1ic"
+path="res://.godot/imported/card-art-creature-mardok-houndbeast.png-359fccb1863859450e633f71aecabab2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-ritual-ashem-vendi.jpg"
-dest_files=["res://.godot/imported/card-art-ritual-ashem-vendi.jpg-ee04073fe8d837f3aa795e585dd21bee.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-mardok-houndbeast.png"
+dest_files=["res://.godot/imported/card-art-creature-mardok-houndbeast.png-359fccb1863859450e633f71aecabab2.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcu6qrjgwyyf3"
-path="res://.godot/imported/card-art-ogre.png-c612c57d399732f1af0891fc188783e5.ctex"
+uid="uid://bbhksk2xfgxlx"
+path="res://.godot/imported/card-art-creature-tugarTrainer.jpg-62a29b37ee98760194aa8557add270d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-ogre.png"
-dest_files=["res://.godot/imported/card-art-ogre.png-c612c57d399732f1af0891fc188783e5.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-tugarTrainer.jpg"
+dest_files=["res://.godot/imported/card-art-creature-tugarTrainer.jpg-62a29b37ee98760194aa8557add270d8.ctex"]
 
 [params]
 

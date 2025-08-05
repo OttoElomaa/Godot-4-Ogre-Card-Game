@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be3k7rj1w72ah"
-path="res://.godot/imported/card-art-spell-blast.png-b96cf95c55dec1640c6b2d2d76f37bc9.ctex"
+uid="uid://bjqdhj2rq7hrj"
+path="res://.godot/imported/card-art-ritual-ashem-medVohu.jpg-0e3893cb9b7b8473ff52501deb97fdd8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-spell-blast.png"
-dest_files=["res://.godot/imported/card-art-spell-blast.png-b96cf95c55dec1640c6b2d2d76f37bc9.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-ritual-ashem-medVohu.jpg"
+dest_files=["res://.godot/imported/card-art-ritual-ashem-medVohu.jpg-0e3893cb9b7b8473ff52501deb97fdd8.ctex"]
 
 [params]
 

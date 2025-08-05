@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm48rqyud4hpd"
-path="res://.godot/imported/card-art-creature-ruk-raider.png-270aba7e1aaa27256c9fcb6fe732bfe9.ctex"
+uid="uid://ubxsgqgvccky"
+path="res://.godot/imported/card-art-creature-janinSpirit.jpg-8b8d6026f4d1d17296186b93edbdee07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-creature-ruk-raider.png"
-dest_files=["res://.godot/imported/card-art-creature-ruk-raider.png-270aba7e1aaa27256c9fcb6fe732bfe9.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-janinSpirit.jpg"
+dest_files=["res://.godot/imported/card-art-creature-janinSpirit.jpg-8b8d6026f4d1d17296186b93edbdee07.ctex"]
 
 [params]
 

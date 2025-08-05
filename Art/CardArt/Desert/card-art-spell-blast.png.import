@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0hp5ejpxal7t"
-path="res://.godot/imported/card-art-creature-alhaja-Pious.jpg-1feb6027b77d8cf8ef2b3e4fbea4b41a.ctex"
+uid="uid://be3k7rj1w72ah"
+path="res://.godot/imported/card-art-spell-blast.png-8bb1ed2d8a0f78ac70640bd32becfbad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-creature-alhaja-Pious.jpg"
-dest_files=["res://.godot/imported/card-art-creature-alhaja-Pious.jpg-1feb6027b77d8cf8ef2b3e4fbea4b41a.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-spell-blast.png"
+dest_files=["res://.godot/imported/card-art-spell-blast.png-8bb1ed2d8a0f78ac70640bd32becfbad.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ubxsgqgvccky"
-path="res://.godot/imported/card-art-creature-janinSpirit.jpg-a09417235cca949c75941cf954841172.ctex"
+uid="uid://c3wwe11fgomi1"
+path="res://.godot/imported/card-art-creature-tugarBeast.jpg-0aa7064648cd7199c08bd6729ee6b374.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-creature-janinSpirit.jpg"
-dest_files=["res://.godot/imported/card-art-creature-janinSpirit.jpg-a09417235cca949c75941cf954841172.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-tugarBeast.jpg"
+dest_files=["res://.godot/imported/card-art-creature-tugarBeast.jpg-0aa7064648cd7199c08bd6729ee6b374.ctex"]
 
 [params]
 

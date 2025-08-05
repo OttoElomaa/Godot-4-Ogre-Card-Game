@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxwwujckku1ic"
-path="res://.godot/imported/card-art-creature-mardok-houndbeast.png-e89a5186621868fee37e02494900ebee.ctex"
+uid="uid://coifp8j4fpvk0"
+path="res://.godot/imported/card-art-creature-janinSpirit-Alt-01.jpg-4f90c82ed1dae58e38b8fa9a3a124066.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-creature-mardok-houndbeast.png"
-dest_files=["res://.godot/imported/card-art-creature-mardok-houndbeast.png-e89a5186621868fee37e02494900ebee.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-janinSpirit-Alt-01.jpg"
+dest_files=["res://.godot/imported/card-art-creature-janinSpirit-Alt-01.jpg-4f90c82ed1dae58e38b8fa9a3a124066.ctex"]
 
 [params]
 

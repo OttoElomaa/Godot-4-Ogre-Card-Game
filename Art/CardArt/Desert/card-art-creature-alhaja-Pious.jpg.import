@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coifp8j4fpvk0"
-path="res://.godot/imported/card-art-creature-janinSpirit-Alt-01.jpg-5e89d9c501cf68efd9f657768dcdaddc.ctex"
+uid="uid://b0hp5ejpxal7t"
+path="res://.godot/imported/card-art-creature-alhaja-Pious.jpg-4463c542e34560c9b0ad85fdcd5b6e2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-creature-janinSpirit-Alt-01.jpg"
-dest_files=["res://.godot/imported/card-art-creature-janinSpirit-Alt-01.jpg-5e89d9c501cf68efd9f657768dcdaddc.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-alhaja-Pious.jpg"
+dest_files=["res://.godot/imported/card-art-creature-alhaja-Pious.jpg-4463c542e34560c9b0ad85fdcd5b6e2a.ctex"]
 
 [params]
 

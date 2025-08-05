@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjqdhj2rq7hrj"
-path="res://.godot/imported/card-art-ritual-ashem-medVohu.jpg-49b9afba11cda1f60f8bea6a9592d6cb.ctex"
+uid="uid://bl0fms15do0xe"
+path="res://.godot/imported/card-art-creature-briarfolk.jpg-a83476f050b1f97f30b0b209aaffbf23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-ritual-ashem-medVohu.jpg"
-dest_files=["res://.godot/imported/card-art-ritual-ashem-medVohu.jpg-49b9afba11cda1f60f8bea6a9592d6cb.ctex"]
+source_file="res://Art/CardArt/card-art-creature-briarfolk.jpg"
+dest_files=["res://.godot/imported/card-art-creature-briarfolk.jpg-a83476f050b1f97f30b0b209aaffbf23.ctex"]
 
 [params]
 

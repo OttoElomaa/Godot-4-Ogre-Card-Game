@@ -2,8 +2,8 @@ extends EffectScript
 
 
 
-@export var payMana := 0
-@export var payHealth := 0
+@export var modifyMana := 0
+@export var modifyHealth := 0
 
 @export var drawCards := 0
 
@@ -16,6 +16,19 @@ extends EffectScript
 
 func createTextTwo() -> String:
 	var text := ""
+	
+	
+	#### HEALTH / MANA ALTERING
+	if modifyHealth < 0:
+		text += "Owner pays %s Health" % modifyHealth
+	elif modifyHealth > 0:
+		text += "Owner gains %s Health" % modifyHealth
+		
+	if modifyMana < 0:
+		text += "Owner pays %s Mana" % modifyMana
+	elif modifyMana > 0:
+		text += "Owner gains %s Mana" % modifyMana
+	
 	
 	#### CARD DRAW
 	if drawCards > 0:
