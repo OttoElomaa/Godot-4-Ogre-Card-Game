@@ -517,7 +517,7 @@ func updateCardLabels():
 		glow.get_node("HealthGlowDown").show()
 		
 
-
+###############################################################################
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
@@ -534,10 +534,12 @@ func animateDestroyCard():
 	if actionState == CardActionStates.DESTROYED:
 		$BodyAnimations.play("DestroyBoardCard")
 	
+	
 #### CALLED IN ANIMATION "DestroyBoardCard"
 func destroyCardTwo():
 	cardsManager.moveToDiscard(self)
 
+#################################################################################
 
 
 func rotateRestingCard(willRest:bool):

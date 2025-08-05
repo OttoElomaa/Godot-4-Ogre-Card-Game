@@ -87,11 +87,12 @@ func drawCard(sourceDeck:Node,targetHand:Node):
 func updateHandCardsVisuals():
 	var x_offset := 0
 	for c:Card in $PlayerHand.get_children():
-		c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
-		x_offset += 180
-		
-		c.statesHand()
-		c.updateCardVisuals()
+		if c.checkAlive():
+			c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
+			x_offset += 180
+			
+			c.statesHand()
+			c.updateCardVisuals()
 	
 	x_offset = 0
 	for c in $EnemyHand.get_children():
@@ -117,8 +118,8 @@ func _physics_process(delta: float) -> void:
 		
 	#### HIGHLIGHT A CARD ON HOVER -> Not when mouse over a stack of cards
 	#### CHECK IS INITIATED Only on HOVER ON/OFF. -> turns on HoverCheckNeeded
-	if hoverCheckNeeded and not currentHoveredCards.is_empty():
-		if not currentDraggedCard: #### TURN These Checks OFF WHEN DRAGGING
+	if hoverCheckNeeded:
+		if not currentDraggedCard and not currentHoveredCards.is_empty(): #### TURN These Checks OFF WHEN DRAGGING
 			
 			#### TURN OFF HIGHLIGHT For All Cards In Stack EXCEPT TOP CARD (Last Index)
 			var lastIndex := currentHoveredCards.size() - 1
@@ -197,20 +198,26 @@ func handleFinishDraggingCard() -> Node:
 	var success := false
 	var c = currentDraggedCard
 	
+	#################################################
 	#### HANDLE RITUAL USE CASE
 	var resultCards:Array = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	var target:Card = null
 	
+	
+	#### GET CARDS UNDER MOUSE WHEN DRAGGING FINISHED
 	if not resultCards.is_empty():
 		for res in resultCards:
 			if not getCollidedObject(res) == currentDraggedCard:
 				target = getCollidedObject(res)
-		
-		if target and c.isRitual:
-			success = battleSystem.handlePlayerRitual(c, target)
-	if success:
-		c.destroyAndAnimate(true)
 	
+	#### TRIGGER RITUAL WITH OR WITHOUT TARGET FOUND			
+	if c.isRitual:
+		success = battleSystem.handlePlayerRitual(c, target)	
+		if success:
+			#c.destroyAndAnimate(true)
+			return
+	
+	#############################################################
 	#### HANDLE ATTACKING
 	#### FIND CARD SLOT
 	var results:Array = main.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
@@ -273,6 +280,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	battleSystem.updateResourceLabels()
 	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
 	return true
+
 
 
 func placeCardInSlot(card:Card, slot:CardSlot) -> bool:

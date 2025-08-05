@@ -170,26 +170,32 @@ func handlePlayerAttack():
 		return
 
 
-
+#### FOR PLAYING 'RITUAL' CARDS
 func handlePlayerRitual(c:Card, target:Card) -> bool:
+	
+	var success := false
+	
+	if playerMana < c.manaCost: #### CAN'T AFFORD, RETURN
+		return success
+	
 	
 	#### GET CARD in SLOT
 	if target:
-		var success = c.actions.handleRitual(target)
-		#if success:
-			#c.destroyAndAnimate(true)
-		return success
-	
-	#### IF CARD=NULL, TARGET ENEMY PORTRAIT
+		success = c.actions.handleRitual(target)
 	else:
-		handlePlayerAttackEnemy()
+		success = c.actions.handleRitual(null)
+		
+	if success:
+		c.destroyAndAnimate(true)
+		playerMana -= c.manaCost
+		cardsManager.updateHandCardsVisuals()
 		updateResourceLabels()
-		return true
 	
-	return false
+	return success
 
 
 
+#### FOR CARDS THAT HAVE THE 'CAST' JEYWORD
 func handlePlayerCast():
 	print("Click - Player trying to cast")
 	
