@@ -220,7 +220,7 @@ func handlePlayerAttackEnemy():
 	enemyHealth -= combatDamage
 	
 	c.playAttackAnimation()
-	#c.restAndAnimate(false)
+	c.restAndAnimate(false)
 	endAttackState()
 	c.countersNode.togglePhased(false)
 
@@ -235,15 +235,13 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	
 	#### PLAYER HAS BLOCKERS, FIND KILLABLE BLOCKER
 	for other in blockers:
-		#if c.checkHasLethal(other): #### HAS LETHAL DAMAGE -> Attack
 		target = other
 		
 	
 	#### TARGET FOUND, ATTACK TARGET CARD
 	if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
-		c.playAttackAnimation()
-		#if not resolveAttack(c, target):
+		var success = resolveAttack(c, target)
 			#c.restAndAnimate(false)
 	
 	#### NO BLOCKERS, ATTACK PLAYER
@@ -278,8 +276,6 @@ func handlePlayerAttackCreature(target:Card):
 		return
 	
 	#### VALID TARGET - RESOLVE ATTACK
-	currentAttackingCard.playAttackAnimation()
-	endAttackState()
 	resolveAttack(currentAttackingCard, target)
 		
 
@@ -288,6 +284,9 @@ func handlePlayerAttackCreature(target:Card):
 #### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
+	
+	attackCard.playAttackAnimation()
+	endAttackState()
 	
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
 	var cardsToDestroy := []
@@ -302,8 +301,8 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	#### DEFENDER TOO RIGHT ????
 	targetCard.actions.handleBattleArt(attackCard)
 	
+	#### ATTACKING CANCELS PHASING -> PHASE IN
 	attackCard.countersNode.togglePhased(false)
-	
 	
 	
 	#### DON'T REST-ANIMATE DESTROYED ATTACKER CARD

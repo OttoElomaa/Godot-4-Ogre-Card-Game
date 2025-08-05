@@ -519,6 +519,7 @@ func updateCardLabels():
 
 
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
+#### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
 	if not isRitual:
 		mySlot.isAvailable = true
@@ -533,7 +534,7 @@ func animateDestroyCard():
 	if actionState == CardActionStates.DESTROYED:
 		$BodyAnimations.play("DestroyBoardCard")
 	
-
+#### CALLED IN ANIMATION "DestroyBoardCard"
 func destroyCardTwo():
 	cardsManager.moveToDiscard(self)
 
