@@ -293,7 +293,7 @@ position = Vector2(-300, 0)
 [node name="EnemyBoard" type="Node2D" parent="CardsManager"]
 
 [node name="PlayerHandPosition" type="Marker2D" parent="CardsManager"]
-position = Vector2(135, 1392)
+position = Vector2(260, 1392)
 
 [node name="EnemyHandPosition" type="Marker2D" parent="CardsManager"]
 position = Vector2(1505, 109)

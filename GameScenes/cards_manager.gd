@@ -86,13 +86,30 @@ func drawCard(sourceDeck:Node,targetHand:Node):
 #### OFFSETS, SHOW MANA COSTS, ETC.
 func updateHandCardsVisuals():
 	var x_offset := 0
-	for c:Card in $PlayerHand.get_children():
+	var offsetChange := 200
+	var x_gap_amount := 400
+	
+	var increment := 1
+	var incrementTreshold := 4
+	
+	var cards:Array = $PlayerHand.get_children()
+	if cards.size() > 7:
+		offsetChange = 140
+		incrementTreshold = 6
+		x_offset -= 100
+		x_gap_amount = 400
+	
+	
+	for c:Card in cards:
 		if c.checkAlive():
 			c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
-			x_offset += 180
+			x_offset += offsetChange
+			if increment == incrementTreshold:
+				x_offset += x_gap_amount
 			
 			c.statesHand()
 			c.updateCardVisuals()
+			increment += 1
 	
 	x_offset = 0
 	for c in $EnemyHand.get_children():
