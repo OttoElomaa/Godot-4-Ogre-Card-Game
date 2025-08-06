@@ -16,6 +16,13 @@ func createDesertDeck():
 	var card:Card = null
 	var cards := []
 	
+	#### GREEN DEFIANCE
+	for i in range(20):
+		cards.append(createCard("res://Cards/GreenDefiance/Cr-BriarFolk.tscn"))
+	for i in range(5):
+		cards.append(createCard("res://Cards/GreenDefiance/Cr-DeathKnight.tscn"))
+	
+	#### THE WILDS
 	for i in range(5):
 		cards.append(createCard("res://Cards/Wilds/Cr-Pikeman.tscn"))
 	for i in range(20):
@@ -32,8 +39,7 @@ func createDesertDeck():
 	
 	for i in range(10):
 		cards.append(createCard("res://Cards/Wilds/Cr-BlinkBeast.tscn"))
-	for i in range(5):
-		cards.append(createCard("res://Cards/GreenDefiance/Cr-DeathKnight.tscn"))
+	
 	for i in range(10):
 		cards.append(createCard("res://Cards/Wilds/Cr-Alhaja-Pious.tscn"))
 	

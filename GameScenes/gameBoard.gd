@@ -120,6 +120,15 @@ func changeMana(amount:int, isEnemy:bool):
 		$BattleSystem.playerMana += amount
 
 
+func changeHealth(amount:int, isEnemy:bool):
+	
+	if isEnemy:
+		$BattleSystem.enemyHealth += amount
+	else:
+		$BattleSystem.playerHealth += amount
+
+
+
 ########################################################################################
 
 func checkSlotPlayer(slot:CardSlot):
@@ -173,6 +182,10 @@ func updateUi(turnCount:int):
 	$CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel.text = boardName
 	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
 
+
+func updateResourceLabelsHelp():
+	updateResourceLabels(battleSystem.playerHealth, 
+	battleSystem.playerMana, battleSystem.enemyHealth, battleSystem.enemyMana)
 
 func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
 	$Portraits/PlayerHealthLabel.text = "%d" % playerHealth

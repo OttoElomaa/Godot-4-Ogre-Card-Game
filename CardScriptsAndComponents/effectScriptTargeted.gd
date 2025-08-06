@@ -18,7 +18,7 @@ func createTextTwo() -> String:
 
 
 
-func activateTargeted(target:Card):
+func activateTargeted(target:Card, actor:Card):
 	var success := false
 	
 	

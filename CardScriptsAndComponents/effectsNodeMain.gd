@@ -108,57 +108,70 @@ func activateNode(node:Node, target:Card):
 	
 	for script in node.get_children():
 		if script.has_method("activateTargetless"):
-			success = script.activateTargetless()
+			success = script.activateTargetless(myCard)
 		elif target:
 			if script.has_method("activateTargeted"):
-				success = script.activateTargeted(target)
+				success = script.activateTargeted(target, myCard)
 	
 	if success:
 		if not node == payoffNode:
 			handlePayoff(target)
 	
-	
 	#### UPDATE VISUALS AFTER ACTION
 	MyTools.updateBoardCardsVisuals()
-	#myCard.updateCardVisuals()
-	#if target:
-		#target.updateCardVisuals()
+	return success
+
+
+
+func isTargetless(node:Node) -> bool:
+	for script in node.get_children():
+		if script.has_method("activateTargetless"):
+			return true
+	return false
+
+
+func isTargeted(node:Node) -> bool:
+	for script in node.get_children():
+		if script.has_method("activateTargeted"):
+			return true
+	return false
+
+##############################################################
+
+func handleArrival(target:Card) -> bool:
+	return activateNode(arrivalNode, target)
+
+
+func handleRitual(target:Card) -> bool:
+	return activateNode(ritualNode, target)
+
+
+func handleCast(target:Card) -> bool:
+	var success:bool = activateNode(castNode, target)
+	if success:
+		myCard.restAndAnimate(true)
 	
 	return success
 
 
-##############################################################
-
-func handleArrival(target:Card):
-	return activateNode(arrivalNode, target)
-
-
-func handleRitual(target:Card):
-	return activateNode(ritualNode, target)
-
-
-func handleCast(target:Card):
-	return activateNode(castNode, target)
-
-
-func handleBattleArt(target:Card):
+func handleBattleArt(target:Card) -> bool:
 	return activateNode(battleArtNode, target)
 
 
-func handleOnTurn(target:Card):
+func handleOnTurn(target:Card) -> bool:
 	return activateNode(onTurnNode, target)
 
 
 
 ######################################################
-func handlePayoff(target:Card):
+func handlePayoff(target:Card) -> bool:
 	return activateNode(payoffNode, target)
 
 
 
 ##################################################
 
-func checkHasCast():
+func checkHasCast() -> bool:
 	if castNode.get_children().is_empty():
 		return false
 	return true

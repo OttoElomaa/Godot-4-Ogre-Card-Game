@@ -2,8 +2,8 @@ extends EffectScript
 
 
 
-@export var modifyMana := 0
 @export var modifyHealth := 0
+@export var modifyMana := 0
 
 @export var drawCards := 0
 
@@ -45,10 +45,20 @@ func createTextTwo() -> String:
 
 
 
-func activateTargetless():
+func activateTargetless(actor:Card):
 	var success := false
-	
+		
 	########################################## TARGETLESS EFFECTS
+	
+	#### MODIFY HEALTH/MANA
+	if modifyHealth != 0:
+		MyTools.changeHealth(modifyHealth, actor.isEnemyCard)
+		success = true
+	if modifyMana != 0:
+		MyTools.changeMana(modifyMana, actor.isEnemyCard)
+		success = true
+	
+	
 	#### CARD DRAW
 	if drawCards > 0:
 		for i in range(drawCards):

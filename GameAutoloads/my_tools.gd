@@ -29,6 +29,7 @@ func checkNodeValidity(node) -> bool:
 	return true
 
 
+
 func handlePlaceCardInSlot(card:Card, slot:CardSlot):
 	
 	#var cardManager = get_tree().get_first_node_in_group("cardManager")
@@ -69,8 +70,13 @@ func handleDrawCard(isEnemy:bool):
 	cardsManager.checkIsEnemyAnddrawCard(isEnemy)
 
 
+
 func changeMana(amount:int, isEnemy:bool):
 	gameBoard.changeMana(amount, isEnemy)
+
+
+func changeHealth(amount:int, isEnemy:bool):
+	gameBoard.changeHealth(amount, isEnemy)
 	
 
 
@@ -84,6 +90,8 @@ func getBoardCards(isEnemy:bool):
 
 
 func updateBoardCardsVisuals():
+	gameBoard.updateResourceLabelsHelp()
+	
 	for c:Card in getBoardCards(true):
 		c.updateCardVisuals()
 	for c:Card in getBoardCards(false):

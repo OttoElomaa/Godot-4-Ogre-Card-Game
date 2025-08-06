@@ -53,7 +53,7 @@ func _input(e: InputEvent) -> void:
 		
 		if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
 			if e.is_pressed():
-				handlePlayerCast()
+				handlePlayerCastTargeting()
 
 
 func _physics_process(delta: float) -> void:
@@ -195,8 +195,40 @@ func handlePlayerRitual(c:Card, target:Card) -> bool:
 
 
 
-#### FOR CARDS THAT HAVE THE 'CAST' JEYWORD
-func handlePlayerCast():
+func cardCastButtonPressed() -> void:
+	
+	currentCastingCard = main.actionMenuCard
+	var c = main.actionMenuCard
+	
+	if c:
+		if c.actions.isTargetless(c.actions.castNode):
+			handlePlayerCastActivate(false)
+			
+		else:
+			handlePlayerCastActivate(true)
+	
+	
+	
+func handlePlayerCastActivate(isTargeted:bool):
+	var success := false
+	
+	#### TARGETED CAST -> SHOW Cast Line, SET CAST STATE
+	if isTargeted:
+		castLineShown = true
+		States.gameState = States.GameStates.CAST
+		$CastLine.show()
+		castLine.points[0] = currentCastingCard.position
+			
+	else:
+		success = currentCastingCard.actions.handleCast(null)
+		currentCastingCard = null
+	
+	main.toggleCardActionMenu(false, null)
+	
+
+
+#### FOR CARDS THAT HAVE THE 'CAST' KEYWORD
+func handlePlayerCastTargeting():
 	print("Click - Player trying to cast")
 	
 	#### GET CARDS AT MOUSE POSITION
@@ -207,7 +239,6 @@ func handlePlayerCast():
 		var target:Card = getCollidedObject(r)
 		prints("Cast target card: ", target)
 		if currentCastingCard.actions.handleCast(target):
-			currentCastingCard.restAndAnimate(true)
 			currentCastingCard = null
 			endCastState()
 			return
@@ -348,13 +379,5 @@ func getCollidedObject(result):
 	return result.collider.get_parent()
 
 
-func cardCastButtonPressed() -> void:
-	
-	currentCastingCard = main.actionMenuCard
-	castLineShown = true
-	States.gameState = States.GameStates.CAST
-	
-	$CastLine.show()
-	castLine.points[0] = currentCastingCard.position
-	main.toggleCardActionMenu(false, null)
+
 	
