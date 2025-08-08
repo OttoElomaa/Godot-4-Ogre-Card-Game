@@ -172,21 +172,15 @@ func handlePlayerAttack():
 
 #### FOR PLAYING 'RITUAL' CARDS
 func handlePlayerRitual(c:Card, target:Card) -> bool:
-	
 	var success := false
-	
 	if playerMana < c.manaCost: #### CAN'T AFFORD, RETURN
 		return success
 	
+	#### RESOLVE RITUAL IN CARD'S ACTION NODE (Could be TARGETED or TARGETLESS)
+	success = c.actions.handleRitual(target)
 	
-	#### GET CARD in SLOT
-	if target:
-		success = c.actions.handleRitual(target)
-	else:
-		success = c.actions.handleRitual(null)
-		
 	if success:
-		c.destroyAndAnimate(true)
+		cardsManager.discardCard(c, true)
 		playerMana -= c.manaCost
 		cardsManager.updateHandCardsVisuals()
 		updateResourceLabels()
@@ -354,9 +348,9 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
 	for c:Card in cardsToDestroy:
 		if c == attackCard:
-			c.destroyAndAnimate(false)
+			cardsManager.discardCard(c, false)
 		else:
-			c.destroyAndAnimate(true)
+			cardsManager.discardCard(c, true)
 		
 	return attackerDestroyed
 

@@ -85,21 +85,24 @@ func drawCard(sourceDeck:Node,targetHand:Node):
 	
 #### OFFSETS, SHOW MANA COSTS, ETC.
 func updateHandCardsVisuals():
+	
+	#### PLAYER HAND STUFF #################################
+	#### BASELINE: 4 CARDS ON RIGHT SIDE OF PORTRAIT
 	var x_offset := 0
 	var offsetChange := 200
-	var x_gap_amount := 400
-	
+	var x_gap_amount := 400   ## GAP, Then 3 CARDS ON LEFT SIDE
 	var increment := 1
 	var incrementTreshold := 4
 	
 	var cards:Array = $PlayerHand.get_children()
+	
+	#### IF MORE THAN 7 HAND CARDS: 6 CARDS ON RIGHT SIDE, 4 ON LEFT
 	if cards.size() > 7:
-		offsetChange = 140
+		offsetChange = 140    ## CARDS CLOSER TOGETHER
 		incrementTreshold = 6
 		x_offset -= 100
-		x_gap_amount = 400
 	
-	
+	#### PLACE EACH CARD IN PLAYER HAND
 	for c:Card in cards:
 		if c.checkAlive():
 			c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
@@ -231,7 +234,6 @@ func handleFinishDraggingCard() -> Node:
 	if c.isRitual:
 		success = battleSystem.handlePlayerRitual(c, target)	
 		if success:
-			#c.destroyAndAnimate(true)
 			return
 	
 	#############################################################
@@ -260,11 +262,6 @@ func handleFinishDraggingCard() -> Node:
 	updateHandCardsVisuals()
 	return null
 
-
-
-func handlePlayRitual(c:Card, slot:CardSlot) -> bool:
-	
-	return false
 
 
 
@@ -477,6 +474,21 @@ func findValidNodesInArray(cards:Array):
 	return validCards
 
 
+######################################################
+#### DISCARD STUFF
+
+func handleDiscardAtDraw():
+	pass
+	
+
+func handleDiscardAtTurnEnd():
+	pass
+
+
+func discardCard(card:Card, toAnimate:bool):
+	card.destroyAndAnimate(toAnimate)
+	
+#### CALLED FROM DESTROY ANIMATION IN CARD NODE
 func moveToDiscard(card:Card):
 	card.reparent($Discard)
 	card.position = Vector2.ZERO

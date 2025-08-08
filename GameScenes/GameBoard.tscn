@@ -139,7 +139,7 @@ texture = ExtResource("4_1qylb")
 position = Vector2(1176.5, 1266)
 texture = ExtResource("5_4lnmq")
 
-[node name="EnemyResourceHolderSprite2" type="Sprite2D" parent="Portraits"]
+[node name="EnemyResourceHolderSprite" type="Sprite2D" parent="Portraits"]
 position = Vector2(1243.5, 150)
 texture = ExtResource("5_4lnmq")
 
