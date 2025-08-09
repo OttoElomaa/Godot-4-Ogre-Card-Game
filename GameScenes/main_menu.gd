@@ -62,23 +62,15 @@ func buttonPressedToggleBestiary() -> void:
 		allCards.append_array( loadCardsInFolder("res://Cards/GreenDefiance/") )
 		allCards.append_array( loadCardsInFolder("res://Cards/Wilds/") )
 		
+		#### PLACE CARDS IN BESTIARY SLOTS
+		var bestiarySlots: Array = $Bestiary/Slots.get_children()
+		var placedCards = MyTools.placeCardsInSlotArray(allCards, bestiarySlots)
 		
-		var counter := 0
-		var card:Card = null
-		for slot in $Bestiary/Slots.get_children():
-			if counter < allCards.size():
-				card = allCards[counter]
-				card.position = slot.position
-				$Bestiary/Cards.add_child(card)
-				
-				card.turnOnBestiaryVisuals()
-				
-				counter += 1
-			
-			
+		for card:Card in placedCards:
+			$Bestiary/Cards.add_child(card)
+			card.turnOnBestiaryVisuals()
 		
 		
-
 
 func buttonPressedExitGame() -> void:
 	get_tree().quit()

@@ -23,6 +23,8 @@ var dumbHandDrawCounter := 0
 var mainCardInfoShown := false
 var hoverCheckNeeded := false
 
+var graveyardVisible := false
+
 
 
 func _ready() -> void:
@@ -490,5 +492,34 @@ func discardCard(card:Card, toAnimate:bool):
 	
 #### CALLED FROM DESTROY ANIMATION IN CARD NODE
 func moveToDiscard(card:Card):
-	card.reparent($Discard)
+	
+	card.reparent($Discard/Cards)
 	card.position = Vector2.ZERO
+	
+	#### PLACE DISCARD CARDS IN SLOTS TO DISPLAY
+	var discardCards = $Discard/Cards.get_children()
+	var discardSlots = $Discard/Slots.get_children()
+	MyTools.placeCardsInSlotArray(discardCards, discardSlots)
+
+
+func buttonPressedToggleGraveyard() -> void:
+	var mainCamera:Camera2D = main.cameraMainBoard
+	var graveyardCamera := $Discard/CameraGraveyard
+	
+	#### DISPLAY GRAVEYARD
+	if graveyardVisible:
+		mainCamera.enabled = true
+		graveyardCamera.enabled = false
+		graveyardVisible = false
+	
+	#### DISPLAY MAIN GAME BOARD	
+	else:
+		mainCamera.enabled = false
+		graveyardCamera.enabled = true
+		graveyardVisible = true
+	
+	
+	
+	
+	
+	

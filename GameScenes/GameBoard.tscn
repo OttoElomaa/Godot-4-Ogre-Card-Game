@@ -299,9 +299,73 @@ position = Vector2(260, 1392)
 position = Vector2(1505, 109)
 
 [node name="Discard" type="Node2D" parent="CardsManager"]
-position = Vector2(-584, -252)
+position = Vector2(-631, -2197)
 
 [node name="DiscardPosition" type="Marker2D" parent="CardsManager/Discard"]
+
+[node name="CameraGraveyard" type="Camera2D" parent="CardsManager/Discard"]
+anchor_mode = 0
+enabled = false
+zoom = Vector2(0.76, 0.76)
+
+[node name="Cards" type="Node2D" parent="CardsManager/Discard"]
+
+[node name="Slots" type="Node2D" parent="CardsManager/Discard"]
+z_index = -1
+
+[node name="BestiarySlot" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(470, 279)
+
+[node name="BestiarySlot2" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(700, 279)
+
+[node name="BestiarySlot3" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(930, 279)
+
+[node name="BestiarySlot4" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1160, 279)
+
+[node name="BestiarySlot5" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1390, 279)
+
+[node name="BestiarySlot6" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1620, 279)
+
+[node name="BestiarySlot7" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(470, 729)
+
+[node name="BestiarySlot8" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(700, 729)
+
+[node name="BestiarySlot9" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(930, 729)
+
+[node name="BestiarySlot10" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1160, 729)
+
+[node name="BestiarySlot11" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1390, 729)
+
+[node name="BestiarySlot12" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1620, 729)
+
+[node name="BestiarySlot13" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(470, 1179)
+
+[node name="BestiarySlot14" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(700, 1179)
+
+[node name="BestiarySlot15" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(930, 1179)
+
+[node name="BestiarySlot16" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1160, 1179)
+
+[node name="BestiarySlot17" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1390, 1179)
+
+[node name="BestiarySlot18" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1620, 1179)
 
 [node name="PlayerSlots" type="Node2D" parent="."]
 z_index = -1
@@ -466,18 +530,41 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/EndTurnPane"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EndTurnPane"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBoxContainer"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/Panel"]
+[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel"]
 layout_mode = 2
 text = "End Turn"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="EndTurnButton" type="Button" parent="CanvasLayer/EndTurnPane/Panel"]
+[node name="EndTurnButton" type="Button" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("19_j663k")
+theme_override_styles/normal = ExtResource("20_tic85")
+
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("12_i42kc")
+
+[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Show / Hide Graveyard"
+label_settings = ExtResource("18_tppv1")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ToggleGraveyardButton" type="Button" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel2"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("19_j663k")
 theme_override_styles/normal = ExtResource("20_tic85")
@@ -538,7 +625,7 @@ text = "Goes Here"
 label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="CameraMainBoard" type="Camera2D" parent="."]
 anchor_mode = 0
 zoom = Vector2(0.76, 0.76)
 
@@ -594,6 +681,7 @@ horizontal_alignment = 1
 [connection signal="timeout" from="BattleSystem/EnemyStartCombatTimer" to="BattleSystem" method="timeoutEnemyStartCombat"]
 [connection signal="timeout" from="BattleSystem/EndEnemyTurnTimer" to="BattleSystem" method="timeoutEndEnemyTurn"]
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/EndTurnPane/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel2/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]

@@ -98,4 +98,22 @@ func updateBoardCardsVisuals():
 		c.updateCardVisuals()
 
 
+
+func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
+	
+	var counter := 0
+	var card:Card = null
+	var placedCards := []
+	
+	for slot in slots:
+		if counter < cards.size():
+			card = cards[counter]
+			card.position = slot.position
+			placedCards.append(card)
+			counter += 1
+	
+	return placedCards
+
+
+
 	

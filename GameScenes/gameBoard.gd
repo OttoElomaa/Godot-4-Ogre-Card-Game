@@ -6,6 +6,8 @@ class_name GameBoard
 @onready var cardsManager := $CardsManager
 @onready var battleSystem := $BattleSystem
 
+@onready var cameraMainBoard := $CameraMainBoard
+
 
 enum CardSlotTypes {
 	PLAYER, ENEMY
@@ -94,7 +96,7 @@ func toggleCardActionMenu(enable:bool, card:Card):
 			#### TURN ON CARD ACTION MENU
 			States.gameState = States.GameStates.CARD_ACT_MENU
 			actionMenuCard = card
-			$ActionMenuCanvas.offset = get_global_mouse_position() * $Camera2D.zoom.x
+			$ActionMenuCanvas.offset = get_global_mouse_position() * $CameraMainBoard.zoom.x
 			$ActionMenuCanvas.show()
 			
 			#### CAST BUTTON
