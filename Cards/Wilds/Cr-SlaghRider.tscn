@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_lcboh"]
 [ext_resource type="PackedScene" uid="uid://cgchj318fykoy" path="res://CardScriptsAndComponents/EffectTargeted.tscn" id="2_4vpam"]
-[ext_resource type="Texture2D" uid="uid://bl33hix47cn41" path="res://Art/CardArt/card-art-creature-slagh-rider.png" id="2_lcboh"]
+[ext_resource type="Texture2D" uid="uid://bps2xijib187r" path="res://Art/CardArt/card-art-creature-slagh-rider.jpg" id="3_4vpam"]
 
 [node name="Card-Cr-SlaghRider" instance=ExtResource("1_lcboh")]
 cardName = "Slagh Rider"
@@ -15,4 +15,4 @@ targetGroup = 1
 bolsterDamage = 2
 
 [node name="Art" parent="Frontside" index="1"]
-texture = ExtResource("2_lcboh")
+texture = ExtResource("3_4vpam")

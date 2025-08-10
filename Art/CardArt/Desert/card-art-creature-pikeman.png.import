@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl33hix47cn41"
-path="res://.godot/imported/card-art-creature-slagh-rider.png-155764123d53eb4f3e9c002cb7cf4da2.ctex"
+uid="uid://dpdvl0rumn58v"
+path="res://.godot/imported/card-art-creature-pikeman.png-94c0731d89c8b1217483e1a91d7c0439.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-creature-slagh-rider.png"
-dest_files=["res://.godot/imported/card-art-creature-slagh-rider.png-155764123d53eb4f3e9c002cb7cf4da2.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-pikeman.png"
+dest_files=["res://.godot/imported/card-art-creature-pikeman.png-94c0731d89c8b1217483e1a91d7c0439.ctex"]
 
 [params]
 
