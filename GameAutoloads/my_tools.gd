@@ -21,10 +21,11 @@ func checkNodeValidity(node) -> bool:
 		return false
 	if node.is_queued_for_deletion():
 		return false
+	
 	#### SPECIFIC TO CARDS
-	if node is Card:
-		if not node.checkAlive():
-			return false
+	#if node is Card:
+		#if not node.checkAlive():
+			#return false
 	
 	return true
 
@@ -60,7 +61,7 @@ func findEmptyCardSlots(isEnemy) -> Array:
 
 func handleCardHover(isHovering:bool, card:Card):
 	if States.gameState == States.GameStates.BESTIARY:
-		pass
+		card.mainMenu.toggleCardInfo(isHovering, card)
 	else:
 		cardsManager.toggleCardHover(isHovering, card)
 	

@@ -1,4 +1,5 @@
 extends Node2D
+class_name  CardsManager
 
 
 var COLLISION_MASK_CARD := 1
@@ -12,7 +13,7 @@ var CARD_HIGHLIGHTED_SCALE := Vector2(1.25, 1.25)
 
 
 var main:GameBoard = null
-var battleSystem:Node = null
+var battleSystem:BattleSystem = null
 
 var screenSize:Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO)
 
@@ -344,6 +345,7 @@ func toggleCardHover(isHovering:bool, card:Card):
 func toggleCardHighlight(card:Card, toHighlight:bool):
 	if not MyTools.checkNodeValidity(card):
 		return
+		#if not card.actionState == card.CardActionStates.DESTROYED:
 			
 	if toHighlight:
 		if not card in currentHoveredCards:
@@ -400,6 +402,9 @@ func connectCardSignal(card:Card):
 func startPlayerTurn():
 	main.showPlayerTurnPopup()
 	wakeBoardCards($PlayerBoard)
+	handleTurnStartReset($PlayerBoard)
+	handleTurnStartReset($EnemyBoard)
+	
 	arriveTravelingBoardCards($EnemyBoard)
 	
 	drawCard($PlayerDeck, $PlayerHand)
@@ -408,16 +413,25 @@ func startPlayerTurn():
 
 func startEnemyTurn():
 	wakeBoardCards($EnemyBoard)
+	handleTurnStartReset($EnemyBoard)
+	handleTurnStartReset($PlayerBoard)
+	
 	arriveTravelingBoardCards($PlayerBoard)
 	
 	var newCard = drawCard($EnemyDeck, $EnemyHand)
 	
 
 
+func handleTurnStartReset(board:Node):
+	for c:Card in board.get_children():
+		c.handleTurnStartReset()
+
+
+
 func wakeBoardCards(board:Node):
 	#### RESETS AND CLEANUP
 	for c:Card in board.get_children():
-		c.handleTurnStartReset()
+		#c.handleTurnStartReset()
 		c.wake()
 	#### STUFF LIKE ON-TURN-START TRIGGERS
 	for c:Card in board.get_children():
@@ -496,10 +510,13 @@ func moveToDiscard(card:Card):
 	card.reparent($Discard/Cards)
 	card.position = Vector2.ZERO
 	
+	card.handleEnterGraveyard()
+	
 	#### PLACE DISCARD CARDS IN SLOTS TO DISPLAY
 	var discardCards = $Discard/Cards.get_children()
 	var discardSlots = $Discard/Slots.get_children()
 	MyTools.placeCardsInSlotArray(discardCards, discardSlots)
+
 
 
 func buttonPressedToggleGraveyard() -> void:

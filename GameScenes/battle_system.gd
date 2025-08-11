@@ -1,10 +1,10 @@
 extends Node2D
-
+class_name  BattleSystem
 
 
 
 var main:GameBoard = null
-var cardsManager:Node = null
+var cardsManager:CardsManager = null
 
 @onready var attackLine := $AttackLine
 @onready var castLine := $CastLine

@@ -68,9 +68,16 @@ func buttonPressedToggleBestiary() -> void:
 		
 		for card:Card in placedCards:
 			$Bestiary/Cards.add_child(card)
-			card.turnOnBestiaryVisuals()
+			card.turnOnBestiaryVisuals(self)
 		
 		
 
 func buttonPressedExitGame() -> void:
 	get_tree().quit()
+
+
+
+
+func toggleCardInfo(enable:bool, card:Card):
+	var cardInfo := $CanvasLayer/CardInfoPane/CardInfoPanel
+	cardInfo.toggleCardInfo(enable, card)

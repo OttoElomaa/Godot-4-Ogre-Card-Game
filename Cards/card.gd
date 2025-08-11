@@ -87,7 +87,8 @@ var isPhased: bool:
 ##########################################################
 
 
-var cardsManager:Node = null
+var cardsManager:CardsManager = null
+var mainMenu: Node = null
 
 var mySlot: CardSlot = null
 var isEnemyCard := false
@@ -199,14 +200,15 @@ func handleTurnStartReset():
 func handleTurnStartActions():
 	#### TRIGGER ON TURN START EFFECTS
 	if States.isStatePlay():
-		actions.handleOnTurn(null)
+		actions.handleOnTurn(null) #### TRIGGER ON-TURN NODE
 
 
 
 #### HANDLE CARD BEING PLAYED ON BOARD
 func handleArrival():
 	basicSetup()
-	actions.handleArrival(null) #### TRIGGER ARRIVAL NODE
+	actions.handleArrival(null)  #### TRIGGER ARRIVAL NODE
+	actions.handleOnTurn(null)   #### TRIGGER ON-TURN NODE
 	
 	#if hasShadow:
 		#countersNode.togglePhased(true)
@@ -256,13 +258,9 @@ func toggleFrontSide(toShow:bool):
 
 #############################################################
 
-#func rest():
-	#resting = true
-	#$BodyAnimations/RestTimer.start()
-
 #### HANDLE REST
 #### ANIMATE = ROTATE CARD IMMEDIATELY
-#### DON'T ANIMATE = PLAY ANIMATION ON DELAY?? Why?
+#### DON'T ANIMATE = PLAY ANIMATION ON DELAY? ->TO PLAY ATTACK ANIMATION FIRST
 func restAndAnimate(toAnimate:bool):
 	isResting = true
 	if toAnimate:
@@ -270,11 +268,13 @@ func restAndAnimate(toAnimate:bool):
 	else:
 		$BodyAnimations/RestTimer.start()
 
+
 func wake():
 	isResting = false
 	rotateRestingCard(false)
 
 ########################################################
+
 
 func switchStates():
 	if actionState == CardActionStates.ACTIVE:
@@ -447,7 +447,9 @@ func toggleActionStateIndicator(enable:bool):
 
 
 
-func turnOnBestiaryVisuals():
+func turnOnBestiaryVisuals(mainMenu:Node):
+	self.mainMenu = mainMenu
+	
 	toggleManaCostIndicator(true)
 	toggleActionStateIndicator(false)
 	toggleTraveling(false)
@@ -456,6 +458,18 @@ func turnOnBestiaryVisuals():
 	$Frontside/CardNameBestiary/Label.text = cardName
 	
 	updateCardLabels()
+
+
+
+func handleEnterGraveyard():
+	handleTurnStartReset()
+	
+	toggleManaCostIndicator(true)
+	toggleActionStateIndicator(false)
+	toggleTraveling(false)
+	
+	updateCardLabels()
+
 
 
 #### VISUALS - ANIMATIONS
