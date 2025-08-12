@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://babshaacwyqaq"]
+
+[ext_resource type="Script" uid="uid://cuh72cjn47ixc" path="res://GameScenes/intro.gd" id="1_knwgi"]
+[ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/typewriter_textbox.tscn" id="2_knwgi"]
+[ext_resource type="Texture2D" uid="uid://iro7vjuquihg" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-01.png" id="2_yaago"]
+[ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-02.png" id="3_vc82o"]
+[ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="4_irmk7"]
+[ext_resource type="Texture2D" uid="uid://yy4b6om5as5s" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-02.png" id="5_58g4w"]
+[ext_resource type="PackedScene" uid="uid://cdcyvjftrdsxg" path="res://GameScenes/audio.tscn" id="7_58g4w"]
+[ext_resource type="AudioStream" uid="uid://b12p3w7ls8cpn" path="res://Audio/BGM/Cards of Achra OST - Main Menu Theme.ogg" id="8_75oj8"]
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_knwgi")
+
+[node name="Textbox 1" parent="." instance=ExtResource("2_knwgi")]
+offset_left = 756.0
+offset_top = 329.0
+offset_right = 1173.0
+offset_bottom = 452.0
+theme = null
+script = null
+
+[node name="UpperCornerDecor" type="Sprite2D" parent="."]
+position = Vector2(313, 344)
+texture = ExtResource("2_yaago")
+
+[node name="LowerCornerDecor" type="Sprite2D" parent="."]
+position = Vector2(1597, 729)
+texture = ExtResource("3_vc82o")
+
+[node name="Leaves" type="Sprite2D" parent="LowerCornerDecor"]
+position = Vector2(-1375, -84)
+texture = ExtResource("4_irmk7")
+
+[node name="Leaves2" type="Sprite2D" parent="LowerCornerDecor"]
+position = Vector2(110, 99)
+texture = ExtResource("5_58g4w")
+
+[node name="Audio" parent="." instance=ExtResource("7_58g4w")]
+BGM = ExtResource("8_75oj8")

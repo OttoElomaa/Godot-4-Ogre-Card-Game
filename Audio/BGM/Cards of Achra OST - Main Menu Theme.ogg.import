@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b12p3w7ls8cpn"
+path="res://.godot/imported/Cards of Achra OST - Main Menu Theme.ogg-9273acb6869a4e3ac38340feaf30d700.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/BGM/Cards of Achra OST - Main Menu Theme.ogg"
+dest_files=["res://.godot/imported/Cards of Achra OST - Main Menu Theme.ogg-9273acb6869a4e3ac38340feaf30d700.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
