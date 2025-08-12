@@ -269,9 +269,11 @@ func handleFinishDraggingCard() -> Node:
 
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
+	#### SLOT STUFF
+	c.mySlot = slot
+	slot.toggleAvailable(false)
 	
-	var originalPos = c.position
-	placeCardInSlot(c, slot)	
+	var originalPos = c.position	
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
@@ -283,9 +285,19 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
 	#### PLAYER CARD. REPARENT AND TAKE MANA COST
 	else:
-		#c.position = slot.position
+		c.position = slot.position
 		c.reparent($PlayerBoard)
 		battleSystem.playerMana -= c.manaCost
+	
+	#### VISUAL STUFF
+	c.scale = Vector2.ONE
+	c.toggleFrontSide(true)
+	
+	#### SET ACTION STATE AND TRAVEL STATE	
+	c.toggleTraveling(true)
+	
+	#### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
+	c.setInitialActionState()
 	
 	
 	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
@@ -293,30 +305,6 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 
 	battleSystem.updateResourceLabels()
 	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
-	return true
-
-
-
-func placeCardInSlot(card:Card, slot:CardSlot) -> bool:
-	
-	card.scale = Vector2.ONE
-	card.toggleFrontSide(true)
-	
-	#### SLOT STUFF
-	card.mySlot = slot
-	slot.toggleAvailable(false)
-	
-	#### ONLY IF CREATURE...
-	if card.checkInert():
-		return true
-		
-	#### SET ACTION STATE AND TRAVEL STATE	
-	card.toggleTraveling(true)
-	
-	#### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
-	card.position = slot.position
-	card.setInitialActionState()
-	
 	return true
 
 

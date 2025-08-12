@@ -184,7 +184,6 @@ func createEffectText():
 	
 ########################################################		
 func basicSetup():
-	
 	if isRitual:
 		statesInert()
 	
@@ -194,9 +193,6 @@ func basicSetup():
 	
 	
 	
-	
-			
-
 func handleTurnStartReset():
 	tempDamage = damage
 	tempHealth = health
