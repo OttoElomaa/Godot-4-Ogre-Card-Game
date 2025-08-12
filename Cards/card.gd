@@ -463,6 +463,7 @@ func turnOnBestiaryVisuals(mainMenu:Node):
 
 func handleEnterGraveyard():
 	handleTurnStartReset()
+	wake()
 	
 	toggleManaCostIndicator(true)
 	toggleActionStateIndicator(false)
