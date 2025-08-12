@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpdvl0rumn58v"
-path="res://.godot/imported/card-art-creature-pikeman.png-94c0731d89c8b1217483e1a91d7c0439.ctex"
+uid="uid://curoofw6c3veq"
+path="res://.godot/imported/card-art-base-card-placeholder.jpg-11fc0a379d5535d2d8a6c3bd9eaf1699.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/Desert/card-art-creature-pikeman.png"
-dest_files=["res://.godot/imported/card-art-creature-pikeman.png-94c0731d89c8b1217483e1a91d7c0439.ctex"]
+source_file="res://Art/CardArt/card-art-base-card-placeholder.jpg"
+dest_files=["res://.godot/imported/card-art-base-card-placeholder.jpg-11fc0a379d5535d2d8a6c3bd9eaf1699.ctex"]
 
 [params]
 

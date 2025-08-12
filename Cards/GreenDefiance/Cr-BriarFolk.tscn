@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_epv8e"]
 [ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/EffectTargetless.tscn" id="2_c7feh"]
-[ext_resource type="Texture2D" uid="uid://bl0fms15do0xe" path="res://Art/CardArt/card-art-creature-briarfolk.jpg" id="2_epv8e"]
+[ext_resource type="Texture2D" uid="uid://b01fgy8k28uhs" path="res://Art/CardArt/GreenDefiance/card-art-creature-briarfolk.jpg" id="3_c7feh"]
 
 [node name="Card-Cr-BriarFolk" instance=ExtResource("1_epv8e")]
 cardName = "Briarfolk"
@@ -16,4 +16,4 @@ startingHealth = 1
 modifyMana = 1
 
 [node name="Art" parent="Frontside" index="1"]
-texture = ExtResource("2_epv8e")
+texture = ExtResource("3_c7feh")

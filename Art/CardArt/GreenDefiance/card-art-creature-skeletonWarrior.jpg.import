@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm48rqyud4hpd"
-path="res://.godot/imported/card-art-creature-ruk-raider.png-ba5929428ac98686559fcb9d78ca2a27.ctex"
+uid="uid://ddk2tjpttrqwm"
+path="res://.godot/imported/card-art-creature-skeletonWarrior.jpg-91d9a8cee6692edc89a61ff7b26048a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/Desert/card-art-creature-ruk-raider.png"
-dest_files=["res://.godot/imported/card-art-creature-ruk-raider.png-ba5929428ac98686559fcb9d78ca2a27.ctex"]
+source_file="res://Art/CardArt/GreenDefiance/card-art-creature-skeletonWarrior.jpg"
+dest_files=["res://.godot/imported/card-art-creature-skeletonWarrior.jpg-91d9a8cee6692edc89a61ff7b26048a0.ctex"]
 
 [params]
 

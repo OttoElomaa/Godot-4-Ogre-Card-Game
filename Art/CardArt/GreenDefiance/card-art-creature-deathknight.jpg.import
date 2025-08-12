@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8fv2mu03csy"
-path="res://.godot/imported/card-art-creature-deathknight.jpg-6951625dbd63fabb6a196b5b2e4944f6.ctex"
+path="res://.godot/imported/card-art-creature-deathknight.jpg-0664d68ce83f004eb1ef3a77473029eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-creature-deathknight.jpg"
-dest_files=["res://.godot/imported/card-art-creature-deathknight.jpg-6951625dbd63fabb6a196b5b2e4944f6.ctex"]
+source_file="res://Art/CardArt/GreenDefiance/card-art-creature-deathknight.jpg"
+dest_files=["res://.godot/imported/card-art-creature-deathknight.jpg-0664d68ce83f004eb1ef3a77473029eb.ctex"]
 
 [params]
 

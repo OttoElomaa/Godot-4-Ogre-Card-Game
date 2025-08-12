@@ -275,10 +275,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
-		var newPos = c.position
-		c.position = originalPos
-		var tween = get_tree().create_tween()
-		tween.tween_property(c, "position", newPos, 0.2)
+		MyTools.moveCardTweening(c, originalPos, c.position)
 		
 		c.reparent($EnemyBoard)
 		c.isEnemyCard = true
@@ -321,8 +318,8 @@ func placeCardInSlot(card:Card, slot:CardSlot) -> bool:
 	card.setInitialActionState()
 	
 	return true
-	
-	
+
+
 
 func toggleCardHover(isHovering:bool, card:Card):
 	if isHovering:

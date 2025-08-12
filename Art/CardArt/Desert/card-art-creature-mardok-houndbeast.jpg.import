@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be3k7rj1w72ah"
-path="res://.godot/imported/card-art-spell-blast.png-8bb1ed2d8a0f78ac70640bd32becfbad.ctex"
+uid="uid://ucoqlp6pe0yw"
+path="res://.godot/imported/card-art-creature-mardok-houndbeast.jpg-966ca4330392d0b345349fc7eb954e26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/Desert/card-art-spell-blast.png"
-dest_files=["res://.godot/imported/card-art-spell-blast.png-8bb1ed2d8a0f78ac70640bd32becfbad.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-mardok-houndbeast.jpg"
+dest_files=["res://.godot/imported/card-art-creature-mardok-houndbeast.jpg-966ca4330392d0b345349fc7eb954e26.ctex"]
 
 [params]
 

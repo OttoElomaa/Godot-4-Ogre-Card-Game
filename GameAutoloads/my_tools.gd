@@ -26,14 +26,18 @@ func checkNodeValidity(node) -> bool:
 	#if node is Card:
 		#if not node.checkAlive():
 			#return false
-	
 	return true
 
 
 
+func moveCardTweening(c:Card, originalPos:Vector2, newPos:Vector2):
+	c.position = originalPos
+	var tween = get_tree().create_tween()
+	tween.tween_property(c, "position", newPos, 0.2)
+
+
+
 func handlePlaceCardInSlot(card:Card, slot:CardSlot):
-	
-	#var cardManager = get_tree().get_first_node_in_group("cardManager")
 	cardsManager.handlePlaceCardInSlot(card, slot)
 
 

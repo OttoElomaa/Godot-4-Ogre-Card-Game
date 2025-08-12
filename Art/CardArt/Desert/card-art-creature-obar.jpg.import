@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq588jgcvxryv"
-path="res://.godot/imported/card-art-creature-Kull-assassin.jpg-59647fc574773d472c399fd2433ecdd0.ctex"
+uid="uid://ckc1e808l0bob"
+path="res://.godot/imported/card-art-creature-obar.jpg-80d407c2b4ac20699d99e5e77c4c2a7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/card-art-creature-Kull-assassin.jpg"
-dest_files=["res://.godot/imported/card-art-creature-Kull-assassin.jpg-59647fc574773d472c399fd2433ecdd0.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-obar.jpg"
+dest_files=["res://.godot/imported/card-art-creature-obar.jpg-80d407c2b4ac20699d99e5e77c4c2a7a.ctex"]
 
 [params]
 

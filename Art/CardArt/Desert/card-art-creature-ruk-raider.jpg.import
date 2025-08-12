@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcu6qrjgwyyf3"
-path="res://.godot/imported/card-art-ogre.png-60ee1bfd2449497f5de04ee57b5b47f7.ctex"
+uid="uid://w6nblsll4dhr"
+path="res://.godot/imported/card-art-creature-ruk-raider.jpg-555cbd4e8e449a631d1e864686a61eff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/CardArt/Desert/card-art-ogre.png"
-dest_files=["res://.godot/imported/card-art-ogre.png-60ee1bfd2449497f5de04ee57b5b47f7.ctex"]
+source_file="res://Art/CardArt/Desert/card-art-creature-ruk-raider.jpg"
+dest_files=["res://.godot/imported/card-art-creature-ruk-raider.jpg-555cbd4e8e449a631d1e864686a61eff.ctex"]
 
 [params]
 

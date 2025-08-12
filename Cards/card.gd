@@ -112,6 +112,9 @@ func _ready() -> void:
 	if boardOrTempNode is Node2D:
 		myOffset = get_parent().position
 	
+	
+	#$Frontside/Art.scale = Vector2(0.2, 0.2)
+	
 	if cardType == CardTypes.CREATURE:
 		$Frontside/Background/Creature.show()
 		$Frontside/Background/Spell.hide()
@@ -190,6 +193,8 @@ func basicSetup():
 	$Actions.setup(self)
 	
 	
+	
+	
 			
 
 func handleTurnStartReset():
@@ -222,9 +227,8 @@ func setInitialActionState():
 	
 	#### ENEMY CARDS ATTACK BY DEFAULT
 	if isEnemyCard: 
-		#if not hasShadow:
+		#if not keywordHandler.hasShadow:
 		statesActive()
-
 
 
 
@@ -283,27 +287,41 @@ func switchStates():
 		statesActive()
 
 
+
 func statesActive():
 	actionState = CardActionStates.ACTIVE
 	stateHandler.get_node("ActiveIcon").show()
 	
+	animateBlockingState(true)
 	
-	#### POSITION AS INDICATOR
-	var activeOffset := -50
-	if isEnemyCard:
-		activeOffset *= -1
-	position.y = mySlot.position.y + activeOffset
-	
-	countersNode.togglePhased(false)
-	
-	
+
 func statesPassive():
 	actionState = CardActionStates.PASSIVE
 	stateHandler.get_node("ActiveIcon").hide()
 	
+	#### POSITION AS INDICATOR
+	animateBlockingState(false)
+
+
+
+func animateBlockingState(toBlock:bool):
+	var newPos = mySlot.position
 	
 	#### POSITION AS INDICATOR
-	position.y = mySlot.position.y
+	if toBlock:
+		var activeOffset := -50
+		if isEnemyCard:
+			activeOffset *= -1
+		
+		newPos.y += activeOffset
+			
+		#position.y = mySlot.position.y + activeOffset
+		countersNode.togglePhased(false)
+	#else:
+		#position.y = mySlot.position.y
+	
+	MyTools.moveCardTweening(self, position, newPos)
+
 
 
 func statesInert():
