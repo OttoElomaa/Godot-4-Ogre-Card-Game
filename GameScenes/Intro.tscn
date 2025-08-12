@@ -12,29 +12,39 @@
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_knwgi")
 
-[node name="Textbox 1" parent="." instance=ExtResource("2_knwgi")]
-offset_left = 756.0
-offset_top = 329.0
-offset_right = 1173.0
-offset_bottom = 452.0
-theme = null
-script = null
+[node name="Audio" parent="." instance=ExtResource("7_58g4w")]
+BGM = ExtResource("8_75oj8")
 
-[node name="UpperCornerDecor" type="Sprite2D" parent="."]
+[node name="Decor" type="Node2D" parent="."]
+visible = false
+
+[node name="UpperCornerDecor" type="Sprite2D" parent="Decor"]
 position = Vector2(313, 344)
 texture = ExtResource("2_yaago")
 
-[node name="LowerCornerDecor" type="Sprite2D" parent="."]
+[node name="LowerCornerDecor" type="Sprite2D" parent="Decor"]
 position = Vector2(1597, 729)
 texture = ExtResource("3_vc82o")
 
-[node name="Leaves" type="Sprite2D" parent="LowerCornerDecor"]
-position = Vector2(-1375, -84)
+[node name="Leaves" type="Sprite2D" parent="Decor"]
+position = Vector2(222, 645)
 texture = ExtResource("4_irmk7")
 
-[node name="Leaves2" type="Sprite2D" parent="LowerCornerDecor"]
-position = Vector2(110, 99)
+[node name="Leaves2" type="Sprite2D" parent="Decor"]
+position = Vector2(1707, 828)
 texture = ExtResource("5_58g4w")
 
-[node name="Audio" parent="." instance=ExtResource("7_58g4w")]
-BGM = ExtResource("8_75oj8")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TypewriterTextbox" parent="CanvasLayer" instance=ExtResource("2_knwgi")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -61.5
+offset_right = 144.5
+offset_bottom = 61.5
+grow_horizontal = 2
+grow_vertical = 2

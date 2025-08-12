@@ -1,8 +1,23 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2lky3krjjul4"]
 
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="1_718ti"]
-[ext_resource type="Script" uid="uid://daqtnv0figo1l" path="res://Typewriter.gd" id="2_k08e2"]
-[ext_resource type="AudioStream" uid="uid://b5r7qyyesdm51" path="res://Audio/SE/Dedushka_Voice.wav" id="3_belcu"]
+[ext_resource type="Script" uid="uid://b2femu4hqkqb8" path="res://GameScenes/Typewriter.gd" id="2_k08e2"]
+[ext_resource type="AudioStream" uid="uid://dhuojolt6ampg" path="res://Audio/SE/Dedushka_Voice.wav" id="3_belcu"]
+
+[sub_resource type="Animation" id="Animation_ih6jd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_fh001"]
 resource_name = "Typewriter"
@@ -20,28 +35,13 @@ tracks/0/keys = {
 "values": [0.0, 1.0]
 }
 
-[sub_resource type="Animation" id="Animation_ih6jd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RichTextLabel:visible_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3f72v"]
 _data = {
 &"RESET": SubResource("Animation_ih6jd"),
 &"Typewriter": SubResource("Animation_fh001")
 }
 
-[node name="Control" type="Control"]
+[node name="TypewriterTextbox" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2.0
@@ -73,7 +73,6 @@ visible_ratio = 0.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_belcu")
 volume_db = -5.073
-bus = &"SE"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
