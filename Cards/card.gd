@@ -168,8 +168,7 @@ func createEffectText():
 		effectTexts.append("Vanguard")
 	
 	
-	#### CHECK CAST, BATTLE ART, and RITUAL NODES
-	
+	#### CHECK ACTION NODES (CAST, BATTLE ART, and RITUAL NODES etc.)
 	var actionHolderTexts := []
 	actionHolderTexts = actions.createActionText()
 	
@@ -388,22 +387,50 @@ func checkTraveling() -> bool:
 
 func checkAlive():
 	return !(actionState == CardActionStates.DESTROYED)
+
 		
 ########################################################
+####  COMBAT STUFF  #####################
 
+#### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
+func handleCombatActions(isAttacking:bool, otherCard:Card):
+	
+	if isAttacking:
+		playAttackAnimation()
+		#### ATTACKING CANCELS PHASING -> PHASE IN
+		countersNode.togglePhased(false)
+			
+	actions.handleBattleArt(otherCard)
+	
+	
+		
+func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
+	if tempHealth <= 0:
+		destroyAndAnimate(!isAttacker)
+		return true
+	
+	#### SURVIVES, And IS ATTACKER	
+	elif isAttacker:
+		#### REST, OR TRAVEL If Vanguard
+		if hasVanguard:
+			toggleTraveling(true)
+		else:
+			restAndAnimate(false)
+			
+			
+	return false
 
 
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
-func takeDamageAndCheckLethal(card:Card) -> bool:
+func takeCombatDamage(card:Card) -> bool:
 	
 	var selfCombatDamage:int = getCombatDamage()
 	var enemyCombatDamage:int = card.getCombatDamage()
 	
 	#### CHECK DESTROYED STATUS 1: DUELIST
-	var selfDestroyed := false
 	if keywordHandler.hasDuelist():
 		if selfCombatDamage >= card.tempHealth:
-			return selfDestroyed
+			return false   #### DUELIST KILLS, SURVIVES -> FALSE
 			
 	
 	#### DEAL DAMAGE
@@ -414,14 +441,13 @@ func takeDamageAndCheckLethal(card:Card) -> bool:
 	else:
 		tempHealth -= damageTaken
 	
+	updateCardVisuals()
 	
 	#### CHECK DESTROYED STATUS
 	if tempHealth <= 0:
-		selfDestroyed = true
+		return true    #### CREATURE DIES -> TRUE
+	return false
 	
-	#### UPDATE VISUALS AND RETURN DESTROYED STATUS
-	updateCardVisuals()
-	return selfDestroyed
 
 
 
@@ -550,6 +576,9 @@ func updateCardLabels():
 	elif tempHealth < startingHealth:
 		glow.get_node("HealthGlowDown").show()
 		
+
+
+
 
 ###############################################################################
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE

@@ -180,7 +180,7 @@ func handlePlayerRitual(c:Card, target:Card) -> bool:
 	success = c.actions.handleRitual(target)
 	
 	if success:
-		cardsManager.discardCard(c, true)
+		cardsManager.discardCard(c)
 		playerMana -= c.manaCost
 		cardsManager.updateHandCardsVisuals()
 		updateResourceLabels()
@@ -315,44 +315,23 @@ func handlePlayerAttackCreature(target:Card):
 #### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
-	
-	attackCard.playAttackAnimation()
-	endAttackState()
-	
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	var cardsToDestroy := []
-	if targetCard.takeDamageAndCheckLethal(attackCard):
-		cardsToDestroy.append(targetCard)
-	if attackCard.takeDamageAndCheckLethal(targetCard):
-		cardsToDestroy.append(attackCard)
-	
-	
-	#### HANDLE ATTACKER COMBAT ARTS
-	attackCard.actions.handleBattleArt(targetCard)
-	#### DEFENDER TOO RIGHT ????
-	targetCard.actions.handleBattleArt(attackCard)
-	
-	#### ATTACKING CANCELS PHASING -> PHASE IN
-	attackCard.countersNode.togglePhased(false)
-	
-	
-	#### DON'T REST-ANIMATE DESTROYED ATTACKER CARD
-	var attackerDestroyed := false
-	if attackCard in cardsToDestroy:
-		attackerDestroyed = true
-	else:
-		attackCard.restAndAnimate(false)
-	
-	
-	
-	#### HANDLE DESTROYING THE CARDS THAT TOOK LETHAL DAMAGE
-	for c:Card in cardsToDestroy:
-		if c == attackCard:
-			cardsManager.discardCard(c, false)
-		else:
-			cardsManager.discardCard(c, true)
+	targetCard.takeCombatDamage(attackCard)
+	attackCard.takeCombatDamage(targetCard)
 		
-	return attackerDestroyed
+	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
+	attackCard.handleCombatActions(true, targetCard)
+	targetCard.handleCombatActions(false, attackCard)
+	
+	#### CHECK IF EITHER CARD WAS DESTROYED
+	attackCard.checkAndHandleCombatDeath(true)
+	targetCard.checkAndHandleCombatDeath(false)
+	
+	endAttackState()
+	#### RETURN WHETHER ATTACKER IS DESTROYED -> WHY?
+	if not attackCard.checkAlive():
+		return true
+	return false
 
 
 

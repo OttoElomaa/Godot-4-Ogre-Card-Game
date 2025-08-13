@@ -478,6 +478,10 @@ func findValidNodesInArray(cards:Array):
 ######################################################
 #### DISCARD STUFF
 
+func discardCard(c:Card):
+	c.destroyAndAnimate(true)
+	
+
 func handleDiscardAtDraw():
 	pass
 	
@@ -486,9 +490,7 @@ func handleDiscardAtTurnEnd():
 	pass
 
 
-func discardCard(card:Card, toAnimate:bool):
-	card.destroyAndAnimate(toAnimate)
-	
+
 #### CALLED FROM DESTROY ANIMATION IN CARD NODE
 func moveToDiscard(card:Card):
 	

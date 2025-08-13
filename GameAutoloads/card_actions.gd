@@ -15,7 +15,7 @@ func inflict(target:Card, amount:int):
 
 #### DEAL TEMPORARY AND PERMANENT DAMAGE TO A CARD
 func corrode(target:Card, amount:int):
-	target.tempHealth -= amount
+	#target.tempHealth -= amount
 	target.health -= amount
 	
 	if target.tempHealth <= 0:

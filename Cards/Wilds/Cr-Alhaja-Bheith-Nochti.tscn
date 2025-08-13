@@ -10,5 +10,8 @@ manaCost = 3
 startingDamage = 2
 startingHealth = 2
 
+[node name="Keyword" parent="KeywordHandler/MyKeywords" index="0"]
+hasVanguard = true
+
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_ein2a")

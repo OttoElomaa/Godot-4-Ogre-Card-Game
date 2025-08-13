@@ -261,7 +261,6 @@ script = ExtResource("3_lcq1x")
 
 [node name="Keyword" parent="KeywordHandler/MyKeywords" instance=ExtResource("4_qt84u")]
 isPermanent = true
-hasVanguard = true
 
 [node name="KeywordsToGrant" type="Node" parent="KeywordHandler"]
 
