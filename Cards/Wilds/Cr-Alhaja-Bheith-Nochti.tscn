@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtps2wa815evx"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_mir7j"]
+[ext_resource type="Texture2D" uid="uid://cb7jl678hu751" path="res://Art/CardArt/Desert/card-art-creature-alhaja-bheith-nochti.jpg" id="2_ein2a"]
+
+[node name="Card-Cr-Alhaja-Bheith-Nochti" instance=ExtResource("1_mir7j")]
+cardName = "Alhaja Bheith Nochti"
+subTypeStr = "Alhaja Warrior"
+manaCost = 3
+startingDamage = 2
+startingHealth = 2
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_ein2a")

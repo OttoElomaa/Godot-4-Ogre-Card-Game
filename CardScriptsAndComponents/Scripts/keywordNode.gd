@@ -7,4 +7,4 @@ extends Node
 
 
 @export var hasDuelist := false
-@export var hasShadow := false
+@export var hasVanguard := false

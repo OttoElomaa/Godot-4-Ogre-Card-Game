@@ -73,6 +73,9 @@ var hasDuelist: bool:
 	get:
 		return keywordHandler.hasDuelist()
 
+var hasVanguard: bool:
+	get:
+		return keywordHandler.hasVanguard()
 
 
 
@@ -160,7 +163,9 @@ func createEffectText():
 	
 	#### CHECK FROM KEYWORDS HANDLER
 	if hasDuelist:
-		effectTexts.append("Duelist") 
+		effectTexts.append("Duelist")
+	if hasVanguard:
+		effectTexts.append("Vanguard")
 	
 	
 	#### CHECK CAST, BATTLE ART, and RITUAL NODES
