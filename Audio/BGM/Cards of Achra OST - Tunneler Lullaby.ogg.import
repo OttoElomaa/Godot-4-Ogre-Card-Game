@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cqryjjev655kv"
+path="res://.godot/imported/Cards of Achra OST - Tunneler Lullaby.ogg-d2b3095e965d44f112c7f4967425dabd.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/BGM/Cards of Achra OST - Tunneler Lullaby.ogg"
+dest_files=["res://.godot/imported/Cards of Achra OST - Tunneler Lullaby.ogg-d2b3095e965d44f112c7f4967425dabd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

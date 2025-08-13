@@ -1,8 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=31 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/gameBoard.gd" id="1_rf3o6"]
 [ext_resource type="Script" uid="uid://x5hp1ama1l5h" path="res://GameScenes/card_loader.gd" id="2_gftaw"]
+[ext_resource type="PackedScene" uid="uid://cdcyvjftrdsxg" path="res://GameScenes/audio.tscn" id="2_s281r"]
 [ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
+[ext_resource type="AudioStream" uid="uid://cull86x870gae" path="res://Audio/BGM/Cards of Achra OST - Raiders Close In.ogg" id="3_rf3o6"]
 [ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_1qylb"]
 [ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/BoardComponents/game-mana-health-holder-texture-v2.png" id="5_4lnmq"]
 [ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSetHeaderHealth.tres" id="6_r88d6"]
@@ -121,6 +123,9 @@ border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
 [node name="GameBoard" type="Node2D" groups=["gameboard"]]
 script = ExtResource("1_rf3o6")
+
+[node name="Audio" parent="." instance=ExtResource("2_s281r")]
+BGM = ExtResource("3_rf3o6")
 
 [node name="CardLoader" type="Node" parent="."]
 script = ExtResource("2_gftaw")

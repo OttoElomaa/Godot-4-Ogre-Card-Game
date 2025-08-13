@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cull86x870gae"
+path="res://.godot/imported/Cards of Achra OST - Raiders Close In.ogg-f84562aeee63d4ae58d8af96fcf8361c.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/BGM/Cards of Achra OST - Raiders Close In.ogg"
+dest_files=["res://.godot/imported/Cards of Achra OST - Raiders Close In.ogg-f84562aeee63d4ae58d8af96fcf8361c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
