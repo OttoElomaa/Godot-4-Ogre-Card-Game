@@ -1,18 +1,18 @@
-extends Control
+extends PanelContainer
 
 var visible_characters = 0
 var current_character = ''
-@onready var label = $RichTextLabel
+@onready var label:RichTextLabel = $MarginContainer/RichTextLabel
 var silent = [' ', ',', ':', '.']
 
 func _ready():
+	visible_characters = 0
 	$AnimationPlayer.play("Typewriter")
 
 func _process(delta):
 	if label.visible_characters != visible_characters:
 		current_character = label.text[label.visible_characters]
-		if !(current_character in silent):
+		if not (current_character in silent):
 			$AudioStreamPlayer.play()
-		else:
-			pass
-		visible_characters = $RichTextLabel.visible_characters
+			
+		visible_characters = label.visible_characters

@@ -56,7 +56,9 @@ func buttonPressedToggleBestiary() -> void:
 	if not bestiaryVisible:
 		bestiaryVisible = true
 		States.gameState = States.GameStates.BESTIARY
+		
 		$Bestiary.show()
+		$Intro.toggleIntro(false)
 		
 		var allCards:Array = loadCardsInFolder("res://Cards/Depths/")
 		allCards.append_array( loadCardsInFolder("res://Cards/GreenDefiance/") )
@@ -69,6 +71,13 @@ func buttonPressedToggleBestiary() -> void:
 		for card:Card in placedCards:
 			$Bestiary/Cards.add_child(card)
 			card.turnOnBestiaryVisuals(self)
+	
+	else:
+		bestiaryVisible = false
+		States.gameState = States.GameStates.NONE
+		
+		$Bestiary.hide()
+		$Intro.toggleIntro(true)
 		
 		
 
