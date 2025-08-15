@@ -74,14 +74,14 @@ theme_override_colors/default_color = Color(0.973535, 0.973535, 0.973535, 1)
 bbcode_enabled = true
 text = "O seeker!    
 Know this:      
-  
+    
 Histories, upon [color='RED']blood[/color] mound,     
 Into [color='RED']blood[/color], return.  
 From such decrease        
-  
+     
 Even [color=#c0c0f0]gods[/color] are unexempt.      
 Of ancient [color=#ffa000]glories[/color], you may with us partake:          
-  
+             
 May our [color=#af8f50]cards[/color] revive them."
 fit_content = true
 vertical_alignment = 1

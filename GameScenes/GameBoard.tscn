@@ -313,64 +313,53 @@ anchor_mode = 0
 enabled = false
 zoom = Vector2(0.76, 0.76)
 
-[node name="Cards" type="Node2D" parent="CardsManager/Discard"]
+[node name="Player" type="Node2D" parent="CardsManager/Discard"]
 
-[node name="Slots" type="Node2D" parent="CardsManager/Discard"]
-z_index = -1
+[node name="Slots" type="Node2D" parent="CardsManager/Discard/Player"]
 
-[node name="BestiarySlot" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(636, 538)
+[node name="BestiarySlot" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(636, 438)
 
-[node name="BestiarySlot2" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(866, 538)
+[node name="BestiarySlot2" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(866, 438)
 
-[node name="BestiarySlot3" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1096, 538)
+[node name="BestiarySlot3" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1096, 438)
 
-[node name="BestiarySlot4" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1326, 538)
+[node name="BestiarySlot4" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1326, 438)
 
-[node name="BestiarySlot5" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1556, 538)
+[node name="BestiarySlot5" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1556, 438)
 
-[node name="BestiarySlot6" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1786, 538)
+[node name="BestiarySlot6" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1786, 438)
 
-[node name="BestiarySlot7" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(636, 988)
+[node name="Cards" type="Node2D" parent="CardsManager/Discard/Player"]
 
-[node name="BestiarySlot8" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(866, 988)
+[node name="Enemy" type="Node2D" parent="CardsManager/Discard"]
 
-[node name="BestiarySlot9" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1096, 988)
+[node name="Slots" type="Node2D" parent="CardsManager/Discard/Enemy"]
 
-[node name="BestiarySlot10" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1326, 988)
+[node name="BestiarySlot7" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(636, 1038)
 
-[node name="BestiarySlot11" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1556, 988)
+[node name="BestiarySlot8" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(866, 1038)
 
-[node name="BestiarySlot12" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1786, 988)
+[node name="BestiarySlot9" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1096, 1038)
 
-[node name="BestiarySlot13" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(636, 1438)
+[node name="BestiarySlot10" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1326, 1038)
 
-[node name="BestiarySlot14" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(866, 1438)
+[node name="BestiarySlot11" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1556, 1038)
 
-[node name="BestiarySlot15" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1096, 1438)
+[node name="BestiarySlot12" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+position = Vector2(1786, 1038)
 
-[node name="BestiarySlot16" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1326, 1438)
-
-[node name="BestiarySlot17" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1556, 1438)
-
-[node name="BestiarySlot18" parent="CardsManager/Discard/Slots" instance=ExtResource("16_8xajj")]
-position = Vector2(1786, 1438)
+[node name="Cards" type="Node2D" parent="CardsManager/Discard/Enemy"]
 
 [node name="PlayerSlots" type="Node2D" parent="."]
 z_index = -1

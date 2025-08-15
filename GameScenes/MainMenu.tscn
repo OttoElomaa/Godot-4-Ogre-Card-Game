@@ -21,6 +21,8 @@ script = ExtResource("1_jd835")
 [node name="Audio" parent="." instance=ExtResource("2_18c0x")]
 BGM = ExtResource("3_3ew8u")
 
+[node name="Intro" parent="." instance=ExtResource("11_3ew8u")]
+
 [node name="MenuCamera" type="Camera2D" parent="."]
 position = Vector2(1299, 540)
 
@@ -183,8 +185,6 @@ position = Vector2(1648, 1150)
 
 [node name="CardsManager" type="Node2D" parent="." groups=["cardManager"]]
 script = ExtResource("7_wqb3i")
-
-[node name="Intro" parent="." instance=ExtResource("11_3ew8u")]
 
 [node name="Decor" type="Node2D" parent="."]
 

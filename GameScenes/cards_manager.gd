@@ -478,10 +478,6 @@ func findValidNodesInArray(cards:Array):
 ######################################################
 #### DISCARD STUFF
 
-func discardCard(c:Card):
-	c.destroyAndAnimate(true)
-	
-
 func handleDiscardAtDraw():
 	pass
 	
@@ -490,18 +486,36 @@ func handleDiscardAtTurnEnd():
 	pass
 
 
+#### DESTROY ANIMATION CALLS THE moveToDiscard FUNCTION
+func discardCard(c:Card):
+	c.destroyAndAnimate(true)
+	
+
 
 #### CALLED FROM DESTROY ANIMATION IN CARD NODE
 func moveToDiscard(card:Card):
 	
-	card.reparent($Discard/Cards)
+	var discardNode:Node = $Discard/Player/Cards
+	if card.isEnemyCard:
+		discardNode = $Discard/Enemy/Cards
+	
+	card.reparent(discardNode)
 	card.position = Vector2.ZERO
 	
 	card.handleEnterGraveyard()
+	updateGraveyardVisuals()
 	
+
+
+func updateGraveyardVisuals():
+		
 	#### PLACE DISCARD CARDS IN SLOTS TO DISPLAY
-	var discardCards = $Discard/Cards.get_children()
-	var discardSlots = $Discard/Slots.get_children()
+	var discardCards = $Discard/Player/Cards.get_children()
+	var discardSlots = $Discard/Player/Slots.get_children()
+	MyTools.placeCardsInSlotArray(discardCards, discardSlots)
+	
+	discardCards = $Discard/Enemy/Cards.get_children()
+	discardSlots = $Discard/Enemy/Slots.get_children()
 	MyTools.placeCardsInSlotArray(discardCards, discardSlots)
 
 
