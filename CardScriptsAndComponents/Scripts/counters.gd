@@ -9,6 +9,15 @@ var hasDoom := false
 
 
 
+
+func updateEffectVisuals():
+	$Buff.hide()
+	$Debuff.hide()
+
+	updatePhasedVisuals()
+
+
+
 func togglePhased(isPhased:bool):
 	self.isPhased = isPhased
 	updatePhasedVisuals()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=30 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Script" uid="uid://c4juxj0muiopk" path="res://CardScriptsAndComponents/Scripts/counters.gd" id="2_07jhh"]
@@ -7,6 +7,7 @@
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="4_7bc8n"]
 [ext_resource type="Script" uid="uid://yys4316b4p1r" path="res://CardScriptsAndComponents/Scripts/effectsNodeMain.gd" id="4_q2hgj"]
 [ext_resource type="PackedScene" uid="uid://camlvr52j6gkf" path="res://CardScriptsAndComponents/keyword.tscn" id="4_qt84u"]
+[ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="4_s5qc8"]
 [ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="4_w0fdq"]
 [ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_6ma8t"]
 [ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="5_jsedn"]
@@ -224,13 +225,42 @@ _data = {
 [node name="Card" type="Node2D"]
 script = ExtResource("1_i5yq8")
 
-[node name="Counters" type="Node2D" parent="."]
+[node name="Effects" type="Node2D" parent="."]
+z_index = 1
 script = ExtResource("2_07jhh")
 
-[node name="PhasedTexture" type="Sprite2D" parent="Counters"]
+[node name="PhasedTexture" type="Sprite2D" parent="Effects"]
 visible = false
 z_index = 1
 texture = ExtResource("3_8geja")
+
+[node name="Buff" type="Node2D" parent="Effects"]
+position = Vector2(-100, -150)
+
+[node name="BuffSprite1" type="Sprite2D" parent="Effects/Buff"]
+texture = ExtResource("4_s5qc8")
+
+[node name="BuffSprite2" type="Sprite2D" parent="Effects/Buff"]
+texture = ExtResource("4_s5qc8")
+offset = Vector2(0, 50)
+
+[node name="BuffSprite3" type="Sprite2D" parent="Effects/Buff"]
+texture = ExtResource("4_s5qc8")
+offset = Vector2(0, 100)
+
+[node name="Debuff" type="Node2D" parent="Effects"]
+position = Vector2(100, -150)
+
+[node name="BuffSprite1" type="Sprite2D" parent="Effects/Debuff"]
+texture = ExtResource("4_s5qc8")
+
+[node name="BuffSprite2" type="Sprite2D" parent="Effects/Debuff"]
+texture = ExtResource("4_s5qc8")
+offset = Vector2(0, 50)
+
+[node name="BuffSprite3" type="Sprite2D" parent="Effects/Debuff"]
+texture = ExtResource("4_s5qc8")
+offset = Vector2(0, 100)
 
 [node name="Actions" type="Node" parent="."]
 script = ExtResource("4_q2hgj")
@@ -248,6 +278,8 @@ script = ExtResource("4_q2hgj")
 [node name="Payoff" type="Node" parent="Actions"]
 
 [node name="Cost" type="Node" parent="Actions"]
+
+[node name="EffectToGrant" type="Node" parent="Actions"]
 
 [node name="SpecialCondition" type="Node" parent="Actions"]
 

@@ -250,11 +250,9 @@ func handlePlayerAttackEnemy():
 	var combatDamage = c.getCombatDamage()
 	enemyHealth -= combatDamage
 	
-	c.playAttackAnimation()
-	c.restAndAnimate(false)
+	c.handleAttackingPortrait()
 	endAttackState()
-	c.countersNode.togglePhased(false)
-
+	
 
 
 #### BTW, PlayAttackAnimation CALLS THE CARD DESTROY COMMAND
@@ -278,11 +276,9 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	#### NO BLOCKERS, ATTACK PLAYER
 	elif blockers.is_empty():
 		playerHealth -= c.getCombatDamage()
-		c.playAttackAnimation()
-		c.restAndAnimate(false)
-		c.countersNode.togglePhased(false)
+		c.handleAttackingPortrait()
 	
-
+	
 
 func handlePlayerAttackCreature(target:Card):
 	

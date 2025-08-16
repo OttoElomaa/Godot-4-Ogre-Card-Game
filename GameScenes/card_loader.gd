@@ -50,7 +50,7 @@ func createDesertDeck():
 	for i in range(5):
 		cards.append(createCard("res://Cards/Wilds/Cr-Tugar.tscn"))
 	
-	for i in range(5):
+	for i in range(20):
 		cards.append(createCard("res://Cards/Depths/Cr-Kull-Assassin.tscn"))
 	for i in range(20):
 		cards.append(createCard("res://Cards/Wilds/Ri-Ashem1-medVohu.tscn"))

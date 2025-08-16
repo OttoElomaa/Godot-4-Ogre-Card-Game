@@ -22,11 +22,11 @@ var isRitual:
 		return cardType == CardTypes.RITUAL
 
 ###### NODE REFERENCES
-@onready var countersNode := $Counters
+
 @onready var stateHandler := $Frontside/ActionState
 
 @onready var actions := $Actions
-
+@onready var effects := $Effects
 @onready var keywordHandler := $KeywordHandler
 
 
@@ -82,9 +82,9 @@ var hasVanguard: bool:
 ################################################## COUNTER NODE STUFF
 var isPhased: bool:
 	get:
-		return countersNode.isPhased
+		return effects.isPhased
 	set(value):
-		countersNode.togglePhased(value)
+		effects.togglePhased(value)
 
 
 ##########################################################
@@ -316,7 +316,7 @@ func animateBlockingState(toBlock:bool):
 		newPos.y += activeOffset
 			
 		#position.y = mySlot.position.y + activeOffset
-		countersNode.togglePhased(false)
+		effects.togglePhased(false)
 	#else:
 		#position.y = mySlot.position.y
 	
@@ -398,7 +398,7 @@ func handleCombatActions(isAttacking:bool, otherCard:Card):
 	if isAttacking:
 		playAttackAnimation()
 		#### ATTACKING CANCELS PHASING -> PHASE IN
-		countersNode.togglePhased(false)
+		effects.togglePhased(false)
 			
 	actions.handleBattleArt(otherCard)
 	
@@ -454,10 +454,16 @@ func takeCombatDamage(card:Card) -> bool:
 func getCombatDamage():
 	var combatDamage = tempDamage
 	
-	if countersNode.isPhased:
+	if effects.isPhased:
 		combatDamage += 1
 		
 	return combatDamage
+
+
+func handleAttackingPortrait():
+	playAttackAnimation()
+	restAndAnimate(false)
+	effects.togglePhased(false)
 	
 
 ###########################################################################
@@ -541,6 +547,7 @@ func timeoutRestAnimation() -> void:
 func updateCardVisuals():
 	
 	updateCardLabels()
+	effects.updateEffectVisuals()
 	
 	if actionState == CardActionStates.HAND:
 		toggleManaCostIndicator(true)
@@ -549,8 +556,7 @@ func updateCardVisuals():
 		toggleManaCostIndicator(false)
 		toggleActionStateIndicator(true)
 	
-	$Counters.updatePhasedVisuals()
-
+	
 
 
 func updateCardLabels():

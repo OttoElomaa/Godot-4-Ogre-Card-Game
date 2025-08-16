@@ -97,7 +97,7 @@ func activateTargetless(actor:Card):
 	
 	#### PHASE OUT SELF
 	if phaseOut:
-		myCard.countersNode.togglePhased(true)
+		myCard.effects.togglePhased(true)
 		myCard.statesPassive()
 					
 	return success
