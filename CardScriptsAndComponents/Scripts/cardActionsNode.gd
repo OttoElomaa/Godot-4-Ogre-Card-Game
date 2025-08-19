@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 
@@ -186,3 +186,12 @@ func findEmptySlotWhat() -> CardSlot:
 		return null
 	else:
 		return slots[0]
+
+
+
+func getEffectToGrant():
+	var effects:Array = $EffectToGrant.get_children()
+	
+	if effects.is_empty():
+		return null
+	return effects[0]

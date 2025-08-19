@@ -260,6 +260,10 @@ func toggleFrontSide(toShow:bool):
 		$Frontside.hide()
 
 
+func addEffect(appliedEffect: CardEffect):
+	effects.addEffect(appliedEffect)
+
+
 #############################################################
 
 #### HANDLE REST
@@ -508,7 +512,7 @@ func turnOnBestiaryVisuals(mainMenu:Node):
 	$Frontside/CardNameBestiary.show()
 	$Frontside/CardNameBestiary/Label.text = cardName
 	
-	updateCardLabels()
+	updateCardVisuals()
 
 
 
@@ -552,6 +556,10 @@ func updateCardVisuals():
 	if actionState == CardActionStates.HAND:
 		toggleManaCostIndicator(true)
 		toggleActionStateIndicator(false)
+		
+	elif States.gameState == States.GameStates.BESTIARY:
+		toggleManaCostIndicator(true)
+		
 	else:
 		toggleManaCostIndicator(false)
 		toggleActionStateIndicator(true)

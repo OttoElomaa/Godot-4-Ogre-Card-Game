@@ -1,4 +1,6 @@
-extends Node
+extends Node2D
+class_name CardEffect
+
 
 enum effectTypes {
 	NONE, BUFF, DEBUFF
@@ -7,12 +9,21 @@ enum effectTypes {
 @export var effectType := effectTypes.NONE
 @export var isPermanent := false
 
-@export var sourceCard: Card = null
+var sourceCard: Card = null
 var myCard: Card = null
 
 
 @export var hasDuelist := false
 @export var hasVanguard := false
+
+
+@export var isDoom := false
+@export var isArmor := false
+
+
+var icon:
+	get:
+		return $Icon.texture
 
 
 
@@ -37,3 +48,19 @@ func applyEffect(targetCard:Card):
 	
 func setMyTarget(card:Card):
 	self.myCard = card
+
+
+
+func getEffectName():
+	if isDoom:
+		return "Doom"
+	if isArmor:
+		return "Armor"
+
+
+func toggleIcon(toShow:bool):
+	if toShow:
+		$Icon.show()
+	else:
+		$Icon.hide()
+	

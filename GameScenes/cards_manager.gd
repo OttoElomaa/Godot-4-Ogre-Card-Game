@@ -73,13 +73,15 @@ func drawCard(sourceDeck:Node,targetHand:Node):
 		assert(1==2,"testing launch crash 2")
 		return
 		
-	var cardScene = sourceDeck.get_child(0)	
+	var cardScene:Card = sourceDeck.get_child(0)	
 	cardScene.cardsManager = self	
 	cardScene.reparent(targetHand)
 	
 	if sourceDeck == $EnemyDeck:
 		cardScene.toggleEnemyStatus(true)
 		cardScene.toggleFrontSide(false)
+		
+	cardScene.updateCardVisuals()
 	updateHandCardsVisuals()
 	
 	return cardScene

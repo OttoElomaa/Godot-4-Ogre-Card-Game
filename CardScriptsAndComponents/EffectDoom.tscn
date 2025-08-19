@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dehsm4nrexepg"]
+
+[ext_resource type="PackedScene" uid="uid://camlvr52j6gkf" path="res://CardScriptsAndComponents/EffectOrKeyword.tscn" id="1_a2axn"]
+[ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="2_g6uc3"]
+
+[node name="EffectDoom" instance=ExtResource("1_a2axn")]
+effectType = 2
+isDoom = true
+
+[node name="Icon" parent="." index="0"]
+texture = ExtResource("2_g6uc3")

@@ -32,6 +32,8 @@ var isEnemy := false
 
 
 ####################################### EFFECT - WHAT DOES IT DO
+@export var grantEffect := false
+
 @export var inflict := 0
 @export var inflictPlayer := 0
 @export var inflictCreature := 0

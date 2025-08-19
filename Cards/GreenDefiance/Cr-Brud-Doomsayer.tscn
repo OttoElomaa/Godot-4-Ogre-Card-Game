@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://0rv6qotxbvyy"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_jhoc5"]
+[ext_resource type="PackedScene" uid="uid://cgchj318fykoy" path="res://CardScriptsAndComponents/ActionTargeted.tscn" id="2_jhoc5"]
+[ext_resource type="Texture2D" uid="uid://cet75s3qgtg0w" path="res://Art/CardArt/GreenDefiance/card-art-creature-doomsayer.jpg" id="3_jhoc5"]
+[ext_resource type="PackedScene" uid="uid://dehsm4nrexepg" path="res://CardScriptsAndComponents/EffectDoom.tscn" id="3_yk35a"]
+
+[node name="Card-Cr-Doomsayer" instance=ExtResource("1_jhoc5")]
+cardName = "Doomsayer"
+subTypeStr = "Brud Cultist"
+manaCost = 1
+startingDamage = 1
+startingHealth = 1
+
+[node name="EffectTargeted" parent="Actions/Cast" index="0" instance=ExtResource("2_jhoc5")]
+grantEffect = true
+
+[node name="EffectDoom" parent="Actions/EffectToGrant" index="0" instance=ExtResource("3_yk35a")]
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("3_jhoc5")

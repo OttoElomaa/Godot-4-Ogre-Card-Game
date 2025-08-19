@@ -11,6 +11,9 @@ extends EffectScript
 func createTextTwo() -> String:
 	var text := ""
 	
+	if grantEffect:
+		text += "Add effect to target"
+	
 	if hasSacrifice:
 		text += "Sacrifice target"
 	
@@ -21,11 +24,22 @@ func createTextTwo() -> String:
 func activateTargeted(target:Card, actor:Card):
 	var success := false
 	
+	#### TARGETED-ONLY ACTIONS  #######################################
 	
 	#### SACRIFICE
 	if hasSacrifice:
 		if myCard.isOnSameSide(target):
 			target.destroyAndAnimate(true)
+			success = true
+	
+	
+	#### GENERIC ACTIONS, TARGETED VERSIONS  ##############################
+	
+	#### GRANT AN EFFECT
+	if grantEffect:
+		var effect = actionsNode.getEffectToGrant()
+		if effect:
+			target.addEffect(effect)
 			success = true
 	
 	#### INFLICT

@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m612s"]
 [ext_resource type="PackedScene" uid="uid://b4tndl4w2i3lg" path="res://Cards/GreenDefiance/Cr-SkeletonWarrior.tscn" id="2_f3ejk"]
-[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/EffectTargetless.tscn" id="2_jrsq4"]
-[ext_resource type="Texture2D" uid="uid://c8fv2mu03csy" path="res://Art/CardArt/card-art-creature-deathknight.jpg" id="2_m612s"]
+[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/ActionTargetless.tscn" id="2_jrsq4"]
+[ext_resource type="Texture2D" uid="uid://c8fv2mu03csy" path="res://Art/CardArt/GreenDefiance/card-art-creature-deathknight.jpg" id="2_m612s"]
 
 [node name="Card-Cr-DeathKnight" instance=ExtResource("1_m612s")]
 cardName = "Death Knight"

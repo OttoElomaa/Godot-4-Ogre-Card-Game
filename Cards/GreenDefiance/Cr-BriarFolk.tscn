@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnmsayr5lqvem"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_epv8e"]
-[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/EffectTargetless.tscn" id="2_c7feh"]
+[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/ActionTargetless.tscn" id="2_c7feh"]
 [ext_resource type="Texture2D" uid="uid://b01fgy8k28uhs" path="res://Art/CardArt/GreenDefiance/card-art-creature-briarfolk.jpg" id="3_c7feh"]
 
 [node name="Card-Cr-BriarFolk" instance=ExtResource("1_epv8e")]
