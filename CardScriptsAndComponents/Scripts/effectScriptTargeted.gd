@@ -12,7 +12,12 @@ func createTextTwo() -> String:
 	var text := ""
 	
 	if grantEffect:
-		text += "Add effect to target"
+		var effect:CardEffect = actionsNode.getEffectToGrant()
+		if not effect:
+			assert(1==2,"WTF effect to grant error")
+			
+		var effectName:String = effect.getEffectName()
+		text += "Add %s to target" % effectName
 	
 	if hasSacrifice:
 		text += "Sacrifice target"
