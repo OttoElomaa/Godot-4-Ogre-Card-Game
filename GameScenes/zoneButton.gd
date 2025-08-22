@@ -25,3 +25,7 @@ func _on_panel_mouse_entered() -> void:
 	
 	zone.updateActionDescription(actionName, description)
 	
+
+
+func buttonMouseEntered() -> void:
+	zone.updateActionDescription(actionName, description)
