@@ -7,10 +7,10 @@
 
 [node name="Card-Cr-Doomsayer" instance=ExtResource("1_jhoc5")]
 cardName = "Doomsayer"
-subTypeStr = "Brud Cultist"
-manaCost = 1
-startingDamage = 1
-startingHealth = 1
+subTypeStr = "Brud Necromancer"
+flavorText = "A reviled death cultist."
+manaCost = 3
+startingHealth = 4
 
 [node name="EffectTargeted" parent="Actions/Cast" index="0" instance=ExtResource("2_jhoc5")]
 grantEffect = true

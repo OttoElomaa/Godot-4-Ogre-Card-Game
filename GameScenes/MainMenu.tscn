@@ -57,6 +57,38 @@ layout_mode = 2
 theme_override_styles/hover = ExtResource("4_duqux")
 theme_override_styles/normal = ExtResource("5_26mog")
 
+[node name="StartGamePane" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -120.0
+offset_right = 120.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 100
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/StartGamePane"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_b8l8w")
+
+[node name="Label" type="Label" parent="CanvasLayer/StartGamePane/Panel"]
+layout_mode = 2
+text = "Enter the World"
+label_settings = ExtResource("3_wqb3i")
+horizontal_alignment = 1
+
+[node name="StartGameButton" type="Button" parent="CanvasLayer/StartGamePane/Panel"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("4_duqux")
+theme_override_styles/normal = ExtResource("5_26mog")
+
 [node name="ShowBestiaryPane" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
@@ -201,5 +233,6 @@ position = Vector2(2112, 464)
 texture = ExtResource("14_uifqy")
 
 [connection signal="pressed" from="CanvasLayer/StartMatchPane/Panel/StartButton" to="." method="buttonPressedStartMatch"]
+[connection signal="pressed" from="CanvasLayer/StartGamePane/Panel/StartGameButton" to="." method="buttonPressedGoToWorld"]
 [connection signal="pressed" from="CanvasLayer/ShowBestiaryPane/VBoxContainer/BestiaryPane/Button" to="." method="buttonPressedToggleBestiary"]
 [connection signal="pressed" from="CanvasLayer/ShowBestiaryPane/VBoxContainer/ExitPane/Button" to="." method="buttonPressedExitGame"]

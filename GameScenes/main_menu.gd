@@ -3,6 +3,9 @@ extends Node2D
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard.tscn")
 
+@onready var ZoneScene: PackedScene = preload("res://GameScenes/Zone.tscn")
+
+
 var bestiaryVisible := false
 
 
@@ -49,6 +52,12 @@ func buttonPressedStartMatch() -> void:
 	#var gameBoard: GameBoard = GameBoardScene.instantiate()
 	bestiaryVisible = false
 	get_tree().change_scene_to_packed(GameBoardScene)
+
+
+func buttonPressedGoToWorld() -> void:
+	bestiaryVisible = false
+	get_tree().change_scene_to_packed(ZoneScene)
+
 
 
 func buttonPressedToggleBestiary() -> void:
