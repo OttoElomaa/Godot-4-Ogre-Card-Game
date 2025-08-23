@@ -23,7 +23,6 @@ var actionMenuCard: Card = null
 
 
 func _ready() -> void:
-	
 	States.statesPlay()
 	
 	$CardsManager.main = self
@@ -33,15 +32,15 @@ func _ready() -> void:
 	$BattleSystem.cardsManager = $CardsManager
 	
 	MyTools.gameBoardSetup(self)
-	
-	var idk = 0
-	var playerDeckCards:Array = $CardLoader.createDesertDeck()
+
+
+
+	var playerDeckCards:Array = GameInfo.playerDeckCards
 	for card in playerDeckCards:
 		$CardsManager/PlayerDeck.add_child(card)
 		
-	var enemyDeckCards:Array = $CardLoader.createDesertDeck()
+	var enemyDeckCards:Array = GameInfo.enemyDeckCards
 	for card in enemyDeckCards:
-		print("reparent success")
 		$CardsManager/EnemyDeck.add_child(card)
 	
 	#await(get_tree().create_timer(0.2))
@@ -67,20 +66,6 @@ func _unhandled_input(e: InputEvent) -> void:
 			if States.gameState == States.GameStates.CARD_ACT_MENU:
 				toggleCardActionMenu(false, null)
 
-
-func fetchMouseOverObjects(collisionMask: int):
-	
-	#### WORLD STATE
-	var spaceState = get_world_2d().direct_space_state
-	#### MOUSE POSITION
-	var params = PhysicsPointQueryParameters2D.new()
-	params.position = get_global_mouse_position()
-	params.collide_with_areas = true
-	params.collision_mask = collisionMask
-	
-	#### INTERSECT THEM
-	var result = spaceState.intersect_point(params)
-	return result
 
 
 

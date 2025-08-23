@@ -41,6 +41,33 @@ func _ready() -> void:
 	
 
 
+func _input(e: InputEvent) -> void:
+	
+	if e is InputEventMouseButton: 
+		if e.is_pressed():
+			if e.button_index == MOUSE_BUTTON_LEFT:
+				inputFetchIcons()
+
+
+
+
+func inputFetchIcons():	
+	var result = MyTools.fetchMouseOverObjects(1)
+	
+	for r in result:
+		var icon = r.collider.get_parent()
+		if icon is Node:
+			if icon.has_method("getDeckCards"):
+				startBoardMatch(icon)
+			
+			
+
+func startBoardMatch(icon:Node):
+	var deckCards:Array = icon.getDeckCards()
+	GameInfo.enemyDeckCards = deckCards
+	GameInfo.playerDeckCards = MyTools.createGenericPlayerDeck()
+	MyTools.startBoardMatch()
+
 func updateActionDescription(name:String, desc:String):
 
 	actionNameLabel.text = name
@@ -57,3 +84,10 @@ func showBattleInfo(gameBoard:Node):
 
 func buttonPressedExitGame() -> void:
 	get_tree().quit()
+
+
+
+func startGameBoardBattle(enemyCards:Array):
+	
+	GameInfo.enemyDeckCards = enemyCards
+	GameInfo.playerDeckCards = []

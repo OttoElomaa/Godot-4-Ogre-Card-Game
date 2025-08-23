@@ -156,14 +156,14 @@ func togglePlayerAttackMode(enable:bool, card:Card):
 func handlePlayerAttack():
 	
 	#### GET CARDS AT MOUSE POSITION
-	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
+	var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if results.size() > 0:
 		var target:Card = getCollidedObject(results[0])
 		handlePlayerAttackCreature(target)
 		return
 	
 	#### CHECK IF ENEMY PORTRAIT AT MOUSE POSITION
-	results = main.fetchMouseOverObjects(COLLISION_MASK_ENEMY_PORTRAIT)
+	results = MyTools.fetchMouseOverObjects(COLLISION_MASK_ENEMY_PORTRAIT)
 	if results.size() > 0:
 		handlePlayerAttackEnemy()
 		updateResourceLabels()
@@ -226,7 +226,7 @@ func handlePlayerCastTargeting():
 	print("Click - Player trying to cast")
 	
 	#### GET CARDS AT MOUSE POSITION
-	var results = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
+	var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	prints("Cards found for casting: ", results.size())
 	
 	for r in results:

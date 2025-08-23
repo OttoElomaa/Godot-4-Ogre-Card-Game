@@ -1,16 +1,27 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctrvsaptdulhm"]
+[gd_scene load_steps=25 format=3 uid="uid://ctrvsaptdulhm"]
 
 [ext_resource type="Texture2D" uid="uid://eddjiah8pup6" path="res://Art/ZoneComponents/cards-achra-zones-desert.jpg" id="1_18y15"]
 [ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/zone.gd" id="1_fjd6i"]
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/ZoneBoardIcon.tscn" id="2_rmpmb"]
+[ext_resource type="PackedScene" uid="uid://dtps2wa815evx" path="res://Cards/Wilds/Cr-Alhaja-Bheith-Nochti.tscn" id="3_f6as4"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="3_xt5s7"]
+[ext_resource type="PackedScene" uid="uid://dk4etb0x0xce3" path="res://Cards/Wilds/Cr-Pikeman.tscn" id="4_13exd"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="4_588s3"]
+[ext_resource type="PackedScene" uid="uid://qd3ll6tcjlep" path="res://Cards/Wilds/Cr-Stran-Herder.tscn" id="5_gp5ld"]
 [ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="5_yhj0w"]
+[ext_resource type="PackedScene" uid="uid://ufufchgvc1q8" path="res://Cards/Wilds/Cr-Tugar.tscn" id="6_4coas"]
 [ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="6_4x05h"]
+[ext_resource type="PackedScene" uid="uid://l3rpd1xyh67i" path="res://Cards/Wilds/Cr-Ogre.tscn" id="7_47oou"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="7_xt5s7"]
+[ext_resource type="PackedScene" uid="uid://ctjoy83adq33o" path="res://Cards/Wilds/Cr-SlaghRider.tscn" id="8_4t6do"]
 [ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/zoneButton.gd" id="8_588s3"]
+[ext_resource type="PackedScene" uid="uid://c8h8fv1enpgpb" path="res://Cards/GreenDefiance/Cr-DeathKnight.tscn" id="9_8633n"]
+[ext_resource type="PackedScene" uid="uid://cqej1t0pa88fs" path="res://Cards/Wilds/Cr-Janin-bargainer.tscn" id="10_yxxtt"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_bxjdc"]
+[ext_resource type="PackedScene" uid="uid://dnvgrx8n5noeh" path="res://Cards/Wilds/Cr-BlinkBeast.tscn" id="11_kqd17"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
+[ext_resource type="PackedScene" uid="uid://dvshdygyjpncb" path="res://Cards/Wilds/Cr-Alhaja-Pious.tscn" id="12_01ekw"]
+[ext_resource type="PackedScene" uid="uid://c7v3m7qb227jv" path="res://Cards/Wilds/Cr-RukRaider.tscn" id="13_k47wg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
 bg_color = Color(0.947752, 0.911757, 0.861921, 1)
@@ -36,12 +47,24 @@ zoneName = "The Eastern Desert"
 
 [node name="Board1" parent="GameBoards" instance=ExtResource("2_rmpmb")]
 position = Vector2(0, -250)
+card1 = ExtResource("3_f6as4")
+card2 = ExtResource("4_13exd")
+card3 = ExtResource("5_gp5ld")
+card4 = ExtResource("6_4coas")
 
 [node name="Board2" parent="GameBoards" instance=ExtResource("2_rmpmb")]
 position = Vector2(410, 0)
+card1 = ExtResource("4_13exd")
+card2 = ExtResource("7_47oou")
+card3 = ExtResource("8_4t6do")
+card4 = ExtResource("9_8633n")
 
 [node name="Board3" parent="GameBoards" instance=ExtResource("2_rmpmb")]
 position = Vector2(-410, 0)
+card1 = ExtResource("10_yxxtt")
+card2 = ExtResource("11_kqd17")
+card3 = ExtResource("12_01ekw")
+card4 = ExtResource("13_k47wg")
 
 [node name="MapArt" type="Sprite2D" parent="."]
 z_index = -1

@@ -5,6 +5,12 @@ var gameBoard:GameBoard = null
 var cardsManager:Node = null
 var battleSystem:Node = null
 
+@onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard.tscn")
+
+
+func startBoardMatch():
+	get_tree().change_scene_to_packed(GameBoardScene)
+
 
 func gameBoardSetup(gameBoard:GameBoard):
 	self.gameBoard = gameBoard
@@ -61,6 +67,22 @@ func findEmptyCardSlots(isEnemy) -> Array:
 	
 	return emptySlots
 	
+
+
+func fetchMouseOverObjects(collisionMask: int):
+		
+	#### WORLD STATE
+	var spaceState = get_world_2d().direct_space_state
+	#### MOUSE POSITION
+	var params = PhysicsPointQueryParameters2D.new()
+	params.position = get_global_mouse_position()
+	params.collide_with_areas = true
+	params.collision_mask = collisionMask
+	
+	#### INTERSECT THEM
+	var result = spaceState.intersect_point(params)
+	return result
+
 
 
 func handleCardHover(isHovering:bool, card:Card):
@@ -120,5 +142,8 @@ func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
 	return placedCards
 
 
+
+func createGenericPlayerDeck():
+	return $CardLoader.createDesertDeck()
 
 	

@@ -225,7 +225,7 @@ func handleFinishDraggingCard() -> Node:
 	
 	#################################################
 	#### HANDLE RITUAL USE CASE
-	var resultCards:Array = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
+	var resultCards:Array = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	var target:Card = null
 	
 	
@@ -244,7 +244,7 @@ func handleFinishDraggingCard() -> Node:
 	#############################################################
 	#### HANDLE ATTACKING
 	#### FIND CARD SLOT
-	var results:Array = main.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
+	var results:Array = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
 	if results.size() > 0:
 		var selectedSlot:CardSlot = getCollidedObject(results[0])
 		
@@ -354,7 +354,7 @@ func toggleHighlightTwo(enable:bool, card:Card):
 
 func fetchCardOnClick() -> Card:
 	#### GET CARDS AT MOUSE POSITION
-	var result = main.fetchMouseOverObjects(COLLISION_MASK_CARD)
+	var result = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if result.size() > 0:
 		var topCard = getCollidedObject(result[0])
 		
