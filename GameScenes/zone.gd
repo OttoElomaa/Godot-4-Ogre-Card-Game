@@ -7,6 +7,10 @@ extends Node2D
 
 @onready var heroNameLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox/HeroNameLabel
 @onready var gloryAmountLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox/GloryAmountLabel
+@onready var heroPortrait:TextureRect = $CanvasLayer/PlayerInfoPanel/VBox/PanelContainer/HeroPortrait 
+
+@onready var actionButtonsHbox:HBoxContainer = $CanvasLayer/BottomActions/VBox/ButtonsHBox
+
 
 var hoverCheckNeeded := false
 var actionName := ""
@@ -27,11 +31,13 @@ func _ready() -> void:
 	
 	heroNameLabel.text = GameInfo.heroName
 	gloryAmountLabel.text = "%d" % GameInfo.playerGlory
-	$CanvasLayer/PlayerInfoPanel/VBox/HeroPortrait.texture = GameInfo.playerIcon
+	heroPortrait.texture = GameInfo.playerIcon
 	
-	for actionButton in $CanvasLayer/BottomActions/VBox/ButtonsHBox.get_children():
+	for actionButton in actionButtonsHbox.get_children():
 		actionButton.setup(self)
 	
+	for gameBoard in $GameBoards.get_children():
+		gameBoard.setup(self)
 	
 
 
@@ -42,6 +48,10 @@ func updateActionDescription(name:String, desc:String):
 	
 	actionName = ""
 	actionDesc = ""
+
+
+func showBattleInfo(gameBoard:Node):
+	$CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle.updateDescriptionPanel()
 
 
 

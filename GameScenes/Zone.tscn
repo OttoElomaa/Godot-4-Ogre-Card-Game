@@ -2,8 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://eddjiah8pup6" path="res://Art/ZoneComponents/cards-achra-zones-desert.jpg" id="1_18y15"]
 [ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/zone.gd" id="1_fjd6i"]
-[ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="2_4x05h"]
-[ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="3_bxjdc"]
+[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/ZoneBoardIcon.tscn" id="2_rmpmb"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="3_xt5s7"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="4_588s3"]
 [ext_resource type="StyleBox" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="5_yhj0w"]
@@ -11,6 +10,7 @@
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="7_xt5s7"]
 [ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/zoneButton.gd" id="8_588s3"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_bxjdc"]
+[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
 bg_color = Color(0.947752, 0.911757, 0.861921, 1)
@@ -34,41 +34,14 @@ zoneName = "The Eastern Desert"
 
 [node name="GameBoards" type="Node2D" parent="."]
 
-[node name="Board1" type="Node2D" parent="GameBoards"]
+[node name="Board1" parent="GameBoards" instance=ExtResource("2_rmpmb")]
 position = Vector2(0, -250)
-scale = Vector2(1.5, 1.5)
 
-[node name="Icon" type="Sprite2D" parent="GameBoards/Board1"]
-position = Vector2(0, 10)
-scale = Vector2(1.8, 1.8)
-texture = ExtResource("2_4x05h")
-
-[node name="Frame" type="Sprite2D" parent="GameBoards/Board1"]
-texture = ExtResource("3_bxjdc")
-
-[node name="Board2" type="Node2D" parent="GameBoards"]
-position = Vector2(-410, 0)
-scale = Vector2(1.5, 1.5)
-
-[node name="Icon" type="Sprite2D" parent="GameBoards/Board2"]
-position = Vector2(0, 10)
-scale = Vector2(1.8, 1.8)
-texture = ExtResource("2_4x05h")
-
-[node name="Frame" type="Sprite2D" parent="GameBoards/Board2"]
-texture = ExtResource("3_bxjdc")
-
-[node name="Board3" type="Node2D" parent="GameBoards"]
+[node name="Board2" parent="GameBoards" instance=ExtResource("2_rmpmb")]
 position = Vector2(410, 0)
-scale = Vector2(1.5, 1.5)
 
-[node name="Icon" type="Sprite2D" parent="GameBoards/Board3"]
-position = Vector2(0, 10)
-scale = Vector2(1.8, 1.8)
-texture = ExtResource("2_4x05h")
-
-[node name="Frame" type="Sprite2D" parent="GameBoards/Board3"]
-texture = ExtResource("3_bxjdc")
+[node name="Board3" parent="GameBoards" instance=ExtResource("2_rmpmb")]
+position = Vector2(-410, 0)
 
 [node name="MapArt" type="Sprite2D" parent="."]
 z_index = -1
@@ -155,6 +128,85 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="PlayerInfoPanel" type="MarginContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(400, 0)
+offset_right = 380.0
+offset_bottom = 520.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/PlayerInfoPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/PlayerInfoPanel/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HeroPortrait" type="TextureRect" parent="CanvasLayer/PlayerInfoPanel/VBox/PanelContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("11_bxjdc")
+expand_mode = 4
+stretch_mode = 6
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/PlayerInfoPanel/VBox/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("11_qjauh")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/PlayerInfoPanel/VBox"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox"]
+layout_mode = 2
+text = "  Hero  -"
+label_settings = ExtResource("7_xt5s7")
+horizontal_alignment = 1
+
+[node name="HeroNameLabel" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox"]
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("7_xt5s7")
+horizontal_alignment = 1
+
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/PlayerInfoPanel/VBox"]
+custom_minimum_size = Vector2(340, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox"]
+layout_mode = 2
+text = "  Glory  -"
+label_settings = ExtResource("7_xt5s7")
+horizontal_alignment = 1
+
+[node name="GloryAmountLabel" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox"]
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("7_xt5s7")
+horizontal_alignment = 1
+
 [node name="BottomActions" type="MarginContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(1200, 0)
 anchors_preset = 7
@@ -228,7 +280,7 @@ theme_override_styles/panel = ExtResource("3_xt5s7")
 
 [node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize/Panel"]
 layout_mode = 2
-text = "Proselytize"
+text = "Proselytize -  "
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
@@ -253,7 +305,7 @@ theme_override_styles/panel = ExtResource("3_xt5s7")
 
 [node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel"]
 layout_mode = 2
-text = "Scry"
+text = "Scry -  "
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
@@ -278,7 +330,7 @@ theme_override_styles/panel = ExtResource("3_xt5s7")
 
 [node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel"]
 layout_mode = 2
-text = "Travel"
+text = "Travel -  "
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
@@ -287,69 +339,30 @@ layout_mode = 2
 theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
 
-[node name="PlayerInfoPanel" type="MarginContainer" parent="CanvasLayer"]
-offset_right = 220.0
-offset_bottom = 100.0
+[node name="Battle" type="MarginContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox"]
+layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
+script = ExtResource("8_588s3")
+description = "Fight an opponent on one of the available game boards."
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/PlayerInfoPanel"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="HeroPortrait" type="TextureRect" parent="CanvasLayer/PlayerInfoPanel/VBox"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("11_bxjdc")
-expand_mode = 4
-stretch_mode = 6
-
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/PlayerInfoPanel/VBox"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
+theme_override_styles/panel = ExtResource("3_xt5s7")
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel"]
-custom_minimum_size = Vector2(500, 0)
+[node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel"]
 layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox"]
-layout_mode = 2
-text = "  Hero  -"
-label_settings = ExtResource("7_xt5s7")
+text = "Battle -  "
+label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
-[node name="HeroNameLabel" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox"]
+[node name="ActionPress" type="Button" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel"]
 layout_mode = 2
-text = "Goes Here"
-label_settings = ExtResource("7_xt5s7")
-horizontal_alignment = 1
-
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/PlayerInfoPanel/VBox"]
-custom_minimum_size = Vector2(340, 80)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
-
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel2"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Label" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox"]
-layout_mode = 2
-text = "  Glory  -"
-label_settings = ExtResource("7_xt5s7")
-horizontal_alignment = 1
-
-[node name="GloryAmountLabel" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox"]
-layout_mode = 2
-text = "Goes Here"
-label_settings = ExtResource("7_xt5s7")
-horizontal_alignment = 1
+theme_override_styles/hover = ExtResource("5_yhj0w")
+theme_override_styles/normal = ExtResource("6_4x05h")
 
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="buttonPressedExitGame"]
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize" method="buttonMouseEntered"]
@@ -358,3 +371,5 @@ horizontal_alignment = 1
 [connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry" method="buttonPressedActivate"]
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel" method="buttonMouseEntered"]
 [connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel" method="buttonPressedActivate"]
+[connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle" method="buttonMouseEntered"]
+[connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle" method="buttonPressedActivate"]

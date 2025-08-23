@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cq8mqxsw7pqjg"]
+
+[ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="1_0vns5"]
+[ext_resource type="Script" uid="uid://b4jucpsg4wr8b" path="res://GameScenes/zone_board_icon.gd" id="1_ge5wy"]
+[ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="2_ge5wy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aq0yd"]
+radius = 69.3333
+height = 138.667
+
+[node name="Board1" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_ge5wy")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, 10)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("1_0vns5")
+
+[node name="Frame" type="Sprite2D" parent="."]
+texture = ExtResource("2_ge5wy")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_aq0yd")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="mouseEnteredShowBattleInfo"]
