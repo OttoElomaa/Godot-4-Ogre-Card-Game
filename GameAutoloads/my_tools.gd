@@ -8,8 +8,8 @@ var battleSystem:Node = null
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard.tscn")
 
 
-func startBoardMatch():
-	get_tree().change_scene_to_packed(GameBoardScene)
+
+	
 
 
 func gameBoardSetup(gameBoard:GameBoard):

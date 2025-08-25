@@ -21,6 +21,7 @@ States="*res://GameAutoloads/States.tscn"
 MyTools="*res://GameAutoloads/MyTools.tscn"
 CardActions="*res://GameAutoloads/CardActions.tscn"
 GameInfo="*res://GameAutoloads/GameInfo.tscn"
+SceneSwitcher="*res://GameAutoloads/SceneSwitcher.tscn"
 
 [display]
 

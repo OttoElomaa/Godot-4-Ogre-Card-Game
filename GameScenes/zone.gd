@@ -3,6 +3,10 @@ extends Node2D
 
 @export var zoneName := "The Lands"
 
+@onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard.tscn")
+
+##################################
+
 @onready var zoneNameLabel:Label = $CanvasLayer/ZoneInfoPanel/Panel/HBox/ZoneNameLabel
 
 @onready var heroNameLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox/HeroNameLabel
@@ -66,7 +70,9 @@ func startBoardMatch(icon:Node):
 	var deckCards:Array = icon.getDeckCards()
 	GameInfo.enemyDeckCards = deckCards
 	GameInfo.playerDeckCards = MyTools.createGenericPlayerDeck()
-	MyTools.startBoardMatch()
+	
+	var newBoard:Node = GameBoardScene.instantiate()
+	SceneSwitcher.switchToNewScene(newBoard, self)
 
 func updateActionDescription(name:String, desc:String):
 

@@ -53,13 +53,16 @@ func buttonPressedStartMatch() -> void:
 	bestiaryVisible = false
 	GameInfo.playerDeckCards = MyTools.createGenericPlayerDeck()
 	GameInfo.enemyDeckCards = MyTools.createGenericPlayerDeck()
-	MyTools.startBoardMatch()
+	var newBoard:Node = GameBoardScene.instantiate()
+	SceneSwitcher.switchToNewScene(newBoard, self)
 	
 
 
 func buttonPressedGoToWorld() -> void:
 	bestiaryVisible = false
-	get_tree().change_scene_to_packed(ZoneScene)
+	var newZone:Node = ZoneScene.instantiate()
+	SceneSwitcher.switchToNewScene(newZone, self)
+	#get_tree().change_scene_to_packed(ZoneScene)
 
 
 
