@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://dp73rr7k36k1f"]
+
+[ext_resource type="Script" uid="uid://c2lkk4wba4nja" path="res://Scenes/level_select.gd" id="1_lx4vd"]
+[ext_resource type="Texture2D" uid="uid://cm7xsvr23pien" path="res://Graphics/Machine.png" id="2_2sqnl"]
+[ext_resource type="Script" uid="uid://cmefc18fqoi5r" path="res://Scenes/map_character.gd" id="2_72w8f"]
+[ext_resource type="Texture2D" uid="uid://b800gp7eajadx" path="res://Graphics/path-of-achra-world-09-BIGLABELS-WEBSITE.jpg" id="4_2sqnl"]
+[ext_resource type="Texture2D" uid="uid://c4evvkwp11lke" path="res://Graphics/Windowskin.png" id="5_kb5mc"]
+[ext_resource type="Script" uid="uid://cgumy6i61bq8r" path="res://Scenes/tooltip.gd" id="6_qnihq"]
+[ext_resource type="FontFile" uid="uid://cpojim1w0j7kk" path="res://Fonts/Silkscreen [RUS by Mr.Enot].ttf" id="7_kb5mc"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_72w8f"]
+vertices = PackedVector2Array(993.008, -988.023, 996.969, 995.961, -990, 989.031, -990, -992.969)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1000, -1003, 1003, -998, 1007, 1006, -1000, 999)])
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_72w8f"]
+radius = 2.79
+
+[sub_resource type="Theme" id="Theme_qnihq"]
+default_font = ExtResource("7_kb5mc")
+default_font_size = 12
+
+[node name="Level Select" type="Node2D"]
+script = ExtResource("1_lx4vd")
+movement_speed = 200.0
+create_level = true
+
+[node name="BackGround" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="BackGround"]
+texture = ExtResource("4_2sqnl")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(0, 1)
+navigation_polygon = SubResource("NavigationPolygon_72w8f")
+
+[node name="Character" type="CharacterBody2D" parent="."]
+z_index = 2
+script = ExtResource("2_72w8f")
+
+[node name="Camera2D" type="Camera2D" parent="Character"]
+position_smoothing_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Character"]
+position = Vector2(0, -12)
+texture = ExtResource("2_2sqnl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Character"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
+shape = SubResource("CircleShape2D_72w8f")
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="Nodes" type="Node2D" parent="."]
+
+[node name="Tooltip" type="NinePatchRect" parent="."]
+z_index = 10
+z_as_relative = false
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 136.0
+offset_bottom = 136.0
+texture = ExtResource("5_kb5mc")
+script = ExtResource("6_qnihq")
+
+[node name="Desc" type="RichTextLabel" parent="Tooltip"]
+z_index = 11
+z_as_relative = false
+layout_mode = 0
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 94.0
+offset_bottom = 34.0
+theme = SubResource("Theme_qnihq")
+bbcode_enabled = true
+text = "Shinparityi"
+fit_content = true

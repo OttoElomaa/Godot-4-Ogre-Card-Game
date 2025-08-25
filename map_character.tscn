@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://1t2c7s5vdbhe"]
+
+[ext_resource type="Script" uid="uid://cmefc18fqoi5r" path="res://Scenes/map_character.gd" id="1_6snsr"]
+[ext_resource type="Texture2D" uid="uid://cm7xsvr23pien" path="res://Graphics/Machine.png" id="2_bpqpq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_72w8f"]
+radius = 2.79
+
+[node name="Character" type="CharacterBody2D"]
+z_index = 2
+script = ExtResource("1_6snsr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("2_bpqpq")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_72w8f")
