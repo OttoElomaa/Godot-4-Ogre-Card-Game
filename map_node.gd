@@ -2,12 +2,18 @@ extends Node2D
 class_name Map_Node
 
 @export var index = Vector2(0, 0)
+#Contains every connection of the node. Each vector is ADDED to the node's own index
+#to get the index of the connected node. If you're using arrow-key based movement, the
+#keys with cardinal directions must be kept. Else, keys may be named anything.
 @export var connections: Dictionary = {'up': Vector2(0, 1), 'down': Vector2(0,-1),
 'left': Vector2(-1, 0), 'right': Vector2(1, 0)}
-@export var node_type = 'captured'
+#Used to reference the type of the node within code, such as in the _node_entered function
+#of level_select.
+@export var node_type = 'base'
+#Ingame flavor text. Used by the Tooltip scene.
 @export var description = 'Captured!' + '\n' + 'You have taken over this node. Good job!'
 @export var node_sprite = preload("res://Graphics/Map_Node_Empty.png")
-var difficulty = 0
+
 @onready var Main_Node = get_parent().get_parent()
 
 func _ready():
