@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://duioegcrx8lxj"]
+
+[ext_resource type="Texture2D" uid="uid://doq8dbumokecr" path="res://Graphics/Paddle.png" id="1_beqeg"]
+[ext_resource type="Script" uid="uid://mmcuqonxar5s" path="res://Scenes/path_line.gd" id="1_c5n7f"]
+
+[node name="Path_Line" type="Line2D"]
+texture = ExtResource("1_beqeg")
+texture_mode = 1
+script = ExtResource("1_c5n7f")
