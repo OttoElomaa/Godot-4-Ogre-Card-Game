@@ -4,6 +4,7 @@ extends Node2D
 
 var playerName := "The Player"
 var heroName := "The Amir"
+var character_position: Map_Node
 
 var playerGlory := 0
 

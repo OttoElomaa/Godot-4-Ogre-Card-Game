@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp73rr7k36k1f"]
+
+[ext_resource type="Script" uid="uid://b2303t1wi46kv" path="res://GameScenes/level_select.gd" id="1_lx4vd"]
+[ext_resource type="PackedScene" uid="uid://b5iuilyek4ka8" path="res://GameScenes/map_character.tscn" id="3_2sqnl"]
+[ext_resource type="Texture2D" uid="uid://cmfxojwgfvey8" path="res://Art/ZoneComponents/path-of-achra-world-09-BIGLABELS-WEBSITE.jpg" id="4_2sqnl"]
+[ext_resource type="PackedScene" uid="uid://nuu3xo3eknpr" path="res://GameScenes/map_node.tscn" id="4_esctj"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_72w8f"]
+vertices = PackedVector2Array(993.008, -988.023, 996.969, 995.961, -990, 989.031, -990, -992.969)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1000, -1003, 1003, -998, 1007, 1006, -1000, 999)])
+
+[node name="Level Select" type="Node2D"]
+script = ExtResource("1_lx4vd")
+
+[node name="BackGround" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="BackGround"]
+texture = ExtResource("4_2sqnl")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(0, 1)
+navigation_polygon = SubResource("NavigationPolygon_72w8f")
+
+[node name="Character" parent="." instance=ExtResource("3_2sqnl")]
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="Nodes" type="Node2D" parent="."]
+top_level = true
+
+[node name="Map_Node" parent="Nodes" instance=ExtResource("4_esctj")]
+position = Vector2(432, 238)
+
+[node name="Map_Node2" parent="Nodes" instance=ExtResource("4_esctj")]
+position = Vector2(211, 530)
+index = "Salt Flats"
+connections = ["Desert of the Gods", "Eastern Desert"]
+
+[node name="Map_Node6" parent="Nodes" instance=ExtResource("4_esctj")]
+position = Vector2(-70, 231)
+index = "Desert of the Gods"
+connections = ["Eastern Desert", "Salt Flats"]
+description = "Desert of the Gods"

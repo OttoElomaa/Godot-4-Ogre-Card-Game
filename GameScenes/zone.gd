@@ -12,6 +12,7 @@ extends Node2D
 @onready var heroNameLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox/HeroNameLabel
 @onready var gloryAmountLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox/GloryAmountLabel
 @onready var heroPortrait:TextureRect = $CanvasLayer/PlayerInfoPanel/VBox/PanelContainer/HeroPortrait 
+@onready var levelSelect = $Map_Screen/SubViewportContainer/CanvasLayer2/LevelSelect
 
 @onready var actionButtonsHbox:HBoxContainer = $CanvasLayer/BottomActions/VBox/ButtonsHBox
 
@@ -31,6 +32,9 @@ var actionDescLabel:Label:
 
 func _ready() -> void:
 	
+	levelSelect.zoom = Vector2(2.0, 2.0)
+	
+	zoneName = levelSelect.character_position.index
 	zoneNameLabel.text = zoneName
 	
 	heroNameLabel.text = GameInfo.heroName
@@ -97,3 +101,7 @@ func startGameBoardBattle(enemyCards:Array):
 	
 	GameInfo.enemyDeckCards = enemyCards
 	GameInfo.playerDeckCards = []
+
+func buttonPressedTravel():
+	
+	SceneSwitcher.switchToNewSceneFromFile('travel_screen', self)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ctrvsaptdulhm"]
+[gd_scene load_steps=26 format=3 uid="uid://ctrvsaptdulhm"]
 
 [ext_resource type="Texture2D" uid="uid://eddjiah8pup6" path="res://Art/ZoneComponents/cards-achra-zones-desert.jpg" id="1_18y15"]
 [ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/zone.gd" id="1_fjd6i"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
 [ext_resource type="PackedScene" uid="uid://dvshdygyjpncb" path="res://Cards/Wilds/Cr-Alhaja-Pious.tscn" id="12_01ekw"]
 [ext_resource type="PackedScene" uid="uid://c7v3m7qb227jv" path="res://Cards/Wilds/Cr-RukRaider.tscn" id="13_k47wg"]
+[ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/level_select.tscn" id="23_4t6do"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
 bg_color = Color(0.947752, 0.911757, 0.861921, 1)
@@ -43,9 +44,34 @@ border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 script = ExtResource("1_fjd6i")
 zoneName = "The Eastern Desert"
 
+[node name="Map_Screen" type="MarginContainer" parent="."]
+show_behind_parent = true
+z_index = -6
+z_as_relative = false
+offset_left = -563.0
+offset_top = -402.0
+offset_right = 588.0
+offset_bottom = 230.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Map_Screen"]
+z_index = -5
+layout_mode = 2
+stretch = true
+mouse_target = true
+
+[node name="CanvasLayer2" type="SubViewport" parent="Map_Screen/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1151, 632)
+render_target_update_mode = 4
+
+[node name="LevelSelect" parent="Map_Screen/SubViewportContainer/CanvasLayer2" instance=ExtResource("23_4t6do")]
+position = Vector2(-21, 13)
+
 [node name="GameBoards" type="Node2D" parent="."]
 
 [node name="Board1" parent="GameBoards" instance=ExtResource("2_rmpmb")]
+top_level = true
+z_index = 6
 position = Vector2(0, -250)
 card1 = ExtResource("3_f6as4")
 card2 = ExtResource("4_13exd")
@@ -53,20 +79,21 @@ card3 = ExtResource("5_gp5ld")
 card4 = ExtResource("6_4coas")
 
 [node name="Board2" parent="GameBoards" instance=ExtResource("2_rmpmb")]
-position = Vector2(410, 0)
+position = Vector2(406, -18)
 card1 = ExtResource("4_13exd")
 card2 = ExtResource("7_47oou")
 card3 = ExtResource("8_4t6do")
 card4 = ExtResource("9_8633n")
 
 [node name="Board3" parent="GameBoards" instance=ExtResource("2_rmpmb")]
-position = Vector2(-410, 0)
+position = Vector2(-416, -19)
 card1 = ExtResource("10_yxxtt")
 card2 = ExtResource("11_kqd17")
 card3 = ExtResource("12_01ekw")
 card4 = ExtResource("13_k47wg")
 
 [node name="MapArt" type="Sprite2D" parent="."]
+visible = false
 z_index = -1
 position = Vector2(0, -130)
 scale = Vector2(0.7, 0.7)
@@ -143,13 +170,20 @@ theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
 
 [node name="IdkTest" type="MarginContainer" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/IdkTest"]
+layout_mode = 2
+texture = ExtResource("11_qjauh")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 
 [node name="PlayerInfoPanel" type="MarginContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(400, 0)
@@ -393,6 +427,7 @@ theme_override_styles/normal = ExtResource("6_4x05h")
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry" method="buttonMouseEntered"]
 [connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry" method="buttonPressedActivate"]
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel" method="buttonMouseEntered"]
+[connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="." method="buttonPressedTravel"]
 [connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel" method="buttonPressedActivate"]
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle" method="buttonMouseEntered"]
 [connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle" method="buttonPressedActivate"]

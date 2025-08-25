@@ -28,7 +28,5 @@ func _on_panel_mouse_entered() -> void:
 	updateDescriptionPanel()
 	
 	
-
-
 func buttonMouseEntered() -> void:
 	zone.updateActionDescription(actionName, description)

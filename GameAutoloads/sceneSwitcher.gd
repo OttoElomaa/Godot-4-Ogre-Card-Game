@@ -6,6 +6,7 @@ var currentSceneA:Node = null
 
 var sceneTree:SceneTree = null
 
+const GameScenePath = "res://GameScenes/"
 
 func _ready() -> void:
 	sceneTree = get_tree()
@@ -31,7 +32,19 @@ func switchToNewScene(newSceneB:Node, currScene:Node):
 	sceneTree.current_scene = newSceneB
 	sceneTree.root.remove_child.call_deferred(storedSceneB)
 
-
+func switchToNewSceneFromFile(path:String, currScene:Node):
+	print("Switching to a new scene.")
+	print("From: " + currScene.name)
+	print("To: " + path)
+	
+	storedSceneB = currScene
+	var full_path = GameScenePath + path + '.tscn'
+	var s = load(full_path)
+	var newSceneB = s.instantiate()
+	
+	sceneTree.root.add_child.call_deferred(newSceneB)
+	sceneTree.current_scene = newSceneB
+	sceneTree.root.remove_child.call_deferred(storedSceneB)
 
 func switchToStoredScene():
 	print("Switching to a stored scene.")
@@ -46,6 +59,5 @@ func switchToStoredScene():
 	sceneTree.current_scene = sceneToSwitchIntoB
 	sceneTree.root.remove_child(storedSceneB)
 	
-	
-	
+
 	
