@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://d26esw6ynlm4r"]
+
+[sub_resource type="Gradient" id="Gradient_vmbko"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d2gk3"]
+gradient = SubResource("Gradient_vmbko")
+
+[sub_resource type="Environment" id="Environment_vmbko"]
+background_mode = 3
+background_canvas_max_layer = 3
+tonemap_mode = 1
+glow_enabled = true
+glow_levels/1 = 16.0
+glow_normalized = true
+glow_bloom = 0.03
+glow_blend_mode = 1
+glow_hdr_threshold = 0.77
+glow_hdr_luminance_cap = 30.29
+fog_mode = 1
+fog_density = 1.0
+adjustment_enabled = true
+adjustment_brightness = 0.89
+adjustment_contrast = 1.12
+adjustment_saturation = 1.38
+adjustment_color_correction = SubResource("GradientTexture1D_d2gk3")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_d2gk3"]
+
+[sub_resource type="Compositor" id="Compositor_ke8nu"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_vmbko")
+camera_attributes = SubResource("CameraAttributesPractical_d2gk3")
+compositor = SubResource("Compositor_ke8nu")

@@ -5,4 +5,5 @@ class_name Audio
 
 func _ready():
 	$AudioStreamPlayer.stream = BGM
+	$AudioStreamPlayer.stream.loop = true
 	$AudioStreamPlayer.play()

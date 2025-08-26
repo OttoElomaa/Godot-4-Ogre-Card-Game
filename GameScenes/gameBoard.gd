@@ -115,7 +115,6 @@ func changeHealth(amount:int, isEnemy:bool):
 		$BattleSystem.playerHealth += amount
 
 
-
 ########################################################################################
 
 func checkSlotPlayer(slot:CardSlot):

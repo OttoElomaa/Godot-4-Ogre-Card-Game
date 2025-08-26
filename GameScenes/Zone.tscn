@@ -72,21 +72,21 @@ position = Vector2(-21, 13)
 [node name="Board1" parent="GameBoards" instance=ExtResource("2_rmpmb")]
 top_level = true
 z_index = 6
-position = Vector2(0, -250)
+position = Vector2(-82, -313)
 card1 = ExtResource("3_f6as4")
 card2 = ExtResource("4_13exd")
 card3 = ExtResource("5_gp5ld")
 card4 = ExtResource("6_4coas")
 
 [node name="Board2" parent="GameBoards" instance=ExtResource("2_rmpmb")]
-position = Vector2(406, -18)
+position = Vector2(243, -88)
 card1 = ExtResource("4_13exd")
 card2 = ExtResource("7_47oou")
 card3 = ExtResource("8_4t6do")
 card4 = ExtResource("9_8633n")
 
 [node name="Board3" parent="GameBoards" instance=ExtResource("2_rmpmb")]
-position = Vector2(-416, -19)
+position = Vector2(-394, -77)
 card1 = ExtResource("10_yxxtt")
 card2 = ExtResource("11_kqd17")
 card3 = ExtResource("12_01ekw")
