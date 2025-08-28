@@ -65,6 +65,7 @@ size = Vector2i(1151, 632)
 render_target_update_mode = 4
 
 [node name="LevelSelect" parent="Map_Screen/SubViewportContainer/CanvasLayer2" instance=ExtResource("23_4t6do")]
+visible = false
 position = Vector2(-21, 13)
 
 [node name="GameBoards" type="Node2D" parent="."]
@@ -93,7 +94,6 @@ card3 = ExtResource("12_01ekw")
 card4 = ExtResource("13_k47wg")
 
 [node name="MapArt" type="Sprite2D" parent="."]
-visible = false
 z_index = -1
 position = Vector2(0, -130)
 scale = Vector2(0.7, 0.7)
@@ -180,10 +180,13 @@ mouse_filter = 2
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/IdkTest"]
 layout_mode = 2
 texture = ExtResource("11_qjauh")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
 
 [node name="PlayerInfoPanel" type="MarginContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(400, 0)
