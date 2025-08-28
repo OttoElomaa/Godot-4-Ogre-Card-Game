@@ -1,6 +1,5 @@
 [gd_scene load_steps=26 format=3 uid="uid://ctrvsaptdulhm"]
 
-[ext_resource type="Texture2D" uid="uid://eddjiah8pup6" path="res://Art/ZoneComponents/cards-achra-zones-desert.jpg" id="1_18y15"]
 [ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/zone.gd" id="1_fjd6i"]
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/ZoneBoardIcon.tscn" id="2_rmpmb"]
 [ext_resource type="PackedScene" uid="uid://dtps2wa815evx" path="res://Cards/Wilds/Cr-Alhaja-Bheith-Nochti.tscn" id="3_f6as4"]
@@ -22,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
 [ext_resource type="PackedScene" uid="uid://dvshdygyjpncb" path="res://Cards/Wilds/Cr-Alhaja-Pious.tscn" id="12_01ekw"]
 [ext_resource type="PackedScene" uid="uid://c7v3m7qb227jv" path="res://Cards/Wilds/Cr-RukRaider.tscn" id="13_k47wg"]
+[ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="15_4t6do"]
 [ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/level_select.tscn" id="23_4t6do"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
@@ -97,7 +97,7 @@ card4 = ExtResource("13_k47wg")
 z_index = -1
 position = Vector2(0, -130)
 scale = Vector2(0.7, 0.7)
-texture = ExtResource("1_18y15")
+texture = ExtResource("15_4t6do")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

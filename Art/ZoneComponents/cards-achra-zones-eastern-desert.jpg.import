@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eddjiah8pup6"
-path="res://.godot/imported/cards-achra-zones-desert.jpg-304c12f5edee218b8ade72cc78b95d3b.ctex"
+uid="uid://cgrm16t4xuxvl"
+path="res://.godot/imported/cards-achra-zones-eastern-desert.jpg-f10d8e7af1948a370842d23b0d29919a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/ZoneComponents/cards-achra-zones-desert.jpg"
-dest_files=["res://.godot/imported/cards-achra-zones-desert.jpg-304c12f5edee218b8ade72cc78b95d3b.ctex"]
+source_file="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg"
+dest_files=["res://.godot/imported/cards-achra-zones-eastern-desert.jpg-f10d8e7af1948a370842d23b0d29919a.ctex"]
 
 [params]
 

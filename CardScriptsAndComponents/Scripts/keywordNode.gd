@@ -18,7 +18,9 @@ var myCard: Card = null
 
 
 @export var isDoom := false
+
 @export var isArmor := false
+@export var isHunt := false
 
 
 var icon:
