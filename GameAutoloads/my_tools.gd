@@ -5,7 +5,7 @@ var gameBoard:GameBoard = null
 var cardsManager:Node = null
 var battleSystem:Node = null
 
-@onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard.tscn")
+@onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
 
 

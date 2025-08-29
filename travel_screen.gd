@@ -1,7 +1,7 @@
 extends Node2D
 class_name TravelScreen
 
-@onready var levelSelect: Level_Select = $"MarginContainer/SubViewportContainer/SubViewport/Level Select"
+@onready var levelSelect: Level_Select = $MarginContainer/SubViewportContainer/SubViewport/LevelSelect
 
 func _ready():
 	$AnimationPlayer.play("zoom_out")

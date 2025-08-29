@@ -3,28 +3,12 @@
 [ext_resource type="Script" uid="uid://d4bphbjg3snvs" path="res://travel_screen.gd" id="1_y1wuq"]
 [ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/TravelMap/level_select.tscn" id="2_reupg"]
 
-[sub_resource type="Animation" id="Animation_y1wuq"]
-resource_name = "zoom_out"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/SubViewportContainer/SubViewport/Level Select:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2, 2), Vector2(1.5, 1.5)]
-}
-
 [sub_resource type="Animation" id="Animation_reupg"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/SubViewportContainer/SubViewport/Level Select:zoom")
+tracks/0/path = NodePath("MarginContainer/SubViewportContainer/SubViewport/LevelSelect:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -39,7 +23,7 @@ resource_name = "zoom_in"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/SubViewportContainer/SubViewport/Level Select:zoom")
+tracks/0/path = NodePath("MarginContainer/SubViewportContainer/SubViewport/LevelSelect:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -47,6 +31,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1.7, 1.7), Vector2(2.2, 2.2)]
+}
+
+[sub_resource type="Animation" id="Animation_y1wuq"]
+resource_name = "zoom_out"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/SubViewportContainer/SubViewport/LevelSelect:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1.5, 1.5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_reupg"]
@@ -76,7 +76,7 @@ physics_object_picking = true
 size = Vector2i(1917, 1079)
 render_target_update_mode = 4
 
-[node name="Level Select" parent="MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_reupg")]
+[node name="LevelSelect" parent="MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_reupg")]
 zoom = Vector2(2, 2)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

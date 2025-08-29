@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://csw63ytv6teic"]
 
-[ext_resource type="Script" uid="uid://btvr6ube321ot" path="res://GameScenes/basic_log_message.gd" id="1_2cby4"]
-[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="1_v6uv3"]
+[ext_resource type="Script" uid="uid://btvr6ube321ot" path="res://GameScenes/GameBoard/basic_log_message.gd" id="1_2cby4"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="1_v6uv3"]
 [ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Fonts/monaco/monaco.ttf" id="3_v6uv3"]
 
 [node name="Message" type="PanelContainer"]

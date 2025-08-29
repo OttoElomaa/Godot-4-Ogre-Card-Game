@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard.tscn")
+@onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
 @onready var ZoneScene: PackedScene = preload("res://GameScenes/Zone/Zone.tscn")
 

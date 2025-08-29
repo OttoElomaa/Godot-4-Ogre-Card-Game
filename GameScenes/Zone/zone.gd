@@ -3,7 +3,7 @@ extends Node2D
 
 @export var zoneName := "The Lands"
 
-@onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard.tscn")
+@onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
 ##################################
 

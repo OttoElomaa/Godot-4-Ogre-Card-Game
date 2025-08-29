@@ -2,7 +2,7 @@ extends MarginContainer
 
 
 
-var LogMessage = load("res://GameScenes/BasicLogMessage.tscn")
+var LogMessage = load("res://GameScenes/GameBoard/BasicLogMessage.tscn")
 
 @onready var scroller := $Panel/Margin/Scroll
 @onready var rows := $Panel/Margin/Scroll/Rows
