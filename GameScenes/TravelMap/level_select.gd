@@ -8,7 +8,7 @@ signal level_select_initialized()
 
 @onready var Nodes = $Nodes
 
-var map_node = preload("res://GameScenes/map_node.tscn")
+var map_node = preload("res://GameScenes/TravelMap/map_node.tscn")
 
 @export var movement_speed = 200.0
 var controllable := true

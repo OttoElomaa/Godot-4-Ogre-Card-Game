@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://ctrvsaptdulhm"]
 
-[ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/zone.gd" id="1_fjd6i"]
-[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/ZoneBoardIcon.tscn" id="2_rmpmb"]
+[ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/Zone/zone.gd" id="1_fjd6i"]
+[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBoardIcon.tscn" id="2_rmpmb"]
 [ext_resource type="PackedScene" uid="uid://dtps2wa815evx" path="res://Cards/Wilds/Cr-Alhaja-Bheith-Nochti.tscn" id="3_f6as4"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="3_xt5s7"]
 [ext_resource type="PackedScene" uid="uid://dk4etb0x0xce3" path="res://Cards/Wilds/Cr-Pikeman.tscn" id="4_13exd"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://l3rpd1xyh67i" path="res://Cards/Wilds/Cr-Ogre.tscn" id="7_47oou"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="7_xt5s7"]
 [ext_resource type="PackedScene" uid="uid://ctjoy83adq33o" path="res://Cards/Wilds/Cr-SlaghRider.tscn" id="8_4t6do"]
-[ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/zoneButton.gd" id="8_588s3"]
+[ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="8_588s3"]
 [ext_resource type="PackedScene" uid="uid://c8h8fv1enpgpb" path="res://Cards/GreenDefiance/Cr-DeathKnight.tscn" id="9_8633n"]
 [ext_resource type="PackedScene" uid="uid://cqej1t0pa88fs" path="res://Cards/Wilds/Cr-Janin-bargainer.tscn" id="10_yxxtt"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_bxjdc"]
@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dvshdygyjpncb" path="res://Cards/Wilds/Cr-Alhaja-Pious.tscn" id="12_01ekw"]
 [ext_resource type="PackedScene" uid="uid://c7v3m7qb227jv" path="res://Cards/Wilds/Cr-RukRaider.tscn" id="13_k47wg"]
 [ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="15_4t6do"]
-[ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/level_select.tscn" id="23_4t6do"]
+[ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/TravelMap/level_select.tscn" id="23_4t6do"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
 bg_color = Color(0.947752, 0.911757, 0.861921, 1)

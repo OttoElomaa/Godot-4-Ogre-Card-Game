@@ -104,4 +104,4 @@ func startGameBoardBattle(enemyCards:Array):
 
 func buttonPressedTravel():
 	
-	SceneSwitcher.switchToNewSceneFromFile('travel_screen', self)
+	SceneSwitcher.switchToNewSceneFromFile("TravelMap/travel_screen", self)

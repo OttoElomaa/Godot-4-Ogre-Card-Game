@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://nuu3xo3eknpr"]
 
-[ext_resource type="Script" uid="uid://hi0gitvne1os" path="res://GameScenes/map_node.gd" id="1_g7uvm"]
+[ext_resource type="Script" uid="uid://hi0gitvne1os" path="res://GameScenes/TravelMap/map_node.gd" id="1_g7uvm"]
 [ext_resource type="Texture2D" uid="uid://bvc2q36p55v57" path="res://Art/ZoneComponents/Map_Node_Empty.png" id="1_wp7i3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7uvm"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dp73rr7k36k1f"]
 
-[ext_resource type="Script" uid="uid://b2303t1wi46kv" path="res://GameScenes/level_select.gd" id="1_lx4vd"]
-[ext_resource type="PackedScene" uid="uid://b5iuilyek4ka8" path="res://GameScenes/map_character.tscn" id="3_2sqnl"]
+[ext_resource type="Script" uid="uid://b2303t1wi46kv" path="res://GameScenes/TravelMap/level_select.gd" id="1_lx4vd"]
+[ext_resource type="PackedScene" uid="uid://b5iuilyek4ka8" path="res://GameScenes/TravelMap/map_character.tscn" id="3_2sqnl"]
 [ext_resource type="Texture2D" uid="uid://cmfxojwgfvey8" path="res://Art/ZoneComponents/path-of-achra-world-09-BIGLABELS-WEBSITE.jpg" id="4_2sqnl"]
-[ext_resource type="PackedScene" uid="uid://nuu3xo3eknpr" path="res://GameScenes/map_node.tscn" id="4_esctj"]
+[ext_resource type="PackedScene" uid="uid://nuu3xo3eknpr" path="res://GameScenes/TravelMap/map_node.tscn" id="4_esctj"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_72w8f"]
 vertices = PackedVector2Array(993.008, -988.023, 996.969, 995.961, -990, 989.031, -990, -992.969)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://nmvym5570qtn"]
 
 [ext_resource type="Script" uid="uid://d4bphbjg3snvs" path="res://travel_screen.gd" id="1_y1wuq"]
-[ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/level_select.tscn" id="2_reupg"]
+[ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/TravelMap/level_select.tscn" id="2_reupg"]
 
 [sub_resource type="Animation" id="Animation_y1wuq"]
 resource_name = "zoom_out"

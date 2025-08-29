@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5iuilyek4ka8"]
 
-[ext_resource type="Script" uid="uid://lur1tnd5koar" path="res://GameScenes/map_character.gd" id="1_qx700"]
+[ext_resource type="Script" uid="uid://lur1tnd5koar" path="res://GameScenes/TravelMap/map_character.gd" id="1_qx700"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_72w8f"]
 radius = 2.79
