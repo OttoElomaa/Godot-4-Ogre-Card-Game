@@ -312,8 +312,8 @@ func handlePlayerAttackCreature(target:Card):
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	targetCard.takeCombatDamage(attackCard)
-	attackCard.takeCombatDamage(targetCard)
+	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard)
+	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard)
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
 	attackCard.handleCombatActions(true, targetCard)
@@ -324,6 +324,15 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	targetCard.checkAndHandleCombatDeath(false)
 	
 	endAttackState()
+	
+	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
+	main.addLogMessage(attackerString, Color.WHITE)	
+	
+	var targetHurtString = "%s takes %d damage" % [targetCard.cardName, damageTakenByTarget]
+	main.addLogMessage(targetHurtString, Color.ROYAL_BLUE)	
+	var attackerHurtString = "%s takes %d damage" % [attackCard.cardName, damageTakenByAttacker]
+	main.addLogMessage(attackerHurtString, Color.LIGHT_CORAL)	
+	
 	#### RETURN WHETHER ATTACKER IS DESTROYED -> WHY?
 	if not attackCard.checkAlive():
 		return true

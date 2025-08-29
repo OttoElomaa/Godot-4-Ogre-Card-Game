@@ -426,7 +426,7 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 
 
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
-func takeCombatDamage(card:Card) -> bool:
+func takeCombatDamage(card:Card) -> int:
 	
 	var selfCombatDamage:int = getCombatDamage()
 	var enemyCombatDamage:int = card.getCombatDamage()
@@ -434,23 +434,22 @@ func takeCombatDamage(card:Card) -> bool:
 	#### CHECK DESTROYED STATUS 1: DUELIST
 	if keywordHandler.hasDuelist():
 		if selfCombatDamage >= card.tempHealth:
-			return false   #### DUELIST KILLS, SURVIVES -> FALSE
+			return 0   #### DUELIST KILLS, SURVIVES -> FALSE
 			
 	
 	#### DEAL DAMAGE
 	var damageTaken = enemyCombatDamage
-	
 	if tempHealth < damageTaken:
-		tempHealth = 0
-	else:
-		tempHealth -= damageTaken
+		damageTaken = tempHealth
+		
+	tempHealth -= damageTaken
 	
 	updateCardVisuals()
 	
 	#### CHECK DESTROYED STATUS
-	if tempHealth <= 0:
-		return true    #### CREATURE DIES -> TRUE
-	return false
+	#if tempHealth <= 0:
+		#return true    #### CREATURE DIES -> TRUE
+	return damageTaken
 	
 
 
