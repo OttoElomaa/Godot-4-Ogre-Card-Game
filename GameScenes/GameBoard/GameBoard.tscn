@@ -548,7 +548,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 60
+theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 20
 
 [node name="CardInfoPanel" parent="CanvasLayer/CardInfoPane" instance=ExtResource("21_ufaws")]

@@ -4,8 +4,6 @@ extends Node2D
 
 var isPhased := false
 
-var hasDoom := false
-
 
 var buffs:
 	get:
@@ -26,14 +24,17 @@ func addEffect(appliedEffect: CardEffect):
 			e.reparent($Debuff/Nodes)
 	
 	e.toggleIcon(false)
-			
+	
+	updateEffectInfo()		
 	updateEffectVisuals()
 		
-	
+
+
+func updateEffectInfo():
+	pass
+
 
 func updateEffectVisuals():
-	#$Buff.hide()
-	#$Debuff.hide()
 	
 	var effectName := ""
 	var buffIcon:Texture = null
@@ -53,8 +54,9 @@ func updateEffectVisuals():
 		$Debuff/Sprites/DebuffSprite1.show()
 	if buffIcon != null:
 		$Buff/Sprites/BuffSprite1.show()
-		
-		
+			
+	updatePhasedVisuals()
+	
 			
 		#### ONLY ONE EFFECT TYPE ALLOWED
 		#if e.getEffectName() != effectName:
@@ -62,14 +64,7 @@ func updateEffectVisuals():
 				#e.queue_free()
 		#effectName = e.getEffectName()
 		
-		
 	
-	
-	
-	updatePhasedVisuals()
-
-
-
 func togglePhased(isPhased:bool):
 	self.isPhased = isPhased
 	updatePhasedVisuals()
@@ -81,3 +76,13 @@ func updatePhasedVisuals():
 		$PhasedTexture.show()
 	else:
 		$PhasedTexture.hide()
+
+
+
+func hasDoom() -> bool:
+	
+	for effect:CardEffect in debuffs:
+		if effect.isDoom:
+			return true
+	return false
+	

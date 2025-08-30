@@ -176,14 +176,14 @@ func updateDamageCalculator(targetC:Card):
 	var damageToDealLabel := $CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer/TargetDmgTakenLabel
 	var damageToTakeLabel := $CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer/AttackerDmgTakenLabel
 	
-	if not currentAttackingCard:
+	var attacker:Card = currentAttackingCard
+	if not attacker:
 		return
-	if targetC == currentAttackingCard:
+	if targetC == attacker:
 		return
 		
-	#$CanvasLayer/DamageCalculator/Panel/TargetDmgTakenLabel.text = targetC.cardName
-	damageToDealLabel.text = "%d" % currentAttackingCard.getCombatDamage()
-	damageToTakeLabel.text = "%d" % targetC.getCombatDamage()
+	damageToDealLabel.text = "%d" % attacker.getCombatDamageToTarget(targetC)
+	damageToTakeLabel.text = "%d" % targetC.getCombatDamageToTarget(attacker)
 	
 
 
@@ -310,7 +310,7 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	
 	#### NO BLOCKERS, ATTACK PLAYER
 	elif blockers.is_empty():
-		playerHealth -= c.getCombatDamage()
+		playerHealth -= c.getCombatDamageToTarget(null)
 		c.handleAttackingPortrait()
 	
 	
