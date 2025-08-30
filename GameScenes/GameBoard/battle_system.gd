@@ -8,6 +8,8 @@ var cardsManager:CardsManager = null
 
 @onready var attackLine := $AttackLine
 @onready var castLine := $CastLine
+@onready var damageCalculator := $CanvasLayer/DamageCalculator
+
 var COLLISION_MASK_CARD := 1
 var COLLISION_MASK_ENEMY_PORTRAIT := 4
 
@@ -18,7 +20,7 @@ var enemyMana := 0
 var playerHealth := 20
 var enemyHealth := 20
 
-var attackLineShown: bool = false
+var playerAttackOngoing: bool = false
 var currentAttackingCard: Card = null
 
 var castLineShown: bool = false
@@ -33,6 +35,8 @@ func _ready() -> void:
 	playerMana = turnCount
 	enemyMana = turnCount
 	#updateResourceLabels()
+	
+	togglePlayerAttackMode(false, null)
 	
 	
 	
@@ -58,10 +62,14 @@ func _input(e: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	if attackLineShown:
-		attackLine.points[1] = get_global_mouse_position()
+	var mousePos := get_global_mouse_position()
+	
+	if playerAttackOngoing:
+		attackLine.points[1] = mousePos
+		damageCalculator.position = (mousePos + Vector2(100,0)) * main.cameraMainBoard.zoom.x
+		
 	if castLineShown:
-		castLine.points[1] = get_global_mouse_position()
+		castLine.points[1] = mousePos
 	
 
 #######################################################################
@@ -139,16 +147,29 @@ func timeoutEndEnemyTurn() -> void:
 #### TURN ON PLAYER ATTACK MODE
 func togglePlayerAttackMode(enable:bool, card:Card):
 	
+	#### TURN IT OFF
+	if not enable:
+		currentAttackingCard = null
+		States.statesPlay()
+		
+		playerAttackOngoing = enable
+		$AttackLine.hide()
+		damageCalculator.hide()
+		return
+	
+	#### DO NOTHING
 	if not MyTools.checkNodeValidity(card):
 		return
 	
+	#### TURN IT ON
 	if card.checkCanAct():
 		currentAttackingCard = card
 		States.gameState = States.GameStates.ATTACK
 		
-		attackLineShown = enable
+		playerAttackOngoing = enable
 		$AttackLine.show()
 		attackLine.points[0] = card.position
+		damageCalculator.show()
 
 
 
@@ -348,9 +369,7 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 
 func endAttackState():
 	if States.gameState == States.GameStates.ATTACK:
-		attackLineShown = false
-		$AttackLine.hide()
-		States.gameState = States.GameStates.PLAY
+		togglePlayerAttackMode(false, null)
 	
 func endCastState():
 	castLineShown = false
