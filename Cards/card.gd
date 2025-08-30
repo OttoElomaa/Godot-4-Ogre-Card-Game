@@ -97,6 +97,20 @@ var mySlot: CardSlot = null
 var isEnemyCard := false
 var myOffset := Vector2.ZERO
 
+var hurtColor:
+	get:
+		if isEnemyCard:
+			return Color.GOLDENROD
+		else:
+			return Color.FIREBRICK
+
+var healColor:
+	get:
+		if isEnemyCard:
+			return Color.CADET_BLUE
+		else:
+			return Color.LIGHT_GREEN
+
 
 
 
@@ -396,6 +410,39 @@ func checkAlive():
 ########################################################
 ####  COMBAT STUFF  #####################
 
+#### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
+func takeCombatDamage(card:Card) -> int:
+	
+	var selfCombatDamage:int = getCombatDamage()
+	var enemyCombatDamage:int = card.getCombatDamage()
+	
+	#### CHECK DESTROYED STATUS 1: DUELIST
+	if keywordHandler.hasDuelist():
+		if selfCombatDamage >= card.tempHealth:
+			return 0   #### DUELIST KILLS, SURVIVES -> FALSE
+			
+	
+	#### DEAL DAMAGE
+	var damageTaken = enemyCombatDamage
+	if tempHealth < damageTaken:
+		damageTaken = tempHealth
+
+	tempHealth -= damageTaken
+	updateCardVisuals()
+	
+	return damageTaken
+	
+
+
+func getCombatDamage():
+	var combatDamage = tempDamage
+	
+	if effects.isPhased:
+		combatDamage += 1	
+	return combatDamage
+
+
+
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
 func handleCombatActions(isAttacking:bool, otherCard:Card):
 	
@@ -425,43 +472,7 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	return false
 
 
-#### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
-func takeCombatDamage(card:Card) -> int:
-	
-	var selfCombatDamage:int = getCombatDamage()
-	var enemyCombatDamage:int = card.getCombatDamage()
-	
-	#### CHECK DESTROYED STATUS 1: DUELIST
-	if keywordHandler.hasDuelist():
-		if selfCombatDamage >= card.tempHealth:
-			return 0   #### DUELIST KILLS, SURVIVES -> FALSE
-			
-	
-	#### DEAL DAMAGE
-	var damageTaken = enemyCombatDamage
-	if tempHealth < damageTaken:
-		damageTaken = tempHealth
-		
-	tempHealth -= damageTaken
-	
-	updateCardVisuals()
-	
-	#### CHECK DESTROYED STATUS
-	#if tempHealth <= 0:
-		#return true    #### CREATURE DIES -> TRUE
-	return damageTaken
-	
-
-
-
-func getCombatDamage():
-	var combatDamage = tempDamage
-	
-	if effects.isPhased:
-		combatDamage += 1
-		
-	return combatDamage
-
+######################################################################
 
 func handleAttackingPortrait():
 	playAttackAnimation()

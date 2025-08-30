@@ -320,23 +320,29 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	targetCard.handleCombatActions(false, attackCard)
 	
 	#### CHECK IF EITHER CARD WAS DESTROYED
-	attackCard.checkAndHandleCombatDeath(true)
-	targetCard.checkAndHandleCombatDeath(false)
+	var attackerDestroyed = attackCard.checkAndHandleCombatDeath(true)
+	var targetDestroyed = targetCard.checkAndHandleCombatDeath(false)
 	
 	endAttackState()
 	
+	
+	#### COMBAT LOG STUFF ##################################
 	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
 	main.addLogMessage(attackerString, Color.WHITE)	
 	
 	var targetHurtString = "%s takes %d damage" % [targetCard.cardName, damageTakenByTarget]
-	main.addLogMessage(targetHurtString, Color.ROYAL_BLUE)	
+	if targetDestroyed:
+		targetHurtString += " Destroyed"
+	main.addLogMessage(targetHurtString, targetCard.hurtColor)	
+	
 	var attackerHurtString = "%s takes %d damage" % [attackCard.cardName, damageTakenByAttacker]
-	main.addLogMessage(attackerHurtString, Color.LIGHT_CORAL)	
+	if attackerDestroyed:
+		attackerHurtString += " Destroyed"
+	main.addLogMessage(attackerHurtString, attackCard.hurtColor)	
+	
 	
 	#### RETURN WHETHER ATTACKER IS DESTROYED -> WHY?
-	if not attackCard.checkAlive():
-		return true
-	return false
+	return attackerDestroyed
 
 
 
