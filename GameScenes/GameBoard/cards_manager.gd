@@ -32,12 +32,11 @@ func _ready() -> void:
 	screenSize = get_viewport_rect()
 
 
-
+#### SETUP STUFF ##############################################
 func setup():	
 	dealPlayerHand()
 	dealEnemyHand()
 	
-
 
 func dealPlayerHand():
 	dumbHandDrawCounter = 0
@@ -58,8 +57,84 @@ func dealEnemyHand():
 		card.toggleFrontSide(false)
 	updateHandCardsVisuals()
 
+
+#### PHYSICS AND INPUT STUFF
+
+
+func _physics_process(delta: float) -> void:
+	
+	if States.gameState == States.GameStates.NONE:
+		return
+	
+	#### MOVE CARD THAT WAS SELECTED FOR DRAGGING
+	var c = currentDraggedCard
+	if c:
+		c.position = get_global_mouse_position()
+	
+	#### HOVER STUFF	
+	if hoverCheckNeeded:
+		if not currentDraggedCard:
+			if not currentHoveredCards.is_empty(): #### TURN These Checks OFF WHEN DRAGGING
+				handleHoverCheck()
+
+	
+	#### THIS HIDES CARD INFO WHEN NO CARDS ARE HOVERED -> No need for info panel
+	if mainCardInfoShown:
+		if currentHoveredCards.is_empty():
+			mainCardInfoShown = false
+			main.toggleCardInfo(false, null)
+
+
+#### HIGHLIGHT A CARD ON HOVER -> Not when mouse over a stack of cards
+#### CHECK IS INITIATED Only on HOVER ON/OFF. -> turns on HoverCheckNeeded
+func handleHoverCheck():
+	
+	#### TURN OFF HIGHLIGHT For All Cards In Stack EXCEPT TOP CARD (Last Index)
+	var lastIndex := currentHoveredCards.size() - 1
+	for i in range(currentHoveredCards.size()):
+		if i != lastIndex:
+			toggleHoverVisuals(false, currentHoveredCards[i])
+	
+	#### TURN ON HIGHLIGHT For TOP CARD		
+	var topCard = currentHoveredCards[lastIndex]
+	toggleHoverVisuals(true, topCard)
+	battleSystem.updateDamageCalculator(topCard)
+	
+	#### SHOW TOP CARD'S INFO, TURN OFF HOVER CHECK
+	mainCardInfoShown = true
+	main.toggleCardInfo(true, topCard)
+	hoverCheckNeeded = false
+
+
+func _input(e: InputEvent) -> void:
+	#### ONLY PROCESS 'PLAY' STATE HERE
+	if States.gameState != States.GameStates.PLAY:
+		return
+	
+	#### CLICK PROCESSING
+	if e is InputEventMouseButton: 
+		if e.is_pressed():
+			
+			#### LEFT CLICK PROCESSING
+			if e.button_index == MOUSE_BUTTON_LEFT:
+				if currentDraggedCard:
+					currentDraggedCard = handleFinishDraggingCard()
+				else:
+					startDraggingCardOrAttack()
+					
+				print("left clikc")	
+				prints("dragged card: ", currentDraggedCard)
+			
+			#### RIGHT CLICK PROCESSING -> CARD ACTION MENU	
+			elif e.button_index == MOUSE_BUTTON_RIGHT:
+				var card = fetchCardOnClick()
+				if MyTools.checkNodeValidity(card):
+					main.toggleCardActionMenu(true, card)
+	
 		
 
+
+#### CARD DRAW STUFF ################################################
 func checkIsEnemyAnddrawCard(isEnemy:bool):
 	if isEnemy:
 		drawCard($EnemyDeck, $EnemyHand)
@@ -130,73 +205,8 @@ func updateHandCardsVisuals():
 #c.position.x = clamp(c.position.x, screenSize.position.x, screenSize.end.x)
 #c.position.y = clamp(c.position.y, screenSize.position.y, screenSize.end.y)
 
-
-func _physics_process(delta: float) -> void:
-	
-	if States.gameState == States.GameStates.NONE:
-		return
-	
-	#### MOVE CARD THAT WAS SELECTED FOR DRAGGING
-	var c = currentDraggedCard
-	if c:
-		c.position = get_global_mouse_position()
 		
-	#### HIGHLIGHT A CARD ON HOVER -> Not when mouse over a stack of cards
-	#### CHECK IS INITIATED Only on HOVER ON/OFF. -> turns on HoverCheckNeeded
-	if hoverCheckNeeded:
-		if not currentDraggedCard and not currentHoveredCards.is_empty(): #### TURN These Checks OFF WHEN DRAGGING
-			
-			#### TURN OFF HIGHLIGHT For All Cards In Stack EXCEPT TOP CARD (Last Index)
-			var lastIndex := currentHoveredCards.size() - 1
-			for i in range(currentHoveredCards.size()):
-				if i != lastIndex:
-					toggleHighlightTwo(false, currentHoveredCards[i])
-			
-			#### TURN ON HIGHLIGHT For TOP CARD		
-			var card = currentHoveredCards[lastIndex]
-			toggleHighlightTwo(true, card)
-			
-			#### SHOW TOP CARD'S INFO, TURN OFF HOVER CHECK
-			mainCardInfoShown = true
-			main.toggleCardInfo(true, card)
-			hoverCheckNeeded = false
 	
-	#### THIS HIDES CARD INFO WHEN NO CARDS ARE HOVERED -> No need for info panel
-	if mainCardInfoShown:
-		if currentHoveredCards.is_empty():
-			mainCardInfoShown = false
-			main.toggleCardInfo(false, null)
-
-
-func _input(e: InputEvent) -> void:
-	#### ONLY PROCESS 'PLAY' STATE HERE
-	if States.gameState != States.GameStates.PLAY:
-		return
-	
-	#### CLICK PROCESSING
-	if e is InputEventMouseButton: 
-		if e.is_pressed():
-			
-			#### LEFT CLICK PROCESSING
-			if e.button_index == MOUSE_BUTTON_LEFT:
-				if currentDraggedCard:
-					currentDraggedCard = handleFinishDraggingCard()
-				else:
-					startDraggingCardOrAttack()
-					
-				print("left clikc")	
-				prints("dragged card: ", currentDraggedCard)
-			
-			#### RIGHT CLICK PROCESSING -> CARD ACTION MENU	
-			elif e.button_index == MOUSE_BUTTON_RIGHT:
-				var card = fetchCardOnClick()
-				if MyTools.checkNodeValidity(card):
-					main.toggleCardActionMenu(true, card)
-			
-		#elif e.is_released():
-			#print("left relese")
-
-
 
 
 func startDraggingCardOrAttack():
@@ -310,39 +320,28 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	return true
 
 
-
+#### INITIATE A HOVER CHECK
 func toggleCardHover(isHovering:bool, card:Card):
+	if not MyTools.checkNodeValidity(card):
+		return
+	
+	#### CALLED WHEN 'HOVER ON' TRIGGERED	
 	if isHovering:
 		prints("hover on card: ", card)
-		toggleCardHighlight(card, true)
-			
+		if not card in currentHoveredCards:
+			currentHoveredCards.append(card)
+	
+	#### CALLED WHEN 'HOVER OFF' TRIGGERED			
 	else:
 		prints("hover on card off: ", card)
-		toggleHighlightTwo(false, card)
-	
-	toggleCardHighlight(card, isHovering)	
+		currentHoveredCards.erase(card)
+		toggleHoverVisuals(false, card) #### TURN OFF HOVER VISUALS ON HOVER OFF -> Not done in CHECK func
+		
 	card.toggleCardName(isHovering)	
 	hoverCheckNeeded = true
 	
 	
-	
-	
-	
-
-func toggleCardHighlight(card:Card, toHighlight:bool):
-	if not MyTools.checkNodeValidity(card):
-		return
-		#if not card.actionState == card.CardActionStates.DESTROYED:
-			
-	if toHighlight:
-		if not card in currentHoveredCards:
-			currentHoveredCards.append(card)	
-	else:
-		currentHoveredCards.erase(card)
-		
-
-
-func toggleHighlightTwo(enable:bool, card:Card):		
+func toggleHoverVisuals(enable:bool, card:Card):		
 	if enable:
 		card.scale = CARD_HIGHLIGHTED_SCALE
 		card.z_index = 2

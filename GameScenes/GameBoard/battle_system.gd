@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 	
 	if playerAttackOngoing:
 		attackLine.points[1] = mousePos
-		damageCalculator.position = (mousePos + Vector2(100,0)) * main.cameraMainBoard.zoom.x
+		damageCalculator.position = (mousePos + Vector2(100,-50)) * main.cameraMainBoard.zoom.x
 		
 	if castLineShown:
 		castLine.points[1] = mousePos
@@ -171,6 +171,20 @@ func togglePlayerAttackMode(enable:bool, card:Card):
 		attackLine.points[0] = card.position
 		damageCalculator.show()
 
+
+func updateDamageCalculator(targetC:Card):
+	var damageToDealLabel := $CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer/TargetDmgTakenLabel
+	var damageToTakeLabel := $CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer/AttackerDmgTakenLabel
+	
+	if not currentAttackingCard:
+		return
+	if targetC == currentAttackingCard:
+		return
+		
+	#$CanvasLayer/DamageCalculator/Panel/TargetDmgTakenLabel.text = targetC.cardName
+	damageToDealLabel.text = "%d" % currentAttackingCard.getCombatDamage()
+	damageToTakeLabel.text = "%d" % targetC.getCombatDamage()
+	
 
 
 #### PROCESS ATTACK TARGET (ENEMY, OR ENEMY CARD)
