@@ -341,13 +341,20 @@ func toggleCardHover(isHovering:bool, card:Card):
 	hoverCheckNeeded = true
 	
 	
-func toggleHoverVisuals(enable:bool, card:Card):		
+func toggleHoverVisuals(enable:bool, card:Card):
+	var indexToSet := 1
+		
 	if enable:
 		card.scale = CARD_HIGHLIGHTED_SCALE
-		card.z_index = 2
+		indexToSet = 5
 	else:
 		card.scale = CARD_NORMAL_SCALE
-		card.z_index = 1
+		if card.isResting:
+			indexToSet = 2
+		else:
+			indexToSet = 1
+	
+	card.z_index = indexToSet
 		
 
 

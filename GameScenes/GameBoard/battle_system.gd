@@ -282,7 +282,7 @@ func handlePlayerAttackEnemy():
 		
 	#### ATTACK THE ENEMY
 	var c = currentAttackingCard
-	var combatDamage = c.getCombatDamage()
+	var combatDamage = c.getCombatDamageToTarget(null)
 	enemyHealth -= combatDamage
 	
 	c.handleAttackingPortrait()
