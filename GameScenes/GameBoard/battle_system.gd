@@ -220,6 +220,9 @@ func handlePlayerRitual(c:Card, target:Card) -> bool:
 		cardsManager.updateHandCardsVisuals()
 		updateResourceLabels()
 	
+	if success:
+		main.addLogMessage("%s prayer is recited" % c.cardName, Color.WHITE)	
+	
 	return success
 
 
@@ -283,6 +286,10 @@ func handlePlayerAttackEnemy():
 	#### ATTACK THE ENEMY
 	var c = currentAttackingCard
 	var combatDamage = c.getCombatDamageToTarget(null)
+	
+	handlePortraitAttackPrintout(c, combatDamage, true)
+	
+	
 	enemyHealth -= combatDamage
 	
 	c.handleAttackingPortrait()
@@ -310,10 +317,27 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	
 	#### NO BLOCKERS, ATTACK PLAYER
 	elif blockers.is_empty():
-		playerHealth -= c.getCombatDamageToTarget(null)
+		var damageToPlayer = c.getCombatDamageToTarget(null)
+		playerHealth -= damageToPlayer
+		handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
 		c.handleAttackingPortrait()
 	
 	
+
+func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEnemy:bool):
+	var attackString := ""
+	var targetName := ""
+	if targetIsEnemy:
+		targetName = "Top player (Enemy)"
+	else:
+		targetName = "Bottom player (Player)"
+		
+	attackString = "%s attacks %s!" % [attackCard.cardName, targetName]	
+	main.addLogMessage(attackString, Color.WHITE)
+	
+	var amountString := "%s takes %d damage" % [targetName, damageAmount]
+	var color:Color = Color.DARK_SALMON
+	main.addLogMessage(amountString, color)
 
 func handlePlayerAttackCreature(target:Card):
 	
@@ -367,12 +391,12 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	
 	var targetHurtString = "%s takes %d damage" % [targetCard.cardName, damageTakenByTarget]
 	if targetDestroyed:
-		targetHurtString += " Destroyed"
+		targetHurtString += " - Destroyed"
 	main.addLogMessage(targetHurtString, targetCard.hurtColor)	
 	
 	var attackerHurtString = "%s takes %d damage" % [attackCard.cardName, damageTakenByAttacker]
 	if attackerDestroyed:
-		attackerHurtString += " Destroyed"
+		attackerHurtString += " - Destroyed"
 	main.addLogMessage(attackerHurtString, attackCard.hurtColor)	
 	
 	

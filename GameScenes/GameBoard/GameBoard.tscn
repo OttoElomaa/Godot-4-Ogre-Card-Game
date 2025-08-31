@@ -571,7 +571,7 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("25_gfnca")
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/BattleLogPane"]
-custom_minimum_size = Vector2(450, 150)
+custom_minimum_size = Vector2(450, 200)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
