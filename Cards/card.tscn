@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=31 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Script" uid="uid://c4juxj0muiopk" path="res://CardScriptsAndComponents/Scripts/cardEffectsNode.gd" id="2_07jhh"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="5_jsedn"]
 [ext_resource type="Texture2D" uid="uid://cdficndq8clk4" path="res://Art/CardComponents/card-backside-texture-v2-achra.jpg" id="5_lcq1x"]
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="6_lcq1x"]
+[ext_resource type="Script" uid="uid://l04tnby43p40" path="res://CardScriptsAndComponents/Scripts/actionNodeSubHolder.gd" id="6_m45w5"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="6_u70hd"]
 [ext_resource type="Script" uid="uid://cwcen3irknv0t" path="res://CardScriptsAndComponents/Scripts/effectScriptConditionsChecker.gd" id="7_5riqg"]
 [ext_resource type="Texture2D" uid="uid://c6fbvpdul76bl" path="res://Art/CardComponents/card-action-state-indicator-texture-traveling-V2.png" id="9_gi0db"]
@@ -278,18 +279,32 @@ offset = Vector2(0, 100)
 script = ExtResource("4_q2hgj")
 
 [node name="Arrival" type="Node" parent="Actions"]
+script = ExtResource("6_m45w5")
+actionTypeStr = "Arrival"
 
 [node name="Ritual" type="Node" parent="Actions"]
+script = ExtResource("6_m45w5")
+actionTypeStr = "Ritual"
 
 [node name="Cast" type="Node" parent="Actions"]
+script = ExtResource("6_m45w5")
+actionTypeStr = "Cast"
 
 [node name="BattleArt" type="Node" parent="Actions"]
+script = ExtResource("6_m45w5")
+actionTypeStr = "Battle Art"
 
 [node name="OnTurn" type="Node" parent="Actions"]
+script = ExtResource("6_m45w5")
+actionTypeStr = "On Turn"
 
 [node name="Payoff" type="Node" parent="Actions"]
+script = ExtResource("6_m45w5")
+actionTypeStr = "Payoff"
 
 [node name="Cost" type="Node" parent="Actions"]
+script = ExtResource("6_m45w5")
+actionTypeStr = "Cost"
 
 [node name="EffectToGrant" type="Node2D" parent="Actions"]
 

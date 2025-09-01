@@ -108,6 +108,11 @@ func createText() -> String:
 	return text
 
 
-
+#### NEEDS TO BE EMPTY HERE -> FILLED IN Targeted AND Targetless SCRIPTS
 func createTextTwo() -> String:
 	return ""
+
+
+
+func createPrintout():
+	pass

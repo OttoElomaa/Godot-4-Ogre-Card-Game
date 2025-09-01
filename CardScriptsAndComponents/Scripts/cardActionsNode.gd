@@ -105,15 +105,20 @@ func getNodeKeyword(node:Node) -> String:
 
 func activateNode(node:Node, target:Card):
 	var success := false
+	var successfulScript:Node = null
 	
 	for script in node.get_children():
 		if script.has_method("activateTargetless"):
 			success = script.activateTargetless(myCard)
+			successfulScript = script
+			
 		elif target:
 			if script.has_method("activateTargeted"):
 				success = script.activateTargeted(target, myCard)
+				successfulScript = script
 	
 	if success:
+		successfulScript.createPrintout()  #### CREATE COMBAT LOG ENTRY
 		if not node == payoffNode:
 			handlePayoff(target)
 	
