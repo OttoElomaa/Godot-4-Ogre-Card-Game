@@ -118,7 +118,8 @@ func activateNode(node:Node, target:Card):
 				successfulScript = script
 	
 	if success:
-		successfulScript.createPrintout()  #### CREATE COMBAT LOG ENTRY
+		var holder = successfulScript.get_parent()
+		successfulScript.createPrintout(holder)  #### CREATE COMBAT LOG ENTRY
 		if not node == payoffNode:
 			handlePayoff(target)
 	

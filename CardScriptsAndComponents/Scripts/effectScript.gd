@@ -114,5 +114,12 @@ func createTextTwo() -> String:
 
 
 
-func createPrintout():
-	pass
+func createPrintout(actionHolder:Node):
+	
+	var holderText:String = actionHolder.actionTypeStr
+	var lineOne := "%s trigger on %s:" % [holderText, myCard.cardName]
+	MyTools.createCombatLogPrintout(lineOne, Color.WHITE)
+	
+	var effectText = createText()
+	MyTools.createCombatLogPrintout(effectText, Color.STEEL_BLUE)
+	

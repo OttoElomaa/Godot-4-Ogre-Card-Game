@@ -132,7 +132,7 @@ func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
 	var card:Card = null
 	var placedCards := []
 	
-	for slot in slots:
+	for slot:CardSlot in slots:
 		if counter < cards.size():
 			card = cards[counter]
 			card.position = slot.position
@@ -146,4 +146,11 @@ func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
 func createGenericPlayerDeck():
 	return $CardLoader.createDesertDeck()
 
+	
+
+
+func createCombatLogPrintout(text:String, color:Color):
+	if not gameBoard:
+		return
+	gameBoard.addLogMessage(text, color)
 	
