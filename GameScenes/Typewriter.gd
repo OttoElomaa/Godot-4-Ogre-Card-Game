@@ -12,7 +12,6 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if label.visible_characters != visible_characters:
 		current_character = label.text[label.visible_characters]
-		#print(current_character)
 		if not current_character in silent:
 			$AudioStreamPlayer.play()
 			
