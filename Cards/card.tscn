@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="6_lcq1x"]
 [ext_resource type="Script" uid="uid://l04tnby43p40" path="res://CardScriptsAndComponents/Scripts/actionNodeSubHolder.gd" id="6_m45w5"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="6_u70hd"]
-[ext_resource type="Script" uid="uid://cwcen3irknv0t" path="res://CardScriptsAndComponents/Scripts/effectScriptConditionsChecker.gd" id="7_5riqg"]
+[ext_resource type="Script" uid="uid://cwcen3irknv0t" path="res://CardScriptsAndComponents/Scripts/actionScriptConditionsChecker.gd" id="7_5riqg"]
 [ext_resource type="Texture2D" uid="uid://c6fbvpdul76bl" path="res://Art/CardComponents/card-action-state-indicator-texture-traveling-V2.png" id="9_gi0db"]
 [ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="9_i3xqw"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSet-Header-OffWhiteYellow50.tres" id="9_l781d"]

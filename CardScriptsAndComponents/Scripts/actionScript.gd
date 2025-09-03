@@ -1,7 +1,7 @@
 extends Node
 
 
-class_name  EffectScript
+class_name  ActionScript
 
 
 
