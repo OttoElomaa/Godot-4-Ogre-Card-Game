@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu0ueeth8ipdq"]
+
+[ext_resource type="Script" uid="uid://cyai5jj2rdnj4" path="res://CardScriptsAndComponents/Scripts/keyword.gd" id="1_n84qs"]
+
+[node name="Keyword" type="Node2D"]
+script = ExtResource("1_n84qs")

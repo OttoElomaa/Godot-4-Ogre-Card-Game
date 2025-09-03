@@ -1,11 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dehsm4nrexepg"]
+[gd_scene load_steps=2 format=3 uid="uid://b7ebpdx20rjh6"]
 
-[ext_resource type="PackedScene" uid="uid://camlvr52j6gkf" path="res://CardScriptsAndComponents/EffectOrKeyword.tscn" id="1_a2axn"]
-[ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="2_g6uc3"]
+[ext_resource type="PackedScene" uid="uid://ca73vscnr1a8" path="res://CardScriptsAndComponents/EffectCounter.tscn" id="1_4fpho"]
 
-[node name="EffectDoom" instance=ExtResource("1_a2axn")]
+[node name="EffectDoom" instance=ExtResource("1_4fpho")]
 effectType = 2
 isDoom = true
-
-[node name="Icon" parent="." index="0"]
-texture = ExtResource("2_g6uc3")

@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://kbmh20bwbb3u" path="res://CardScriptsAndComponents/Scripts/keyword_handler.gd" id="3_lcq1x"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="4_7bc8n"]
 [ext_resource type="Script" uid="uid://yys4316b4p1r" path="res://CardScriptsAndComponents/Scripts/cardActionsNode.gd" id="4_q2hgj"]
-[ext_resource type="PackedScene" uid="uid://camlvr52j6gkf" path="res://CardScriptsAndComponents/EffectOrKeyword.tscn" id="4_qt84u"]
 [ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="4_s5qc8"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_w0fdq"]
 [ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_6ma8t"]
@@ -19,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://c6fbvpdul76bl" path="res://Art/CardComponents/card-action-state-indicator-texture-traveling-V2.png" id="9_gi0db"]
 [ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="9_i3xqw"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSet-Header-OffWhiteYellow50.tres" id="9_l781d"]
+[ext_resource type="PackedScene" uid="uid://cu0ueeth8ipdq" path="res://CardScriptsAndComponents/Keyword.tscn" id="9_m45w5"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_8geja"]
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSetSmallBrownCardText.tres" id="13_j3lys"]
 [ext_resource type="Texture2D" uid="uid://3s7fsmtkjp8v" path="res://Art/CardComponents/card-action-state-indicator-texture-active-V3.png" id="16_8geja"]
@@ -318,7 +318,7 @@ script = ExtResource("3_lcq1x")
 
 [node name="MyKeywords" type="Node" parent="KeywordHandler"]
 
-[node name="Keyword" parent="KeywordHandler/MyKeywords" instance=ExtResource("4_qt84u")]
+[node name="Keyword" parent="KeywordHandler/MyKeywords" instance=ExtResource("9_m45w5")]
 isPermanent = true
 
 [node name="KeywordsToGrant" type="Node" parent="KeywordHandler"]
