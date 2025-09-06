@@ -8,10 +8,6 @@ var battleSystem:Node = null
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
 
-
-	
-
-
 func gameBoardSetup(gameBoard:GameBoard):
 	self.gameBoard = gameBoard
 	self.cardsManager =gameBoard.cardsManager
@@ -147,7 +143,6 @@ func createGenericPlayerDeck():
 	return $CardLoader.createDesertDeck()
 
 	
-
 
 func createCombatLogPrintout(text:String, color:Color):
 	if not gameBoard:

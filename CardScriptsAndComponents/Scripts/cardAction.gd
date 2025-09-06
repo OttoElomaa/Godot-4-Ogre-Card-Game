@@ -67,9 +67,6 @@ func activate(target:Card) -> bool:
 
 
 
-
-
-
 func findEmptySlot() -> CardSlot:
 	
 	var slots:Array = MyTools.findEmptyCardSlots(isEnemy)

@@ -1,9 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://boj1grfrys5st"]
+[gd_scene load_steps=2 format=3 uid="uid://boj1grfrys5st"]
 
 [ext_resource type="PackedScene" uid="uid://camlvr52j6gkf" path="res://CardScriptsAndComponents/CardEffect.tscn" id="1_0fwa6"]
-[ext_resource type="Texture2D" uid="uid://dph2nsi3hc1ax" path="res://Art/CardComponents/card-effect-counter-texture-hunt.png" id="2_0fwa6"]
 
 [node name="EffectHunt" instance=ExtResource("1_0fwa6")]
-
-[node name="Icon" parent="." index="0"]
-texture = ExtResource("2_0fwa6")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=30 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Script" uid="uid://c4juxj0muiopk" path="res://CardScriptsAndComponents/Scripts/cardEffectsNode.gd" id="2_07jhh"]
@@ -18,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://c6fbvpdul76bl" path="res://Art/CardComponents/card-action-state-indicator-texture-traveling-V2.png" id="9_gi0db"]
 [ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="9_i3xqw"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSet-Header-OffWhiteYellow50.tres" id="9_l781d"]
-[ext_resource type="PackedScene" uid="uid://cu0ueeth8ipdq" path="res://CardScriptsAndComponents/Keyword.tscn" id="9_m45w5"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_8geja"]
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSetSmallBrownCardText.tres" id="13_j3lys"]
 [ext_resource type="Texture2D" uid="uid://3s7fsmtkjp8v" path="res://Art/CardComponents/card-action-state-indicator-texture-active-V3.png" id="16_8geja"]
@@ -317,9 +316,6 @@ script = ExtResource("7_5riqg")
 script = ExtResource("3_lcq1x")
 
 [node name="MyKeywords" type="Node" parent="KeywordHandler"]
-
-[node name="Keyword" parent="KeywordHandler/MyKeywords" instance=ExtResource("9_m45w5")]
-isPermanent = true
 
 [node name="KeywordsToGrant" type="Node" parent="KeywordHandler"]
 

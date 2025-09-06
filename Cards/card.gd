@@ -52,6 +52,8 @@ var health := 0
 var tempDamage := 0
 var tempHealth := 0
 
+var keywords = []
+
 var effectText := ""
 
 
@@ -77,8 +79,31 @@ var hasVanguard: bool:
 	get:
 		return keywordHandler.hasVanguard()
 
+func getKeywords():
+	keywords = $KeywordHandler.collectKeywords()
+	
+func hasKeyword(keyword):
+	getKeywords()
+	for i in keywords:
+		if i.name == keyword:
+			return true
+	return false
 
-
+func addKeyword(string:String):
+	var keywordDirectory = 'res://CardScriptsAndComponents/Keywords/'
+	var new_keyword: Keyword
+	for i in DirAccess.get_files_at(keywordDirectory):
+		print(i)
+		if i.contains(string):
+			print('Keyword Found')
+			var loaded_keyword = load(keywordDirectory + i)
+			new_keyword = loaded_keyword.instantiate()
+			$KeywordHandler/MyKeywords.add_child(new_keyword)
+			return
+	new_keyword = Keyword.new()
+	new_keyword.effect_shortname = string
+	$KeywordHandler/MyKeywords.add_child(new_keyword)
+	
 ################################################## COUNTER NODE STUFF
 var isPhased: bool:
 	get:
@@ -137,6 +162,7 @@ func _ready() -> void:
 		$Frontside/Background/Spell.hide()
 		$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % startingDamage
 		$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % startingHealth
+		getKeywords()
 	else:
 		$Frontside/Background/Creature.hide()
 		$Frontside/Background/Spell.show()
@@ -176,10 +202,9 @@ func createEffectText():
 	var effectTexts := []
 	
 	#### CHECK FROM KEYWORDS HANDLER
-	if hasDuelist:
-		effectTexts.append("Duelist")
-	if hasVanguard:
-		effectTexts.append("Vanguard")
+	getKeywords()
+	for keyword in keywords:
+		effectTexts.append(keyword.effect_shortname)
 	
 	
 	#### CHECK ACTION NODES (CAST, BATTLE ART, and RITUAL NODES etc.)
@@ -417,7 +442,7 @@ func takeCombatDamage(card:Card) -> int:
 	var enemyCombatDamage:int = card.getCombatDamageToTarget(self)
 	
 	#### CHECK DESTROYED STATUS 1: DUELIST
-	if keywordHandler.hasDuelist():
+	if hasKeyword('Duelist'):
 		if selfCombatDamage >= card.tempHealth:
 			return 0   #### DUELIST KILLS, SURVIVES -> FALSE
 			
@@ -473,7 +498,7 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	#### SURVIVES, And IS ATTACKER	
 	elif isAttacker:
 		#### REST, OR TRAVEL If Vanguard
-		if hasVanguard:
+		if hasKeyword('Vanguard'):
 			toggleTraveling(true)
 		else:
 			restAndAnimate(false)

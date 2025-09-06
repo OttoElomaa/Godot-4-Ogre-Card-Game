@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtps2wa815evx"]
+[gd_scene load_steps=4 format=3 uid="uid://dtps2wa815evx"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_mir7j"]
 [ext_resource type="Texture2D" uid="uid://cb7jl678hu751" path="res://Art/CardArt/Desert/card-art-creature-alhaja-bheith-nochti.jpg" id="2_ein2a"]
+[ext_resource type="PackedScene" uid="uid://btssvmxbcdn05" path="res://CardScriptsAndComponents/Keywords/Vanguard.tscn" id="2_mir7j"]
 
 [node name="Card-Cr-Alhaja-Bheith-Nochti" instance=ExtResource("1_mir7j")]
 cardName = "Alhaja Bheith Nochti"
@@ -11,8 +12,8 @@ manaCost = 3
 startingDamage = 2
 startingHealth = 2
 
-[node name="Keyword" parent="KeywordHandler/MyKeywords" index="0"]
-hasVanguard = true
+[node name="Vanguard" parent="KeywordHandler/MyKeywords" index="0" instance=ExtResource("2_mir7j")]
+effect_description = "No, I still don't know."
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_ein2a")

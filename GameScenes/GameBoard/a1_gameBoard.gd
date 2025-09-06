@@ -197,3 +197,24 @@ func toggleCardInfo(enable:bool, card:Card):
 func addLogMessage(text:String, color:Color) -> void:
 	
 	$CanvasLayer/BattleLogPane.addMessage(text, color)
+
+#################################################################
+# Cheat Functions
+
+func nuke_cards(obj):
+	for child in obj.get_children():
+		obj.remove_child(child)
+
+func nuke_all_cards():
+	nuke_cards($CardsManager/PlayerBoard)
+	nuke_cards($CardsManager/PlayerHand)
+	nuke_cards($CardsManager/EnemyHand)
+	nuke_cards($CardsManager/EnemyBoard)
+
+func add_card_to_board(to, card:Card):
+	if to == 'player':
+		$PlayerSlots/TableCardSlot.add_child(card)
+	elif to == 'enemy':
+		$CardsManager/EnemyHand.add_child(card)
+	else:
+		print('WTF MAN?')

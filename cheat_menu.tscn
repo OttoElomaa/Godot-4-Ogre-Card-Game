@@ -1,0 +1,120 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhescek764odo"]
+
+[ext_resource type="Script" uid="uid://bepqe5wwx3b28" path="res://cheat_menu.gd" id="1_23tl8"]
+[ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Fonts/BasicSmallPixelFont.tres" id="2_ahs3t"]
+[ext_resource type="Texture2D" uid="uid://bv6t2gvsftvsp" path="res://Art/BoardComponents/card-slot-empty-texture.png" id="3_k054w"]
+
+[node name="CheatMenu" type="Node2D"]
+top_level = true
+z_index = 20
+z_as_relative = false
+script = ExtResource("1_23tl8")
+
+[node name="GameBoard_Cheats" type="CanvasLayer" parent="."]
+layer = 10
+visible = false
+
+[node name="NukeAllCards" type="Button" parent="GameBoard_Cheats"]
+offset_left = 350.0
+offset_top = 18.0
+offset_right = 498.0
+offset_bottom = 67.0
+text = "!! Nuke All Cards !!"
+
+[node name="MarginContainer" type="MarginContainer" parent="GameBoard_Cheats"]
+offset_left = 1597.0
+offset_top = 504.0
+offset_right = 1917.0
+offset_bottom = 1078.0
+size_flags_horizontal = 8
+
+[node name="NinePatchRect" type="Panel" parent="GameBoard_Cheats/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_ahs3t")
+
+[node name="CardName" type="TextEdit" parent="GameBoard_Cheats/MarginContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 85.0
+offset_right = 231.0
+offset_bottom = 120.0
+text = "Card Name"
+placeholder_text = "Card Name"
+
+[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/MarginContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 63.0
+offset_right = 258.0
+offset_bottom = 363.0
+texture = ExtResource("3_k054w")
+
+[node name="Attack" type="TextEdit" parent="GameBoard_Cheats/MarginContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 302.0
+offset_right = 131.0
+offset_bottom = 337.0
+text = "0"
+
+[node name="HP" type="TextEdit" parent="GameBoard_Cheats/MarginContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 303.0
+offset_right = 221.0
+offset_bottom = 338.0
+text = "0"
+
+[node name="NewKeyword" type="TextEdit" parent="GameBoard_Cheats/MarginContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 393.0
+offset_right = 201.0
+offset_bottom = 435.0
+placeholder_text = "New Keyword
+"
+
+[node name="Keywords" type="RichTextLabel" parent="GameBoard_Cheats/MarginContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 142.0
+offset_right = 224.0
+offset_bottom = 286.0
+text = "No Keywords"
+
+[node name="AddKeyword" type="Button" parent="GameBoard_Cheats/MarginContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 395.0
+offset_right = 297.0
+offset_bottom = 434.0
+text = "Add"
+
+[node name="ToFoe" type="Button" parent="GameBoard_Cheats/MarginContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 173.0
+offset_top = 454.0
+offset_right = 295.0
+offset_bottom = 499.0
+text = "To Foe >"
+
+[node name="ToYou" type="Button" parent="GameBoard_Cheats/MarginContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 508.0
+offset_right = 293.0
+offset_bottom = 555.0
+text = "To You >"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 576.0
+offset_top = 3.0
+offset_right = 663.0
+offset_bottom = 26.0
+text = "Cheats on~"
+
+[connection signal="pressed" from="GameBoard_Cheats/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/MarginContainer/NinePatchRect/AddKeyword" to="." method="_on_add_keyword_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/MarginContainer/NinePatchRect/ToFoe" to="." method="_on_to_foe_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/MarginContainer/NinePatchRect/ToYou" to="." method="_on_to_you_pressed"]

@@ -1,5 +1,5 @@
 extends CardEffect
+class_name Keyword
 
-
-@export var hasDuelist := false
-@export var hasVanguard := false
+@export var effect_shortname: String
+@export var effect_description: String
