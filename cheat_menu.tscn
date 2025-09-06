@@ -135,8 +135,11 @@ layout_mode = 2
 text = "To You >"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [connection signal="pressed" from="GameBoard_Cheats/TopMenu/HBox/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
 =======
+=======
+>>>>>>> Stashed changes
 [node name="Margin2" type="MarginContainer" parent="GameBoard_Cheats"]
 anchors_preset = 3
 anchor_left = 1.0

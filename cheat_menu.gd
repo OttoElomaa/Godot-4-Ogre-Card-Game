@@ -32,10 +32,17 @@ func toggleCardEditor(toShow:bool):
 	if toShow:
 		cheatPanel.show()
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		topMenu.show()
 	else:
 		cheatPanel.hide()
 		topMenu.hide()
+=======
+		$GameBoard_Cheats/Margin2/CheatPanel2.show()
+	else:
+		cheatPanel.hide()
+		$GameBoard_Cheats/Margin2/CheatPanel2.hide()
+>>>>>>> Stashed changes
 =======
 		$GameBoard_Cheats/Margin2/CheatPanel2.show()
 	else:
