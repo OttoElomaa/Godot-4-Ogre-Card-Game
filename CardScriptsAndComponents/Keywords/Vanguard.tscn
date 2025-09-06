@@ -4,4 +4,4 @@
 
 [node name="Vanguard" instance=ExtResource("1_crckr")]
 effect_shortname = "Vanguard"
-effect_description = "I honestly don't know what bro's cooking with this..."
+effect_description = "On combat, instead of Resting, Travel."

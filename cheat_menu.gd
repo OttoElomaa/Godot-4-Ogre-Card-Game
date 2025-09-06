@@ -2,7 +2,7 @@ extends Node2D
 class_name CheatMenu
 
 var current_scene
-var template_card = preload('res://Cards/Wilds/Cr-Pikeman.tscn')
+var template_card = preload("res://Cards/Cr-DebugMenuCard.tscn")
 var active_cheat_scene
 
 var new_card: Card

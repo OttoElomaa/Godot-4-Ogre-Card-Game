@@ -82,16 +82,19 @@ var hasVanguard: bool:
 func getKeywords():
 	keywords = $KeywordHandler.collectKeywords()
 	
-func hasKeyword(keyword):
+	
+func hasKeyword(keyword:String) -> bool:
 	getKeywords()
 	for i in keywords:
 		if i.name == keyword:
 			return true
 	return false
 
+
 func addKeyword(string:String):
 	var keywordDirectory = 'res://CardScriptsAndComponents/Keywords/'
 	var new_keyword: Keyword
+	
 	for i in DirAccess.get_files_at(keywordDirectory):
 		print(i)
 		if i.contains(string):
@@ -100,10 +103,14 @@ func addKeyword(string:String):
 			new_keyword = loaded_keyword.instantiate()
 			$KeywordHandler/MyKeywords.add_child(new_keyword)
 			return
+			
 	new_keyword = Keyword.new()
 	new_keyword.effect_shortname = string
 	$KeywordHandler/MyKeywords.add_child(new_keyword)
-	
+
+
+
+
 ################################################## COUNTER NODE STUFF
 var isPhased: bool:
 	get:
