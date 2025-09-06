@@ -13,7 +13,6 @@ startingDamage = 2
 startingHealth = 2
 
 [node name="Vanguard" parent="KeywordHandler/MyKeywords" index="0" instance=ExtResource("2_mir7j")]
-effect_description = "No, I still don't know."
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_ein2a")

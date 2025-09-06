@@ -6,6 +6,9 @@ var template_card = preload('res://Cards/Wilds/Cr-Pikeman.tscn')
 var active_cheat_scene
 
 var new_card: Card
+var found_card: Card
+
+var all_cards = []
 
 @onready var cheatPanel := $GameBoard_Cheats/Margin/CheatPanel
 @onready var topMenu := $GameBoard_Cheats/TopMenu
@@ -28,10 +31,17 @@ func _input(event):
 func toggleCardEditor(toShow:bool):
 	if toShow:
 		cheatPanel.show()
+<<<<<<< Updated upstream
 		topMenu.show()
 	else:
 		cheatPanel.hide()
 		topMenu.hide()
+=======
+		$GameBoard_Cheats/Margin2/CheatPanel2.show()
+	else:
+		cheatPanel.hide()
+		$GameBoard_Cheats/Margin2/CheatPanel2.hide()
+>>>>>>> Stashed changes
 		
 	cardEditorVisible = toShow
 
@@ -80,7 +90,6 @@ func _on_to_you_pressed():
 	finalize_card()
 	new_card.show()
 	MyTools.summonCard(new_card, false)
-	#current_scene.add_card_to_board('player', new_card)
 	conj_card()
 
 
@@ -88,5 +97,19 @@ func _on_to_foe_pressed():
 	finalize_card()
 	new_card.show()
 	MyTools.summonCard(new_card, true)
-	#current_scene.add_card_to_board('enemy', new_card)
 	conj_card()
+
+func _on_search_card_name_text_changed():
+	var prompt = $GameBoard_Cheats/Margin2/CheatPanel2/VBox/SearchCardName.text
+	for i in GameInfo.playerDeckCards:
+		if i.cardName == prompt:
+			found_card = i
+			$GameBoard_Cheats/Margin2/CheatPanel2/VBox/CardFace.texture = found_card.cardArt
+
+func _on_to_foe_2_pressed():
+	if found_card:
+		MyTools.summonCard(found_card, true)
+
+func _on_to_you_2_pressed():
+	if found_card:
+		MyTools.summonCard(found_card, false)

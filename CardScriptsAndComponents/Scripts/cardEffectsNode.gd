@@ -12,9 +12,7 @@ var debuffs:
 	get:
 		return $Debuff/Nodes.get_children()
 
-
-
-func addEffect(appliedEffect: CardEffect):
+func addEffect(appliedEffect: EffectCounter):
 	var e = appliedEffect
 	
 	match e.effectType:
@@ -27,7 +25,6 @@ func addEffect(appliedEffect: CardEffect):
 	
 	updateEffectInfo()		
 	updateEffectVisuals()
-		
 
 
 func updateEffectInfo():

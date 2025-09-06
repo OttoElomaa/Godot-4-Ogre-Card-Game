@@ -53,6 +53,7 @@ var tempDamage := 0
 var tempHealth := 0
 
 var keywords = []
+var counters = []
 
 var effectText := ""
 
@@ -70,22 +71,13 @@ var allowInteract := true
 
 ####################################### KEYWORD HANDLER STUFF
 
-		
-var hasDuelist: bool:
-	get:
-		return keywordHandler.hasDuelist()
-
-var hasVanguard: bool:
-	get:
-		return keywordHandler.hasVanguard()
-
 func getKeywords():
 	keywords = $KeywordHandler.collectKeywords()
 	
 func hasKeyword(keyword):
 	getKeywords()
 	for i in keywords:
-		if i.name == keyword:
+		if i.id == keyword:
 			return true
 	return false
 
@@ -101,7 +93,7 @@ func addKeyword(string:String):
 			$KeywordHandler/MyKeywords.add_child(new_keyword)
 			return
 	new_keyword = Keyword.new()
-	new_keyword.effect_shortname = string
+	new_keyword.id = string
 	$KeywordHandler/MyKeywords.add_child(new_keyword)
 	
 ################################################## COUNTER NODE STUFF
@@ -113,7 +105,24 @@ var isPhased: bool:
 
 
 ##########################################################
+# EFFECT COUNTER STUFF
 
+func getEffects():
+	var counters = []
+	for i in $Effects/Buff/Nodes.get_children():
+		counters.append(i)
+	for i in $Effects/Debuff/Nodes.get_children():
+		counters.append(i)
+
+func hasEffect(id:String):
+	getEffects()
+	for i in counters:
+		if i.id == id:
+			return true
+	return false
+
+
+##############################################################
 
 var cardsManager:CardsManager = null
 var mainMenu: Node = null
@@ -225,7 +234,7 @@ func createEffectText():
 	#### CHECK FROM KEYWORDS HANDLER
 	getKeywords()
 	for keyword in keywords:
-		effectTexts.append(keyword.effect_shortname)
+		effectTexts.append(keyword.id)
 	
 	
 	#### CHECK ACTION NODES (CAST, BATTLE ART, and RITUAL NODES etc.)
@@ -492,7 +501,7 @@ func getCombatDamageToTarget(target:Card):
 		return combatDamage
 	
 	#### TARGET'S EFFECTS
-	if target.effects.hasDoom():
+	if target.hasEffect('Doom'):
 		combatDamage += 1
 	
 	return combatDamage
