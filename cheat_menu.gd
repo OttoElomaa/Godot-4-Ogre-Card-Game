@@ -8,6 +8,7 @@ var active_cheat_scene
 var new_card: Card
 
 @onready var cheatPanel := $GameBoard_Cheats/Margin/CheatPanel
+@onready var topMenu := $GameBoard_Cheats/TopMenu
 
 var cardEditorVisible := false
 
@@ -27,8 +28,10 @@ func _input(event):
 func toggleCardEditor(toShow:bool):
 	if toShow:
 		cheatPanel.show()
+		topMenu.show()
 	else:
 		cheatPanel.hide()
+		topMenu.hide()
 		
 	cardEditorVisible = toShow
 
