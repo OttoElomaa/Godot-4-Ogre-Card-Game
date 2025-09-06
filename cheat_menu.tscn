@@ -134,7 +134,85 @@ text = "To Foe >"
 layout_mode = 2
 text = "To You >"
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [connection signal="pressed" from="GameBoard_Cheats/TopMenu/HBox/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
+=======
+=======
+>>>>>>> Stashed changes
+[node name="Margin2" type="MarginContainer" parent="GameBoard_Cheats"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -517.0
+offset_top = -549.0
+offset_right = -267.0
+offset_bottom = 6.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 200
+
+[node name="CheatPanel2" type="PanelContainer" parent="GameBoard_Cheats/Margin2"]
+custom_minimum_size = Vector2(235, 350)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_ahs3t")
+
+[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/Margin2/CheatPanel2"]
+layout_mode = 2
+texture = ExtResource("3_k054w")
+expand_mode = 4
+stretch_mode = 6
+
+[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/Margin2/CheatPanel2"]
+layout_mode = 2
+
+[node name="SearchCardName" type="TextEdit" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k054w")
+theme_override_styles/normal = ExtResource("5_wg888")
+text = "Card Name"
+placeholder_text = "Card Name"
+
+[node name="CardFace" type="TextureRect" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+expand_mode = 1
+
+[node name="Label" type="Label" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Add card..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToFoe2" type="Button" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+layout_mode = 2
+text = "To Foe >"
+
+[node name="ToYou2" type="Button" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+layout_mode = 2
+text = "To You >"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 576.0
+offset_top = 3.0
+offset_right = 663.0
+offset_bottom = 26.0
+text = "Cheats on~"
+
+[connection signal="pressed" from="GameBoard_Cheats/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
+>>>>>>> Stashed changes
 [connection signal="pressed" from="GameBoard_Cheats/Margin/CheatPanel/VBox/AddKeyword" to="." method="_on_add_keyword_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/Margin/CheatPanel/VBox/ToFoe" to="." method="_on_to_foe_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/Margin/CheatPanel/VBox/ToYou" to="." method="_on_to_you_pressed"]
+[connection signal="text_changed" from="GameBoard_Cheats/Margin2/CheatPanel2/VBox/SearchCardName" to="." method="_on_search_card_name_text_changed"]
+[connection signal="pressed" from="GameBoard_Cheats/Margin2/CheatPanel2/VBox/ToFoe2" to="." method="_on_to_foe_2_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/Margin2/CheatPanel2/VBox/ToYou2" to="." method="_on_to_you_2_pressed"]

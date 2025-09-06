@@ -8,8 +8,8 @@ class_name CardEffect
 var sourceCard: Card = null
 var myCard: Card = null
 
-
-
+@export var id: String
+@export var description: String
 
 
 func setup(sourceC:Card):

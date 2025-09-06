@@ -79,7 +79,6 @@ func findEmptyCardSlots(isEnemy) -> Array:
 	return emptySlots
 	
 
-
 func fetchMouseOverObjects(collisionMask: int):
 		
 	#### WORLD STATE
