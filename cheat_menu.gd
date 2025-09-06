@@ -10,7 +10,8 @@ var found_card: Card
 
 var all_cards = []
 
-@onready var cheatPanel := $GameBoard_Cheats/Margin/CheatPanel
+@onready var cardEditor := $GameBoard_Cheats/Margin/CardEditor
+@onready var cardSearch := $GameBoard_Cheats/Margin2/SearchCardsPanel
 @onready var topMenu := $GameBoard_Cheats/TopMenu
 
 var cardEditorVisible := false
@@ -30,26 +31,15 @@ func _input(event):
 
 func toggleCardEditor(toShow:bool):
 	if toShow:
-		cheatPanel.show()
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+		cardEditor.show()
+		cardSearch.show()
 		topMenu.show()
-	else:
-		cheatPanel.hide()
-		topMenu.hide()
-=======
-		$GameBoard_Cheats/Margin2/CheatPanel2.show()
-	else:
-		cheatPanel.hide()
-		$GameBoard_Cheats/Margin2/CheatPanel2.hide()
->>>>>>> Stashed changes
-=======
-		$GameBoard_Cheats/Margin2/CheatPanel2.show()
-	else:
-		cheatPanel.hide()
-		$GameBoard_Cheats/Margin2/CheatPanel2.hide()
->>>>>>> Stashed changes
 		
+	else:
+		cardEditor.hide()
+		cardSearch.hide()
+		topMenu.hide()
+
 	cardEditorVisible = toShow
 
 	
@@ -68,22 +58,22 @@ func _on_nuke_all_cards_pressed():
 
 
 func _on_add_keyword_pressed():
-	new_card.addKeyword(cheatPanel.get_node("VBox/NewKeyword").text) 
+	new_card.addKeyword(cardEditor.get_node("VBox/NewKeyword").text) 
 	update_new_card_keywords()
 	
 	
 func update_new_card_keywords():
 	new_card.getKeywords()
-	cheatPanel.get_node("VBox/Keywords").text = ''
+	cardEditor.get_node("VBox/Keywords").text = ''
 	for i in new_card.keywords:
-		cheatPanel.get_node("VBox/Keywords").text += i.effect_shortname
+		cardEditor.get_node("VBox/Keywords").text += i.id
 
 
 func finalize_card():
-	cheatPanel.get_node("VBox/Attack")
-	new_card.startingDamage = cheatPanel.get_node("VBox/HBox/Attack").text.to_int()
-	new_card.startingHealth = cheatPanel.get_node("VBox/HBox/HP").text.to_int()
-	new_card.cardName = cheatPanel.get_node("VBox/CardName").text
+	cardEditor.get_node("VBox/Attack")
+	new_card.startingDamage = cardEditor.get_node("VBox/HBox/Attack").text.to_int()
+	new_card.startingHealth = cardEditor.get_node("VBox/HBox/HP").text.to_int()
+	new_card.cardName = cardEditor.get_node("VBox/CardName").text
 
 	add_child(new_card)
 
@@ -107,11 +97,11 @@ func _on_to_foe_pressed():
 	conj_card()
 
 func _on_search_card_name_text_changed():
-	var prompt = $GameBoard_Cheats/Margin2/CheatPanel2/VBox/SearchCardName.text
+	var prompt = cardSearch.get_node("VBox/SearchCardName").text
 	for i in GameInfo.playerDeckCards:
 		if i.cardName == prompt:
 			found_card = i
-			$GameBoard_Cheats/Margin2/CheatPanel2/VBox/CardFace.texture = found_card.cardArt
+			cardSearch.get_node("VBox/CardFace").texture = found_card.cardArt
 
 func _on_to_foe_2_pressed():
 	if found_card:

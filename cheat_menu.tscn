@@ -64,22 +64,22 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 200
 
-[node name="CheatPanel" type="PanelContainer" parent="GameBoard_Cheats/Margin"]
+[node name="CardEditor" type="PanelContainer" parent="GameBoard_Cheats/Margin"]
 custom_minimum_size = Vector2(235, 350)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_ahs3t")
 
-[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/Margin/CheatPanel"]
+[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/Margin/CardEditor"]
 layout_mode = 2
 texture = ExtResource("3_k054w")
 expand_mode = 4
 stretch_mode = 6
 
-[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/Margin/CheatPanel"]
+[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/Margin/CardEditor"]
 layout_mode = 2
 
-[node name="CardName" type="TextEdit" parent="GameBoard_Cheats/Margin/CheatPanel/VBox"]
+[node name="CardName" type="TextEdit" parent="GameBoard_Cheats/Margin/CardEditor/VBox"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_k054w")
@@ -87,59 +87,53 @@ theme_override_styles/normal = ExtResource("5_wg888")
 text = "Card Name"
 placeholder_text = "Card Name"
 
-[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/Margin/CheatPanel/VBox"]
+[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/Margin/CardEditor/VBox"]
 layout_mode = 2
 alignment = 1
 
-[node name="Attack" type="TextEdit" parent="GameBoard_Cheats/Margin/CheatPanel/VBox/HBox"]
+[node name="Attack" type="TextEdit" parent="GameBoard_Cheats/Margin/CardEditor/VBox/HBox"]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_wg888")
 text = "0"
 
-[node name="HP" type="TextEdit" parent="GameBoard_Cheats/Margin/CheatPanel/VBox/HBox"]
+[node name="HP" type="TextEdit" parent="GameBoard_Cheats/Margin/CardEditor/VBox/HBox"]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_wg888")
 text = "0"
 
-[node name="NewKeyword" type="TextEdit" parent="GameBoard_Cheats/Margin/CheatPanel/VBox"]
+[node name="NewKeyword" type="TextEdit" parent="GameBoard_Cheats/Margin/CardEditor/VBox"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_wg888")
 placeholder_text = "New Keyword
 "
 
-[node name="Keywords" type="RichTextLabel" parent="GameBoard_Cheats/Margin/CheatPanel/VBox"]
+[node name="Keywords" type="RichTextLabel" parent="GameBoard_Cheats/Margin/CardEditor/VBox"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "No Keywords"
 
-[node name="AddKeyword" type="Button" parent="GameBoard_Cheats/Margin/CheatPanel/VBox"]
+[node name="AddKeyword" type="Button" parent="GameBoard_Cheats/Margin/CardEditor/VBox"]
 layout_mode = 2
 text = "Add Keyword"
 
-[node name="Label" type="Label" parent="GameBoard_Cheats/Margin/CheatPanel/VBox"]
+[node name="Label" type="Label" parent="GameBoard_Cheats/Margin/CardEditor/VBox"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Add card..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ToFoe" type="Button" parent="GameBoard_Cheats/Margin/CheatPanel/VBox"]
+[node name="ToFoe" type="Button" parent="GameBoard_Cheats/Margin/CardEditor/VBox"]
 layout_mode = 2
 text = "To Foe >"
 
-[node name="ToYou" type="Button" parent="GameBoard_Cheats/Margin/CheatPanel/VBox"]
+[node name="ToYou" type="Button" parent="GameBoard_Cheats/Margin/CardEditor/VBox"]
 layout_mode = 2
 text = "To You >"
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-[connection signal="pressed" from="GameBoard_Cheats/TopMenu/HBox/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
-=======
-=======
->>>>>>> Stashed changes
 [node name="Margin2" type="MarginContainer" parent="GameBoard_Cheats"]
 anchors_preset = 3
 anchor_left = 1.0
@@ -158,22 +152,29 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 200
 
-[node name="CheatPanel2" type="PanelContainer" parent="GameBoard_Cheats/Margin2"]
+[node name="SearchCardsPanel" type="PanelContainer" parent="GameBoard_Cheats/Margin2"]
 custom_minimum_size = Vector2(235, 350)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_ahs3t")
 
-[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/Margin2/CheatPanel2"]
+[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/Margin2/SearchCardsPanel"]
 layout_mode = 2
 texture = ExtResource("3_k054w")
 expand_mode = 4
 stretch_mode = 6
 
-[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/Margin2/CheatPanel2"]
+[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/Margin2/SearchCardsPanel"]
 layout_mode = 2
 
-[node name="SearchCardName" type="TextEdit" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+[node name="Label2" type="Label" parent="GameBoard_Cheats/Margin2/SearchCardsPanel/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Search by name..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SearchCardName" type="TextEdit" parent="GameBoard_Cheats/Margin2/SearchCardsPanel/VBox"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_k054w")
@@ -181,38 +182,30 @@ theme_override_styles/normal = ExtResource("5_wg888")
 text = "Card Name"
 placeholder_text = "Card Name"
 
-[node name="CardFace" type="TextureRect" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+[node name="CardFace" type="TextureRect" parent="GameBoard_Cheats/Margin2/SearchCardsPanel/VBox"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 expand_mode = 1
 
-[node name="Label" type="Label" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+[node name="Label" type="Label" parent="GameBoard_Cheats/Margin2/SearchCardsPanel/VBox"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Add card..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ToFoe2" type="Button" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+[node name="ToFoe2" type="Button" parent="GameBoard_Cheats/Margin2/SearchCardsPanel/VBox"]
 layout_mode = 2
 text = "To Foe >"
 
-[node name="ToYou2" type="Button" parent="GameBoard_Cheats/Margin2/CheatPanel2/VBox"]
+[node name="ToYou2" type="Button" parent="GameBoard_Cheats/Margin2/SearchCardsPanel/VBox"]
 layout_mode = 2
 text = "To You >"
 
-[node name="Label" type="Label" parent="."]
-offset_left = 576.0
-offset_top = 3.0
-offset_right = 663.0
-offset_bottom = 26.0
-text = "Cheats on~"
-
-[connection signal="pressed" from="GameBoard_Cheats/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
->>>>>>> Stashed changes
-[connection signal="pressed" from="GameBoard_Cheats/Margin/CheatPanel/VBox/AddKeyword" to="." method="_on_add_keyword_pressed"]
-[connection signal="pressed" from="GameBoard_Cheats/Margin/CheatPanel/VBox/ToFoe" to="." method="_on_to_foe_pressed"]
-[connection signal="pressed" from="GameBoard_Cheats/Margin/CheatPanel/VBox/ToYou" to="." method="_on_to_you_pressed"]
-[connection signal="text_changed" from="GameBoard_Cheats/Margin2/CheatPanel2/VBox/SearchCardName" to="." method="_on_search_card_name_text_changed"]
-[connection signal="pressed" from="GameBoard_Cheats/Margin2/CheatPanel2/VBox/ToFoe2" to="." method="_on_to_foe_2_pressed"]
-[connection signal="pressed" from="GameBoard_Cheats/Margin2/CheatPanel2/VBox/ToYou2" to="." method="_on_to_you_2_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/TopMenu/HBox/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/Margin/CardEditor/VBox/AddKeyword" to="." method="_on_add_keyword_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/Margin/CardEditor/VBox/ToFoe" to="." method="_on_to_foe_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/Margin/CardEditor/VBox/ToYou" to="." method="_on_to_you_pressed"]
+[connection signal="text_changed" from="GameBoard_Cheats/Margin2/SearchCardsPanel/VBox/SearchCardName" to="." method="_on_search_card_name_text_changed"]
+[connection signal="pressed" from="GameBoard_Cheats/Margin2/SearchCardsPanel/VBox/ToFoe2" to="." method="_on_to_foe_2_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/Margin2/SearchCardsPanel/VBox/ToYou2" to="." method="_on_to_you_2_pressed"]
