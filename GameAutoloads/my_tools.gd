@@ -39,6 +39,21 @@ func moveCardTweening(c:Card, originalPos:Vector2, newPos:Vector2):
 
 
 
+#### CAN BE USED BY SUMMON ABILITIES, DEBUG MENU, ETC
+func summonCard(card:Card, isEnemy:bool) -> bool:
+	var slots:Array = findEmptyCardSlots(isEnemy)
+	
+	if not slots.is_empty():
+		var slot = slots[0]
+		
+		handlePlaceCardInSlot(card, slot)
+		changeMana(card.manaCost, isEnemy)
+		return true
+		
+	return false
+
+
+
 func handlePlaceCardInSlot(card:Card, slot:CardSlot):
 	cardsManager.handlePlaceCardInSlot(card, slot)
 

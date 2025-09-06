@@ -143,12 +143,11 @@ func _ready() -> void:
 	cardsManager = get_tree().get_first_node_in_group("cardManager")
 	cardsManager.connectCardSignal(self)
 	
-	subTypes = subTypeStr.split(" ")
+	#subTypes = subTypeStr.split(" ")
+	#damage = startingDamage
+	#health = startingHealth
 	
-	damage = startingDamage
-	health = startingHealth
 	
-	handleTurnStartReset()
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
@@ -157,27 +156,49 @@ func _ready() -> void:
 	
 	#$Frontside/Art.scale = Vector2(0.2, 0.2)
 	
+	#### SETUP FOR ALL ACTION SCRIPTS
+	#### SHARE INFO ON, IS CARD ENEMY
+	$Actions.setup(self)
+	
 	if cardType == CardTypes.CREATURE:
+		updateCardNameAndBasicInfo(true)
 		$Frontside/Background/Creature.show()
 		$Frontside/Background/Spell.hide()
-		$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % startingDamage
-		$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % startingHealth
-		getKeywords()
+		
 	else:
+		updateCardNameAndBasicInfo(false)
+		
 		$Frontside/Background/Creature.hide()
 		$Frontside/Background/Spell.show()
 		$Frontside/Resources.hide()
 		$Frontside/ActionState.hide()
 	
-	#### SETUP FOR ALL ACTION SCRIPTS
-	#### SHARE INFO ON, IS CARD ENEMY
-	$Actions.setup(self)
+	
+	
+	
+	#createEffectText()
+	#$Frontside/CardName/Label.text = cardName
+	
+	$Frontside/CardName.hide()
+	
+	handleTurnStartReset()
+
+
+
+func updateCardNameAndBasicInfo(isCreature:bool):
+	subTypes = subTypeStr.split(" ")
+	getKeywords()
+	damage = startingDamage
+	health = startingHealth
 	
 	createEffectText()
 	
 	$Frontside/CardName/Label.text = cardName
-	$Frontside/CardName.hide()
 	
+	if isCreature:
+		$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % startingDamage
+		$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % startingHealth
+
 	
 	
 func createEffectText():
