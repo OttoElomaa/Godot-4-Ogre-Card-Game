@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=30 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Script" uid="uid://c4juxj0muiopk" path="res://CardScriptsAndComponents/Scripts/cardEffectsNode.gd" id="2_07jhh"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://kbmh20bwbb3u" path="res://CardScriptsAndComponents/Scripts/keyword_handler.gd" id="3_lcq1x"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="4_7bc8n"]
 [ext_resource type="Script" uid="uid://yys4316b4p1r" path="res://CardScriptsAndComponents/Scripts/cardActionsNode.gd" id="4_q2hgj"]
-[ext_resource type="PackedScene" uid="uid://camlvr52j6gkf" path="res://CardScriptsAndComponents/EffectOrKeyword.tscn" id="4_qt84u"]
 [ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="4_s5qc8"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_w0fdq"]
 [ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_6ma8t"]
@@ -15,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="6_lcq1x"]
 [ext_resource type="Script" uid="uid://l04tnby43p40" path="res://CardScriptsAndComponents/Scripts/actionNodeSubHolder.gd" id="6_m45w5"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="6_u70hd"]
-[ext_resource type="Script" uid="uid://cwcen3irknv0t" path="res://CardScriptsAndComponents/Scripts/effectScriptConditionsChecker.gd" id="7_5riqg"]
+[ext_resource type="Script" uid="uid://cwcen3irknv0t" path="res://CardScriptsAndComponents/Scripts/actionScriptConditionsChecker.gd" id="7_5riqg"]
 [ext_resource type="Texture2D" uid="uid://c6fbvpdul76bl" path="res://Art/CardComponents/card-action-state-indicator-texture-traveling-V2.png" id="9_gi0db"]
 [ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="9_i3xqw"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSet-Header-OffWhiteYellow50.tres" id="9_l781d"]
@@ -317,9 +316,6 @@ script = ExtResource("7_5riqg")
 script = ExtResource("3_lcq1x")
 
 [node name="MyKeywords" type="Node" parent="KeywordHandler"]
-
-[node name="Keyword" parent="KeywordHandler/MyKeywords" instance=ExtResource("4_qt84u")]
-isPermanent = true
 
 [node name="KeywordsToGrant" type="Node" parent="KeywordHandler"]
 

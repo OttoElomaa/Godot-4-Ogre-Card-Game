@@ -15,3 +15,10 @@ func hasVanguard() -> bool:
 		if keyword.hasVanguard:
 			return true
 	return false
+
+func collectKeywords() -> Array:
+	var keywords = []
+	for keyword in $MyKeywords.get_children():
+		if keyword is Keyword:
+			keywords.append(keyword)
+	return keywords

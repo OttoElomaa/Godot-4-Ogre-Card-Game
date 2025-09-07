@@ -17,6 +17,7 @@ extends Node2D
 var myCard: Card = null
 var isEnemy := false
 
+var effectToGrant:Node = null
 
 
 
@@ -29,6 +30,9 @@ func setup(card:Card):
 			
 			if script.has_method("setup"):
 				script.setup(card)
+	
+	effectToGrant = getEffectToGrant()
+
 
 
 func createActionText() -> Array:
@@ -195,9 +199,15 @@ func findEmptySlotWhat() -> CardSlot:
 
 
 
-func getEffectToGrant():
-	var effects:Array = $EffectToGrant.get_children()
+func getEffectToGrant() -> Node:
 	
-	if effects.is_empty():
-		return null
-	return effects[0]
+	if effectToGrant:
+		return effectToGrant
+	
+	else:
+	
+		var effects:Array = $EffectToGrant.get_children()
+		
+		if effects.is_empty():
+			return null
+		return effects[0]

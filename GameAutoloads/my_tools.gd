@@ -8,10 +8,6 @@ var battleSystem:Node = null
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
 
-
-	
-
-
 func gameBoardSetup(gameBoard:GameBoard):
 	self.gameBoard = gameBoard
 	self.cardsManager =gameBoard.cardsManager
@@ -43,6 +39,21 @@ func moveCardTweening(c:Card, originalPos:Vector2, newPos:Vector2):
 
 
 
+#### CAN BE USED BY SUMMON ABILITIES, DEBUG MENU, ETC
+func summonCard(card:Card, isEnemy:bool) -> bool:
+	var slots:Array = findEmptyCardSlots(isEnemy)
+	
+	if not slots.is_empty():
+		var slot = slots[0]
+		
+		handlePlaceCardInSlot(card, slot)
+		changeMana(card.manaCost, isEnemy)
+		return true
+		
+	return false
+
+
+
 func handlePlaceCardInSlot(card:Card, slot:CardSlot):
 	cardsManager.handlePlaceCardInSlot(card, slot)
 
@@ -67,7 +78,6 @@ func findEmptyCardSlots(isEnemy) -> Array:
 	
 	return emptySlots
 	
-
 
 func fetchMouseOverObjects(collisionMask: int):
 		
@@ -147,7 +157,6 @@ func createGenericPlayerDeck():
 	return $CardLoader.createDesertDeck()
 
 	
-
 
 func createCombatLogPrintout(text:String, color:Color):
 	if not gameBoard:

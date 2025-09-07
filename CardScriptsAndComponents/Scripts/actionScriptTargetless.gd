@@ -1,4 +1,4 @@
-extends EffectScript
+extends ActionScript
 
 
 
@@ -69,16 +69,9 @@ func activateTargetless(actor:Card):
 	if summonScene:
 		var creature:Card = summonScene.instantiate()
 		add_child(creature)   #### TEMP PARENT TO TRIGGER _READY
+		success = MyTools.summonCard(creature, isEnemy)
 		
-		
-		
-		var slots:Array = MyTools.findEmptyCardSlots(isEnemy)
-		if not slots.is_empty():
-			
-			var slot = slots[0]
-			MyTools.handlePlaceCardInSlot(creature, slot)
-			MyTools.changeMana(creature.manaCost, isEnemy)
-			success = true
+
 	
 	var targets:Array = MyTools.getBoardCards(isEnemy)
 	if targetGroup == TargetOptions.ALLIES:

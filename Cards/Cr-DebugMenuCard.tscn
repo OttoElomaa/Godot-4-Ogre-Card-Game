@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgigdn20pta8p"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_ydl6k"]
+[ext_resource type="Texture2D" uid="uid://cpje3wokp2ij1" path="res://Art/CardArt/card-art-creature-debug-placeholder.jpg" id="2_502gv"]
+
+[node name="Card-Cr-Pikeman" instance=ExtResource("1_ydl6k")]
+cardName = "Debug Card"
+subTypeStr = "Minion"
+flavorText = "A debug guy, from the void they have spawned"
+manaCost = 1
+startingDamage = 1
+startingHealth = 1
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_502gv")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://camlvr52j6gkf"]
+
+[ext_resource type="Script" uid="uid://but6003joni3c" path="res://CardScriptsAndComponents/Scripts/cardEffect.gd" id="1_phuyc"]
+
+[node name="CardEffect" type="Node2D"]
+script = ExtResource("1_phuyc")

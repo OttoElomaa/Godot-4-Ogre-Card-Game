@@ -2,39 +2,20 @@ extends Node2D
 class_name CardEffect
 
 
-enum effectTypes {
-	NONE, BUFF, DEBUFF
-}
 
-@export var effectType := effectTypes.NONE
 @export var isPermanent := false
 
 var sourceCard: Card = null
 var myCard: Card = null
 
-
-@export var hasDuelist := false
-@export var hasVanguard := false
-
-
-@export var isDoom := false
-
-@export var isArmor := false
-@export var isHunt := false
-
-
-var icon:
-	get:
-		return $Icon.texture
-
+@export var id: String
+@export var description: String
 
 
 func setup(sourceC:Card):
 	self.sourceCard = sourceC
 	
 	
-
-
 
 func applyEffect(targetCard:Card):
 	
@@ -52,17 +33,10 @@ func setMyTarget(card:Card):
 	self.myCard = card
 
 
-
+#### INHERITED FUNCTION -> EMPTY HERE, FILLED IN INHERITED CLASSES
 func getEffectName():
-	if isDoom:
-		return "Doom"
-	if isArmor:
-		return "Armor"
+	pass
 
 
-func toggleIcon(toShow:bool):
-	if toShow:
-		$Icon.show()
-	else:
-		$Icon.hide()
+
 	

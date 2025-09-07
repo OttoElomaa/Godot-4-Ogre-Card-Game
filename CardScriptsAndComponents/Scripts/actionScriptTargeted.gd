@@ -1,4 +1,4 @@
-extends EffectScript
+extends ActionScript
 
 
 
@@ -12,7 +12,7 @@ func createTextTwo() -> String:
 	var text := ""
 	
 	if grantEffect:
-		var effect:CardEffect = actionsNode.getEffectToGrant()
+		var effect:Node = actionsNode.getEffectToGrant()
 		if not effect:
 			assert(1==2,"WTF effect to grant error")
 			

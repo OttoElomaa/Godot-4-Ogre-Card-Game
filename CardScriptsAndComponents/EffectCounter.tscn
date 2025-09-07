@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca73vscnr1a8"]
+
+[ext_resource type="Script" uid="uid://5c42sqov344m" path="res://CardScriptsAndComponents/Scripts/effect_counter.gd" id="1_1hgi6"]
+[ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="2_o2iqq"]
+
+[node name="EffectCounter" type="Node2D"]
+script = ExtResource("1_1hgi6")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_o2iqq")

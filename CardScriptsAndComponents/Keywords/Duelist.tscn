@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://80enk6gwoju"]
+
+[ext_resource type="PackedScene" uid="uid://cu0ueeth8ipdq" path="res://CardScriptsAndComponents/Keyword.tscn" id="1_ghgmq"]
+
+[node name="Duelist" instance=ExtResource("1_ghgmq")]
+id = "Duelist"
+description = "In combat, if this card deals lethal combat damage, it takes no damage."

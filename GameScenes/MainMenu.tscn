@@ -9,7 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="5_26mog"]
 [ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://CardScriptsAndComponents/tableCardSlot.tscn" id="6_b8l8w"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="6_duqux"]
-[ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/GameBoard/cards_manager.gd" id="7_wqb3i"]
+[ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/GameBoard/a1_cards_manager.gd" id="7_wqb3i"]
 [ext_resource type="PackedScene" uid="uid://babshaacwyqaq" path="res://GameScenes/Intro.tscn" id="11_3ew8u"]
 [ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-02.png" id="12_07ip0"]
 [ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="13_b4hlq"]

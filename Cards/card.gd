@@ -52,6 +52,9 @@ var health := 0
 var tempDamage := 0
 var tempHealth := 0
 
+var keywords = []
+var counters = []
+
 var effectText := ""
 
 
@@ -68,14 +71,35 @@ var allowInteract := true
 
 ####################################### KEYWORD HANDLER STUFF
 
-		
-var hasDuelist: bool:
-	get:
-		return keywordHandler.hasDuelist()
+func getKeywords():
+	keywords = $KeywordHandler.collectKeywords()
+	
+	
+func hasKeyword(keyword:String) -> bool:
+	getKeywords()
+	for i in keywords:
+		if i.id == keyword:
+			return true
+	return false
 
-var hasVanguard: bool:
-	get:
-		return keywordHandler.hasVanguard()
+
+func addKeyword(string:String):
+	var keywordDirectory = 'res://CardScriptsAndComponents/Keywords/'
+	var new_keyword: Keyword
+	
+	for i in DirAccess.get_files_at(keywordDirectory):
+		print(i)
+		if i.contains(string):
+			print('Keyword Found')
+			var loaded_keyword = load(keywordDirectory + i)
+			new_keyword = loaded_keyword.instantiate()
+			$KeywordHandler/MyKeywords.add_child(new_keyword)
+			return
+			
+	new_keyword = Keyword.new()
+	new_keyword.id = string
+	$KeywordHandler/MyKeywords.add_child(new_keyword)
+
 
 
 
@@ -88,7 +112,24 @@ var isPhased: bool:
 
 
 ##########################################################
+# EFFECT COUNTER STUFF
 
+func getEffects():
+	var counters = []
+	for i in $Effects/Buff/Nodes.get_children():
+		counters.append(i)
+	for i in $Effects/Debuff/Nodes.get_children():
+		counters.append(i)
+
+func hasEffect(id:String):
+	getEffects()
+	for i in counters:
+		if i.id == id:
+			return true
+	return false
+
+
+##############################################################
 
 var cardsManager:CardsManager = null
 var mainMenu: Node = null
@@ -118,12 +159,11 @@ func _ready() -> void:
 	cardsManager = get_tree().get_first_node_in_group("cardManager")
 	cardsManager.connectCardSignal(self)
 	
-	subTypes = subTypeStr.split(" ")
+	#subTypes = subTypeStr.split(" ")
+	#damage = startingDamage
+	#health = startingHealth
 	
-	damage = startingDamage
-	health = startingHealth
 	
-	handleTurnStartReset()
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
@@ -132,26 +172,49 @@ func _ready() -> void:
 	
 	#$Frontside/Art.scale = Vector2(0.2, 0.2)
 	
+	#### SETUP FOR ALL ACTION SCRIPTS
+	#### SHARE INFO ON, IS CARD ENEMY
+	$Actions.setup(self)
+	
 	if cardType == CardTypes.CREATURE:
+		updateCardNameAndBasicInfo(true)
 		$Frontside/Background/Creature.show()
 		$Frontside/Background/Spell.hide()
-		$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % startingDamage
-		$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % startingHealth
+		
 	else:
+		updateCardNameAndBasicInfo(false)
+		
 		$Frontside/Background/Creature.hide()
 		$Frontside/Background/Spell.show()
 		$Frontside/Resources.hide()
 		$Frontside/ActionState.hide()
 	
-	#### SETUP FOR ALL ACTION SCRIPTS
-	#### SHARE INFO ON, IS CARD ENEMY
-	$Actions.setup(self)
+	
+	
+	
+	#createEffectText()
+	#$Frontside/CardName/Label.text = cardName
+	
+	$Frontside/CardName.hide()
+	
+	handleTurnStartReset()
+
+
+
+func updateCardNameAndBasicInfo(isCreature:bool):
+	subTypes = subTypeStr.split(" ")
+	getKeywords()
+	damage = startingDamage
+	health = startingHealth
 	
 	createEffectText()
 	
 	$Frontside/CardName/Label.text = cardName
-	$Frontside/CardName.hide()
 	
+	if isCreature:
+		$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % startingDamage
+		$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % startingHealth
+
 	
 	
 func createEffectText():
@@ -176,10 +239,9 @@ func createEffectText():
 	var effectTexts := []
 	
 	#### CHECK FROM KEYWORDS HANDLER
-	if hasDuelist:
-		effectTexts.append("Duelist")
-	if hasVanguard:
-		effectTexts.append("Vanguard")
+	getKeywords()
+	for keyword in keywords:
+		effectTexts.append(keyword.id)
 	
 	
 	#### CHECK ACTION NODES (CAST, BATTLE ART, and RITUAL NODES etc.)
@@ -417,7 +479,7 @@ func takeCombatDamage(card:Card) -> int:
 	var enemyCombatDamage:int = card.getCombatDamageToTarget(self)
 	
 	#### CHECK DESTROYED STATUS 1: DUELIST
-	if keywordHandler.hasDuelist():
+	if hasKeyword('Duelist'):
 		if selfCombatDamage >= card.tempHealth:
 			return 0   #### DUELIST KILLS, SURVIVES -> FALSE
 			
@@ -446,7 +508,7 @@ func getCombatDamageToTarget(target:Card):
 		return combatDamage
 	
 	#### TARGET'S EFFECTS
-	if target.effects.hasDoom():
+	if target.hasEffect('Doom'):
 		combatDamage += 1
 	
 	return combatDamage
@@ -473,7 +535,7 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	#### SURVIVES, And IS ATTACKER	
 	elif isAttacker:
 		#### REST, OR TRAVEL If Vanguard
-		if hasVanguard:
+		if hasKeyword('Vanguard'):
 			toggleTraveling(true)
 		else:
 			restAndAnimate(false)
