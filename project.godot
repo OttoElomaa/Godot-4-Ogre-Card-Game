@@ -22,7 +22,7 @@ MyTools="*res://GameAutoloads/MyTools.tscn"
 CardActions="*res://GameAutoloads/CardActions.tscn"
 GameInfo="*res://GameAutoloads/GameInfo.tscn"
 SceneSwitcher="*res://GameAutoloads/SceneSwitcher.tscn"
-Cheat="*res://cheat_menu.tscn"
+Cheat="*res://GameScenes/cheat_menu.tscn"
 
 [display]
 

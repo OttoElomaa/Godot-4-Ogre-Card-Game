@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cdcyvjftrdsxg" path="res://GameScenes/audio.tscn" id="2_18c0x"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="2_b8l8w"]
 [ext_resource type="AudioStream" uid="uid://b12p3w7ls8cpn" path="res://Audio/BGM/Cards of Achra OST - Main Menu Theme.ogg" id="3_3ew8u"]
-[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="3_wqb3i"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="3_wqb3i"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="4_duqux"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="5_26mog"]
 [ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://CardScriptsAndComponents/tableCardSlot.tscn" id="6_b8l8w"]
