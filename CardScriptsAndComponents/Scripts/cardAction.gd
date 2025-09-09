@@ -1,11 +1,19 @@
-extends Node
+extends Node2D
 
 enum TargetOptions {NONE, ALLIES, ENEMIES}
 
-enum SpecialConditions {NONE, ON_RITUAL, ON_CREATURE_ARRIVAL, ON_CREATURE_DEATH, ON_ALLY_DEATH, ON_ENEMY_DEATH}
+enum LocalSituations {
+	NONE, ARRIVAL, CAST, BATTLE_ART, ON_TURN, RITUAL
+}
+enum GlobalSituations {
+	NONE, ON_RITUAL, ON_CREATURE_ARRIVAL, ON_CREATURE_DEATH, ON_ALLY_DEATH, ON_ENEMY_DEATH
+	}
 
 var myCard: Card = null
 var isEnemy := false
+
+@export var localSituation := LocalSituations.NONE
+@export var globalSituation := GlobalSituations.NONE
 
 @export var nodeKeyword := "Action type"
 
@@ -13,6 +21,8 @@ var isEnemy := false
 
 
 func setup(card:Card):
+	assert(1==2,"Bullshit card action node")
+	
 	myCard = card
 	isEnemy = card.isEnemyCard
 	
@@ -22,8 +32,10 @@ func setup(card:Card):
 	
 
 
-func createText() -> String:
-	var text = ""
+func createActionText() -> String:
+	var text := ""
+	
+	var situationStr:String = getSituationStr()
 	
 	for script in get_children():
 		text += script.createText()
@@ -32,7 +44,7 @@ func createText() -> String:
 	#### AT THE END, COMPILE TEXT
 	text = text.rstrip(", ")
 	if text != "":
-		text = "%s: %s" % [nodeKeyword, text]	
+		text = "%s: %s" % [situationStr, text]	
 	
 	return text
 
@@ -49,17 +61,21 @@ func checkActive():
 
 func activate(target:Card) -> bool:
 	var success := false
+	var successfulScript:Node = null
 	
 	for script in get_children():
 		if script.has_method("activateTargetless"):
-			success = script.activateTargetless()
+			success = script.activateTargetless(myCard)
+			successfulScript = script
 		elif target:
 			if script.has_method("activateTargeted"):
 				success = script.activateTargeted(target)
+				successfulScript = script
 	
 	if success:
-		if not self == myCard.payoffNode:
-			myCard.payoffNode.activate(null)
+		successfulScript.createPrintout(self)  #### CREATE COMBAT LOG ENTRY
+		#if not self == myCard.payoffNode:
+			#myCard.payoffNode.activate(null)
 	
 		MyTools.updateBoardCardsVisuals()
 		
@@ -75,3 +91,59 @@ func findEmptySlot() -> CardSlot:
 		return null
 	else:
 		return slots[0]
+
+
+
+func getSituationStr() -> String:
+	var loc := LocalSituations
+	
+	match localSituation:
+		
+		loc.ARRIVAL:
+			return "Arrival"
+		loc.CAST:
+			return "Cast"
+		loc.BATTLE_ART:
+			return "Battle Art"
+		loc.ON_TURN:
+			return "On Turn"
+		loc.RITUAL:
+			return "Ritual"
+	
+	return "Unknown Situation"
+		
+
+
+#### BAD CODE, REPLACE WITH SIGNALS
+##########################################################
+
+func handleArrival(target:Card) -> bool:
+	if localSituation == LocalSituations.ARRIVAL:
+		return activate(target)
+	return false
+
+
+func handleRitual(target:Card) -> bool:
+	if localSituation == LocalSituations.RITUAL:
+		return activate(target)
+	return false
+
+
+func handleCast(target:Card) -> bool:
+	var success:bool = activate(target)
+	if success:
+		myCard.restAndAnimate(true)
+	
+	return success
+
+
+func handleBattleArt(target:Card) -> bool:
+	if localSituation == LocalSituations.BATTLE_ART:
+		return activate(target)
+	return false
+
+
+func handleOnTurn(target:Card) -> bool:
+	if localSituation == LocalSituations.ON_TURN:
+		return activate(target)
+	return false

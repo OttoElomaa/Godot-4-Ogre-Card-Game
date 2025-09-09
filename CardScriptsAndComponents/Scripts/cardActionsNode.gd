@@ -31,13 +31,25 @@ func setup(card:Card):
 			if script.has_method("setup"):
 				script.setup(card)
 	
-	effectToGrant = getEffectToGrant()
+	#effectToGrant = getEffectToGrant()
 
 
 
 func createActionText() -> Array:
 	var effectTexts := []
 	
+	for cardAction in get_children():
+		if cardAction.has_method("createActionText"):
+			effectTexts.append(cardAction.createActionText())
+		
+	return effectTexts
+
+
+
+#### BEFORE REWRITE. DELETE?
+func createActionTextOldVersion():
+	var effectTexts := []
+		
 	#### IS IT RITUAL?
 	if myCard.isRitual:
 		var ritualText = createNodeText(ritualNode)	
@@ -124,8 +136,8 @@ func activateNode(node:Node, target:Card):
 	if success:
 		var holder = successfulScript.get_parent()
 		successfulScript.createPrintout(holder)  #### CREATE COMBAT LOG ENTRY
-		if not node == payoffNode:
-			handlePayoff(target)
+		#if not node == payoffNode:
+			#handlePayoff(target)
 	
 	#### UPDATE VISUALS AFTER ACTION
 	MyTools.updateBoardCardsVisuals()
@@ -149,11 +161,17 @@ func isTargeted(node:Node) -> bool:
 ##############################################################
 
 func handleArrival(target:Card) -> bool:
-	return activateNode(arrivalNode, target)
+	for cardAction in get_children():
+		if cardAction.handleArrival(target):
+			return true
+	return false
 
 
 func handleRitual(target:Card) -> bool:
-	return activateNode(ritualNode, target)
+	for cardAction in get_children():
+		if cardAction.handleRitual(target):
+			return true
+	return false
 
 
 func handleCast(target:Card) -> bool:
@@ -165,11 +183,17 @@ func handleCast(target:Card) -> bool:
 
 
 func handleBattleArt(target:Card) -> bool:
-	return activateNode(battleArtNode, target)
+	for cardAction in get_children():
+		if cardAction.handleBattleArt(target):
+			return true
+	return false
 
 
 func handleOnTurn(target:Card) -> bool:
-	return activateNode(onTurnNode, target)
+	for cardAction in get_children():
+		if cardAction.handleOnTurn(target):
+			return true
+	return false
 
 
 
