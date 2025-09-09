@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bslvy7botsc75" path="res://CardScriptsAndComponents/Scripts/actionScriptTargeted.gd" id="1_01pvy"]
 
-[node name="EffectTargeted" type="Node"]
+[node name="ActionTargeted" type="Node"]
 script = ExtResource("1_01pvy")

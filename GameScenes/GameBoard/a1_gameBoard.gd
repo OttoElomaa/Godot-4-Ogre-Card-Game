@@ -86,7 +86,7 @@ func toggleCardActionMenu(enable:bool, card:Card):
 			
 			#### CAST BUTTON
 			var castButton := $ActionMenuCanvas/CardActionMenu/CastPanel
-			if card.actions.checkHasCast():
+			if card.actions.getCastAction() != null:
 				castButton.show()
 			else:
 				castButton.hide()

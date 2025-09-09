@@ -2,18 +2,6 @@ extends Node2D
 
 
 
-@onready var castNode := $Cast
-@onready var battleArtNode := $BattleArt
-@onready var ritualNode := $Ritual
-@onready var arrivalNode := $Arrival
-@onready var onTurnNode := $OnTurn
-
-@onready var specialTriggers := $SpecialCondition
-@onready var payoffNode := $Payoff
-@onready var costNode := $Cost
-
-
-
 var myCard: Card = null
 var isEnemy := false
 
@@ -25,15 +13,10 @@ func setup(card:Card):
 	myCard = card
 	isEnemy = card.isEnemyCard
 	
-	for holder in get_children():
-		for script in holder.get_children():
-			
-			if script.has_method("setup"):
-				script.setup(card)
+	for action in get_children():
+		action.setup(myCard)
+		
 	
-	#effectToGrant = getEffectToGrant()
-
-
 
 func createActionText() -> Array:
 	var effectTexts := []
@@ -43,79 +26,6 @@ func createActionText() -> Array:
 			effectTexts.append(cardAction.createActionText())
 		
 	return effectTexts
-
-
-
-#### BEFORE REWRITE. DELETE?
-func createActionTextOldVersion():
-	var effectTexts := []
-		
-	#### IS IT RITUAL?
-	if myCard.isRitual:
-		var ritualText = createNodeText(ritualNode)	
-		effectTexts.append(ritualText) 
-	
-	#### IF NOT RITUAL, CREATE THE REST
-	else:
-		var arrivalText = createNodeText(arrivalNode)		#### ARRIVAL
-		effectTexts.append(arrivalText)
-		
-		var onTurnText = createNodeText(onTurnNode)		#### ON TURN START
-		effectTexts.append(onTurnText) 
-		
-			
-		var castText = createNodeText(castNode)	  #### CAST	
-		effectTexts.append(castText) 
-		
-		
-		var battleArtText = createNodeText(battleArtNode)		#### BATTLE ART (Card Combat)
-		effectTexts.append(battleArtText) 
-	
-	var payoffText = createNodeText(payoffNode)		#### BATTLE ART (Card Combat)
-	effectTexts.append(payoffText) 
-	
-	return effectTexts
-
-
-func createNodeText(node:Node) -> String:
-	
-	var text = ""
-	
-	for script in node.get_children():
-		text += script.createText()
-		text += ", "
-	
-	#### AT THE END, COMPILE TEXT
-	text = text.rstrip(", ")
-	if text != "":
-		text = "%s: %s" % [getNodeKeyword(node), text]	
-	
-	return text
-	
-
-
-func getNodeKeyword(node:Node) -> String:
-	
-	match node:
-		arrivalNode:
-			return "Arrival"
-		ritualNode:
-			return "Ritual"
-		castNode:
-			return "Cast"
-		
-		battleArtNode:
-			return "Battle Art"
-		onTurnNode:
-			return "On Turn"
-			
-		payoffNode:
-			return "Payoff"
-		specialTriggers:
-			return "Idk man"
-	
-	assert(1==2,"Something went wrong in Actions node")
-	return ""
 
 
 
@@ -175,7 +85,11 @@ func handleRitual(target:Card) -> bool:
 
 
 func handleCast(target:Card) -> bool:
-	var success:bool = activateNode(castNode, target)
+	var success := false
+	
+	for cardAction in get_children():
+		success = cardAction.handleCast(target)
+			
 	if success:
 		myCard.restAndAnimate(true)
 	
@@ -198,17 +112,24 @@ func handleOnTurn(target:Card) -> bool:
 
 
 ######################################################
-func handlePayoff(target:Card) -> bool:
-	return activateNode(payoffNode, target)
+#func handlePayoff(target:Card) -> bool:
+	#return activateNode(payoffNode, target)
 
 
 
 ##################################################
 
-func checkHasCast() -> bool:
-	if castNode.get_children().is_empty():
-		return false
-	return true
+func getCastAction() -> Node:
+	for cardAction:Node in get_children():
+		if cardAction.checkHasCast():
+			return cardAction
+	return null
+
+
+func checkIsActionTargeted(cardAction:Node):
+	if cardAction.checkIsActionTargeted():
+		return true
+	return false
 
 
 

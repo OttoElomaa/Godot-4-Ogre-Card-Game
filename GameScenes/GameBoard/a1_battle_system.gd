@@ -233,11 +233,16 @@ func cardCastButtonPressed() -> void:
 	var c = main.actionMenuCard
 	
 	if c:
-		if c.actions.isTargetless(c.actions.castNode):
-			handlePlayerCastActivate(false)
-			
-		else:
-			handlePlayerCastActivate(true)
+		#if c.actions.isTargetless(c.actions.castNode):
+		#### LOTS OF CHECKS DONE IN THE ACTIONS NODE
+		var castAction = c.actions.getCastAction()
+		#### CAST ACTION WAS FOUND
+		if castAction:
+			#### IS IT TARGETED OR TARGETLESS
+			if c.actions.checkIsActionTargeted(castAction):
+				handlePlayerCastActivate(true)
+			else:
+				handlePlayerCastActivate(false)
 	
 	
 	

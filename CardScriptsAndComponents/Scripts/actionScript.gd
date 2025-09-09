@@ -1,14 +1,9 @@
 extends Node
-
-
 class_name  ActionScript
 
 
-
-
-enum TargetOptions {NONE, ALLY, ALLIES, ENEMY, ENEMIES, ALL}
-enum DetailedTargetingOptions {NONE, STRONGEST, WEAKEST,}
-
+#enum TargetOptions {NONE, ALLY, ALLIES, ENEMY, ENEMIES, ALL}
+#enum DetailedTargetingOptions {NONE, STRONGEST, WEAKEST,}
 
 
 var actionsNode: Node = null
@@ -27,8 +22,8 @@ var isEnemy := false
 #### EFFECT TYPE: For example, BOLSTER ALL OTHER 'SPIRITS'...
 @export var effectTypeLine := ""
 
-@export var targetGroup := TargetOptions.NONE
-@export var detailedTargeting := DetailedTargetingOptions.NONE
+#@export var targetGroup := TargetOptions.NONE
+#@export var detailedTargeting := DetailedTargetingOptions.NONE
 
 
 ####################################### EFFECT - WHAT DOES IT DO
@@ -80,32 +75,10 @@ func createText() -> String:
 		text += "Tap target"
 	
 	
-	#### ADD BOLSTER
-	if bolsterDamage > 0 or bolsterHealth > 0:
-		
-		match targetGroup:
-			#### ALL ALLIES
-			TargetOptions.ALLIES:
-				if effectTypeLine != "":
-					text += "Bolster %s" % effectTypeLine
-				else:
-					text += "Bolster Allies"
-			
-			#### ONE ALLY - CAST ONLY? -> Needs Targeting
-			TargetOptions.ALLY:	
-				if effectTypeLine != "":
-					text += "Bolster Target %s" % effectTypeLine
-				else:
-					text += "Bolster"
-			
-		text += " %d/%d" % [bolsterDamage, bolsterHealth]
-	
-	
-	
-	
 	#### ADD SCRIPT-SPECIFIC EFFECT TEXT
 	text += createTextTwo()
 	return text
+
 
 
 #### NEEDS TO BE EMPTY HERE -> FILLED IN Targeted AND Targetless SCRIPTS

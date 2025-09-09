@@ -20,9 +20,7 @@ var isEnemy := false
 
 
 
-func setup(card:Card):
-	assert(1==2,"Bullshit card action node")
-	
+func setup(card:Card):	
 	myCard = card
 	isEnemy = card.isEnemyCard
 	
@@ -50,15 +48,6 @@ func createActionText() -> String:
 
 
 
-func checkActive():
-	
-	if not get_children().is_empty():
-		return true
-	return false
-	#return isActive
-
-
-
 func activate(target:Card) -> bool:
 	var success := false
 	var successfulScript:Node = null
@@ -69,7 +58,7 @@ func activate(target:Card) -> bool:
 			successfulScript = script
 		elif target:
 			if script.has_method("activateTargeted"):
-				success = script.activateTargeted(target)
+				success = script.activateTargeted(target, myCard)
 				successfulScript = script
 	
 	if success:
@@ -114,6 +103,14 @@ func getSituationStr() -> String:
 		
 
 
+func checkIsActionTargeted() -> bool:
+	for actionScript in get_children():
+		if actionScript.has_method("activateTargeted"):
+			return true
+	return false
+
+
+
 #### BAD CODE, REPLACE WITH SIGNALS
 ##########################################################
 
@@ -135,6 +132,14 @@ func handleCast(target:Card) -> bool:
 		myCard.restAndAnimate(true)
 	
 	return success
+
+
+
+func checkHasCast() -> bool:
+	if localSituation == LocalSituations.CAST:
+		return true
+	return false
+
 
 
 func handleBattleArt(target:Card) -> bool:

@@ -1,6 +1,11 @@
 extends ActionScript
 
 
+enum AutomaticTargetOptions {NONE, ALLIES, ENEMIES, ALL}
+#enum DetailedTargetingOptions {NONE, STRONGEST, WEAKEST,}
+
+@export var automaticTargetGroup := AutomaticTargetOptions.NONE
+
 
 @export var modifyHealth := 0
 @export var modifyMana := 0
@@ -17,6 +22,7 @@ extends ActionScript
 func createTextTwo() -> String:
 	var text := ""
 	
+	#assert(automaticTargetGroup != AutomaticTargetOptions.NONE, "You forgot to assign target group to card action")
 	
 	#### HEALTH / MANA ALTERING
 	if modifyHealth < 0:
@@ -38,8 +44,21 @@ func createTextTwo() -> String:
 	if summonScene:
 		text += summonString
 	
+	#### PHASE OUT
 	if phaseOut:
 		text += "Phase out"
+	
+		#### BOLSTER
+	if bolsterDamage > 0 or bolsterHealth > 0:
+		
+		match automaticTargetGroup:
+			#### ALL ALLIES
+			AutomaticTargetOptions.ALLIES:
+				if effectTypeLine != "":
+					text += "Bolster %s" % effectTypeLine
+				else:
+					text += "Bolster Allies"
+	
 	
 	return text
 
@@ -74,10 +93,13 @@ func activateTargetless(actor:Card):
 
 	
 	var targets:Array = MyTools.getBoardCards(isEnemy)
-	if targetGroup == TargetOptions.ALLIES:
+	
+		
+	#### BOLSTER	
+	if bolsterDamage > 0 or bolsterHealth > 0:
 		
 		#### BOLSTER ALLIES
-		if bolsterDamage > 0 or bolsterHealth > 0:
+		if automaticTargetGroup == AutomaticTargetOptions.ALLIES:
 			for card in targets:
 				if effectTypeLine == "":
 					card.tempDamage += bolsterDamage

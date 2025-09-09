@@ -18,7 +18,7 @@ drawCards = 1
 [node name="CardAction" parent="Actions" index="0" instance=ExtResource("3_an1q6")]
 localSituation = 1
 
-[node name="EffectTargetless" parent="Actions/CardAction" index="0" instance=ExtResource("2_1pf7u")]
+[node name="ActionTargetless" parent="Actions/CardAction" index="0" instance=ExtResource("2_1pf7u")]
 drawCards = 1
 
 [node name="Art" parent="Frontside" index="1"]

@@ -1,6 +1,10 @@
 extends ActionScript
 
 
+enum ManualTargetOptions {NONE, ALLY, ALLIES, ENEMY, ENEMIES, ALL}
+#enum DetailedTargetingOptions {NONE, STRONGEST, WEAKEST,}
+
+@export var manualTargetGroup := ManualTargetOptions.NONE
 
 @export var hasSacrifice := false
 
@@ -11,6 +15,9 @@ extends ActionScript
 func createTextTwo() -> String:
 	var text := ""
 	
+	assert(manualTargetGroup != ManualTargetOptions.NONE, "You forgot to assign target group to card action")
+	
+	#### ADD AN EFFECT COUNTER TO TARGET
 	if grantEffect:
 		var effect:Node = actionsNode.getEffectToGrant()
 		if not effect:
@@ -19,8 +26,24 @@ func createTextTwo() -> String:
 		var effectName:String = effect.getEffectName()
 		text += "Add %s to target" % effectName
 	
+	#### SACRIFICE
 	if hasSacrifice:
 		text += "Sacrifice target"
+	
+
+					
+	#### BOLSTER
+	if bolsterDamage > 0 or bolsterHealth > 0:
+		match manualTargetGroup:
+			
+			#### ONE ALLY - CAST ONLY? -> Needs Targeting
+			ManualTargetOptions.ALLY:	
+				if effectTypeLine != "":
+					text += "Bolster Target %s" % effectTypeLine
+				else:
+					text += "Bolster"
+			
+		text += " %d/%d" % [bolsterDamage, bolsterHealth]
 	
 	return text
 
