@@ -96,12 +96,24 @@ func _on_to_foe_pressed():
 	MyTools.summonCard(new_card, true)
 	conj_card()
 
-func _on_search_card_name_text_changed():
-	var prompt = cardSearch.get_node("VBox/SearchCardName").text
+func _on_search_card_name_text_changed() -> bool:
+	var prompt:String = cardSearch.get_node("VBox/SearchCardName").text
+	prompt = prompt.to_lower()
+	if prompt == "":
+		cardSearch.get_node("VBox/CardFace").texture = null
+		return false
+	
 	for i in GameInfo.playerDeckCards:
-		if i.cardName == prompt:
+		var cardName:String = i.cardName.to_lower()
+		if cardName.contains(prompt):
 			found_card = i
 			cardSearch.get_node("VBox/CardFace").texture = found_card.cardArt
+			return true
+	
+	cardSearch.get_node("VBox/CardFace").texture = null
+	return false
+			
+			
 
 func _on_to_foe_2_pressed():
 	if found_card:
