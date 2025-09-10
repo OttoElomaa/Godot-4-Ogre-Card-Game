@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_lcboh"]
 [ext_resource type="PackedScene" uid="uid://cgchj318fykoy" path="res://CardScriptsAndComponents/ActionTargeted.tscn" id="2_4vpam"]
-[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/CardAction.tscn" id="2_16jdu"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_16jdu"]
 [ext_resource type="Texture2D" uid="uid://bps2xijib187r" path="res://Art/CardArt/card-art-creature-slagh-rider.jpg" id="3_4vpam"]
 
 [node name="Card-Cr-SlaghRider" instance=ExtResource("1_lcboh")]

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://l3rpd1xyh67i"]
+[gd_scene load_steps=6 format=3 uid="uid://l3rpd1xyh67i"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_1h6lf"]
 [ext_resource type="Texture2D" uid="uid://ckc1e808l0bob" path="res://Art/CardArt/Desert/card-art-creature-obar.jpg" id="2_h1jwu"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_u72pc"]
+[ext_resource type="PackedScene" uid="uid://cktcqllypvgaa" path="res://CardScriptsAndComponents/Actions/TargetingComponent.tscn" id="3_xtwej"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="4_5yovd"]
 
 [node name="Card-Cr-Ogre" instance=ExtResource("1_1h6lf")]
 cardName = "Obar"
@@ -9,6 +12,15 @@ flavorText = "There's rumors of children going missing in the wild..."
 manaCost = 5
 startingDamage = 3
 startingHealth = 4
+
+[node name="CardAction" parent="Actions" index="0" instance=ExtResource("2_u72pc")]
+localSituation = 1
+
+[node name="TargetingComponent" parent="Actions/CardAction" index="0" instance=ExtResource("3_xtwej")]
+automaticTargetGroup = 3
+
+[node name="SkillAlterHealth" parent="Actions/CardAction" index="1" instance=ExtResource("4_5yovd")]
+bolsterHealth = 1
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_h1jwu")

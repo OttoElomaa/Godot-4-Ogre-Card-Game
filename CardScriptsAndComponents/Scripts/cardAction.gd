@@ -17,6 +17,8 @@ var isEnemy := false
 
 @export var nodeKeyword := "Action type"
 
+@export var isCost := false
+@export var isPayoff := false
 
 
 
@@ -36,8 +38,9 @@ func createActionText() -> String:
 	var situationStr:String = getSituationStr()
 	
 	for script in get_children():
-		text += script.createText()
-		text += ", "
+		if script.has_method("createText"):
+			text += script.createText()
+			text += ", "
 	
 	#### AT THE END, COMPILE TEXT
 	text = text.rstrip(", ")
@@ -48,18 +51,19 @@ func createActionText() -> String:
 
 
 
+#### CALLED BY SITUATION MANAGER -> THAT WILL BE DONE BY SIGNALS i think?
+#### CURRENTLY Called by handleRitual(), handleCast() ETC.
 func activate(target:Card) -> bool:
 	var success := false
 	var successfulScript:Node = null
 	
-	for script in get_children():
-		if script.has_method("activateTargetless"):
-			success = script.activateTargetless(myCard)
-			successfulScript = script
-		elif target:
-			if script.has_method("activateTargeted"):
-				success = script.activateTargeted(target, myCard)
-				successfulScript = script
+	var targets:Array = handleTargeting()
+	
+	for skill:Node in get_children():
+		if skill.has_method("activate"):
+			success = skill.activate(targets)
+			successfulScript = skill
+			
 	
 	if success:
 		successfulScript.createPrintout(self)  #### CREATE COMBAT LOG ENTRY
@@ -72,14 +76,13 @@ func activate(target:Card) -> bool:
 
 
 
-func findEmptySlot() -> CardSlot:
+func handleTargeting() -> Array:
+	for component:Node in get_children():
+		if component.has_method("getTargets"):
+			return component.getTargets(isEnemy)
+			
+	return []
 	
-	var slots:Array = MyTools.findEmptyCardSlots(isEnemy)
-	
-	if slots.is_empty():
-		return null
-	else:
-		return slots[0]
 
 
 

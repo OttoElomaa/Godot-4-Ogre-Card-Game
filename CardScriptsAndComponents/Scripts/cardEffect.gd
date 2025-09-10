@@ -1,7 +1,9 @@
 extends Node2D
 class_name CardEffect
 
-
+#### THIS IS A BASE CLASS ->
+#### KEYWORDS AND EFFECT COUNTERS INHERIT FROM IT
+#### MAIN POINT IS THAT IT'S TRANSFERABLE VIA applyEffect()
 
 @export var isPermanent := false
 
