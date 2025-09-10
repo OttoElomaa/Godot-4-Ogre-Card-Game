@@ -2,8 +2,8 @@ extends Node2D
 
 
 var gameBoard:GameBoard = null
-var cardsManager:Node = null
-var battleSystem:Node = null
+var cardsManager:CardsManager = null
+var battleSystem:BattleSystem = null
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
@@ -124,6 +124,15 @@ func getBoardCards(isEnemy:bool):
 	else:
 		return cardsManager.getPlayerBoardCards()
 
+
+
+func getDeckCards(isEnemy:bool):
+	if isEnemy:
+		return cardsManager.getEnemyDeckCards()
+	else:
+		return cardsManager.getPlayerDeckCards()
+	
+	
 
 
 func updateBoardCardsVisuals():

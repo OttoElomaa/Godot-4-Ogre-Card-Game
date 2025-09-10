@@ -10,8 +10,8 @@ var found_card: Card
 
 var all_cards = []
 
-@onready var cardEditor := $GameBoard_Cheats/Margin/CardEditor
-@onready var cardSearch := $GameBoard_Cheats/Margin2/SearchCardsPanel
+@onready var cardEditor := $GameBoard_Cheats/RightMenu/HBox/CardEditor
+@onready var cardSearch := $GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel
 @onready var topMenu := $GameBoard_Cheats/TopMenu
 
 var cardEditorVisible := false
@@ -103,8 +103,11 @@ func _on_search_card_name_text_changed() -> bool:
 		cardSearch.get_node("VBox/CardFace").texture = null
 		return false
 	
-	for i in GameInfo.playerDeckCards:
+	#### GET PLAYER DECK CARDS IN REAL TIME
+	var playerDeckCards:Array = MyTools.getDeckCards(false) 
+	for i in playerDeckCards:
 		var cardName:String = i.cardName.to_lower()
+		#### IF THE LOWERCASE STRING IS CONTAINED IN LOWERCASE CARD NAME -> Success
 		if cardName.contains(prompt):
 			found_card = i
 			cardSearch.get_node("VBox/CardFace").texture = found_card.cardArt
@@ -117,8 +120,10 @@ func _on_search_card_name_text_changed() -> bool:
 
 func _on_to_foe_2_pressed():
 	if found_card:
+		_on_search_card_name_text_changed()
 		MyTools.summonCard(found_card, true)
 
 func _on_to_you_2_pressed():
 	if found_card:
+		_on_search_card_name_text_changed()
 		MyTools.summonCard(found_card, false)

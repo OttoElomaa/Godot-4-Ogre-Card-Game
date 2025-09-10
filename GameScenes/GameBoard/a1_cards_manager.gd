@@ -457,6 +457,18 @@ func getPlayerBoardCards() -> Array:
 	
 
 
+func getPlayerDeckCards() -> Array:
+	var cards = $PlayerDeck.get_children()
+	return findValidNodesInArray(cards)
+	
+		
+func getEnemyDeckCards() -> Array:
+	var cards = $EnemyDeck.get_children()
+	return findValidNodesInArray(cards)
+	
+		
+		
+
 
 func getPlayerBlockers():
 	var blockers := []

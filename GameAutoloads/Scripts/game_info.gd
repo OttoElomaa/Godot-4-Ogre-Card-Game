@@ -12,5 +12,6 @@ var playerIcon:Texture:
 	get:
 		return $PlayerSprite.texture
 
+
 var enemyDeckCards := []
 var playerDeckCards := []
