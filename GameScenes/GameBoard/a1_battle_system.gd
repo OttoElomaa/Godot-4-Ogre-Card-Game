@@ -7,7 +7,6 @@ var main:GameBoard = null
 var cardsManager:CardsManager = null
 
 @onready var attackLine := $AttackLine
-@onready var castLine := $CastLine
 @onready var damageCalculator := $CanvasLayer/DamageCalculator
 
 var COLLISION_MASK_CARD := 1
@@ -228,59 +227,16 @@ func handlePlayerRitual(c:Card, target:Card) -> bool:
 
 func cardCastButtonPressed() -> void:
 	
-	currentCastingCard = main.actionMenuCard
 	var c = main.actionMenuCard
+	currentCastingCard = main.actionMenuCard
 	
 	if c:
-		#if c.actions.isTargetless(c.actions.castNode):
-		#### LOTS OF CHECKS DONE IN THE ACTIONS NODE
 		var castAction = c.actions.getCastAction()
-		#### CAST ACTION WAS FOUND
-		if castAction:
-			#### IS IT TARGETED OR TARGETLESS
-			if c.actions.checkIsActionTargeted(castAction):
-				handlePlayerCastActivate(true)
-			else:
-				handlePlayerCastActivate(false)
-	
-	
-	
-func handlePlayerCastActivate(isTargeted:bool):
-	var success := false
-	
-	#### TARGETED CAST -> SHOW Cast Line, SET CAST STATE
-	if isTargeted:
-		castLineShown = true
-		States.gameState = States.GameStates.CAST
-		$CastLine.show()
-		castLine.points[0] = currentCastingCard.position
+		if castAction:   #### CAST ACTION WAS FOUND
+			c.actions.handleCast()   #### IS IT TARGETED OR TARGETLESS
 			
-	else:
-		success = currentCastingCard.actions.handleCast(null)
-		currentCastingCard = null
 	
-	main.toggleCardActionMenu(false, null)
 	
-
-
-#### FOR CARDS THAT HAVE THE 'CAST' KEYWORD
-#func handlePlayerCastTargeting():
-	#print("Click - Player trying to cast")
-	#
-	##### GET CARDS AT MOUSE POSITION
-	#var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
-	#prints("Cards found for casting: ", results.size())
-	#
-	#for r in results:
-		#var target:Card = getCollidedObject(r)
-		#prints("Cast target card: ", target)
-		#if currentCastingCard.actions.handleCast(target):
-			#currentCastingCard = null
-			#endCastState()
-			#return
-
-
-
 func handlePlayerAttackEnemy():
 	#### ENEMY HAS BLOCKERS, CAN'T ATTACK ENEMY
 	if not cardsManager.getEnemyBlockers().is_empty():

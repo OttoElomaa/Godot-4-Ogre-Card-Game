@@ -12,7 +12,7 @@ var battleSystem:BattleSystem = null
 
 func gameBoardSetup(gameBoard:GameBoard):
 	self.gameBoard = gameBoard
-	self.cardsManager =gameBoard.cardsManager
+	self.cardsManager = gameBoard.cardsManager
 	self.battleSystem = gameBoard.battleSystem
 
 
@@ -186,3 +186,7 @@ func createCombatLogPrintout(text:String, color:Color):
 		return
 	gameBoard.addLogMessage(text, color)
 	
+
+
+func toggleCardActionMenu(enable:bool, card:Card):
+	gameBoard.toggleCardActionMenu(enable, card)

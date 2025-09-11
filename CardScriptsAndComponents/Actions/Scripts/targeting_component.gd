@@ -24,13 +24,14 @@ var myCard:Card = null
 func setup(action:Node, card:Card):
 	self.action = action
 	self.myCard = card
+	endCastState()
 
 
 func _physics_process(delta: float) -> void:
 	
 	if castLineShown:
 		var mousePos := get_global_mouse_position()
-		castLine.points[1] = mousePos
+		castLine.points[1] = mousePos - myCard.position
 
 
 
@@ -41,7 +42,7 @@ func _input(e: InputEvent) -> void:
 		
 		if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
 			if e.is_pressed():
-				handlePlayerCastTargeting()
+				handleTargetingClicked()
 
 
 
@@ -74,10 +75,22 @@ func getTargets(isEnemy:bool) -> Array:
 	
 	return targets
 	
+
+#### MANUAL TARGETING STUFF
+############################################################	
+
+func beginManualTargeting():
+	States.gameState = States.GameStates.CAST
+	MyTools.toggleCardActionMenu(false, null)
 	
+	castLineShown = true
+	$CastLine.show()
+	castLine.points[0] = Vector2.ZERO
+
+
 
 #### INPUT PROCESSING - TARGET CARD CLICK ATTEMPTED
-func handlePlayerCastTargeting():
+func handleTargetingClicked():
 	print("Click - Player trying to cast")
 	
 	#### GET CARDS AT MOUSE POSITION
@@ -92,8 +105,8 @@ func handlePlayerCastTargeting():
 		if target in validTargets:
 			action.activateSkillAfterTargeting([target])
 		
-		endCastState()
-		return	
+	endCastState()
+	return	
 		
 
 
@@ -107,4 +120,6 @@ func checkIsManualTargeting():
 func endCastState():
 	castLineShown = false
 	$CastLine.hide()
-	States.gameState = States.GameStates.PLAY	
+	
+	if States.gameState == States.GameStates.CAST:
+		States.gameState = States.GameStates.PLAY	

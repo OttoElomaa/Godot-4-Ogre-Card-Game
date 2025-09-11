@@ -10,6 +10,8 @@ var STARTING_HAND_SIZE := 4
 var CARD_NORMAL_SCALE := Vector2(1,1)
 var CARD_HIGHLIGHTED_SCALE := Vector2(1.25, 1.25)
 
+@onready var playerGraveyard := $Discard/Player
+@onready var enemyGraveyard := $Discard/Enemy
 
 
 var main:GameBoard = null
@@ -33,7 +35,9 @@ func _ready() -> void:
 
 
 #### SETUP STUFF ##############################################
-func setup():	
+func setup(gameBoard):
+	self.main = gameBoard
+	self.battleSystem = main.battleSystem
 	dealPlayerHand()
 	dealEnemyHand()
 	
@@ -528,10 +532,11 @@ func moveToDiscard(card:Card):
 
 
 func updateGraveyardVisuals():
+	prints("Faulty cards manager: ", self.get_path().get_concatenated_names())
 		
 	#### PLACE DISCARD CARDS IN SLOTS TO DISPLAY
-	var discardCards = $Discard/Player/Cards.get_children()
-	var discardSlots = $Discard/Player/Slots.get_children()
+	var discardCards = playerGraveyard.get_node("Cards").get_children()
+	var discardSlots = playerGraveyard.get_node("Slots").get_children()
 	MyTools.placeCardsInSlotArray(discardCards, discardSlots)
 	
 	discardCards = $Discard/Enemy/Cards.get_children()

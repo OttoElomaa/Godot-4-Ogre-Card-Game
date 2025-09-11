@@ -70,6 +70,13 @@ func activate() -> bool:
 
 
 
+func handleManualTargeting():
+	for component:Node in get_children():
+		if component.has_method("beginManualTargeting"):
+			component.beginManualTargeting()
+
+
+
 func activateSkillAfterTargeting(targets:Array) -> bool:
 	var success := false
 	var successfulScript:Node = null
@@ -94,10 +101,7 @@ func getTargets() -> Array:
 	return []
 	
 
-func handleManualTargeting():
-	for component:Node in get_children():
-		if component.has_method("handleManualTargeting"):
-			component.handleManualTargeting()
+
 
 
 func checkIsManualTargeting() -> bool:

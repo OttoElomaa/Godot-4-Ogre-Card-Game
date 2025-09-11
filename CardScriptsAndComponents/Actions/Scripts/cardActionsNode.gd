@@ -91,11 +91,7 @@ func handleCast() -> bool:
 		var actionSuccess = cardAction.handleCast()
 		if actionSuccess:
 			success = true
-		
 			
-	if success:
-		myCard.restAndAnimate(true)
-	
 	return success
 
 

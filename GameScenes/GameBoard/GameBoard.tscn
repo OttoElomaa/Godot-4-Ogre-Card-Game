@@ -271,11 +271,6 @@ z_index = 10
 points = PackedVector2Array(-287, 209, -492, 528)
 default_color = Color(1, 0.67451, 0.341176, 1)
 
-[node name="CastLine" type="Line2D" parent="BattleSystem"]
-z_index = 10
-points = PackedVector2Array(-403, 174, -578, 465)
-default_color = Color(0.288165, 0.546665, 0.999997, 1)
-
 [node name="EnemyStartCombatTimer" type="Timer" parent="BattleSystem"]
 wait_time = 0.4
 one_shot = true
