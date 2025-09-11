@@ -523,7 +523,7 @@ func handleCombatActions(isAttacking:bool, otherCard:Card):
 		#### ATTACKING CANCELS PHASING -> PHASE IN
 		effects.togglePhased(false)
 			
-	actions.handleBattleArt(otherCard)
+	actions.handleBattleArt()
 	
 	
 		

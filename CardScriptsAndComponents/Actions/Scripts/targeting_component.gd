@@ -4,7 +4,7 @@ enum AutomaticTargetOptions {
 	NONE, ALLIES, ENEMIES, ALL
 	}
 enum ManualTargetOptions {
-	NONE, ALLY, ALLIES, ENEMY, ENEMIES, ALL
+	NONE, ALLY, ENEMY, ANY
 	}
 
 @export var automaticTargetGroup := AutomaticTargetOptions.NONE
@@ -61,6 +61,16 @@ func getTargets(isEnemy:bool) -> Array:
 			var allCreatures:Array = MyTools.getBoardCards(isEnemy)
 			allCreatures.append_array(MyTools.getBoardCards(!isEnemy))
 			return allCreatures
+			
+	match manualTargetGroup:
+		man.ALLY:
+			return MyTools.getBoardCards(isEnemy)
+		man.ENEMY:
+			return MyTools.getBoardCards(!isEnemy)
+		man.ANY:
+			var allCreatures:Array = MyTools.getBoardCards(isEnemy)
+			allCreatures.append_array(MyTools.getBoardCards(!isEnemy))
+			return allCreatures
 	
 	return targets
 	
@@ -78,9 +88,12 @@ func handlePlayerCastTargeting():
 		var target:Card = MyTools.getCollidedObject(r)
 		prints("Cast target card: ", target)
 		
-		if action.handleCast(target):
-			endCastState()
-			return	
+		var validTargets:Array = getTargets(action.isEnemy)
+		if target in validTargets:
+			action.activateSkillAfterTargeting([target])
+		
+		endCastState()
+		return	
 		
 
 
