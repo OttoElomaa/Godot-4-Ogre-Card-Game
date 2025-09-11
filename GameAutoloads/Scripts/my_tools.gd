@@ -1,6 +1,8 @@
 extends Node2D
 
 
+var COLLISION_MASK_CARD := 1
+
 var gameBoard:GameBoard = null
 var cardsManager:CardsManager = null
 var battleSystem:BattleSystem = null
@@ -77,7 +79,10 @@ func findEmptyCardSlots(isEnemy) -> Array:
 			emptySlots.append(slot)
 	
 	return emptySlots
-	
+
+
+#### MOUSE CLICK HANDLING
+############################################################	
 
 func fetchMouseOverObjects(collisionMask: int):
 		
@@ -93,7 +98,12 @@ func fetchMouseOverObjects(collisionMask: int):
 	var result = spaceState.intersect_point(params)
 	return result
 
+func getCollidedObject(result):
+	return result.collider.get_parent()
 
+
+#### MOUSE HOVER
+##########################################################
 
 func handleCardHover(isHovering:bool, card:Card):
 	if States.gameState == States.GameStates.BESTIARY:
@@ -102,6 +112,7 @@ func handleCardHover(isHovering:bool, card:Card):
 		cardsManager.toggleCardHover(isHovering, card)
 	
 
+######################################################
 
 func handleDrawCard(isEnemy:bool):	
 	cardsManager.checkIsEnemyAnddrawCard(isEnemy)
@@ -116,6 +127,8 @@ func changeHealth(amount:int, isEnemy:bool):
 	gameBoard.changeHealth(amount, isEnemy)
 	
 
+#### CARD GETTERS
+####################################################
 
 func getBoardCards(isEnemy:bool):
 	
@@ -132,7 +145,8 @@ func getDeckCards(isEnemy:bool):
 	else:
 		return cardsManager.getPlayerDeckCards()
 	
-	
+
+#####################################################	
 
 
 func updateBoardCardsVisuals():

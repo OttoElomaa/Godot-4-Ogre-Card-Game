@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctjoy83adq33o"]
+[gd_scene load_steps=3 format=3 uid="uid://ctjoy83adq33o"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_lcboh"]
-[ext_resource type="PackedScene" uid="uid://cgchj318fykoy" path="res://CardScriptsAndComponents/ActionTargeted.tscn" id="2_4vpam"]
-[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_16jdu"]
 [ext_resource type="Texture2D" uid="uid://bps2xijib187r" path="res://Art/CardArt/card-art-creature-slagh-rider.jpg" id="3_4vpam"]
 
 [node name="Card-Cr-SlaghRider" instance=ExtResource("1_lcboh")]
@@ -10,13 +8,6 @@ cardName = "Slagh Rider"
 manaCost = 2
 startingDamage = 1
 startingHealth = 2
-
-[node name="CardAction" parent="Actions" index="0" instance=ExtResource("2_16jdu")]
-localSituation = 2
-
-[node name="ActionTargeted" parent="Actions/CardAction" index="0" instance=ExtResource("2_4vpam")]
-manualTargetGroup = 1
-bolsterDamage = 2
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_4vpam")

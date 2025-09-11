@@ -3,6 +3,13 @@ class_name  Skill
 
 @export var skillName := ""
 
+var action:Node = null
+var myCard:Card = null
+
+
+func setup(action:Node, card:Card):
+	self.action = action
+	self.myCard = card
 
 
 #### THIS FUNCTION WILL BE FILLED IN INHERITED SCRIPTS

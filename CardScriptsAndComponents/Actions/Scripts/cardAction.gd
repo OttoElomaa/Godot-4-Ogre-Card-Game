@@ -26,9 +26,9 @@ func setup(card:Card):
 	myCard = card
 	isEnemy = card.isEnemyCard
 	
-	for script in get_children():
-		if script.has_method("setup"):
-			script.setup(card)
+	for component in get_children():
+		if component.has_method("setup"):
+			component.setup(self, myCard)
 	
 
 
@@ -53,30 +53,40 @@ func createActionText() -> String:
 
 #### CALLED BY SITUATION MANAGER -> THAT WILL BE DONE BY SIGNALS i think?
 #### CURRENTLY Called by handleRitual(), handleCast() ETC.
-func activate(target:Card) -> bool:
+func activate() -> bool:
+	var success := false
+	
+	if checkIsManualTargeting():
+		handleManualTargeting()
+		
+	else:
+		var targets:Array = getTargets()
+		success = activateSkillAfterTargeting(targets)
+	
+	
+	
+		
+	return success
+
+
+
+func activateSkillAfterTargeting(targets:Array) -> bool:
 	var success := false
 	var successfulScript:Node = null
-	
-	var targets:Array = handleTargeting()
 	
 	for skill:Node in get_children():
 		if skill.has_method("activate"):
 			success = skill.activate(targets)
 			successfulScript = skill
 			
-	
 	if success:
-		successfulScript.createPrintout(self)  #### CREATE COMBAT LOG ENTRY
-		#if not self == myCard.payoffNode:
-			#myCard.payoffNode.activate(null)
-	
+		successfulScript.createPrintout(self)  #### CREATE COMBAT LOG ENTRY	
 		MyTools.updateBoardCardsVisuals()
-		
 	return success
 
 
 
-func handleTargeting() -> Array:
+func getTargets() -> Array:
 	for component:Node in get_children():
 		if component.has_method("getTargets"):
 			return component.getTargets(isEnemy)
@@ -84,6 +94,17 @@ func handleTargeting() -> Array:
 	return []
 	
 
+func handleManualTargeting():
+	for component:Node in get_children():
+		if component.has_method("handleManualTargeting"):
+			component.handleManualTargeting()
+
+
+func checkIsManualTargeting() -> bool:
+	for component:Node in get_children():
+		if component.has_method("checkIsManualTargeting"):
+			return component.checkIsManualTargeting()
+	return false
 
 
 func getSituationStr() -> String:
@@ -114,23 +135,26 @@ func checkIsActionTargeted() -> bool:
 
 
 
+
+
+
 #### BAD CODE, REPLACE WITH SIGNALS
 ##########################################################
 
-func handleArrival(target:Card) -> bool:
+func handleArrival() -> bool:
 	if localSituation == LocalSituations.ARRIVAL:
-		return activate(target)
+		return activate()
 	return false
 
 
-func handleRitual(target:Card) -> bool:
+func handleRitual() -> bool:
 	if localSituation == LocalSituations.RITUAL:
-		return activate(target)
+		return activate()
 	return false
 
 
-func handleCast(target:Card) -> bool:
-	var success:bool = activate(target)
+func handleCast() -> bool:
+	var success:bool = activate()
 	if success:
 		myCard.restAndAnimate(true)
 	
@@ -145,13 +169,13 @@ func checkHasCast() -> bool:
 
 
 
-func handleBattleArt(target:Card) -> bool:
+func handleBattleArt() -> bool:
 	if localSituation == LocalSituations.BATTLE_ART:
-		return activate(target)
+		return activate()
 	return false
 
 
-func handleOnTurn(target:Card) -> bool:
+func handleOnTurn() -> bool:
 	if localSituation == LocalSituations.ON_TURN:
-		return activate(target)
+		return activate()
 	return false

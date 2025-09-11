@@ -70,25 +70,25 @@ func isTargeted(node:Node) -> bool:
 
 ##############################################################
 
-func handleArrival(target:Card) -> bool:
+func handleArrival() -> bool:
 	for cardAction in get_children():
-		if cardAction.handleArrival(target):
+		if cardAction.handleArrival():
 			return true
 	return false
 
 
-func handleRitual(target:Card) -> bool:
+func handleRitual() -> bool:
 	for cardAction in get_children():
-		if cardAction.handleRitual(target):
+		if cardAction.handleRitual():
 			return true
 	return false
 
 
-func handleCast(target:Card) -> bool:
+func handleCast() -> bool:
 	var success := false
 	
 	for cardAction in get_children():
-		var actionSuccess = cardAction.handleCast(target)
+		var actionSuccess = cardAction.handleCast()
 		if actionSuccess:
 			success = true
 		
@@ -99,16 +99,16 @@ func handleCast(target:Card) -> bool:
 	return success
 
 
-func handleBattleArt(target:Card) -> bool:
+func handleBattleArt() -> bool:
 	for cardAction in get_children():
-		if cardAction.handleBattleArt(target):
+		if cardAction.handleBattleArt():
 			return true
 	return false
 
 
-func handleOnTurn(target:Card) -> bool:
+func handleOnTurn() -> bool:
 	for cardAction in get_children():
-		if cardAction.handleOnTurn(target):
+		if cardAction.handleOnTurn():
 			return true
 	return false
 

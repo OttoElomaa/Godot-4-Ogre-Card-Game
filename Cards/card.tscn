@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://diry565yftyuy" path="res://Art/CardComponents/card-background-phased-effect-transparent.png" id="3_8geja"]
 [ext_resource type="Script" uid="uid://kbmh20bwbb3u" path="res://CardScriptsAndComponents/Scripts/keyword_handler.gd" id="3_lcq1x"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="4_7bc8n"]
-[ext_resource type="Script" uid="uid://yys4316b4p1r" path="res://CardScriptsAndComponents/Scripts/cardActionsNode.gd" id="4_q2hgj"]
+[ext_resource type="Script" uid="uid://yys4316b4p1r" path="res://CardScriptsAndComponents/Actions/Scripts/cardActionsNode.gd" id="4_q2hgj"]
 [ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="4_s5qc8"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_w0fdq"]
 [ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_6ma8t"]

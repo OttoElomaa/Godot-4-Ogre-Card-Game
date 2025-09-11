@@ -53,23 +53,22 @@ func _input(e: InputEvent) -> void:
 			if e.is_pressed():
 				handlePlayerAttack()
 				
-	if States.gameState == States.GameStates.CAST:
+	#if States.gameState == States.GameStates.CAST:
 		
-		if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
-			if e.is_pressed():
-				handlePlayerCastTargeting()
+		#if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
+			#if e.is_pressed():
+				#handlePlayerCastTargeting()
 
 
 func _physics_process(delta: float) -> void:
 	
-	var mousePos := get_global_mouse_position()
-	
 	if playerAttackOngoing:
+		var mousePos := get_global_mouse_position()
 		attackLine.points[1] = mousePos
 		damageCalculator.position = (mousePos + Vector2(100,-50)) * main.cameraMainBoard.zoom.x
 		
-	if castLineShown:
-		castLine.points[1] = mousePos
+	#if castLineShown:
+		#castLine.points[1] = mousePos
 	
 
 #######################################################################
@@ -193,7 +192,7 @@ func handlePlayerAttack():
 	#### GET CARDS AT MOUSE POSITION
 	var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if results.size() > 0:
-		var target:Card = getCollidedObject(results[0])
+		var target:Card = MyTools.getCollidedObject(results[0])
 		handlePlayerAttackCreature(target)
 		return
 	
@@ -212,7 +211,7 @@ func handlePlayerRitual(c:Card, target:Card) -> bool:
 		return success
 	
 	#### RESOLVE RITUAL IN CARD'S ACTION NODE (Could be TARGETED or TARGETLESS)
-	success = c.actions.handleRitual(target)
+	success = c.actions.handleRitual()
 	
 	if success:
 		cardsManager.discardCard(c)
@@ -265,20 +264,20 @@ func handlePlayerCastActivate(isTargeted:bool):
 
 
 #### FOR CARDS THAT HAVE THE 'CAST' KEYWORD
-func handlePlayerCastTargeting():
-	print("Click - Player trying to cast")
-	
-	#### GET CARDS AT MOUSE POSITION
-	var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
-	prints("Cards found for casting: ", results.size())
-	
-	for r in results:
-		var target:Card = getCollidedObject(r)
-		prints("Cast target card: ", target)
-		if currentCastingCard.actions.handleCast(target):
-			currentCastingCard = null
-			endCastState()
-			return
+#func handlePlayerCastTargeting():
+	#print("Click - Player trying to cast")
+	#
+	##### GET CARDS AT MOUSE POSITION
+	#var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
+	#prints("Cards found for casting: ", results.size())
+	#
+	#for r in results:
+		#var target:Card = getCollidedObject(r)
+		#prints("Cast target card: ", target)
+		#if currentCastingCard.actions.handleCast(target):
+			#currentCastingCard = null
+			#endCastState()
+			#return
 
 
 
@@ -414,15 +413,15 @@ func endAttackState():
 	if States.gameState == States.GameStates.ATTACK:
 		togglePlayerAttackMode(false, null)
 	
-func endCastState():
-	castLineShown = false
-	$CastLine.hide()
-	States.gameState = States.GameStates.PLAY	
+#func endCastState():
+	#castLineShown = false
+	#$CastLine.hide()
+	#States.gameState = States.GameStates.PLAY	
 
 ############################################################################
 
-func getCollidedObject(result):
-	return result.collider.get_parent()
+#func getCollidedObject(result):
+	#return result.collider.get_parent()
 
 
 

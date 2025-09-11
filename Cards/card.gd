@@ -281,15 +281,15 @@ func handleTurnStartReset():
 func handleTurnStartActions():
 	#### TRIGGER ON TURN START EFFECTS
 	if States.isStatePlay():
-		actions.handleOnTurn(null) #### TRIGGER ON-TURN NODE
+		actions.handleOnTurn() #### TRIGGER ON-TURN NODE
 
 
 
 #### HANDLE CARD BEING PLAYED ON BOARD
 func handleArrival():
 	basicSetup()
-	actions.handleArrival(null)  #### TRIGGER ARRIVAL NODE
-	actions.handleOnTurn(null)   #### TRIGGER ON-TURN NODE
+	actions.handleArrival()  #### TRIGGER ARRIVAL NODE
+	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
 	
 	#if hasShadow:
 		#countersNode.togglePhased(true)
