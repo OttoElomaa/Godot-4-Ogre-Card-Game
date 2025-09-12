@@ -95,7 +95,6 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_k054w")
 theme_override_styles/normal = ExtResource("5_wg888")
-text = "Card Name"
 placeholder_text = "Card Name"
 
 [node name="CardFace" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]

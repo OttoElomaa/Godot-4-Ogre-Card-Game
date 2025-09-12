@@ -115,6 +115,10 @@ func _input(e: InputEvent) -> void:
 	if States.gameState != States.GameStates.PLAY:
 		return
 	
+	#### TURN OFF TEMPORARY MOUSE INPUT IGNORING
+	if States.toggleIgnoreMouseInput(false):
+		return
+	
 	#### CLICK PROCESSING
 	if e is InputEventMouseButton: 
 		if e.is_pressed():

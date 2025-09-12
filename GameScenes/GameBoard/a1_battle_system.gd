@@ -52,11 +52,7 @@ func _input(e: InputEvent) -> void:
 			if e.is_pressed():
 				handlePlayerAttack()
 				
-	#if States.gameState == States.GameStates.CAST:
-		
-		#if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
-			#if e.is_pressed():
-				#handlePlayerCastTargeting()
+
 
 
 func _physics_process(delta: float) -> void:
@@ -66,10 +62,9 @@ func _physics_process(delta: float) -> void:
 		attackLine.points[1] = mousePos
 		damageCalculator.position = (mousePos + Vector2(100,-50)) * main.cameraMainBoard.zoom.x
 		
-	#if castLineShown:
-		#castLine.points[1] = mousePos
 	
 
+#### AUTOMATIC TURN ORDER STUFF, ENEMY TURN STUFF
 #######################################################################
 
 func _on_end_turn_button_pressed() -> void:
@@ -79,7 +74,6 @@ func _on_end_turn_button_pressed() -> void:
 #### PLAY ENEMY TURN, THEN AFTER TIMER WAIT, START PLAYER TURN
 func passTurn():
 	cardsManager.startEnemyTurn()
-	#cardsManager.wakeEnemyCards()
 	$EnemyStartCombatTimer.start()
 	$EndEnemyTurnTimer.start()
 	enemyPlayTurn()
@@ -114,7 +108,6 @@ func timeoutEnemyStartCombat() -> void:
 				pass
 			elif card.checkCanAct(): #### CAN IT ACT
 				handleEnemyAttackPlayer(card)
-				#currentAttackingCard = card
 
 
 
@@ -125,6 +118,7 @@ func playEnemyCard(card:Card):
 			cardsManager.handlePlaceCardInSlot(card, slot)
 			return true
 	return false
+
 
 
 #### START PLAYER'S TURN AFTER ENEMY ACTION
@@ -138,6 +132,8 @@ func timeoutEndEnemyTurn() -> void:
 	cardsManager.startPlayerTurn()
 	
 	main.addLogMessage("Player turn!", Color.html("524634"))
+
+
 
 #############################################################################
 #### PLAYER ATTACK FUNCTIONS
@@ -369,15 +365,7 @@ func endAttackState():
 	if States.gameState == States.GameStates.ATTACK:
 		togglePlayerAttackMode(false, null)
 	
-#func endCastState():
-	#castLineShown = false
-	#$CastLine.hide()
-	#States.gameState = States.GameStates.PLAY	
 
-############################################################################
-
-#func getCollidedObject(result):
-	#return result.collider.get_parent()
 
 
 

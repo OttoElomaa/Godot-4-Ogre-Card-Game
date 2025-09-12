@@ -121,5 +121,8 @@ func endCastState():
 	castLineShown = false
 	$CastLine.hide()
 	
+	#### TEMPORARILY IGNORE MOUSE INPUT FROM OTHER NODES, LIKE CARD MANAGER
+	States.toggleIgnoreMouseInput(true)
+	
 	if States.gameState == States.GameStates.CAST:
 		States.gameState = States.GameStates.PLAY	
