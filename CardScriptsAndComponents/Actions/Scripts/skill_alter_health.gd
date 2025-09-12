@@ -21,12 +21,12 @@ func activate(targets:Array) -> bool:
 			success = true
 
 		#### CORRODE
-		if corrode > 0:
+		elif corrode > 0:
 			CardActions.corrode(target, corrode)
 			success = true
 		
 		#### BOLSTER
-		if bolsterDamage > 0 or bolsterHealth > 0:
+		elif bolsterDamage > 0 or bolsterHealth > 0:
 			target.tempDamage += bolsterDamage
 			target.tempHealth += bolsterHealth
 			success = true
@@ -39,5 +39,17 @@ func createText() -> String:
 	if bolsterDamage > 0 or bolsterHealth > 0:
 		var text = "Bolster %d/%d" % [bolsterDamage, bolsterHealth]
 		return text
+	
+		#### ADD INFLICT
+	elif inflictCreature > 0:
+		return "Inflict %d" % inflictCreature
+	elif inflictPlayer > 0:
+		return "Inflict Player %d" % inflictPlayer
+	
+	
+	if corrode > 0:
+		return "Corrode %d" % corrode
+		
+		
 	return ""
 	

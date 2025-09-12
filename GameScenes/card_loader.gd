@@ -19,7 +19,7 @@ func createDesertDeck():
 	#### GREEN DEFIANCE
 	for i in range(5):
 		cards.append(createCard("res://Cards/GreenDefiance/Cr-BriarFolk.tscn"))
-	for i in range(20):
+	for i in range(5):
 		cards.append(createCard("res://Cards/GreenDefiance/Cr-DeathKnight.tscn"))
 	
 	for i in range(10):
@@ -35,12 +35,12 @@ func createDesertDeck():
 	for i in range(5):
 		cards.append(createCard("res://Cards/Wilds/Cr-MardokHound.tscn"))
 	
-	for i in range(10):
+	for i in range(20):
 		cards.append(createCard("res://Cards/Wilds/Cr-SlaghRider.tscn"))
-	for i in range(5):
+	for i in range(20):
 		cards.append(createCard("res://Cards/Wilds/Ri-Blast.tscn"))
 	
-	for i in range(5):
+	for i in range(20):
 		cards.append(createCard("res://Cards/Wilds/Cr-BlinkBeast.tscn"))
 	
 	for i in range(30):
@@ -55,7 +55,7 @@ func createDesertDeck():
 	
 	for i in range(5):
 		cards.append(createCard("res://Cards/Depths/Cr-Kull-Assassin.tscn"))
-	for i in range(30):
+	for i in range(20):
 		cards.append(createCard("res://Cards/Wilds/Ri-Ashem1-medVohu.tscn"))
 	
 	for i in range(10):

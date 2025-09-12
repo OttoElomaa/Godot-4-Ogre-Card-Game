@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxa0yse2tdcgv"]
+
+[ext_resource type="Script" uid="uid://dm4ta07nai364" path="res://CardScriptsAndComponents/Actions/skill_rest_and_travel.gd" id="1_7bt20"]
+
+[node name="SkillRestAndTravel" type="Node2D"]
+script = ExtResource("1_7bt20")

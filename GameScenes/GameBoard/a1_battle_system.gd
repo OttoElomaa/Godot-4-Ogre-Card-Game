@@ -206,6 +206,7 @@ func handlePlayerRitual(c:Card, target:Card) -> bool:
 		return success
 	
 	#### RESOLVE RITUAL IN CARD'S ACTION NODE (Could be TARGETED or TARGETLESS)
+	c.actions.setInitialTarget(target)
 	success = c.actions.handleRitual()
 	
 	if success:

@@ -89,16 +89,30 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 	if success:
 		successfulScript.createPrintout(self)  #### CREATE COMBAT LOG ENTRY	
 		MyTools.updateBoardCardsVisuals()
+		
+		
+	#### CLEAR THE INITIAL TARGET AFTER ACTION USE
+	myCard.actions.setInitialTarget(null)
+	
 	return success
 
 
 
 func getTargets() -> Array:
+	var targets := []
+	
+	#### IF ACTION HAS A TARGETING NODE  (-> IF IT HAS CUSTOM TARGETING OPTIONS)
 	for component:Node in get_children():
 		if component.has_method("getTargets"):
-			return component.getTargets(isEnemy)
+			targets = component.getTargets(isEnemy)
+	
+	#### IF NO OTHER TARGETS WERE SELECTED, CHECK IF THERE IS AN INITIAL TARGET
+	#### (ATTACK TARGET, TARGET OF PLAYED RITUAL CARD, ETC)
+	if targets == []:
+		if myCard.actions.initialTarget:
+			targets.append(myCard.actions.initialTarget) 
 			
-	return []
+	return targets
 	
 
 

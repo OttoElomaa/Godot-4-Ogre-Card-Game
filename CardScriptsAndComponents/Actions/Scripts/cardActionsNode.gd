@@ -7,6 +7,10 @@ var isEnemy := false
 
 var effectToGrant:Node = null
 
+#### (ATTACK TARGET, TARGET OF PLAYED RITUAL CARD, ETC)
+#### ASSIGNED IN CODE WHEREVER THE ACTION TYPE IS ACTIVATED AND CAN HAVE AN INITIAL TARGET
+var initialTarget: Card = null
+
 
 
 func setup(card:Card):
@@ -67,6 +71,12 @@ func isTargeted(node:Node) -> bool:
 		if script.has_method("activateTargeted"):
 			return true
 	return false
+
+
+
+func setInitialTarget(target:Card):
+	initialTarget = target
+
 
 ##############################################################
 
