@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://qd3ll6tcjlep"]
+[gd_scene load_steps=7 format=3 uid="uid://qd3ll6tcjlep"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_bq7lr"]
 [ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/Desert/card-art-creature-tugarTrainer.jpg" id="2_g2kjf"]
 [ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/ActionTargetless.tscn" id="2_mwal1"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_glvvi"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="4_y6cjq"]
+[ext_resource type="PackedScene" uid="uid://cktcqllypvgaa" path="res://CardScriptsAndComponents/Actions/TargetingComponent.tscn" id="5_y6cjq"]
 
 [node name="Card-Cr-StranHerder" instance=ExtResource("1_bq7lr")]
 cardName = "Stran Herder"
@@ -12,11 +15,21 @@ manaCost = 2
 startingDamage = 2
 startingHealth = 2
 
-[node name="Effects_OnTurn#EffectTargetless" parent="Actions/OnTurn" index="0" instance=ExtResource("2_mwal1")]
+[node name="Actions_OnTurn#Effects_OnTurn#EffectTargetless" parent="." index="0" instance=ExtResource("2_mwal1")]
 effectTypeLine = "Beast"
-targetGroup = 2
 bolsterDamage = 1
 bolsterHealth = 1
+
+[node name="CardAction" parent="Actions" index="0" instance=ExtResource("3_glvvi")]
+localSituation = 4
+
+[node name="SkillAlterHealth" parent="Actions/CardAction" index="0" instance=ExtResource("4_y6cjq")]
+bolsterDamage = 1
+bolsterHealth = 1
+
+[node name="TargetingComponent" parent="Actions/CardAction" index="1" instance=ExtResource("5_y6cjq")]
+automaticTargetGroup = 1
+targetCardType = "Beast"
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_g2kjf")

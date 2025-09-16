@@ -8,8 +8,11 @@ enum ManualTargetOptions {
 	}
 
 @export var automaticTargetGroup := AutomaticTargetOptions.NONE
-
 @export var manualTargetGroup := ManualTargetOptions.NONE
+
+@export var targetCardType := ""
+
+##################################################
 
 @onready var castLine := $CastLine
 var castLineShown := false
@@ -52,28 +55,39 @@ func getTargets(isEnemy:bool) -> Array:
 	var aut := AutomaticTargetOptions
 	var man := ManualTargetOptions
 	
-	
+	#### AUTOMATIC TARGETING
 	match automaticTargetGroup:
 		aut.ALLIES:
-			return MyTools.getBoardCards(isEnemy)
+			targets = MyTools.getBoardCards(isEnemy)
 		aut.ENEMIES:
-			return MyTools.getBoardCards(!isEnemy)
+			targets = MyTools.getBoardCards(!isEnemy)
 		aut.ALL:
 			var allCreatures:Array = MyTools.getBoardCards(isEnemy)
 			allCreatures.append_array(MyTools.getBoardCards(!isEnemy))
-			return allCreatures
-			
+			targets = allCreatures
+	
+	#### MANUAL TARGETING		
 	match manualTargetGroup:
 		man.ALLY:
-			return MyTools.getBoardCards(isEnemy)
+			targets = MyTools.getBoardCards(isEnemy)
 		man.ENEMY:
-			return MyTools.getBoardCards(!isEnemy)
+			targets = MyTools.getBoardCards(!isEnemy)
 		man.ANY:
 			var allCreatures:Array = MyTools.getBoardCards(isEnemy)
 			allCreatures.append_array(MyTools.getBoardCards(!isEnemy))
-			return allCreatures
+			targets = allCreatures
 	
-	return targets
+	#### FILTERING OPTIONS AFTER TARGET GROUP SELECTION
+	var filteredTargets = []
+	if targetCardType == "": #### NO TYPE FILTER
+		filteredTargets = targets
+	#### FILTER TARGETS BY SUBTYPE -> For example only cards with BEAST subtype
+	else:
+		for card:Card in targets:
+			if targetCardType in card.subTypes:
+				filteredTargets.append(card)
+	
+	return filteredTargets
 	
 
 #### MANUAL TARGETING STUFF

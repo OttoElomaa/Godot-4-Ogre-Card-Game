@@ -3,6 +3,7 @@ class_name  Skill
 
 @export var skillName := ""
 
+
 var action:Node = null
 var myCard:Card = null
 
