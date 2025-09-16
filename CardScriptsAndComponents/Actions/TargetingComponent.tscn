@@ -7,5 +7,5 @@ script = ExtResource("1_pclkx")
 
 [node name="CastLine" type="Line2D" parent="."]
 z_index = 10
-points = PackedVector2Array(-403, 174, -578, 465)
+points = PackedVector2Array(-4, 16, -51, 81)
 default_color = Color(0.288165, 0.546665, 0.999997, 1)

@@ -28,11 +28,13 @@ func activate(targets:Array) -> bool:
 	#### TARGETED ACTIONS
 	for target:Card in targets:
 		
-		#### ADD AN EFFECT COUNTER
+		#### ADD AN AMOUNT OF EFFECT COUNTERS
 		if grantEffect:
-			var effect:CardEffect = grantEffect.instantiate()
-			
 			for i in range(grantAmount):
+				
+				var effect:CardEffect = grantEffect.instantiate() #### INSTANTIATE
+				add_child(effect) #### TEMPORARY BEFORE REPARENTING
+				
 				target.addEffect(effect)
 				target.updateCardVisuals()
 				success = true

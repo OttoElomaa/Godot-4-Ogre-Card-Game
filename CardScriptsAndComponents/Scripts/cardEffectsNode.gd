@@ -5,12 +5,15 @@ extends Node2D
 var isPhased := false
 
 
-var buffs:
+var buffs:Array:
 	get:
 		return $Buff/Nodes.get_children()
-var debuffs:
+var debuffs:Array:
 	get:
 		return $Debuff/Nodes.get_children()
+
+@onready var buffSprites := $Buff/Sprites
+@onready var debuffSprites := $Debuff/Sprites
 
 
 
@@ -27,6 +30,11 @@ func addEffect(appliedEffect: EffectCounter):
 	
 	updateEffectInfo()		
 	updateEffectVisuals()
+	
+	var card:Card = get_parent()
+	var printout := "%s added on %s" % ["EffectName", card.cardName]
+	MyTools.createCombatLogPrintout(printout, Color.WHITE)
+	
 
 
 func updateEffectInfo():
@@ -34,26 +42,39 @@ func updateEffectInfo():
 
 
 func updateEffectVisuals():
+	var card:Card = get_parent()
 	
 	var effectName := ""
-	var buffIcon:Texture = null
-	var debuffIcon:Texture = null
+	var buffsCount = buffs.size()
+	var debuffsCount = debuffs.size()
+	
+	for sprite in buffSprites.get_children():
+		sprite.texture = null
+	for sprite in debuffSprites.get_children():
+		sprite.texture = null	
+		
+	if buffsCount > 0:
+		print("%d Buffs found on %s" % [buffs.size(), card.cardName])
+	if debuffsCount > 0:
+		print("%d Debuffs found on %s" % [debuffs.size(), card.cardName])
+		#assert(1==2,"Is this working?")	
+	
+	
+	var sprite:Sprite2D = null
+	var counter := 0
 	
 	for e:CardEffect in buffs:
-		buffIcon = e.icon
+		sprite = buffSprites.get_children()[counter]
+		sprite.texture = e.icon
+		counter += 1
+		
+	counter = 0
 	for e:CardEffect in debuffs:
-		debuffIcon = e.icon
+		sprite = debuffSprites.get_children()[counter]
+		sprite.texture = e.icon
+		counter += 1
 	
-	for icon in $Buff/Sprites.get_children():
-		icon.hide()
-	for icon in $Debuff/Sprites.get_children():
-		icon.hide()
-	
-	if debuffIcon != null:
-		$Debuff/Sprites/DebuffSprite1.show()
-	if buffIcon != null:
-		$Buff/Sprites/BuffSprite1.show()
-			
+		
 	updatePhasedVisuals()
 	
 			
