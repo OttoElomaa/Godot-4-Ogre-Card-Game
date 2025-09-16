@@ -19,7 +19,6 @@ config/icon="res://Art/icon.svg"
 
 States="*res://GameAutoloads/States.tscn"
 MyTools="*res://GameAutoloads/MyTools.tscn"
-CardActions="*res://GameAutoloads/CardActions.tscn"
 GameInfo="*res://GameAutoloads/GameInfo.tscn"
 SceneSwitcher="*res://GameAutoloads/SceneSwitcher.tscn"
 Cheat="*res://GameScenes/cheat_menu.tscn"

@@ -56,9 +56,11 @@ func createActionText() -> String:
 func activate() -> bool:
 	var success := false
 	
+	#### TURN ON MANUAL TARGETING -> No target selected yet!
 	if checkIsManualTargeting():
 		handleManualTargeting()
 		
+	#### HANDLE AUTOMATIC TARGETING AND ACTIVATE CARD ABILITY	
 	else:
 		var targets:Array = getTargets()
 		success = activateSkillAfterTargeting(targets)
@@ -87,6 +89,11 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 			successfulScript = skill
 			
 	if success:
+		#### REST IF NEEDED
+		if checkHasCast():
+			myCard.restAndAnimate(true)
+			
+		
 		successfulScript.createPrintout(self)  #### CREATE COMBAT LOG ENTRY	
 		MyTools.updateBoardCardsVisuals()
 		

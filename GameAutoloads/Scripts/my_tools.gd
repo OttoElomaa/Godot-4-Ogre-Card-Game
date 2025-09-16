@@ -9,6 +9,13 @@ var battleSystem:BattleSystem = null
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
+var zoomVector:Vector2:
+	get:
+		if gameBoard:
+			return gameBoard.cameraMainBoard.zoom
+		return Vector2.ZERO
+		
+
 
 func gameBoardSetup(gameBoard:GameBoard):
 	self.gameBoard = gameBoard

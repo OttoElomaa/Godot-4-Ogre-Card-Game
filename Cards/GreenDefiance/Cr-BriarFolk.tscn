@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnmsayr5lqvem"]
+[gd_scene load_steps=5 format=3 uid="uid://cnmsayr5lqvem"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_epv8e"]
-[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/ActionTargetless.tscn" id="2_c7feh"]
 [ext_resource type="Texture2D" uid="uid://b01fgy8k28uhs" path="res://Art/CardArt/GreenDefiance/card-art-creature-briarfolk.jpg" id="3_c7feh"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_una4c"]
 [ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="4_etjnd"]
@@ -13,9 +12,6 @@ flavorText = "Waits for the age of clear pools and living waters"
 manaCost = 1
 startingDamage = 1
 startingHealth = 1
-
-[node name="Actions_Cast#EffectTargetless" parent="." index="0" instance=ExtResource("2_c7feh")]
-modifyMana = 1
 
 [node name="CardAction" parent="Actions" index="0" instance=ExtResource("3_una4c")]
 localSituation = 2
