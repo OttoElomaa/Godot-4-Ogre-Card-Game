@@ -17,12 +17,12 @@ func activate(targets:Array) -> bool:
 	for target:Card in targets:
 		#### INFLICT
 		if inflictCreature > 0:
-			CardActions.inflict(target, inflictCreature)
+			handleInflict(target, inflictCreature)
 			success = true
 
 		#### CORRODE
 		elif corrode > 0:
-			CardActions.corrode(target, corrode)
+			handleCorrode(target, corrode)
 			success = true
 		
 		#### BOLSTER
@@ -52,4 +52,32 @@ func createText() -> String:
 		
 		
 	return ""
+	
+	
+	
+	
+	
+
+#### DEAL TEMPORARY DAMAGE TO A CARD
+func handleInflict(target:Card, amount:int):
+	target.tempHealth -= amount
+	
+	if target.tempHealth <= 0:
+		target.destroyAndAnimate(true)
+		
+
+
+#### DEAL TEMPORARY AND PERMANENT DAMAGE TO A CARD
+func handleCorrode(target:Card, amount:int):
+	#target.tempHealth -= amount
+	target.health -= amount
+	
+	if target.tempHealth <= 0:
+		target.destroyAndAnimate(true)
+		
+		
+	
+	
+	
+	
 	
