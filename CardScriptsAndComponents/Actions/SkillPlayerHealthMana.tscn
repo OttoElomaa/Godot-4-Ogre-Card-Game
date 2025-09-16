@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cd1bgbw3nwn36"]
 
-[ext_resource type="Script" uid="uid://cfcvj8ub12s3a" path="res://CardScriptsAndComponents/Actions/skill_player_health_mana.gd" id="1_jyg2e"]
+[ext_resource type="Script" uid="uid://cfcvj8ub12s3a" path="res://CardScriptsAndComponents/Actions/Scripts/skill_player_health_mana.gd" id="1_jyg2e"]
 
 [node name="SkillPlayerHealthMana" type="Node2D"]
 script = ExtResource("1_jyg2e")

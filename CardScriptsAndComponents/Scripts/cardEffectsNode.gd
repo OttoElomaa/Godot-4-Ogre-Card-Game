@@ -12,6 +12,8 @@ var debuffs:
 	get:
 		return $Debuff/Nodes.get_children()
 
+
+
 func addEffect(appliedEffect: EffectCounter):
 	var e = appliedEffect
 	

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://nr3rtlgag5sv"]
+
+[ext_resource type="Script" uid="uid://voa7w3nkjlql" path="res://CardScriptsAndComponents/Actions/Scripts/skill_effect_counters.gd" id="1_560vi"]
+
+[node name="SkillEffectCounters" type="Node2D"]
+script = ExtResource("1_560vi")
