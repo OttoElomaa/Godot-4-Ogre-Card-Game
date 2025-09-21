@@ -14,7 +14,6 @@ startingDamage = 2
 startingHealth = 2
 
 [node name="CardAction" parent="Actions" index="0" instance=ExtResource("2_x2mhe")]
-localSituation = 3
 
 [node name="SkillAlterHealth" parent="Actions/CardAction" index="0" instance=ExtResource("3_dfey6")]
 corrode = 2

@@ -1,5 +1,5 @@
 extends Node2D
-class_name  Skill
+class_name Skill
 
 @export var skillName := ""
 

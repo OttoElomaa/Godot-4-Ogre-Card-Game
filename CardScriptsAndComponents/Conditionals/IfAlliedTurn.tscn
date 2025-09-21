@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bij1gb3rf0kq2"]
+
+[ext_resource type="Script" uid="uid://ca077pnsetanb" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_allied_turn.gd" id="1_vbouh"]
+
+[node name="IfAlliedTurn" type="Node"]
+script = ExtResource("1_vbouh")
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

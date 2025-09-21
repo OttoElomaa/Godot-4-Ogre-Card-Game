@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b50qou0nvjrrv"]
+
+[ext_resource type="Script" uid="uid://biatean81yc55" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_subtype.gd" id="1_7xfmk"]
+
+[node name="IfSubtype" type="Node"]
+script = ExtResource("1_7xfmk")
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

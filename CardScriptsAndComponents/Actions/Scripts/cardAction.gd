@@ -1,19 +1,23 @@
 extends Node2D
+class_name CardAction
 
 enum TargetOptions {NONE, ALLIES, ENEMIES}
 
-enum LocalSituations {
-	NONE, ARRIVAL, CAST, BATTLE_ART, ON_TURN, RITUAL
-}
-enum GlobalSituations {
-	NONE, ON_RITUAL, ON_CREATURE_ARRIVAL, ON_CREATURE_DEATH, ON_ALLY_DEATH, ON_ENEMY_DEATH
-	}
+#enum LocalSituations {
+#	NONE, ARRIVAL, CAST, BATTLE_ART, ON_TURN, RITUAL
+#}
+#enum GlobalSituations {
+#	NONE, ON_RITUAL, ON_CREATURE_ARRIVAL, ON_CREATURE_DEATH, ON_ALLY_DEATH, ON_ENEMY_DEATH
+#	}
 
 var myCard: Card = null
 var isEnemy := false
+var hasCast := false
 
-@export var localSituation := LocalSituations.NONE
-@export var globalSituation := GlobalSituations.NONE
+@export var targetingComponent: TargetingComponent
+
+#@export var localSituation := LocalSituations.NONE
+#@export var globalSituation := GlobalSituations.NONE
 
 @export var nodeKeyword := "Action type"
 
@@ -35,7 +39,7 @@ func setup(card:Card):
 func createActionText() -> String:
 	var text := ""
 	
-	var situationStr:String = getSituationStr()
+	var situationStr:String = get_parent().situation_text
 	
 	for script in get_children():
 		if script.has_method("createText"):
@@ -57,15 +61,16 @@ func activate() -> bool:
 	var success := false
 	
 	#### TURN ON MANUAL TARGETING -> No target selected yet!
-	if checkIsManualTargeting():
-		handleManualTargeting()
+	if targetingComponent is AutoTargetingComponent:
+		var targets:Array = targetingComponent.getTargets(myCard)
+		success = activateSkillAfterTargeting(targets)
 		
 	#### HANDLE AUTOMATIC TARGETING AND ACTIVATE CARD ABILITY	
-	else:
-		var targets:Array = getTargets()
-		success = activateSkillAfterTargeting(targets)
+#	else:
+#		var targets:Array = getTargets()
+#		success = activateSkillAfterTargeting(targets)
 	
-	
+
 	
 		
 	return success
@@ -84,14 +89,14 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 	var successfulScript:Node = null
 	
 	for skill:Node in get_children():
-		if skill.has_method("activate"):
+		if skill is Skill:
 			success = skill.activate(targets)
 			successfulScript = skill
 			
 	if success:
 		#### REST IF NEEDED
-		if checkHasCast():
-			myCard.restAndAnimate(true)
+#		if checkHasCast():
+#			myCard.restAndAnimate(true)
 			
 		
 		successfulScript.createPrintout(self)  #### CREATE COMBAT LOG ENTRY	
@@ -109,9 +114,8 @@ func getTargets() -> Array:
 	var targets := []
 	
 	#### IF ACTION HAS A TARGETING NODE  (-> IF IT HAS CUSTOM TARGETING OPTIONS)
-	for component:Node in get_children():
-		if component.has_method("getTargets"):
-			targets = component.getTargets(isEnemy)
+	if targetingComponent.has_method("getTargets"):
+			targets = targetingComponent.getTargets(isEnemy)
 	
 	#### IF NO OTHER TARGETS WERE SELECTED, CHECK IF THERE IS AN INITIAL TARGET
 	#### (ATTACK TARGET, TARGET OF PLAYED RITUAL CARD, ETC)
@@ -126,29 +130,29 @@ func getTargets() -> Array:
 
 
 func checkIsManualTargeting() -> bool:
-	for component:Node in get_children():
-		if component.has_method("checkIsManualTargeting"):
-			return component.checkIsManualTargeting()
+	if targetingComponent.has_method("checkIsManualTargeting"):
+		return targetingComponent.checkIsManualTargeting()
 	return false
 
 
 func getSituationStr() -> String:
-	var loc := LocalSituations
+	return get_parent().situation_text
+#	var loc := LocalSituations
+#	
+#	match localSituation:
+#		
+#		loc.ARRIVAL:
+#			return "Arrival"
+#		loc.CAST:
+#			return "Cast"
+#		loc.BATTLE_ART:
+#			return "Battle Art"
+#		loc.ON_TURN:
+#			return "On Turn"
+#		loc.RITUAL:
+#			return "Ritual"
 	
-	match localSituation:
-		
-		loc.ARRIVAL:
-			return "Arrival"
-		loc.CAST:
-			return "Cast"
-		loc.BATTLE_ART:
-			return "Battle Art"
-		loc.ON_TURN:
-			return "On Turn"
-		loc.RITUAL:
-			return "Ritual"
-	
-	return "Unknown Situation"
+#	return "Unknown Situation"
 		
 
 
@@ -166,41 +170,38 @@ func checkIsActionTargeted() -> bool:
 #### BAD CODE, REPLACE WITH SIGNALS
 ##########################################################
 
-func handleArrival() -> bool:
-	if localSituation == LocalSituations.ARRIVAL:
-		return activate()
-	return false
+#func handleArrival() -> bool:
+#	if localSituation == LocalSituations.ARRIVAL:
+#		return activate()
+#	return false
 
 
-func handleRitual() -> bool:
-	if localSituation == LocalSituations.RITUAL:
-		return activate()
-	return false
+#func handleRitual() -> bool:
+#	if localSituation == LocalSituations.RITUAL:
+#		return activate()
+#	return false
 
 
-func handleCast() -> bool:
-	var success:bool = activate()
-	if success:
-		myCard.restAndAnimate(true)
+#func handleCast() -> bool:
+#	var success:bool = activate()
+#	if success:
+#		myCard.restAndAnimate(true)
 	
-	return success
+#	return success
+
+
+#func checkHasCast() -> bool:
+#	return hasCast
 
 
 
-func checkHasCast() -> bool:
-	if localSituation == LocalSituations.CAST:
-		return true
-	return false
+#func handleBattleArt() -> bool:
+#	if localSituation == LocalSituations.BATTLE_ART:
+#		return activate()
+#	return false
 
 
-
-func handleBattleArt() -> bool:
-	if localSituation == LocalSituations.BATTLE_ART:
-		return activate()
-	return false
-
-
-func handleOnTurn() -> bool:
-	if localSituation == LocalSituations.ON_TURN:
-		return activate()
-	return false
+#func handleOnTurn() -> bool:
+#	if localSituation == LocalSituations.ON_TURN:
+#		return activate()
+#	return false

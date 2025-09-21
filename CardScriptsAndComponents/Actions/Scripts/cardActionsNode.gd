@@ -20,7 +20,10 @@ func setup(card:Card):
 	for action in get_children():
 		action.setup(myCard)
 		
-	
+func awakenTriggers():
+	for trigger in get_children():
+		if trigger is Trigger:
+			trigger.wake()
 
 func createActionText() -> Array:
 	var effectTexts := []
@@ -112,11 +115,11 @@ func handleBattleArt() -> bool:
 	return false
 
 
-func handleOnTurn() -> bool:
-	for cardAction in get_children():
-		if cardAction.handleOnTurn():
-			return true
-	return false
+#func handleOnTurn() -> bool:
+#	for cardAction in get_children():
+#		if cardAction.handleOnTurn():
+#			return true
+#	return false
 
 
 
@@ -129,9 +132,9 @@ func handleOnTurn() -> bool:
 ##################################################
 
 func getCastAction() -> Node:
-	for cardAction:Node in get_children():
-		if cardAction.checkHasCast():
-			return cardAction
+	for trigger:Trigger in get_children():
+		if trigger is OnCastTrigger:
+			return trigger
 	return null
 
 

@@ -33,6 +33,7 @@ func _ready() -> void:
 	turnCount += 1
 	playerMana = turnCount
 	enemyMana = turnCount
+	GameInfo.enemy_turn = false
 	#updateResourceLabels()
 	
 	togglePlayerAttackMode(false, null)
@@ -73,12 +74,15 @@ func _on_end_turn_button_pressed() -> void:
 	
 #### PLAY ENEMY TURN, THEN AFTER TIMER WAIT, START PLAYER TURN
 func passTurn():
-	cardsManager.startEnemyTurn()
-	$EnemyStartCombatTimer.start()
-	$EndEnemyTurnTimer.start()
-	enemyPlayTurn()
+	GameInfo.enemy_turn = !GameInfo.enemy_turn
+	print(GameInfo.enemy_turn)
+	SignalBus.turnStarted.emit()
+	if GameInfo.enemy_turn:
+		cardsManager.startEnemyTurn()
+		$EnemyStartCombatTimer.start()
+		$EndEnemyTurnTimer.start()
+		enemyPlayTurn()
 	
-
 
 func enemyPlayTurn():
 	
@@ -132,6 +136,8 @@ func timeoutEndEnemyTurn() -> void:
 	cardsManager.startPlayerTurn()
 	
 	main.addLogMessage("Player turn!", Color.html("524634"))
+	GameInfo.enemy_turn = !GameInfo.enemy_turn
+	SignalBus.turnStarted.emit()
 
 
 

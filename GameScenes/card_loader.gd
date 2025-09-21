@@ -16,50 +16,50 @@ func createDesertDeck():
 	var card:Card = null
 	var cards := []
 	
-	#### GREEN DEFIANCE
-	for i in range(5):
-		cards.append(createCard("res://Cards/GreenDefiance/Cr-BriarFolk.tscn"))
-	for i in range(5):
-		cards.append(createCard("res://Cards/GreenDefiance/Cr-DeathKnight.tscn"))
-	
-	for i in range(20):
-		cards.append(createCard("res://Cards/GreenDefiance/Cr-Brud-Doomsayer.tscn"))
-	
-	#### THE WILDS
-	for i in range(5):
-		cards.append(createCard("res://Cards/Wilds/Cr-Pikeman.tscn"))
-	for i in range(5):
-		cards.append(createCard("res://Cards/Wilds/Cr-Ogre.tscn"))
-	for i in range(5):
-		cards.append(createCard("res://Cards/Wilds/Cr-RukRaider.tscn"))
-	for i in range(20):
-		cards.append(createCard("res://Cards/Wilds/Cr-MardokHound.tscn"))
-	
-	for i in range(20):
-		cards.append(createCard("res://Cards/Wilds/Cr-SlaghRider.tscn"))
-	for i in range(20):
-		cards.append(createCard("res://Cards/Wilds/Ri-Blast.tscn"))
-	
-	for i in range(20):
-		cards.append(createCard("res://Cards/Wilds/Cr-BlinkBeast.tscn"))
-	
-	for i in range(10):
-		cards.append(createCard("res://Cards/Wilds/Cr-Alhaja-Pious.tscn"))
-	for i in range(10):
-		cards.append(createCard("res://Cards/Wilds/Cr-Alhaja-Bheith-Nochti.tscn"))
-	
+	##### GREEN DEFIANCE
+	#for i in range(5):
+		#cards.append(createCard("res://Cards/GreenDefiance/Cr-BriarFolk.tscn"))
+	#for i in range(5):
+		#cards.append(createCard("res://Cards/GreenDefiance/Cr-DeathKnight.tscn"))
+	#
+	#for i in range(20):
+		#cards.append(createCard("res://Cards/GreenDefiance/Cr-Brud-Doomsayer.tscn"))
+	#
+	##### THE WILDS
+	#for i in range(5):
+		#cards.append(createCard("res://Cards/Wilds/Cr-Pikeman.tscn"))
+	#for i in range(5):
+		#cards.append(createCard("res://Cards/Wilds/Cr-Ogre.tscn"))
+	#for i in range(5):
+		#cards.append(createCard("res://Cards/Wilds/Cr-RukRaider.tscn"))
+	#for i in range(20):
+		#cards.append(createCard("res://Cards/Wilds/Cr-MardokHound.tscn"))
+	#
+	#for i in range(20):
+		#cards.append(createCard("res://Cards/Wilds/Cr-SlaghRider.tscn"))
+	#for i in range(20):
+		#cards.append(createCard("res://Cards/Wilds/Ri-Blast.tscn"))
+	#
+	#for i in range(20):
+		#cards.append(createCard("res://Cards/Wilds/Cr-BlinkBeast.tscn"))
+	#
+	#for i in range(10):
+		#cards.append(createCard("res://Cards/Wilds/Cr-Alhaja-Pious.tscn"))
+	#for i in range(10):
+		#cards.append(createCard("res://Cards/Wilds/Cr-Alhaja-Bheith-Nochti.tscn"))
+	#
 	for i in range(30):
 		cards.append(createCard("res://Cards/Wilds/Cr-Stran-Herder.tscn"))
-	for i in range(5):
-		cards.append(createCard("res://Cards/Wilds/Cr-Tugar.tscn"))
-	
-	for i in range(5):
-		cards.append(createCard("res://Cards/Depths/Cr-Kull-Assassin.tscn"))
-	for i in range(20):
-		cards.append(createCard("res://Cards/Wilds/Ri-Ashem1-medVohu.tscn"))
-	
-	for i in range(10):
-		cards.append(createCard("res://Cards/Wilds/Cr-Janin-bargainer.tscn"))
+	#for i in range(5):
+		#cards.append(createCard("res://Cards/Wilds/Cr-Tugar.tscn"))
+	#
+	#for i in range(5):
+		#cards.append(createCard("res://Cards/Depths/Cr-Kull-Assassin.tscn"))
+	#for i in range(20):
+		#cards.append(createCard("res://Cards/Wilds/Ri-Ashem1-medVohu.tscn"))
+	#
+	#for i in range(10):
+		#cards.append(createCard("res://Cards/Wilds/Cr-Janin-bargainer.tscn"))
 	
 	
 	

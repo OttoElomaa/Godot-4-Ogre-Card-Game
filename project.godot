@@ -22,12 +22,12 @@ MyTools="*res://GameAutoloads/MyTools.tscn"
 GameInfo="*res://GameAutoloads/GameInfo.tscn"
 SceneSwitcher="*res://GameAutoloads/SceneSwitcher.tscn"
 Cheat="*res://GameScenes/cheat_menu.tscn"
+SignalBus="*res://GameAutoloads/SignalBus.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 
 [global_group]
 

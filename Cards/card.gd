@@ -4,6 +4,7 @@ class_name Card
 
 signal hoverOn
 signal hoverOff
+signal stateChanged(endState:String)
 
 #### ACTIVE = Combatant, can be targeted, protects player from being targeted
 #### PASSIVE = Can't be targeted, doesn't protect
@@ -13,6 +14,11 @@ signal hoverOff
 enum CardActionStates {
 	ACTIVE, PASSIVE, DESTROYED, INERT, HAND
 }
+
+enum CardStates {
+	DECK, HAND, BOARD, GRAVEYARD
+}
+
 enum CardTypes {
 	CREATURE, RITUAL,
 }
@@ -164,7 +170,6 @@ func _ready() -> void:
 	#health = startingHealth
 	
 	
-	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
 		myOffset = get_parent().position
@@ -278,18 +283,18 @@ func handleTurnStartReset():
 	tempHealth = health
 	
 
-func handleTurnStartActions():
-	#### TRIGGER ON TURN START EFFECTS
-	if States.isStatePlay():
-		actions.handleOnTurn() #### TRIGGER ON-TURN NODE
+#func handleTurnStartActions():
+#	#### TRIGGER ON TURN START EFFECTS
+#	if States.isStatePlay():
+#		actions.handleOnTurn() #### TRIGGER ON-TURN NODE
 
 
 
 #### HANDLE CARD BEING PLAYED ON BOARD
 func handleArrival():
 	basicSetup()
-	actions.handleArrival()  #### TRIGGER ARRIVAL NODE
-	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
+	actions.awakenTriggers()#	actions.handleArrival()  #### TRIGGER ARRIVAL NODE
+#	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
 	
 	#if hasShadow:
 		#countersNode.togglePhased(true)

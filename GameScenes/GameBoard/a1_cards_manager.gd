@@ -435,8 +435,8 @@ func wakeBoardCards(board:Node):
 		#c.handleTurnStartReset()
 		c.wake()
 	#### STUFF LIKE ON-TURN-START TRIGGERS
-	for c:Card in board.get_children():
-		c.handleTurnStartActions()
+#	for c:Card in board.get_children():
+#		c.handleTurnStartActions()
 		
 	#### UPDATE ALL LABELS, IN CASE THEY WERE AFFECTED
 	MyTools.updateBoardCardsVisuals()

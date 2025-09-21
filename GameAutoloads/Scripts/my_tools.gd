@@ -144,7 +144,11 @@ func getBoardCards(isEnemy:bool):
 	else:
 		return cardsManager.getPlayerBoardCards()
 
-
+func getAllBoardCards():
+	var fullBoard = []
+	fullBoard.append_array(cardsManager.getEnemyBoardCards())
+	fullBoard.append_array(cardsManager.getPlayerBoardCards())
+	return fullBoard
 
 func getDeckCards(isEnemy:bool):
 	if isEnemy:

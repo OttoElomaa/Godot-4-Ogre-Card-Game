@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnjmuo0d5grgs"]
+
+[ext_resource type="Script" uid="uid://dk3jm4ajc4d2" path="res://CardScriptsAndComponents/Actions/Scripts/automatic_targeting_component.gd" id="1_cp73h"]
+[ext_resource type="PackedScene" uid="uid://bmewfrpb1dqdt" path="res://CardScriptsAndComponents/Conditionals/IfAlly.tscn" id="2_0qide"]
+
+[node name="TargetAllAllies" type="Node2D"]
+script = ExtResource("1_cp73h")
+metadata/_custom_type_script = "uid://b3u8lcg0o8ftl"
+
+[node name="IfAlly" parent="." instance=ExtResource("2_0qide")]

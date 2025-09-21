@@ -13,7 +13,6 @@ startingDamage = 2
 startingHealth = 2
 
 [node name="CardAction" parent="Actions" index="0" instance=ExtResource("3_an1q6")]
-localSituation = 1
 
 [node name="SkillDeckActions" parent="Actions/CardAction" index="0" instance=ExtResource("3_u0q21")]
 drawCards = 1
