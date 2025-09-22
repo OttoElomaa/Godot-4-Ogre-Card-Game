@@ -25,7 +25,11 @@ func setup(card):
 func wake():
 	disabled = false
 
+func sleep():
+	disabled = true
+
 func execute(args):
+	var success = false
 	if not disabled:
 		if not args:
 			args = []
@@ -33,9 +37,10 @@ func execute(args):
 		for cond in conditions:
 			if cond is ConditionalComponent:
 				if not cond.check(myCard, args):
-					return
+					return false
 				cond.reset()
 		print(name, ' all conditions green')
 		for child in get_children():
 			if child is CardAction:
-				child.activate(args)
+				success = await child.activate(args)
+		return success

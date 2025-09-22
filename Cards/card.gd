@@ -1,10 +1,10 @@
+@icon("res://Art/icons/16x16/character.png")
 extends Node2D
 class_name Card
 
 
 signal hoverOn
 signal hoverOff
-signal stateChanged(endState:String)
 
 #### ACTIVE = Combatant, can be targeted, protects player from being targeted
 #### PASSIVE = Can't be targeted, doesn't protect
@@ -425,7 +425,6 @@ func statesInert():
 func statesDestroy():
 	actionState = CardActionStates.DESTROYED	
 
-
 func statesHand():
 	actionState = CardActionStates.HAND
 
@@ -612,6 +611,7 @@ func turnOnBestiaryVisuals(mainMenu:Node):
 
 func handleEnterGraveyard():
 	handleTurnStartReset()
+	actions.putTriggersToSleep()
 	wake()
 	
 	toggleManaCostIndicator(true)

@@ -1,3 +1,4 @@
+@icon("res://Art/icons/16x16/autotile.png")
 extends Node2D
 class_name GameBoard
 
@@ -158,7 +159,9 @@ func _on_toggle_defend_button_pressed() -> void:
 	actionMenuCard.switchStates()
 	toggleCardActionMenu(false, null)
 	
-
+func _on_cast_button_pressed():
+	actionMenuCard.switchStates()
+	toggleCardActionMenu(false, null)
 
 
 ##########################################################################################

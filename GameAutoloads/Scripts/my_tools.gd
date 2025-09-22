@@ -124,7 +124,8 @@ func handleCardHover(isHovering:bool, card:Card):
 func handleDrawCard(isEnemy:bool):	
 	cardsManager.checkIsEnemyAnddrawCard(isEnemy)
 
-
+func handleShuffleToDeck(card:Card):
+	cardsManager.moveToDeck(card)
 
 func changeMana(amount:int, isEnemy:bool):
 	gameBoard.changeMana(amount, isEnemy)

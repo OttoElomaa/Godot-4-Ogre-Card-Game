@@ -538,6 +538,14 @@ func moveToDiscard(card:Card):
 	card.handleEnterGraveyard()
 	updateGraveyardVisuals()
 	
+func moveToDeck(card:Card):
+	var deckNode = $PlayerDeck
+	if card.isEnemyCard:
+		deckNode = $EnemyDeck
+	
+	card.reparent(deckNode)
+	card.position = Vector2.ZERO
+	card.handleEnterGraveyard()
 
 
 func updateGraveyardVisuals():

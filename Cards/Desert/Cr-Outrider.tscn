@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://qd3ll6tcjlep"]
+[gd_scene load_steps=10 format=3 uid="uid://qd3ll6tcjlep"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_hhsm2"]
 [ext_resource type="PackedScene" uid="uid://hgfd7t0eywau" path="res://CardScriptsAndComponents/Triggers/OnSelfArrivalTrigger.tscn" id="2_hhsm2"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="5_d68ha"]
 [ext_resource type="PackedScene" uid="uid://b50qou0nvjrrv" path="res://CardScriptsAndComponents/Conditionals/IfSubtype.tscn" id="6_lq8tf"]
 [ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/Desert/card-art-creature-tugarTrainer.jpg" id="7_klw2k"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="7_w3s86"]
+[ext_resource type="PackedScene" uid="uid://c1q8muh6pjecq" path="res://CardScriptsAndComponents/Actions/SkillShuffleToDeck.tscn" id="8_q156q"]
 
-[node name="Card-Cr-StranHerder" instance=ExtResource("1_hhsm2")]
+[node name="Card-Cr-Outrider" instance=ExtResource("1_hhsm2")]
 cardName = "Outrider"
 subTypeStr = "Salkhi Scout"
 description = "On Arrival: bolster all allies +1/1."
@@ -31,6 +33,13 @@ bolsterHealth = 1
 
 [node name="IfSubtype" parent="Actions/OnSelfArrivalTrigger/CardAction/TargetAllAllies" index="1" instance=ExtResource("6_lq8tf")]
 subtype = "Scout"
+
+[node name="CastAction" parent="Actions" index="1" node_paths=PackedStringArray("targetingComponent") instance=ExtResource("3_q156q")]
+targetingComponent = NodePath("TargetSelf")
+
+[node name="TargetSelf" parent="Actions/CastAction" index="0" instance=ExtResource("7_w3s86")]
+
+[node name="SkillShuffleToDeck" parent="Actions/CastAction" index="1" instance=ExtResource("8_q156q")]
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("7_klw2k")

@@ -118,8 +118,8 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 			
 	if success:
 		#### REST IF NEEDED
-#		if checkHasCast():
-#			myCard.restAndAnimate(true)
+		if checkHasCast():
+			myCard.restAndAnimate(true)
 			
 		
 		successfulScript.createPrintout(self)  #### CREATE COMBAT LOG ENTRY	
@@ -159,7 +159,10 @@ func getSituationStr() -> String:
 	if get_parent() is not Node2D:
 		return get_parent().situation_text
 	else:
-		return "Ritual"
+		if myCard.cardType == myCard.CardTypes.RITUAL:
+			return "Ritual"
+		else:
+			return "Cast"
 #	var loc := LocalSituations
 #	
 #	match localSituation:
@@ -213,8 +216,8 @@ func checkIsActionTargeted() -> bool:
 #	return success
 
 
-#func checkHasCast() -> bool:
-#	return hasCast
+func checkHasCast() -> bool:
+	return hasCast
 
 
 

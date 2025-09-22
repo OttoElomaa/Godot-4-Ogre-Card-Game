@@ -239,7 +239,7 @@ func cardCastButtonPressed() -> void:
 		var castAction = c.actions.getCastAction()
 		if castAction:   #### CAST ACTION WAS FOUND
 			c.actions.handleCast()   #### IS IT TARGETED OR TARGETLESS
-			
+		
 	
 	
 func handlePlayerAttackEnemy():

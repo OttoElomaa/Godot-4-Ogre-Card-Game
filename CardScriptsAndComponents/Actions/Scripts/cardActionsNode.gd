@@ -26,6 +26,11 @@ func awakenTriggers():
 		if trigger is Trigger:
 			trigger.wake()
 
+func putTriggersToSleep():
+	for trigger in get_children():
+		if trigger is Trigger:
+			trigger.sleep()
+
 func createActionText() -> Array:
 	var effectTexts := []
 	
@@ -94,18 +99,21 @@ func handleRitual() -> bool:
 	for cardAction:CardAction in get_children():
 		if await cardAction.activate([]):
 			success = true
-		
+	
+	if success:
+		SignalBus.ritual.emit()
 	return success
 
 
 func handleCast() -> bool:
 	var success := false
 	
-	for cardAction in get_children():
-		var actionSuccess = cardAction.handleCast()
-		if actionSuccess:
-			success = true
-			
+	for child in get_children():
+		if child is CardAction:
+			success = child.activate([])
+
+	if success:
+		SignalBus.cast.emit()
 	return success
 
 
@@ -133,9 +141,10 @@ func handleCast() -> bool:
 ##################################################
 
 func getCastAction() -> Node:
-	for trigger:Trigger in get_children():
-		if trigger is OnCastTrigger:
-			return trigger
+	if myCard.cardType == myCard.CardTypes.CREATURE:
+		for child in get_children():
+			if child is CardAction:
+				return child
 	return null
 
 
