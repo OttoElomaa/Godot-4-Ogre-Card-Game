@@ -57,12 +57,22 @@ func createActionText() -> String:
 
 #### CALLED BY SITUATION MANAGER -> THAT WILL BE DONE BY SIGNALS i think?
 #### CURRENTLY Called by handleRitual(), handleCast() ETC.
-func activate() -> bool:
+func activate(args) -> bool:
 	var success := false
 	
 	#### TURN ON MANUAL TARGETING -> No target selected yet!
 	if targetingComponent is AutoTargetingComponent:
 		var targets:Array = targetingComponent.getTargets(myCard)
+		success = activateSkillAfterTargeting(targets)
+	
+	elif targetingComponent is EnemyTargetingComponent:
+		var targets:Array = []
+		targets.append(args[0])
+		success = activateSkillAfterTargeting(targets)
+	
+	elif targetingComponent is SelfTargetingComponent:
+		var targets:Array = []
+		targets.append(myCard)
 		success = activateSkillAfterTargeting(targets)
 		
 	#### HANDLE AUTOMATIC TARGETING AND ACTIVATE CARD ABILITY	

@@ -5,6 +5,5 @@
 [node name="EffectDoom" instance=ExtResource("1_mtg2c")]
 effectType = 2
 max_counter = 3
-isDoom = true
 id = "Doom"
 description = "Debuff. When damaged, this card takes more damage equal to its Doom."

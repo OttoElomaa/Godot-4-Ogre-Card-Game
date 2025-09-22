@@ -40,9 +40,12 @@ var isRitual:
 @export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE
 @export var subTypeStr := "Card Sub-Type"
+
+
 var subTypes := []
 var cardTypeStr := ""
 
+@export_multiline var description := ""
 @export_multiline var flavorText := ""
 
 var cardArt:
@@ -169,6 +172,8 @@ func _ready() -> void:
 	#damage = startingDamage
 	#health = startingHealth
 	
+	SignalBus.connect("attacked", handleCombatActions)
+	SignalBus.connect("defended", handleCombatActions)
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
@@ -264,7 +269,7 @@ func createEffectText():
 	effectText = effectText.rstrip(",. ")
 	effectText = effectText.lstrip(",. ")
 	#effectText = text
-	l.text = effectText
+	l.text = description
 	
 	
 ########################################################		
@@ -294,6 +299,7 @@ func handleTurnStartReset():
 func handleArrival():
 	basicSetup()
 	actions.awakenTriggers()#	actions.handleArrival()  #### TRIGGER ARRIVAL NODE
+	SignalBus.arrival.emit([self])
 #	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
 	
 	#if hasShadow:
@@ -519,20 +525,20 @@ func getCombatDamageToTarget(target:Card):
 	return combatDamage
 
 
-
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
-func handleCombatActions(isAttacking:bool, otherCard:Card):
+func handleCombatActions(args: Array):
+	var isAttacker = null
+	var attacker = args[0]
+	var defender = args[1]
 	
-	if isAttacking:
+	if attacker == self:
+		isAttacker = true
 		playAttackAnimation()
-		#### ATTACKING CANCELS PHASING -> PHASE IN
-		effects.togglePhased(false)
-	
-	actions.setInitialTarget(otherCard)		
-	actions.handleBattleArt()
-	
-	
-		
+	elif defender == self:
+		isAttacker = false
+
+
+
 func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	if tempHealth <= 0:
 		destroyAndAnimate(!isAttacker)

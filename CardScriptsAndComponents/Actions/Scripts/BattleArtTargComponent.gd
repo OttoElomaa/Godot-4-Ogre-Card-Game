@@ -1,0 +1,2 @@
+extends TargetingComponent
+class_name EnemyTargetingComponent

@@ -1,7 +1,7 @@
 extends Skill
 
 
-@export var grantEffect:PackedScene = null
+@export var grantEffect:EffectCounter
 @export var grantAmount := 0
 
 @export var phaseOut := false
@@ -23,11 +23,10 @@ func activate(targets:Array) -> bool:
 			myCard.effects.togglePhased(true)
 			myCard.statesPassive()
 			success = true
-			
-	
+
 	#### TARGETED ACTIONS
 	for target:Card in targets:
-		
+
 		#### ADD AN AMOUNT OF EFFECT COUNTERS
 		if grantEffect:
 			for i in range(grantAmount):
@@ -38,8 +37,8 @@ func activate(targets:Array) -> bool:
 				target.addEffect(effect)
 				target.updateCardVisuals()
 				success = true
-				
-		
+
+
 		#### PHASE OUT
 		if phaseOut:
 			target.effects.togglePhased(true)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn0a82cmfvbid"]
+
+[ext_resource type="Script" uid="uid://dins0fn04ovvs" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_foe.gd" id="1_87uis"]
+
+[node name="IfFoe" type="Node"]
+script = ExtResource("1_87uis")
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

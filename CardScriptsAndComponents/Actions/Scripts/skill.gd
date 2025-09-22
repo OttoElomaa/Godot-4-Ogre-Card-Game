@@ -26,7 +26,7 @@ func createText() -> String:
 func createPrintout(action:Node):
 	
 	var holderText:String = action.getSituationStr()
-	var lineOne := "%s trigger on %s:" % [holderText, action.myCard.cardName]
+	var lineOne := "%s trigger on %s %s:" % [holderText, MyTools.getFactionString(myCard), action.myCard.cardName]
 	MyTools.createCombatLogPrintout(lineOne, Color.WHITE)
 	
 	var effectText = self.createText()

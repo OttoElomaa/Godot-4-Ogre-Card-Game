@@ -25,15 +25,17 @@ func setup(card):
 func wake():
 	disabled = false
 
-func execute():
+func execute(args):
 	if not disabled:
+		if not args:
+			args = []
 		print(name, ' from ', myCard.cardName, ' is executing')
 		for cond in conditions:
 			if cond is ConditionalComponent:
-				if not cond.check(myCard, null):
+				if not cond.check(myCard, args):
 					return
 				cond.reset()
 		print(name, ' all conditions green')
 		for child in get_children():
 			if child is CardAction:
-				child.activate()
+				child.activate(args)

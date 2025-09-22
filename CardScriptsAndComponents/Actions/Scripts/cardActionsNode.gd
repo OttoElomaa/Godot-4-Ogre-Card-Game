@@ -28,9 +28,6 @@ func awakenTriggers():
 func createActionText() -> Array:
 	var effectTexts := []
 	
-	for cardAction in get_children():
-		if cardAction.has_method("createActionText"):
-			effectTexts.append(cardAction.createActionText())
 		
 	return effectTexts
 
@@ -83,11 +80,11 @@ func setInitialTarget(target:Card):
 
 ##############################################################
 
-func handleArrival() -> bool:
-	for cardAction in get_children():
-		if cardAction.handleArrival():
-			return true
-	return false
+#func handleArrival() -> bool:
+#	for trigger in get_children():
+#		if cardAction.handleArrival():
+#			return true
+#	return false
 
 
 func handleRitual() -> bool:
@@ -108,11 +105,11 @@ func handleCast() -> bool:
 	return success
 
 
-func handleBattleArt() -> bool:
-	for cardAction in get_children():
-		if cardAction.handleBattleArt():
-			return true
-	return false
+#func handleBattleArt() -> bool:
+#	for cardAction in get_children():
+#		if cardAction.handleBattleArt():
+#			return true
+#	return false
 
 
 #func handleOnTurn() -> bool:

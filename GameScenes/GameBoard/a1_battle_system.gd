@@ -226,7 +226,10 @@ func handlePlayerRitual(c:Card, target:Card) -> bool:
 	
 	return success
 
-
+func attack(attacker:Card, defender:Card):
+	SignalBus.attacked.emit(attacker, defender)
+	SignalBus.defended.emit(attacker, defender)
+	
 
 func cardCastButtonPressed() -> void:
 	
@@ -338,8 +341,10 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard)
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
-	attackCard.handleCombatActions(true, targetCard)
-	targetCard.handleCombatActions(false, attackCard)
+#	attackCard.handleCombatActions(true, targetCard)
+#	targetCard.handleCombatActions(false, attackCard)
+	SignalBus.attacked.emit([attackCard, targetCard])
+	SignalBus.defended.emit([attackCard, targetCard])
 	
 	#### CHECK IF EITHER CARD WAS DESTROYED
 	var attackerDestroyed = attackCard.checkAndHandleCombatDeath(true)

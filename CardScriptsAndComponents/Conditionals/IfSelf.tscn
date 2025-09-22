@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqt3gngoys4mh"]
+
+[ext_resource type="Script" uid="uid://ce7s262q5hvli" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_self.gd" id="1_idwcl"]
+
+[node name="IfSelf" type="Node"]
+script = ExtResource("1_idwcl")
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

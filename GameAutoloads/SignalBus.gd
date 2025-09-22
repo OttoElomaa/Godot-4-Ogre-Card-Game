@@ -1,12 +1,19 @@
 extends Node
 
 signal turnStarted
-signal arrival(card:Card)
+
+#	One argument: the card that arrived
+signal arrival(args:Array)
+
 signal cast
 signal ritual
-signal attacked(card:Card)
-signal defended(card:Card)
-signal death(card:Card)
+
+#	Two arguments. 0: the attacking card, 1: the defending card
+signal attacked(args:Array)
+signal defended(args:Array)
+
+#	One argument: the card that died
+signal death(args:Array)
 
 #enum LocalSituations {
 #	NONE, ARRIVAL, CAST, BATTLE_ART, ON_TURN, RITUAL
