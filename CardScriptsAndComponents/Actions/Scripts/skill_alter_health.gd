@@ -1,3 +1,4 @@
+@icon("res://Art/icons/16x16/heart.png")
 extends Skill
 
 

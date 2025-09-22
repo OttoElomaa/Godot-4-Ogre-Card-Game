@@ -1,3 +1,4 @@
+@icon("res://Art/icons/16x16/arrow_in.png")
 extends Node2D
 class_name TargetingComponent
 
