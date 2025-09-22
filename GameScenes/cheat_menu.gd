@@ -127,3 +127,15 @@ func _on_to_you_2_pressed():
 	if found_card:
 		_on_search_card_name_text_changed()
 		MyTools.summonCard(found_card, false)
+
+
+func _on_to_player_hand_pressed() -> void:
+	if found_card:
+		_on_search_card_name_text_changed()
+		MyTools.addCardToHand(found_card, false)
+
+
+func _on_to_player_graveyard_pressed() -> void:
+	if found_card:
+		_on_search_card_name_text_changed()
+		MyTools.addCardToGraveyard(found_card, false)

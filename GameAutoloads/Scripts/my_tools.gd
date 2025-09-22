@@ -56,10 +56,23 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 		var slot = slots[0]
 		
 		handlePlaceCardInSlot(card, slot)
-		changeMana(card.manaCost, isEnemy)
+		#changeMana(card.manaCost, isEnemy)
 		return true
 		
 	return false
+
+
+func shuffleToDeck(card:Card, isEnemy:bool):
+	cardsManager.moveToDeck(card, isEnemy)
+
+
+func addCardToHand(card:Card, isEnemy:bool):
+	cardsManager.moveToHand(card, isEnemy)
+
+
+func addCardToGraveyard(card:Card, isEnemy:bool):
+	cardsManager.moveToDiscard(card, isEnemy)	
+	
 
 
 
@@ -124,8 +137,7 @@ func handleCardHover(isHovering:bool, card:Card):
 func handleDrawCard(isEnemy:bool):	
 	cardsManager.checkIsEnemyAnddrawCard(isEnemy)
 
-func handleShuffleToDeck(card:Card):
-	cardsManager.moveToDeck(card)
+
 
 func changeMana(amount:int, isEnemy:bool):
 	gameBoard.changeMana(amount, isEnemy)

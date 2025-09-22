@@ -117,6 +117,14 @@ text = "To Foe >"
 layout_mode = 2
 text = "To You >"
 
+[node name="ToPlayerHand" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+layout_mode = 2
+text = "To Your Hand >"
+
+[node name="ToPlayerGraveyard" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+layout_mode = 2
+text = "To Your Graveyard >"
+
 [node name="CardEditor" type="PanelContainer" parent="GameBoard_Cheats/RightMenu/HBox"]
 custom_minimum_size = Vector2(235, 350)
 layout_mode = 2
@@ -191,6 +199,8 @@ text = "To You >"
 [connection signal="text_changed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/SearchCardName" to="." method="_on_search_card_name_text_changed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToFoe2" to="." method="_on_to_foe_2_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToYou2" to="." method="_on_to_you_2_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToPlayerHand" to="." method="_on_to_player_hand_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToPlayerGraveyard" to="." method="_on_to_player_graveyard_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/AddKeyword" to="." method="_on_add_keyword_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/ToFoe" to="." method="_on_to_foe_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/ToYou" to="." method="_on_to_you_pressed"]

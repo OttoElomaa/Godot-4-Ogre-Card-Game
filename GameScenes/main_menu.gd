@@ -76,9 +76,9 @@ func buttonPressedToggleBestiary() -> void:
 		$CanvasLayer/CardInfoPane.show()
 		$Intro.toggleIntro(false)
 		
-		var allCards:Array = loadCardsInFolder("res://Cards/Depths/")
+		var allCards:Array = loadCardsInFolder("res://Cards/Outcasts/")
 		allCards.append_array( loadCardsInFolder("res://Cards/GreenDefiance/") )
-		allCards.append_array( loadCardsInFolder("res://Cards/Wilds/") )
+		allCards.append_array( loadCardsInFolder("res://Cards/Desert/") )
 		
 		#### PLACE CARDS IN BESTIARY SLOTS
 		var bestiarySlots: Array = $Bestiary/Slots.get_children()

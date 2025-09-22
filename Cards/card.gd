@@ -12,7 +12,7 @@ signal hoverOff
 #### DESTROYED STATUS when the card is beaten in combat or otherwise destroyed
 #### INERT REFERS to SPELLS and other cards that can't attack or cast
 enum CardActionStates {
-	ACTIVE, PASSIVE, DESTROYED, INERT, HAND
+	ACTIVE, PASSIVE, DISCARD, INERT, HAND, DECK
 }
 
 enum CardStates {
@@ -423,10 +423,14 @@ func statesInert():
 	
 
 func statesDestroy():
-	actionState = CardActionStates.DESTROYED	
+	actionState = CardActionStates.DISCARD	
 
 func statesHand():
 	actionState = CardActionStates.HAND
+
+func statesDeck():
+	actionState = CardActionStates.DECK
+
 
 
 func toggleTraveling(enabled:bool):
@@ -476,7 +480,7 @@ func checkTraveling() -> bool:
 
 
 func checkAlive():
-	return !(actionState == CardActionStates.DESTROYED)
+	return !(actionState == CardActionStates.DISCARD)
 
 		
 ########################################################
@@ -692,23 +696,21 @@ func updateCardLabels():
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
-	if not isRitual:
+	if mySlot:
 		mySlot.isAvailable = true
 		
-	statesDestroy()
 	if toAnimate:
-		animateDestroyCard()
+		playCardDestroyedAnimation()
+	
 
 
-
-func animateDestroyCard():
-	if actionState == CardActionStates.DESTROYED:
-		$BodyAnimations.play("DestroyBoardCard")
+func playCardDestroyedAnimation():
+	$BodyAnimations.play("DestroyBoardCard")
 	
 	
 #### CALLED IN ANIMATION "DestroyBoardCard"
 func destroyCardTwo():
-	cardsManager.moveToDiscard(self)
+	cardsManager.moveToDiscard(self, isEnemyCard)
 
 #################################################################################
 

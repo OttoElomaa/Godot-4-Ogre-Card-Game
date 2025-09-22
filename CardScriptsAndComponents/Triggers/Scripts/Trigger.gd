@@ -13,14 +13,16 @@ signal completed
 
 func _ready():
 	SignalBus.connect(triggered_when, execute)
+	
+
+func setup(card):
+	myCard = card
 	for child in get_children():
 		if child is ConditionalComponent:
 			conditions.append(child)
 		if child.has_method('setup'):
 			child.setup(myCard)
 
-func setup(card):
-	myCard = card
 
 func wake():
 	disabled = false

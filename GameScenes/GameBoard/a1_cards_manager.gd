@@ -526,10 +526,11 @@ func discardCard(c:Card):
 
 
 #### CALLED FROM DESTROY ANIMATION IN CARD NODE
-func moveToDiscard(card:Card):
+func moveToDiscard(card:Card, isEnemy:bool):
+	card.statesDestroy()
 	
 	var discardNode:Node = $Discard/Player/Cards
-	if card.isEnemyCard:
+	if isEnemy:
 		discardNode = $Discard/Enemy/Cards
 	
 	card.reparent(discardNode)
@@ -537,19 +538,39 @@ func moveToDiscard(card:Card):
 	
 	card.handleEnterGraveyard()
 	updateGraveyardVisuals()
+
 	
-func moveToDeck(card:Card):
+func moveToDeck(card:Card, isEnemy:bool):
+	card.statesDeck()
+	
 	var deckNode = $PlayerDeck
-	if card.isEnemyCard:
+	if isEnemy:
 		deckNode = $EnemyDeck
 	
 	card.reparent(deckNode)
 	card.position = Vector2.ZERO
 	card.handleEnterGraveyard()
+	
+
+
+
+func moveToHand(card:Card, isEnemy:bool):
+	card.statesHand()
+	
+	var handNode = $PlayerHand
+	if isEnemy:
+		handNode = $EnemyHand
+	
+	card.reparent(handNode)
+	card.position = Vector2.ZERO
+	card.handleEnterGraveyard()
+	
+	updateHandCardsVisuals()
+
 
 
 func updateGraveyardVisuals():
-	prints("Faulty cards manager: ", self.get_path().get_concatenated_names())
+	#prints("Faulty cards manager: ", self.get_path().get_concatenated_names())
 		
 	#### PLACE DISCARD CARDS IN SLOTS TO DISPLAY
 	var discardCards = playerGraveyard.get_node("Cards").get_children()
@@ -565,6 +586,7 @@ func updateGraveyardVisuals():
 func buttonPressedToggleGraveyard() -> void:
 	var mainCamera:Camera2D = main.cameraMainBoard
 	var graveyardCamera := $Discard/CameraGraveyard
+	updateGraveyardVisuals()
 	
 	#### DISPLAY GRAVEYARD
 	if graveyardVisible:
