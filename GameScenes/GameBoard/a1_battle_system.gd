@@ -206,14 +206,13 @@ func handlePlayerAttack():
 
 
 #### FOR PLAYING 'RITUAL' CARDS
-func handlePlayerRitual(c:Card, target:Card) -> bool:
+func handlePlayerRitual(c:Card) -> bool:
 	var success := false
 	if playerMana < c.manaCost: #### CAN'T AFFORD, RETURN
 		return success
 	
 	#### RESOLVE RITUAL IN CARD'S ACTION NODE (Could be TARGETED or TARGETLESS)
-	c.actions.setInitialTarget(target)
-	success = c.actions.handleRitual()
+	success = await c.actions.handleRitual()
 	
 	if success:
 		cardsManager.discardCard(c)

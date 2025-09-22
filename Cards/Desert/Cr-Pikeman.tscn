@@ -24,7 +24,6 @@ targetingComponent = NodePath("BattleArtTargComponent")
 [node name="BattleArtTargComponent" parent="Actions/BattleArtTrigger/CardAction" index="0" instance=ExtResource("4_bf25j")]
 
 [node name="SkillAlterHealth" parent="Actions/BattleArtTrigger/CardAction" index="1" instance=ExtResource("5_5q5n6")]
-inflictPlayer = 2
 inflictCreature = 2
 
 [node name="Art" parent="Frontside" index="1"]

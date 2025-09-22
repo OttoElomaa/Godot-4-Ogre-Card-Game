@@ -88,10 +88,13 @@ func setInitialTarget(target:Card):
 
 
 func handleRitual() -> bool:
-	for cardAction in get_children():
-		if cardAction.handleRitual():
-			return true
-	return false
+	var success := false
+	
+	for cardAction:CardAction in get_children():
+		if await cardAction.activate([]):
+			success = true
+		
+	return success
 
 
 func handleCast() -> bool:

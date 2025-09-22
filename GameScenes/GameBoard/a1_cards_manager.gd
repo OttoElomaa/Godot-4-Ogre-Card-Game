@@ -225,27 +225,31 @@ func startDraggingCardOrAttack():
 	if not card.checkInteractAllowed():
 		return
 	
+	
 	#### ONLY IF IT'S NOT SLOTTED	
 	if not card.mySlot:
 		currentDraggedCard = card
 		card.z_index = 5
-		
+	
+		if card.isRitual:
+			currentDraggedCard = null
+			battleSystem.handlePlayerRitual(card)
+	
 	#### SLOTTED CARDS WILL ATTACK INSTEAD
 	else:
 		currentDraggedCard = null
 		battleSystem.togglePlayerAttackMode(true, card)
 		
-		
+
 
 func handleFinishDraggingCard() -> Node:
 	var success := false
 	var c = currentDraggedCard
-	
+
 	#################################################
 	#### HANDLE RITUAL USE CASE
 	var resultCards:Array = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	var target:Card = null
-	
 	
 	#### GET CARDS UNDER MOUSE WHEN DRAGGING FINISHED
 	if not resultCards.is_empty():
@@ -254,10 +258,10 @@ func handleFinishDraggingCard() -> Node:
 				target = getCollidedObject(res)
 	
 	#### TRIGGER RITUAL WITH OR WITHOUT TARGET FOUND			
-	if c.isRitual:
-		success = battleSystem.handlePlayerRitual(c, target)	
-		if success:
-			return
+#	if c.isRitual:
+#		success = battleSystem.handlePlayerRitual(c, target)	
+#		if success:
+#			return
 	
 	#############################################################
 	#### HANDLE ATTACKING
@@ -289,6 +293,7 @@ func handleFinishDraggingCard() -> Node:
 
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
+	c.cardsManager = self
 	#### SLOT STUFF
 	c.mySlot = slot
 	slot.toggleAvailable(false)

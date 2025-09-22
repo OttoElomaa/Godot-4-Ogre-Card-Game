@@ -67,14 +67,26 @@ func activate(args) -> bool:
 	
 	elif targetingComponent is EnemyTargetingComponent:
 		var targets:Array = []
-		targets.append(args[0])
+		targets.append(args[1])
 		success = activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SelfTargetingComponent:
 		var targets:Array = []
 		targets.append(myCard)
 		success = activateSkillAfterTargeting(targets)
-		
+	
+	elif targetingComponent is ManualTargetingComponent:
+		var target: Card = null
+		targetingComponent.activate()
+		await targetingComponent.target_acquired or targetingComponent.aborted
+		print("target acquired: ", targetingComponent.target)
+		if targetingComponent.target:
+			var targets:Array = []
+			targets.append(targetingComponent.target)
+			success = activateSkillAfterTargeting(targets)
+		else:
+			return false
+	
 	#### HANDLE AUTOMATIC TARGETING AND ACTIVATE CARD ABILITY	
 #	else:
 #		var targets:Array = getTargets()
@@ -136,9 +148,6 @@ func getTargets() -> Array:
 	return targets
 	
 
-
-
-
 func checkIsManualTargeting() -> bool:
 	if targetingComponent.has_method("checkIsManualTargeting"):
 		return targetingComponent.checkIsManualTargeting()
@@ -146,7 +155,10 @@ func checkIsManualTargeting() -> bool:
 
 
 func getSituationStr() -> String:
-	return get_parent().situation_text
+	if get_parent() is not Node2D:
+		return get_parent().situation_text
+	else:
+		return "Ritual"
 #	var loc := LocalSituations
 #	
 #	match localSituation:
