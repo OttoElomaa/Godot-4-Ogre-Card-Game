@@ -51,10 +51,15 @@ script = ExtResource("3_2vaow")
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2"]
-offset_left = 411.0
-offset_top = 38.0
-offset_right = 1450.0
-offset_bottom = 1039.0
+anchors_preset = -1
+anchor_left = 0.214
+anchor_top = 0.035
+anchor_right = 0.755
+anchor_bottom = 0.962
+offset_left = 0.119965
+offset_top = 0.200001
+offset_right = 0.399902
+offset_bottom = 0.039917
 texture = ExtResource("1_kjltk")
 patch_margin_left = 7
 patch_margin_top = 7
@@ -65,6 +70,7 @@ axis_stretch_vertical = 1
 
 [node name="OwnedCardsContainer" type="GridContainer" parent="CanvasLayer2/NinePatchRect"]
 clip_contents = true
+custom_minimum_size = Vector2(1039, 1001)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

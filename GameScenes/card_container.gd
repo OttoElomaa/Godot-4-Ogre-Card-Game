@@ -9,7 +9,7 @@ func _ready():
 	$Frontside/ManaCost/ManaCostLabel.text = str(card.manaCost)
 	$Frontside/Resources/Panel/HBox/PowerLabel.text = str(card.startingDamage)
 	$Frontside/Resources/Panel/HBox/HealthLabel.text = str(card.startingHealth)
-	$Frontside/EffectsLabel.text = card.cardName
+	$Frontside/EffectsLabel.text = card.description
 	
 func _get_drag_data(at_position):
 	var data = [card, false]

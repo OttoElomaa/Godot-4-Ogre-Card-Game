@@ -327,6 +327,7 @@ label_settings = ExtResource("6_u70hd")
 horizontal_alignment = 1
 
 [node name="CardName" type="Node2D" parent="Frontside"]
+visible = false
 position = Vector2(0, -220)
 
 [node name="Shadow" type="Sprite2D" parent="Frontside/CardName"]
@@ -349,7 +350,6 @@ label_settings = ExtResource("9_l781d")
 horizontal_alignment = 1
 
 [node name="CardNameBestiary" type="Node2D" parent="Frontside"]
-visible = false
 position = Vector2(0, -216)
 
 [node name="Shadow" type="Sprite2D" parent="Frontside/CardNameBestiary"]
