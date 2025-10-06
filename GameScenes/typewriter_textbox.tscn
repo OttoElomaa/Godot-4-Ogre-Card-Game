@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://d2lky3krjjul4"]
 
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="1_718ti"]
-[ext_resource type="StyleBox" path="res://PanelStyles/EmptyStyleBox.tres" id="2_belcu"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="2_belcu"]
 [ext_resource type="Script" uid="uid://b2femu4hqkqb8" path="res://GameScenes/Typewriter.gd" id="2_k08e2"]
 [ext_resource type="AudioStream" uid="uid://dhuojolt6ampg" path="res://Audio/SE/Dedushka_Voice.wav" id="3_belcu"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="5_belcu"]

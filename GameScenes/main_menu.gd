@@ -18,27 +18,23 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	
 	if bestiaryVisible:
 		if event.is_action_pressed("ui_down"):
 			$MenuCamera.position += Vector2.DOWN * 50
 		elif event.is_action("scrollDown"):
-			$MenuCamera.position += Vector2.DOWN * 50	
-			
+			$MenuCamera.position += Vector2.DOWN * 50
+
 		elif event.is_action_pressed("ui_up"):
 			$MenuCamera.position += Vector2.UP * 50
 		elif event.is_action("scrollUp"):
 			$MenuCamera.position += Vector2.UP * 50
-	
-
-
 
 func loadCardsInFolder(folderPath:String) -> Array:
-	
+
 	var dir := DirAccess.open(folderPath)
 	var file_names := dir.get_files()
 	var cardScenes := []
-	
+
 	for name in file_names:
 		var card:PackedScene = load(folderPath + name)
 		cardScenes.append(card.instantiate() ) 
@@ -51,10 +47,10 @@ func buttonPressedStartMatch() -> void:
 	
 	#var gameBoard: GameBoard = GameBoardScene.instantiate()
 	bestiaryVisible = false
-	GameInfo.playerDeckCards = MyTools.createGenericPlayerDeck()
+	GameInfo.playerOwnedCards = MyTools.createGenericPlayerDeck()
 	GameInfo.enemyDeckCards = MyTools.createGenericPlayerDeck()
-	var newBoard:Node = GameBoardScene.instantiate()
-	SceneSwitcher.switchToNewScene(newBoard, self)
+#	var newBoard:Node = GameBoardScene.instantiate()
+	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/DeckEdit.tscn")
 	
 
 
@@ -95,14 +91,9 @@ func buttonPressedToggleBestiary() -> void:
 		$Bestiary.hide()
 		$CanvasLayer/CardInfoPane.hide()
 		$Intro.toggleIntro(true)
-		
-		
 
 func buttonPressedExitGame() -> void:
 	get_tree().quit()
-
-
-
 
 func toggleCardInfo(enable:bool, card:Card):
 	var cardInfo := $CanvasLayer/CardInfoPane/CardInfoPanel
