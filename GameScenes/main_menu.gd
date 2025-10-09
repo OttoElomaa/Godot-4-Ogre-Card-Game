@@ -50,7 +50,7 @@ func buttonPressedStartMatch() -> void:
 	GameInfo.playerOwnedCards = MyTools.createGenericPlayerDeck()
 	GameInfo.enemyDeckCards = MyTools.createGenericPlayerDeck()
 #	var newBoard:Node = GameBoardScene.instantiate()
-	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/DeckEdit.tscn")
+	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/DeckEditScreen/DeckEdit.tscn")
 	
 
 
