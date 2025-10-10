@@ -13,7 +13,6 @@
 [node name="Card-Cr-Outrider" instance=ExtResource("1_hhsm2")]
 cardName = "Outrider"
 subTypeStr = "Salkhi Scout"
-description = "On Arrival: bolster all allies +1/1."
 flavorText = "As wind carries grains of sand through the desert, so too Outriders carry omens and news."
 manaCost = 2
 startingDamage = 2
@@ -23,7 +22,7 @@ startingHealth = 2
 
 [node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" node_paths=PackedStringArray("targetingComponent") instance=ExtResource("3_q156q")]
 targetingComponent = NodePath("TargetAllAllies")
-nodeKeyword = "Action type"
+customActionText = "Arrival: Bolster Allied Scouts 1/1"
 
 [node name="SkillAlterHealth" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("4_bokjc")]
 bolsterDamage = 1
@@ -36,6 +35,7 @@ subtype = "Scout"
 
 [node name="CastAction" parent="Actions" index="1" node_paths=PackedStringArray("targetingComponent") instance=ExtResource("3_q156q")]
 targetingComponent = NodePath("TargetSelf")
+customActionText = "Cast: Shuffle to deck"
 
 [node name="TargetSelf" parent="Actions/CastAction" index="0" instance=ExtResource("7_w3s86")]
 

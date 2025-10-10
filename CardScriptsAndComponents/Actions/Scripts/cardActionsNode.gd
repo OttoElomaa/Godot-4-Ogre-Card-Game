@@ -6,6 +6,10 @@ extends Node2D
 var myCard: Card = null
 var isEnemy := false
 
+@onready var actions:
+	get:
+		return get_children()
+
 var effectToGrant:Node = null
 
 #### (ATTACK TARGET, TARGET OF PLAYED RITUAL CARD, ETC)
@@ -31,11 +35,17 @@ func putTriggersToSleep():
 		if trigger is Trigger:
 			trigger.sleep()
 
+
+
 func createActionText() -> Array:
-	var effectTexts := []
+	var actionTexts := []
 	
+	for action in actions:
+		if action is CardAction:
+			#var act:CardAction = action
+			actionTexts.append(action.createActionText())
 		
-	return effectTexts
+	return actionTexts
 
 
 

@@ -35,6 +35,7 @@ var isRitual:
 @onready var effects := $Effects
 @onready var keywordHandler := $KeywordHandler
 
+@onready var effectTextLabel := $Frontside/EffectText
 
 ####################################### EXPORT VARIABLES
 @export var cardName := "Card Name"
@@ -45,7 +46,6 @@ var isRitual:
 var subTypes := []
 var cardTypeStr := ""
 
-@export_multiline var description := ""
 @export_multiline var flavorText := ""
 
 var cardArt:
@@ -165,8 +165,11 @@ var healColor:
 
 
 func _ready() -> void:
+	
+	
 	cardsManager = get_tree().get_first_node_in_group("cardManager")
-	cardsManager.connectCardSignal(self)
+	if cardsManager:
+		cardsManager.connectCardSignal(self)
 	
 	#subTypes = subTypeStr.split(" ")
 	#damage = startingDamage
@@ -199,10 +202,7 @@ func _ready() -> void:
 		$Frontside/Resources.hide()
 		$Frontside/ActionState.hide()
 	
-	
-	
-	
-	#createEffectText()
+	createEffectText()
 	#$Frontside/CardName/Label.text = cardName
 	
 	$Frontside/CardName.hide()
@@ -229,7 +229,6 @@ func updateCardNameAndBasicInfo(isCreature:bool):
 	
 func createEffectText():
 	
-	
 	match cardType:
 		CardTypes.CREATURE:
 			cardTypeStr = "Creature"
@@ -244,8 +243,6 @@ func createEffectText():
 	subTypeStr = subTypeStr.rstrip(" ")
 	
 	#################################### EFFECT TEXT
-	var l = $Frontside/EffectsLabel
-	#var text = ""
 	var effectTexts := []
 	
 	#### CHECK FROM KEYWORDS HANDLER
@@ -268,8 +265,9 @@ func createEffectText():
 	
 	effectText = effectText.rstrip(",. ")
 	effectText = effectText.lstrip(",. ")
-	#effectText = text
-	l.text = description
+	
+	effectTextLabel.text = effectText
+	return effectText
 	
 	
 ########################################################		

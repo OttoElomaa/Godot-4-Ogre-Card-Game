@@ -15,6 +15,7 @@ func _ready():
 	ownedCardsContainer.connect("card_mouse_exited", hide_info)
 	
 func create_containers():
+	#### EMPTY THE CARD LISTS BEFORE FILLING THEM
 	for child in activeCardsContainer.get_children():
 		child.queue_free()
 	for child in ownedCardsContainer.get_children():

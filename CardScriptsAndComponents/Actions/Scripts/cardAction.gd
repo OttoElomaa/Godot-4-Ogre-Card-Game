@@ -20,7 +20,8 @@ var hasCast := false
 #@export var localSituation := LocalSituations.NONE
 #@export var globalSituation := GlobalSituations.NONE
 
-@export var nodeKeyword := "Action type"
+#@export var nodeKeyword := "Action type"
+@export_multiline var customActionText := ""
 
 @export var isCost := false
 @export var isPayoff := false
@@ -38,23 +39,9 @@ func setup(card:Card):
 
 
 func createActionText() -> String:
-	var text := ""
-	
-	var situationStr:String = get_parent().situation_text
-	
-	for script in get_children():
-		if script.has_method("createText"):
-			text += script.createText()
-			text += ", "
-	
-	#### AT THE END, COMPILE TEXT
-	text = text.rstrip(", ")
-	if text != "":
-		text = "%s: %s" % [situationStr, text]	
-	
-	return text
+	return customActionText
 
-
+	
 
 #### CALLED BY SITUATION MANAGER -> THAT WILL BE DONE BY SIGNALS i think?
 #### CURRENTLY Called by handleRitual(), handleCast() ETC.

@@ -387,7 +387,7 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("9_gi0db")
 offset = Vector2(-110, -10)
 
-[node name="EffectsLabel" type="Label" parent="Frontside"]
+[node name="EffectText" type="Label" parent="Frontside"]
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
 anchor_left = 0.5
