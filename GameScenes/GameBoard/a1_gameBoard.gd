@@ -24,6 +24,9 @@ var actionMenuCard: Card = null
 
 
 func _ready() -> void:
+	
+	#### SETUP BOARD
+	##################################
 	States.statesPlay()
 	
 	$CardsManager.main = self
@@ -34,21 +37,34 @@ func _ready() -> void:
 	
 	MyTools.gameBoardSetup(self)
 
-
-
-	var playerDeckCards:Array = GameInfo.playerDeckCards
-	for card in playerDeckCards:
-		$CardsManager/PlayerDeck.add_child(card)
-		
-	var enemyDeckCards:Array = GameInfo.enemyDeckCards
-	for card in enemyDeckCards:
-		$CardsManager/EnemyDeck.add_child(card)
+	##################################################
+	#### SETUP PLAYER CARDS
 	
-	#await(get_tree().create_timer(0.2))
+	var playerDeckCards:Array = GameInfo.playerDeckCards
+	
+	for card:Card in playerDeckCards:
+		if card.get_tree():
+			card.reparent($CardsManager/PlayerDeck)
+		else:
+			$CardsManager/PlayerDeck.add_child(card)
+		card.setup(self)
+		card.show()
+	
+	#### SETUP ENEMY CARDS
+	var enemyDeckCards:Array = GameInfo.enemyDeckCards
+	
+	for card:Card in enemyDeckCards:
+		if card.get_tree():
+			card.reparent($CardsManager/EnemyDeck)
+		else:
+			$CardsManager/EnemyDeck.add_child(card)
+		card.setup(self)
+		card.show()
 	
 	$CardsManager.setup(self)
 	
 
+	###################################################
 	#### UI STUFF
 	updateUi($BattleSystem.turnCount)
 	$BattleSystem.updateResourceLabels()
@@ -59,6 +75,7 @@ func _ready() -> void:
 		slot.slotType = CardSlotTypes.PLAYER
 	for slot:CardSlot in $EnemySlots.get_children():
 		slot.slotType = CardSlotTypes.ENEMY
+
 
 
 func _unhandled_input(e: InputEvent) -> void:

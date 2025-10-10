@@ -166,14 +166,22 @@ var healColor:
 
 func _ready() -> void:
 	
+	setup(null)
 	
-	cardsManager = get_tree().get_first_node_in_group("cardManager")
-	if cardsManager:
-		cardsManager.connectCardSignal(self)
 	
 	#subTypes = subTypeStr.split(" ")
 	#damage = startingDamage
 	#health = startingHealth
+	
+	
+
+
+
+func setup(gameBoard: GameBoard):
+	
+	if gameBoard:
+		cardsManager = gameBoard.cardsManager
+		cardsManager.connectCardSignal(self)
 	
 	SignalBus.connect("attacked", handleCombatActions)
 	SignalBus.connect("defended", handleCombatActions)
@@ -182,8 +190,6 @@ func _ready() -> void:
 	if boardOrTempNode is Node2D:
 		myOffset = get_parent().position
 	
-	
-	#$Frontside/Art.scale = Vector2(0.2, 0.2)
 	
 	#### SETUP FOR ALL ACTION SCRIPTS
 	#### SHARE INFO ON, IS CARD ENEMY
@@ -206,6 +212,7 @@ func _ready() -> void:
 	#$Frontside/CardName/Label.text = cardName
 	
 	$Frontside/CardName.hide()
+	$Frontside/CardNameBestiary.hide()
 	
 	handleTurnStartReset()
 
