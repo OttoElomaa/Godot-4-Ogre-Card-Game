@@ -91,8 +91,7 @@ func handleTargetingClicked():
 		#
 		#####
 		if tg in getTargets():
-			if not tg == myCard:
-				target = tg
+			target = tg
 	
 	if target:
 		prints("Cast target card: ", target)

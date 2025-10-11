@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://0rv6qotxbvyy"]
+[gd_scene load_steps=7 format=3 uid="uid://0rv6qotxbvyy"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_jhoc5"]
-[ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="2_efnvc"]
-[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_yk35a"]
+[ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="2_efnvc"]
 [ext_resource type="Texture2D" uid="uid://cet75s3qgtg0w" path="res://Art/CardArt/GreenDefiance/card-art-creature-doomsayer.jpg" id="3_jhoc5"]
-[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="3_t7a0p"]
-[ext_resource type="PackedScene" uid="uid://b7ebpdx20rjh6" path="res://CardScriptsAndComponents/EffectCounters/EffectDoom.tscn" id="5_qb0jj"]
-[ext_resource type="PackedScene" uid="uid://mf6mhdd0aiij" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllFoes.tscn" id="6_qb0jj"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="3_qb0jj"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="4_henv4"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="5_nn21i"]
 
 [node name="Card-Cr-Doomsayer" instance=ExtResource("1_jhoc5")]
 cardName = "Doomsayer"
@@ -17,14 +16,16 @@ startingHealth = 4
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_efnvc")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("2_yk35a")]
-customActionText = "Cast: Add 2 Doom to target"
+[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="0" node_paths=PackedStringArray("targetingComponent")]
+script = ExtResource("3_qb0jj")
+targetingComponent = NodePath("ManualTargeting")
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("3_t7a0p")]
-grantEffect = ExtResource("5_qb0jj")
-grantAmount = 2
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_henv4")]
+manualTargetGroup = 1
 
-[node name="TargetAllFoes" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("6_qb0jj")]
+[node name="SkillAlterHealth" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_nn21i")]
+bolsterHealth = 4
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_jhoc5")
