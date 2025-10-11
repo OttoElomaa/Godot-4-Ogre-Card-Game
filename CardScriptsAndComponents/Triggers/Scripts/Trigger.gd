@@ -32,7 +32,7 @@ func sleep():
 
 func execute(args):
 	var success = false
-	if not disabled:
+	if not disabled or myCard.cardType == myCard.CardTypes.RITUAL:
 		if not args:
 			args = []
 		print(name, ' from ', myCard.cardName, ' is executing')
@@ -45,4 +45,4 @@ func execute(args):
 		for child in get_children():
 			if child is CardAction:
 				success = await child.activate(args)
-		return success
+	return success

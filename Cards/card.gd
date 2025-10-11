@@ -183,8 +183,8 @@ func setup(gameBoard: GameBoard):
 		cardsManager = gameBoard.cardsManager
 		cardsManager.connectCardSignal(self)
 	
-	SignalBus.connect("attacked", handleCombatActions)
-	SignalBus.connect("defended", handleCombatActions)
+#	SignalBus.connect("attacked", handleCombatActions)
+#	SignalBus.connect("defended", handleCombatActions)
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:

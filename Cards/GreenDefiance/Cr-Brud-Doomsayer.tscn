@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_yk35a"]
 [ext_resource type="Texture2D" uid="uid://cet75s3qgtg0w" path="res://Art/CardArt/GreenDefiance/card-art-creature-doomsayer.jpg" id="3_jhoc5"]
 [ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="3_t7a0p"]
-[ext_resource type="PackedScene" uid="uid://cktcqllypvgaa" path="res://CardScriptsAndComponents/Actions/TargetingComponent.tscn" id="5_efnvc"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="4_t7a0p"]
 
 [node name="Card-Cr-Doomsayer" instance=ExtResource("1_jhoc5")]
 cardName = "Doomsayer"
@@ -18,7 +18,7 @@ startingHealth = 4
 [node name="SkillEffectCounters" parent="Actions/CardAction" index="0" instance=ExtResource("3_t7a0p")]
 grantAmount = 2
 
-[node name="TargetingComponent" parent="Actions/CardAction" index="1" instance=ExtResource("5_efnvc")]
+[node name="ManualTargeting" parent="Actions/CardAction" index="1" instance=ExtResource("4_t7a0p")]
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_jhoc5")

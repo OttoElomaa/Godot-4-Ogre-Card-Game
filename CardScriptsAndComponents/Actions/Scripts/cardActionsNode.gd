@@ -106,10 +106,14 @@ func setInitialTarget(target:Card):
 func handleRitual() -> bool:
 	var success := false
 	
-	for cardAction:CardAction in get_children():
-		if await cardAction.activate([]):
-			success = true
-	
+#	for cardAction:CardAction in get_children():
+#		if await cardAction.activate([]):
+#			success = true
+	for child in get_children():
+		if child is OnCastTrigger:
+			if await child.execute([]):
+				success = true
+
 	if success:
 		SignalBus.ritual.emit()
 	return success
@@ -119,8 +123,9 @@ func handleCast() -> bool:
 	var success := false
 	
 	for child in get_children():
-		if child is CardAction:
-			success = child.activate([])
+		if child is OnCastTrigger:
+			if await child.execute([]):
+				success = true
 
 	if success:
 		SignalBus.cast.emit()
@@ -153,7 +158,7 @@ func handleCast() -> bool:
 func getCastAction() -> Node:
 	if myCard.cardType == myCard.CardTypes.CREATURE:
 		for child in get_children():
-			if child is CardAction:
+			if child is OnCastTrigger:
 				return child
 	return null
 

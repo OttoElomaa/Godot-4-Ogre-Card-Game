@@ -5,7 +5,8 @@ signal turnStarted
 #	One argument: the card that arrived
 signal arrival(args:Array)
 
-signal cast
+signal cast_pressed(args:Array)
+signal cast(args:Array)
 signal ritual
 
 #	Two arguments. 0: the attacking card, 1: the defending card

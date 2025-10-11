@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4cy7ldeelvmn"]
+
+[ext_resource type="Script" path="res://GameScenes/card_panel.gd" id="1_5a33h"]
+
+[node name="CardPanel" type="PanelContainer"]
+size_flags_horizontal = 3
+script = ExtResource("1_5a33h")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CardNameLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "The Shinparator"
+
+[node name="StatsLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "99/99"
+
+[node name="ManaCostLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "9"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

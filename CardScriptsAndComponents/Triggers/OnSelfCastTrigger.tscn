@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo03aq3860x4c"]
+
+[ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="1_203fk"]
+
+[node name="OnCastTrigger" type="Node"]
+script = ExtResource("1_203fk")
+situation_text = "Cast"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"

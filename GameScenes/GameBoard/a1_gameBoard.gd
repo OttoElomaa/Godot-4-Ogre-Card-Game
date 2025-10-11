@@ -43,7 +43,7 @@ func _ready() -> void:
 	var playerDeckCards:Array = GameInfo.playerDeckCards
 	
 	for card:Card in playerDeckCards:
-		if card.get_tree():
+		if card.is_inside_tree():
 			card.reparent($CardsManager/PlayerDeck)
 		else:
 			$CardsManager/PlayerDeck.add_child(card)
@@ -54,7 +54,7 @@ func _ready() -> void:
 	var enemyDeckCards:Array = GameInfo.enemyDeckCards
 	
 	for card:Card in enemyDeckCards:
-		if card.get_tree():
+		if card.is_inside_tree():
 			card.reparent($CardsManager/EnemyDeck)
 		else:
 			$CardsManager/EnemyDeck.add_child(card)

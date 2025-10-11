@@ -153,7 +153,7 @@ func checkIsEnemyAnddrawCard(isEnemy:bool):
 func drawCard(sourceDeck:Node,targetHand:Node):
 	
 	if sourceDeck.get_child_count() < 1:
-		assert(1==2,"testing launch crash 2")
+#		assert(1==2,"testing launch crash 2")
 		return
 		
 	var cardScene:Card = sourceDeck.get_child(0)	
@@ -437,7 +437,7 @@ func handleTurnStartReset(board:Node):
 func wakeBoardCards(board:Node):
 	#### RESETS AND CLEANUP
 	for c:Card in board.get_children():
-		#c.handleTurnStartReset()
+		c.handleTurnStartReset()
 		c.wake()
 	#### STUFF LIKE ON-TURN-START TRIGGERS
 #	for c:Card in board.get_children():
