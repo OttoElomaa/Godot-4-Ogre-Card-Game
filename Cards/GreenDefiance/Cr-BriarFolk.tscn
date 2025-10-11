@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnmsayr5lqvem"]
+[gd_scene load_steps=6 format=3 uid="uid://cnmsayr5lqvem"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_epv8e"]
+[ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="2_una4c"]
 [ext_resource type="Texture2D" uid="uid://b01fgy8k28uhs" path="res://Art/CardArt/GreenDefiance/card-art-creature-briarfolk.jpg" id="3_c7feh"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_una4c"]
 [ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="4_etjnd"]
@@ -13,10 +14,11 @@ manaCost = 1
 startingDamage = 1
 startingHealth = 1
 
-[node name="CardAction" parent="Actions" index="0" instance=ExtResource("3_una4c")]
-localSituation = 2
+[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_una4c")]
 
-[node name="SkillPlayerHealthMana" parent="Actions/CardAction" index="0" instance=ExtResource("4_etjnd")]
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("3_una4c")]
+
+[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_etjnd")]
 alterOwnerMana = 1
 
 [node name="Art" parent="Frontside" index="1"]
