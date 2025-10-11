@@ -200,7 +200,7 @@ func handlePlayerAttack():
 	#### CHECK IF ENEMY PORTRAIT AT MOUSE POSITION
 	results = MyTools.fetchMouseOverObjects(COLLISION_MASK_ENEMY_PORTRAIT)
 	if results.size() > 0:
-		handlePlayerAttackEnemy()
+		handlePlayerAttackEnemy()  #### ATTACK PORTRAIT
 		updateResourceLabels()
 		return
 
@@ -251,13 +251,10 @@ func handlePlayerAttackEnemy():
 	#### ATTACK THE ENEMY
 	var c = currentAttackingCard
 	var combatDamage = c.getCombatDamageToTarget(null)
-	
-	handlePortraitAttackPrintout(c, combatDamage, true)
-	
-	
+	c.handleAttackingPortrait()
 	enemyHealth -= combatDamage
 	
-	c.handleAttackingPortrait()
+	handlePortraitAttackPrintout(c, combatDamage, true)
 	endAttackState()
 	
 

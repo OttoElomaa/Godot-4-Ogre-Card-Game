@@ -294,6 +294,8 @@ func handleFinishDraggingCard() -> Node:
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	c.cardsManager = self
+	
+	######################################
 	#### SLOT STUFF
 	c.mySlot = slot
 	slot.toggleAvailable(false)
@@ -303,8 +305,8 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
 		MyTools.moveCardTweening(c, originalPos, c.position)
-		
 		c.reparent($EnemyBoard)
+		
 		c.isEnemyCard = true
 		battleSystem.enemyMana -= c.manaCost
 	
@@ -312,8 +314,11 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	else:
 		c.position = slot.position
 		c.reparent($PlayerBoard)
+		
+		c.isEnemyCard = false
 		battleSystem.playerMana -= c.manaCost
 	
+	##############################################
 	#### VISUAL STUFF
 	c.scale = Vector2.ONE
 	c.toggleFrontSide(true)
