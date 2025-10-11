@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0e807arj0ef"]
+
+[ext_resource type="Script" uid="uid://bs5kjnljmmys" path="res://CardScriptsAndComponents/Triggers/Scripts/Trigger.gd" id="1_t5l2o"]
+[ext_resource type="PackedScene" uid="uid://bqt3gngoys4mh" path="res://CardScriptsAndComponents/Conditionals/IfSelf.tscn" id="2_erdf7"]
+
+[node name="ArrivalTrigger" type="Node"]
+script = ExtResource("1_t5l2o")
+triggered_when = "arrival"
+situation_text = "Arrival"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"
+
+[node name="IfSelf" parent="." instance=ExtResource("2_erdf7")]

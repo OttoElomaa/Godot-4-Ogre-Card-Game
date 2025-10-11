@@ -1,25 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4tndl4w2i3lg"]
+[gd_scene load_steps=3 format=3 uid="uid://b4tndl4w2i3lg"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_uw8jb"]
-[ext_resource type="PackedScene" uid="uid://biap5dhvp08qo" path="res://CardScriptsAndComponents/Triggers/BattleArtTrigger.tscn" id="2_dwyej"]
 [ext_resource type="Texture2D" uid="uid://ddk2tjpttrqwm" path="res://Art/CardArt/GreenDefiance/card-art-creature-skeletonWarrior.jpg" id="2_uw8jb"]
-[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_rvkd0"]
-[ext_resource type="PackedScene" uid="uid://mf6mhdd0aiij" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllFoes.tscn" id="4_i3nkg"]
-[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_es187"]
 
 [node name="Card-Cr-SkelWarrior" instance=ExtResource("1_uw8jb")]
 cardName = "Skeleton Warrior"
 manaCost = 2
 startingDamage = 1
 startingHealth = 2
-
-[node name="OnAttackTrigger" parent="Actions" index="0" instance=ExtResource("2_dwyej")]
-
-[node name="CardAction" parent="Actions/OnAttackTrigger" index="1" instance=ExtResource("3_rvkd0")]
-
-[node name="TargetAllFoes" parent="Actions/OnAttackTrigger/CardAction" index="0" instance=ExtResource("4_i3nkg")]
-
-[node name="SkillEffectCounters" parent="Actions/OnAttackTrigger/CardAction" index="1" instance=ExtResource("5_es187")]
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_uw8jb")

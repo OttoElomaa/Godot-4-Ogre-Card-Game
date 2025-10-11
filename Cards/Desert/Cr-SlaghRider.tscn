@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctjoy83adq33o"]
+[gd_scene load_steps=7 format=3 uid="uid://ctjoy83adq33o"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_lcboh"]
+[ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="2_5jlh2"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="2_16jdu"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_y63ad"]
 [ext_resource type="Texture2D" uid="uid://bps2xijib187r" path="res://Art/CardArt/card-art-creature-slagh-rider.jpg" id="3_4vpam"]
-[ext_resource type="PackedScene" uid="uid://cktcqllypvgaa" path="res://CardScriptsAndComponents/Actions/TargetingComponent.tscn" id="3_y63ad"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_5jlh2"]
 
 [node name="Card-Cr-SlaghRider" instance=ExtResource("1_lcboh")]
 cardName = "Slagh Rider"
@@ -12,14 +13,15 @@ manaCost = 2
 startingDamage = 1
 startingHealth = 2
 
-[node name="CardAction" parent="Actions" index="0" instance=ExtResource("2_y63ad")]
-localSituation = 2
+[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_5jlh2")]
 
-[node name="SkillAlterHealth" parent="Actions/CardAction" index="0" instance=ExtResource("2_16jdu")]
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("2_y63ad")]
+customActionText = "Cast: Bolster Ally +2/0"
+
+[node name="SkillAlterHealth" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("2_16jdu")]
 bolsterDamage = 2
 
-[node name="TargetingComponent" parent="Actions/CardAction" index="1" instance=ExtResource("3_y63ad")]
-manualTargetGroup = 1
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_5jlh2")]
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_4vpam")

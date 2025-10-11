@@ -174,13 +174,13 @@ func _on_exit_button_pressed() -> void:
 
 func _on_toggle_defend_button_pressed() -> void:
 	actionMenuCard.switchStates()
+	#toggleCardActionMenu(false, null)
+
+
+func buttonPressedHideCardActionMenu() -> void:
 	toggleCardActionMenu(false, null)
+
 	
-func _on_cast_button_pressed():
-	actionMenuCard.switchStates()
-	toggleCardActionMenu(false, null)
-
-
 ##########################################################################################
 
 func updateUi(turnCount:int):

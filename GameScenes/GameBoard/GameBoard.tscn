@@ -744,6 +744,7 @@ horizontal_alignment = 1
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel2/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
-[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="_on_cast_button_pressed"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]

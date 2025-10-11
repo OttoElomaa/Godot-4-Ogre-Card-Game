@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwj4lr0i67frt"]
+[gd_scene load_steps=6 format=3 uid="uid://dwj4lr0i67frt"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_kp5c2"]
+[ext_resource type="PackedScene" uid="uid://biap5dhvp08qo" path="res://CardScriptsAndComponents/Triggers/BattleArtTrigger.tscn" id="2_ghwtv"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_x2mhe"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="3_dfey6"]
 [ext_resource type="Texture2D" uid="uid://ucoqlp6pe0yw" path="res://Art/CardArt/Desert/card-art-creature-mardok-houndbeast.jpg" id="3_rnvwq"]
@@ -13,9 +14,11 @@ manaCost = 4
 startingDamage = 2
 startingHealth = 2
 
-[node name="CardAction" parent="Actions" index="0" instance=ExtResource("2_x2mhe")]
+[node name="BattleArtTrigger" parent="Actions" index="0" instance=ExtResource("2_ghwtv")]
 
-[node name="SkillAlterHealth" parent="Actions/CardAction" index="0" instance=ExtResource("3_dfey6")]
+[node name="CardAction" parent="Actions/BattleArtTrigger" index="1" instance=ExtResource("2_x2mhe")]
+
+[node name="SkillAlterHealth" parent="Actions/BattleArtTrigger/CardAction" index="0" instance=ExtResource("3_dfey6")]
 corrode = 2
 
 [node name="Art" parent="Frontside" index="1"]

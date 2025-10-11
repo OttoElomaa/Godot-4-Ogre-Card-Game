@@ -1,3 +1,4 @@
+@icon("res://Art/icons/16x16/camera_first_person.png")
 extends Node
 class_name Trigger
 
@@ -22,6 +23,18 @@ func setup(card):
 			conditions.append(child)
 		if child.has_method('setup'):
 			child.setup(myCard)
+
+
+
+func createActionText():
+	var actionTexts := []
+	var actions:Array = get_children()
+	for action in actions:
+		if action is CardAction:
+			actionTexts.append(action.createActionText())
+	return actionTexts
+			
+
 
 
 func wake():

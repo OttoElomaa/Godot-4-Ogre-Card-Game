@@ -72,8 +72,11 @@ func activate(args) -> bool:
 			var targets:Array = []
 			targets.append(targetingComponent.target)
 			success = activateSkillAfterTargeting(targets)
-		else:
-			return false
+		
+	else:
+		var targets = []
+		success = activateSkillAfterTargeting(targets)
+			#return false
 	
 	#### HANDLE AUTOMATIC TARGETING AND ACTIVATE CARD ABILITY	
 #	else:

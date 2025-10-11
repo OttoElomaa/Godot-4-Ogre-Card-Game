@@ -259,9 +259,7 @@ func createEffectText():
 	
 	
 	#### CHECK ACTION NODES (CAST, BATTLE ART, and RITUAL NODES etc.)
-	var actionHolderTexts := []
-	actionHolderTexts = actions.createActionText()
-	
+	var actionHolderTexts:Array = actions.createActionText()
 	effectTexts.append_array(actionHolderTexts)
 	
 	effectText = ""

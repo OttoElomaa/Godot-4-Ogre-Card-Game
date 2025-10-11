@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=28 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Script" uid="uid://c4juxj0muiopk" path="res://CardScriptsAndComponents/Scripts/cardEffectsNode.gd" id="2_07jhh"]
@@ -12,14 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="5_jsedn"]
 [ext_resource type="Texture2D" uid="uid://cdficndq8clk4" path="res://Art/CardComponents/card-backside-texture-v2-achra.jpg" id="5_lcq1x"]
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="6_lcq1x"]
-[ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="6_s5qc8"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="6_u70hd"]
-[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="7_5riqg"]
-[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="8_lgw4w"]
 [ext_resource type="Texture2D" uid="uid://c6fbvpdul76bl" path="res://Art/CardComponents/card-action-state-indicator-texture-traveling-V2.png" id="9_gi0db"]
 [ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="9_i3xqw"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="9_l781d"]
-[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="9_uagit"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_8geja"]
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="13_j3lys"]
 [ext_resource type="Texture2D" uid="uid://3s7fsmtkjp8v" path="res://Art/CardComponents/card-action-state-indicator-texture-active-V3.png" id="16_8geja"]
@@ -278,20 +274,6 @@ offset = Vector2(0, 100)
 
 [node name="Actions" type="Node2D" parent="."]
 script = ExtResource("4_q2hgj")
-
-[node name="OnCastTrigger" parent="Actions" instance=ExtResource("6_s5qc8")]
-
-[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" node_paths=PackedStringArray("targetingComponent")]
-script = ExtResource("7_5riqg")
-targetingComponent = NodePath("ManualTargeting")
-customActionText = "Boom! Bang! Zap!"
-metadata/_custom_type_script = "uid://dfqyywxg05ds"
-
-[node name="SkillAlterHealth" parent="Actions/OnCastTrigger/CardAction" instance=ExtResource("8_lgw4w")]
-inflictCreature = 2
-
-[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" instance=ExtResource("9_uagit")]
-manualTargetGroup = 2
 
 [node name="KeywordHandler" type="Node" parent="."]
 script = ExtResource("3_lcq1x")

@@ -1,7 +1,7 @@
 extends Skill
 
 
-@export var grantEffect:EffectCounter
+@export var grantEffect: PackedScene
 @export var grantAmount := 0
 
 @export var phaseOut := false
@@ -48,17 +48,3 @@ func activate(targets:Array) -> bool:
 		
 	return success
 	
-
-
-func createText() -> String:
-	var text := ""
-	
-	#### TEXT: ADD AN EFFECT COUNTER
-	if grantEffect:
-		var effect:CardEffect = grantEffect.instantiate()
-		var effectName:String = effect.getEffectName()
-		text += "Add %d %s to target" % [grantAmount, effectName]
-	
-	
-	
-	return text

@@ -6,7 +6,7 @@ extends Node2D
 var myCard: Card = null
 var isEnemy := false
 
-@onready var actions:
+@onready var triggers:
 	get:
 		return get_children()
 
@@ -24,6 +24,8 @@ func setup(card:Card):
 	
 	for action in get_children():
 		action.setup(myCard)
+
+
 		
 func awakenTriggers():
 	for trigger in get_children():
@@ -40,10 +42,11 @@ func putTriggersToSleep():
 func createActionText() -> Array:
 	var actionTexts := []
 	
-	for action in actions:
-		if action is CardAction:
-			#var act:CardAction = action
-			actionTexts.append(action.createActionText())
+	for trigger in triggers:
+		if trigger is Trigger:
+			actionTexts.append_array(trigger.createActionText())
+		else:
+			assert(1==2, "Does this non-Trigger node belong here?")
 		
 	return actionTexts
 
@@ -96,19 +99,10 @@ func setInitialTarget(target:Card):
 
 ##############################################################
 
-#func handleArrival() -> bool:
-#	for trigger in get_children():
-#		if cardAction.handleArrival():
-#			return true
-#	return false
-
 
 func handleRitual() -> bool:
 	var success := false
 	
-#	for cardAction:CardAction in get_children():
-#		if await cardAction.activate([]):
-#			success = true
 	for child in get_children():
 		if child is OnCastTrigger:
 			if await child.execute([]):
@@ -130,27 +124,6 @@ func handleCast() -> bool:
 	if success:
 		SignalBus.cast.emit()
 	return success
-
-
-#func handleBattleArt() -> bool:
-#	for cardAction in get_children():
-#		if cardAction.handleBattleArt():
-#			return true
-#	return false
-
-
-#func handleOnTurn() -> bool:
-#	for cardAction in get_children():
-#		if cardAction.handleOnTurn():
-#			return true
-#	return false
-
-
-
-######################################################
-#func handlePayoff(target:Card) -> bool:
-	#return activateNode(payoffNode, target)
-
 
 
 ##################################################
@@ -178,18 +151,3 @@ func findEmptySlotWhat() -> CardSlot:
 		return null
 	else:
 		return slots[0]
-
-
-
-func getEffectToGrant() -> Node:
-	
-	if effectToGrant:
-		return effectToGrant
-	
-	else:
-	
-		var effects:Array = $EffectToGrant.get_children()
-		
-		if effects.is_empty():
-			return null
-		return effects[0]
