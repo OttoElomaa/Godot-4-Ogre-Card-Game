@@ -523,6 +523,7 @@ func getCombatDamageToTarget(target:Card):
 	if effects.isPhased:
 		combatDamage += 1
 	
+	#### END OF TARGETLESS DAMAGE CALCULATION
 	if not target:
 		return combatDamage
 	
@@ -531,6 +532,7 @@ func getCombatDamageToTarget(target:Card):
 		combatDamage += 1
 	
 	return combatDamage
+
 
 
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
@@ -701,6 +703,8 @@ func updateCardLabels():
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
+	statesDestroy()
+	
 	if mySlot:
 		mySlot.isAvailable = true
 		
@@ -710,7 +714,8 @@ func destroyAndAnimate(toAnimate:bool):
 
 
 func playCardDestroyedAnimation():
-	$BodyAnimations.play("DestroyBoardCard")
+	if not checkAlive():
+		$BodyAnimations.play("DestroyBoardCard")
 	
 	
 #### CALLED IN ANIMATION "DestroyBoardCard"

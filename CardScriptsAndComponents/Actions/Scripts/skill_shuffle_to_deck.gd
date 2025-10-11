@@ -1,5 +1,6 @@
 extends Skill
 
+
 ## 1 argument. 0: the card to shuffle
 func activate(targets):
 	for card:Card in targets:
