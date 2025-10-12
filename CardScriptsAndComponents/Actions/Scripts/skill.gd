@@ -1,3 +1,4 @@
+@icon("res://Art/icons/16x16/script_start.png")
 extends Node2D
 class_name Skill
 

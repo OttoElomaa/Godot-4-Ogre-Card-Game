@@ -6,13 +6,6 @@ extends Skill
 
 @export var phaseOut := false
 
-@export var alterOwnerHealth := 0
-@export var alterOwnerMana := 0
-@export var alterOpponentHealth := 0
-@export var alterOpponentMana := 0
-
-
-
 
 func activate(targets:Array) -> bool:
 	var success := false
@@ -29,22 +22,34 @@ func activate(targets:Array) -> bool:
 
 		#### ADD AN AMOUNT OF EFFECT COUNTERS
 		if grantEffect:
-			for i in range(grantAmount):
-				
-				var effect:CardEffect = grantEffect.instantiate() #### INSTANTIATE
-				add_child(effect) #### TEMPORARY BEFORE REPARENTING
-				
-				target.addEffect(effect)
-				target.updateCardVisuals()
-				success = true
-
-
+			success = handleGrantEffect(target)
+			
 		#### PHASE OUT
 		if phaseOut:
-			target.effects.togglePhased(true)
-			target.statesPassive()
-			success = true
+			success = handlePhaseOut(target)
 	
 		
 	return success
 	
+	
+
+func handleGrantEffect(target:Card) -> bool:
+	var success := false
+	for i in range(grantAmount):
+				
+		var effect:CardEffect = grantEffect.instantiate() #### INSTANTIATE
+		add_child(effect) #### TEMPORARY BEFORE REPARENTING
+		
+		target.addEffect(effect)
+		target.updateCardVisuals()
+		success = true
+	
+	return success
+
+
+
+func handlePhaseOut(target:Card) -> bool:
+	target.effects.togglePhased(true)
+	target.statesPassive()
+	var success = true
+	return success

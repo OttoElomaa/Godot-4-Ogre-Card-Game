@@ -62,7 +62,7 @@ var tempDamage := 0
 var tempHealth := 0
 
 var keywords = []
-var counters = []
+#var counters = []
 
 var effectText := ""
 
@@ -123,15 +123,19 @@ var isPhased: bool:
 ##########################################################
 # EFFECT COUNTER STUFF
 
+#### GET ALL EFFECTS -> USED BY hasEffect() AND OTHER STUFF
 func getEffects():
 	var counters = []
-	for i in $Effects/Buff/Nodes.get_children():
-		counters.append(i)
-	for i in $Effects/Debuff/Nodes.get_children():
-		counters.append(i)
+	for e:EffectCounter in $Effects/Buff/Nodes.get_children():
+		counters.append(e)
+	for e:EffectCounter in $Effects/Debuff/Nodes.get_children():
+		counters.append(e)
+	return counters
 
+
+#### GET EFFECTS, SEE IF ID MATCHES
 func hasEffect(id:String):
-	getEffects()
+	var counters = getEffects()
 	for i in counters:
 		if i.id == id:
 			return true
