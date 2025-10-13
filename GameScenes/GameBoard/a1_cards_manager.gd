@@ -305,7 +305,10 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
 		MyTools.moveCardTweening(c, originalPos, c.position)
-		c.reparent($EnemyBoard)
+		if c.is_inside_tree():
+			c.reparent($EnemyBoard)
+		else:
+			$EnemyBoard.add_child(c)
 		
 		c.isEnemyCard = true
 		battleSystem.enemyMana -= c.manaCost
@@ -313,8 +316,10 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	#### PLAYER CARD. REPARENT AND TAKE MANA COST
 	else:
 		c.position = slot.position
-		c.reparent($PlayerBoard)
-		
+		if c.is_inside_tree():
+			c.reparent($PlayerBoard)
+		else:
+			$PlayerBoard.add_child(c)
 		c.isEnemyCard = false
 		battleSystem.playerMana -= c.manaCost
 	
@@ -566,7 +571,10 @@ func moveToHand(card:Card, isEnemy:bool):
 	if isEnemy:
 		handNode = $EnemyHand
 	
-	card.reparent(handNode)
+	if card.is_inside_tree():
+		card.reparent(handNode)
+	else:
+		handNode.add_child(card)
 	card.position = Vector2.ZERO
 	card.handleEnterGraveyard()
 	

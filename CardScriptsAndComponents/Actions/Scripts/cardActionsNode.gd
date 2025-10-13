@@ -123,6 +123,7 @@ func handleCast() -> bool:
 
 	if success:
 		SignalBus.cast.emit()
+		myCard.restAndAnimate(true)
 	return success
 
 

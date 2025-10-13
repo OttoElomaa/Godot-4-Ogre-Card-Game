@@ -138,9 +138,16 @@ func hasEffect(id:String):
 	var counters = getEffects()
 	for i in counters:
 		if i.id == id:
+			print(i.name)
 			return true
 	return false
 
+func getEffect(id:String) -> CardEffect:
+	var counters = getEffects()
+	for i in counters:
+		if i.id == id:
+			return i
+	return null
 
 ##############################################################
 
@@ -171,7 +178,8 @@ var healColor:
 func _ready() -> void:
 	
 	setup(null)
-	
+	SignalBus.connect("attacked", handleCombatActions)
+	SignalBus.connect("defended", handleCombatActions)
 	
 	#subTypes = subTypeStr.split(" ")
 	#damage = startingDamage
@@ -187,8 +195,6 @@ func setup(gameBoard: GameBoard):
 		cardsManager = gameBoard.cardsManager
 		cardsManager.connectCardSignal(self)
 	
-#	SignalBus.connect("attacked", handleCombatActions)
-#	SignalBus.connect("defended", handleCombatActions)
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
@@ -511,6 +517,8 @@ func takeCombatDamage(card:Card) -> int:
 		damageTaken = tempHealth
 
 	tempHealth -= damageTaken
+	
+		
 	updateCardVisuals()
 	
 	return damageTaken
@@ -531,7 +539,7 @@ func getCombatDamageToTarget(target:Card):
 	
 	#### TARGET'S EFFECTS
 	if target.hasEffect('Doom'):
-		combatDamage += 1
+		combatDamage += target.getEffect('Doom').counter
 	
 	return combatDamage
 

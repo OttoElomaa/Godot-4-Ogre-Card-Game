@@ -22,9 +22,15 @@ func addEffect(appliedEffect: EffectCounter):
 	
 	match e.effectType:
 		e.effectTypes.BUFF:
-			e.reparent($Buff/Nodes)
+			if has_similar(buffs, e):
+				has_similar(buffs, e).increment()
+			else:
+				e.reparent($Buff/Nodes)
 		e.effectTypes.DEBUFF:
-			e.reparent($Debuff/Nodes)
+			if has_similar(buffs, e):
+				has_similar(buffs, e).increment()
+			else:
+				e.reparent($Buff/Nodes)
 	
 	e.toggleIcon(false)
 	
@@ -40,6 +46,11 @@ func addEffect(appliedEffect: EffectCounter):
 func updateEffectInfo():
 	pass
 
+func has_similar(array:Array, effect:EffectCounter) -> EffectCounter:
+	for i:EffectCounter in array:
+		if i.id == effect.id:
+			return i
+	return null
 
 func updateEffectVisuals():
 	var card:Card = get_parent()
@@ -50,9 +61,11 @@ func updateEffectVisuals():
 	
 	for sprite in buffSprites.get_children():
 		sprite.texture = null
+		sprite.get_child(0).hide() ##Hides the label w/ amount
 	for sprite in debuffSprites.get_children():
 		sprite.texture = null	
-		
+		sprite.get_child(0).hide()
+	
 	if buffsCount > 0:
 		print("%d Buffs found on %s" % [buffs.size(), card.cardName])
 	if debuffsCount > 0:
@@ -66,6 +79,9 @@ func updateEffectVisuals():
 	for e:CardEffect in buffs:
 		sprite = buffSprites.get_children()[counter]
 		sprite.texture = e.icon
+		if e is EffectCounter:
+			sprite.get_child(0).show()
+			sprite.get_child(0).text = str(e.counter)
 		counter += 1
 		
 	counter = 0

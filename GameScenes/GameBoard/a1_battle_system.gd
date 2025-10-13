@@ -275,7 +275,7 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
 		var success = resolveAttack(c, target)
-			#c.restAndAnimate(false)
+		c.restAndAnimate(false)
 	
 	#### NO BLOCKERS, ATTACK PLAYER
 	elif blockers.is_empty():
