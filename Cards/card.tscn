@@ -351,11 +351,18 @@ texture = ExtResource("6_lcq1x")
 visible = false
 texture = ExtResource("5_jsedn")
 
-[node name="Art" type="Sprite2D" parent="Frontside"]
+[node name="Art" type="TextureRect" parent="Frontside"]
 texture_filter = 6
-position = Vector2(0, -73)
+custom_minimum_size = Vector2(1000, 800)
+offset_left = -100.0
+offset_top = -154.0
+offset_right = 900.0
+offset_bottom = 646.0
 scale = Vector2(0.2, 0.2)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource("11_8geja")
+expand_mode = 2
 
 [node name="ManaCost" type="Node2D" parent="Frontside"]
 position = Vector2(0, -174)

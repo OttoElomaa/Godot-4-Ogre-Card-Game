@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://culp08236f2n1"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_1l73v"]
+[ext_resource type="Texture2D" uid="uid://bdagker27ovcp" path="res://Art/CardArt/GreenDefiance/card-art-creature-vineman-elder.jpg" id="2_kxm04"]
+
+[node name="Ch-VinemanElder" instance=ExtResource("1_1l73v")]
+cardName = "Vineman Elder"
+cardType = 2
+subTypeStr = "Vineman Champion"
+flavorText = "\"O Nephilim! I have lived to see the late Sun.\""
+startingHealth = 9
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_kxm04")

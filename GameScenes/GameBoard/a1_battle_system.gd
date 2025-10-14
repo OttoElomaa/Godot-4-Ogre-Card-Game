@@ -76,7 +76,7 @@ func _on_end_turn_button_pressed() -> void:
 func passTurn():
 	GameInfo.enemy_turn = !GameInfo.enemy_turn
 	print(GameInfo.enemy_turn)
-	SignalBus.turnStarted.emit()
+	SignalBus.turnStarted.emit([])
 	if GameInfo.enemy_turn:
 		cardsManager.startEnemyTurn()
 		$EnemyStartCombatTimer.start()
@@ -137,7 +137,7 @@ func timeoutEndEnemyTurn() -> void:
 	
 	main.addLogMessage("Player turn!", Color.html("524634"))
 	GameInfo.enemy_turn = !GameInfo.enemy_turn
-	SignalBus.turnStarted.emit()
+	SignalBus.turnStarted.emit([])
 
 
 
@@ -175,15 +175,22 @@ func togglePlayerAttackMode(enable:bool, card:Card):
 func updateDamageCalculator(targetC:Card):
 	var damageToDealLabel := $CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer/TargetDmgTakenLabel
 	var damageToTakeLabel := $CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer/AttackerDmgTakenLabel
+	var extraDamage2Defender: int = 0
+	var extraDamage2Attacker: int = 0
 	
 	var attacker:Card = currentAttackingCard
 	if not attacker:
 		return
 	if targetC == attacker:
 		return
-		
-	damageToDealLabel.text = "%d" % attacker.getCombatDamageToTarget(targetC)
-	damageToTakeLabel.text = "%d" % targetC.getCombatDamageToTarget(attacker)
+	
+	if targetC.getEffect('Doom'):
+		extraDamage2Defender += targetC.getEffect('Doom').counter
+	if attacker.getEffect('Doom'):
+		extraDamage2Attacker += attacker.getEffect('Doom').counter
+	
+	damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(targetC, false) + extraDamage2Defender) 
+	damageToTakeLabel.text = "%d" % (targetC.getCombatDamageToTarget(attacker, true) + extraDamage2Attacker)
 	
 
 
@@ -250,7 +257,7 @@ func handlePlayerAttackEnemy():
 		
 	#### ATTACK THE ENEMY
 	var c = currentAttackingCard
-	var combatDamage = c.getCombatDamageToTarget(null)
+	var combatDamage = c.getCombatDamageToTarget(null, true)
 	c.handleAttackingPortrait()
 	enemyHealth -= combatDamage
 	
@@ -279,12 +286,16 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	
 	#### NO BLOCKERS, ATTACK PLAYER
 	elif blockers.is_empty():
-		var damageToPlayer = c.getCombatDamageToTarget(null)
-		playerHealth -= damageToPlayer
-		handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
-		c.handleAttackingPortrait()
-	
-	
+		if not main.playerChampion():
+			var damageToPlayer = c.getCombatDamageToTarget(null, true)
+			playerHealth -= damageToPlayer
+			handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
+			c.handleAttackingPortrait()
+		else:
+			var damageToChampion = c.getCombatDamageToTarget(main.playerChampion(), true)
+			main.playerChampion().takeCombatDamage(c)
+			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
+			c.handleAttackingPortrait()
 
 func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEnemy:bool):
 	var attackString := ""
@@ -297,9 +308,9 @@ func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEne
 	attackString = "%s attacks %s!" % [attackCard.cardName, targetName]	
 	main.addLogMessage(attackString, Color.WHITE)
 	
-	var amountString := "%s takes %d damage" % [targetName, damageAmount]
-	var color:Color = Color.DARK_SALMON
-	main.addLogMessage(amountString, color)
+#	var amountString := "%s takes %d damage" % [targetName, damageAmount]
+#	var color:Color = Color.DARK_SALMON
+#	main.addLogMessage(amountString, color)
 
 func handlePlayerAttackCreature(target:Card):
 	
@@ -353,14 +364,14 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
 	main.addLogMessage(attackerString, Color.WHITE)	
 	
-	var targetHurtString = "%s takes %d damage" % [targetCard.cardName, damageTakenByTarget]
+	var targetHurtString = "%s %s " % [MyTools.getFactionString(targetCard), targetCard.cardName]
 	if targetDestroyed:
-		targetHurtString += " - Destroyed"
+		targetHurtString += "was destroyed"
 	main.addLogMessage(targetHurtString, targetCard.hurtColor)	
 	
-	var attackerHurtString = "%s takes %d damage" % [attackCard.cardName, damageTakenByAttacker]
+	var attackerHurtString = "%s %s " % [MyTools.getFactionString(attackCard), attackCard.cardName]
 	if attackerDestroyed:
-		attackerHurtString += " - Destroyed"
+		attackerHurtString += "was destroyed"
 	main.addLogMessage(attackerHurtString, attackCard.hurtColor)	
 	
 	

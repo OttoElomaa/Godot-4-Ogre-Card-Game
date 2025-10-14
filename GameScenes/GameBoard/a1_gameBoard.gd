@@ -25,6 +25,10 @@ var actionMenuCard: Card = null
 
 func _ready() -> void:
 	
+	#### SETUP SIGNALS
+	##################################
+
+	
 	#### SETUP BOARD
 	##################################
 	States.statesPlay()
@@ -116,7 +120,6 @@ func toggleCardActionMenu(enable:bool, card:Card):
 		$ActionMenuCanvas.hide()
 
 
-
 func changeMana(amount:int, isEnemy:bool):
 	
 	if isEnemy:
@@ -131,8 +134,6 @@ func changeHealth(amount:int, isEnemy:bool):
 		$BattleSystem.enemyHealth += amount
 	else:
 		$BattleSystem.playerHealth += amount
-
-
 
 ########################################################################################
 
@@ -194,6 +195,7 @@ func updateResourceLabelsHelp():
 	updateResourceLabels(battleSystem.playerHealth, 
 	battleSystem.playerMana, battleSystem.enemyHealth, battleSystem.enemyMana)
 
+
 func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
 	$Portraits/PlayerHealthLabel.text = "%d" % playerHealth
 	$Portraits/PlayerManaLabel.text = "%d" % playerMana
@@ -201,6 +203,17 @@ func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
 	$Portraits/EnemyManaLabel.text = "%d" % enemyMana
 
 
+func playerChampion() -> Card:
+	if $CardsManager/PlayerChampSlot.get_children().size() > 0:
+		return $CardsManager/PlayerChampSlot.get_child(0)
+	else:
+		return null
+
+func enemyChampion() -> Card:
+	if $CardsManager/EnemyChampSlot.get_children().size() > 0:
+		return $CardsManager/EnemyChampSlot.get_child(0)
+	else:
+		return null
 
 func showPlayerTurnPopup():
 	$Visuals/YourTurnPopup/PopupAnimation.play("ShowPopup")

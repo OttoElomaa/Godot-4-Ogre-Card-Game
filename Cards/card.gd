@@ -20,12 +20,16 @@ enum CardStates {
 }
 
 enum CardTypes {
-	CREATURE, RITUAL,
+	CREATURE, RITUAL, CHAMPION
 }
 
 var isRitual:
 	get:
 		return cardType == CardTypes.RITUAL
+
+var isChampion:
+	get:
+		return cardType == CardTypes.CHAMPION
 
 ###### NODE REFERENCES
 
@@ -251,6 +255,8 @@ func createEffectText():
 			cardTypeStr = "Creature"
 		CardTypes.RITUAL:
 			cardTypeStr = "Ritual"
+		CardTypes.CHAMPION:
+			cardTypeStr = "Champion"
 	
 	
 	subTypeStr = ""
@@ -288,6 +294,8 @@ func createEffectText():
 ########################################################		
 func basicSetup():
 	if isRitual:
+		statesInert()
+	if cardType == CardTypes.CHAMPION:
 		statesInert()
 	
 	#### SETUP FOR ALL ACTION SCRIPTS
@@ -502,8 +510,8 @@ func checkAlive():
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
 func takeCombatDamage(card:Card) -> int:
 	
-	var selfCombatDamage:int = getCombatDamageToTarget(card)
-	var enemyCombatDamage:int = card.getCombatDamageToTarget(self)
+	var selfCombatDamage:int = getCombatDamageToTarget(card, true)
+	var enemyCombatDamage:int = card.getCombatDamageToTarget(self, false)
 	
 	#### CHECK DESTROYED STATUS 1: DUELIST
 	if hasKeyword('Duelist'):
@@ -513,19 +521,33 @@ func takeCombatDamage(card:Card) -> int:
 	
 	#### DEAL DAMAGE
 	var damageTaken = enemyCombatDamage
-	if tempHealth < damageTaken:
-		damageTaken = tempHealth
-
-	tempHealth -= damageTaken
-	
-		
+	takeDamage(damageTaken)
+				
 	updateCardVisuals()
 	
 	return damageTaken
+
+
+func takeDamage(amount:int):
+	var damageModifiers:int = 0
 	
+	##GENERAL DAMAGE EFFECTS
+	if getEffect('Doom'):
+		damageModifiers += getEffect('Doom').counter
+		
+	##DAMAGE IS DEALT
+	var damageTaken = amount + damageModifiers
+	tempHealth -= damageTaken
+	var amountString := "%s %s takes %d damage" % [MyTools.getFactionString(self), self.cardName, amount]
+	var color:Color = Color.DARK_SALMON
+	MyTools.createCombatLogPrintout(amountString, color)
+
+	##CHECK IF DESTROYED
+	if tempHealth <= 0:
+		destroyAndAnimate(true)
 
 
-func getCombatDamageToTarget(target:Card):
+func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	#### BASELINE
 	var combatDamage = tempDamage
 	
@@ -538,8 +560,8 @@ func getCombatDamageToTarget(target:Card):
 		return combatDamage
 	
 	#### TARGET'S EFFECTS
-	if target.hasEffect('Doom'):
-		combatDamage += target.getEffect('Doom').counter
+	if target.hasEffect('Rage') and not isAttacker:
+		combatDamage += target.getEffect('Rage').counter
 	
 	return combatDamage
 
@@ -604,7 +626,10 @@ func toggleManaCostIndicator(enable:bool):
 		$Frontside/ManaCost.show()
 		$Frontside/ManaCost/ManaCostLabel.text = "%d" % manaCost
 	else:
-		$Frontside/ManaCost.hide()
+		if not isChampion:
+			$Frontside/ManaCost.hide()
+		else:
+			$Frontside/ManaCost/ManaCostLabel.text = "%d" % tempHealth
 
 
 func toggleActionStateIndicator(enable:bool):
@@ -687,6 +712,8 @@ func updateCardLabels():
 	#### LABELS
 	$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % tempHealth
 	$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % tempDamage
+	if isChampion:
+		$Frontside/ManaCost/ManaCostLabel.text = "%d" % tempHealth
 	
 	#### GLOW
 	var glow := $Frontside/Resources/Glow

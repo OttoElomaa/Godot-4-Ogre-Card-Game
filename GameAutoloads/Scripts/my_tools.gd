@@ -169,7 +169,8 @@ func getDeckCards(isEnemy:bool):
 	else:
 		return cardsManager.getPlayerDeckCards()
 
-func getFactionString(card:Card):
+## Accepts Card. Returns 'Foe' if card is an enemy card, 'Allied' if card is an ally card. 
+func getFactionString(card:Card) -> String:
 	if card.isEnemyCard:
 		return 'Foe'
 	else: 

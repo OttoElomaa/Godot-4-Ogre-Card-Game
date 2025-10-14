@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=31 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/GameBoard/a1_gameBoard.gd" id="1_rf3o6"]
 [ext_resource type="PackedScene" uid="uid://cdcyvjftrdsxg" path="res://GameScenes/audio.tscn" id="2_s281r"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="17_7ll03"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="18_tppv1"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
+[ext_resource type="Script" uid="uid://cq33h3kryyrto" path="res://CardScriptsAndComponents/Scripts/table_card_slot.gd" id="20_7yxuf"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="21_ufaws"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]
@@ -132,9 +133,16 @@ BGM = ExtResource("3_rf3o6")
 
 [node name="Portraits" type="Node2D" parent="."]
 
-[node name="PlayerSprite" type="Sprite2D" parent="Portraits"]
-position = Vector2(1125.5, 1251)
+[node name="PlayerSprite" type="TextureRect" parent="Portraits"]
+custom_minimum_size = Vector2(210, 260)
+offset_left = 1018.0
+offset_top = 1119.0
+offset_right = 1228.0
+offset_bottom = 1379.0
+pivot_offset = Vector2(113.5, 152)
 texture = ExtResource("3_1phva")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="EnemySprite" type="Sprite2D" parent="Portraits"]
 position = Vector2(1189.5, 135)
@@ -431,6 +439,16 @@ position = Vector2(1556, 1038)
 position = Vector2(1786, 1038)
 
 [node name="Cards" type="Node2D" parent="CardsManager/Discard/Enemy"]
+
+[node name="PlayerChampSlot" type="Node2D" parent="CardsManager"]
+position = Vector2(1126, 1242)
+script = ExtResource("20_7yxuf")
+metadata/_custom_type_script = "uid://cq33h3kryyrto"
+
+[node name="EnemyChampSlot" type="Node2D" parent="CardsManager"]
+position = Vector2(1208, 147)
+script = ExtResource("20_7yxuf")
+metadata/_custom_type_script = "uid://cq33h3kryyrto"
 
 [node name="PlayerSlots" type="Node2D" parent="."]
 z_index = -1

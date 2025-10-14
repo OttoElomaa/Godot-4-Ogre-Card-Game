@@ -61,10 +61,7 @@ func createText() -> String:
 
 #### DEAL TEMPORARY DAMAGE TO A CARD
 func handleInflict(target:Card, amount:int):
-	target.tempHealth -= amount
-	
-	if target.tempHealth <= 0:
-		target.destroyAndAnimate(true)
+	target.takeDamage(amount)
 		
 
 

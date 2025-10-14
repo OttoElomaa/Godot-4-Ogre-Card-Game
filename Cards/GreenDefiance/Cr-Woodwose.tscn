@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://rmnwpdla01k4"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_c5v68"]
+[ext_resource type="PackedScene" uid="uid://jyrj2f2h71w" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnTrigger.tscn" id="2_o47dh"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_t4qyw"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="4_877ti"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_gtvc7"]
+[ext_resource type="PackedScene" uid="uid://bjvo1v4qvl7v2" path="res://CardScriptsAndComponents/EffectCounters/EffectRage.tscn" id="6_1ywc3"]
+[ext_resource type="Texture2D" uid="uid://0yg51dfmlxt7" path="res://Art/CardArt/GreenDefiance/Woodwose.png" id="7_neonv"]
+
+[node name="Cr-Woodwose" instance=ExtResource("1_c5v68")]
+cardName = "Woodwose"
+subTypeStr = "Woodwose Warrior"
+manaCost = 3
+startingDamage = 3
+startingHealth = 2
+
+[node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("2_o47dh")]
+
+[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" node_paths=PackedStringArray("targetingComponent") instance=ExtResource("3_t4qyw")]
+targetingComponent = NodePath("TargetSelf")
+customActionText = "On turn, gain 1 Rage."
+
+[node name="TargetSelf" parent="Actions/OnAlliedTurnTrigger/CardAction" index="0" instance=ExtResource("4_877ti")]
+
+[node name="SkillEffectCounters" parent="Actions/OnAlliedTurnTrigger/CardAction" index="1" instance=ExtResource("5_gtvc7")]
+grantEffect = ExtResource("6_1ywc3")
+grantAmount = 1
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("7_neonv")
