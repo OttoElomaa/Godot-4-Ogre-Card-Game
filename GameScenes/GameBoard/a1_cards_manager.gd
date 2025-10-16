@@ -235,9 +235,9 @@ func startDraggingCardOrAttack():
 			currentDraggedCard = null
 			battleSystem.handlePlayerRitual(card)
 		
-		elif card.cardType == card.CardTypes.CHAMPION:
-			currentDraggedCard = null
-			handlePlaceChampionInSlot(card)
+		#elif card.cardType == card.CardTypes.CHAMPION:
+			#currentDraggedCard = null
+			#handlePlaceChampionInSlot(card)
 	
 	#### SLOTTED CARDS WILL ATTACK INSTEAD
 	else:
@@ -293,44 +293,7 @@ func handleFinishDraggingCard() -> Node:
 	updateHandCardsVisuals()
 	return null
 
-func handlePlaceChampionInSlot(c:Card):
-	c.cardsManager = self
-	var mySlot: Node2D = null
-	
-	if not c.isEnemyCard:
-		c.mySlot = $PlayerChampSlot
-		battleSystem.playerMana -= c.manaCost
-	else:
-		c.mySlot = $EnemyChampSlot
-		battleSystem.enemyMana -= c.manaCost
-	
-	var originalPos = c.global_position
-	c.global_position = c.mySlot.global_position
-#	MyTools.moveCardTweening(c, originalPos, c.global_position)
-	
-	if c.is_inside_tree():
-		c.reparent(mySlot)
-	else:
-		c.add_child(mySlot)
-	updateHandCardsVisuals()
 
-	##############################################
-	#### VISUAL STUFF
-	c.scale = Vector2.ONE
-	c.toggleFrontSide(true)
-	
-	#### SET ACTION STATE AND TRAVEL STATE	
-	c.toggleTraveling(true)
-	
-	#### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
-	c.setInitialActionState()
-	
-	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
-	c.handleArrival()
-
-	battleSystem.updateResourceLabels()
-	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
-	return true
 	
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
@@ -364,6 +327,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 		c.isEnemyCard = false
 		battleSystem.playerMana -= c.manaCost
 	
+
 	##############################################
 	#### VISUAL STUFF
 	c.scale = Vector2.ONE
@@ -375,13 +339,67 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	#### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
 	c.setInitialActionState()
 	
-	
 	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
 	c.handleArrival()
-
+	
 	battleSystem.updateResourceLabels()
 	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
+
+
+	#placePermanentInSlotTwo(c)
 	return true
+
+
+
+
+#func handlePlaceChampionInSlot(c:Card):
+	#c.cardsManager = self
+	#var mySlot: Node2D = null
+	#
+	#if not c.isEnemyCard:
+		#c.mySlot = $PlayerChampSlot
+		#battleSystem.playerMana -= c.manaCost
+	#else:
+		#c.mySlot = $EnemyChampSlot
+		#battleSystem.enemyMana -= c.manaCost
+	#
+	#var originalPos = c.global_position
+	#c.global_position = c.mySlot.global_position
+##	MyTools.moveCardTweening(c, originalPos, c.global_position)
+	#
+	#if c.is_inside_tree():
+		#c.reparent(mySlot)
+	#else:
+		#c.add_child(mySlot)
+	#updateHandCardsVisuals()
+#
+#
+#
+	#placePermanentInSlotTwo(c)
+	#return true
+
+
+#func placePermanentInSlotTwo(c:Card):
+	#
+	#
+	###############################################
+	##### VISUAL STUFF
+	#c.scale = Vector2.ONE
+	#c.toggleFrontSide(true)
+	#
+	##### SET ACTION STATE AND TRAVEL STATE	
+	#c.toggleTraveling(true)
+	#
+	##### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
+	#c.setInitialActionState()
+	#
+	##### SETUP AND ACTIVATE ARRIVAL TRIGGERS
+	#c.handleArrival()
+	#
+	#battleSystem.updateResourceLabels()
+	#main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
+	
+
 
 
 #### INITIATE A HOVER CHECK

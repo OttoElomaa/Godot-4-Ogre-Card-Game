@@ -5,7 +5,6 @@ extends Skill
 @export var drawCards := 0
 
 @export var summonScene: PackedScene = null
-@export_multiline var summonString := "Summon a thing"
 
 
 
@@ -42,6 +41,6 @@ func createText() -> String:
 	
 	#### ADD SUMMON
 	elif summonScene:
-		text = summonString
+		text = "Summon some stuff idk"
 	
 	return text

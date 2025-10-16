@@ -15,7 +15,7 @@ var myCard: Card = null
 var isEnemy := false
 var hasCast := false
 
-@export var targetingComponent: TargetingComponent
+@onready var targetingComponent: TargetingComponent
 
 #@export var localSituation := LocalSituations.NONE
 #@export var globalSituation := GlobalSituations.NONE

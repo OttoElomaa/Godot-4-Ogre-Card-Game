@@ -73,7 +73,7 @@ var effectText := ""
 
 ######################################### CARD ACTION STATE
 #### RESTING = Can't take card actions this turn, such as attack or cast.
-#### RESTING IS TRIGGERED by attacking, or casting --> Unless "Haste/Vigilant" kind of effects
+#### RESTING IS TRIGGERED by attacking, or casting --> Unless "Haste/Vanguard" kind of effects
 #### TRAVELING IS TRIGGERED by entering. It's summoning sickness
 var actionState: CardActionStates = CardActionStates.ACTIVE
 var isTraveling := false

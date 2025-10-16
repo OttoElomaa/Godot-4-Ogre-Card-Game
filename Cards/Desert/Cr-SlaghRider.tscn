@@ -22,6 +22,7 @@ customActionText = "Cast: Bolster Ally +2/0"
 bolsterDamage = 2
 
 [node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_5jlh2")]
+manualTargetGroup = 1
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_4vpam")
