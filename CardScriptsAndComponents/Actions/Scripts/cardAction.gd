@@ -78,16 +78,7 @@ func activate(args) -> bool:
 	else:
 		var targets = []
 		success = activateSkillAfterTargeting(targets)
-			#return false
-	
-	#### HANDLE AUTOMATIC TARGETING AND ACTIVATE CARD ABILITY	
-#	else:
-#		var targets:Array = getTargets()
-#		success = activateSkillAfterTargeting(targets)
-	
-
-	
-		
+			
 	return success
 
 

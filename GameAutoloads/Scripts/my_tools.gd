@@ -56,10 +56,11 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 		var slot = slots[0]
 		
 		handlePlaceCardInSlot(card, slot)
-		#changeMana(card.manaCost, isEnemy)
+		changeMana(card.manaCost, isEnemy)
 		return true
 		
 	return false
+
 
 
 func shuffleToDeck(card:Card, isEnemy:bool):
