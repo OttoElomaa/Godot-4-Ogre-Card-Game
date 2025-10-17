@@ -22,16 +22,16 @@ func addEffect(appliedEffect: EffectCounter):
 	
 	match e.effectType:
 		e.effectTypes.BUFF:
-			var foundEffect:CardEffect = has_similar(buffs, e)
-			if foundEffect:
-				foundEffect.increment()
+#			var foundEffect:CardEffect = 
+			if has_similar(buffs, e):
+				has_similar(buffs, e).increment()
 			else:
 				e.reparent($Buff/Nodes)
 				
 		e.effectTypes.DEBUFF:
-			var foundEffect:CardEffect = has_similar(debuffs, e)
-			if foundEffect:
-				foundEffect.increment()
+#			var foundEffect:CardEffect = has_similar(debuffs, e)
+			if has_similar(buffs, e):
+				has_similar(buffs, e).increment()
 			else:
 				e.reparent($Buff/Nodes)
 	

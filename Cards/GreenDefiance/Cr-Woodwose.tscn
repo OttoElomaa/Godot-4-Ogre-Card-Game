@@ -17,8 +17,7 @@ startingHealth = 2
 
 [node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("2_o47dh")]
 
-[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" node_paths=PackedStringArray("targetingComponent") instance=ExtResource("3_t4qyw")]
-targetingComponent = NodePath("TargetSelf")
+[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" instance=ExtResource("3_t4qyw")]
 customActionText = "On turn, gain 1 Rage."
 
 [node name="TargetSelf" parent="Actions/OnAlliedTurnTrigger/CardAction" index="0" instance=ExtResource("4_877ti")]

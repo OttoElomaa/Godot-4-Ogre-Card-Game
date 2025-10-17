@@ -508,10 +508,10 @@ func checkAlive():
 ####  COMBAT STUFF  #####################
 
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
-func takeCombatDamage(card:Card) -> int:
+func takeCombatDamage(card:Card, isAttacker: bool) -> int:
 	
-	var selfCombatDamage:int = getCombatDamageToTarget(card, true)
-	var enemyCombatDamage:int = card.getCombatDamageToTarget(self, false)
+	var selfCombatDamage:int = getCombatDamageToTarget(card, !isAttacker)
+	var enemyCombatDamage:int = card.getCombatDamageToTarget(self, isAttacker)
 	
 	#### CHECK DESTROYED STATUS 1: DUELIST
 	if hasKeyword('Duelist'):
@@ -560,8 +560,8 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 		return combatDamage
 	
 	#### TARGET'S EFFECTS
-	if target.hasEffect('Rage') and not isAttacker:
-		combatDamage += target.getEffect('Rage').counter
+	if hasEffect('Rage') and isAttacker:
+		combatDamage += getEffect('Rage').counter
 	
 	return combatDamage
 

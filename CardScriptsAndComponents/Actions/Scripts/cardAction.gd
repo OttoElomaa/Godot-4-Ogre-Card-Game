@@ -15,7 +15,7 @@ var myCard: Card = null
 var isEnemy := false
 var hasCast := false
 
-@onready var targetingComponent: TargetingComponent
+var targetingComponent: TargetingComponent
 
 #@export var localSituation := LocalSituations.NONE
 #@export var globalSituation := GlobalSituations.NONE
@@ -35,6 +35,8 @@ func setup(card:Card):
 	for component in get_children():
 		if component.has_method("setup"):
 			component.setup(self, myCard)
+		if component is TargetingComponent:
+			targetingComponent = component
 	
 
 

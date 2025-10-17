@@ -18,8 +18,7 @@ startingHealth = 2
 
 [node name="OnSelfArrivalTrigger" parent="Actions" index="0" instance=ExtResource("2_hhsm2")]
 
-[node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" node_paths=PackedStringArray("targetingComponent") instance=ExtResource("3_q156q")]
-targetingComponent = NodePath("TargetAllAllies")
+[node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" instance=ExtResource("3_q156q")]
 customActionText = "Arrival: Bolster Allied Scouts 1/1"
 
 [node name="SkillAlterHealth" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("4_bokjc")]

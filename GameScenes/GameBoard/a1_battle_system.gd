@@ -189,8 +189,8 @@ func updateDamageCalculator(targetC:Card):
 	if attacker.getEffect('Doom'):
 		extraDamage2Attacker += attacker.getEffect('Doom').counter
 	
-	damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(targetC, false) + extraDamage2Defender) 
-	damageToTakeLabel.text = "%d" % (targetC.getCombatDamageToTarget(attacker, true) + extraDamage2Attacker)
+	damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(attacker, true) + extraDamage2Defender) 
+	damageToTakeLabel.text = "%d" % (targetC.getCombatDamageToTarget(targetC, false) + extraDamage2Attacker)
 	
 
 
@@ -293,7 +293,7 @@ func handleEnemyAttackPlayer(attackCard: Card):
 			c.handleAttackingPortrait()
 		else:
 			var damageToChampion = c.getCombatDamageToTarget(main.playerChampion(), true)
-			main.playerChampion().takeCombatDamage(c)
+			main.playerChampion().takeCombatDamage(c, true)
 			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
 			c.handleAttackingPortrait()
 
@@ -344,8 +344,8 @@ func handlePlayerAttackCreature(target:Card):
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard)
-	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard)
+	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, true)
+	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, false)
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
 #	attackCard.handleCombatActions(true, targetCard)
