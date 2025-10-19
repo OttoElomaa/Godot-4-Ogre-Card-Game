@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dijgfy3o21b0w" path="res://Art/CardArt/Desert/card-art-creature-ruk-thrall.jpg" id="2_ld7th"]
 [ext_resource type="PackedScene" uid="uid://biap5dhvp08qo" path="res://CardScriptsAndComponents/Triggers/BattleArtTrigger.tscn" id="2_w4frd"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_ieay7"]
-[ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/TargetEnemy.tscn" id="4_bf25j"]
+[ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/CombatTargeting.tscn" id="4_bf25j"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="5_5q5n6"]
 
 [node name="Card-Cr-Pikeman" instance=ExtResource("1_nno3t")]

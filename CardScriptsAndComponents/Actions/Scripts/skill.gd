@@ -5,7 +5,7 @@ class_name Skill
 @export var skillName := ""
 
 
-var action:Node = null
+var action:CardAction = null
 var myCard:Card = null
 
 
@@ -18,17 +18,17 @@ func setup(action:Node, card:Card):
 func activate(targets:Array) -> bool:
 	return false
 
-#### THIS FUNCTION WILL BE FILLED IN INHERITED SCRIPTS
+#### THIS FUNCTION IS OUTDATED AND SHOULD NOT BE USED
 func createText() -> String:
 	return ""
 
 
 
-func createPrintout(action:Node):
+func createPrintout(action:CardAction):
 	
 	var holderText:String = action.getSituationStr()
 	var lineOne := "%s triggers on %s %s:" % [holderText, MyTools.getFactionString(myCard), action.myCard.cardName]
 	MyTools.createCombatLogPrintout(lineOne, Color.WHITE)
 	
 	var effectText = self.createText()
-	MyTools.createCombatLogPrintout(effectText, Color.STEEL_BLUE)
+	MyTools.createCombatLogPrintout(action.customActionText, Color.STEEL_BLUE)

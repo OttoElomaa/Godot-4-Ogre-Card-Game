@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_hrd7b"]
 [ext_resource type="Texture2D" uid="uid://n1kqgxe3iukd" path="res://Art/CardArt/card-art-creature-blinkbeast.jpg" id="2_o7m1v"]
 [ext_resource type="PackedScene" uid="uid://dxa0yse2tdcgv" path="res://CardScriptsAndComponents/Actions/SkillRestAndTravel.tscn" id="3_qriay"]
-[ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/TargetEnemy.tscn" id="5_e0r5v"]
+[ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/CombatTargeting.tscn" id="5_e0r5v"]
 
 [node name="Card-Cr-Blinkbeast" instance=ExtResource("1_o7m1v")]
 cardName = "Blinkbeast"

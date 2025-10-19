@@ -35,28 +35,6 @@ func activate(targets:Array) -> bool:
 	return success
 	
 
-
-func createText() -> String:
-	if bolsterDamage > 0 or bolsterHealth > 0:
-		var text = "Bolster %d/%d" % [bolsterDamage, bolsterHealth]
-		return text
-	
-		#### ADD INFLICT
-	elif inflictCreature > 0:
-		return "Inflict %d" % inflictCreature
-	elif inflictPlayer > 0:
-		return "Inflict Player %d" % inflictPlayer
-	
-	
-	if corrode > 0:
-		return "Corrode %d" % corrode
-		
-		
-	return ""
-	
-	
-	
-	
 	
 
 #### DEAL TEMPORARY DAMAGE TO A CARD

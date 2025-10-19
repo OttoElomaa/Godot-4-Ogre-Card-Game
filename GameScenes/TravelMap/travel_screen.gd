@@ -11,4 +11,4 @@ func _on_node_entered(node:Map_Node):
 	print('node entered')
 	$AnimationPlayer.play('zoom_in')
 	await $AnimationPlayer.animation_finished
-	SceneSwitcher.switchToNewSceneFromFile('Zone/Zone', self)
+	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/Zone/Zone.tscn")
