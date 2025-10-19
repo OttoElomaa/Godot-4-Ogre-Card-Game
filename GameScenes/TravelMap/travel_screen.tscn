@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://nmvym5570qtn"]
 
-[ext_resource type="Script" uid="uid://d4bphbjg3snvs" path="res://travel_screen.gd" id="1_y1wuq"]
+[ext_resource type="Script" uid="uid://d4bphbjg3snvs" path="res://GameScenes/TravelMap/travel_screen.gd" id="1_y1wuq"]
 [ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/TravelMap/level_select.tscn" id="2_reupg"]
 
 [sub_resource type="Animation" id="Animation_reupg"]
@@ -73,7 +73,7 @@ mouse_target = true
 disable_3d = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(2, 2)
+size = Vector2i(1917, 1079)
 render_target_update_mode = 4
 
 [node name="LevelSelect" parent="MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_reupg")]

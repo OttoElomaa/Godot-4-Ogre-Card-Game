@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://boieos0xdflds"]
+
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="1_awo24"]
+
+[node name="CardAction" type="Node2D"]
+script = ExtResource("1_awo24")
+nodeKeyword = ""

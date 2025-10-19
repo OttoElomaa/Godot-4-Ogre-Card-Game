@@ -7,7 +7,6 @@ var main:GameBoard = null
 var cardsManager:CardsManager = null
 
 @onready var attackLine := $AttackLine
-@onready var castLine := $CastLine
 @onready var damageCalculator := $CanvasLayer/DamageCalculator
 
 var COLLISION_MASK_CARD := 1
@@ -34,6 +33,7 @@ func _ready() -> void:
 	turnCount += 1
 	playerMana = turnCount
 	enemyMana = turnCount
+	GameInfo.enemy_turn = false
 	#updateResourceLabels()
 	
 	togglePlayerAttackMode(false, null)
@@ -53,25 +53,19 @@ func _input(e: InputEvent) -> void:
 			if e.is_pressed():
 				handlePlayerAttack()
 				
-	if States.gameState == States.GameStates.CAST:
-		
-		if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
-			if e.is_pressed():
-				handlePlayerCastTargeting()
+
 
 
 func _physics_process(delta: float) -> void:
 	
-	var mousePos := get_global_mouse_position()
-	
 	if playerAttackOngoing:
+		var mousePos := get_global_mouse_position()
 		attackLine.points[1] = mousePos
 		damageCalculator.position = (mousePos + Vector2(100,-50)) * main.cameraMainBoard.zoom.x
 		
-	if castLineShown:
-		castLine.points[1] = mousePos
 	
 
+#### AUTOMATIC TURN ORDER STUFF, ENEMY TURN STUFF
 #######################################################################
 
 func _on_end_turn_button_pressed() -> void:
@@ -80,13 +74,15 @@ func _on_end_turn_button_pressed() -> void:
 	
 #### PLAY ENEMY TURN, THEN AFTER TIMER WAIT, START PLAYER TURN
 func passTurn():
-	cardsManager.startEnemyTurn()
-	#cardsManager.wakeEnemyCards()
-	$EnemyStartCombatTimer.start()
-	$EndEnemyTurnTimer.start()
-	enemyPlayTurn()
+	GameInfo.enemy_turn = !GameInfo.enemy_turn
+	print(GameInfo.enemy_turn)
+	SignalBus.turnStarted.emit([])
+	if GameInfo.enemy_turn:
+		cardsManager.startEnemyTurn()
+		$EnemyStartCombatTimer.start()
+		$EndEnemyTurnTimer.start()
+		enemyPlayTurn()
 	
-
 
 func enemyPlayTurn():
 	
@@ -116,7 +112,6 @@ func timeoutEnemyStartCombat() -> void:
 				pass
 			elif card.checkCanAct(): #### CAN IT ACT
 				handleEnemyAttackPlayer(card)
-				#currentAttackingCard = card
 
 
 
@@ -127,6 +122,7 @@ func playEnemyCard(card:Card):
 			cardsManager.handlePlaceCardInSlot(card, slot)
 			return true
 	return false
+
 
 
 #### START PLAYER'S TURN AFTER ENEMY ACTION
@@ -140,6 +136,10 @@ func timeoutEndEnemyTurn() -> void:
 	cardsManager.startPlayerTurn()
 	
 	main.addLogMessage("Player turn!", Color.html("524634"))
+	GameInfo.enemy_turn = !GameInfo.enemy_turn
+	SignalBus.turnStarted.emit([])
+
+
 
 #############################################################################
 #### PLAYER ATTACK FUNCTIONS
@@ -175,15 +175,22 @@ func togglePlayerAttackMode(enable:bool, card:Card):
 func updateDamageCalculator(targetC:Card):
 	var damageToDealLabel := $CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer/TargetDmgTakenLabel
 	var damageToTakeLabel := $CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer/AttackerDmgTakenLabel
+	var extraDamage2Defender: int = 0
+	var extraDamage2Attacker: int = 0
 	
 	var attacker:Card = currentAttackingCard
 	if not attacker:
 		return
 	if targetC == attacker:
 		return
-		
-	damageToDealLabel.text = "%d" % attacker.getCombatDamageToTarget(targetC)
-	damageToTakeLabel.text = "%d" % targetC.getCombatDamageToTarget(attacker)
+	
+	if targetC.getEffect('Doom'):
+		extraDamage2Defender += targetC.getEffect('Doom').counter
+	if attacker.getEffect('Doom'):
+		extraDamage2Attacker += attacker.getEffect('Doom').counter
+	
+	damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(attacker, true) + extraDamage2Defender) 
+	damageToTakeLabel.text = "%d" % (targetC.getCombatDamageToTarget(targetC, false) + extraDamage2Attacker)
 	
 
 
@@ -193,26 +200,26 @@ func handlePlayerAttack():
 	#### GET CARDS AT MOUSE POSITION
 	var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if results.size() > 0:
-		var target:Card = getCollidedObject(results[0])
+		var target:Card = MyTools.getCollidedObject(results[0])
 		handlePlayerAttackCreature(target)
 		return
 	
 	#### CHECK IF ENEMY PORTRAIT AT MOUSE POSITION
 	results = MyTools.fetchMouseOverObjects(COLLISION_MASK_ENEMY_PORTRAIT)
 	if results.size() > 0:
-		handlePlayerAttackEnemy()
+		handlePlayerAttackEnemy()  #### ATTACK PORTRAIT
 		updateResourceLabels()
 		return
 
 
 #### FOR PLAYING 'RITUAL' CARDS
-func handlePlayerRitual(c:Card, target:Card) -> bool:
+func handlePlayerRitual(c:Card) -> bool:
 	var success := false
 	if playerMana < c.manaCost: #### CAN'T AFFORD, RETURN
 		return success
 	
 	#### RESOLVE RITUAL IN CARD'S ACTION NODE (Could be TARGETED or TARGETLESS)
-	success = c.actions.handleRitual(target)
+	success = await c.actions.handleRitual()
 	
 	if success:
 		cardsManager.discardCard(c)
@@ -225,58 +232,23 @@ func handlePlayerRitual(c:Card, target:Card) -> bool:
 	
 	return success
 
-
+func attack(attacker:Card, defender:Card):
+	SignalBus.attacked.emit(attacker, defender)
+	SignalBus.defended.emit(attacker, defender)
+	
 
 func cardCastButtonPressed() -> void:
 	
-	currentCastingCard = main.actionMenuCard
 	var c = main.actionMenuCard
+	currentCastingCard = main.actionMenuCard
 	
 	if c:
-		if c.actions.isTargetless(c.actions.castNode):
-			handlePlayerCastActivate(false)
-			
-		else:
-			handlePlayerCastActivate(true)
+		var castAction = c.actions.getCastAction()
+		if castAction:   #### CAST ACTION WAS FOUND
+			c.actions.handleCast()   #### IS IT TARGETED OR TARGETLESS
+		
 	
 	
-	
-func handlePlayerCastActivate(isTargeted:bool):
-	var success := false
-	
-	#### TARGETED CAST -> SHOW Cast Line, SET CAST STATE
-	if isTargeted:
-		castLineShown = true
-		States.gameState = States.GameStates.CAST
-		$CastLine.show()
-		castLine.points[0] = currentCastingCard.position
-			
-	else:
-		success = currentCastingCard.actions.handleCast(null)
-		currentCastingCard = null
-	
-	main.toggleCardActionMenu(false, null)
-	
-
-
-#### FOR CARDS THAT HAVE THE 'CAST' KEYWORD
-func handlePlayerCastTargeting():
-	print("Click - Player trying to cast")
-	
-	#### GET CARDS AT MOUSE POSITION
-	var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
-	prints("Cards found for casting: ", results.size())
-	
-	for r in results:
-		var target:Card = getCollidedObject(r)
-		prints("Cast target card: ", target)
-		if currentCastingCard.actions.handleCast(target):
-			currentCastingCard = null
-			endCastState()
-			return
-
-
-
 func handlePlayerAttackEnemy():
 	#### ENEMY HAS BLOCKERS, CAN'T ATTACK ENEMY
 	if not cardsManager.getEnemyBlockers().is_empty():
@@ -285,14 +257,11 @@ func handlePlayerAttackEnemy():
 		
 	#### ATTACK THE ENEMY
 	var c = currentAttackingCard
-	var combatDamage = c.getCombatDamageToTarget(null)
-	
-	handlePortraitAttackPrintout(c, combatDamage, true)
-	
-	
+	var combatDamage = c.getCombatDamageToTarget(null, true)
+	c.handleAttackingPortrait()
 	enemyHealth -= combatDamage
 	
-	c.handleAttackingPortrait()
+	handlePortraitAttackPrintout(c, combatDamage, true)
 	endAttackState()
 	
 
@@ -313,16 +282,20 @@ func handleEnemyAttackPlayer(attackCard: Card):
 	if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
 		var success = resolveAttack(c, target)
-			#c.restAndAnimate(false)
+		c.restAndAnimate(false)
 	
 	#### NO BLOCKERS, ATTACK PLAYER
 	elif blockers.is_empty():
-		var damageToPlayer = c.getCombatDamageToTarget(null)
-		playerHealth -= damageToPlayer
-		handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
-		c.handleAttackingPortrait()
-	
-	
+		if not main.playerChampion():
+			var damageToPlayer = c.getCombatDamageToTarget(null, true)
+			playerHealth -= damageToPlayer
+			handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
+			c.handleAttackingPortrait()
+		else:
+			var damageToChampion = c.getCombatDamageToTarget(main.playerChampion(), true)
+			main.playerChampion().takeCombatDamage(c, true)
+			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
+			c.handleAttackingPortrait()
 
 func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEnemy:bool):
 	var attackString := ""
@@ -335,9 +308,9 @@ func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEne
 	attackString = "%s attacks %s!" % [attackCard.cardName, targetName]	
 	main.addLogMessage(attackString, Color.WHITE)
 	
-	var amountString := "%s takes %d damage" % [targetName, damageAmount]
-	var color:Color = Color.DARK_SALMON
-	main.addLogMessage(amountString, color)
+#	var amountString := "%s takes %d damage" % [targetName, damageAmount]
+#	var color:Color = Color.DARK_SALMON
+#	main.addLogMessage(amountString, color)
 
 func handlePlayerAttackCreature(target:Card):
 	
@@ -371,12 +344,14 @@ func handlePlayerAttackCreature(target:Card):
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard)
-	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard)
+	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, true)
+	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, false)
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
-	attackCard.handleCombatActions(true, targetCard)
-	targetCard.handleCombatActions(false, attackCard)
+#	attackCard.handleCombatActions(true, targetCard)
+#	targetCard.handleCombatActions(false, attackCard)
+	SignalBus.attacked.emit([attackCard, targetCard])
+	SignalBus.defended.emit([attackCard, targetCard])
 	
 	#### CHECK IF EITHER CARD WAS DESTROYED
 	var attackerDestroyed = attackCard.checkAndHandleCombatDeath(true)
@@ -389,14 +364,14 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
 	main.addLogMessage(attackerString, Color.WHITE)	
 	
-	var targetHurtString = "%s takes %d damage" % [targetCard.cardName, damageTakenByTarget]
+	var targetHurtString = "%s %s " % [MyTools.getFactionString(targetCard), targetCard.cardName]
 	if targetDestroyed:
-		targetHurtString += " - Destroyed"
+		targetHurtString += "was destroyed"
 	main.addLogMessage(targetHurtString, targetCard.hurtColor)	
 	
-	var attackerHurtString = "%s takes %d damage" % [attackCard.cardName, damageTakenByAttacker]
+	var attackerHurtString = "%s %s " % [MyTools.getFactionString(attackCard), attackCard.cardName]
 	if attackerDestroyed:
-		attackerHurtString += " - Destroyed"
+		attackerHurtString += "was destroyed"
 	main.addLogMessage(attackerHurtString, attackCard.hurtColor)	
 	
 	
@@ -409,15 +384,7 @@ func endAttackState():
 	if States.gameState == States.GameStates.ATTACK:
 		togglePlayerAttackMode(false, null)
 	
-func endCastState():
-	castLineShown = false
-	$CastLine.hide()
-	States.gameState = States.GameStates.PLAY	
 
-############################################################################
-
-func getCollidedObject(result):
-	return result.collider.get_parent()
 
 
 

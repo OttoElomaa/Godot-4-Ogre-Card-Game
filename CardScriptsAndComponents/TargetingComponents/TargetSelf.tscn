@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://3l3w5jk5cfnx"]
+
+[ext_resource type="Script" uid="uid://dq02vrexaneno" path="res://CardScriptsAndComponents/Actions/Scripts/self_targeting_component.gd" id="1_r3iu4"]
+
+[node name="TargetSelf" type="Node2D"]
+script = ExtResource("1_r3iu4")
+metadata/_custom_type_script = "uid://dq02vrexaneno"

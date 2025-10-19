@@ -1,3 +1,4 @@
+@icon("res://Art/icons/16x16/autotile.png")
 extends Node2D
 class_name GameBoard
 
@@ -23,6 +24,13 @@ var actionMenuCard: Card = null
 
 
 func _ready() -> void:
+	
+	#### SETUP SIGNALS
+	##################################
+
+	
+	#### SETUP BOARD
+	##################################
 	States.statesPlay()
 	
 	$CardsManager.main = self
@@ -33,21 +41,34 @@ func _ready() -> void:
 	
 	MyTools.gameBoardSetup(self)
 
-
-
+	##################################################
+	#### SETUP PLAYER CARDS
+	
 	var playerDeckCards:Array = GameInfo.playerDeckCards
-	for card in playerDeckCards:
-		$CardsManager/PlayerDeck.add_child(card)
-		
+	
+	for card:Card in playerDeckCards:
+		if card.is_inside_tree():
+			card.reparent($CardsManager/PlayerDeck)
+		else:
+			$CardsManager/PlayerDeck.add_child(card)
+		card.setup(self)
+		card.show()
+	
+	#### SETUP ENEMY CARDS
 	var enemyDeckCards:Array = GameInfo.enemyDeckCards
-	for card in enemyDeckCards:
-		$CardsManager/EnemyDeck.add_child(card)
 	
-	#await(get_tree().create_timer(0.2))
+	for card:Card in enemyDeckCards:
+		if card.is_inside_tree():
+			card.reparent($CardsManager/EnemyDeck)
+		else:
+			$CardsManager/EnemyDeck.add_child(card)
+		card.setup(self)
+		card.show()
 	
-	$CardsManager.setup()
+	$CardsManager.setup(self)
 	
 
+	###################################################
 	#### UI STUFF
 	updateUi($BattleSystem.turnCount)
 	$BattleSystem.updateResourceLabels()
@@ -58,6 +79,7 @@ func _ready() -> void:
 		slot.slotType = CardSlotTypes.PLAYER
 	for slot:CardSlot in $EnemySlots.get_children():
 		slot.slotType = CardSlotTypes.ENEMY
+
 
 
 func _unhandled_input(e: InputEvent) -> void:
@@ -86,7 +108,7 @@ func toggleCardActionMenu(enable:bool, card:Card):
 			
 			#### CAST BUTTON
 			var castButton := $ActionMenuCanvas/CardActionMenu/CastPanel
-			if card.actions.checkHasCast():
+			if card.actions.getCastAction() != null:
 				castButton.show()
 			else:
 				castButton.hide()
@@ -96,7 +118,6 @@ func toggleCardActionMenu(enable:bool, card:Card):
 		if States.gameState == States.GameStates.CARD_ACT_MENU:
 			States.gameState = States.GameStates.PLAY
 		$ActionMenuCanvas.hide()
-
 
 
 func changeMana(amount:int, isEnemy:bool):
@@ -113,8 +134,6 @@ func changeHealth(amount:int, isEnemy:bool):
 		$BattleSystem.enemyHealth += amount
 	else:
 		$BattleSystem.playerHealth += amount
-
-
 
 ########################################################################################
 
@@ -156,11 +175,13 @@ func _on_exit_button_pressed() -> void:
 
 func _on_toggle_defend_button_pressed() -> void:
 	actionMenuCard.switchStates()
+	#toggleCardActionMenu(false, null)
+
+
+func buttonPressedHideCardActionMenu() -> void:
 	toggleCardActionMenu(false, null)
+
 	
-
-
-
 ##########################################################################################
 
 func updateUi(turnCount:int):
@@ -174,6 +195,7 @@ func updateResourceLabelsHelp():
 	updateResourceLabels(battleSystem.playerHealth, 
 	battleSystem.playerMana, battleSystem.enemyHealth, battleSystem.enemyMana)
 
+
 func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
 	$Portraits/PlayerHealthLabel.text = "%d" % playerHealth
 	$Portraits/PlayerManaLabel.text = "%d" % playerMana
@@ -181,6 +203,17 @@ func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
 	$Portraits/EnemyManaLabel.text = "%d" % enemyMana
 
 
+func playerChampion() -> Card:
+	if $CardsManager/PlayerChampSlot.get_children().size() > 0:
+		return $CardsManager/PlayerChampSlot.get_child(0)
+	else:
+		return null
+
+func enemyChampion() -> Card:
+	if $CardsManager/EnemyChampSlot.get_children().size() > 0:
+		return $CardsManager/EnemyChampSlot.get_child(0)
+	else:
+		return null
 
 func showPlayerTurnPopup():
 	$Visuals/YourTurnPopup/PopupAnimation.play("ShowPopup")

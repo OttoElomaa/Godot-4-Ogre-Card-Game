@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnvgrx8n5noeh"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_o7m1v"]
+[ext_resource type="PackedScene" uid="uid://biap5dhvp08qo" path="res://CardScriptsAndComponents/Triggers/BattleArtTrigger.tscn" id="2_6oe4s"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_hrd7b"]
+[ext_resource type="Texture2D" uid="uid://n1kqgxe3iukd" path="res://Art/CardArt/card-art-creature-blinkbeast.jpg" id="2_o7m1v"]
+[ext_resource type="PackedScene" uid="uid://dxa0yse2tdcgv" path="res://CardScriptsAndComponents/Actions/SkillRestAndTravel.tscn" id="3_qriay"]
+[ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/CombatTargeting.tscn" id="5_e0r5v"]
+
+[node name="Card-Cr-Blinkbeast" instance=ExtResource("1_o7m1v")]
+cardName = "Blinkbeast"
+subTypeStr = "Astral Beast"
+flavorText = "A playful astral hunter from beyond Achra."
+manaCost = 1
+startingDamage = 1
+startingHealth = 3
+
+[node name="BattleArtTrigger" parent="Actions" index="0" instance=ExtResource("2_6oe4s")]
+
+[node name="CardAction" parent="Actions/BattleArtTrigger" index="1" instance=ExtResource("2_hrd7b")]
+customActionText = "Battle art: Makes the enemy Rest"
+
+[node name="SkillRestAndTravel" parent="Actions/BattleArtTrigger/CardAction" index="0" instance=ExtResource("3_qriay")]
+rest = true
+
+[node name="BattleArtTargComponent" parent="Actions/BattleArtTrigger/CardAction" index="1" instance=ExtResource("5_e0r5v")]
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_o7m1v")

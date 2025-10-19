@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://qd3ll6tcjlep"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_hhsm2"]
+[ext_resource type="PackedScene" uid="uid://hgfd7t0eywau" path="res://CardScriptsAndComponents/Triggers/OnSelfArrivalTrigger.tscn" id="2_hhsm2"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_q156q"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="4_bokjc"]
+[ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="5_d68ha"]
+[ext_resource type="PackedScene" uid="uid://b50qou0nvjrrv" path="res://CardScriptsAndComponents/Conditionals/IfSubtype.tscn" id="6_lq8tf"]
+[ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/Desert/card-art-creature-tugarTrainer.jpg" id="7_klw2k"]
+
+[node name="Card-Cr-Outrider" instance=ExtResource("1_hhsm2")]
+cardName = "Outrider"
+subTypeStr = "Salkhi Scout"
+flavorText = "As wind carries grains of sand through the desert, so too Outriders carry omens and news."
+manaCost = 2
+startingDamage = 2
+startingHealth = 2
+
+[node name="OnSelfArrivalTrigger" parent="Actions" index="0" instance=ExtResource("2_hhsm2")]
+
+[node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" instance=ExtResource("3_q156q")]
+customActionText = "Arrival: Bolster Allied Scouts 1/1"
+
+[node name="SkillAlterHealth" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("4_bokjc")]
+bolsterDamage = 1
+bolsterHealth = 1
+
+[node name="TargetAllAllies" parent="Actions/OnSelfArrivalTrigger/CardAction" index="1" instance=ExtResource("5_d68ha")]
+
+[node name="IfSubtype" parent="Actions/OnSelfArrivalTrigger/CardAction/TargetAllAllies" index="1" instance=ExtResource("6_lq8tf")]
+subtype = "Scout"
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("7_klw2k")

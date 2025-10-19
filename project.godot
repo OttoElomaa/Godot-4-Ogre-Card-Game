@@ -13,22 +13,21 @@ config_version=5
 config/name="Cards of Achra"
 run/main_scene="uid://dhgg2oefy2y6e"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://Art/icon.svg"
+config/windows_native_icon="res://CoA.ico"
 
 [autoload]
 
 States="*res://GameAutoloads/States.tscn"
 MyTools="*res://GameAutoloads/MyTools.tscn"
-CardActions="*res://GameAutoloads/CardActions.tscn"
 GameInfo="*res://GameAutoloads/GameInfo.tscn"
 SceneSwitcher="*res://GameAutoloads/SceneSwitcher.tscn"
-Cheat="*res://cheat_menu.tscn"
+Cheat="*res://GameScenes/cheat_menu.tscn"
+SignalBus="*res://GameAutoloads/SignalBus.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 
 [global_group]
 

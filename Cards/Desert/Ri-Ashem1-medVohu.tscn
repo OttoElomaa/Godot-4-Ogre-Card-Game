@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuv0oahpdcxew"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_l4n6e"]
+[ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="2_jgnib"]
+[ext_resource type="Texture2D" uid="uid://bjqdhj2rq7hrj" path="res://Art/CardArt/Desert/card-art-ritual-ashem-medVohu.jpg" id="2_l4n6e"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_try66"]
+[ext_resource type="PackedScene" uid="uid://14fl88rpfs16" path="res://CardScriptsAndComponents/Actions/SkillDeckActions.tscn" id="3_try66"]
+
+[node name="Card-Ri-medVohu" instance=ExtResource("1_l4n6e")]
+cardName = "Med Vohu"
+cardType = 1
+manaCost = 3
+
+[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_jgnib")]
+
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("2_try66")]
+customActionText = "Ritual: Draw 2"
+
+[node name="SkillDeckActions" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("3_try66")]
+drawCards = 2
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_l4n6e")

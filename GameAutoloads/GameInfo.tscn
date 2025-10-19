@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bm7ccdg7ahl6n"]
 
-[ext_resource type="Script" uid="uid://cidev08o1bxfd" path="res://GameAutoloads/game_info.gd" id="1_e76oq"]
+[ext_resource type="Script" uid="uid://cidev08o1bxfd" path="res://GameAutoloads/Scripts/game_info.gd" id="1_e76oq"]
 [ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/Desert/card-art-creature-tugarTrainer.jpg" id="2_o8fn3"]
 
 [node name="GameInfo" type="Node2D"]

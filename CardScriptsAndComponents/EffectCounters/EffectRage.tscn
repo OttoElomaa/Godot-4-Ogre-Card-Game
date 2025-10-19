@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjvo1v4qvl7v2"]
+
+[ext_resource type="PackedScene" uid="uid://ca73vscnr1a8" path="res://CardScriptsAndComponents/EffectCounters/EffectCounter.tscn" id="1_pf5i8"]
+[ext_resource type="Texture2D" uid="uid://dph2nsi3hc1ax" path="res://Art/CardComponents/card-effect-counter-texture-hunt.png" id="2_utv22"]
+
+[node name="EffectRage" instance=ExtResource("1_pf5i8")]
+effectType = 1
+max_counter = 99
+id = "Rage"
+description = "Buff. For each stack, increases damage dealt when attacking by 1."
+
+[node name="Icon" parent="." index="0"]
+texture = ExtResource("2_utv22")

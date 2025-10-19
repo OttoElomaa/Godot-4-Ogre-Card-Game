@@ -1,3 +1,4 @@
+@icon("res://Art/icons/16x16/character.png")
 extends Node2D
 class_name Card
 
@@ -11,15 +12,24 @@ signal hoverOff
 #### DESTROYED STATUS when the card is beaten in combat or otherwise destroyed
 #### INERT REFERS to SPELLS and other cards that can't attack or cast
 enum CardActionStates {
-	ACTIVE, PASSIVE, DESTROYED, INERT, HAND
+	ACTIVE, PASSIVE, DISCARD, INERT, HAND, DECK
 }
+
+enum CardStates {
+	DECK, HAND, BOARD, GRAVEYARD
+}
+
 enum CardTypes {
-	CREATURE, RITUAL,
+	CREATURE, RITUAL, CHAMPION
 }
 
 var isRitual:
 	get:
 		return cardType == CardTypes.RITUAL
+
+var isChampion:
+	get:
+		return cardType == CardTypes.CHAMPION
 
 ###### NODE REFERENCES
 
@@ -29,11 +39,14 @@ var isRitual:
 @onready var effects := $Effects
 @onready var keywordHandler := $KeywordHandler
 
+@onready var effectTextLabel := $Frontside/EffectText
 
 ####################################### EXPORT VARIABLES
 @export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE
 @export var subTypeStr := "Card Sub-Type"
+
+
 var subTypes := []
 var cardTypeStr := ""
 
@@ -53,14 +66,14 @@ var tempDamage := 0
 var tempHealth := 0
 
 var keywords = []
-var counters = []
+#var counters = []
 
 var effectText := ""
 
 
 ######################################### CARD ACTION STATE
 #### RESTING = Can't take card actions this turn, such as attack or cast.
-#### RESTING IS TRIGGERED by attacking, or casting --> Unless "Haste/Vigilant" kind of effects
+#### RESTING IS TRIGGERED by attacking, or casting --> Unless "Haste/Vanguard" kind of effects
 #### TRAVELING IS TRIGGERED by entering. It's summoning sickness
 var actionState: CardActionStates = CardActionStates.ACTIVE
 var isTraveling := false
@@ -114,20 +127,31 @@ var isPhased: bool:
 ##########################################################
 # EFFECT COUNTER STUFF
 
+#### GET ALL EFFECTS -> USED BY hasEffect() AND OTHER STUFF
 func getEffects():
 	var counters = []
-	for i in $Effects/Buff/Nodes.get_children():
-		counters.append(i)
-	for i in $Effects/Debuff/Nodes.get_children():
-		counters.append(i)
+	for e:EffectCounter in $Effects/Buff/Nodes.get_children():
+		counters.append(e)
+	for e:EffectCounter in $Effects/Debuff/Nodes.get_children():
+		counters.append(e)
+	return counters
 
+
+#### GET EFFECTS, SEE IF ID MATCHES
 func hasEffect(id:String):
-	getEffects()
+	var counters = getEffects()
 	for i in counters:
 		if i.id == id:
+			print(i.name)
 			return true
 	return false
 
+func getEffect(id:String) -> CardEffect:
+	var counters = getEffects()
+	for i in counters:
+		if i.id == id:
+			return i
+	return null
 
 ##############################################################
 
@@ -156,21 +180,30 @@ var healColor:
 
 
 func _ready() -> void:
-	cardsManager = get_tree().get_first_node_in_group("cardManager")
-	cardsManager.connectCardSignal(self)
+	
+	setup(null)
+	SignalBus.connect("attacked", handleCombatActions)
+	SignalBus.connect("defended", handleCombatActions)
 	
 	#subTypes = subTypeStr.split(" ")
 	#damage = startingDamage
 	#health = startingHealth
 	
 	
+
+
+
+func setup(gameBoard: GameBoard):
+	
+	if gameBoard:
+		cardsManager = gameBoard.cardsManager
+		cardsManager.connectCardSignal(self)
+	
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
 		myOffset = get_parent().position
 	
-	
-	#$Frontside/Art.scale = Vector2(0.2, 0.2)
 	
 	#### SETUP FOR ALL ACTION SCRIPTS
 	#### SHARE INFO ON, IS CARD ENEMY
@@ -189,13 +222,11 @@ func _ready() -> void:
 		$Frontside/Resources.hide()
 		$Frontside/ActionState.hide()
 	
-	
-	
-	
-	#createEffectText()
+	createEffectText()
 	#$Frontside/CardName/Label.text = cardName
 	
 	$Frontside/CardName.hide()
+	$Frontside/CardNameBestiary.hide()
 	
 	handleTurnStartReset()
 
@@ -219,12 +250,13 @@ func updateCardNameAndBasicInfo(isCreature:bool):
 	
 func createEffectText():
 	
-	
 	match cardType:
 		CardTypes.CREATURE:
 			cardTypeStr = "Creature"
 		CardTypes.RITUAL:
 			cardTypeStr = "Ritual"
+		CardTypes.CHAMPION:
+			cardTypeStr = "Champion"
 	
 	
 	subTypeStr = ""
@@ -234,8 +266,6 @@ func createEffectText():
 	subTypeStr = subTypeStr.rstrip(" ")
 	
 	#################################### EFFECT TEXT
-	var l = $Frontside/EffectsLabel
-	#var text = ""
 	var effectTexts := []
 	
 	#### CHECK FROM KEYWORDS HANDLER
@@ -245,9 +275,7 @@ func createEffectText():
 	
 	
 	#### CHECK ACTION NODES (CAST, BATTLE ART, and RITUAL NODES etc.)
-	var actionHolderTexts := []
-	actionHolderTexts = actions.createActionText()
-	
+	var actionHolderTexts:Array = actions.createActionText()
 	effectTexts.append_array(actionHolderTexts)
 	
 	effectText = ""
@@ -258,13 +286,16 @@ func createEffectText():
 	
 	effectText = effectText.rstrip(",. ")
 	effectText = effectText.lstrip(",. ")
-	#effectText = text
-	l.text = effectText
+	
+	effectTextLabel.text = effectText
+	return effectText
 	
 	
 ########################################################		
 func basicSetup():
 	if isRitual:
+		statesInert()
+	if cardType == CardTypes.CHAMPION:
 		statesInert()
 	
 	#### SETUP FOR ALL ACTION SCRIPTS
@@ -278,18 +309,19 @@ func handleTurnStartReset():
 	tempHealth = health
 	
 
-func handleTurnStartActions():
-	#### TRIGGER ON TURN START EFFECTS
-	if States.isStatePlay():
-		actions.handleOnTurn(null) #### TRIGGER ON-TURN NODE
+#func handleTurnStartActions():
+#	#### TRIGGER ON TURN START EFFECTS
+#	if States.isStatePlay():
+#		actions.handleOnTurn() #### TRIGGER ON-TURN NODE
 
 
 
 #### HANDLE CARD BEING PLAYED ON BOARD
 func handleArrival():
 	basicSetup()
-	actions.handleArrival(null)  #### TRIGGER ARRIVAL NODE
-	actions.handleOnTurn(null)   #### TRIGGER ON-TURN NODE
+	actions.awakenTriggers()#	actions.handleArrival()  #### TRIGGER ARRIVAL NODE
+	SignalBus.arrival.emit([self])
+#	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
 	
 	#if hasShadow:
 		#countersNode.togglePhased(true)
@@ -412,11 +444,14 @@ func statesInert():
 	
 
 func statesDestroy():
-	actionState = CardActionStates.DESTROYED	
-
+	actionState = CardActionStates.DISCARD	
 
 func statesHand():
 	actionState = CardActionStates.HAND
+
+func statesDeck():
+	actionState = CardActionStates.DECK
+
 
 
 func toggleTraveling(enabled:bool):
@@ -466,17 +501,17 @@ func checkTraveling() -> bool:
 
 
 func checkAlive():
-	return !(actionState == CardActionStates.DESTROYED)
+	return !(actionState == CardActionStates.DISCARD)
 
 		
 ########################################################
 ####  COMBAT STUFF  #####################
 
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
-func takeCombatDamage(card:Card) -> int:
+func takeCombatDamage(card:Card, isAttacker: bool) -> int:
 	
-	var selfCombatDamage:int = getCombatDamageToTarget(card)
-	var enemyCombatDamage:int = card.getCombatDamageToTarget(self)
+	var selfCombatDamage:int = getCombatDamageToTarget(card, !isAttacker)
+	var enemyCombatDamage:int = card.getCombatDamageToTarget(self, isAttacker)
 	
 	#### CHECK DESTROYED STATUS 1: DUELIST
 	if hasKeyword('Duelist'):
@@ -486,17 +521,33 @@ func takeCombatDamage(card:Card) -> int:
 	
 	#### DEAL DAMAGE
 	var damageTaken = enemyCombatDamage
-	if tempHealth < damageTaken:
-		damageTaken = tempHealth
-
-	tempHealth -= damageTaken
+	takeDamage(damageTaken)
+				
 	updateCardVisuals()
 	
 	return damageTaken
+
+
+func takeDamage(amount:int):
+	var damageModifiers:int = 0
 	
+	##GENERAL DAMAGE EFFECTS
+	if getEffect('Doom'):
+		damageModifiers += getEffect('Doom').counter
+		
+	##DAMAGE IS DEALT
+	var damageTaken = amount + damageModifiers
+	tempHealth -= damageTaken
+	var amountString := "%s %s takes %d damage" % [MyTools.getFactionString(self), self.cardName, amount]
+	var color:Color = Color.DARK_SALMON
+	MyTools.createCombatLogPrintout(amountString, color)
+
+	##CHECK IF DESTROYED
+	if tempHealth <= 0:
+		destroyAndAnimate(true)
 
 
-func getCombatDamageToTarget(target:Card):
+func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	#### BASELINE
 	var combatDamage = tempDamage
 	
@@ -504,29 +555,32 @@ func getCombatDamageToTarget(target:Card):
 	if effects.isPhased:
 		combatDamage += 1
 	
+	#### END OF TARGETLESS DAMAGE CALCULATION
 	if not target:
 		return combatDamage
 	
 	#### TARGET'S EFFECTS
-	if target.hasEffect('Doom'):
-		combatDamage += 1
+	if hasEffect('Rage') and isAttacker:
+		combatDamage += getEffect('Rage').counter
 	
 	return combatDamage
 
 
 
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
-func handleCombatActions(isAttacking:bool, otherCard:Card):
+func handleCombatActions(args: Array):
+	var isAttacker = null
+	var attacker = args[0]
+	var defender = args[1]
 	
-	if isAttacking:
+	if attacker == self:
+		isAttacker = true
 		playAttackAnimation()
-		#### ATTACKING CANCELS PHASING -> PHASE IN
-		effects.togglePhased(false)
-			
-	actions.handleBattleArt(otherCard)
-	
-	
-		
+	elif defender == self:
+		isAttacker = false
+
+
+
 func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	if tempHealth <= 0:
 		destroyAndAnimate(!isAttacker)
@@ -572,7 +626,10 @@ func toggleManaCostIndicator(enable:bool):
 		$Frontside/ManaCost.show()
 		$Frontside/ManaCost/ManaCostLabel.text = "%d" % manaCost
 	else:
-		$Frontside/ManaCost.hide()
+		if not isChampion:
+			$Frontside/ManaCost.hide()
+		else:
+			$Frontside/ManaCost/ManaCostLabel.text = "%d" % tempHealth
 
 
 func toggleActionStateIndicator(enable:bool):
@@ -600,6 +657,7 @@ func turnOnBestiaryVisuals(mainMenu:Node):
 
 func handleEnterGraveyard():
 	handleTurnStartReset()
+	actions.putTriggersToSleep()
 	wake()
 	
 	toggleManaCostIndicator(true)
@@ -654,6 +712,8 @@ func updateCardLabels():
 	#### LABELS
 	$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % tempHealth
 	$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % tempDamage
+	if isChampion:
+		$Frontside/ManaCost/ManaCostLabel.text = "%d" % tempHealth
 	
 	#### GLOW
 	var glow := $Frontside/Resources/Glow
@@ -680,23 +740,24 @@ func updateCardLabels():
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
-	if not isRitual:
+	statesDestroy()
+	
+	if mySlot:
 		mySlot.isAvailable = true
 		
-	statesDestroy()
 	if toAnimate:
-		animateDestroyCard()
+		playCardDestroyedAnimation()
+	
 
 
-
-func animateDestroyCard():
-	if actionState == CardActionStates.DESTROYED:
+func playCardDestroyedAnimation():
+	if not checkAlive():
 		$BodyAnimations.play("DestroyBoardCard")
 	
 	
 #### CALLED IN ANIMATION "DestroyBoardCard"
 func destroyCardTwo():
-	cardsManager.moveToDiscard(self)
+	cardsManager.moveToDiscard(self, isEnemyCard)
 
 #################################################################################
 

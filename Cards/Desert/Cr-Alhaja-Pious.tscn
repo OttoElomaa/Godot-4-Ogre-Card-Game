@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvshdygyjpncb"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_6in3p"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_6jpba"]
+[ext_resource type="PackedScene" uid="uid://hgfd7t0eywau" path="res://CardScriptsAndComponents/Triggers/OnSelfArrivalTrigger.tscn" id="2_et0df"]
+[ext_resource type="PackedScene" uid="uid://14fl88rpfs16" path="res://CardScriptsAndComponents/Actions/SkillDeckActions.tscn" id="3_et0df"]
+[ext_resource type="Texture2D" uid="uid://b0hp5ejpxal7t" path="res://Art/CardArt/Desert/card-art-creature-alhaja-Pious.jpg" id="4_aqcq5"]
+
+[node name="Card-Cr-PiousAlhaja" instance=ExtResource("1_6in3p")]
+cardName = "Pious Alhaja"
+subTypeStr = "Alhaja Commoner"
+manaCost = 3
+startingDamage = 2
+startingHealth = 2
+
+[node name="OnSelfArrivalTrigger" parent="Actions" index="0" instance=ExtResource("2_et0df")]
+
+[node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" instance=ExtResource("2_6jpba")]
+customActionText = "Arrival: Draw 1"
+
+[node name="SkillDeckActions" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("3_et0df")]
+drawCards = 1
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("4_aqcq5")

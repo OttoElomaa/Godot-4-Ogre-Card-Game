@@ -1,0 +1,154 @@
+@icon("res://Art/icons/16x16/swords.png")
+extends Node2D
+
+
+
+var myCard: Card = null
+var isEnemy := false
+
+@onready var triggers:
+	get:
+		return get_children()
+
+var effectToGrant:Node = null
+
+#### (ATTACK TARGET, TARGET OF PLAYED RITUAL CARD, ETC)
+#### ASSIGNED IN CODE WHEREVER THE ACTION TYPE IS ACTIVATED AND CAN HAVE AN INITIAL TARGET
+var initialTarget: Card = null
+
+
+
+func setup(card:Card):
+	myCard = card
+	isEnemy = card.isEnemyCard
+	
+	for action in get_children():
+		action.setup(myCard)
+
+
+		
+func awakenTriggers():
+	for trigger in get_children():
+		if trigger is Trigger:
+			trigger.wake()
+
+func putTriggersToSleep():
+	for trigger in get_children():
+		if trigger is Trigger:
+			trigger.sleep()
+
+
+
+func createActionText() -> Array:
+	var actionTexts := []
+	
+	for trigger in triggers:
+		if trigger is Trigger:
+			actionTexts.append_array(trigger.createActionText())
+		else:
+			assert(1==2, "Does this non-Trigger node belong here?")
+		
+	return actionTexts
+
+
+
+func activateNode(node:Node, target:Card):
+	var success := false
+	var successfulScript:Node = null
+	
+	for script in node.get_children():
+		if script.has_method("activateTargetless"):
+			success = script.activateTargetless(myCard)
+			successfulScript = script
+			
+		elif target:
+			if script.has_method("activateTargeted"):
+				success = script.activateTargeted(target, myCard)
+				successfulScript = script
+	
+	if success:
+		var holder = successfulScript.get_parent()
+		successfulScript.createPrintout(holder)  #### CREATE COMBAT LOG ENTRY
+		#if not node == payoffNode:
+			#handlePayoff(target)
+	
+	#### UPDATE VISUALS AFTER ACTION
+	MyTools.updateBoardCardsVisuals()
+	return success
+
+
+
+func isTargetless(node:Node) -> bool:
+	for script in node.get_children():
+		if script.has_method("activateTargetless"):
+			return true
+	return false
+
+
+func isTargeted(node:Node) -> bool:
+	for script in node.get_children():
+		if script.has_method("activateTargeted"):
+			return true
+	return false
+
+
+
+func setInitialTarget(target:Card):
+	initialTarget = target
+
+
+##############################################################
+
+
+func handleRitual() -> bool:
+	var success := false
+	
+	for child in get_children():
+		if child is OnCastTrigger:
+			if await child.execute([]):
+				success = true
+
+	if success:
+		SignalBus.ritual.emit()
+	return success
+
+
+func handleCast() -> bool:
+	var success := false
+	
+	for child in get_children():
+		if child is OnCastTrigger:
+			if await child.execute([]):
+				success = true
+
+	if success:
+		SignalBus.cast.emit()
+		myCard.restAndAnimate(true)
+	return success
+
+
+##################################################
+
+func getCastAction() -> Node:
+	if myCard.cardType == myCard.CardTypes.CREATURE:
+		for child in get_children():
+			if child is OnCastTrigger:
+				return child
+	return null
+
+
+func checkIsActionTargeted(cardAction:Node):
+	if cardAction.checkIsActionTargeted():
+		return true
+	return false
+
+
+
+func findEmptySlotWhat() -> CardSlot:
+	
+	var slots:Array = MyTools.findEmptyCardSlots(isEnemy)
+	
+	if slots.is_empty():
+		return null
+	else:
+		return slots[0]

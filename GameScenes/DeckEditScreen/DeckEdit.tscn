@@ -1,0 +1,127 @@
+[gd_scene load_steps=11 format=3 uid="uid://dkclkk5p3fw8b"]
+
+[ext_resource type="Script" uid="uid://dvogoklqfpfpc" path="res://GameScenes/DeckEditScreen/deck_edit.gd" id="1_2aanx"]
+[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="1_kjltk"]
+[ext_resource type="Script" uid="uid://dlhi0eiiqqxh3" path="res://GameScenes/DeckEditScreen/active_deck_container.gd" id="3_2vaow"]
+[ext_resource type="Script" uid="uid://dw7x0akbcnnau" path="res://GameScenes/DeckEditScreen/owned_cards_container.gd" id="4_2vaow"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_wteh1"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="4_xlhhm"]
+[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="5_rwrpj"]
+[ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="6_t6uxs"]
+[ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://PanelStyles/SelectBoxTransparent.tres" id="7_wteh1"]
+[ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="10_fk3a6"]
+
+[node name="DeckEdit" type="Node2D"]
+script = ExtResource("1_2aanx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
+offset_top = 35.0
+offset_right = 388.0
+offset_bottom = 1043.0
+texture = ExtResource("1_kjltk")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("7_wteh1")
+
+[node name="#CardsInDeck" type="Label" parent="CanvasLayer/NinePatchRect/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "0 / 10"
+label_settings = ExtResource("4_xlhhm")
+horizontal_alignment = 1
+
+[node name="ActiveCardsContainer" type="VBoxContainer" parent="CanvasLayer/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_2vaow")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer2"]
+custom_minimum_size = Vector2(1000, 1000)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -530.0
+offset_top = -500.0
+offset_right = 470.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_wteh1")
+metadata/_edit_group_ = true
+
+[node name="Scroll" type="ScrollContainer" parent="CanvasLayer2/Panel"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="OwnedCardsContainer" type="GridContainer" parent="CanvasLayer2/Panel/Scroll"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 8
+script = ExtResource("4_2vaow")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2/Panel"]
+layout_mode = 2
+texture = ExtResource("1_kjltk")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CardInfoPanel" parent="." instance=ExtResource("5_rwrpj")]
+offset_left = 1477.0
+offset_top = 35.0
+offset_right = 1877.0
+offset_bottom = 635.0
+
+[node name="ProceedButton" type="Button" parent="."]
+offset_left = 1473.0
+offset_top = 972.0
+offset_right = 1838.0
+offset_bottom = 1038.0
+theme_override_styles/hover = ExtResource("6_t6uxs")
+theme_override_styles/normal = ExtResource("7_wteh1")
+
+[node name="Label" type="Label" parent="ProceedButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Proceed"
+label_settings = ExtResource("10_fk3a6")
+
+[connection signal="button_up" from="ProceedButton" to="." method="_on_proceed_button_button_up"]

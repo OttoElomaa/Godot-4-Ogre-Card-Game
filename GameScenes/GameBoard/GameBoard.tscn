@@ -1,30 +1,30 @@
 [gd_scene load_steps=31 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/GameBoard/a1_gameBoard.gd" id="1_rf3o6"]
-[ext_resource type="Script" uid="uid://x5hp1ama1l5h" path="res://GameScenes/card_loader.gd" id="2_gftaw"]
 [ext_resource type="PackedScene" uid="uid://cdcyvjftrdsxg" path="res://GameScenes/audio.tscn" id="2_s281r"]
 [ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
 [ext_resource type="AudioStream" uid="uid://cull86x870gae" path="res://Audio/BGM/Cards of Achra OST - Raiders Close In.ogg" id="3_rf3o6"]
 [ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_1qylb"]
 [ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/BoardComponents/game-mana-health-holder-texture-v2.png" id="5_4lnmq"]
-[ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSetHeaderHealth.tres" id="6_r88d6"]
-[ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSetHeaderMana.tres" id="7_vfgb4"]
+[ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSettings/LabelSetHeaderHealth.tres" id="6_r88d6"]
+[ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="7_vfgb4"]
 [ext_resource type="Texture2D" uid="uid://iro7vjuquihg" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-01.png" id="8_mj3e8"]
 [ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-02.png" id="9_nxc8c"]
 [ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="10_223y2"]
 [ext_resource type="Texture2D" uid="uid://yy4b6om5as5s" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-02.png" id="11_0xags"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="12_i42kc"]
-[ext_resource type="LabelSettings" uid="uid://df882tsfd50yb" path="res://Fonts/LabelSettingYellowHeaderFont.tres" id="13_u7g0n"]
+[ext_resource type="LabelSettings" uid="uid://df882tsfd50yb" path="res://Fonts/LabelSettings/LabelSettingYellowHeaderFont.tres" id="13_u7g0n"]
 [ext_resource type="Script" uid="uid://doyn8i1dunq2s" path="res://GameScenes/GameBoard/a1_battle_system.gd" id="14_mv2fm"]
 [ext_resource type="Script" uid="uid://d0w7g3qrh1m43" path="res://GameScenes/GameBoard/a1_cards_manager.gd" id="15_h4god"]
 [ext_resource type="PackedScene" uid="uid://b7sjbfq7abkga" path="res://CardScriptsAndComponents/tableCardSlot.tscn" id="16_8xajj"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="17_7ll03"]
-[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettingSmallFontWhite.tres" id="18_tppv1"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="18_tppv1"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
+[ext_resource type="Script" uid="uid://cq33h3kryyrto" path="res://CardScriptsAndComponents/Scripts/table_card_slot.gd" id="20_7yxuf"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="21_ufaws"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]
-[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -131,14 +131,18 @@ zoom = Vector2(0.76, 0.76)
 [node name="Audio" parent="." instance=ExtResource("2_s281r")]
 BGM = ExtResource("3_rf3o6")
 
-[node name="CardLoader" type="Node" parent="."]
-script = ExtResource("2_gftaw")
-
 [node name="Portraits" type="Node2D" parent="."]
 
-[node name="PlayerSprite" type="Sprite2D" parent="Portraits"]
-position = Vector2(1125.5, 1251)
+[node name="PlayerSprite" type="TextureRect" parent="Portraits"]
+custom_minimum_size = Vector2(210, 260)
+offset_left = 1018.0
+offset_top = 1119.0
+offset_right = 1228.0
+offset_bottom = 1379.0
+pivot_offset = Vector2(113.5, 152)
 texture = ExtResource("3_1phva")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="EnemySprite" type="Sprite2D" parent="Portraits"]
 position = Vector2(1189.5, 135)
@@ -270,11 +274,6 @@ script = ExtResource("14_mv2fm")
 z_index = 10
 points = PackedVector2Array(-287, 209, -492, 528)
 default_color = Color(1, 0.67451, 0.341176, 1)
-
-[node name="CastLine" type="Line2D" parent="BattleSystem"]
-z_index = 10
-points = PackedVector2Array(-403, 174, -578, 465)
-default_color = Color(0.288165, 0.546665, 0.999997, 1)
 
 [node name="EnemyStartCombatTimer" type="Timer" parent="BattleSystem"]
 wait_time = 0.4
@@ -440,6 +439,16 @@ position = Vector2(1556, 1038)
 position = Vector2(1786, 1038)
 
 [node name="Cards" type="Node2D" parent="CardsManager/Discard/Enemy"]
+
+[node name="PlayerChampSlot" type="Node2D" parent="CardsManager"]
+position = Vector2(1126, 1242)
+script = ExtResource("20_7yxuf")
+metadata/_custom_type_script = "uid://cq33h3kryyrto"
+
+[node name="EnemyChampSlot" type="Node2D" parent="CardsManager"]
+position = Vector2(1208, 147)
+script = ExtResource("20_7yxuf")
+metadata/_custom_type_script = "uid://cq33h3kryyrto"
 
 [node name="PlayerSlots" type="Node2D" parent="."]
 z_index = -1
@@ -753,5 +762,7 @@ horizontal_alignment = 1
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel2/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]

@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://dijfx84j10vd5"]
+
+[ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://PanelStyles/SelectBoxTransparent.tres" id="1_0hem1"]
+[ext_resource type="Script" uid="uid://dufv20a668c6e" path="res://GameScenes/DeckEditScreen/card_panel.gd" id="1_5a33h"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="3_3qnth"]
+[ext_resource type="LabelSettings" uid="uid://c1s8rbhy5ftgg" path="res://Fonts/LabelSettings/LabelSettingSmallFontOrange.tres" id="4_lh4jl"]
+
+[node name="CardPanel" type="PanelContainer"]
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_0hem1")
+script = ExtResource("1_5a33h")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CardNameLabel" type="Label" parent="Margin/HBox"]
+texture_filter = 1
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "The Shinparator"
+label_settings = ExtResource("3_3qnth")
+autowrap_mode = 2
+
+[node name="StatsLabel" type="Label" parent="Margin/HBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 6
+text = "99/99"
+label_settings = ExtResource("4_lh4jl")
+
+[node name="ManaCostLabel" type="Label" parent="Margin/HBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 10
+text = "9"
+label_settings = ExtResource("3_3qnth")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,10 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7ebpdx20rjh6"]
 
-[ext_resource type="PackedScene" uid="uid://ca73vscnr1a8" path="res://CardScriptsAndComponents/EffectCounter.tscn" id="1_mtg2c"]
+[ext_resource type="PackedScene" uid="uid://ca73vscnr1a8" path="res://CardScriptsAndComponents/EffectCounters/EffectCounter.tscn" id="1_mtg2c"]
 
 [node name="EffectDoom" instance=ExtResource("1_mtg2c")]
 effectType = 2
 max_counter = 3
-isDoom = true
 id = "Doom"
 description = "Debuff. When damaged, this card takes more damage equal to its Doom."

@@ -3,9 +3,9 @@
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="1_0kdtv"]
 [ext_resource type="Texture2D" uid="uid://bvnmf54c4ye2n" path="res://Art/CardComponents/card-background-texture-V4b-ForInfoPane.jpg" id="2_axiiv"]
 [ext_resource type="Script" uid="uid://cjv7n32vxaee8" path="res://GameScenes/cardInfoPanel.gd" id="2_o0dss"]
-[ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSet-Header-Brown.tres" id="3_o0dss"]
+[ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSettings/LabelSet-Header-Brown.tres" id="3_o0dss"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_ykqoc"]
-[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSetSmallBrownCardText.tres" id="5_f5wib"]
+[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="5_f5wib"]
 
 [node name="CardInfoPanel" type="PanelContainer"]
 custom_minimum_size = Vector2(400, 600)

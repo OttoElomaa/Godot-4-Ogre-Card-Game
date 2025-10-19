@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8h8fv1enpgpb"]
+[gd_scene load_steps=7 format=3 uid="uid://c8h8fv1enpgpb"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m612s"]
-[ext_resource type="PackedScene" uid="uid://b4tndl4w2i3lg" path="res://Cards/GreenDefiance/Cr-SkeletonWarrior.tscn" id="2_f3ejk"]
-[ext_resource type="PackedScene" uid="uid://5bwi4v428dkw" path="res://CardScriptsAndComponents/ActionTargetless.tscn" id="2_jrsq4"]
+[ext_resource type="PackedScene" uid="uid://d0e807arj0ef" path="res://CardScriptsAndComponents/Triggers/ArrivalTrigger.tscn" id="2_id566"]
 [ext_resource type="Texture2D" uid="uid://c8fv2mu03csy" path="res://Art/CardArt/GreenDefiance/card-art-creature-deathknight.jpg" id="2_m612s"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_2la6j"]
+[ext_resource type="PackedScene" uid="uid://14fl88rpfs16" path="res://CardScriptsAndComponents/Actions/SkillDeckActions.tscn" id="4_dwvwn"]
+[ext_resource type="PackedScene" uid="uid://b4tndl4w2i3lg" path="res://Cards/GreenDefiance/Cr-SkeletonWarrior.tscn" id="5_jttgo"]
 
 [node name="Card-Cr-DeathKnight" instance=ExtResource("1_m612s")]
 cardName = "Death Knight"
@@ -12,9 +14,13 @@ manaCost = 4
 startingDamage = 3
 startingHealth = 3
 
-[node name="Effects_Arrival#EffectTargetless" parent="Actions/Arrival" index="0" instance=ExtResource("2_jrsq4")]
-summonScene = ExtResource("2_f3ejk")
-summonString = "Summon a skeleton"
+[node name="ArrivalTrigger" parent="Actions" index="0" instance=ExtResource("2_id566")]
+
+[node name="CardAction" parent="Actions/ArrivalTrigger" index="1" instance=ExtResource("3_2la6j")]
+customActionText = "Arrival: Summon a 1/2 skeleton"
+
+[node name="SkillDeckActions" parent="Actions/ArrivalTrigger/CardAction" index="0" instance=ExtResource("4_dwvwn")]
+summonScene = ExtResource("5_jttgo")
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_m612s")

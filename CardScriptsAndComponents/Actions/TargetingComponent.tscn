@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cktcqllypvgaa"]
+
+[ext_resource type="Script" uid="uid://b3u8lcg0o8ftl" path="res://CardScriptsAndComponents/Actions/Scripts/targeting_component.gd" id="1_pclkx"]
+
+[node name="TargetingComponent" type="Node2D"]
+script = ExtResource("1_pclkx")
+
+[node name="CastLine" type="Line2D" parent="."]
+z_index = 10
+points = PackedVector2Array(-4, 16, -51, 81)
+default_color = Color(0.288165, 0.546665, 0.999997, 1)

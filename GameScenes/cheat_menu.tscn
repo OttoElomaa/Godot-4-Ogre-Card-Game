@@ -1,0 +1,206 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhescek764odo"]
+
+[ext_resource type="Script" uid="uid://bepqe5wwx3b28" path="res://GameScenes/cheat_menu.gd" id="1_23tl8"]
+[ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Fonts/BasicSmallPixelFont.tres" id="2_ahs3t"]
+[ext_resource type="Texture2D" uid="uid://bv6t2gvsftvsp" path="res://Art/BoardComponents/card-slot-empty-texture.png" id="3_k054w"]
+[ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Fonts/monaco/monaco.ttf" id="4_k054w"]
+[ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="4_wg888"]
+[ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://PanelStyles/SelectBoxTransparent.tres" id="5_wg888"]
+
+[node name="CheatMenu" type="Node2D"]
+top_level = true
+z_index = 20
+z_as_relative = false
+script = ExtResource("1_23tl8")
+
+[node name="GameBoard_Cheats" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="TopMenu" type="MarginContainer" parent="GameBoard_Cheats"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_right = -43.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/TopMenu"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="GameBoard_Cheats/TopMenu/HBox"]
+texture_filter = 1
+layout_mode = 2
+text = "Cheats on~"
+label_settings = ExtResource("4_wg888")
+
+[node name="NukeAllCards" type="Button" parent="GameBoard_Cheats/TopMenu/HBox"]
+texture_filter = 1
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k054w")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("5_wg888")
+text = "!! Nuke All Cards !!"
+
+[node name="RightMenu" type="MarginContainer" parent="GameBoard_Cheats"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -215.0
+offset_top = -505.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 200
+
+[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/RightMenu"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="SearchCardsPanel" type="PanelContainer" parent="GameBoard_Cheats/RightMenu/HBox"]
+custom_minimum_size = Vector2(235, 350)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_ahs3t")
+
+[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel"]
+layout_mode = 2
+texture = ExtResource("3_k054w")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Search by name..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SearchCardName" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k054w")
+theme_override_styles/normal = ExtResource("5_wg888")
+placeholder_text = "Card Name"
+
+[node name="CardFace" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+expand_mode = 1
+
+[node name="Label" type="Label" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Add card..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToFoe2" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+layout_mode = 2
+text = "To Foe >"
+
+[node name="ToYou2" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+layout_mode = 2
+text = "To You >"
+
+[node name="ToPlayerHand" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+layout_mode = 2
+text = "To Your Hand >"
+
+[node name="ToPlayerGraveyard" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+layout_mode = 2
+text = "To Your Graveyard >"
+
+[node name="CardEditor" type="PanelContainer" parent="GameBoard_Cheats/RightMenu/HBox"]
+custom_minimum_size = Vector2(235, 350)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_ahs3t")
+
+[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor"]
+layout_mode = 2
+texture = ExtResource("3_k054w")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor"]
+layout_mode = 2
+
+[node name="CardName" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k054w")
+theme_override_styles/normal = ExtResource("5_wg888")
+text = "Card Name"
+placeholder_text = "Card Name"
+
+[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Attack" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/HBox"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("5_wg888")
+text = "0"
+
+[node name="HP" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/HBox"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("5_wg888")
+text = "0"
+
+[node name="NewKeyword" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("5_wg888")
+placeholder_text = "New Keyword
+"
+
+[node name="Keywords" type="RichTextLabel" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "No Keywords"
+
+[node name="AddKeyword" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+layout_mode = 2
+text = "Add Keyword"
+
+[node name="Label" type="Label" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Add card..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToFoe" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+layout_mode = 2
+text = "To Foe >"
+
+[node name="ToYou" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+layout_mode = 2
+text = "To You >"
+
+[connection signal="pressed" from="GameBoard_Cheats/TopMenu/HBox/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
+[connection signal="text_changed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/SearchCardName" to="." method="_on_search_card_name_text_changed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToFoe2" to="." method="_on_to_foe_2_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToYou2" to="." method="_on_to_you_2_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToPlayerHand" to="." method="_on_to_player_hand_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToPlayerGraveyard" to="." method="_on_to_player_graveyard_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/AddKeyword" to="." method="_on_add_keyword_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/ToFoe" to="." method="_on_to_foe_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/ToYou" to="." method="_on_to_you_pressed"]

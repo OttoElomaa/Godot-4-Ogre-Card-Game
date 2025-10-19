@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://clfufaehxtbbd"]
-
-[ext_resource type="Script" uid="uid://c6gg6oln5gg8h" path="res://GameAutoloads/card_actions.gd" id="1_iufk4"]
-
-[node name="CardActions" type="Node2D"]
-script = ExtResource("1_iufk4")

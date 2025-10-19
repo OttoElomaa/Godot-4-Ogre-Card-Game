@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://bews6x4fcf3mr"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_07d1u"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_e1l0y"]
+[ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="2_ka4br"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="3_h3v4s"]
+[ext_resource type="Texture2D" uid="uid://c3bglrj7apvdw" path="res://Art/CardArt/Desert/card-art-ritual-blast.jpg" id="3_k3mux"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="4_jfp56"]
+
+[node name="Card-Sp-Blast" instance=ExtResource("1_07d1u")]
+cardName = "Blast"
+cardType = 1
+
+[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_ka4br")]
+
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" node_paths=PackedStringArray("targetingComponent") instance=ExtResource("2_e1l0y")]
+targetingComponent = NodePath("ManualTargeting")
+
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_jfp56")]
+manualTargetGroup = 3
+
+[node name="SkillAlterHealth" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("3_h3v4s")]
+inflictCreature = 2
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("3_k3mux")
