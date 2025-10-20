@@ -8,15 +8,13 @@ class_name Trigger
 var conditions = []
 
 var myCard: Card = null
-var disabled = true
-
-signal completed
 
 func _ready():
-	SignalBus.connect(triggered_when, execute)
+	if not SignalBus.is_connected(triggered_when, execute):
+		SignalBus.connect(triggered_when, execute)
 	
 
-func setup(card):
+func setup(card: Card):
 	myCard = card
 	for child in get_children():
 		if child is ConditionalComponent:
@@ -35,17 +33,9 @@ func createActionText():
 	return actionTexts
 			
 
-
-
-func wake():
-	disabled = false
-
-func sleep():
-	disabled = true
-
 func execute(args):
 	var success = false
-	if not disabled or myCard.cardType == myCard.CardTypes.RITUAL:
+	if myCard.cardState == myCard.CardStates.BOARD or myCard.cardType == myCard.CardTypes.RITUAL:
 		if not args:
 			args = []
 		print(name, ' from ', myCard.cardName, ' is executing')

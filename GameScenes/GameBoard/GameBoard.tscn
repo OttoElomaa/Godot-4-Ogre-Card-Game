@@ -499,6 +499,7 @@ position = Vector2(1582, 472)
 position = Vector2(1812, 472)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
 visible = false
@@ -564,6 +565,8 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 
 [node name="BattleLogPane" type="MarginContainer" parent="CanvasLayer"]
+z_index = 10
+z_as_relative = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -578,6 +581,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 script = ExtResource("25_gfnca")
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/BattleLogPane"]
 custom_minimum_size = Vector2(450, 200)

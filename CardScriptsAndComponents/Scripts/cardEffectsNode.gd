@@ -12,6 +12,8 @@ var debuffs:Array:
 	get:
 		return $Debuff/Nodes.get_children()
 
+@onready var myCard = get_parent()
+
 @onready var buffSprites := $Buff/Sprites
 @onready var debuffSprites := $Debuff/Sprites
 
@@ -19,21 +21,25 @@ var debuffs:Array:
 
 func addEffect(appliedEffect: EffectCounter):
 	var e = appliedEffect
+	e.setup(myCard)
 	
 	match e.effectType:
 		e.effectTypes.BUFF:
 #			var foundEffect:CardEffect = 
 			if has_similar(buffs, e):
 				has_similar(buffs, e).increment()
+				e.queue_free()
 			else:
 				e.reparent($Buff/Nodes)
 				
 		e.effectTypes.DEBUFF:
 #			var foundEffect:CardEffect = has_similar(debuffs, e)
-			if has_similar(buffs, e):
-				has_similar(buffs, e).increment()
+			if has_similar(debuffs, e):
+				has_similar(debuffs, e).increment()
+				e.queue_free()
 			else:
-				e.reparent($Buff/Nodes)
+				e.reparent($Debuff/Nodes)
+				
 	
 	e.toggleIcon(false)
 	
@@ -91,6 +97,9 @@ func updateEffectVisuals():
 	for e:CardEffect in debuffs:
 		sprite = debuffSprites.get_children()[counter]
 		sprite.texture = e.icon
+		if e is EffectCounter:
+			sprite.get_child(0).show()
+			sprite.get_child(0).text = str(e.counter)
 		counter += 1
 	
 		

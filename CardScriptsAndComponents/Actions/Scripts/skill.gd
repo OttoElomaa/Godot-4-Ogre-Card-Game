@@ -22,7 +22,15 @@ func activate(targets:Array) -> bool:
 func createText() -> String:
 	return ""
 
+func get_scaling(args: Dictionary) -> int:
+	var bonus_value = 0
+	if get_children().size() > 0:
+		for child:ScalingComponent in get_children():
+			bonus_value += child.get_scaling(args)
+	return bonus_value
 
+func isScaled() -> bool:
+	return get_children().size() > 0
 
 func createPrintout(action:CardAction):
 	

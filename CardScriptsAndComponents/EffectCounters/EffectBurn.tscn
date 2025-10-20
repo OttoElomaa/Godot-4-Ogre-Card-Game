@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://devjn27tioxp7"]
+
+[ext_resource type="Script" uid="uid://5c42sqov344m" path="res://CardScriptsAndComponents/Scripts/effect_counter.gd" id="1_y552c"]
+[ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="2_r65xv"]
+[ext_resource type="PackedScene" uid="uid://jyrj2f2h71w" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnTrigger.tscn" id="3_kj70b"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="4_bscki"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="5_hxwhl"]
+[ext_resource type="PackedScene" uid="uid://dbcmto8022l1h" path="res://CardScriptsAndComponents/ScalingComponents/ScaleFromCounter.tscn" id="6_b8yyc"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="7_h2ymp"]
+
+[node name="EffectBurn" type="Node2D"]
+script = ExtResource("1_y552c")
+effectType = 2
+max_counter = 3
+id = "Burn"
+description = "Debuff. Corrode 1 per stack on turn, then remove 1 stack."
+metadata/_custom_type_script = "uid://5c42sqov344m"
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_r65xv")
+
+[node name="OnAlliedTurnTrigger" parent="." instance=ExtResource("3_kj70b")]
+
+[node name="CardAction" type="Node2D" parent="OnAlliedTurnTrigger"]
+script = ExtResource("4_bscki")
+customActionText = "Damaged by Burn"
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillAlterHealth" parent="OnAlliedTurnTrigger/CardAction" instance=ExtResource("5_hxwhl")]
+corrode = 1
+
+[node name="ScaleFromCounter" parent="OnAlliedTurnTrigger/CardAction/SkillAlterHealth" instance=ExtResource("6_b8yyc")]
+EffectId = "Burn"
+
+[node name="TargetSelf" parent="OnAlliedTurnTrigger/CardAction" instance=ExtResource("7_h2ymp")]

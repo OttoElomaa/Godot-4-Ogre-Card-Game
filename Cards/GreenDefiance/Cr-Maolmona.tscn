@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://xlvagiuf8en8"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_dvp65"]
+[ext_resource type="Texture2D" uid="uid://cpje3wokp2ij1" path="res://Art/CardArt/card-art-creature-debug-placeholder.jpg" id="2_s5s5a"]
+
+[node name="Cr-Maolmona" instance=ExtResource("1_dvp65")]
+cardName = "Fuckin' Maolmona"
+subTypeStr = "Your dead!!!"
+startingHealth = 200
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_s5s5a")

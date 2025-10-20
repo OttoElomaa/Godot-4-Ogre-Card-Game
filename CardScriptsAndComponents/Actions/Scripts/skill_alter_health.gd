@@ -18,12 +18,18 @@ func activate(targets:Array) -> bool:
 	for target:Card in targets:
 		#### INFLICT
 		if inflictCreature > 0:
-			handleInflict(target, inflictCreature)
+			var damage = inflictCreature
+			if isScaled():
+				damage = get_scaling({'target': target})
+			handleInflict(target, damage)
 			success = true
 
 		#### CORRODE
 		elif corrode > 0:
-			handleCorrode(target, corrode)
+			var damage = corrode
+			if isScaled():
+				damage = get_scaling({'target': target})
+			handleCorrode(target, damage)
 			success = true
 		
 		#### BOLSTER
@@ -33,8 +39,6 @@ func activate(targets:Array) -> bool:
 			success = true
 		
 	return success
-	
-
 	
 
 #### DEAL TEMPORARY DAMAGE TO A CARD

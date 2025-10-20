@@ -76,6 +76,7 @@ var effectText := ""
 #### RESTING IS TRIGGERED by attacking, or casting --> Unless "Haste/Vanguard" kind of effects
 #### TRAVELING IS TRIGGERED by entering. It's summoning sickness
 var actionState: CardActionStates = CardActionStates.ACTIVE
+var cardState: CardStates = CardStates.DECK
 var isTraveling := false
 var isResting := false
 var allowInteract := true
@@ -319,7 +320,6 @@ func handleTurnStartReset():
 #### HANDLE CARD BEING PLAYED ON BOARD
 func handleArrival():
 	basicSetup()
-	actions.awakenTriggers()#	actions.handleArrival()  #### TRIGGER ARRIVAL NODE
 	SignalBus.arrival.emit([self])
 #	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
 	
@@ -331,6 +331,7 @@ func handleArrival():
 
 
 func setInitialActionState():
+	cardState = CardStates.BOARD
 	statesPassive()
 	
 	#### ENEMY CARDS ATTACK BY DEFAULT
@@ -448,10 +449,14 @@ func statesDestroy():
 
 func statesHand():
 	actionState = CardActionStates.HAND
+	cardState = CardStates.HAND
 
 func statesDeck():
 	actionState = CardActionStates.DECK
+	cardState = CardStates.DECK
 
+func statesBoard():
+	cardState = CardStates.BOARD
 
 
 func toggleTraveling(enabled:bool):
@@ -565,8 +570,6 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	
 	return combatDamage
 
-
-
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
 func handleCombatActions(args: Array):
 	var isAttacker = null
@@ -657,7 +660,7 @@ func turnOnBestiaryVisuals(mainMenu:Node):
 
 func handleEnterGraveyard():
 	handleTurnStartReset()
-	actions.putTriggersToSleep()
+
 	wake()
 	
 	toggleManaCostIndicator(true)

@@ -14,11 +14,13 @@ var myCard: Card = null
 @export var description: String
 
 
-func setup(sourceC:Card):
-	self.sourceCard = sourceC
+func setup(holder: Card):
+#	self.sourceCard = sourceC
+	myCard = holder
+	for child in get_children():
+		if child.has_method('setup'):
+			child.setup(myCard)
 	
-	
-
 func applyEffect(targetCard:Card):
 	
 	#### CREATE COPY OF SELF

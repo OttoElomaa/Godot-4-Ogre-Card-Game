@@ -1,5 +1,5 @@
 extends Node2D
-class_name  CardsManager
+class_name CardsManager
 
 
 var COLLISION_MASK_CARD := 1
@@ -190,7 +190,7 @@ func updateHandCardsVisuals():
 		incrementTreshold = 6
 		x_offset -= 100
 	
-	#### PLACE EACH CARD IN PLAYER HAND
+	#### t EACH CARD IN PLAYER HAND
 	for c:Card in cards:
 		if c.checkAlive():
 			c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
@@ -634,6 +634,7 @@ func moveToHand(card:Card, isEnemy:bool):
 		card.reparent(handNode)
 	else:
 		handNode.add_child(card)
+		card.setup(main)
 	card.position = Vector2.ZERO
 	card.handleEnterGraveyard()
 	
