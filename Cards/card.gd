@@ -129,7 +129,7 @@ var isPhased: bool:
 # EFFECT COUNTER STUFF
 
 #### GET ALL EFFECTS -> USED BY hasEffect() AND OTHER STUFF
-func getEffects():
+func getEffects() -> Array:
 	var counters = []
 	for e:EffectCounter in $Effects/Buff/Nodes.get_children():
 		counters.append(e)
@@ -372,6 +372,24 @@ func toggleFrontSide(toShow:bool):
 func addEffect(appliedEffect: CardEffect):
 	effects.addEffect(appliedEffect)
 
+## Increase or decrease the number of stacks on a given effect counter.
+func changeEffectStacks(id:String, amount: int):
+	if getEffect(id) is EffectCounter:
+		var counter = getEffect(id).counter
+		getEffect(id).counter += clampi(amount, amount, counter)
+	checkAndTerminateEffects()
+	effects.updateEffectVisuals()
+
+## Checks if any effect counters are at 0. If they are not permanent, remove them.
+func checkAndTerminateEffects():
+	for effect: EffectCounter in getEffects():
+		if effect.counter < 1 and !effect.isPermanent:
+			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
+			removeEffect(effect.id)
+
+func removeEffect(id):
+	if getEffect(id):
+		getEffect(id).queue_free()
 
 #############################################################
 

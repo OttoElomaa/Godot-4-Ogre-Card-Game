@@ -31,7 +31,6 @@ func applyEffect(targetCard:Card):
 	targetCard.addEffect(appliedEffect)
 	appliedEffect.setMyTarget(targetCard)
 
-
 	
 func setMyTarget(card:Card):
 	self.myCard = card

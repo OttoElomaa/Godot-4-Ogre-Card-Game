@@ -111,8 +111,8 @@ func updateEffectVisuals():
 			#if effectName != "":
 				#e.queue_free()
 		#effectName = e.getEffectName()
-		
-	
+
+
 func togglePhased(isPhased:bool):
 	self.isPhased = isPhased
 	updatePhasedVisuals()

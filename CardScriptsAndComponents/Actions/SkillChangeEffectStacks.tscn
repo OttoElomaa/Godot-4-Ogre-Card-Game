@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvl306ch72ymq"]
+
+[ext_resource type="Script" uid="uid://dq5p0x8u0mhub" path="res://CardScriptsAndComponents/Actions/Scripts/skill_change_counter.gd" id="1_wabvx"]
+
+[node name="SkillChangeEffectStacks" type="Node2D"]
+script = ExtResource("1_wabvx")
+skillName = "Reduce"
+metadata/_custom_type_script = "uid://cxr3ippvyy8ii"
