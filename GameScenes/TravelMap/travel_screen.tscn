@@ -73,7 +73,7 @@ mouse_target = true
 disable_3d = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1917, 1079)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="LevelSelect" parent="MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_reupg")]
