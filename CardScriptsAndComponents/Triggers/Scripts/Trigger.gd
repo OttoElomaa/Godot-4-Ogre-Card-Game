@@ -6,7 +6,7 @@ class_name Trigger
 @export var situation_text := ''
 
 var conditions = []
-
+var disabled = false
 var myCard: Card = null
 
 func _ready():
@@ -22,7 +22,11 @@ func setup(card: Card):
 		if child.has_method('setup'):
 			child.setup(myCard)
 
-
+func sleep():
+	disabled = true
+	
+func wake():
+	disabled = false
 
 func createActionText():
 	var actionTexts := []
@@ -35,17 +39,24 @@ func createActionText():
 
 func execute(args):
 	var success = false
+
+	if disabled:
+		return success
+
 	if myCard.cardState == myCard.CardStates.BOARD or myCard.cardType == myCard.CardTypes.RITUAL:
+
 		if not args:
 			args = []
+
 		print(name, ' from ', myCard.cardName, ' is executing')
-		for cond in conditions:
-			if cond is ConditionalComponent:
-				if not cond.check(myCard, args):
-					return false
-				cond.reset()
+
+		for cond:ConditionalComponent in conditions:
+			if not cond.check(myCard, args):
+				return false
 		print(name, ' all conditions green')
+
 		for child in get_children():
 			if child is CardAction:
 				success = await child.activate(args)
+
 	return success

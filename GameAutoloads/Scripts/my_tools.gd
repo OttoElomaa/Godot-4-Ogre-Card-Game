@@ -170,6 +170,24 @@ func getDeckCards(isEnemy:bool):
 	else:
 		return cardsManager.getPlayerDeckCards()
 
+func getAllDeckCards():
+	var allDecks = []
+	allDecks.append_array(cardsManager.getEnemyDeckCards())
+	allDecks.append_array(cardsManager.getPlayerDeckCards())
+	return allDecks
+
+func getAllHandCards():
+	var allHands = []
+	allHands.append_array(cardsManager.getEnemyHandCards())
+	allHands.append_array(cardsManager.getPlayerHandCards())
+	return allHands
+
+func getAllGraveyards():
+	var allGraveyards = []
+	allGraveyards.append_array(cardsManager.getEnemyGraveyardCards())
+	allGraveyards.append_array(cardsManager.getPlayerGraveyardCards())
+	return allGraveyards
+	
 ## Accepts Card. Returns 'Foe' if card is an enemy card, 'Allied' if card is an ally card. 
 func getFactionString(card:Card) -> String:
 	if card.isEnemyCard:

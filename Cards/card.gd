@@ -23,6 +23,10 @@ enum CardTypes {
 	CREATURE, RITUAL, CHAMPION
 }
 
+enum UpgradeStates {
+	UNUPGRADED, PATH_1, PATH_2, PATH_3
+}
+
 var isRitual:
 	get:
 		return cardType == CardTypes.RITUAL
@@ -46,6 +50,12 @@ var isChampion:
 @export var cardType := CardTypes.CREATURE
 @export var subTypeStr := "Card Sub-Type"
 
+var cardsManager:CardsManager = null
+var mainMenu: Node = null
+
+var mySlot: CardSlot = null
+var isEnemyCard := false
+var myOffset := Vector2.ZERO
 
 var subTypes := []
 var cardTypeStr := ""
@@ -59,6 +69,7 @@ var cardArt:
 @export var manaCost := 0
 @export var startingDamage := 0
 @export var startingHealth := 0
+@export var upgraded := UpgradeStates.UNUPGRADED
 
 var damage := 0
 var health := 0
@@ -71,6 +82,17 @@ var keywords = []
 var effectText := ""
 
 
+
+
+@export_subgroup('Upgrade Path #1')
+@export var alt_card_name_1: String
+@export var alt_actions_node_1: Node
+@export var alt_keywords_1: PackedStringArray
+@export var alt_art_1: Texture2D
+@export var alt_damage_1: int
+@export var alt_health_1: int
+@export var alt_mana_cost_1: int
+
 ######################################### CARD ACTION STATE
 #### RESTING = Can't take card actions this turn, such as attack or cast.
 #### RESTING IS TRIGGERED by attacking, or casting --> Unless "Haste/Vanguard" kind of effects
@@ -82,8 +104,8 @@ var isResting := false
 var allowInteract := true
 
 
-
-####################################### KEYWORD HANDLER STUFF
+#######################################################################################
+#region ######################################### KEYWORD HANDLER STUFF
 
 func getKeywords():
 	keywords = $KeywordHandler.collectKeywords()
@@ -114,19 +136,25 @@ func addKeyword(string:String):
 	new_keyword.id = string
 	$KeywordHandler/MyKeywords.add_child(new_keyword)
 
+## Adds keywords from an array of string values.
+func replace_keywords(new_k:PackedStringArray):
+	for string:String in new_k:
+		addKeyword(string)
 
+#endregion
 
-
-################################################## COUNTER NODE STUFF
+#######################################################################################
+#region ######################################### COUNTER NODE STUFF
 var isPhased: bool:
 	get:
 		return effects.isPhased
 	set(value):
 		effects.togglePhased(value)
 
+#endregion
 
-##########################################################
-# EFFECT COUNTER STUFF
+#######################################################################################
+#region ######################################### EFFECT COUNTER STUFF
 
 #### GET ALL EFFECTS -> USED BY hasEffect() AND OTHER STUFF
 func getEffects() -> Array:
@@ -154,14 +182,33 @@ func getEffect(id:String) -> CardEffect:
 			return i
 	return null
 
-##############################################################
+func addEffect(appliedEffect: CardEffect):
+	effects.addEffect(appliedEffect)
 
-var cardsManager:CardsManager = null
-var mainMenu: Node = null
+## Increase or decrease the number of stacks on a given effect counter.
+func changeEffectStacks(id:String, amount: int):
+	if getEffect(id) is EffectCounter:
+		var counter = getEffect(id).counter
+		getEffect(id).counter += clampi(amount, amount, counter)
+	checkAndTerminateEffects()
+	effects.updateEffectVisuals()
 
-var mySlot: CardSlot = null
-var isEnemyCard := false
-var myOffset := Vector2.ZERO
+## Checks if any effect counters are at 0. If they are not permanent, remove them.
+func checkAndTerminateEffects():
+	for effect: EffectCounter in getEffects():
+		if effect.counter < 1 and !effect.isPermanent:
+			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
+			removeEffect(effect.id)
+
+## Remove an effect.
+func removeEffect(id):
+	if getEffect(id):
+		getEffect(id).queue_free()
+
+#endregion
+
+#######################################################################################
+#region ######################################## COLOR FETCHERS
 
 var hurtColor:
 	get:
@@ -177,9 +224,10 @@ var healColor:
 		else:
 			return Color.LIGHT_GREEN
 
+#endregion
 
-
-
+#######################################################################################
+#region ######################################## STARTUP
 func _ready() -> void:
 	
 	setup(null)
@@ -192,7 +240,12 @@ func _ready() -> void:
 	
 	
 
-
+func setup_all_actions():
+	$Actions.setup(self)
+	$Actions.putTriggersToSleep()
+	if alt_actions_node_1:
+		alt_actions_node_1.setup(self)
+		alt_actions_node_1.putTriggersToSleep()
 
 func setup(gameBoard: GameBoard):
 	
@@ -205,10 +258,11 @@ func setup(gameBoard: GameBoard):
 	if boardOrTempNode is Node2D:
 		myOffset = get_parent().position
 	
+	change_upgrade_state(upgraded)
 	
 	#### SETUP FOR ALL ACTION SCRIPTS
 	#### SHARE INFO ON, IS CARD ENEMY
-	$Actions.setup(self)
+	actions.setup(self)
 	
 	if cardType == CardTypes.CREATURE:
 		updateCardNameAndBasicInfo(true)
@@ -236,8 +290,7 @@ func setup(gameBoard: GameBoard):
 func updateCardNameAndBasicInfo(isCreature:bool):
 	subTypes = subTypeStr.split(" ")
 	getKeywords()
-	damage = startingDamage
-	health = startingHealth
+
 	
 	createEffectText()
 	
@@ -292,7 +345,8 @@ func createEffectText():
 	return effectText
 	
 	
-########################################################		
+################################################
+
 func basicSetup():
 	if isRitual:
 		statesInert()
@@ -302,7 +356,7 @@ func basicSetup():
 	#### SETUP FOR ALL ACTION SCRIPTS
 	#### SHARE INFO ON, IS CARD ENEMY
 	$Actions.setup(self)
-	
+
 	
 	
 func handleTurnStartReset():
@@ -339,9 +393,10 @@ func setInitialActionState():
 		#if not keywordHandler.hasShadow:
 		statesActive()
 
+#endregion
 
-
-#########################################################################
+##############################################################################
+#region ######################################## MOUSE INTERACTION
 func _on_area_2d_mouse_entered() -> void:
 	#emit_signal("hoverOn", self)
 	MyTools.handleCardHover(true, self)
@@ -368,32 +423,10 @@ func toggleFrontSide(toShow:bool):
 	else:
 		$Frontside.hide()
 
+#endregion
 
-func addEffect(appliedEffect: CardEffect):
-	effects.addEffect(appliedEffect)
-
-## Increase or decrease the number of stacks on a given effect counter.
-func changeEffectStacks(id:String, amount: int):
-	if getEffect(id) is EffectCounter:
-		var counter = getEffect(id).counter
-		getEffect(id).counter += clampi(amount, amount, counter)
-	checkAndTerminateEffects()
-	effects.updateEffectVisuals()
-
-## Checks if any effect counters are at 0. If they are not permanent, remove them.
-func checkAndTerminateEffects():
-	for effect: EffectCounter in getEffects():
-		if effect.counter < 1 and !effect.isPermanent:
-			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
-			removeEffect(effect.id)
-
-func removeEffect(id):
-	if getEffect(id):
-		getEffect(id).queue_free()
-
-#############################################################
-
-#### HANDLE REST
+#############################################################################
+#region ######################################### HANDLE REST
 #### ANIMATE = ROTATE CARD IMMEDIATELY
 #### DON'T ANIMATE = PLAY ANIMATION ON DELAY? ->TO PLAY ATTACK ANIMATION FIRST
 func restAndAnimate(toAnimate:bool):
@@ -408,9 +441,10 @@ func wake():
 	isResting = false
 	rotateRestingCard(false)
 
-########################################################
+#endregion
 
-
+##############################################################################
+#region ########################################## STATE STUFF
 func switchStates():
 	if actionState == CardActionStates.ACTIVE:
 		statesPassive()
@@ -525,10 +559,12 @@ func checkTraveling() -> bool:
 
 func checkAlive():
 	return !(actionState == CardActionStates.DISCARD)
+	
+	
+#endregion
 
-		
-########################################################
-####  COMBAT STUFF  #####################
+###############################################################################
+#region #########################################  COMBAT STUFF
 
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
 func takeCombatDamage(card:Card, isAttacker: bool) -> int:
@@ -618,9 +654,21 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 			
 	return false
 
+func handleEnterGraveyard():
+	handleTurnStartReset()
 
-######################################################################
+	wake()
+	
+	toggleManaCostIndicator(true)
+	toggleActionStateIndicator(false)
+	toggleTraveling(false)
+	
+	updateCardLabels()
 
+#endregion
+
+##################################################################################
+#region ######################################## VISUALS - HUD
 func handleAttackingPortrait():
 	playAttackAnimation()
 	restAndAnimate(false)
@@ -674,23 +722,11 @@ func turnOnBestiaryVisuals(mainMenu:Node):
 	
 	updateCardVisuals()
 
+#endregion
 
+###############################################################################
+#region ######################################## VISUALS - ANIMATIONS
 
-func handleEnterGraveyard():
-	handleTurnStartReset()
-
-	wake()
-	
-	toggleManaCostIndicator(true)
-	toggleActionStateIndicator(false)
-	toggleTraveling(false)
-	
-	updateCardLabels()
-
-
-
-#### VISUALS - ANIMATIONS
-#######################################################################################
 
 func playAttackAnimation():
 	if isEnemyCard:
@@ -704,9 +740,10 @@ func timeoutRestAnimation() -> void:
 	if checkResting():
 		rotateRestingCard(true)
 
+#endregion
 
-
-#### VISUALS
+################################################################################
+#region ############################################ VISUALS
 #######################################################################
 
 func updateCardVisuals():
@@ -795,3 +832,37 @@ func rotateRestingCard(willRest:bool):
 
 func toggleCardName(enable:bool):
 	$Frontside/CardName.visible = enable
+#endregion
+
+###############################################################################
+#region #########################################UPGRADE FUNCTIONALITY
+###########################################################
+
+## Sets card stats, action node and keywords to alternative ones.
+func change_upgrade_state(new_state:UpgradeStates):
+	
+	## Puts triggers in all actions nodes to sleep.
+	setup_all_actions()
+	
+	match new_state:
+		UpgradeStates.PATH_1:
+			cardName = alt_card_name_1
+			if alt_actions_node_1:
+				actions = alt_actions_node_1
+			if alt_keywords_1:
+				$KeywordHandler.clearKeywords()
+				replace_keywords(alt_keywords_1)
+			$Frontside/Art.texture = alt_art_1
+			damage = alt_damage_1
+			health = alt_health_1
+			manaCost = alt_mana_cost_1
+		UpgradeStates.UNUPGRADED:
+			damage = startingDamage
+			health = startingHealth
+		_:
+			assert(1==2, 'Value out of bounds')
+	actions.awakenTriggers()
+	updateCardNameAndBasicInfo(cardType==CardTypes.CREATURE)
+
+
+#endregion

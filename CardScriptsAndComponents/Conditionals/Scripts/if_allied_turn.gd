@@ -1,13 +1,5 @@
 extends ConditionalComponent
 
-func check(card, condition):
-	condition = GameInfo.enemy_turn
+func check(card:Card, _condition):
 	print(name, ' is checking')
-	if card is Card:
-		if card.isEnemyCard == condition:
-			passed = true
-			print(name, ' is true')
-		else:
-			passed = false
-			print(name, ' is false')
-		return passed
+	return card.isEnemyCard == GameInfo.enemy_turn

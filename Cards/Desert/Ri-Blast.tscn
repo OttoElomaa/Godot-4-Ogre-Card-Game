@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bews6x4fcf3mr"]
+[gd_scene load_steps=7 format=3 uid="uid://bews6x4fcf3mr"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_07d1u"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_e1l0y"]
@@ -6,8 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="3_h3v4s"]
 [ext_resource type="Texture2D" uid="uid://c3bglrj7apvdw" path="res://Art/CardArt/Desert/card-art-ritual-blast.jpg" id="3_k3mux"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="4_jfp56"]
-[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="6_q4hcx"]
-[ext_resource type="PackedScene" uid="uid://devjn27tioxp7" path="res://CardScriptsAndComponents/EffectCounters/EffectBurn.tscn" id="7_jpqju"]
 
 [node name="Card-Sp-Blast" instance=ExtResource("1_07d1u")]
 cardName = "Blast"
@@ -22,11 +20,7 @@ customActionText = "Inflict 2 damage."
 manualTargetGroup = 3
 
 [node name="SkillAlterHealth" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("3_h3v4s")]
-inflictCreature = 1
-
-[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="2" instance=ExtResource("6_q4hcx")]
-grantEffect = ExtResource("7_jpqju")
-grantAmount = 2
+inflictCreature = 2
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_k3mux")
