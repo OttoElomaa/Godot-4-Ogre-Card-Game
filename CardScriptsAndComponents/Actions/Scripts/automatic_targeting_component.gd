@@ -17,7 +17,7 @@ class_name AutoTargetingComponent
 func ready():
 	pass
 
-func getTargets(condition):
+func getTargets(condition) -> Array:
 	var targets = []
 	var conditions = []
 	var success = true
@@ -27,8 +27,7 @@ func getTargets(condition):
 		if child is ConditionalComponent:
 			conditions.append(child)
 	print(name, 'has conditions ', conditions)
-	
-	
+
 	for card:Card in cards_in_group:
 		print(name, ' is checking ', card.cardName, ' with conditions ', conditions)
 		success = true
@@ -44,7 +43,7 @@ func getTargets(condition):
 func get_cards_in_group() -> Array:
 	var cards = []
 	if use_board_cards:
-		cards.append(MyTools.getAllBoardCards()) 
+		cards.append_array(MyTools.getAllBoardCards()) 
 	if use_deck_cards:
 		cards.append_array(MyTools.getAllDeckCards())
 	if use_hand_cards:

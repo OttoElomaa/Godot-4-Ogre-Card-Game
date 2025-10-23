@@ -624,8 +624,6 @@ func moveToDeck(card:Card, isEnemy:bool):
 	card.reparent(deckNode)
 	card.position = Vector2.ZERO
 	card.handleEnterGraveyard()
-	
-
 
 
 func moveToHand(card:Card, isEnemy:bool):

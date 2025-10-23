@@ -7,9 +7,11 @@ signal arrival(args:Array)
 ##	One argument: the champion that was placed
 signal champion_placed(args:Array)
 
-signal cast_pressed(args:Array)
+## One argument: the card that cast.
 signal cast(args:Array)
-signal ritual
+
+## One argument: the ritual that was cast.
+signal ritual(args:Array)
 
 ##	Two arguments. 0: the attacking card, 1: the defending card
 signal attacked(args:Array)

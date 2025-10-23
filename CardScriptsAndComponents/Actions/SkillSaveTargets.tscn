@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf2buy6iocrt3"]
+
+[ext_resource type="Script" uid="uid://dta072uvgejan" path="res://CardScriptsAndComponents/Actions/Scripts/save_targets.gd" id="1_askn6"]
+
+[node name="SkillSaveTargets" type="Node2D"]
+script = ExtResource("1_askn6")
+metadata/_custom_type_script = "uid://cxr3ippvyy8ii"

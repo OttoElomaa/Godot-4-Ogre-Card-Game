@@ -56,7 +56,7 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 		var slot = slots[0]
 		
 		handlePlaceCardInSlot(card, slot)
-		changeMana(card.manaCost, isEnemy)
+#		changeMana(card.manaCost, isEnemy)
 		return true
 		
 	return false
@@ -141,6 +141,7 @@ func handleDrawCard(isEnemy:bool):
 
 
 func changeMana(amount:int, isEnemy:bool):
+	print('Generated ', amount, ' mana')
 	gameBoard.changeMana(amount, isEnemy)
 
 
@@ -158,7 +159,7 @@ func getBoardCards(isEnemy:bool):
 	else:
 		return cardsManager.getPlayerBoardCards()
 
-func getAllBoardCards():
+func getAllBoardCards() -> Array:
 	var fullBoard = []
 	fullBoard.append_array(cardsManager.getEnemyBoardCards())
 	fullBoard.append_array(cardsManager.getPlayerBoardCards())

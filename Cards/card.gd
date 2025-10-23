@@ -262,7 +262,7 @@ func setup(gameBoard: GameBoard):
 	
 	#### SETUP FOR ALL ACTION SCRIPTS
 	#### SHARE INFO ON, IS CARD ENEMY
-	actions.setup(self)
+#	actions.setup(self)
 	
 	if cardType == CardTypes.CREATURE:
 		updateCardNameAndBasicInfo(true)
@@ -487,23 +487,28 @@ func animateBlockingState(toBlock:bool):
 	
 	MyTools.moveCardTweening(self, position, newPos)
 
-
+func vacateSlot():
+	if mySlot:
+		mySlot.toggleAvailable(true)
+	mySlot = null
 
 func statesInert():
 	actionState = CardActionStates.INERT
 	var s = $Frontside/ActionState
 	s.get_node("ActiveIcon").hide()
 	
-	
 
 func statesDestroy():
+	vacateSlot()
 	actionState = CardActionStates.DISCARD	
 
 func statesHand():
+	vacateSlot()
 	actionState = CardActionStates.HAND
 	cardState = CardStates.HAND
 
 func statesDeck():
+	vacateSlot()
 	actionState = CardActionStates.DECK
 	cardState = CardStates.DECK
 

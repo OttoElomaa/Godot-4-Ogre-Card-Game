@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqej1t0pa88fs"]
+[gd_scene load_steps=11 format=3 uid="uid://cqej1t0pa88fs"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_6ny87"]
+[ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="2_tbg24"]
 [ext_resource type="Texture2D" uid="uid://ubxsgqgvccky" path="res://Art/CardArt/Desert/card-art-creature-janinSpirit.jpg" id="3_ob4vk"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_r07h0"]
+[ext_resource type="PackedScene" uid="uid://c48goee1xgt00" path="res://CardScriptsAndComponents/Actions/SkillSendToGraveyard.tscn" id="4_u2phu"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_udkeg"]
+[ext_resource type="PackedScene" uid="uid://cf2buy6iocrt3" path="res://CardScriptsAndComponents/Actions/SkillSaveTargets.tscn" id="6_dfmyb"]
+[ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="7_8lj54"]
+[ext_resource type="PackedScene" uid="uid://7xhkcpcrp5p1" path="res://CardScriptsAndComponents/ScalingComponents/ScaleFromCostCard.tscn" id="8_osbj1"]
+[ext_resource type="Script" uid="uid://ct2d04rc5jy3" path="res://CardScriptsAndComponents/ScalingComponents/Scripts/scale_from_cost_card.gd" id="9_71q2j"]
 
 [node name="Card-Cr-JaninBargain" instance=ExtResource("1_6ny87")]
 cardName = "Janin Bargainer"
@@ -10,6 +18,29 @@ flavorText = "Your kin will spread to the edges of Achra, like motes of sand..."
 manaCost = 3
 startingDamage = 1
 startingHealth = 3
+
+[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_tbg24")]
+
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("3_r07h0")]
+customActionText = "Cast: Sacrifice your creature"
+
+[node name="SkillSendToGraveyard" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_u2phu")]
+
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_udkeg")]
+manualTargetGroup = 1
+
+[node name="SaveTargets" parent="Actions/OnCastTrigger/CardAction" index="2" instance=ExtResource("6_dfmyb")]
+
+[node name="CardAction2" parent="Actions/OnCastTrigger" index="1" instance=ExtResource("3_r07h0")]
+customActionText = "Gain twice the sacrificed creature's cost as mana."
+
+[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction2" index="0" instance=ExtResource("7_8lj54")]
+alterOwnerMana = 1
+
+[node name="ScaleFromSavedCard" parent="Actions/OnCastTrigger/CardAction2/SkillPlayerHealthMana" index="0" instance=ExtResource("8_osbj1")]
+script = ExtResource("9_71q2j")
+stat_to_use = 2
+multiplier = 2.0
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_ob4vk")

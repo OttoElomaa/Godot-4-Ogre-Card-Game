@@ -58,5 +58,7 @@ func execute(args):
 		for child in get_children():
 			if child is CardAction:
 				success = await child.activate(args)
+				if not success:
+					return success
 
 	return success

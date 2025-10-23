@@ -19,7 +19,6 @@ flavorText = "Outriders carry omens and news, like wind carries grains of sand."
 manaCost = 2
 startingDamage = 2
 startingHealth = 2
-upgraded = 1
 alt_card_name_1 = "Bringer of Rituals"
 alt_actions_node_1 = NodePath("Actions2")
 alt_art_1 = ExtResource("2_d68ha")
