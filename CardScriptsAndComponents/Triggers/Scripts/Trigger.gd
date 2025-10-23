@@ -37,7 +37,7 @@ func createActionText():
 	return actionTexts
 			
 
-func execute(args):
+func execute(params:SignalParams):
 	var success = false
 
 	if disabled:
@@ -45,18 +45,18 @@ func execute(args):
 
 	if myCard.cardState == myCard.CardStates.BOARD or myCard.cardType == myCard.CardTypes.RITUAL:
 
-		if not args:
-			args = []
+		if not params:
+			params = SignalParams.new()
 
 		print(name, ' from ', myCard.cardName, ' is executing')
 
 		for cond:ConditionalComponent in conditions:
-			if not cond.check(myCard, args):
+			if not cond.check(myCard, params):
 				return false
 		print(name, ' all conditions green')
 
 		for child in get_children():
 			if child is CardAction:
-				success = await child.activate(args)
+				success = await child.activate(params)
 
 	return success

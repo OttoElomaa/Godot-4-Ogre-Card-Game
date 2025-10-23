@@ -350,8 +350,15 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
 #	attackCard.handleCombatActions(true, targetCard)
 #	targetCard.handleCombatActions(false, attackCard)
-	SignalBus.attacked.emit([attackCard, targetCard])
-	SignalBus.defended.emit([attackCard, targetCard])
+	var params := SignalParams.new()
+	params.sourceCard = attackCard
+	params.targetCard = targetCard
+	SignalBus.attacked.emit(params)
+	
+	var params2 := SignalParams.new()
+	params2.sourceCard = targetCard
+	params2.targetCard = attackCard
+	SignalBus.defended.emit(params2)
 	
 	#### CHECK IF EITHER CARD WAS DESTROYED
 	var attackerDestroyed = attackCard.checkAndHandleCombatDeath(true)

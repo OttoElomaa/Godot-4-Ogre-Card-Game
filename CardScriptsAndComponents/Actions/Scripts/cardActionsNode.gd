@@ -52,44 +52,6 @@ func createActionText() -> Array:
 
 
 
-func activateNode(node:Node, target:Card):
-	var success := false
-	var successfulScript:Node = null
-	
-	for script in node.get_children():
-		if script.has_method("activateTargetless"):
-			success = script.activateTargetless(myCard)
-			successfulScript = script
-			
-		elif target:
-			if script.has_method("activateTargeted"):
-				success = script.activateTargeted(target, myCard)
-				successfulScript = script
-	
-	if success:
-		var holder = successfulScript.get_parent()
-		successfulScript.createPrintout(holder)  #### CREATE COMBAT LOG ENTRY
-		#if not node == payoffNode:
-			#handlePayoff(target)
-	
-	#### UPDATE VISUALS AFTER ACTION
-	MyTools.updateBoardCardsVisuals()
-	return success
-
-
-
-func isTargetless(node:Node) -> bool:
-	for script in node.get_children():
-		if script.has_method("activateTargetless"):
-			return true
-	return false
-
-
-func isTargeted(node:Node) -> bool:
-	for script in node.get_children():
-		if script.has_method("activateTargeted"):
-			return true
-	return false
 
 
 
@@ -105,7 +67,7 @@ func handleRitual() -> bool:
 	
 	for child in get_children():
 		if child is OnCastTrigger:
-			if await child.execute([]):
+			if await child.execute(null):
 				success = true
 
 	if success:
@@ -118,7 +80,7 @@ func handleCast() -> bool:
 	
 	for child in get_children():
 		if child is OnCastTrigger:
-			if await child.execute([]):
+			if await child.execute(null):
 				success = true
 
 	if success:

@@ -374,7 +374,10 @@ func handleTurnStartReset():
 #### HANDLE CARD BEING PLAYED ON BOARD
 func handleArrival():
 	basicSetup()
-	SignalBus.arrival.emit([self])
+	
+	var params = SignalParams.new()
+	params.sourceCard = self
+	SignalBus.arrival.emit(params)
 #	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
 	
 	#if hasShadow:

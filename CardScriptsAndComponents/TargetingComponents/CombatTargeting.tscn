@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://duie7et41fnb6"]
 
-[ext_resource type="Script" uid="uid://2p6jf8hmr8ox" path="res://CardScriptsAndComponents/Actions/Scripts/BattleArtTargComponent.gd" id="1_ln3n4"]
+[ext_resource type="Script" uid="uid://2p6jf8hmr8ox" path="res://CardScriptsAndComponents/TargetingComponents/Scripts/BattleArtTargComponent.gd" id="1_ln3n4"]
 
 [node name="BattleArtTargComponent" type="Node2D"]
 script = ExtResource("1_ln3n4")
