@@ -22,3 +22,7 @@ func collectKeywords() -> Array:
 		if keyword is Keyword:
 			keywords.append(keyword)
 	return keywords
+
+func clearKeywords():
+	for keyword:Keyword in $MyKeywords.get_children():
+		queue_free()

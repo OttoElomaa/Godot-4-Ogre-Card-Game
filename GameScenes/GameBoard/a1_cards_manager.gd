@@ -527,6 +527,9 @@ func getEnemyHandCards() -> Array:
 	var cards = $EnemyHand.get_children()
 	return findValidNodesInArray(cards)
 
+func getPlayerHandCards() -> Array:
+	var cards = $PlayerHand.get_children()
+	return findValidNodesInArray(cards)
 
 func getEnemyBoardCards() -> Array:
 	var cards = $EnemyBoard.get_children()
@@ -537,8 +540,6 @@ func getPlayerBoardCards() -> Array:
 	var cards = $PlayerBoard.get_children()
 	return findValidNodesInArray(cards)
 	
-
-
 func getPlayerDeckCards() -> Array:
 	var cards = $PlayerDeck.get_children()
 	return findValidNodesInArray(cards)
@@ -548,9 +549,13 @@ func getEnemyDeckCards() -> Array:
 	var cards = $EnemyDeck.get_children()
 	return findValidNodesInArray(cards)
 	
-		
-		
+func getPlayerGraveyardCards() -> Array:
+	var cards = $Discard/Player/Cards.get_children()
+	return findValidNodesInArray(cards)
 
+func getEnemyGraveyardCards() -> Array:
+	var cards = $Discard/Enemy/Cards.get_children()
+	return findValidNodesInArray(cards)
 
 func getPlayerBlockers():
 	var blockers := []

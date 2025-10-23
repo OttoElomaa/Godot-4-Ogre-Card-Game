@@ -1,20 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://qd3ll6tcjlep"]
+[gd_scene load_steps=12 format=3 uid="uid://qd3ll6tcjlep"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_hhsm2"]
+[ext_resource type="Texture2D" uid="uid://cpje3wokp2ij1" path="res://Art/CardArt/card-art-creature-debug-placeholder.jpg" id="2_d68ha"]
 [ext_resource type="PackedScene" uid="uid://hgfd7t0eywau" path="res://CardScriptsAndComponents/Triggers/OnSelfArrivalTrigger.tscn" id="2_hhsm2"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_q156q"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="4_bokjc"]
 [ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="5_d68ha"]
-[ext_resource type="PackedScene" uid="uid://b50qou0nvjrrv" path="res://CardScriptsAndComponents/Conditionals/IfSubtype.tscn" id="6_lq8tf"]
 [ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/Desert/card-art-creature-tugarTrainer.jpg" id="7_klw2k"]
+[ext_resource type="Script" uid="uid://yys4316b4p1r" path="res://CardScriptsAndComponents/Actions/Scripts/cardActionsNode.gd" id="7_lq8tf"]
+[ext_resource type="PackedScene" uid="uid://cnl53ndg87cwd" path="res://CardScriptsAndComponents/Actions/SkillDrawCardToHand.tscn" id="8_klw2k"]
+[ext_resource type="PackedScene" uid="uid://w0gk04ursfij" path="res://CardScriptsAndComponents/TargetingComponents/AllyFetch.tscn" id="9_c3bds"]
+[ext_resource type="PackedScene" uid="uid://botbjqrlvbhcq" path="res://CardScriptsAndComponents/Conditionals/IfType.tscn" id="10_0l6fb"]
 
-[node name="Card-Cr-Outrider" instance=ExtResource("1_hhsm2")]
+[node name="Card-Cr-Outrider" node_paths=PackedStringArray("alt_actions_node_1") instance=ExtResource("1_hhsm2")]
 cardName = "Outrider"
 subTypeStr = "Salkhi Scout"
-flavorText = "As wind carries grains of sand through the desert, so too Outriders carry omens and news."
+flavorText = "Outriders carry omens and news, like wind carries grains of sand."
 manaCost = 2
 startingDamage = 2
 startingHealth = 2
+upgraded = 1
+alt_card_name_1 = "Bringer of Rituals"
+alt_actions_node_1 = NodePath("Actions2")
+alt_art_1 = ExtResource("2_d68ha")
+alt_damage_1 = 2
+alt_health_1 = 2
+alt_mana_cost_1 = 2
 
 [node name="OnSelfArrivalTrigger" parent="Actions" index="0" instance=ExtResource("2_hhsm2")]
 
@@ -27,8 +38,20 @@ bolsterHealth = 1
 
 [node name="TargetAllAllies" parent="Actions/OnSelfArrivalTrigger/CardAction" index="1" instance=ExtResource("5_d68ha")]
 
-[node name="IfSubtype" parent="Actions/OnSelfArrivalTrigger/CardAction/TargetAllAllies" index="1" instance=ExtResource("6_lq8tf")]
-subtype = "Scout"
+[node name="Actions2" type="Node2D" parent="." index="2"]
+script = ExtResource("7_lq8tf")
+
+[node name="OnSelfArrivalTrigger" parent="Actions2" index="0" instance=ExtResource("2_hhsm2")]
+
+[node name="CardAction" parent="Actions2/OnSelfArrivalTrigger" index="1" instance=ExtResource("3_q156q")]
+customActionText = "Arrival: Fetch a Ritual card from the deck and add it to hand."
+
+[node name="SkillDrawCardToHand" parent="Actions2/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("8_klw2k")]
+
+[node name="AllyFetch" parent="Actions2/OnSelfArrivalTrigger/CardAction" index="1" instance=ExtResource("9_c3bds")]
+
+[node name="IfType" parent="Actions2/OnSelfArrivalTrigger/CardAction/AllyFetch" index="1" instance=ExtResource("10_0l6fb")]
+card_type = "Ritual"
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("7_klw2k")

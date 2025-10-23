@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://devjn27tioxp7"]
+[gd_scene load_steps=9 format=3 uid="uid://devjn27tioxp7"]
 
 [ext_resource type="Script" uid="uid://5c42sqov344m" path="res://CardScriptsAndComponents/Scripts/effect_counter.gd" id="1_y552c"]
 [ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="2_r65xv"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="5_hxwhl"]
 [ext_resource type="PackedScene" uid="uid://dbcmto8022l1h" path="res://CardScriptsAndComponents/ScalingComponents/ScaleFromCounter.tscn" id="6_b8yyc"]
 [ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="7_h2ymp"]
+[ext_resource type="PackedScene" uid="uid://cvl306ch72ymq" path="res://CardScriptsAndComponents/Actions/SkillChangeEffectStacks.tscn" id="8_kj70b"]
 
 [node name="EffectBurn" type="Node2D"]
 script = ExtResource("1_y552c")
@@ -33,3 +34,7 @@ corrode = 1
 EffectId = "Burn"
 
 [node name="TargetSelf" parent="OnAlliedTurnTrigger/CardAction" instance=ExtResource("7_h2ymp")]
+
+[node name="SkillDecrementEffect" parent="OnAlliedTurnTrigger/CardAction" instance=ExtResource("8_kj70b")]
+effectID = "Burn"
+amount = -1
