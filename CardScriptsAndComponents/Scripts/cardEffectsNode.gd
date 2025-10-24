@@ -1,7 +1,6 @@
 extends Node2D
 
 
-
 var isPhased := false
 
 
@@ -55,11 +54,13 @@ func addEffect(appliedEffect: EffectCounter):
 func updateEffectInfo():
 	pass
 
+
 func has_similar(array:Array, effect:EffectCounter) -> EffectCounter:
 	for i:EffectCounter in array:
 		if i.id == effect.id:
 			return i
 	return null
+
 
 func updateEffectVisuals():
 	var card:Card = get_parent()
@@ -69,17 +70,15 @@ func updateEffectVisuals():
 	var debuffsCount = debuffs.size()
 	
 	for sprite in buffSprites.get_children():
-		sprite.texture = null
-		sprite.get_child(0).hide() ##Hides the label w/ amount
+		sprite.hide()
+		
 	for sprite in debuffSprites.get_children():
-		sprite.texture = null	
-		sprite.get_child(0).hide()
+		sprite.hide()
 	
 	if buffsCount > 0:
 		print("%d Buffs found on %s" % [buffs.size(), card.cardName])
 	if debuffsCount > 0:
-		print("%d Debuffs found on %s" % [debuffs.size(), card.cardName])
-		#assert(1==2,"Is this working?")	
+		print("%d Debuffs found on %s" % [debuffs.size(), card.cardName])	
 	
 	
 	var sprite:Sprite2D = null
@@ -87,32 +86,28 @@ func updateEffectVisuals():
 	
 	for e:CardEffect in buffs:
 		sprite = buffSprites.get_children()[counter]
+		
+		sprite.show()
 		sprite.texture = e.icon
 		if e is EffectCounter:
-			sprite.get_child(0).show()
-			sprite.get_child(0).text = str(e.counter)
+			sprite.get_node("Amount").text = str(e.counter)
 		counter += 1
 		
 	counter = 0
 	for e:CardEffect in debuffs:
 		sprite = debuffSprites.get_children()[counter]
+		
+		sprite.show()
 		sprite.texture = e.icon
 		if e is EffectCounter:
-			sprite.get_child(0).show()
-			sprite.get_child(0).text = str(e.counter)
+			sprite.get_node("Amount").text = str(e.counter)
 		counter += 1
 	
 		
 	updatePhasedVisuals()
 	
 			
-		#### ONLY ONE EFFECT TYPE ALLOWED
-		#if e.getEffectName() != effectName:
-			#if effectName != "":
-				#e.queue_free()
-		#effectName = e.getEffectName()
-
-
+	
 func togglePhased(isPhased:bool):
 	self.isPhased = isPhased
 	updatePhasedVisuals()
@@ -124,13 +119,3 @@ func updatePhasedVisuals():
 		$PhasedTexture.show()
 	else:
 		$PhasedTexture.hide()
-
-
-
-func hasDoom() -> bool:
-	
-	for effect:CardEffect in debuffs:
-		if effect.isDoom:
-			return true
-	return false
-	

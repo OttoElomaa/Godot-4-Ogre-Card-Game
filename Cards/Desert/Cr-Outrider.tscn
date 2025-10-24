@@ -44,7 +44,7 @@ script = ExtResource("7_lq8tf")
 [node name="OnSelfArrivalTrigger" parent="Actions2" index="0" instance=ExtResource("2_hhsm2")]
 
 [node name="CardAction" parent="Actions2/OnSelfArrivalTrigger" index="1" instance=ExtResource("3_q156q")]
-customActionText = "Arrival: Fetch a Ritual card from the deck and add it to hand."
+customActionText = "Arrival: Fetch a Ritual."
 
 [node name="SkillDrawCardToHand" parent="Actions2/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("8_klw2k")]
 

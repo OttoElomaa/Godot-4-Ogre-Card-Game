@@ -1,6 +1,6 @@
 extends Node
 
-signal turnStarted
+signal turnStarted(params:SignalParams)
 
 ##	One argument: the card that arrived
 signal arrival(params:SignalParams)
@@ -9,7 +9,7 @@ signal champion_placed(params:SignalParams)
 
 signal cast_pressed(params:SignalParams)
 signal cast(params:SignalParams)
-signal ritual
+signal ritual(params:SignalParams)
 
 ##	Two arguments. 0: the attacking card, 1: the defending card
 signal attacked(params:SignalParams)

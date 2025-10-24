@@ -104,129 +104,8 @@ var isResting := false
 var allowInteract := true
 
 
-#######################################################################################
-#region ######################################### KEYWORD HANDLER STUFF
-
-func getKeywords():
-	keywords = $KeywordHandler.collectKeywords()
-	
-	
-func hasKeyword(keyword:String) -> bool:
-	getKeywords()
-	for i in keywords:
-		if i.id == keyword:
-			return true
-	return false
 
 
-func addKeyword(string:String):
-	var keywordDirectory = 'res://CardScriptsAndComponents/Keywords/'
-	var new_keyword: Keyword
-	
-	for i in DirAccess.get_files_at(keywordDirectory):
-		print(i)
-		if i.contains(string):
-			print('Keyword Found')
-			var loaded_keyword = load(keywordDirectory + i)
-			new_keyword = loaded_keyword.instantiate()
-			$KeywordHandler/MyKeywords.add_child(new_keyword)
-			return
-			
-	new_keyword = Keyword.new()
-	new_keyword.id = string
-	$KeywordHandler/MyKeywords.add_child(new_keyword)
-
-## Adds keywords from an array of string values.
-func replace_keywords(new_k:PackedStringArray):
-	for string:String in new_k:
-		addKeyword(string)
-
-#endregion
-
-#######################################################################################
-#region ######################################### COUNTER NODE STUFF
-var isPhased: bool:
-	get:
-		return effects.isPhased
-	set(value):
-		effects.togglePhased(value)
-
-#endregion
-
-#######################################################################################
-#region ######################################### EFFECT COUNTER STUFF
-
-#### GET ALL EFFECTS -> USED BY hasEffect() AND OTHER STUFF
-func getEffects() -> Array:
-	var counters = []
-	for e:EffectCounter in $Effects/Buff/Nodes.get_children():
-		counters.append(e)
-	for e:EffectCounter in $Effects/Debuff/Nodes.get_children():
-		counters.append(e)
-	return counters
-
-
-#### GET EFFECTS, SEE IF ID MATCHES
-func hasEffect(id:String):
-	var counters = getEffects()
-	for i in counters:
-		if i.id == id:
-			print(i.name)
-			return true
-	return false
-
-func getEffect(id:String) -> CardEffect:
-	var counters = getEffects()
-	for i in counters:
-		if i.id == id:
-			return i
-	return null
-
-func addEffect(appliedEffect: CardEffect):
-	effects.addEffect(appliedEffect)
-
-## Increase or decrease the number of stacks on a given effect counter.
-func changeEffectStacks(id:String, amount: int):
-	if getEffect(id) is EffectCounter:
-		var counter = getEffect(id).counter
-		getEffect(id).counter += clampi(amount, amount, counter)
-	checkAndTerminateEffects()
-	effects.updateEffectVisuals()
-
-## Checks if any effect counters are at 0. If they are not permanent, remove them.
-func checkAndTerminateEffects():
-	for effect: EffectCounter in getEffects():
-		if effect.counter < 1 and !effect.isPermanent:
-			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
-			removeEffect(effect.id)
-
-## Remove an effect.
-func removeEffect(id):
-	if getEffect(id):
-		getEffect(id).queue_free()
-
-#endregion
-
-#######################################################################################
-#region ######################################## COLOR FETCHERS
-
-var hurtColor:
-	get:
-		if isEnemyCard:
-			return Color.GOLDENROD
-		else:
-			return Color.FIREBRICK
-
-var healColor:
-	get:
-		if isEnemyCard:
-			return Color.CADET_BLUE
-		else:
-			return Color.LIGHT_GREEN
-
-#endregion
-
-#######################################################################################
 #region ######################################## STARTUP
 func _ready() -> void:
 	
@@ -234,18 +113,14 @@ func _ready() -> void:
 	SignalBus.connect("attacked", handleCombatActions)
 	SignalBus.connect("defended", handleCombatActions)
 	
-	#subTypes = subTypeStr.split(" ")
-	#damage = startingDamage
-	#health = startingHealth
 	
-	
-
 func setup_all_actions():
 	$Actions.setup(self)
 	$Actions.putTriggersToSleep()
 	if alt_actions_node_1:
 		alt_actions_node_1.setup(self)
 		alt_actions_node_1.putTriggersToSleep()
+
 
 func setup(gameBoard: GameBoard):
 	
@@ -397,6 +272,144 @@ func setInitialActionState():
 		statesActive()
 
 #endregion
+
+
+
+#######################################################################################
+#region ######################################### KEYWORD HANDLER STUFF
+
+func getKeywords():
+	keywords = $KeywordHandler.collectKeywords()
+	
+	
+func hasKeyword(keyword:String) -> bool:
+	getKeywords()
+	for i in keywords:
+		if i.id == keyword:
+			return true
+	return false
+
+
+func addKeyword(string:String):
+	var keywordDirectory = 'res://CardScriptsAndComponents/Keywords/'
+	var new_keyword: Keyword
+	
+	for i in DirAccess.get_files_at(keywordDirectory):
+		print(i)
+		if i.contains(string):
+			print('Keyword Found')
+			var loaded_keyword = load(keywordDirectory + i)
+			new_keyword = loaded_keyword.instantiate()
+			$KeywordHandler/MyKeywords.add_child(new_keyword)
+			return
+			
+	new_keyword = Keyword.new()
+	new_keyword.id = string
+	$KeywordHandler/MyKeywords.add_child(new_keyword)
+
+
+## Adds keywords from an array of string values.
+func replace_keywords(new_k:PackedStringArray):
+	for string:String in new_k:
+		addKeyword(string)
+
+#endregion
+
+
+
+#######################################################################################
+#region ######################################### COUNTER NODE STUFF
+var isPhased: bool:
+	get:
+		return effects.isPhased
+	set(value):
+		effects.togglePhased(value)
+
+#endregion
+
+
+
+#######################################################################################
+#region ######################################### EFFECT COUNTER STUFF
+
+#### GET ALL EFFECTS -> USED BY hasEffect() AND OTHER STUFF
+func getEffects() -> Array:
+	var counters = []
+	for e:EffectCounter in $Effects/Buff/Nodes.get_children():
+		counters.append(e)
+	for e:EffectCounter in $Effects/Debuff/Nodes.get_children():
+		counters.append(e)
+	return counters
+
+
+#### GET EFFECTS, SEE IF ID MATCHES
+func hasEffect(id:String):
+	var counters = getEffects()
+	for i in counters:
+		if i.id == id:
+			print(i.name)
+			return true
+	return false
+
+
+func getEffect(id:String) -> CardEffect:
+	var counters = getEffects()
+	for i in counters:
+		if i.id == id:
+			return i
+	return null
+
+
+func addEffect(appliedEffect: CardEffect):
+	effects.addEffect(appliedEffect)
+
+
+## Increase or decrease the number of stacks on a given effect counter.
+func changeEffectStacks(id:String, amount: int):
+	if getEffect(id) is EffectCounter:
+		var counter = getEffect(id).counter
+		getEffect(id).counter += clampi(amount, amount, counter)
+	checkAndTerminateEffects()
+	effects.updateEffectVisuals()
+
+
+## Checks if any effect counters are at 0. If they are not permanent, remove them.
+func checkAndTerminateEffects():
+	for effect: EffectCounter in getEffects():
+		if effect.counter < 1 and !effect.isPermanent:
+			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
+			removeEffect(effect.id)
+
+
+## Remove an effect.
+func removeEffect(id):
+	if getEffect(id):
+		getEffect(id).queue_free()
+
+#endregion
+
+
+
+#######################################################################################
+#region ######################################## COLOR FETCHERS
+
+var hurtColor:
+	get:
+		if isEnemyCard:
+			return Color.GOLDENROD
+		else:
+			return Color.FIREBRICK
+
+var healColor:
+	get:
+		if isEnemyCard:
+			return Color.CADET_BLUE
+		else:
+			return Color.LIGHT_GREEN
+
+#endregion
+
+#######################################################################################
 
 ##############################################################################
 #region ######################################## MOUSE INTERACTION

@@ -1,5 +1,7 @@
 extends ConditionalComponent
 
+#### CHECK: IS IT THIS CARD'S ALLIED TURN?
 func check(card:Card, _condition):
-	print(name, ' is checking')
-	return card.isEnemyCard == GameInfo.enemy_turn
+	var success := card.isEnemyCard == GameInfo.enemy_turn
+	print("%s is checking. Success: %s" % [name, success])
+	return success

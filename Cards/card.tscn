@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=30 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Script" uid="uid://c4juxj0muiopk" path="res://CardScriptsAndComponents/Scripts/cardEffectsNode.gd" id="2_07jhh"]
@@ -12,6 +12,7 @@
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Fonts/BasicSmallPixelFont.tres" id="5_8geja"]
 [ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="5_jsedn"]
 [ext_resource type="Texture2D" uid="uid://cdficndq8clk4" path="res://Art/CardComponents/card-backside-texture-v2-achra.jpg" id="5_lcq1x"]
+[ext_resource type="Texture2D" uid="uid://caft2vq4coj0t" path="res://Art/CardComponents/card-effect-counter-stacks-background.png" id="5_q2hgj"]
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="6_lcq1x"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="6_u70hd"]
 [ext_resource type="Texture2D" uid="uid://c6fbvpdul76bl" path="res://Art/CardComponents/card-action-state-indicator-texture-traveling-V2.png" id="9_gi0db"]
@@ -245,6 +246,14 @@ position = Vector2(100, 150)
 position = Vector2(-100, -150)
 texture = ExtResource("4_s5qc8")
 
+[node name="Shadow" type="TextureRect" parent="Effects/Buff/Sprites/BuffSprite1"]
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 41.0
+offset_bottom = 37.0
+texture = ExtResource("5_q2hgj")
+stretch_mode = 2
+
 [node name="Amount" type="Label" parent="Effects/Buff/Sprites/BuffSprite1"]
 offset_left = 15.0
 offset_top = 8.0
@@ -259,6 +268,14 @@ position = Vector2(-100, -150)
 texture = ExtResource("4_s5qc8")
 offset = Vector2(0, 50)
 
+[node name="Shadow" type="TextureRect" parent="Effects/Buff/Sprites/BuffSprite2"]
+offset_left = -25.0
+offset_top = 25.0
+offset_right = 41.0
+offset_bottom = 87.0
+texture = ExtResource("5_q2hgj")
+stretch_mode = 2
+
 [node name="Amount" type="Label" parent="Effects/Buff/Sprites/BuffSprite2"]
 offset_left = 15.0
 offset_top = 58.0
@@ -272,6 +289,14 @@ horizontal_alignment = 1
 position = Vector2(-100, -150)
 texture = ExtResource("4_s5qc8")
 offset = Vector2(0, 100)
+
+[node name="Shadow" type="TextureRect" parent="Effects/Buff/Sprites/BuffSprite3"]
+offset_left = -25.0
+offset_top = 75.0
+offset_right = 41.0
+offset_bottom = 137.0
+texture = ExtResource("5_q2hgj")
+stretch_mode = 2
 
 [node name="Amount" type="Label" parent="Effects/Buff/Sprites/BuffSprite3"]
 offset_left = 15.0
@@ -292,6 +317,14 @@ position = Vector2(100, -150)
 [node name="DebuffSprite1" type="Sprite2D" parent="Effects/Debuff/Sprites"]
 texture = ExtResource("4_s5qc8")
 
+[node name="Shadow" type="TextureRect" parent="Effects/Debuff/Sprites/DebuffSprite1"]
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 41.0
+offset_bottom = 37.0
+texture = ExtResource("5_q2hgj")
+stretch_mode = 2
+
 [node name="Amount" type="Label" parent="Effects/Debuff/Sprites/DebuffSprite1"]
 offset_left = 15.0
 offset_top = 8.0
@@ -305,6 +338,14 @@ horizontal_alignment = 1
 texture = ExtResource("4_s5qc8")
 offset = Vector2(0, 50)
 
+[node name="Shadow" type="TextureRect" parent="Effects/Debuff/Sprites/DebuffSprite2"]
+offset_left = -25.0
+offset_top = 25.0
+offset_right = 41.0
+offset_bottom = 87.0
+texture = ExtResource("5_q2hgj")
+stretch_mode = 2
+
 [node name="Amount" type="Label" parent="Effects/Debuff/Sprites/DebuffSprite2"]
 offset_left = 15.0
 offset_top = 58.0
@@ -317,6 +358,14 @@ horizontal_alignment = 1
 [node name="DebuffSprite3" type="Sprite2D" parent="Effects/Debuff/Sprites"]
 texture = ExtResource("4_s5qc8")
 offset = Vector2(0, 100)
+
+[node name="Shadow" type="TextureRect" parent="Effects/Debuff/Sprites/DebuffSprite3"]
+offset_left = -25.0
+offset_top = 75.0
+offset_right = 41.0
+offset_bottom = 137.0
+texture = ExtResource("5_q2hgj")
+stretch_mode = 2
 
 [node name="Amount" type="Label" parent="Effects/Debuff/Sprites/DebuffSprite3"]
 offset_left = 15.0
