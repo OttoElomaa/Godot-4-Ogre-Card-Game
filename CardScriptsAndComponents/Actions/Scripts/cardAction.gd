@@ -23,8 +23,9 @@ var targetingComponent: TargetingComponent
 #@export var nodeKeyword := "Action type"
 @export_multiline var customActionText := ""
 
-@export var isCost := false
-@export var isPayoff := false
+#@export var isCost := false
+var savedTargets: Array
+#@export var isPayoff := false
 
 
 
@@ -74,14 +75,19 @@ func activate(params:SignalParams) -> bool:
 			var targets:Array = []
 			targets.append(targetingComponent.target)
 			success = activateSkillAfterTargeting(targets)
-		
+		else:
+			return success
 	else:
 		var targets = []
 		success = activateSkillAfterTargeting(targets)
 			
 	return success
 
-
+func get_saved_targets():
+	for child:CardAction in get_parent().get_children():
+		if not child.savedTargets.is_empty():
+			print(child.savedTargets)
+			return child.savedTargets
 
 func handleManualTargeting():
 	for component:Node in get_children():

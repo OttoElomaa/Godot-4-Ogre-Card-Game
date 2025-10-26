@@ -8,7 +8,6 @@ class_name Skill
 var action:CardAction = null
 var myCard:Card = null
 
-
 func setup(action:Node, card:Card):
 	self.action = action
 	self.myCard = card
@@ -22,15 +21,23 @@ func activate(targets:Array) -> bool:
 func createText() -> String:
 	return ""
 
-func get_scaling(args: Dictionary) -> int:
+func get_scaling(new_args: Dictionary) -> int:
 	var bonus_value = 0
+	var arguments = {} 
+	arguments['saved_targets'] = get_saved_targets()
+	arguments['user'] = myCard
+	arguments.merge(new_args)
 	if get_children().size() > 0:
 		for child:ScalingComponent in get_children():
-			bonus_value += child.get_scaling(args)
+			bonus_value += child.get_scaling(arguments) * child.multiplier
+	print('Scaled with ', bonus_value)
 	return bonus_value
 
 func isScaled() -> bool:
 	return get_children().size() > 0
+
+func get_saved_targets():
+	return action.get_saved_targets()
 
 func createPrintout(action:CardAction):
 	

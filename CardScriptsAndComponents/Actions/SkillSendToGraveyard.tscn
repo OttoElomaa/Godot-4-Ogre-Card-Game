@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c48goee1xgt00"]
+
+[ext_resource type="Script" uid="uid://dkr60roiicgek" path="res://CardScriptsAndComponents/Actions/Scripts/skill_send_to_graveyard.gd" id="1_pl4ya"]
+
+[node name="SkillSendToGraveyard" type="Node2D"]
+script = ExtResource("1_pl4ya")
+metadata/_custom_type_script = "uid://cxr3ippvyy8ii"

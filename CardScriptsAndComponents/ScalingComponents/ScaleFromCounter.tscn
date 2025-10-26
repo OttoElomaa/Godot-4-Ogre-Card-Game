@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbcmto8022l1h"]
 
-[ext_resource type="Script" uid="uid://nv6yy32vdj1u" path="res://CardScriptsAndComponents/ScalingComponents/scale_from_counter.gd" id="1_04ppb"]
+[ext_resource type="Script" uid="uid://nv6yy32vdj1u" path="res://CardScriptsAndComponents/ScalingComponents/Scripts/scale_from_counter.gd" id="1_04ppb"]
 
 [node name="ScaleFromCounter" type="Node"]
 script = ExtResource("1_04ppb")

@@ -58,5 +58,7 @@ func execute(params:SignalParams):
 		for child in get_children():
 			if child is CardAction:
 				success = await child.activate(params)
+				if not success:
+					return success
 
 	return success

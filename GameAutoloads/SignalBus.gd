@@ -8,7 +8,11 @@ signal arrival(params:SignalParams)
 signal champion_placed(params:SignalParams)
 
 signal cast_pressed(params:SignalParams)
+
+## One argument: the card that cast.
 signal cast(params:SignalParams)
+
+## One argument: the ritual that was cast.
 signal ritual(params:SignalParams)
 
 ##	Two arguments. 0: the attacking card, 1: the defending card

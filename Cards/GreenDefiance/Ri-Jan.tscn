@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://wyl0ao77i0bp"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_c2kfc"]
+[ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="2_ga422"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_lkiog"]
+[ext_resource type="PackedScene" uid="uid://cnl53ndg87cwd" path="res://CardScriptsAndComponents/Actions/SkillDrawCardToHand.tscn" id="4_77jrv"]
+[ext_resource type="PackedScene" uid="uid://hxa2c3jb5ru4" path="res://CardScriptsAndComponents/TargetingComponents/AllyGraveyard.tscn" id="5_6n2xt"]
+[ext_resource type="PackedScene" uid="uid://botbjqrlvbhcq" path="res://CardScriptsAndComponents/Conditionals/IfType.tscn" id="6_iasup"]
+
+[node name="Ri-Jan" instance=ExtResource("1_c2kfc")]
+cardName = "Fronds of Jan"
+cardType = 1
+subTypeStr = "Gharch Spell"
+flavorText = "As long as flesh remains, fungal-knights seldom stay dead."
+
+[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_ga422")]
+
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("3_lkiog")]
+customActionText = "An ally creature is revived and put back to hand."
+
+[node name="SkillDrawCardToHand" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_77jrv")]
+
+[node name="AllyGraveyard" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_6n2xt")]
+
+[node name="IfType" parent="Actions/OnCastTrigger/CardAction/AllyGraveyard" index="1" instance=ExtResource("6_iasup")]
+card_type = "Creature"

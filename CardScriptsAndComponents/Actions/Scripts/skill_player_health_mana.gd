@@ -15,18 +15,30 @@ func activate(targets:Array) -> bool:
 	
 	#### ALTER OWNER RESOURCES
 	if alterOwnerHealth != 0:
-		MyTools.changeHealth(alterOwnerHealth, myCard.isEnemyCard)
+		var value = alterOwnerHealth
+		if isScaled():
+			value = get_scaling({})
+		MyTools.changeHealth(value, myCard.isEnemyCard)
 		success = true
 	if alterOwnerMana != 0:
-		MyTools.changeMana(alterOwnerMana, myCard.isEnemyCard)
+		var value = alterOwnerMana
+		if isScaled():
+			value = get_scaling({})
+		MyTools.changeMana(value, myCard.isEnemyCard)
 		success = true
 
 	#### ALTER OWNER RESOURCES
 	if alterOpponentHealth != 0:
-		MyTools.changeHealth(alterOpponentHealth, !myCard.isEnemyCard)
+		var value = alterOpponentHealth
+		if isScaled():
+			value = get_scaling({})
+		MyTools.changeHealth(value, !myCard.isEnemyCard)
 		success = true
 	if alterOpponentMana != 0:
-		MyTools.changeMana(alterOwnerMana, !myCard.isEnemyCard)
+		var value = alterOpponentMana
+		if isScaled():
+			value = get_scaling({})
+		MyTools.changeMana(value, !myCard.isEnemyCard)
 		success = true
 
 		
