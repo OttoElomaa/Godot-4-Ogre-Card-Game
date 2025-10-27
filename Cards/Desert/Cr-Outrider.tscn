@@ -15,7 +15,7 @@
 [node name="Card-Cr-Outrider" node_paths=PackedStringArray("alt_actions_node_1") instance=ExtResource("1_hhsm2")]
 cardName = "Outrider"
 subTypeStr = "Salkhi Scout"
-flavorText = "Outriders carry omens and news, like wind carries grains of sand."
+flavorText = "Ah Outrider, sibling of barkhans, carrier of omens!"
 manaCost = 2
 startingDamage = 2
 startingHealth = 2

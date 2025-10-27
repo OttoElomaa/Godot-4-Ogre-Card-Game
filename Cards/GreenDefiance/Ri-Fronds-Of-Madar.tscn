@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://o4288fvn3jsd"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_tm7ws"]
+[ext_resource type="Texture2D" uid="uid://cao4ayvdqvtj" path="res://Art/CardArt/GreenDefiance/Fronds of Madar.png" id="2_g1f38"]
+
+[node name="Ri-Fronds of Madar" instance=ExtResource("1_tm7ws")]
+cardName = "Fronds of Madar"
+cardType = 1
+subTypeStr = "Gharch Spell"
+flavorText = "Come, o Mother! Reclaim thy wayward child!"
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_g1f38")
