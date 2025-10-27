@@ -239,9 +239,9 @@ func handlePlayerRitual(c:Card) -> bool:
 	
 	return success
 
-func attack(attacker:Card, defender:Card):
-	SignalBus.attacked.emit(attacker, defender)
-	SignalBus.defended.emit(attacker, defender)
+#func attack(attacker:Card, defender:Card):
+#	SignalBus.attacked.emit(attacker, defender)
+#	SignalBus.defended.emit(attacker, defender)
 	
 
 func cardCastButtonPressed() -> void:

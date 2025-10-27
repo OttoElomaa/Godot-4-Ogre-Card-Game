@@ -646,10 +646,10 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	return combatDamage
 
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
-func handleCombatActions(args: Array):
+func handleCombatActions(params:SignalParams):
 	var isAttacker = null
-	var attacker = args[0]
-	var defender = args[1]
+	var attacker = params.sourceCard
+	var defender = params.targetCard
 	
 	if attacker == self:
 		isAttacker = true
