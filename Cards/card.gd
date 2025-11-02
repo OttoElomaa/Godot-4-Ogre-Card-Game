@@ -104,129 +104,8 @@ var isResting := false
 var allowInteract := true
 
 
-#######################################################################################
-#region ######################################### KEYWORD HANDLER STUFF
-
-func getKeywords():
-	keywords = $KeywordHandler.collectKeywords()
-	
-	
-func hasKeyword(keyword:String) -> bool:
-	getKeywords()
-	for i in keywords:
-		if i.id == keyword:
-			return true
-	return false
 
 
-func addKeyword(string:String):
-	var keywordDirectory = 'res://CardScriptsAndComponents/Keywords/'
-	var new_keyword: Keyword
-	
-	for i in DirAccess.get_files_at(keywordDirectory):
-		print(i)
-		if i.contains(string):
-			print('Keyword Found')
-			var loaded_keyword = load(keywordDirectory + i)
-			new_keyword = loaded_keyword.instantiate()
-			$KeywordHandler/MyKeywords.add_child(new_keyword)
-			return
-			
-	new_keyword = Keyword.new()
-	new_keyword.id = string
-	$KeywordHandler/MyKeywords.add_child(new_keyword)
-
-## Adds keywords from an array of string values.
-func replace_keywords(new_k:PackedStringArray):
-	for string:String in new_k:
-		addKeyword(string)
-
-#endregion
-
-#######################################################################################
-#region ######################################### COUNTER NODE STUFF
-var isPhased: bool:
-	get:
-		return effects.isPhased
-	set(value):
-		effects.togglePhased(value)
-
-#endregion
-
-#######################################################################################
-#region ######################################### EFFECT COUNTER STUFF
-
-#### GET ALL EFFECTS -> USED BY hasEffect() AND OTHER STUFF
-func getEffects() -> Array:
-	var counters = []
-	for e:EffectCounter in $Effects/Buff/Nodes.get_children():
-		counters.append(e)
-	for e:EffectCounter in $Effects/Debuff/Nodes.get_children():
-		counters.append(e)
-	return counters
-
-
-#### GET EFFECTS, SEE IF ID MATCHES
-func hasEffect(id:String):
-	var counters = getEffects()
-	for i in counters:
-		if i.id == id:
-			print(i.name)
-			return true
-	return false
-
-func getEffect(id:String) -> CardEffect:
-	var counters = getEffects()
-	for i in counters:
-		if i.id == id:
-			return i
-	return null
-
-func addEffect(appliedEffect: CardEffect):
-	effects.addEffect(appliedEffect)
-
-## Increase or decrease the number of stacks on a given effect counter.
-func changeEffectStacks(id:String, amount: int):
-	if getEffect(id) is EffectCounter:
-		var counter = getEffect(id).counter
-		getEffect(id).counter += clampi(amount, amount, counter)
-	checkAndTerminateEffects()
-	effects.updateEffectVisuals()
-
-## Checks if any effect counters are at 0. If they are not permanent, remove them.
-func checkAndTerminateEffects():
-	for effect: EffectCounter in getEffects():
-		if effect.counter < 1 and !effect.isPermanent:
-			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
-			removeEffect(effect.id)
-
-## Remove an effect.
-func removeEffect(id):
-	if getEffect(id):
-		getEffect(id).queue_free()
-
-#endregion
-
-#######################################################################################
-#region ######################################## COLOR FETCHERS
-
-var hurtColor:
-	get:
-		if isEnemyCard:
-			return Color.GOLDENROD
-		else:
-			return Color.FIREBRICK
-
-var healColor:
-	get:
-		if isEnemyCard:
-			return Color.CADET_BLUE
-		else:
-			return Color.LIGHT_GREEN
-
-#endregion
-
-#######################################################################################
 #region ######################################## STARTUP
 func _ready() -> void:
 	
@@ -234,18 +113,14 @@ func _ready() -> void:
 	SignalBus.connect("attacked", handleCombatActions)
 	SignalBus.connect("defended", handleCombatActions)
 	
-	#subTypes = subTypeStr.split(" ")
-	#damage = startingDamage
-	#health = startingHealth
 	
-	
-
 func setup_all_actions():
 	$Actions.setup(self)
 	$Actions.putTriggersToSleep()
 	if alt_actions_node_1:
 		alt_actions_node_1.setup(self)
 		alt_actions_node_1.putTriggersToSleep()
+
 
 func setup(gameBoard: GameBoard):
 	
@@ -374,7 +249,10 @@ func handleTurnStartReset():
 #### HANDLE CARD BEING PLAYED ON BOARD
 func handleArrival():
 	basicSetup()
-	SignalBus.arrival.emit([self])
+	
+	var params = SignalParams.new()
+	params.sourceCard = self
+	SignalBus.arrival.emit(params)
 #	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
 	
 	#if hasShadow:
@@ -394,6 +272,145 @@ func setInitialActionState():
 		statesActive()
 
 #endregion
+
+
+
+#######################################################################################
+#region ######################################### KEYWORD HANDLER STUFF
+
+func getKeywords():
+	keywords = $KeywordHandler.collectKeywords()
+	
+	
+func hasKeyword(keyword:String) -> bool:
+	getKeywords()
+	for i in keywords:
+		if i.id == keyword:
+			return true
+	return false
+
+
+func addKeyword(string:String):
+	var keywordDirectory = 'res://CardScriptsAndComponents/Keywords/'
+	var new_keyword: Keyword
+	
+	for i in DirAccess.get_files_at(keywordDirectory):
+		print(i)
+		if i.contains(string):
+			print('Keyword Found')
+			var loaded_keyword = load(keywordDirectory + i)
+			new_keyword = loaded_keyword.instantiate()
+			$KeywordHandler/MyKeywords.add_child(new_keyword)
+			return
+			
+	new_keyword = Keyword.new()
+	new_keyword.id = string
+	$KeywordHandler/MyKeywords.add_child(new_keyword)
+
+
+## Adds keywords from an array of string values.
+func replace_keywords(new_k:PackedStringArray):
+	for string:String in new_k:
+		addKeyword(string)
+
+#endregion
+
+
+
+#######################################################################################
+#region ######################################### COUNTER NODE STUFF
+var isPhased: bool:
+	get:
+		return effects.isPhased
+	set(value):
+		effects.togglePhased(value)
+
+#endregion
+
+
+
+#######################################################################################
+#region ######################################### EFFECT COUNTER STUFF
+
+#### GET ALL EFFECTS -> USED BY hasEffect() AND OTHER STUFF
+func getEffects() -> Array:
+	var counters = []
+	for e:EffectCounter in $Effects/Buff/Nodes.get_children():
+		counters.append(e)
+	for e:EffectCounter in $Effects/Debuff/Nodes.get_children():
+		counters.append(e)
+	return counters
+
+
+#### GET EFFECTS, SEE IF ID MATCHES
+func hasEffect(id:String):
+	var counters = getEffects()
+	for i in counters:
+		if i.id == id:
+			print(i.name)
+			return true
+	return false
+
+
+func getEffect(id:String) -> CardEffect:
+	var counters = getEffects()
+	for i in counters:
+		if i.id == id:
+			return i
+	return null
+
+
+func addEffect(appliedEffect: CardEffect):
+	effects.addEffect(appliedEffect)
+
+
+## Increase or decrease the number of stacks on a given effect counter.
+func changeEffectStacks(id:String, amount: int):
+	if getEffect(id) is EffectCounter:
+		var counter = getEffect(id).counter
+		getEffect(id).counter += amount
+	checkAndTerminateEffects()
+	effects.updateEffectVisuals()
+
+
+## Checks if any effect counters are at 0. If they are not permanent, remove them.
+func checkAndTerminateEffects():
+	for effect: EffectCounter in getEffects():
+		if effect.counter < 1 and !effect.isPermanent:
+			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
+			removeEffect(effect.id)
+
+
+## Remove an effect.
+func removeEffect(id):
+	if getEffect(id):
+		getEffect(id).queue_free()
+		await get_tree().process_frame
+
+#endregion
+
+
+
+#######################################################################################
+#region ######################################## COLOR FETCHERS
+
+var hurtColor:
+	get:
+		if isEnemyCard:
+			return Color.GOLDENROD
+		else:
+			return Color.FIREBRICK
+
+var healColor:
+	get:
+		if isEnemyCard:
+			return Color.CADET_BLUE
+		else:
+			return Color.LIGHT_GREEN
+
+#endregion
+
+#######################################################################################
 
 ##############################################################################
 #region ######################################## MOUSE INTERACTION
@@ -500,7 +517,8 @@ func statesInert():
 
 func statesDestroy():
 	vacateSlot()
-	actionState = CardActionStates.DISCARD	
+	actionState = CardActionStates.DISCARD
+	cardState = CardStates.GRAVEYARD
 
 func statesHand():
 	vacateSlot()
@@ -592,48 +610,89 @@ func takeCombatDamage(card:Card, isAttacker: bool) -> int:
 	return damageTaken
 
 
+#### RETURNS THE INPUT DAMAGE, AND ADDS to it any of 
+#### THIS CARD'S (Damage Taking card) DAMAGE-CHANGING EFFECTS
 func takeDamage(amount:int):
-	var damageModifiers:int = 0
 	
-	##GENERAL DAMAGE EFFECTS
+	## EFFECTS THAT CHANGE *ALL* DAMAGE TAKEN BY THIS CARD, INCLUDING INDIRECT. 
+	var damageModifiers:int = 0
+	## IF THIS IS TRUE, THE CARD WILL TAKE NO DAMAGE.
+	var damageIgnored = false
+	
+			
+	## DOOM
 	if getEffect('Doom'):
 		damageModifiers += getEffect('Doom').counter
+	
+	#### ARMOR
+	if hasEffect("Armor"):
+		var armorStacks:int = getEffect("Armor").counter
+		changeEffectStacks('Armor', -(amount + damageModifiers))
+		damageModifiers -= armorStacks
 		
-	##DAMAGE IS DEALT
+	#### PROTECTION
+	if hasEffect('Protection'):
+		damageIgnored = true
+		
+	#### FIX DAMAGE
 	var damageTaken = amount + damageModifiers
+	
+	if damageIgnored:
+		damageTaken = 0
+		
+	if damageTaken < 0:
+		damageTaken = 0
+	
+	#### DAMAGE IS DEALT
 	tempHealth -= damageTaken
 	var amountString := "%s %s takes %d damage" % [MyTools.getFactionString(self), self.cardName, amount]
 	var color:Color = Color.DARK_SALMON
 	MyTools.createCombatLogPrintout(amountString, color)
+	
+	#### DAMAGE_TAKEN SIGNAL IS EMITTED
+	var signal_data = SignalParams.new()
+	signal_data.amount = damageTaken
+	signal_data.isEnemySide = isEnemyCard
+	signal_data.sourceCard = self
+	SignalBus.damage_taken.emit(signal_data)
 
 	##CHECK IF DESTROYED
 	if tempHealth <= 0:
 		destroyAndAnimate(true)
 
 
+
+#### RETURNS THE TEMPORARY DAMAGE, AND ADDS to it any of 
+#### THIS CARD'S (Damage Dealer) DAMAGE-CHANGING EFFECTS
 func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	#### BASELINE
-	var combatDamage = tempDamage
+	var combatDamage:int = tempDamage
 	
 	#### ATTACKER'S EFFECTS
 	if effects.isPhased:
 		combatDamage += 1
 	
+	if hasEffect('Rage') and isAttacker:
+		combatDamage += getEffect('Rage').counter
+	
 	#### END OF TARGETLESS DAMAGE CALCULATION
 	if not target:
 		return combatDamage
 	
-	#### TARGET'S EFFECTS
-	if hasEffect('Rage') and isAttacker:
-		combatDamage += getEffect('Rage').counter
+	
+	#### FIX DAMAGE
+	if combatDamage < 0:
+		combatDamage = 0
 	
 	return combatDamage
 
+
+
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
-func handleCombatActions(args: Array):
+func handleCombatActions(params:SignalParams):
 	var isAttacker = null
-	var attacker = args[0]
-	var defender = args[1]
+	var attacker = params.sourceCard
+	var defender = params.targetCard
 	
 	if attacker == self:
 		isAttacker = true

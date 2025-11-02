@@ -58,7 +58,11 @@ func _on_nuke_all_cards_pressed():
 	current_scene.nuke_all_cards()
 
 func get_all_game_cards():
-	var path = 'res://Cards/Desert/'
+	var path = 'res://Cards/City/'
+	for file in DirAccess.get_files_at(path):
+		var new_card = load(str(path, file))
+		all_cards.append(new_card.instantiate())
+	path = 'res://Cards/Desert/'
 	for file in DirAccess.get_files_at(path):
 		var new_card = load(str(path, file))
 		all_cards.append(new_card.instantiate())

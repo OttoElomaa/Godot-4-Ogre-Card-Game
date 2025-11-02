@@ -8,12 +8,36 @@ extends Node2D
 
 var bestiaryVisible := false
 
+var bestiaryCards := []
 
 
 func _ready() -> void:
 	
+	setupBestiary()
+	
 	bestiaryVisible = true
 	buttonPressedToggleBestiary()
+
+
+
+func setupBestiary():
+	
+	var allCards := []
+	
+	allCards.append_array(loadCardsInFolder("res://Cards/City/"))
+	allCards.append_array( loadCardsInFolder("res://Cards/Desert/") )
+	allCards.append_array( loadCardsInFolder("res://Cards/GreenDefiance/") )
+	allCards.append_array(loadCardsInFolder("res://Cards/Outcasts/"))
+	
+	bestiaryCards.append_array(allCards)
+	
+	#### PLACE CARDS IN BESTIARY SLOTS
+	var bestiarySlots: Array = $Bestiary/Slots.get_children()
+	var placedCards = MyTools.placeCardsInSlotArray(bestiaryCards, bestiarySlots)
+		
+	for card:Card in placedCards:
+		$Bestiary/Cards.add_child(card)
+		card.turnOnBestiaryVisuals(self)
 
 
 
@@ -72,17 +96,6 @@ func buttonPressedToggleBestiary() -> void:
 		$CanvasLayer/CardInfoPane.show()
 		$Intro.toggleIntro(false)
 		
-		var allCards:Array = loadCardsInFolder("res://Cards/Outcasts/")
-		allCards.append_array( loadCardsInFolder("res://Cards/GreenDefiance/") )
-		allCards.append_array( loadCardsInFolder("res://Cards/Desert/") )
-		
-		#### PLACE CARDS IN BESTIARY SLOTS
-		var bestiarySlots: Array = $Bestiary/Slots.get_children()
-		var placedCards = MyTools.placeCardsInSlotArray(allCards, bestiarySlots)
-		
-		for card:Card in placedCards:
-			$Bestiary/Cards.add_child(card)
-			card.turnOnBestiaryVisuals(self)
 	
 	else:
 		bestiaryVisible = false

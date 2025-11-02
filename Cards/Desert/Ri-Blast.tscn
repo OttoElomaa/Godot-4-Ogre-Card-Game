@@ -10,11 +10,12 @@
 [node name="Card-Sp-Blast" instance=ExtResource("1_07d1u")]
 cardName = "Blast"
 cardType = 1
+manaCost = 4
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_ka4br")]
 
 [node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("2_e1l0y")]
-customActionText = "Inflict 2 damage."
+customActionText = "Inflict 1. Add 2 Burn"
 
 [node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_jfp56")]
 manualTargetGroup = 3

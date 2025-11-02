@@ -11,7 +11,7 @@ var sourceCard: Card = null
 var myCard: Card = null
 
 @export var id: String
-@export var description: String
+@export_multiline var description: String
 
 
 func setup(holder: Card):

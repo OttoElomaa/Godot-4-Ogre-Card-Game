@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cktcqllypvgaa"]
 
-[ext_resource type="Script" uid="uid://b3u8lcg0o8ftl" path="res://CardScriptsAndComponents/Actions/Scripts/targeting_component.gd" id="1_pclkx"]
+[ext_resource type="Script" uid="uid://b3u8lcg0o8ftl" path="res://CardScriptsAndComponents/TargetingComponents/Scripts/targeting_component.gd" id="1_pclkx"]
 
 [node name="TargetingComponent" type="Node2D"]
 script = ExtResource("1_pclkx")

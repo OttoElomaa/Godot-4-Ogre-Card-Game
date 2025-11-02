@@ -1,30 +1,15 @@
 extends Node
 
-signal turnStarted
+signal turnStarted(params:SignalParams)
 
-##	One argument: the card that arrived
-signal arrival(args:Array)
-##	One argument: the champion that was placed
-signal champion_placed(args:Array)
+signal arrival(params:SignalParams)
+signal champion_placed(params:SignalParams)
 
-## One argument: the card that cast.
-signal cast(args:Array)
+signal cast(params:SignalParams)
+signal ritual(params:SignalParams)
 
-## One argument: the ritual that was cast.
-signal ritual(args:Array)
+signal attacked(params:SignalParams)
+signal defended(params:SignalParams)
+signal damage_taken(params:SignalParams)
 
-##	Two arguments. 0: the attacking card, 1: the defending card
-signal attacked(args:Array)
-signal defended(args:Array)
-
-##	One argument: the card that died
-signal death(args:Array)
-
-
-
-#enum LocalSituations {
-#	NONE, ARRIVAL, CAST, BATTLE_ART, ON_TURN, RITUAL
-#}
-#enum GlobalSituations {
-#	NONE, ON_RITUAL, ON_CREATURE_ARRIVAL, ON_CREATURE_DEATH, ON_ALLY_DEATH, ON_ENEMY_DEATH
-#	}
+signal death(params:SignalParams)

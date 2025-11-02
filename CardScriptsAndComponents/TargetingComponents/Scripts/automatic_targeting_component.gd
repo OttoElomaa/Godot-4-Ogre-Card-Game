@@ -17,7 +17,7 @@ class_name AutoTargetingComponent
 func ready():
 	pass
 
-func getTargets(condition) -> Array:
+func getTargets() -> Array:
 	var targets = []
 	var conditions = []
 	var success = true
@@ -39,6 +39,8 @@ func getTargets(condition) -> Array:
 			targets.append(card)
 	print(name, ' acquired targets ', targets)
 	return targets
+
+
 
 func get_cards_in_group() -> Array:
 	var cards = []

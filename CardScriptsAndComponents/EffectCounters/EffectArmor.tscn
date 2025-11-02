@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvgj3stl7h3fy"]
+
+[ext_resource type="PackedScene" uid="uid://ca73vscnr1a8" path="res://CardScriptsAndComponents/EffectCounters/EffectCounter.tscn" id="1_p8pol"]
+[ext_resource type="Texture2D" uid="uid://cdhdbiyao5vny" path="res://Art/CardComponents/card-effect-counter-texture-armor.png" id="2_dsa08"]
+
+[node name="EffectArmor" instance=ExtResource("1_p8pol")]
+effectType = 1
+max_counter = 5
+id = "Armor"
+description = "Buff. On taking damage, reduce it by stacks of Armor, and remove that many stacks."
+
+[node name="Icon" parent="." index="0"]
+texture = ExtResource("2_dsa08")

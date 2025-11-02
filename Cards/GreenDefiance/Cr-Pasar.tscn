@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://colad8r6pikh2"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_yof0k"]
+[ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="2_fhqbh"]
+[ext_resource type="Texture2D" uid="uid://cnifcf3galvcl" path="res://Art/CardArt/GreenDefiance/Algae_siren.png" id="2_hbimt"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="3_b1ycd"]
+[ext_resource type="Script" uid="uid://eix01ge4b14h" path="res://CardScriptsAndComponents/TargetingComponents/Scripts/manual_targeting.gd" id="4_fhqbh"]
+
+[node name="Cr-Pasar" instance=ExtResource("1_yof0k")]
+cardName = "Pasar"
+subTypeStr = "Summon"
+flavorText = "O Life! Your forms are beyond counting!"
+startingDamage = 1
+startingHealth = 1
+
+[node name="OnCastTrigger" type="Node" parent="Actions" index="0"]
+script = ExtResource("2_fhqbh")
+situation_text = "Cast"
+metadata/_custom_type_script = "uid://cdekh7m7g5vek"
+
+[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="0"]
+script = ExtResource("3_b1ycd")
+customActionText = "Cast: Transform into target creature."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="ManualTargetingComponent" type="Node2D" parent="Actions/OnCastTrigger/CardAction" index="0"]
+script = ExtResource("4_fhqbh")
+manualTargetGroup = 2
+metadata/_custom_type_script = "uid://eix01ge4b14h"
+
+[node name="Art" parent="Frontside" index="1"]
+z_index = 1
+texture = ExtResource("2_hbimt")

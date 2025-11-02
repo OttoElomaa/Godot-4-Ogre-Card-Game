@@ -68,29 +68,37 @@ func _physics_process(delta: float) -> void:
 #### AUTOMATIC TURN ORDER STUFF, ENEMY TURN STUFF
 #######################################################################
 
-func _on_end_turn_button_pressed() -> void:
-	passTurn()
-	
-	
+
 #### PLAY ENEMY TURN, THEN AFTER TIMER WAIT, START PLAYER TURN
-func passTurn():
-	GameInfo.enemy_turn = !GameInfo.enemy_turn
-	print(GameInfo.enemy_turn)
-	SignalBus.turnStarted.emit([])
+func _on_end_turn_button_pressed() -> void:
+	switchBetweenPlayerEnemyTurns()
+	
+	#### THEN IF ENEMY TURN:
 	if GameInfo.enemy_turn:
 		cardsManager.startEnemyTurn()
 		$EnemyStartCombatTimer.start()
 		$EndEnemyTurnTimer.start()
 		enemyPlayTurn()
 	
-
-func enemyPlayTurn():
 	
+func switchBetweenPlayerEnemyTurns():
+	#### SWITCH TURN TYPE BETWEEN PLAYER <--> ENEMY
+	GameInfo.enemy_turn = !GameInfo.enemy_turn
+	
+	if GameInfo.enemy_turn:
+		print("Enemy turn start")
+	else:
+		print("Player turn start")
+			
+	SignalBus.turnStarted.emit(null)
+	
+	
+
+func enemyPlayTurn() -> void:
 	main.addLogMessage("Opponent turn!", Color.html("524634"))
 	
 	#### PLAY CARDS FROM HAND
-	var enemyHandCards = cardsManager.getEnemyHandCards()
-	
+	var enemyHandCards := cardsManager.getEnemyHandCards()
 	
 	for card:Card in enemyHandCards:
 		if MyTools.checkNodeValidity(card):
@@ -115,7 +123,7 @@ func timeoutEnemyStartCombat() -> void:
 
 
 
-func playEnemyCard(card:Card):
+func playEnemyCard(card:Card) -> bool:
 	for slot:CardSlot in main.getEnemySlots():
 		if slot.isAvailable and card.manaCost <= enemyMana:
 			
@@ -136,16 +144,14 @@ func timeoutEndEnemyTurn() -> void:
 	cardsManager.startPlayerTurn()
 	
 	main.addLogMessage("Player turn!", Color.html("524634"))
-	GameInfo.enemy_turn = !GameInfo.enemy_turn
-	SignalBus.turnStarted.emit([])
-
-
+	switchBetweenPlayerEnemyTurns()
+	
 
 #############################################################################
 #### PLAYER ATTACK FUNCTIONS
 
 #### TURN ON PLAYER ATTACK MODE
-func togglePlayerAttackMode(enable:bool, card:Card):
+func togglePlayerAttackMode(enable:bool, card:Card) -> void:
 	
 	#### TURN IT OFF
 	if not enable:
@@ -172,7 +178,9 @@ func togglePlayerAttackMode(enable:bool, card:Card):
 		damageCalculator.show()
 
 
-func updateDamageCalculator(targetC:Card):
+
+func updateDamageCalculator(targetC:Card) -> void:
+	
 	var damageToDealLabel := $CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer/TargetDmgTakenLabel
 	var damageToTakeLabel := $CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer/AttackerDmgTakenLabel
 	var extraDamage2Defender: int = 0
@@ -189,13 +197,18 @@ func updateDamageCalculator(targetC:Card):
 	if attacker.getEffect('Doom'):
 		extraDamage2Attacker += attacker.getEffect('Doom').counter
 	
+	if targetC.getEffect('Armor'):
+		extraDamage2Defender -= targetC.getEffect('Armor').counter
+	if attacker.getEffect('Armor'):
+		extraDamage2Attacker -= attacker.getEffect('Armor').counter
+	
 	damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(attacker, true) + extraDamage2Defender) 
 	damageToTakeLabel.text = "%d" % (targetC.getCombatDamageToTarget(targetC, false) + extraDamage2Attacker)
 	
 
 
 #### PROCESS ATTACK TARGET (ENEMY, OR ENEMY CARD)
-func handlePlayerAttack():
+func handlePlayerAttack() -> void:
 	
 	#### GET CARDS AT MOUSE POSITION
 	var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
@@ -232,9 +245,9 @@ func handlePlayerRitual(c:Card) -> bool:
 	
 	return success
 
-func attack(attacker:Card, defender:Card):
-	SignalBus.attacked.emit(attacker, defender)
-	SignalBus.defended.emit(attacker, defender)
+#func attack(attacker:Card, defender:Card):
+#	SignalBus.attacked.emit(attacker, defender)
+#	SignalBus.defended.emit(attacker, defender)
 	
 
 func cardCastButtonPressed() -> void:
@@ -249,7 +262,7 @@ func cardCastButtonPressed() -> void:
 		
 	
 	
-func handlePlayerAttackEnemy():
+func handlePlayerAttackEnemy() -> void:
 	#### ENEMY HAS BLOCKERS, CAN'T ATTACK ENEMY
 	if not cardsManager.getEnemyBlockers().is_empty():
 		endAttackState()
@@ -267,7 +280,7 @@ func handlePlayerAttackEnemy():
 
 
 #### BTW, PlayAttackAnimation CALLS THE CARD DESTROY COMMAND
-func handleEnemyAttackPlayer(attackCard: Card):
+func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	
 	var c = attackCard
 	var blockers:Array = cardsManager.getPlayerBlockers()
@@ -297,7 +310,7 @@ func handleEnemyAttackPlayer(attackCard: Card):
 			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
 			c.handleAttackingPortrait()
 
-func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEnemy:bool):
+func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEnemy:bool) -> void:
 	var attackString := ""
 	var targetName := ""
 	if targetIsEnemy:
@@ -308,11 +321,9 @@ func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEne
 	attackString = "%s attacks %s!" % [attackCard.cardName, targetName]	
 	main.addLogMessage(attackString, Color.WHITE)
 	
-#	var amountString := "%s takes %d damage" % [targetName, damageAmount]
-#	var color:Color = Color.DARK_SALMON
-#	main.addLogMessage(amountString, color)
 
-func handlePlayerAttackCreature(target:Card):
+
+func handlePlayerAttackCreature(target:Card) -> void:
 	
 	
 	#### INVALID TARGET - END TARGETING ANYWAY
@@ -350,8 +361,15 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
 #	attackCard.handleCombatActions(true, targetCard)
 #	targetCard.handleCombatActions(false, attackCard)
-	SignalBus.attacked.emit([attackCard, targetCard])
-	SignalBus.defended.emit([attackCard, targetCard])
+	var params := SignalParams.new()
+	params.sourceCard = attackCard
+	params.targetCard = targetCard
+	SignalBus.attacked.emit(params)
+	
+	var params2 := SignalParams.new()
+	params2.sourceCard = targetCard
+	params2.targetCard = attackCard
+	SignalBus.defended.emit(params2)
 	
 	#### CHECK IF EITHER CARD WAS DESTROYED
 	var attackerDestroyed = attackCard.checkAndHandleCombatDeath(true)
@@ -380,7 +398,7 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 
 
 
-func endAttackState():
+func endAttackState() -> void:
 	if States.gameState == States.GameStates.ATTACK:
 		togglePlayerAttackMode(false, null)
 	
