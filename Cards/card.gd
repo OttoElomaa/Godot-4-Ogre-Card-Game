@@ -614,9 +614,18 @@ func takeDamage(amount:int):
 	##GENERAL DAMAGE EFFECTS
 	if getEffect('Doom'):
 		damageModifiers += getEffect('Doom').counter
+	
+	#### ARMOR
+	if hasEffect("Armor"):
+		var armorStacks:int = getEffect("Armor").counter
+		damageModifiers -= armorStacks
 		
-	##DAMAGE IS DEALT
+	#### FIX DAMAGE
 	var damageTaken = amount + damageModifiers
+	if damageTaken < 0:
+		damageTaken = 0
+	
+	#### DAMAGE IS DEALT
 	tempHealth -= damageTaken
 	var amountString := "%s %s takes %d damage" % [MyTools.getFactionString(self), self.cardName, amount]
 	var color:Color = Color.DARK_SALMON
@@ -629,21 +638,33 @@ func takeDamage(amount:int):
 
 func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	#### BASELINE
-	var combatDamage = tempDamage
+	var combatDamage:int = tempDamage
 	
 	#### ATTACKER'S EFFECTS
 	if effects.isPhased:
 		combatDamage += 1
+	
+	if hasEffect('Rage') and isAttacker:
+		combatDamage += getEffect('Rage').counter
 	
 	#### END OF TARGETLESS DAMAGE CALCULATION
 	if not target:
 		return combatDamage
 	
 	#### TARGET'S EFFECTS
-	if hasEffect('Rage') and isAttacker:
-		combatDamage += getEffect('Rage').counter
+		
+	#### ARMOR
+	if target.hasEffect("Armor"):
+		var armorStacks:int = target.getEffect("Armor").counter
+		combatDamage -= armorStacks	
+	
+	#### FIX DAMAGE
+	if combatDamage < 0:
+		combatDamage = 0
 	
 	return combatDamage
+
+
 
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
 func handleCombatActions(params:SignalParams):

@@ -233,6 +233,24 @@ position = Vector2(1418, 1600)
 [node name="BestiarySlot24" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
 position = Vector2(1648, 1600)
 
+[node name="Row5Start" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(498, 2050)
+
+[node name="BestiarySlot25" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(728, 2050)
+
+[node name="BestiarySlot26" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(958, 2050)
+
+[node name="BestiarySlot27" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1188, 2050)
+
+[node name="BestiarySlot28" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1418, 2050)
+
+[node name="BestiarySlot29" parent="Bestiary/Slots" instance=ExtResource("6_b8l8w")]
+position = Vector2(1648, 2050)
+
 [node name="CardsManager" type="Node2D" parent="." groups=["cardManager"]]
 script = ExtResource("7_wqb3i")
 

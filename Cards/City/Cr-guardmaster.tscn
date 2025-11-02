@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://drfjmc3awv6y7"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m82sg"]
+[ext_resource type="PackedScene" uid="uid://jyrj2f2h71w" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnTrigger.tscn" id="2_m15dn"]
+[ext_resource type="Texture2D" uid="uid://8wgmpwys7a5" path="res://Art/CardArt/City/card-art-guardmaster.jpg" id="2_mpk4d"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_qprtf"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="4_e7i22"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_gwvip"]
+[ext_resource type="PackedScene" uid="uid://cvgj3stl7h3fy" path="res://CardScriptsAndComponents/EffectCounters/EffectArmor.tscn" id="6_m15dn"]
+
+[node name="Guardmaster" instance=ExtResource("1_m82sg")]
+cardName = "Guardmaster"
+subTypeStr = "Human Soldier"
+manaCost = 4
+startingDamage = 2
+startingHealth = 1
+
+[node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("2_m15dn")]
+
+[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" instance=ExtResource("3_qprtf")]
+customActionText = "On turn, gain 1 Armor."
+
+[node name="TargetSelf" parent="Actions/OnAlliedTurnTrigger/CardAction" index="0" instance=ExtResource("4_e7i22")]
+
+[node name="SkillEffectCounters" parent="Actions/OnAlliedTurnTrigger/CardAction" index="1" instance=ExtResource("5_gwvip")]
+grantEffect = ExtResource("6_m15dn")
+grantAmount = 1
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("2_mpk4d")
