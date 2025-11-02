@@ -46,8 +46,8 @@ func addEffect(appliedEffect: EffectCounter):
 	updateEffectVisuals()
 	
 	var card:Card = get_parent()
-	var printout := "%s added on %s" % ["EffectName", card.cardName]
-	MyTools.createCombatLogPrintout(printout, Color.WHITE)
+#	var printout := "%s added on %s" % [appliedEffect.id, card.cardName]
+#	MyTools.createCombatLogPrintout(printout, Color.WHITE)
 	
 
 
@@ -91,6 +91,8 @@ func updateEffectVisuals():
 		sprite.texture = e.icon
 		if e is EffectCounter:
 			sprite.get_node("Amount").text = str(e.counter)
+			if e.counter < 1:
+				sprite.hide()
 		counter += 1
 		
 	counter = 0

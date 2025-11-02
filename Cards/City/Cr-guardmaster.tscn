@@ -11,6 +11,7 @@
 [node name="Guardmaster" instance=ExtResource("1_m82sg")]
 cardName = "Guardmaster"
 subTypeStr = "Human Soldier"
+flavorText = "This  one is privy to numbers, and knows Ur-Tekton's scriptures."
 manaCost = 4
 startingDamage = 2
 startingHealth = 1

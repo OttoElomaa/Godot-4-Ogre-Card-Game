@@ -43,22 +43,26 @@ func execute(params:SignalParams):
 	if disabled:
 		return success
 
-	if myCard.cardState == myCard.CardStates.BOARD or myCard.cardType == myCard.CardTypes.RITUAL:
+	if myCard.cardState != myCard.CardStates.BOARD:
+		return success 
+	
+	if myCard.cardType == myCard.CardTypes.RITUAL:
+		return success
 
-		if not params:
-			params = SignalParams.new()
+	if not params:
+		params = SignalParams.new()
 
-		print(name, ' from ', myCard.cardName, ' is executing')
+	print(name, ' from ', myCard.cardName, ' is executing')
 
-		for cond:ConditionalComponent in conditions:
-			if not cond.check(myCard, params):
-				return false
-		print(name, ' all conditions green')
+	for cond:ConditionalComponent in conditions:
+		if not cond.check(myCard, params):
+			return false
+	print(name, ' all conditions green')
 
-		for child in get_children():
-			if child is CardAction:
-				success = await child.activate(params)
-				if not success:
-					return success
+	for child in get_children():
+		if child is CardAction:
+			success = await child.activate(params)
+			if not success:
+				return success
 
 	return success

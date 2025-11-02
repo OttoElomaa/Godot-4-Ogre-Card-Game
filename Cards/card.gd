@@ -368,7 +368,7 @@ func addEffect(appliedEffect: CardEffect):
 func changeEffectStacks(id:String, amount: int):
 	if getEffect(id) is EffectCounter:
 		var counter = getEffect(id).counter
-		getEffect(id).counter += clampi(amount, amount, counter)
+		getEffect(id).counter += amount
 	checkAndTerminateEffects()
 	effects.updateEffectVisuals()
 
@@ -385,6 +385,7 @@ func checkAndTerminateEffects():
 func removeEffect(id):
 	if getEffect(id):
 		getEffect(id).queue_free()
+		await get_tree().process_frame
 
 #endregion
 
@@ -516,7 +517,8 @@ func statesInert():
 
 func statesDestroy():
 	vacateSlot()
-	actionState = CardActionStates.DISCARD	
+	actionState = CardActionStates.DISCARD
+	cardState = CardStates.GRAVEYARD
 
 func statesHand():
 	vacateSlot()
@@ -611,19 +613,33 @@ func takeCombatDamage(card:Card, isAttacker: bool) -> int:
 #### RETURNS THE INPUT DAMAGE, AND ADDS to it any of 
 #### THIS CARD'S (Damage Taking card) DAMAGE-CHANGING EFFECTS
 func takeDamage(amount:int):
-	var damageModifiers:int = 0
 	
-	##GENERAL DAMAGE EFFECTS
+	## EFFECTS THAT CHANGE *ALL* DAMAGE TAKEN BY THIS CARD, INCLUDING INDIRECT. 
+	var damageModifiers:int = 0
+	## IF THIS IS TRUE, THE CARD WILL TAKE NO DAMAGE.
+	var damageIgnored = false
+	
+			
+	## DOOM
 	if getEffect('Doom'):
 		damageModifiers += getEffect('Doom').counter
 	
 	#### ARMOR
 	if hasEffect("Armor"):
 		var armorStacks:int = getEffect("Armor").counter
+		changeEffectStacks('Armor', -(amount + damageModifiers))
 		damageModifiers -= armorStacks
+		
+	#### PROTECTION
+	if hasEffect('Protection'):
+		damageIgnored = true
 		
 	#### FIX DAMAGE
 	var damageTaken = amount + damageModifiers
+	
+	if damageIgnored:
+		damageTaken = 0
+		
 	if damageTaken < 0:
 		damageTaken = 0
 	
@@ -632,6 +648,13 @@ func takeDamage(amount:int):
 	var amountString := "%s %s takes %d damage" % [MyTools.getFactionString(self), self.cardName, amount]
 	var color:Color = Color.DARK_SALMON
 	MyTools.createCombatLogPrintout(amountString, color)
+	
+	#### DAMAGE_TAKEN SIGNAL IS EMITTED
+	var signal_data = SignalParams.new()
+	signal_data.amount = damageTaken
+	signal_data.isEnemySide = isEnemyCard
+	signal_data.sourceCard = self
+	SignalBus.damage_taken.emit(signal_data)
 
 	##CHECK IF DESTROYED
 	if tempHealth <= 0:

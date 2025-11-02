@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://de6egd75msw4o"]
+
+[ext_resource type="Script" uid="uid://5c42sqov344m" path="res://CardScriptsAndComponents/Scripts/effect_counter.gd" id="1_gw2mu"]
+[ext_resource type="Texture2D" uid="uid://dyosit4er0eab" path="res://Art/CardComponents/card-effect-counter-texture-protection.png" id="2_u57j1"]
+[ext_resource type="PackedScene" uid="uid://dqlw64r7a01ex" path="res://CardScriptsAndComponents/Triggers/OnSelfDamageTaken.tscn" id="3_ywadx"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_ecvfd"]
+[ext_resource type="PackedScene" uid="uid://cvl306ch72ymq" path="res://CardScriptsAndComponents/Actions/SkillChangeEffectStacks.tscn" id="4_kkp4c"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="6_kkp4c"]
+
+[node name="EffectProtection" type="Node2D"]
+script = ExtResource("1_gw2mu")
+effectType = 1
+max_counter = 1
+id = "Protection"
+description = "Buff. Cannot have more than 1 stack. Negates one instance of damage, and then is removed."
+metadata/_custom_type_script = "uid://5c42sqov344m"
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_u57j1")
+
+[node name="OnSelfDamageTaken" parent="." instance=ExtResource("3_ywadx")]
+
+[node name="CardAction" parent="OnSelfDamageTaken" instance=ExtResource("4_ecvfd")]
+customActionText = "Shrugged off damage due to Protection!"
+
+[node name="SkillChangeEffectStacks" parent="OnSelfDamageTaken/CardAction" instance=ExtResource("4_kkp4c")]
+effectID = "Protection"
+amount = -1
+
+[node name="TargetSelf" parent="OnSelfDamageTaken/CardAction" instance=ExtResource("6_kkp4c")]

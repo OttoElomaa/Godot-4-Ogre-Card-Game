@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx246euia3w1a"]
+
+[ext_resource type="Script" uid="uid://bs5kjnljmmys" path="res://CardScriptsAndComponents/Triggers/Scripts/Trigger.gd" id="1_m6vut"]
+[ext_resource type="PackedScene" uid="uid://bqt3gngoys4mh" path="res://CardScriptsAndComponents/Conditionals/IfSelf.tscn" id="2_sg145"]
+
+[node name="OnSelfDefendedTrigger" type="Node"]
+script = ExtResource("1_m6vut")
+triggered_when = "defended"
+situation_text = "Defended"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"
+
+[node name="IfSelf" parent="." instance=ExtResource("2_sg145")]
