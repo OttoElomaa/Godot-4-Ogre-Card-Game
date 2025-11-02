@@ -180,6 +180,7 @@ func togglePlayerAttackMode(enable:bool, card:Card) -> void:
 
 
 func updateDamageCalculator(targetC:Card) -> void:
+	
 	var damageToDealLabel := $CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer/TargetDmgTakenLabel
 	var damageToTakeLabel := $CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer/AttackerDmgTakenLabel
 	var extraDamage2Defender: int = 0
@@ -195,6 +196,11 @@ func updateDamageCalculator(targetC:Card) -> void:
 		extraDamage2Defender += targetC.getEffect('Doom').counter
 	if attacker.getEffect('Doom'):
 		extraDamage2Attacker += attacker.getEffect('Doom').counter
+	
+	if targetC.getEffect('Armor'):
+		extraDamage2Defender -= targetC.getEffect('Armor').counter
+	if attacker.getEffect('Armor'):
+		extraDamage2Attacker -= attacker.getEffect('Armor').counter
 	
 	damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(attacker, true) + extraDamage2Defender) 
 	damageToTakeLabel.text = "%d" % (targetC.getCombatDamageToTarget(targetC, false) + extraDamage2Attacker)

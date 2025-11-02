@@ -608,6 +608,8 @@ func takeCombatDamage(card:Card, isAttacker: bool) -> int:
 	return damageTaken
 
 
+#### RETURNS THE INPUT DAMAGE, AND ADDS to it any of 
+#### THIS CARD'S (Damage Taking card) DAMAGE-CHANGING EFFECTS
 func takeDamage(amount:int):
 	var damageModifiers:int = 0
 	
@@ -636,6 +638,9 @@ func takeDamage(amount:int):
 		destroyAndAnimate(true)
 
 
+
+#### RETURNS THE TEMPORARY DAMAGE, AND ADDS to it any of 
+#### THIS CARD'S (Damage Dealer) DAMAGE-CHANGING EFFECTS
 func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	#### BASELINE
 	var combatDamage:int = tempDamage
@@ -651,12 +656,6 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	if not target:
 		return combatDamage
 	
-	#### TARGET'S EFFECTS
-		
-	#### ARMOR
-	if target.hasEffect("Armor"):
-		var armorStacks:int = target.getEffect("Armor").counter
-		combatDamage -= armorStacks	
 	
 	#### FIX DAMAGE
 	if combatDamage < 0:
