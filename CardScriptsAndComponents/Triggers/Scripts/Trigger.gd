@@ -55,7 +55,7 @@ func execute(params:SignalParams):
 	print(name, ' from ', myCard.cardName, ' is executing')
 
 	for cond:ConditionalComponent in conditions:
-		if not cond.check(myCard, params):
+		if not cond.check(params.sourceCard, myCard):
 			return false
 	print(name, ' all conditions green')
 
