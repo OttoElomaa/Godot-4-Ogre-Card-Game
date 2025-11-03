@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://u4hmn1rmmi48"]
+
+[ext_resource type="Script" uid="uid://cghmdh7pi7u7s" path="res://CardScriptsAndComponents/Actions/Scripts/skill_transform_target_into_card.gd" id="1_8b5g5"]
+
+[node name="SkillTransformTargetIntoCard" type="Node2D"]
+script = ExtResource("1_8b5g5")
+metadata/_custom_type_script = "uid://cxr3ippvyy8ii"

@@ -43,12 +43,9 @@ func execute(params:SignalParams):
 	if disabled:
 		return success
 
-	if myCard.cardState != myCard.CardStates.BOARD:
+	if myCard.cardState != myCard.CardStates.BOARD and myCard.cardType == myCard.CardTypes.CREATURE:
 		return success 
 	
-	if myCard.cardType == myCard.CardTypes.RITUAL:
-		return success
-
 	if not params:
 		params = SignalParams.new()
 

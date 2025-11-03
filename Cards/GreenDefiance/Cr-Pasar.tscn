@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://colad8r6pikh2"]
+[gd_scene load_steps=7 format=3 uid="uid://colad8r6pikh2"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_yof0k"]
 [ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="2_fhqbh"]
 [ext_resource type="Texture2D" uid="uid://cnifcf3galvcl" path="res://Art/CardArt/GreenDefiance/Algae_siren.png" id="2_hbimt"]
 [ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="3_b1ycd"]
-[ext_resource type="Script" uid="uid://eix01ge4b14h" path="res://CardScriptsAndComponents/TargetingComponents/Scripts/manual_targeting.gd" id="4_fhqbh"]
+[ext_resource type="PackedScene" uid="uid://21p71ahd2jdd" path="res://CardScriptsAndComponents/Actions/SkillTransformIntoTarget.tscn" id="5_b1ycd"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_c2w3y"]
 
 [node name="Cr-Pasar" instance=ExtResource("1_yof0k")]
 cardName = "Pasar"
-subTypeStr = "Summon"
+subTypeStr = "Algae Changeling"
 flavorText = "O Life! Your forms are beyond counting!"
 startingDamage = 1
 startingHealth = 1
@@ -23,10 +24,15 @@ script = ExtResource("3_b1ycd")
 customActionText = "Cast: Transform into target creature."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="ManualTargetingComponent" type="Node2D" parent="Actions/OnCastTrigger/CardAction" index="0"]
-script = ExtResource("4_fhqbh")
-manualTargetGroup = 2
-metadata/_custom_type_script = "uid://eix01ge4b14h"
+[node name="SkillTransformIntoTarget" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("5_b1ycd")]
+card_name = true
+subtype = true
+flavor_text = true
+effect_counters = true
+equipment = true
+
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_c2w3y")]
+manualTargetGroup = 3
 
 [node name="Art" parent="Frontside" index="1"]
 z_index = 1

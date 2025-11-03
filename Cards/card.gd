@@ -164,9 +164,7 @@ func setup(gameBoard: GameBoard):
 
 func updateCardNameAndBasicInfo(isCreature:bool):
 	subTypes = subTypeStr.split(" ")
-	getKeywords()
 
-	
 	createEffectText()
 	
 	$Frontside/CardName/Label.text = cardName
@@ -175,7 +173,8 @@ func updateCardNameAndBasicInfo(isCreature:bool):
 		$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % startingDamage
 		$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % startingHealth
 
-	
+func tempSetCardArt(new_art: Texture):
+	$Frontside/Art.texture = new_art
 	
 func createEffectText():
 	
@@ -198,8 +197,7 @@ func createEffectText():
 	var effectTexts := []
 	
 	#### CHECK FROM KEYWORDS HANDLER
-	getKeywords()
-	for keyword in keywords:
+	for keyword in getKeywords():
 		effectTexts.append(keyword.id)
 	
 	
@@ -278,13 +276,12 @@ func setInitialActionState():
 #######################################################################################
 #region ######################################### KEYWORD HANDLER STUFF
 
-func getKeywords():
-	keywords = $KeywordHandler.collectKeywords()
+func getKeywords() -> Array:
+	return $KeywordHandler.collectKeywords()
 	
 	
 func hasKeyword(keyword:String) -> bool:
-	getKeywords()
-	for i in keywords:
+	for i in getKeywords():
 		if i.id == keyword:
 			return true
 	return false

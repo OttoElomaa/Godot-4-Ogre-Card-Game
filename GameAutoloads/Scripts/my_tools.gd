@@ -61,7 +61,14 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 		
 	return false
 
-
+#### CAN BE USED FOR FUNCTIONS THAT ACCESS A CARD'S CHILDREN W/O SUMMONING THE CARD
+#### LIKE TRANSFORMING ONE CARD INTO A NEW ONE
+func createTempCard(card:Card):
+	add_child(card)
+	
+func removeTempCard(card:Card):
+	remove_child(card)
+	card.queue_free()
 
 func shuffleToDeck(card:Card, isEnemy:bool):
 	cardsManager.moveToDeck(card, isEnemy)
@@ -74,8 +81,6 @@ func addCardToHand(card:Card, isEnemy:bool):
 func addCardToGraveyard(card:Card, isEnemy:bool):
 	cardsManager.moveToDiscard(card, isEnemy)	
 	
-
-
 
 func handlePlaceCardInSlot(card:Card, slot:CardSlot):
 	cardsManager.handlePlaceCardInSlot(card, slot)

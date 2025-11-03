@@ -17,7 +17,7 @@ var effectToGrant:Node = null
 var initialTarget: Card = null
 
 
-
+## Sets up all children and activates their own setup routines.
 func setup(card:Card):
 	myCard = card
 	isEnemy = card.isEnemyCard
