@@ -1,9 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=32 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/GameBoard/a1_gameBoard.gd" id="1_rf3o6"]
-[ext_resource type="PackedScene" uid="uid://cdcyvjftrdsxg" path="res://GameScenes/audio.tscn" id="2_s281r"]
 [ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
-[ext_resource type="AudioStream" uid="uid://cull86x870gae" path="res://Audio/BGM/Cards of Achra OST - Raiders Close In.ogg" id="3_rf3o6"]
 [ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_1qylb"]
 [ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/BoardComponents/game-mana-health-holder-texture-v2.png" id="5_4lnmq"]
 [ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSettings/LabelSetHeaderHealth.tres" id="6_r88d6"]
@@ -23,8 +21,11 @@
 [ext_resource type="Script" uid="uid://cq33h3kryyrto" path="res://CardScriptsAndComponents/Scripts/table_card_slot.gd" id="20_7yxuf"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="21_ufaws"]
+[ext_resource type="AudioStream" uid="uid://0grfmidlhvlt" path="res://Audio/SE/Player-Damaged.wav" id="24_ikeh1"]
+[ext_resource type="Script" uid="uid://3gv0j2w8kq47" path="res://GameScenes/GameBoard/camera_main_board.gd" id="25_7yxuf"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
+[ext_resource type="AudioStream" uid="uid://cqryjjev655kv" path="res://Audio/BGM/Cards of Achra OST - Tunneler Lullaby.ogg" id="26_hysm7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -127,9 +128,7 @@ script = ExtResource("1_rf3o6")
 [node name="CameraMainBoard" type="Camera2D" parent="."]
 anchor_mode = 0
 zoom = Vector2(0.76, 0.76)
-
-[node name="Audio" parent="." instance=ExtResource("2_s281r")]
-BGM = ExtResource("3_rf3o6")
+script = ExtResource("25_7yxuf")
 
 [node name="Portraits" type="Node2D" parent="."]
 
@@ -358,6 +357,12 @@ layout_mode = 2
 text = "x"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
+
+[node name="SE" type="Node" parent="BattleSystem"]
+
+[node name="SE_Player_Damaged" type="AudioStreamPlayer" parent="BattleSystem/SE"]
+stream = ExtResource("24_ikeh1")
+bus = &"SE"
 
 [node name="CardsManager" type="Node2D" parent="." groups=["cardManager"]]
 script = ExtResource("15_h4god")
@@ -760,6 +765,14 @@ text = "Toggle
 Defend"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="BGM" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("26_hysm7")
+volume_db = -10.0
+autoplay = true
+bus = &"BGM"
 
 [connection signal="timeout" from="BattleSystem/EnemyStartCombatTimer" to="BattleSystem" method="timeoutEnemyStartCombat"]
 [connection signal="timeout" from="BattleSystem/EndEnemyTurnTimer" to="BattleSystem" method="timeoutEndEnemyTurn"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=34 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Material" uid="uid://dccxbrxmkylit" path="res://Resources/Shaders/destroy_card_material.tres" id="1_m45w5"]
@@ -24,6 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://3s7fsmtkjp8v" path="res://Art/CardComponents/card-action-state-indicator-texture-active-V3.png" id="16_8geja"]
 [ext_resource type="Texture2D" uid="uid://cuy7g1fhndhpp" path="res://Art/CardComponents/resources-shading-down.png" id="19_07jhh"]
 [ext_resource type="Texture2D" uid="uid://cl6kjdnh2pqjl" path="res://Art/CardComponents/resources-shading-up.png" id="20_8geja"]
+[ext_resource type="AudioStream" uid="uid://c584yxbl7jwee" path="res://Audio/SE/Card-Death.wav" id="25_s5qc8"]
+[ext_resource type="AudioStream" uid="uid://i6vufojx318b" path="res://Audio/SE/Attack-Spear.wav" id="26_5riqg"]
+[ext_resource type="AudioStream" uid="uid://b88dmx7ccoxck" path="res://Audio/SE/Defend-Chainmail.wav" id="27_lgw4w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kd3xj"]
 size = Vector2(220, 330)
@@ -175,6 +178,18 @@ tracks/2/keys = {
 "method": &"playCardDestroyedAnimation"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SFX/AttackSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_u70hd"]
 length = 0.001
@@ -237,6 +252,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SFX/AttackSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wrqsm"]
@@ -635,6 +662,23 @@ libraries = {
 
 [node name="RestTimer" type="Timer" parent="BodyAnimations"]
 one_shot = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("25_s5qc8")
+volume_db = -20.0
+pitch_scale = 0.5
+bus = &"SE"
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("26_5riqg")
+volume_db = -10.0
+pitch_scale = 0.8
+
+[node name="DefendSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("27_lgw4w")
+volume_db = -20.0
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dhuojolt6ampg"
-path="res://.godot/imported/Dedushka_Voice.wav-b812e45051369800dc22d633dbc7e24d.sample"
+path="res://.godot/imported/Text_Typing.wav-7c8e600743961e3d229f0bfa9b4eb9cb.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Dedushka_Voice.wav"
-dest_files=["res://.godot/imported/Dedushka_Voice.wav-b812e45051369800dc22d633dbc7e24d.sample"]
+source_file="res://Audio/SE/Text_Typing.wav"
+dest_files=["res://.godot/imported/Text_Typing.wav-7c8e600743961e3d229f0bfa9b4eb9cb.sample"]
 
 [params]
 

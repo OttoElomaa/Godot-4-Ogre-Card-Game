@@ -133,7 +133,7 @@ func changeHealth(amount:int, isEnemy:bool):
 	if isEnemy:
 		$BattleSystem.enemyHealth += amount
 	else:
-		$BattleSystem.playerHealth += amount
+		$BattleSystem.playerHealth = max($BattleSystem.playerHealth + amount, 0)
 
 ########################################################################################
 
@@ -215,17 +215,30 @@ func enemyChampion() -> Card:
 	else:
 		return null
 
+func playAttackPortraitAnimation(attackingCard: Card):
+	var c = attackingCard
+	var isEnemy = c.isEnemyCard
+	var targetPos = Vector2(0,0)
+	
+	if isEnemy:
+		targetPos = $Portraits/PlayerSprite.position
+	else:
+		targetPos = $Portraits/EnemySprite.position
+	
+	var tween = create_tween()
+	tween.tween_property(c, "position", targetPos, 0.2)
+	await tween.finished
+
 func showPlayerTurnPopup():
 	$Visuals/YourTurnPopup/PopupAnimation.play("ShowPopup")
 
-
+func shake_screen(intensity:float, time:float):
+	cameraMainBoard.screen_shake(intensity, time)
 
 func toggleCardInfo(enable:bool, card:Card):
 	var cardInfo := $CanvasLayer/CardInfoPane/CardInfoPanel
 	cardInfo.toggleCardInfo(enable, card)
 	
-
-
 
 func addLogMessage(text:String, color:Color) -> void:
 	

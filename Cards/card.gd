@@ -694,7 +694,7 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
 func handleCombatActions(attacker, defender):
-
+	allowInteract = false
 	if attacker == self:
 		z_index = 10
 		await playAttackAnimation(defender)
@@ -716,7 +716,9 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 		else:
 			restAndAnimate(false)
 	returnToSlot()
-			
+	$SFX/DefendSound.play()
+	allowInteract = true
+	
 	return false
 
 func handleEnterGraveyard():
@@ -871,9 +873,6 @@ func updateCardLabels():
 		glow.get_node("HealthGlowDown").show()
 		
 
-
-
-
 ###############################################################################
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
@@ -887,7 +886,6 @@ func destroyAndAnimate(toAnimate:bool):
 		await playCardDestroyedAnimation()
 	
 
-
 func playCardDestroyedAnimation():
 	if checkAlive():
 		return
@@ -900,11 +898,11 @@ func playCardDestroyedAnimation():
 	var change_rotation = randf_range(-10.0, 10.0)
 	tween.tween_property(self, "position", position + change_position, 2).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(self, "rotation_degrees", change_rotation, 0.2)
-		
+	
+	$SFX/DeathSound.play()
 	await burnAwayShader()
 	visible = false
 	destroyCardTwo()
-
 
 func burnAwayShader():
 	material = load("res://Resources/Shaders/destroy_card_material.tres")

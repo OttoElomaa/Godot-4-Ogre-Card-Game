@@ -290,7 +290,6 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	for other in blockers:
 		target = other
 		
-	
 	#### TARGET FOUND, ATTACK TARGET CARD
 	if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
@@ -301,14 +300,25 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	elif blockers.is_empty():
 		if not main.playerChampion():
 			var damageToPlayer = c.getCombatDamageToTarget(null, true)
-			playerHealth -= damageToPlayer
+			await main.playAttackPortraitAnimation(c)
+			main.changeHealth(-c.tempDamage, !c.isEnemyCard)
 			handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
+			playerAttackedSE()
+			main.shake_screen(10, 0.5)
 			c.handleAttackingPortrait()
+			await c.returnToSlot()
 		else:
 			var damageToChampion = c.getCombatDamageToTarget(main.playerChampion(), true)
 			main.playerChampion().takeCombatDamage(c, true)
 			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
 			c.handleAttackingPortrait()
+
+func playerAttackedSE():
+	$SE/SE_Player_Damaged.pitch_scale = 1.0 + randf_range(0.2, -0.2)
+	## The bell gets lower-pitched the lower the HP gets.
+	if playerHealth < 20:
+		$SE/SE_Player_Damaged.pitch_scale += 0.02 * (playerHealth - 10)
+	$SE/SE_Player_Damaged.play()
 
 func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEnemy:bool) -> void:
 	var attackString := ""
@@ -339,6 +349,8 @@ func handlePlayerAttackCreature(target:Card) -> void:
 		end = true
 	elif not target.checkCanBlock():
 		end = true
+	elif not target.allowInteract:
+		end = true
 		
 	if end:
 		if target != currentAttackingCard:
@@ -357,6 +369,7 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	endAttackState()
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
+	targetCard.allowInteract = false
 	await attackCard.handleCombatActions(attackCard, targetCard)
 	targetCard.handleCombatActions(attackCard, targetCard)
 	var params := SignalParams.new()

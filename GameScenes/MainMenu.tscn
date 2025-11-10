@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dhgg2oefy2y6e"]
 
 [ext_resource type="Script" uid="uid://dojtnp1c1qm5h" path="res://GameScenes/main_menu.gd" id="1_jd835"]
-[ext_resource type="PackedScene" uid="uid://cdcyvjftrdsxg" path="res://GameScenes/audio.tscn" id="2_18c0x"]
+[ext_resource type="PackedScene" uid="uid://cjwurlo7haie7" path="res://GameScenes/audio.tscn" id="2_18c0x"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="2_b8l8w"]
 [ext_resource type="AudioStream" uid="uid://b12p3w7ls8cpn" path="res://Audio/BGM/Cards of Achra OST - Main Menu Theme.ogg" id="3_3ew8u"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="3_wqb3i"]
