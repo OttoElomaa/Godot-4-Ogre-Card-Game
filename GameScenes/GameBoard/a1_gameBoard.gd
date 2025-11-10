@@ -99,6 +99,10 @@ func toggleCardActionMenu(enable:bool, card:Card):
 			if card.mySlot:  #### IS IT PLAYER CARD?
 				if not checkSlotPlayer(card.mySlot): 
 					return
+				if card.isTraveling:
+					return
+				if card.isResting:
+					return
 				
 			#### TURN ON CARD ACTION MENU
 			States.gameState = States.GameStates.CARD_ACT_MENU

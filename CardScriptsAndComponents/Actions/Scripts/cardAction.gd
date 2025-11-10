@@ -22,6 +22,7 @@ var targetingComponent: TargetingComponent
 
 #@export var nodeKeyword := "Action type"
 @export_multiline var customActionText := ""
+@export var action_sound: Resource
 
 #@export var isCost := false
 var savedTargets: Array
@@ -39,6 +40,8 @@ func setup(card:Card):
 		if component is TargetingComponent:
 			targetingComponent = component
 	
+	if action_sound:
+		$ActionSE.stream = action_sound
 
 
 func createActionText() -> String:
@@ -106,6 +109,7 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 			successfulScript = skill
 			
 	if success:
+		$ActionSE.play()
 		#### REST IF NEEDED
 		if checkHasCast():
 			myCard.restAndAnimate(true)

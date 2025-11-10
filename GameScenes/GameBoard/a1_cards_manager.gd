@@ -415,7 +415,7 @@ func toggleCardHover(isHovering:bool, card:Card):
 		if not card in currentHoveredCards:
 			currentHoveredCards.append(card)
 	
-	#### CALLED WHEN 'HOVER OFF' TRIGGERED			
+	#### CALLED WHEN 'HOVER OFF' TRIGGERED
 	else:
 		prints("hover on card off: ", card)
 		currentHoveredCards.erase(card)

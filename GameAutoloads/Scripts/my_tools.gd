@@ -6,6 +6,7 @@ var COLLISION_MASK_CARD := 1
 var gameBoard:GameBoard = null
 var cardsManager:CardsManager = null
 var battleSystem:BattleSystem = null
+var genericCard:Card = preload("res://Cards/GreenDefiance/Cr-Maolmona.tscn").instantiate()
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
@@ -65,7 +66,7 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 #### LIKE TRANSFORMING ONE CARD INTO A NEW ONE
 func createTempCard(card:Card):
 	add_child(card)
-	
+
 func removeTempCard(card:Card):
 	remove_child(card)
 	card.queue_free()

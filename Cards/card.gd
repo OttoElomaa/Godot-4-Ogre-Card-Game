@@ -557,7 +557,6 @@ func toggleTraveling(enabled:bool):
 func checkCanBlock() -> bool:
 	#assert(1==2,"where is this called")
 	if actionState == CardActionStates.ACTIVE:
-		if not checkResting():
 			return true
 	return false
 

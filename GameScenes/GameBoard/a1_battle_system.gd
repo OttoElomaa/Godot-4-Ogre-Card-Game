@@ -272,10 +272,13 @@ func handlePlayerAttackEnemy() -> void:
 	var c = currentAttackingCard
 	var combatDamage = c.getCombatDamageToTarget(null, true)
 	c.handleAttackingPortrait()
-	enemyHealth -= combatDamage
-	
-	handlePortraitAttackPrintout(c, combatDamage, true)
 	endAttackState()
+	await main.playAttackPortraitAnimation(c)
+	main.changeHealth(-combatDamage, !c.isEnemyCard)
+	handlePortraitAttackPrintout(c, combatDamage, true)
+	main.shake_screen(10, 0.5)
+	await c.returnToSlot()
+	
 	
 
 
@@ -346,7 +349,7 @@ func handlePlayerAttackCreature(target:Card) -> void:
 		end = true
 	elif not main.checkSlotEnemy(target.mySlot):
 		end = true
-	elif not target.checkCanBlock():
+	elif not cardsManager.getEnemyBlockers().is_empty() and not target.checkCanBlock():
 		end = true
 	elif not target.allowInteract:
 		print('Already fighting!')
