@@ -57,7 +57,6 @@ func dealEnemyHand():
 		dumbHandDrawCounter += 1
 		
 		card.toggleEnemyStatus(true)
-		card.removeMouseInteraction()
 		card.toggleFrontSide(false)
 	updateHandCardsVisuals()
 

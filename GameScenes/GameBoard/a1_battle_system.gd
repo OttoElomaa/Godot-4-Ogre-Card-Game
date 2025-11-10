@@ -294,7 +294,6 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
 		var success = await resolveAttack(c, target)
-		c.restAndAnimate(false)
 	
 	#### NO BLOCKERS, ATTACK PLAYER
 	elif blockers.is_empty():
@@ -350,6 +349,7 @@ func handlePlayerAttackCreature(target:Card) -> void:
 	elif not target.checkCanBlock():
 		end = true
 	elif not target.allowInteract:
+		print('Already fighting!')
 		end = true
 		
 	if end:

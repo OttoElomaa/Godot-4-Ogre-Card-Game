@@ -35,9 +35,3 @@ isPermanent = true
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("2_x6hjd")
-
-[node name="ActionState" parent="Frontside" index="5"]
-use_parent_material = true
-
-[node name="EffectText" parent="Frontside" index="6"]
-use_parent_material = true

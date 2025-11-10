@@ -254,7 +254,7 @@ func handleArrival():
 	#if hasShadow:
 		#countersNode.togglePhased(true)
 		#statesPassive()
-		
+	handleTurnStartReset()
 	updateCardVisuals()
 
 
@@ -449,6 +449,7 @@ func toggleFrontSide(toShow:bool):
 #### DON'T ANIMATE = PLAY ANIMATION ON DELAY? ->TO PLAY ATTACK ANIMATION FIRST
 func restAndAnimate(toAnimate:bool):
 	isResting = true
+	statesPassive()
 	if toAnimate:
 		rotateRestingCard(true)
 	else:
@@ -715,6 +716,7 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 			toggleTraveling(true)
 		else:
 			restAndAnimate(false)
+			
 	returnToSlot()
 	$SFX/DefendSound.play()
 	allowInteract = true
