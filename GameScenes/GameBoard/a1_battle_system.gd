@@ -119,7 +119,7 @@ func timeoutEnemyStartCombat() -> void:
 			if not MyTools.checkNodeValidity(card):  #### CHECK IF VALID
 				pass
 			elif card.checkCanAct(): #### CAN IT ACT
-				handleEnemyAttackPlayer(card)
+				await handleEnemyAttackPlayer(card)
 
 
 
@@ -176,6 +176,7 @@ func togglePlayerAttackMode(enable:bool, card:Card) -> void:
 		$AttackLine.show()
 		attackLine.points[0] = card.position
 		damageCalculator.show()
+		
 
 
 
@@ -209,7 +210,6 @@ func updateDamageCalculator(targetC:Card) -> void:
 
 #### PROCESS ATTACK TARGET (ENEMY, OR ENEMY CARD)
 func handlePlayerAttack() -> void:
-	
 	#### GET CARDS AT MOUSE POSITION
 	var results = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	if results.size() > 0:
@@ -294,7 +294,7 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	#### TARGET FOUND, ATTACK TARGET CARD
 	if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
-		var success = resolveAttack(c, target)
+		var success = await resolveAttack(c, target)
 		c.restAndAnimate(false)
 	
 	#### NO BLOCKERS, ATTACK PLAYER
@@ -346,7 +346,7 @@ func handlePlayerAttackCreature(target:Card) -> void:
 		return
 	
 	#### VALID TARGET - RESOLVE ATTACK
-	resolveAttack(currentAttackingCard, target)
+	await resolveAttack(currentAttackingCard, target)
 		
 
 		
@@ -354,13 +354,15 @@ func handlePlayerAttackCreature(target:Card) -> void:
 #### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
+	endAttackState()
+	
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
 	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, true)
 	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, false)
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
-#	attackCard.handleCombatActions(true, targetCard)
-#	targetCard.handleCombatActions(false, attackCard)
+	await attackCard.handleCombatActions(attackCard, targetCard)
+	targetCard.handleCombatActions(attackCard, targetCard)
 	var params := SignalParams.new()
 	params.sourceCard = attackCard
 	params.targetCard = targetCard
@@ -375,7 +377,7 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	var attackerDestroyed = attackCard.checkAndHandleCombatDeath(true)
 	var targetDestroyed = targetCard.checkAndHandleCombatDeath(false)
 	
-	endAttackState()
+	
 	
 	
 	#### COMBAT LOG STUFF ##################################

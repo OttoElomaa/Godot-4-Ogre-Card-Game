@@ -53,7 +53,7 @@ func handleCorrode(target:Card, amount:int):
 	target.health -= amount
 	
 	if target.tempHealth <= 0:
-		target.destroyAndAnimate(true)
+		target.destroyAndAnimate(true, false)
 		
 		
 	

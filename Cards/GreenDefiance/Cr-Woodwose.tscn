@@ -1,14 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://rmnwpdla01k4"]
+[gd_scene load_steps=12 format=3 uid="uid://rmnwpdla01k4"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_c5v68"]
 [ext_resource type="PackedScene" uid="uid://jyrj2f2h71w" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnTrigger.tscn" id="2_o47dh"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_t4qyw"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_t4qyw"]
 [ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="4_877ti"]
 [ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_gtvc7"]
 [ext_resource type="PackedScene" uid="uid://bjvo1v4qvl7v2" path="res://CardScriptsAndComponents/EffectCounters/EffectRage.tscn" id="6_1ywc3"]
 [ext_resource type="Texture2D" uid="uid://0yg51dfmlxt7" path="res://Art/CardArt/GreenDefiance/Woodwose.png" id="7_neonv"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
+noise = SubResource("FastNoiseLite_s5qc8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_877ti"]
+resource_local_to_scene = true
+shader = ExtResource("2_t4qyw")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_5riqg")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
 [node name="Cr-Woodwose" instance=ExtResource("1_c5v68")]
+material = SubResource("ShaderMaterial_877ti")
 cardName = "Woodwose"
 subTypeStr = "Woodwose Warrior"
 manaCost = 3

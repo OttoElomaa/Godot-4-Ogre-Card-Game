@@ -1,13 +1,33 @@
-[gd_scene load_steps=7 format=3 uid="uid://bews6x4fcf3mr"]
+[gd_scene load_steps=11 format=3 uid="uid://bews6x4fcf3mr"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_07d1u"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_1p68a"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_e1l0y"]
 [ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="2_ka4br"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="3_h3v4s"]
 [ext_resource type="Texture2D" uid="uid://c3bglrj7apvdw" path="res://Art/CardArt/Desert/card-art-ritual-blast.jpg" id="3_k3mux"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="4_jfp56"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
+noise = SubResource("FastNoiseLite_s5qc8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4hcx"]
+resource_local_to_scene = true
+shader = ExtResource("2_1p68a")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_5riqg")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
 [node name="Card-Sp-Blast" instance=ExtResource("1_07d1u")]
+material = SubResource("ShaderMaterial_q4hcx")
 cardName = "Blast"
 cardType = 1
 manaCost = 4
