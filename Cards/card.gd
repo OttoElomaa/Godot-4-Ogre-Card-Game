@@ -662,7 +662,7 @@ func takeDamage(amount:int):
 	##CHECK IF DESTROYED
 
 	if tempHealth <= 0:
-		destroyAndAnimate(true, false)
+		destroyAndAnimate(true)
 
 
 
@@ -877,36 +877,34 @@ func updateCardLabels():
 ###############################################################################
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
-func destroyAndAnimate(toAnimate:bool, recoil:bool):
+func destroyAndAnimate(toAnimate:bool):
 	statesDestroy()
 	
 	if mySlot:
 		mySlot.isAvailable = true
 		
 	if toAnimate:
-		await playCardDestroyedAnimation(recoil)
+		await playCardDestroyedAnimation()
 	
 
 
-func playCardDestroyedAnimation(recoil:bool):
+func playCardDestroyedAnimation():
 	if checkAlive():
 		return
 	
 	## If a card was killed by an attack, it recoils backwards.
-	if recoil:
-		var tween_a = create_tween()
-		var tween_b = create_tween()
-		var change_position = Vector2(0, 150)
-		if isEnemyCard:
-			change_position = -change_position
-		var change_rotation = randf_range(-25.0, 25.0)
-		tween_a.tween_property(self, "position", position + change_position, 0.2).set_ease(Tween.EASE_OUT)
-		tween_b.tween_property(self, "rotation_degrees", change_rotation, 0.1)
-		await tween_a.finished
-		
+	var tween = create_tween()
+	var change_position = Vector2(0, 30)
+	if isEnemyCard:
+		change_position = -change_position
+	var change_rotation = randf_range(-10.0, 10.0)
+	tween.tween_property(self, "position", position + change_position, 2).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "rotation_degrees", change_rotation, 0.2)
 		
 	await burnAwayShader()
-	$BodyAnimations.play("DestroyBoardCard")
+	visible = false
+	destroyCardTwo()
+
 
 func burnAwayShader():
 	material = load("res://Resources/Shaders/destroy_card_material.tres")
@@ -919,8 +917,9 @@ func set_shader_property(value:float, property:String):
 	material.set_shader_parameter(property, value)
 	
 func reset_visuals():
-	material = null
 	$BodyAnimations.play("RESET")
+	visible = true
+	
 	
 #### CALLED IN ANIMATION "DestroyBoardCard"
 func destroyCardTwo():

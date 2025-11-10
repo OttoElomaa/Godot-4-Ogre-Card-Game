@@ -355,10 +355,6 @@ func handlePlayerAttackCreature(target:Card) -> void:
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	endAttackState()
-	
-	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, true)
-	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, false)
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
 	await attackCard.handleCombatActions(attackCard, targetCard)
@@ -372,7 +368,11 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	params2.sourceCard = targetCard
 	params2.targetCard = attackCard
 	SignalBus.defended.emit(params2)
-	
+
+	#### WHICH CARDS TOOK LETHAL DAMAGE?
+	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, true)
+	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, false)
+
 	#### CHECK IF EITHER CARD WAS DESTROYED
 	var attackerDestroyed = attackCard.checkAndHandleCombatDeath(true)
 	var targetDestroyed = targetCard.checkAndHandleCombatDeath(false)

@@ -224,7 +224,10 @@ func startDraggingCardOrAttack():
 		return
 	if not card.checkInteractAllowed():
 		return
-	
+	if card.isEnemyCard:
+		return
+	if card.actionState == card.CardActionStates.DISCARD:
+		return
 	
 	#### ONLY IF IT'S NOT SLOTTED	
 	if not card.mySlot:
@@ -595,7 +598,7 @@ func handleDiscardAtTurnEnd():
 
 #### DESTROY ANIMATION CALLS THE moveToDiscard FUNCTION
 func discardCard(c:Card):
-	c.destroyAndAnimate(true, false)
+	c.destroyAndAnimate(true)
 	
 
 
