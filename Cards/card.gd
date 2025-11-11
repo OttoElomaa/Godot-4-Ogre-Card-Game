@@ -81,8 +81,31 @@ var keywords = []
 
 var effectText := ""
 
+################################# AI VALUES
 
+@export_subgroup('AI Behavior')
+## This card becomes set as a blocker when summoned.
+@export var block_on_arrival = true
+enum actionMode {TANK, ## DOES NOT ACT ON ITS TURN, ONLY BLOCKS.
+ATTACKER, ## IF THERE ARE BLOCKERS, ATTACKS THE ENEMY.
+CASTER, ## IF THERE ARE BLOCKERS, USES ITS CAST ABILITY. 
+}
 
+## If the card acts during its turn, who it targets with attacks/manual tagets casts.
+@export var action_mode = actionMode.ATTACKER
+
+## If the card acts during its turn, who it targets with attacks/manual tagets casts.
+enum targetingMode {
+PLAYER, ## ATTACKS/CASTS ON BLOCKERS. IF NO BLOCKERS, TARGETS THE PLAYER.
+PASSIVE_CARDS, ## TARGETS PASSIVE CARDS IF POSSIBLE.
+SMART_TARGET, ## TARGETS ONLY CARDS WHICH IT CAN KILL AND SURVIVE AGAINST. IF NO SUCH CARDS ARE PRESENT, SKIPS ITS TURN.
+STRONGEST_ALLY, ## CASTS ON THE ALLY WITH THE HIGHEST COMBINED STATS.
+WEAKEST_ALLY ## CASTS ON THE ALLY WITH THE LOWEST COMBINED STATS.
+}
+## If the card acts during its turn, who it targets with attacks/manual tagets casts.
+@export var targeting_mode = targetingMode.PLAYER
+
+################################## UPGRADE PATH 1
 
 @export_subgroup('Upgrade Path #1')
 @export var alt_card_name_1: String
@@ -916,6 +939,8 @@ func set_shader_property(value:float, property:String):
 	material.set_shader_parameter(property, value)
 	
 func reset_visuals():
+	if material.get_shader_parameter('percentage'):
+		set_shader_property(1.0, 'percentage')
 	$BodyAnimations.play("RESET")
 	visible = true
 	

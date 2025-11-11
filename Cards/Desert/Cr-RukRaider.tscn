@@ -29,6 +29,7 @@ cardName = "Ruk Raider"
 manaCost = 3
 startingDamage = 2
 startingHealth = 2
+targeting_mode = 1
 
 [node name="Duelist" parent="KeywordHandler/MyKeywords" index="0" instance=ExtResource("2_lx00x")]
 isPermanent = true
