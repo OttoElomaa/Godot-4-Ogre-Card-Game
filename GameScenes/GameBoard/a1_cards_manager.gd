@@ -76,10 +76,9 @@ func _physics_process(delta: float) -> void:
 	
 	#### HOVER STUFF	
 	if hoverCheckNeeded:
-		if not currentDraggedCard:
-			if not currentHoveredCards.is_empty(): #### TURN These Checks OFF WHEN DRAGGING
+		if not currentDraggedCard: #### TURN These Checks OFF WHEN DRAGGING
+			if not currentHoveredCards.is_empty(): 
 				handleHoverCheck()
-
 	
 	#### THIS HIDES CARD INFO WHEN NO CARDS ARE HOVERED -> No need for info panel
 	if mainCardInfoShown:
@@ -99,9 +98,11 @@ func handleHoverCheck():
 			toggleHoverVisuals(false, currentHoveredCards[i])
 	
 	#### TURN ON HIGHLIGHT For TOP CARD		
-	var topCard = currentHoveredCards[lastIndex]
+	var topCard:Card = currentHoveredCards[lastIndex]
 	toggleHoverVisuals(true, topCard)
-	battleSystem.updateDamageCalculator(topCard)
+	if topCard.isEnemyCard and battleSystem.playerAttackOngoing:
+		battleSystem.damageCalculator.show()
+		battleSystem.updateDamageCalculator(topCard)
 	
 	#### SHOW TOP CARD'S INFO, TURN OFF HOVER CHECK
 	mainCardInfoShown = true

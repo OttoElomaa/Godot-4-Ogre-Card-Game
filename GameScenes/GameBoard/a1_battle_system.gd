@@ -34,7 +34,7 @@ func _ready() -> void:
 	playerMana = turnCount
 	enemyMana = turnCount
 	GameInfo.enemy_turn = false
-	#updateResourceLabels()
+#	updateResourceLabels()
 	
 	togglePlayerAttackMode(false, null)
 	
@@ -175,7 +175,6 @@ func togglePlayerAttackMode(enable:bool, card:Card) -> void:
 		playerAttackOngoing = enable
 		$AttackLine.show()
 		attackLine.points[0] = card.position
-		damageCalculator.show()
 		
 
 
@@ -191,6 +190,10 @@ func updateDamageCalculator(targetC:Card) -> void:
 	if not attacker:
 		return
 	if targetC == attacker:
+		return
+	if not targetC:
+		damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(attacker, true) + extraDamage2Defender) 
+		damageToTakeLabel.text = "0"
 		return
 	
 	if targetC.getEffect('Doom'):
@@ -221,7 +224,6 @@ func handlePlayerAttack() -> void:
 	results = MyTools.fetchMouseOverObjects(COLLISION_MASK_ENEMY_PORTRAIT)
 	if results.size() > 0:
 		handlePlayerAttackEnemy()  #### ATTACK PORTRAIT
-		updateResourceLabels()
 		return
 
 
@@ -275,6 +277,7 @@ func handlePlayerAttackEnemy() -> void:
 	endAttackState()
 	await main.playAttackPortraitAnimation(c)
 	main.changeHealth(-combatDamage, !c.isEnemyCard)
+	updateResourceLabels()
 	handlePortraitAttackPrintout(c, combatDamage, true)
 	main.shake_screen(10, 0.5)
 	await c.returnToSlot()
@@ -304,6 +307,7 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 			var damageToPlayer = c.getCombatDamageToTarget(null, true)
 			await main.playAttackPortraitAnimation(c)
 			main.changeHealth(-c.tempDamage, !c.isEnemyCard)
+			updateResourceLabels()
 			handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
 			playerAttackedSE()
 			main.shake_screen(10, 0.5)
@@ -421,7 +425,10 @@ func endAttackState() -> void:
 		togglePlayerAttackMode(false, null)
 	
 
+func _on_enemy_portrait_area_mouse_entered():
+	damageCalculator.show()
+	updateDamageCalculator(null)
 
 
-
-	
+func _on_enemy_portrait_area_mouse_exited():
+	damageCalculator.hide()

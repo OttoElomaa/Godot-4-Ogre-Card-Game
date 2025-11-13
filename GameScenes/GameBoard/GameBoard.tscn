@@ -774,6 +774,8 @@ volume_db = -10.0
 autoplay = true
 bus = &"BGM"
 
+[connection signal="mouse_entered" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_entered"]
+[connection signal="mouse_exited" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_exited"]
 [connection signal="timeout" from="BattleSystem/EnemyStartCombatTimer" to="BattleSystem" method="timeoutEnemyStartCombat"]
 [connection signal="timeout" from="BattleSystem/EndEnemyTurnTimer" to="BattleSystem" method="timeoutEndEnemyTurn"]
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
@@ -781,5 +783,5 @@ bus = &"BGM"
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel2/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
-[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]

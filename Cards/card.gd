@@ -159,6 +159,7 @@ func setup(gameBoard: GameBoard):
 	#### SETUP FOR ALL ACTION SCRIPTS
 	#### SHARE INFO ON, IS CARD ENEMY
 #	actions.setup(self)
+	reset_shaders()
 	
 	if cardType == CardTypes.CREATURE:
 		updateCardNameAndBasicInfo(true)
@@ -939,16 +940,17 @@ func set_shader_property(value:float, property:String):
 	material.set_shader_parameter(property, value)
 	
 func reset_visuals():
-	if material.get_shader_parameter('percentage'):
-		set_shader_property(1.0, 'percentage')
 	$BodyAnimations.play("RESET")
-	visible = true
+	
+func reset_shaders():
+	set_shader_property(1.0, 'percentage')
+	
 	
 	
 #### CALLED IN ANIMATION "DestroyBoardCard"
 func destroyCardTwo():
 	cardsManager.moveToDiscard(self, isEnemyCard)
-	reset_visuals()
+	reset_shaders()
 
 #################################################################################
 

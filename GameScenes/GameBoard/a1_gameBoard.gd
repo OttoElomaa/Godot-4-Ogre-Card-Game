@@ -135,7 +135,7 @@ func changeMana(amount:int, isEnemy:bool):
 func changeHealth(amount:int, isEnemy:bool):
 	
 	if isEnemy:
-		$BattleSystem.enemyHealth += amount
+		$BattleSystem.enemyHealth = max($BattleSystem.enemyHealth + amount, 0)
 	else:
 		$BattleSystem.playerHealth = max($BattleSystem.playerHealth + amount, 0)
 
