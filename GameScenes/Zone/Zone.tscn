@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBoardIcon.tscn" id="2_rmpmb"]
 [ext_resource type="PackedScene" uid="uid://dtps2wa815evx" path="res://Cards/Desert/Cr-Alhaja-Bheith-Nochti.tscn" id="3_f6as4"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="3_xt5s7"]
-[ext_resource type="PackedScene" uid="uid://dk4etb0x0xce3" path="res://Cards/Desert/Cr-Pikeman.tscn" id="4_13exd"]
+[ext_resource type="PackedScene" uid="uid://dk4etb0x0xce3" path="res://Cards/City/Cr-Kalasirios.tscn" id="4_13exd"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="4_588s3"]
 [ext_resource type="PackedScene" uid="uid://qd3ll6tcjlep" path="res://Cards/Desert/Cr-Outrider.tscn" id="5_gp5ld"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="5_yhj0w"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dnvgrx8n5noeh" path="res://Cards/Desert/Cr-BlinkBeast.tscn" id="11_kqd17"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
 [ext_resource type="PackedScene" uid="uid://dvshdygyjpncb" path="res://Cards/Desert/Cr-Alhaja-Pious.tscn" id="12_01ekw"]
-[ext_resource type="PackedScene" uid="uid://c7v3m7qb227jv" path="res://Cards/Desert/Cr-RukRaider.tscn" id="13_k47wg"]
+[ext_resource type="PackedScene" uid="uid://c7v3m7qb227jv" path="res://Cards/Outcasts/Cr-RukRaider.tscn" id="13_k47wg"]
 [ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="15_4t6do"]
 [ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/TravelMap/level_select.tscn" id="23_4t6do"]
 

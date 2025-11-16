@@ -8,8 +8,6 @@ var active_cheat_scene
 var new_card: Card
 var found_card: Card
 
-var all_cards = []
-
 @onready var cardEditor := $GameBoard_Cheats/RightMenu/HBox/CardEditor
 @onready var cardSearch := $GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel
 @onready var topMenu := $GameBoard_Cheats/TopMenu
@@ -21,7 +19,7 @@ var cardEditorVisible := false
 func _ready():
 	get_current_scene()
 	toggleCardEditor(cardEditorVisible)
-	get_all_game_cards()
+	
 
 
 func _input(event):
@@ -56,24 +54,6 @@ func get_current_scene():
 
 func _on_nuke_all_cards_pressed():
 	current_scene.nuke_all_cards()
-
-func get_all_game_cards():
-	var path = 'res://Cards/City/'
-	for file in DirAccess.get_files_at(path):
-		var new_card = load(str(path, file))
-		all_cards.append(new_card.instantiate())
-	path = 'res://Cards/Desert/'
-	for file in DirAccess.get_files_at(path):
-		var new_card = load(str(path, file))
-		all_cards.append(new_card.instantiate())
-	path = 'res://Cards/Outcasts/'
-	for file in DirAccess.get_files_at('res://Cards/Outcasts/'):
-		var new_card = load(str(path, file))
-		all_cards.append(new_card.instantiate())
-	path = 'res://Cards/GreenDefiance/'
-	for file in DirAccess.get_files_at('res://Cards/GreenDefiance/'):
-		var new_card = load(str(path, file))
-		all_cards.append(new_card.instantiate())
 
 func _on_add_keyword_pressed():
 	new_card.addKeyword(cardEditor.get_node("VBox/NewKeyword").text) 
@@ -123,7 +103,7 @@ func _on_search_card_name_text_changed() -> bool:
 	
 	#### GET PLAYER DECK CARDS IN REAL TIME
 	var playerDeckCards:Array = MyTools.getDeckCards(false) 
-	for i in all_cards:
+	for i in GameInfo.all_cards:
 		var cardName:String = i.cardName.to_lower()
 		#### IF THE LOWERCASE STRING IS CONTAINED IN LOWERCASE CARD NAME -> Success
 		if cardName.contains(prompt):

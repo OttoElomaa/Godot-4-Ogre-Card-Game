@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://7mo4t86mxlx6"]
 
-[ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Fonts/monaco/monaco.ttf" id="1_o7von"]
+[ext_resource type="FontFile" uid="uid://ws5ldmejn1u" path="res://Fonts/Inkverse.ttf" id="1_o7von"]
 
 [resource]
 default_font = ExtResource("1_o7von")

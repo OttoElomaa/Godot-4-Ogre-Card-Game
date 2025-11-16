@@ -1,14 +1,10 @@
 extends Node
 
-
-
 var counter := 0
 
 func createCard(path:String):
 	var cardPacked = load(path)
 	return cardPacked.instantiate()
-	
-
 
 func createDesertDeck():
 	
@@ -20,6 +16,8 @@ func createDesertDeck():
 	#### THE CITY
 	for i in range(5):
 		cards.append(createCard("res://Cards/City/Cr-guardmaster.tscn"))
+	for i in range(5):
+		cards.append(createCard("res://Cards/City/Cr-Kalasirios.tscn"))
 	
 	##### GREEN DEFIANCE
 	for i in range(5):
@@ -37,11 +35,9 @@ func createDesertDeck():
 	#
 	##### THE WILDS
 	for i in range(5):
-		cards.append(createCard("res://Cards/Desert/Cr-Pikeman.tscn"))
-	for i in range(5):
 		cards.append(createCard("res://Cards/Desert/Cr-Ogre.tscn"))
 	for i in range(5):
-		cards.append(createCard("res://Cards/Desert/Cr-RukRaider.tscn"))
+		cards.append(createCard("res://Cards/Outcasts/Cr-RukRaider.tscn"))
 	for i in range(5):
 		cards.append(createCard("res://Cards/Desert/Cr-MardokHound.tscn"))
 	#

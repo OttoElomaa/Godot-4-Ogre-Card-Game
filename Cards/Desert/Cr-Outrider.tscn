@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://qd3ll6tcjlep"]
+[gd_scene load_steps=16 format=3 uid="uid://qd3ll6tcjlep"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_hhsm2"]
 [ext_resource type="Texture2D" uid="uid://cpje3wokp2ij1" path="res://Art/CardArt/card-art-creature-debug-placeholder.jpg" id="2_d68ha"]
 [ext_resource type="PackedScene" uid="uid://hgfd7t0eywau" path="res://CardScriptsAndComponents/Triggers/OnSelfArrivalTrigger.tscn" id="2_hhsm2"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_lq8tf"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_q156q"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="4_bokjc"]
 [ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="5_d68ha"]
@@ -12,7 +13,28 @@
 [ext_resource type="PackedScene" uid="uid://w0gk04ursfij" path="res://CardScriptsAndComponents/TargetingComponents/AllyFetch.tscn" id="9_c3bds"]
 [ext_resource type="PackedScene" uid="uid://botbjqrlvbhcq" path="res://CardScriptsAndComponents/Conditionals/IfType.tscn" id="10_0l6fb"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_klw2k"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c3bds"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_klw2k")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0l6fb"]
+resource_local_to_scene = true
+shader = ExtResource("2_lq8tf")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_c3bds")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
 [node name="Card-Cr-Outrider" node_paths=PackedStringArray("alt_actions_node_1") instance=ExtResource("1_hhsm2")]
+material = SubResource("ShaderMaterial_0l6fb")
 cardName = "Outrider"
 subTypeStr = "Salkhi Scout"
 flavorText = "Ah Outrider, sibling of barkhans, carrier of omens!"

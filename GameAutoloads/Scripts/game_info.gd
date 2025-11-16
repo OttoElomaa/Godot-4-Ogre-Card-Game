@@ -1,5 +1,6 @@
 extends Node2D
 
+var all_cards = []
 
 var playerName := "The Player"
 var heroName := "The Amir"

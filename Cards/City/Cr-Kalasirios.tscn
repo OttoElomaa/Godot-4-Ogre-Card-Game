@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk4etb0x0xce3"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_ytltf"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_kys8y"]
+[ext_resource type="Texture2D" uid="uid://4l7l8jtu5agq" path="res://Art/CardArt/City/card-art-kalasirios.png" id="3_5xjtm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
+noise = SubResource("FastNoiseLite_s5qc8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bf25j"]
+resource_local_to_scene = true
+shader = ExtResource("2_kys8y")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_5riqg")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Card-Cr-Pikeman" instance=ExtResource("1_ytltf")]
+material = SubResource("ShaderMaterial_bf25j")
+cardName = "Kalasirios"
+subTypeStr = "Ashk'lani Soldier"
+flavorText = "A highborn Kingling, not yet anointed in Glory."
+manaCost = 1
+startingDamage = 2
+startingHealth = 2
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("3_5xjtm")

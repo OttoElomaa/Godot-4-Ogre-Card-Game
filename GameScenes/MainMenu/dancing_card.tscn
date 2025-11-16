@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://pd7or3cigyqn"]
+
+[ext_resource type="Script" uid="uid://cf5dhx4ni7a14" path="res://GameScenes/dancing_cards.gd" id="1_h4r8x"]
+[ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/typewriter_textbox.tscn" id="2_s7wik"]
+[ext_resource type="PackedScene" uid="uid://came4na503n5s" path="res://GameScenes/card_container.tscn" id="3_uvdeu"]
+[ext_resource type="Shader" uid="uid://cqwbsn5oqvns0" path="res://Resources/Shaders/dancing_card.gdshader" id="4_s7wik"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7wik"]
+resource_local_to_scene = true
+shader = ExtResource("4_s7wik")
+shader_parameter/r = 0.0
+shader_parameter/offset = 5.151
+
+[sub_resource type="Animation" id="Animation_u3eby"]
+resource_name = "CardDance"
+length = 21.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardContainer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.06667, 6.06667, 9.1, 12.1667, 15.1333, 18.1333, 21),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.436332, 0.436332, 0.0, 0.0, -0.436332, -0.436332, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_c0kru"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardContainer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iyknk"]
+_data = {
+&"CardDance": SubResource("Animation_u3eby"),
+&"RESET": SubResource("Animation_c0kru")
+}
+
+[node name="DancingCard" type="Node2D"]
+script = ExtResource("1_h4r8x")
+
+[node name="TypewriterTextbox" parent="." instance=ExtResource("2_s7wik")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 200.0
+offset_top = -150.0
+offset_right = 650.0
+offset_bottom = 300.0
+grow_horizontal = 1
+grow_vertical = 1
+sound_off = true
+
+[node name="CardContainer" parent="." instance=ExtResource("3_uvdeu")]
+material = SubResource("ShaderMaterial_s7wik")
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 130.0
+offset_bottom = 200.0
+scale = Vector2(2, 2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_iyknk")
+}
+
+[connection signal="mouse_entered" from="CardContainer" to="." method="_on_card_container_mouse_entered"]
+[connection signal="mouse_exited" from="CardContainer" to="." method="_on_card_container_mouse_exited"]

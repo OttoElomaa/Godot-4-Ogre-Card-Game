@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=35 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Material" uid="uid://dccxbrxmkylit" path="res://Resources/Shaders/destroy_card_material.tres" id="1_m45w5"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://cuy7g1fhndhpp" path="res://Art/CardComponents/resources-shading-down.png" id="19_07jhh"]
 [ext_resource type="Texture2D" uid="uid://cl6kjdnh2pqjl" path="res://Art/CardComponents/resources-shading-up.png" id="20_8geja"]
 [ext_resource type="AudioStream" uid="uid://c584yxbl7jwee" path="res://Audio/SE/Card-Death.wav" id="25_s5qc8"]
+[ext_resource type="Texture2D" uid="uid://wmmkx8jna6w5" path="res://Art/CardComponents/card-shadow.png" id="25_uagit"]
 [ext_resource type="AudioStream" uid="uid://i6vufojx318b" path="res://Audio/SE/Attack-Spear.wav" id="26_5riqg"]
 [ext_resource type="AudioStream" uid="uid://b88dmx7ccoxck" path="res://Audio/SE/Defend-Chainmail.wav" id="27_lgw4w"]
 
@@ -471,7 +472,8 @@ scale = Vector2(0.2, 0.2)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("11_8geja")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 6
 
 [node name="ManaCost" type="Node2D" parent="Frontside"]
 position = Vector2(0, -174)
@@ -648,6 +650,12 @@ use_parent_material = true
 layout_mode = 2
 text = "33"
 label_settings = ExtResource("4_7bc8n")
+
+[node name="Shadow" type="Node2D" parent="Frontside"]
+
+[node name="Card-Shadow" type="Sprite2D" parent="Frontside/Shadow"]
+z_index = -1
+texture = ExtResource("25_uagit")
 
 [node name="Area2D" type="Area2D" parent="."]
 

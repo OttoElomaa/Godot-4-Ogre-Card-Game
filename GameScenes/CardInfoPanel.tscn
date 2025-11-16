@@ -39,7 +39,7 @@ vertical_alignment = 2
 layout_mode = 2
 texture = ExtResource("4_ykqoc")
 expand_mode = 5
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="VBox2" type="VBoxContainer" parent="Margin/VBox"]
 layout_mode = 2

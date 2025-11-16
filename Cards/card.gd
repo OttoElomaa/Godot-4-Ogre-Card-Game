@@ -19,12 +19,33 @@ enum CardStates {
 	DECK, HAND, BOARD, GRAVEYARD
 }
 
+
+
 enum CardTypes {
-	CREATURE, RITUAL, CHAMPION
+	CREATURE, ## HAS ATTACK AND HEALTH, CAN BE PUT INTO SLOTS AND CAN ACT IN BATTLE.
+	RITUAL, ## CAN BE CAST FOR A ONE-TIME EFFECT.
+	CHAMPION, ## HAS HEALTH BUT NOT ATTACK. CAN BE PLAYED OVER THE PLAYER PORTRAIT. BLOCKS DAMAGE
+	## TAKEN BY THE PLAYER. ITS HEALTH CAN BE USED TO CAST ITS ABILITIES.
+	STRUCTURE, ## IDENTICAL TO A CREATURE WITH APATHETIC KEYWORD. CANNOT MANUALLY ACT IN BATTLE.
+	ITEM ## IDENTICAL TO A RITUAL WITH TRANSIENT KEYWORD. PURGED ON USE.
 }
 
 enum UpgradeStates {
 	UNUPGRADED, PATH_1, PATH_2, PATH_3
+}
+
+## Shows which loot table the card belongs to. Cards that cannot be gained from loot
+## (like Transient cards) should be set to NONE.
+enum Group {
+	NONE,
+	## GREEN DEFIANCE
+	GREEN_GENERIC, VINEMEN, WOODWOSES, SKULL_PRIESTS, GHARCH, GROVE_CLANS,
+	## DESERT
+	DESERT_GENERIC, SALKHI_HORDE, PYRECALLERS,
+	## CITY
+	CITY_GENERIC, THRONE, GUILDS, TEMPLES, ASTROMANCERS,
+	## OUTCASTS
+	OUTCAST_GENERIC, FREESLAYERS, UMUGITES, NECROMANCERS, MORLOCKS
 }
 
 var isRitual:
@@ -49,6 +70,8 @@ var isChampion:
 @export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE
 @export var subTypeStr := "Card Sub-Type"
+
+@export var group := Group.NONE
 
 var cardsManager:CardsManager = null
 var mainMenu: Node = null
@@ -903,13 +926,19 @@ func updateCardLabels():
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
 	statesDestroy()
-	
+		
 	if mySlot:
 		mySlot.isAvailable = true
 		
 	if toAnimate:
 		await playCardDestroyedAnimation()
 	
+	if hasKeyword('Transient'):
+		purge()
+	
+
+func purge():
+	queue_free()
 
 func playCardDestroyedAnimation():
 	if checkAlive():

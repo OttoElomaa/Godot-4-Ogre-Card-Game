@@ -135,9 +135,9 @@ script = ExtResource("25_7yxuf")
 [node name="PlayerSprite" type="TextureRect" parent="Portraits"]
 custom_minimum_size = Vector2(210, 260)
 offset_left = 1018.0
-offset_top = 1119.0
-offset_right = 1228.0
-offset_bottom = 1379.0
+offset_top = 1121.0
+offset_right = 1245.0
+offset_bottom = 1386.0
 pivot_offset = Vector2(113.5, 152)
 texture = ExtResource("3_1phva")
 expand_mode = 1
@@ -783,5 +783,5 @@ bus = &"BGM"
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel2/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
-[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]

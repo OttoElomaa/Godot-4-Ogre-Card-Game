@@ -22,10 +22,10 @@ func create_containers():
 		child.queue_free()
 		
 	print('Creating containers')
-	for i in GameInfo.playerOwnedCards:
+	for i:Card in GameInfo.playerOwnedCards:
 		var new_cont = CardContainer.instantiate()
-		new_cont.card = i
 		ownedCardsContainer.add_child(new_cont)
+		new_cont.insert_card(i)
 	for i in GameInfo.playerDeckCards:
 		var new_cont = CardPanel.instantiate()
 		new_cont.card = i

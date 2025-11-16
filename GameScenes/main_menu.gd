@@ -12,11 +12,14 @@ var bestiaryCards := []
 
 
 func _ready() -> void:
-	
+	MyTools.get_all_game_cards()
 	setupBestiary()
 	
 	bestiaryVisible = true
 	buttonPressedToggleBestiary()
+	
+	for child in $DancingCards.get_children():
+		child.initialize()
 
 
 

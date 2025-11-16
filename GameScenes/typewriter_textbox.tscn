@@ -1,47 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2lky3krjjul4"]
+[gd_scene load_steps=5 format=3 uid="uid://d2lky3krjjul4"]
 
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="1_718ti"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="2_belcu"]
 [ext_resource type="Script" uid="uid://b2femu4hqkqb8" path="res://GameScenes/Typewriter.gd" id="2_k08e2"]
 [ext_resource type="AudioStream" uid="uid://dhuojolt6ampg" path="res://Audio/SE/Text_Typing.wav" id="3_belcu"]
-[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="5_belcu"]
-
-[sub_resource type="Animation" id="Animation_ih6jd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/RichTextLabel:visible_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-
-[sub_resource type="Animation" id="Animation_fh001"]
-resource_name = "Typewriter"
-length = 15.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/RichTextLabel:visible_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3f72v"]
-_data = {
-&"RESET": SubResource("Animation_ih6jd"),
-&"Typewriter": SubResource("Animation_fh001")
-}
 
 [node name="TypewriterTextbox" type="PanelContainer"]
 custom_minimum_size = Vector2(450, 450)
@@ -59,6 +21,8 @@ grow_vertical = 2
 theme = ExtResource("1_718ti")
 theme_override_styles/panel = ExtResource("2_belcu")
 script = ExtResource("2_k08e2")
+delay = 0.1
+delay_variance = 1.5
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -72,36 +36,22 @@ layout_mode = 2
 theme = ExtResource("1_718ti")
 theme_override_colors/default_color = Color(0.973535, 0.973535, 0.973535, 1)
 bbcode_enabled = true
-text = "O seeker!    
-Know this:      
-    
-Histories, upon [color='RED']blood[/color] mound,     
-Into [color='RED']blood[/color], return.  
-From such decrease        
-     
-Even [color=#c0c0f0]gods[/color] are unexempt.      
-Of ancient [color=#ffa000]glories[/color], you may with us partake:          
-             
-May our [color=#af8f50]cards[/color] revive them."
 fit_content = true
-vertical_alignment = 1
+scroll_active = false
+visible_characters_behavior = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_belcu")
 volume_db = -8.787
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_3f72v")
-}
-
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("5_belcu")
 patch_margin_left = 7
 patch_margin_top = 7
 patch_margin_right = 7
 patch_margin_bottom = 7
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

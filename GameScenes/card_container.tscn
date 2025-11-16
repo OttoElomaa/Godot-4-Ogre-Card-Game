@@ -20,6 +20,7 @@ pivot_offset = Vector2(55, 89)
 script = ExtResource("1_71q1e")
 
 [node name="Frontside" type="Node2D" parent="."]
+use_parent_material = true
 position = Vector2(50, 76)
 scale = Vector2(0.5, 0.5)
 
@@ -81,6 +82,7 @@ text = "Effect Text Goes Here"
 label_settings = ExtResource("9_8jiv1")
 horizontal_alignment = 1
 autowrap_mode = 2
+text_overrun_behavior = 3
 
 [node name="Resources" type="Node2D" parent="Frontside"]
 position = Vector2(10, 140)

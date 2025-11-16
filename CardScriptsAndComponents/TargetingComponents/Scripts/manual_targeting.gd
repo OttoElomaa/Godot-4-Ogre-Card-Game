@@ -53,7 +53,6 @@ func getTargets():
 			if cond is ConditionalComponent:
 				if not cond.check(card, myCard):
 					success = false
-				cond.reset()
 		if card.isEnemyCard and manualTargetGroup == man.ENEMIES:
 			pass
 		elif !card.isEnemyCard and manualTargetGroup == man.ALLIES:
