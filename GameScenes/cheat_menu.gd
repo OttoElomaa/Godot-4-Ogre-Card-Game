@@ -102,7 +102,6 @@ func _on_search_card_name_text_changed() -> bool:
 		return false
 	
 	#### GET PLAYER DECK CARDS IN REAL TIME
-	var playerDeckCards:Array = MyTools.getDeckCards(false) 
 	for i in GameInfo.all_cards:
 		var cardName:String = i.cardName.to_lower()
 		#### IF THE LOWERCASE STRING IS CONTAINED IN LOWERCASE CARD NAME -> Success

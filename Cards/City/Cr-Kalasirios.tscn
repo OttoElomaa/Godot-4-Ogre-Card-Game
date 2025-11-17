@@ -26,9 +26,10 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_bf25j")
 cardName = "Kalasirios"
 subTypeStr = "Ashk'lani Soldier"
+group = 11
 flavorText = "A highborn Kingling, not yet anointed in Glory."
 manaCost = 1
-startingDamage = 2
+startingDamage = 1
 startingHealth = 2
 
 [node name="Art" parent="Frontside" index="1"]

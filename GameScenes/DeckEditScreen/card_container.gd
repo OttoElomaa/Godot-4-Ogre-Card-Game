@@ -14,7 +14,6 @@ func insert_card(new_card:Card):
 	#### NEED TO INSTANTIATE THE CREATED CARD, SO IT CAN HAVE ITS OWN get_children() CALLS
 	#### SO IT CAN BE SETUP PROPERLY, TO GET THE EFFECT TEXT ETC
 	add_child(card)
-	card.hide()
 	
 	art.texture = card.cardArt
 	

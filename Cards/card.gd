@@ -34,8 +34,12 @@ enum UpgradeStates {
 	UNUPGRADED, PATH_1, PATH_2, PATH_3
 }
 
+enum Factions {
+	GREEN_DEFIANCE, DESERT, CITY, OUTCAST
+}
+
 ## Shows which loot table the card belongs to. Cards that cannot be gained from loot
-## (like Transient cards) should be set to NONE.
+## (like boss cards or summoned cards) should be set to NONE.
 enum Group {
 	NONE,
 	## GREEN DEFIANCE
@@ -154,9 +158,12 @@ var allowInteract := true
 
 #region ######################################## STARTUP
 func _ready() -> void:
-	
+	self.connect('visibility_changed', visibility_debug)
 	setup(null)
 	
+
+func visibility_debug():
+	print('Visibility changed!')
 	
 func setup_all_actions():
 	$Actions.setup(self)
@@ -955,7 +962,7 @@ func playCardDestroyedAnimation():
 	
 	$SFX/DeathSound.play()
 	await burnAwayShader()
-	visible = false
+#	visible = false
 	destroyCardTwo()
 
 func burnAwayShader():

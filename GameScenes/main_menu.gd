@@ -99,3 +99,6 @@ func buttonPressedExitGame() -> void:
 func toggleCardInfo(enable:bool, card:Card):
 	var cardInfo := $CanvasLayer/CardInfoPane/CardInfoPanel
 	cardInfo.toggleCardInfo(enable, card)
+
+func _on_options_button_pressed():
+	pass # Replace with function body.
