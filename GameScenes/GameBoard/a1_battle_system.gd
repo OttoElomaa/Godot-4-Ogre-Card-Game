@@ -76,9 +76,9 @@ func _on_end_turn_button_pressed() -> void:
 	#### THEN IF ENEMY TURN:
 	if GameInfo.enemy_turn:
 		cardsManager.startEnemyTurn()
-		$EnemyStartCombatTimer.start()
-		$EndEnemyTurnTimer.start()
-		enemyPlayTurn()
+		await enemyPlayTurn()
+		await timeoutEnemyStartCombat()
+		
 	
 	
 func switchBetweenPlayerEnemyTurns():
@@ -112,14 +112,21 @@ func enemyPlayTurn() -> void:
 func timeoutEnemyStartCombat() -> void:
 	#### ATTACK WITH CARDS ON BOARD
 	var enemyBoardCards = cardsManager.getEnemyBoardCards()
+	
+	#### TANK CARDS DO NOT ACT ON THEIR TURN.
+	for card:Card in enemyBoardCards:
+		if card.action_mode == card.actionMode.TANK:
+			enemyBoardCards.erase(card)
+	
 	#### RUN MULTIPLE ROUNDS SO All enemy cards have TIME TO REACT if another enemy CARD DOES SOMETHING
-	for i in range(3):
-		for card:Card in enemyBoardCards:
+	for card:Card in enemyBoardCards:
 			
-			if not MyTools.checkNodeValidity(card):  #### CHECK IF VALID
-				pass
-			elif card.checkCanAct(): #### CAN IT ACT
-				await handleEnemyAttackPlayer(card)
+		if not MyTools.checkNodeValidity(card):  #### CHECK IF VALID
+			pass
+		elif card.checkCanAct():
+			await handleEnemyAttackPlayer(card)
+	
+	timeoutEndEnemyTurn()
 
 
 
@@ -291,18 +298,30 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	var c = attackCard
 	var blockers:Array = cardsManager.getPlayerBlockers()
 	var target:Card = null
+	var action_modes = attackCard.actionMode
+	var targeting_modes = attackCard.targetingMode
+	var targeting_mode = attackCard.targeting_mode
 	
 	#### PLAYER HAS BLOCKERS, FIND KILLABLE BLOCKER
-	for other in blockers:
-		target = other
+	if not blockers.is_empty():
+		if targeting_mode == targeting_modes.SMART_TARGET:
+			remove_dangerous(attackCard, blockers)
+		target = get_weakest_in_array(blockers)
 		
 	#### TARGET FOUND, ATTACK TARGET CARD
 	if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
 		var success = await resolveAttack(c, target)
 	
+	if targeting_mode == targeting_modes.PASSIVE_CARDS:
+		target = get_weakest_in_array(cardsManager.getPlayerBoardCards())
+	
+	if target:
+		var success = await resolveAttack(c, target)
+		return
+	
 	#### NO BLOCKERS, ATTACK PLAYER
-	elif blockers.is_empty():
+	if blockers.is_empty():
 		if not main.playerChampion():
 			var damageToPlayer = c.getCombatDamageToTarget(null, true)
 			await main.playAttackPortraitAnimation(c)
@@ -319,6 +338,47 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
 			c.handleAttackingPortrait()
 
+
+#### Checks if attack card would die if it attacks defend card.
+func check_if_survives(attackCard:Card, defendCard:Card) -> bool:
+	var projected_damage = defendCard.getCombatDamageToTarget(attackCard, false)
+	if projected_damage >= attackCard.tempHealth:
+		return false
+	else:
+		return true
+
+func check_if_kills(attackCard:Card, defendCard:Card) -> bool:
+	var projected_damage = attackCard.getCombatDamageToTarget(defendCard, false)
+	if projected_damage >= defendCard.tempHealth:
+		return false
+	else:
+		return true
+
+#### Calculates a card's relative power to the caller. Most enemies are less
+#### eager to attack cards with higher power.
+func get_card_power(card:Card) -> int:
+	var power: int = 0
+	power = card.tempDamage + card.tempHealth
+	return power
+
+func get_weaker(card_1:Card, card_2:Card) -> bool:
+	return get_card_power(card_1) > get_card_power(card_2)
+
+#### Sorts an array of Cards and finds out the weakest in terms of base power.
+func get_weakest_in_array(array:Array) -> Card:
+	if array.size() > 0:
+		array.sort_custom(get_weaker)
+		return array[0]
+	else:
+		return null
+
+func remove_dangerous(caller:Card, array:Array) -> Array:
+	for i:Card in array:
+		if not check_if_survives(caller, i):
+			array.erase(i)
+	return array
+	
+	
 func playerAttackedSE():
 	$SE/SE_Player_Damaged.pitch_scale = 1.0 + randf_range(0.2, -0.2)
 	## The bell gets lower-pitched the lower the HP gets.
@@ -394,11 +454,8 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, false)
 
 	#### CHECK IF EITHER CARD WAS DESTROYED
-	var attackerDestroyed = attackCard.checkAndHandleCombatDeath(true)
-	var targetDestroyed = targetCard.checkAndHandleCombatDeath(false)
-	
-	
-	
+	var attackerDestroyed = await attackCard.checkAndHandleCombatDeath(true)
+	var targetDestroyed = await targetCard.checkAndHandleCombatDeath(false)
 	
 	#### COMBAT LOG STUFF ##################################
 	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]

@@ -124,7 +124,8 @@ CASTER, ## IF THERE ARE BLOCKERS, USES ITS CAST ABILITY.
 ## If the card acts during its turn, who it targets with attacks/manual tagets casts.
 enum targetingMode {
 PLAYER, ## ATTACKS/CASTS ON BLOCKERS. IF NO BLOCKERS, TARGETS THE PLAYER.
-PASSIVE_CARDS, ## TARGETS PASSIVE CARDS IF POSSIBLE.
+PASSIVE_CARDS, ## TARGETS PASSIVE CARDS, PRIORITIZING THE WEAKEST.
+TARGET_STRONGEST, ## AS LONG AS THERE ARE CARDS ON BOARD, TARGETS THE STRONGEST ONE.
 SMART_TARGET, ## TARGETS ONLY CARDS WHICH IT CAN KILL AND SURVIVE AGAINST. IF NO SUCH CARDS ARE PRESENT, SKIPS ITS TURN.
 STRONGEST_ALLY, ## CASTS ON THE ALLY WITH THE HIGHEST COMBINED STATS.
 WEAKEST_ALLY ## CASTS ON THE ALLY WITH THE LOWEST COMBINED STATS.
@@ -760,6 +761,7 @@ func handleCombatActions(attacker, defender):
 func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	if tempHealth <= 0:
 #		destroyAndAnimate(true, !isAttacker)
+		await get_tree().create_timer(1).timeout
 		return true
 	
 	#### SURVIVES, And IS ATTACKER	
@@ -770,7 +772,7 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 		else:
 			restAndAnimate(false)
 			
-	returnToSlot()
+	await returnToSlot()
 	$SFX/DefendSound.play()
 	allowInteract = true
 	
@@ -870,7 +872,7 @@ func returnToSlot():
 	var tween = create_tween()
 	tween.tween_property(self, "position", mySlot.position, 0.2)
 	animateBlockingState(actionState == CardActionStates.ACTIVE)
-		
+	await tween.finished
 
 #### FOR RESTING	
 func timeoutRestAnimation() -> void:
