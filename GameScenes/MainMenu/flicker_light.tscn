@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://yol344fkh60p"]
+
+[ext_resource type="Texture2D" uid="uid://3ltb415jhr4r" path="res://Art/CardComponents/LightTexture.png" id="1_c4i67"]
+[ext_resource type="Script" uid="uid://kqgho0rddddf" path="res://GameScenes/MainMenu/Flickering_Light.gd" id="2_mfvej"]
+
+[node name="FlickerLight" type="PointLight2D"]
+rotation = 1.48004
+shadow_enabled = true
+texture = ExtResource("1_c4i67")
+script = ExtResource("2_mfvej")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

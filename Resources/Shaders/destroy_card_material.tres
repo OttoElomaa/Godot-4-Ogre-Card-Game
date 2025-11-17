@@ -13,7 +13,7 @@ noise = SubResource("FastNoiseLite_s5qc8")
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_ggdle")
-shader_parameter/percentage = 1.0
+shader_parameter/percentage = 0.51
 shader_parameter/burn_texture = SubResource("NoiseTexture2D_5riqg")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05

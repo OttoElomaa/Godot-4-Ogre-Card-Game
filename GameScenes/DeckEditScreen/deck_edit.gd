@@ -1,7 +1,7 @@
 extends Node2D
 @onready var CardContainer = preload("res://GameScenes/DeckEditScreen/card_container.tscn")
 @onready var CardPanel = preload("res://GameScenes/DeckEditScreen/card_panel.tscn")
-@onready var ownedCardsContainer = $CanvasLayer2/Panel/Scroll/OwnedCardsContainer
+@onready var ownedCardsContainer = $CanvasLayer2/Panel/Scroll/MarginContainer/OwnedCardsContainer
 @onready var activeCardsContainer = $CanvasLayer/NinePatchRect/VBoxContainer/ActiveCardsContainer
 @onready var cardInfoPanel = $CardInfoPanel
 

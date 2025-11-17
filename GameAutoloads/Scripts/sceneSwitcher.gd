@@ -42,9 +42,10 @@ func switchToNewSceneFromFile(path:String):
 	get_tree().root.remove_child.call_deferred(storedSceneB)
 
 func switchToStoredScene():
-	print("Switching to a stored scene.")
-	print("From: " + currentSceneA.name)
-	print("To: " + storedSceneB.name)
+	var currentSceneA = getCurrentScene()
+#	print("Switching to a stored scene.")
+#	print("From: " + currentSceneA.name)
+#	print("To: " + storedSceneB.name)
 	
 	var sceneToSwitchIntoB = storedSceneB
 	storedSceneB = currentSceneA

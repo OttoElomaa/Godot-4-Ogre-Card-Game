@@ -29,7 +29,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_ok14u")
 cardName = "Med Vohu"
 cardType = 1
-flavorText = "\"In the well of the stars, they saw it, Hashem's deathmask.\""
+flavorText = "\"His breath wind, his voice thunder, his eyes lightning.\""
 manaCost = 3
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_jgnib")]

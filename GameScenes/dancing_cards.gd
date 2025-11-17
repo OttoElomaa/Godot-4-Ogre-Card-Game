@@ -5,20 +5,24 @@ func _ready():
 	
 func initialize():
 	$CardContainer.insert_card(random_card())
+	$CardContainer.position.y += randi_range(200, -200)
+	$CardContainer.rotation_degrees += randf_range(20, -20)
 
 	$TypewriterTextbox.text = $CardContainer.card.flavorText
-	$TypewriterTextbox.position += Vector2(randi_range(-10 * screen_side_right(), 100 * screen_side_right()), 
+	if not screen_side_left() == 1:
+		$TypewriterTextbox.position.x += -600
+	$TypewriterTextbox.position += Vector2(randi_range(-10 * screen_side_left(), 100 * screen_side_left()), 
 	randi_range(-200, 200))
 	$TypewriterTextbox.rotation_degrees += randf_range(25, -25) 
 	$TypewriterTextbox.start()
-	$AnimationPlayer.play("CardDance")
-	$AnimationPlayer.advance(randf_range(0, 13))
+#	$AnimationPlayer.play("CardDance")
+#	$AnimationPlayer.advance(randf_range(0, 13))
 
 func random_card() -> Card:
 	return GameInfo.all_cards[randi_range(0, GameInfo.all_cards.size() - 1)]
 
-func screen_side_right():
-	if position.x < 1000:
+func screen_side_left():
+	if global_position.x < 1000:
 		return 1
 	else:
 		return -1
