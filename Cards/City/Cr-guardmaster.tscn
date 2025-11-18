@@ -37,6 +37,7 @@ flavorText = "This one is privy to numbers, and knows Ur-Tekton's scriptures."
 manaCost = 4
 startingDamage = 2
 startingHealth = 1
+action_mode = 0
 
 [node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("2_m15dn")]
 

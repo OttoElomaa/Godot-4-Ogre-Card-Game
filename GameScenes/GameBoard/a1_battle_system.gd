@@ -25,8 +25,9 @@ var currentAttackingCard: Card = null
 var castLineShown: bool = false
 var currentCastingCard: Card = null
 
-
-
+var enemyAttackers: Array = []
+var enemyCasters: Array = []
+var enemyChargeTarget: Card = null
 
 func _ready() -> void:
 	
@@ -102,29 +103,57 @@ func enemyPlayTurn() -> void:
 	
 	for card:Card in enemyHandCards:
 		if MyTools.checkNodeValidity(card):
-			if card.manaCost <= enemyMana and not card.isRitual:
-				var success = playEnemyCard(card)
-				if success:
-					enemyMana -= card.manaCost
+			if card.manaCost <= enemyMana:
+				if not card.isRitual:
+					var success = playEnemyCard(card)
+					if success:
+						enemyMana -= card.manaCost
+				else:
+					handlePlayerRitual(card)
 	
 	
 
 func timeoutEnemyStartCombat() -> void:
 	#### ATTACK WITH CARDS ON BOARD
 	var enemyBoardCards = cardsManager.getEnemyBoardCards()
+	enemyAttackers = []
+	enemyCasters = []
+	enemyChargeTarget = null
 	
 	#### TANK CARDS DO NOT ACT ON THEIR TURN.
 	for card:Card in enemyBoardCards:
+		card.statesPassive()
 		if card.action_mode == card.actionMode.TANK:
-			enemyBoardCards.erase(card)
-	
-	#### RUN MULTIPLE ROUNDS SO All enemy cards have TIME TO REACT if another enemy CARD DOES SOMETHING
-	for card:Card in enemyBoardCards:
+			card.statesActive()
+		if card.action_mode == card.actionMode.ATTACKER:
+			enemyAttackers.append(card)
+		if card.action_mode == card.actionMode.CASTER:
+			enemyCasters.append(card)
 			
-		if not MyTools.checkNodeValidity(card):  #### CHECK IF VALID
-			pass
-		elif card.checkCanAct():
+	### IF THERE ARE NO BLOCKING CARDS, THE STRONGEST ENEMY CARDS ARE SET TO BLOCK.
+	if cardsManager.getEnemyBlockers().is_empty():
+		sort_by_strongest(enemyBoardCards)
+		var number_of_blockers = roundi(cardsManager.getPlayerBoardCards().size() / 2)
+		for i in range(number_of_blockers):
+			var blocker:Card = enemyBoardCards[i]
+			enemyAttackers.erase(blocker)
+			enemyCasters.erase(blocker)
+			blocker.statesActive()
+		
+	#### RUN MULTIPLE ROUNDS SO All enemy cards have TIME TO REACT if another enemy CARD DOES SOMETHING
+	
+	### CASTERS COME FIRST.
+	for card:Card in enemyCasters:
+		await handleEnemyCast(card)
+	
+	### ATTACKERS COME SECOND, STARTING WITH THE STRONGEST ONES.
+	sort_by_strongest(enemyAttackers)
+	print(enemyAttackers)
+	for card:Card in enemyAttackers:
+		if card.checkCanAct():
 			await handleEnemyAttackPlayer(card)
+	
+
 	
 	timeoutEndEnemyTurn()
 
@@ -154,8 +183,9 @@ func timeoutEndEnemyTurn() -> void:
 	switchBetweenPlayerEnemyTurns()
 	
 
+
 #############################################################################
-#### PLAYER ATTACK FUNCTIONS
+#region### PLAYER ATTACK FUNCTIONS
 
 #### TURN ON PLAYER ATTACK MODE
 func togglePlayerAttackMode(enable:bool, card:Card) -> void:
@@ -237,15 +267,19 @@ func handlePlayerAttack() -> void:
 #### FOR PLAYING 'RITUAL' CARDS
 func handlePlayerRitual(c:Card) -> bool:
 	var success := false
-	if playerMana < c.manaCost: #### CAN'T AFFORD, RETURN
-		return success
+	if !c.isEnemyCard:
+		if playerMana < c.manaCost: #### CAN'T AFFORD, RETURN
+			return success
 	
 	#### RESOLVE RITUAL IN CARD'S ACTION NODE (Could be TARGETED or TARGETLESS)
 	success = await c.actions.handleRitual()
 	
 	if success:
 		cardsManager.discardCard(c)
-		playerMana -= c.manaCost
+		if !c.isEnemyCard:
+			playerMana -= c.manaCost
+		else:
+			enemyMana -= c.manaCost
 		cardsManager.updateHandCardsVisuals()
 		updateResourceLabels()
 	
@@ -290,8 +324,9 @@ func handlePlayerAttackEnemy() -> void:
 	await c.returnToSlot()
 	
 	
+#endregion
 
-
+#region### ENEMY AI
 #### BTW, PlayAttackAnimation CALLS THE CARD DESTROY COMMAND
 func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	
@@ -299,27 +334,39 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	var blockers:Array = cardsManager.getPlayerBlockers()
 	var target:Card = null
 	var action_modes = attackCard.actionMode
-	var targeting_modes = attackCard.targetingMode
-	var targeting_mode = attackCard.targeting_mode
+
 	
 	#### PLAYER HAS BLOCKERS, FIND KILLABLE BLOCKER
 	if not blockers.is_empty():
-		if targeting_mode == targeting_modes.SMART_TARGET:
-			remove_dangerous(attackCard, blockers)
-		target = get_weakest_in_array(blockers)
-		
-	#### TARGET FOUND, ATTACK TARGET CARD
-	if target:
+		sort_by_weakest(blockers)
+		### CHECK IF THIS CARD CAN KILL AN ENEMY BY ITSELF.
+		var individually_killable: Array = blockers
+		remove_individually_unkillable(attackCard, individually_killable)
+		if individually_killable.size() > 0:
+			target = individually_killable[0]
+		#### TARGET FOUND, ATTACK TARGET CARD
+		if target:
 		#### IF ATTACKER DESTROYED, NO ANIMATIONS
-		var success = await resolveAttack(c, target)
-	
-	if targeting_mode == targeting_modes.PASSIVE_CARDS:
-		target = get_weakest_in_array(cardsManager.getPlayerBoardCards())
-	
-	if target:
-		var success = await resolveAttack(c, target)
+			print(c, ' can kill ', target, '. Attacking!')
+			var success = await resolveAttack(c, target)
+			return
+		else:
+			
+			var killable_by_charge: Array = cardsManager.getPlayerBlockers()
+			enemyChargeTarget = null
+			remove_unkillable_by_charge(killable_by_charge)
+			if killable_by_charge.size() > 0:
+				declare_charge(killable_by_charge[0])
+			
+			if enemyChargeTarget:
+				var success = await resolveAttack(c, enemyChargeTarget)
+				return
+			
+			else:
+				await handleEnemyCast(attackCard)
+		
 		return
-	
+		
 	#### NO BLOCKERS, ATTACK PLAYER
 	if blockers.is_empty():
 		if not main.playerChampion():
@@ -338,6 +385,10 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
 			c.handleAttackingPortrait()
 
+func handleEnemyCast(castingCard:Card):
+	if castingCard.actions.getCastAction():
+		await castingCard.actions.handleCast()
+
 
 #### Checks if attack card would die if it attacks defend card.
 func check_if_survives(attackCard:Card, defendCard:Card) -> bool:
@@ -348,12 +399,10 @@ func check_if_survives(attackCard:Card, defendCard:Card) -> bool:
 		return true
 
 func check_if_kills(attackCard:Card, defendCard:Card) -> bool:
-	var projected_damage = attackCard.getCombatDamageToTarget(defendCard, false)
-	if projected_damage >= defendCard.tempHealth:
-		return false
-	else:
-		return true
-
+	var projected_damage = attackCard.getCombatDamageToTarget(defendCard, true)
+	print(attackCard.cardName, ' will deal ', projected_damage, ' damage to ', defendCard)
+	return projected_damage >= defendCard.tempHealth
+		
 #### Calculates a card's relative power to the caller. Most enemies are less
 #### eager to attack cards with higher power.
 func get_card_power(card:Card) -> int:
@@ -362,23 +411,88 @@ func get_card_power(card:Card) -> int:
 	return power
 
 func get_weaker(card_1:Card, card_2:Card) -> bool:
+	return get_card_power(card_1) < get_card_power(card_2)
+
+func get_stronger(card_1:Card, card_2:Card) -> bool:
 	return get_card_power(card_1) > get_card_power(card_2)
 
-#### Sorts an array of Cards and finds out the weakest in terms of base power.
-func get_weakest_in_array(array:Array) -> Card:
-	if array.size() > 0:
-		array.sort_custom(get_weaker)
-		return array[0]
-	else:
-		return null
+#### Sorts an array of Cards with weakest ones going to the front.
+func sort_by_weakest(array:Array) -> Array:
+	array.sort_custom(get_weaker)
+	return array
+
+func sort_by_strongest(array:Array) -> Array:
+	array.sort_custom(get_stronger)
+	return array
 
 func remove_dangerous(caller:Card, array:Array) -> Array:
+	var dangerous = []
 	for i:Card in array:
 		if not check_if_survives(caller, i):
-			array.erase(i)
+			dangerous.append(i)
+	for i:Card in dangerous:
+		array.erase(i)
 	return array
-	
-	
+
+func deprioritize_dangerous(caller:Card, array:Array) -> Array:
+	for i:Card in array:
+		if not check_if_survives(caller, i):
+			array.push_back(i)
+	return array
+
+func remove_individually_unkillable(caller:Card, array:Array) -> Array:
+	var unkillables = []
+	for i:Card in array:
+		if not check_if_kills(caller, i):
+			print(caller.cardName, ' cannot kill ', i.cardName)
+			unkillables.append(i)
+	for i in unkillables:
+		array.erase(i)
+	print(caller.cardName, ' can kill ', array)
+	return array
+
+func deprioritize_individually_unkillable(caller:Card, array:Array) -> Array:
+	for i:Card in array:
+		if not check_if_kills(caller, i):
+			array.push_back(i)
+	return array
+
+## CHARGE: If enemies decide they can kill a blocker by cooperating, they will
+## prioritize it even if they can't beat it individually. This is called a charge.
+
+func check_if_kills_by_charge(card:Card):
+	print('Against ', card.cardName, ', the enemy team has ', get_attacking_power(card), ' total power.')
+	return card.tempHealth <= get_attacking_power(card)
+
+func remove_unkillable_by_charge(array:Array) -> Array:
+	print(array)
+	var unkillable = []
+	for i:Card in array:
+		if not check_if_kills_by_charge(i):
+			print('The enemy team cannot kill ', i.cardName)
+			unkillable.append(i)
+	for i:Card in unkillable:
+		array.erase(i)
+	print('The enemy team can kill ', array)
+	return array
+
+func declare_charge(target: Card):
+	enemyChargeTarget = target
+	print('Declaring charge! At ', enemyChargeTarget)
+
+func get_attacking_power(defendCard:Card) -> int:
+	var atk_power: int = 0
+	for card:Card in enemyAttackers:
+		if card.checkCanAct():
+			atk_power += card.getCombatDamageToTarget(defendCard, true)
+	return atk_power
+
+func prioritize_charge_target(array:Array):
+	if enemyChargeTarget in array:
+		array.push_front(enemyChargeTarget)
+
+#endregion
+
 func playerAttackedSE():
 	$SE/SE_Player_Damaged.pitch_scale = 1.0 + randf_range(0.2, -0.2)
 	## The bell gets lower-pitched the lower the HP gets.
@@ -413,7 +527,11 @@ func handlePlayerAttackCreature(target:Card) -> void:
 		end = true
 	elif not main.checkSlotEnemy(target.mySlot):
 		end = true
-	elif not cardsManager.getEnemyBlockers().is_empty() and not target.checkCanBlock():
+#### DUMMIED CODE: ALLOWS TARGETING PASSIVES IS THERE ARE NO BLOCKERS.
+#	elif not cardsManager.getEnemyBlockers().is_empty() and not target.checkCanBlock():
+#		end = true
+#### CANNOT TARGET PASSIVES AT ALL.
+	elif not target.checkCanBlock():
 		end = true
 	elif not target.allowInteract:
 		print('Already fighting!')
@@ -428,7 +546,7 @@ func handlePlayerAttackCreature(target:Card) -> void:
 	await resolveAttack(currentAttackingCard, target)
 		
 
-		
+
 
 #### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT

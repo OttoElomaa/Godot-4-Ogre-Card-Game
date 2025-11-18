@@ -37,6 +37,7 @@ flavorText = "\"What is the nature of the hairy man? Some say, a person, degrade
 manaCost = 3
 startingDamage = 3
 startingHealth = 2
+block_on_arrival = false
 
 [node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("2_o47dh")]
 

@@ -1,16 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtps2wa815evx"]
+[gd_scene load_steps=8 format=3 uid="uid://dtps2wa815evx"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_mir7j"]
 [ext_resource type="Texture2D" uid="uid://cb7jl678hu751" path="res://Art/CardArt/Desert/card-art-creature-alhaja-bheith-nochti.jpg" id="2_ein2a"]
 [ext_resource type="PackedScene" uid="uid://btssvmxbcdn05" path="res://CardScriptsAndComponents/Keywords/Vanguard.tscn" id="2_mir7j"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_riat4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ig1vh"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_arj5f"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_ig1vh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eqnvv"]
+resource_local_to_scene = true
+shader = ExtResource("2_riat4")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_arj5f")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
 
 [node name="Card-Cr-Alhaja-Bheith-Nochti" instance=ExtResource("1_mir7j")]
+material = SubResource("ShaderMaterial_eqnvv")
 cardName = "Alhaja Bheith Nochti"
 subTypeStr = "Alhaja Warrior"
 flavorText = "“In the purity of the desert, the Bheith Nochti seek the place of utmost piety.”"
 manaCost = 3
 startingDamage = 2
-startingHealth = 2
+startingHealth = 4
 
 [node name="Vanguard" parent="KeywordHandler/MyKeywords" index="0" instance=ExtResource("2_mir7j")]
 

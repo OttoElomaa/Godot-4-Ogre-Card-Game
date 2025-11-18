@@ -105,7 +105,7 @@ func _on_search_card_name_text_changed() -> bool:
 	for i in GameInfo.all_cards:
 		var cardName:String = i.cardName.to_lower()
 		#### IF THE LOWERCASE STRING IS CONTAINED IN LOWERCASE CARD NAME -> Success
-		if cardName.contains(prompt):
+		if cardName.containsn(prompt):
 			found_card = i
 			cardSearch.get_node("VBox/CardFace").texture = found_card.cardArt
 			return true
@@ -136,3 +136,9 @@ func _on_to_player_graveyard_pressed() -> void:
 	if found_card:
 		_on_search_card_name_text_changed()
 		MyTools.addCardToGraveyard(found_card.duplicate(), false)
+
+
+func _on_to_player_hand_2_pressed():
+	if found_card:
+		_on_search_card_name_text_changed()
+		MyTools.addCardToHand(found_card.duplicate(), true)

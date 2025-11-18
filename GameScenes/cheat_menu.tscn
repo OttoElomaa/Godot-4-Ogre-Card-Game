@@ -121,6 +121,10 @@ text = "To You >"
 layout_mode = 2
 text = "To Your Hand >"
 
+[node name="ToPlayerHand2" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+layout_mode = 2
+text = "To Foe's Hand >"
+
 [node name="ToPlayerGraveyard" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
 layout_mode = 2
 text = "To Your Graveyard >"
@@ -200,6 +204,7 @@ text = "To You >"
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToFoe2" to="." method="_on_to_foe_2_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToYou2" to="." method="_on_to_you_2_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToPlayerHand" to="." method="_on_to_player_hand_pressed"]
+[connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToPlayerHand2" to="." method="_on_to_player_hand_2_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToPlayerGraveyard" to="." method="_on_to_player_graveyard_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/AddKeyword" to="." method="_on_add_keyword_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/ToFoe" to="." method="_on_to_foe_pressed"]

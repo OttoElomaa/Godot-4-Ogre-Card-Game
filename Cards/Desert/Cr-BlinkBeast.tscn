@@ -37,7 +37,6 @@ flavorText = "A playful astral hunter from beyond Achra."
 manaCost = 1
 startingDamage = 1
 startingHealth = 3
-targeting_mode = 1
 
 [node name="BattleArtTrigger" parent="Actions" index="0" instance=ExtResource("2_6oe4s")]
 

@@ -41,7 +41,7 @@ enum Factions {
 ## Shows which loot table the card belongs to. Cards that cannot be gained from loot
 ## (like boss cards or summoned cards) should be set to NONE.
 enum Group {
-	NONE,
+	NONE, GENERIC,
 	## GREEN DEFIANCE
 	GREEN_GENERIC, VINEMEN, WOODWOSES, SKULL_PRIESTS, GHARCH, GROVE_CLANS,
 	## DESERT
@@ -78,6 +78,7 @@ var isChampion:
 @export var group := Group.NONE
 
 var cardsManager:CardsManager = null
+var battleSystem:Node = null
 var mainMenu: Node = null
 
 var mySlot: CardSlot = null
@@ -113,6 +114,7 @@ var effectText := ""
 @export_subgroup('AI Behavior')
 ## This card becomes set as a blocker when summoned.
 @export var block_on_arrival = true
+
 enum actionMode {TANK, ## DOES NOT ACT ON ITS TURN, ONLY BLOCKS.
 ATTACKER, ## IF THERE ARE BLOCKERS, ATTACKS THE ENEMY.
 CASTER, ## IF THERE ARE BLOCKERS, USES ITS CAST ABILITY. 
@@ -121,17 +123,14 @@ CASTER, ## IF THERE ARE BLOCKERS, USES ITS CAST ABILITY.
 ## If the card acts during its turn, who it targets with attacks/manual tagets casts.
 @export var action_mode = actionMode.ATTACKER
 
-## If the card acts during its turn, who it targets with attacks/manual tagets casts.
+## If the card acts during its turn, who it targets with manual tagets casts.
 enum targetingMode {
-PLAYER, ## ATTACKS/CASTS ON BLOCKERS. IF NO BLOCKERS, TARGETS THE PLAYER.
-PASSIVE_CARDS, ## TARGETS PASSIVE CARDS, PRIORITIZING THE WEAKEST.
-TARGET_STRONGEST, ## AS LONG AS THERE ARE CARDS ON BOARD, TARGETS THE STRONGEST ONE.
-SMART_TARGET, ## TARGETS ONLY CARDS WHICH IT CAN KILL AND SURVIVE AGAINST. IF NO SUCH CARDS ARE PRESENT, SKIPS ITS TURN.
-STRONGEST_ALLY, ## CASTS ON THE ALLY WITH THE HIGHEST COMBINED STATS.
-WEAKEST_ALLY ## CASTS ON THE ALLY WITH THE LOWEST COMBINED STATS.
+WEAKEST,
+STRONGEST
 }
+
 ## If the card acts during its turn, who it targets with attacks/manual tagets casts.
-@export var targeting_mode = targetingMode.PLAYER
+@export var targeting_mode = targetingMode.WEAKEST
 
 ################################## UPGRADE PATH 1
 
@@ -175,11 +174,13 @@ func setup_all_actions():
 
 
 func setup(gameBoard: GameBoard):
-	
+	print(cardName, ' sets up.')
 	if gameBoard:
+		print(cardName, ' has gameboard')
 		cardsManager = gameBoard.cardsManager
+		battleSystem = gameBoard.battleSystem
 		cardsManager.connectCardSignal(self)
-	
+
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
@@ -320,7 +321,8 @@ func setInitialActionState():
 	#### ENEMY CARDS ATTACK BY DEFAULT
 	if isEnemyCard: 
 		#if not keywordHandler.hasShadow:
-		statesActive()
+		if block_on_arrival:
+			statesActive()
 
 #endregion
 
@@ -609,6 +611,7 @@ func toggleTraveling(enabled:bool):
 
 ##################################
 
+## Returns true is the card's action state is Active and false if it's not.
 func checkCanBlock() -> bool:
 	#assert(1==2,"where is this called")
 	if actionState == CardActionStates.ACTIVE:

@@ -22,7 +22,7 @@ var targetingComponent: TargetingComponent
 
 #@export var nodeKeyword := "Action type"
 @export_multiline var customActionText := ""
-@export var action_sound: Resource
+@export_file('.wav') var action_sound
 
 #@export var isCost := false
 var savedTargets: Array
@@ -39,9 +39,6 @@ func setup(card:Card):
 			component.setup(self, myCard)
 		if component is TargetingComponent:
 			targetingComponent = component
-	
-	if action_sound:
-		$ActionSE.stream = action_sound
 
 
 func createActionText() -> String:
@@ -70,16 +67,32 @@ func activate(params:SignalParams) -> bool:
 		success = activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is ManualTargetingComponent:
-		var target: Card = null
-		targetingComponent.activate()
-		await targetingComponent.target_acquired or targetingComponent.aborted
-		print("target acquired: ", targetingComponent.target)
-		if targetingComponent.target:
-			var targets:Array = []
-			targets.append(targetingComponent.target)
-			success = activateSkillAfterTargeting(targets)
+		### If the player's card requires manual targeting, await its success
+		if not myCard.isEnemyCard:
+			var target: Card = null
+			targetingComponent.activate()
+			await targetingComponent.target_acquired or targetingComponent.aborted
+			print("target acquired: ", targetingComponent.target)
+			if targetingComponent.target:
+				var targets:Array = []
+				targets.append(targetingComponent.target)
+				success = activateSkillAfterTargeting(targets)
+			else:
+				return success
+		### If an enemy targets a manual ability, refer to its AI targeting mode value.
 		else:
-			return success
+			var possible_targets = targetingComponent.getTargets()
+			match myCard.targeting_mode:
+				myCard.targetingMode.WEAKEST:
+					myCard.battleSystem.sort_by_weakest(possible_targets)
+				myCard.targetingMode.STRONGEST:
+					myCard.battleSystem.sort_by_strongest(possible_targets)
+			if possible_targets.is_empty():
+				return success
+			else:
+				var targets:Array = []
+				targets.append(possible_targets[0])
+				success = activateSkillAfterTargeting(targets)
 	else:
 		var targets = []
 		success = activateSkillAfterTargeting(targets)
@@ -87,10 +100,11 @@ func activate(params:SignalParams) -> bool:
 	return success
 
 func get_saved_targets():
-	for child:CardAction in get_parent().get_children():
-		if not child.savedTargets.is_empty():
-			print(child.savedTargets)
-			return child.savedTargets
+	for child in get_parent().get_children():
+		if child is CardAction:
+			if not child.savedTargets.is_empty():
+				print(child.savedTargets)
+				return child.savedTargets
 
 func handleManualTargeting():
 	for component:Node in get_children():
@@ -109,7 +123,6 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 			successfulScript = skill
 			
 	if success:
-		$ActionSE.play()
 		#### REST IF NEEDED
 		if checkHasCast():
 			myCard.restAndAnimate(true)

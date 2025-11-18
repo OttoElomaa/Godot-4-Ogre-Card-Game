@@ -29,12 +29,15 @@ shader_parameter/size_3 = 0.05
 
 [node name="Card-Cr-BriarFolk" instance=ExtResource("1_epv8e")]
 material = SubResource("ShaderMaterial_pjcdb")
-cardName = "Vineman"
+cardName = "Jade Vineman"
 subTypeStr = "Wild Vineman"
+group = 3
 flavorText = "Ah, child of the vine, green-clad, scion of Anghu..."
 manaCost = 1
 startingDamage = 1
 startingHealth = 1
+block_on_arrival = false
+action_mode = 2
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_una4c")]
 
