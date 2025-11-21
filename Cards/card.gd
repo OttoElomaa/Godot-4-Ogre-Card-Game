@@ -19,12 +19,37 @@ enum CardStates {
 	DECK, HAND, BOARD, GRAVEYARD
 }
 
+
+
 enum CardTypes {
-	CREATURE, RITUAL, CHAMPION
+	CREATURE, ## HAS ATTACK AND HEALTH, CAN BE PUT INTO SLOTS AND CAN ACT IN BATTLE.
+	RITUAL, ## CAN BE CAST FOR A ONE-TIME EFFECT.
+	CHAMPION, ## HAS HEALTH BUT NOT ATTACK. CAN BE PLAYED OVER THE PLAYER PORTRAIT. BLOCKS DAMAGE
+	## TAKEN BY THE PLAYER. ITS HEALTH CAN BE USED TO CAST ITS ABILITIES.
+	STRUCTURE, ## IDENTICAL TO A CREATURE WITH APATHETIC KEYWORD. CANNOT MANUALLY ACT IN BATTLE.
+	ITEM ## IDENTICAL TO A RITUAL WITH TRANSIENT KEYWORD. PURGED ON USE.
 }
 
 enum UpgradeStates {
 	UNUPGRADED, PATH_1, PATH_2, PATH_3
+}
+
+enum Factions {
+	GREEN_DEFIANCE, DESERT, CITY, OUTCAST
+}
+
+## Shows which loot table the card belongs to. Cards that cannot be gained from loot
+## (like boss cards or summoned cards) should be set to NONE.
+enum Group {
+	NONE, GENERIC,
+	## GREEN DEFIANCE
+	GREEN_GENERIC, VINEMEN, WOODWOSES, SKULL_PRIESTS, GHARCH, GROVE_CLANS,
+	## DESERT
+	DESERT_GENERIC, SALKHI_HORDE, PYRECALLERS,
+	## CITY
+	CITY_GENERIC, THRONE, GUILDS, TEMPLES, ASTROMANCERS,
+	## OUTCASTS
+	OUTCAST_GENERIC, FREESLAYERS, UMUGITES, NECROMANCERS, MORLOCKS
 }
 
 var isRitual:
@@ -50,7 +75,10 @@ var isChampion:
 @export var cardType := CardTypes.CREATURE
 @export var subTypeStr := "Card Sub-Type"
 
+@export var group := Group.NONE
+
 var cardsManager:CardsManager = null
+var battleSystem:Node = null
 var mainMenu: Node = null
 
 var mySlot: CardSlot = null
@@ -81,8 +109,41 @@ var keywords = []
 
 var effectText := ""
 
+################################# AI VALUES
 
+@export_subgroup('AI Behavior')
+## This card becomes set as a blocker when summoned.
+@export var block_on_arrival = true
 
+enum actionMode {TANK, ## DOES NOT ACT ON ITS TURN, ONLY BLOCKS.
+ATTACKER, ## IF THERE ARE BLOCKERS, ATTACKS THE ENEMY.
+CASTER, ## IF THERE ARE BLOCKERS, USES ITS CAST ABILITY. 
+}
+
+## If the card acts during its turn, who it targets with manual casts.
+@export var action_mode = actionMode.ATTACKER
+
+## If the card acts during its turn, who it targets with manual tagets casts.
+enum targetingMode {
+WEAKEST,
+STRONGEST
+}
+
+## If the card acts during its turn, who it targets with attacks/manual tagets casts.
+@export var targeting_mode = targetingMode.WEAKEST
+
+## Cards with the higher priority would be used sooner in their AI action step.
+## Cards with equal priorities would act in an order based on their power, from
+## strongest to weakest
+@export var priority = 0
+
+## Will never participate in a charge.
+@export var will_not_charge = false
+
+## Will attack even if it would be killed in the process.
+@export var fearless = false
+
+################################## UPGRADE PATH 1
 
 @export_subgroup('Upgrade Path #1')
 @export var alt_card_name_1: String
@@ -108,11 +169,12 @@ var allowInteract := true
 
 #region ######################################## STARTUP
 func _ready() -> void:
-	
+	self.connect('visibility_changed', visibility_debug)
 	setup(null)
-	SignalBus.connect("attacked", handleCombatActions)
-	SignalBus.connect("defended", handleCombatActions)
 	
+
+func visibility_debug():
+	print('Visibility changed!')
 	
 func setup_all_actions():
 	$Actions.setup(self)
@@ -123,11 +185,13 @@ func setup_all_actions():
 
 
 func setup(gameBoard: GameBoard):
-	
+	print(cardName, ' sets up.')
 	if gameBoard:
+		print(cardName, ' has gameboard')
 		cardsManager = gameBoard.cardsManager
+		battleSystem = gameBoard.battleSystem
 		cardsManager.connectCardSignal(self)
-	
+
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
@@ -138,6 +202,7 @@ func setup(gameBoard: GameBoard):
 	#### SETUP FOR ALL ACTION SCRIPTS
 	#### SHARE INFO ON, IS CARD ENEMY
 #	actions.setup(self)
+	reset_shaders()
 	
 	if cardType == CardTypes.CREATURE:
 		updateCardNameAndBasicInfo(true)
@@ -256,7 +321,7 @@ func handleArrival():
 	#if hasShadow:
 		#countersNode.togglePhased(true)
 		#statesPassive()
-		
+	handleTurnStartReset()
 	updateCardVisuals()
 
 
@@ -267,7 +332,8 @@ func setInitialActionState():
 	#### ENEMY CARDS ATTACK BY DEFAULT
 	if isEnemyCard: 
 		#if not keywordHandler.hasShadow:
-		statesActive()
+		if block_on_arrival:
+			statesActive()
 
 #endregion
 
@@ -376,13 +442,19 @@ func checkAndTerminateEffects():
 		if effect.counter < 1 and !effect.isPermanent:
 			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
 			removeEffect(effect.id)
+	effects.updateEffectVisuals()
 
 
 ## Remove an effect.
 func removeEffect(id):
 	if getEffect(id):
 		getEffect(id).queue_free()
-		await get_tree().process_frame
+
+func clearEffects():
+	for child in $Effects/Buff/Nodes.get_children():
+		child.queue_free()
+	for child in $Effects/Debuff/Nodes.get_children():
+		child.queue_free()
 
 #endregion
 
@@ -443,17 +515,15 @@ func toggleFrontSide(toShow:bool):
 #region ######################################### HANDLE REST
 #### ANIMATE = ROTATE CARD IMMEDIATELY
 #### DON'T ANIMATE = PLAY ANIMATION ON DELAY? ->TO PLAY ATTACK ANIMATION FIRST
-func restAndAnimate(toAnimate:bool):
+func restAndAnimate():
 	isResting = true
-	if toAnimate:
-		rotateRestingCard(true)
-	else:
-		$BodyAnimations/RestTimer.start()
+	statesPassive()
+	await rotateRestingCard(true)
 
 
 func wake():
 	isResting = false
-	rotateRestingCard(false)
+	await rotateRestingCard(false)
 
 #endregion
 
@@ -514,6 +584,8 @@ func statesInert():
 
 func statesDestroy():
 	vacateSlot()
+	$Frontside/ActionState/ActiveIcon.hide()
+	clearEffects()
 	actionState = CardActionStates.DISCARD
 	cardState = CardStates.GRAVEYARD
 
@@ -547,10 +619,10 @@ func toggleTraveling(enabled:bool):
 
 ##################################
 
+## Returns true is the card's action state is Active and false if it's not.
 func checkCanBlock() -> bool:
 	#assert(1==2,"where is this called")
 	if actionState == CardActionStates.ACTIVE:
-		if not checkResting():
 			return true
 	return false
 
@@ -654,6 +726,7 @@ func takeDamage(amount:int):
 	SignalBus.damage_taken.emit(signal_data)
 
 	##CHECK IF DESTROYED
+
 	if tempHealth <= 0:
 		destroyAndAnimate(true)
 
@@ -686,33 +759,35 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 
 
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
-func handleCombatActions(params:SignalParams):
-	var isAttacker = null
-	var attacker = params.sourceCard
-	var defender = params.targetCard
-	
+func handleCombatActions(attacker, defender):
+	allowInteract = false
 	if attacker == self:
-		isAttacker = true
-		playAttackAnimation()
+		z_index = 10
+		await playAttackAnimation(defender)
 	elif defender == self:
-		isAttacker = false
-
+		z_index = 0
+		await get_tree().create_timer(1).timeout
 
 
 func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	if tempHealth <= 0:
-		destroyAndAnimate(!isAttacker)
+#		destroyAndAnimate(true, !isAttacker)
+		await get_tree().create_timer(1).timeout
 		return true
+			
+	await returnToSlot()
 	
 	#### SURVIVES, And IS ATTACKER	
-	elif isAttacker:
+	if isAttacker:
 		#### REST, OR TRAVEL If Vanguard
 		if hasKeyword('Vanguard'):
 			toggleTraveling(true)
 		else:
-			restAndAnimate(false)
-			
-			
+			await restAndAnimate()
+
+	$SFX/DefendSound.play()
+	allowInteract = true
+	
 	return false
 
 func handleEnterGraveyard():
@@ -731,8 +806,8 @@ func handleEnterGraveyard():
 ##################################################################################
 #region ######################################## VISUALS - HUD
 func handleAttackingPortrait():
-	playAttackAnimation()
-	restAndAnimate(false)
+#	playAttackAnimation()
+	await restAndAnimate()
 	effects.togglePhased(false)
 	
 
@@ -789,17 +864,32 @@ func turnOnBestiaryVisuals(mainMenu:Node):
 #region ######################################## VISUALS - ANIMATIONS
 
 
-func playAttackAnimation():
+func playAttackAnimation(defender:Card):
+	var offset = Vector2(0,300)
+	if isEnemyCard:
+		offset = -offset
+	var tween = create_tween()
+	var attacking_position = defender.position + offset
+	## The attacking card floats in front of the defending card.
+	tween.tween_property(self, 'position', attacking_position, 0.5)
+	await tween.finished
+	## The attacking card pounces on the defending card.
 	if isEnemyCard:
 		$BodyAnimations.play("EnemyAttack")
 	else:
 		$BodyAnimations.play("PlayerAttack")
-	
+	await $BodyAnimations.animation_finished
+
+func returnToSlot():
+	var tween = create_tween()
+	tween.tween_property(self, "position", mySlot.position, 0.2)
+	animateBlockingState(actionState == CardActionStates.ACTIVE)
+	await tween.finished
 
 #### FOR RESTING	
 func timeoutRestAnimation() -> void:
 	if checkResting():
-		rotateRestingCard(true)
+		await rotateRestingCard(true)
 
 #endregion
 
@@ -852,31 +942,65 @@ func updateCardLabels():
 		glow.get_node("HealthGlowDown").show()
 		
 
-
-
-
 ###############################################################################
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
 	statesDestroy()
-	
+		
 	if mySlot:
 		mySlot.isAvailable = true
 		
 	if toAnimate:
-		playCardDestroyedAnimation()
+		await playCardDestroyedAnimation()
+	
+	if hasKeyword('Transient'):
+		purge()
 	
 
+func purge():
+	queue_free()
 
 func playCardDestroyedAnimation():
-	if not checkAlive():
-		$BodyAnimations.play("DestroyBoardCard")
+	if checkAlive():
+		return
+	
+	## If a card was killed by an attack, it recoils backwards.
+	var tween = create_tween()
+	var change_position = Vector2(0, 30)
+	if isEnemyCard:
+		change_position = -change_position
+	var change_rotation = randf_range(-10.0, 10.0)
+	tween.tween_property(self, "position", position + change_position, 2).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "rotation_degrees", change_rotation, 0.2)
+	
+	$SFX/DeathSound.play()
+	await burnAwayShader()
+#	visible = false
+	destroyCardTwo()
+
+func burnAwayShader():
+	material = load("res://Resources/Shaders/destroy_card_material.tres")
+	var tween = create_tween()
+	tween.tween_method(set_shader_property.bind('percentage'), 1.0, 0.0, 2)
+	await tween.finished
+	return true
+	
+func set_shader_property(value:float, property:String):
+	material.set_shader_parameter(property, value)
+	
+func reset_visuals():
+	$BodyAnimations.play("RESET")
+	
+func reset_shaders():
+	set_shader_property(1.0, 'percentage')
+	
 	
 	
 #### CALLED IN ANIMATION "DestroyBoardCard"
 func destroyCardTwo():
 	cardsManager.moveToDiscard(self, isEnemyCard)
+	reset_shaders()
 
 #################################################################################
 
@@ -887,6 +1011,7 @@ func rotateRestingCard(willRest:bool):
 		degreesGoal = 25
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
+	await tween.finished
 
 
 

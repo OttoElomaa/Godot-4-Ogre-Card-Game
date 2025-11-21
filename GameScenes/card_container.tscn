@@ -11,6 +11,7 @@
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="11_ry028"]
 
 [node name="CardContainer" type="MarginContainer"]
+use_parent_material = true
 custom_minimum_size = Vector2(130, 200)
 offset_left = -55.0
 offset_top = -89.0
@@ -20,21 +21,26 @@ pivot_offset = Vector2(55, 89)
 script = ExtResource("1_71q1e")
 
 [node name="Frontside" type="Node2D" parent="."]
+use_parent_material = true
 position = Vector2(50, 76)
 scale = Vector2(0.5, 0.5)
 
 [node name="Background" type="Node2D" parent="Frontside"]
+use_parent_material = true
 position = Vector2(10, 12)
 
 [node name="Creature" type="Sprite2D" parent="Frontside/Background"]
+use_parent_material = true
 texture = ExtResource("2_nd4cv")
 
 [node name="Spell" type="Sprite2D" parent="Frontside/Background"]
 visible = false
+use_parent_material = true
 texture = ExtResource("3_xq3cd")
 
 [node name="Art" type="Sprite2D" parent="Frontside"]
 texture_filter = 6
+use_parent_material = true
 position = Vector2(10, -61)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_w72ds")
@@ -81,6 +87,7 @@ text = "Effect Text Goes Here"
 label_settings = ExtResource("9_8jiv1")
 horizontal_alignment = 1
 autowrap_mode = 2
+text_overrun_behavior = 3
 
 [node name="Resources" type="Node2D" parent="Frontside"]
 position = Vector2(10, 140)

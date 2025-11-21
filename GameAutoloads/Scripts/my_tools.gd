@@ -6,6 +6,7 @@ var COLLISION_MASK_CARD := 1
 var gameBoard:GameBoard = null
 var cardsManager:CardsManager = null
 var battleSystem:BattleSystem = null
+var genericCard:Card = preload("res://Cards/GreenDefiance/Cr-Maolmona.tscn").instantiate()
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
@@ -22,6 +23,23 @@ func gameBoardSetup(gameBoard:GameBoard):
 	self.cardsManager = gameBoard.cardsManager
 	self.battleSystem = gameBoard.battleSystem
 
+func get_all_game_cards():
+	var path = 'res://Cards/City/'
+	for file in DirAccess.get_files_at(path):
+		var new_card = load(str(path, file))
+		GameInfo.all_cards.append(new_card.instantiate())
+	path = 'res://Cards/Desert/'
+	for file in DirAccess.get_files_at(path):
+		var new_card = load(str(path, file))
+		GameInfo.all_cards.append(new_card.instantiate())
+	path = 'res://Cards/Outcasts/'
+	for file in DirAccess.get_files_at('res://Cards/Outcasts/'):
+		var new_card = load(str(path, file))
+		GameInfo.all_cards.append(new_card.instantiate())
+	path = 'res://Cards/GreenDefiance/'
+	for file in DirAccess.get_files_at('res://Cards/GreenDefiance/'):
+		var new_card = load(str(path, file))
+		GameInfo.all_cards.append(new_card.instantiate())
 
 
 func checkNodeValidity(node) -> bool:
@@ -56,6 +74,7 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 		var slot = slots[0]
 		
 		handlePlaceCardInSlot(card, slot)
+		card.setup(gameBoard)
 #		changeMana(card.manaCost, isEnemy)
 		return true
 		
@@ -65,7 +84,7 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 #### LIKE TRANSFORMING ONE CARD INTO A NEW ONE
 func createTempCard(card:Card):
 	add_child(card)
-	
+
 func removeTempCard(card:Card):
 	remove_child(card)
 	card.queue_free()

@@ -57,7 +57,6 @@ func dealEnemyHand():
 		dumbHandDrawCounter += 1
 		
 		card.toggleEnemyStatus(true)
-		card.removeMouseInteraction()
 		card.toggleFrontSide(false)
 	updateHandCardsVisuals()
 
@@ -77,10 +76,9 @@ func _physics_process(delta: float) -> void:
 	
 	#### HOVER STUFF	
 	if hoverCheckNeeded:
-		if not currentDraggedCard:
-			if not currentHoveredCards.is_empty(): #### TURN These Checks OFF WHEN DRAGGING
+		if not currentDraggedCard: #### TURN These Checks OFF WHEN DRAGGING
+			if not currentHoveredCards.is_empty(): 
 				handleHoverCheck()
-
 	
 	#### THIS HIDES CARD INFO WHEN NO CARDS ARE HOVERED -> No need for info panel
 	if mainCardInfoShown:
@@ -100,9 +98,11 @@ func handleHoverCheck():
 			toggleHoverVisuals(false, currentHoveredCards[i])
 	
 	#### TURN ON HIGHLIGHT For TOP CARD		
-	var topCard = currentHoveredCards[lastIndex]
+	var topCard:Card = currentHoveredCards[lastIndex]
 	toggleHoverVisuals(true, topCard)
-	battleSystem.updateDamageCalculator(topCard)
+	if topCard.isEnemyCard and battleSystem.playerAttackOngoing:
+		battleSystem.damageCalculator.show()
+		battleSystem.updateDamageCalculator(topCard)
 	
 	#### SHOW TOP CARD'S INFO, TURN OFF HOVER CHECK
 	mainCardInfoShown = true
@@ -224,7 +224,10 @@ func startDraggingCardOrAttack():
 		return
 	if not card.checkInteractAllowed():
 		return
-	
+	if card.isEnemyCard:
+		return
+	if card.actionState == card.CardActionStates.DISCARD:
+		return
 	
 	#### ONLY IF IT'S NOT SLOTTED	
 	if not card.mySlot:
@@ -413,7 +416,7 @@ func toggleCardHover(isHovering:bool, card:Card):
 		if not card in currentHoveredCards:
 			currentHoveredCards.append(card)
 	
-	#### CALLED WHEN 'HOVER OFF' TRIGGERED			
+	#### CALLED WHEN 'HOVER OFF' TRIGGERED
 	else:
 		prints("hover on card off: ", card)
 		currentHoveredCards.erase(card)
@@ -533,6 +536,7 @@ func getPlayerHandCards() -> Array:
 
 func getEnemyBoardCards() -> Array:
 	var cards = $EnemyBoard.get_children()
+	print(cards)
 	return findValidNodesInArray(cards)
 
 

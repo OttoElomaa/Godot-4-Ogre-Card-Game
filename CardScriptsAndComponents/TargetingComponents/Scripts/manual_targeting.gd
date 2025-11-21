@@ -34,7 +34,7 @@ func _input(event):
 	#endCastState()
 	#return	
 
-func getTargets():
+func getTargets() -> Array:
 	
 	var conditions = []
 	var success = true
@@ -53,10 +53,9 @@ func getTargets():
 			if cond is ConditionalComponent:
 				if not cond.check(card, myCard):
 					success = false
-				cond.reset()
-		if card.isEnemyCard and manualTargetGroup == man.ENEMIES:
+		if card.isEnemyCard != myCard.isEnemyCard and manualTargetGroup == man.ENEMIES:
 			pass
-		elif !card.isEnemyCard and manualTargetGroup == man.ALLIES:
+		elif card.isEnemyCard == myCard.isEnemyCard and manualTargetGroup == man.ALLIES:
 			pass
 		elif manualTargetGroup == man.ANY:
 			pass

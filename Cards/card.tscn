@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene load_steps=34 format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
+[ext_resource type="Material" uid="uid://dccxbrxmkylit" path="res://Resources/Shaders/destroy_card_material.tres" id="1_m45w5"]
 [ext_resource type="Script" uid="uid://c4juxj0muiopk" path="res://CardScriptsAndComponents/Scripts/cardEffectsNode.gd" id="2_07jhh"]
 [ext_resource type="Texture2D" uid="uid://diry565yftyuy" path="res://Art/CardComponents/card-background-phased-effect-transparent.png" id="3_8geja"]
 [ext_resource type="Script" uid="uid://kbmh20bwbb3u" path="res://CardScriptsAndComponents/Scripts/keyword_handler.gd" id="3_lcq1x"]
@@ -23,6 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://3s7fsmtkjp8v" path="res://Art/CardComponents/card-action-state-indicator-texture-active-V3.png" id="16_8geja"]
 [ext_resource type="Texture2D" uid="uid://cuy7g1fhndhpp" path="res://Art/CardComponents/resources-shading-down.png" id="19_07jhh"]
 [ext_resource type="Texture2D" uid="uid://cl6kjdnh2pqjl" path="res://Art/CardComponents/resources-shading-up.png" id="20_8geja"]
+[ext_resource type="AudioStream" uid="uid://c584yxbl7jwee" path="res://Audio/SE/Card-Death.wav" id="25_s5qc8"]
+[ext_resource type="AudioStream" uid="uid://i6vufojx318b" path="res://Audio/SE/Attack-Spear.wav" id="26_5riqg"]
+[ext_resource type="AudioStream" uid="uid://b88dmx7ccoxck" path="res://Audio/SE/Defend-Chainmail.wav" id="27_lgw4w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kd3xj"]
 size = Vector2(220, 330)
@@ -32,19 +36,19 @@ resource_name = "DestroyBoardCard"
 length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("Frontside:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.6, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
+"transitions": PackedFloat32Array(1, 0.277392, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -200), Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("Backside:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -56,15 +60,15 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("Frontside:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.6, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -79,6 +83,18 @@ tracks/3/keys = {
 "args": [],
 "method": &"destroyCardTwo"
 }]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_cvyu6"]
@@ -162,6 +178,18 @@ tracks/2/keys = {
 "method": &"playCardDestroyedAnimation"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SFX/AttackSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_u70hd"]
 length = 0.001
@@ -213,6 +241,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SFX/AttackSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wrqsm"]
 _data = {
@@ -223,10 +275,12 @@ _data = {
 }
 
 [node name="Card" type="Node2D"]
+material = ExtResource("1_m45w5")
 script = ExtResource("1_i5yq8")
 
 [node name="Effects" type="Node2D" parent="."]
 z_index = 1
+use_parent_material = true
 script = ExtResource("2_07jhh")
 
 [node name="PhasedTexture" type="Sprite2D" parent="Effects"]
@@ -387,21 +441,27 @@ script = ExtResource("3_lcq1x")
 [node name="KeywordsToGrant" type="Node" parent="KeywordHandler"]
 
 [node name="Backside" type="Sprite2D" parent="."]
+use_parent_material = true
 texture = ExtResource("5_lcq1x")
 
 [node name="Frontside" type="Node2D" parent="."]
+use_parent_material = true
 
 [node name="Background" type="Node2D" parent="Frontside"]
+use_parent_material = true
 
 [node name="Creature" type="Sprite2D" parent="Frontside/Background"]
+use_parent_material = true
 texture = ExtResource("6_lcq1x")
 
 [node name="Spell" type="Sprite2D" parent="Frontside/Background"]
 visible = false
+use_parent_material = true
 texture = ExtResource("5_jsedn")
 
 [node name="Art" type="TextureRect" parent="Frontside"]
 texture_filter = 6
+use_parent_material = true
 custom_minimum_size = Vector2(1000, 800)
 offset_left = -100.0
 offset_top = -154.0
@@ -411,7 +471,8 @@ scale = Vector2(0.2, 0.2)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("11_8geja")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 6
 
 [node name="ManaCost" type="Node2D" parent="Frontside"]
 position = Vector2(0, -174)
@@ -486,6 +547,7 @@ horizontal_alignment = 1
 
 [node name="ActionState" type="Node2D" parent="Frontside"]
 z_index = 1
+use_parent_material = true
 position = Vector2(0, -174)
 scale = Vector2(0.6, 0.6)
 
@@ -499,6 +561,7 @@ texture = ExtResource("9_gi0db")
 offset = Vector2(-110, -10)
 
 [node name="EffectText" type="Label" parent="Frontside"]
+use_parent_material = true
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -518,29 +581,36 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Resources" type="Node2D" parent="Frontside"]
+use_parent_material = true
 position = Vector2(0, 128)
 
 [node name="Glow" type="Node2D" parent="Frontside/Resources"]
+use_parent_material = true
 
 [node name="PowerGlowDown" type="Sprite2D" parent="Frontside/Resources/Glow"]
 visible = false
+use_parent_material = true
 texture = ExtResource("19_07jhh")
 offset = Vector2(-30, 18)
 
 [node name="PowerGlowUp" type="Sprite2D" parent="Frontside/Resources/Glow"]
+use_parent_material = true
 texture = ExtResource("20_8geja")
 offset = Vector2(-30, 18)
 
 [node name="HealthGlowDown" type="Sprite2D" parent="Frontside/Resources/Glow"]
+use_parent_material = true
 texture = ExtResource("19_07jhh")
 offset = Vector2(30, 18)
 
 [node name="HealthGlowUp" type="Sprite2D" parent="Frontside/Resources/Glow"]
 visible = false
+use_parent_material = true
 texture = ExtResource("20_8geja")
 offset = Vector2(30, 18)
 
 [node name="Panel" type="PanelContainer" parent="Frontside/Resources"]
+use_parent_material = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -555,23 +625,27 @@ size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("4_w0fdq")
 
 [node name="HBox" type="HBoxContainer" parent="Frontside/Resources/Panel"]
+use_parent_material = true
 layout_mode = 2
 theme_override_constants/separation = 7
 alignment = 1
 
 [node name="PowerLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+use_parent_material = true
 layout_mode = 2
 text = "22"
 label_settings = ExtResource("4_7bc8n")
 horizontal_alignment = 2
 
 [node name="DashLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+use_parent_material = true
 layout_mode = 2
 text = "/"
 label_settings = ExtResource("4_7bc8n")
 horizontal_alignment = 1
 
 [node name="HealthLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+use_parent_material = true
 layout_mode = 2
 text = "33"
 label_settings = ExtResource("4_7bc8n")
@@ -589,6 +663,23 @@ libraries = {
 
 [node name="RestTimer" type="Timer" parent="BodyAnimations"]
 one_shot = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("25_s5qc8")
+volume_db = -20.0
+pitch_scale = 0.5
+bus = &"SE"
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("26_5riqg")
+volume_db = -10.0
+pitch_scale = 0.8
+
+[node name="DefendSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("27_lgw4w")
+volume_db = -20.0
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

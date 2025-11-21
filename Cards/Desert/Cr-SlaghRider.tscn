@@ -1,17 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctjoy83adq33o"]
+[gd_scene load_steps=11 format=3 uid="uid://ctjoy83adq33o"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_lcboh"]
 [ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="2_5jlh2"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="2_16jdu"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_kn400"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_y63ad"]
 [ext_resource type="Texture2D" uid="uid://bps2xijib187r" path="res://Art/CardArt/card-art-creature-slagh-rider.jpg" id="3_4vpam"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_5jlh2"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8tngq"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ae333"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_8tngq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xoxae"]
+resource_local_to_scene = true
+shader = ExtResource("2_kn400")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_ae333")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
 [node name="Card-Cr-SlaghRider" instance=ExtResource("1_lcboh")]
-cardName = "Slagh Rider"
+material = SubResource("ShaderMaterial_xoxae")
+cardName = "Mounted Hiisi"
+subTypeStr = "Freeslayer Rider"
+group = 16
+flavorText = "\"O leaf-clad rider, carrier of mountain's ills! Who rules thee?\"
+\"No god nor man! No god nor man!\""
 manaCost = 2
 startingDamage = 1
 startingHealth = 2
+targeting_mode = 1
+priority = 1
+will_not_charge = true
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_5jlh2")]
 

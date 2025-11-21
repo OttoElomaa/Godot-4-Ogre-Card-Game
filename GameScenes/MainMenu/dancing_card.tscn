@@ -1,0 +1,198 @@
+[gd_scene load_steps=15 format=3 uid="uid://pd7or3cigyqn"]
+
+[ext_resource type="Script" uid="uid://cf5dhx4ni7a14" path="res://GameScenes/dancing_cards.gd" id="1_h4r8x"]
+[ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/typewriter_textbox.tscn" id="2_s7wik"]
+[ext_resource type="Script" uid="uid://bn1ridkmecocv" path="res://GameScenes/MainMenu/card_container_toy.gd" id="3_66xn2"]
+[ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="4_66xn2"]
+[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_uvdeu"]
+[ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="5_6yyfd"]
+[ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="7_y2qbe"]
+[ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="8_cqafk"]
+[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="9_drm3y"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="10_xjaxy"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="11_j65xc"]
+
+[sub_resource type="Animation" id="Animation_u3eby"]
+resource_name = "CardDance"
+length = 21.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardContainer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.06667, 6.06667, 9.1, 12.1667, 15.1333, 18.1333, 21),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.436332, 0.436332, 0.0, 0.0, -0.436332, -0.436332, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_c0kru"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardContainer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iyknk"]
+_data = {
+&"CardDance": SubResource("Animation_u3eby"),
+&"RESET": SubResource("Animation_c0kru")
+}
+
+[node name="DancingCard" type="Node2D"]
+modulate = Color(0.644663, 0.644663, 0.644663, 1)
+script = ExtResource("1_h4r8x")
+
+[node name="TypewriterTextbox" parent="." instance=ExtResource("2_s7wik")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 200.0
+offset_top = -150.0
+offset_right = 650.0
+offset_bottom = 300.0
+grow_horizontal = 1
+grow_vertical = 1
+sound_off = true
+
+[node name="CardContainer" type="MarginContainer" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(130, 200)
+offset_right = 130.0
+offset_bottom = 200.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(55, 89)
+script = ExtResource("3_66xn2")
+
+[node name="Frontside" type="Node2D" parent="CardContainer"]
+use_parent_material = true
+position = Vector2(50, 76)
+scale = Vector2(0.5, 0.5)
+
+[node name="Background" type="Node2D" parent="CardContainer/Frontside"]
+use_parent_material = true
+position = Vector2(10, 12)
+
+[node name="Creature" type="Sprite2D" parent="CardContainer/Frontside/Background"]
+use_parent_material = true
+texture = ExtResource("4_66xn2")
+
+[node name="Spell" type="Sprite2D" parent="CardContainer/Frontside/Background"]
+visible = false
+use_parent_material = true
+texture = ExtResource("5_6yyfd")
+
+[node name="Art" type="Sprite2D" parent="CardContainer/Frontside"]
+texture_filter = 6
+use_parent_material = true
+position = Vector2(10, -61)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_uvdeu")
+
+[node name="ManaCost" type="Node2D" parent="CardContainer/Frontside"]
+visible = false
+position = Vector2(10, -162)
+scale = Vector2(0.8, 0.8)
+
+[node name="ManaCostTexture" type="Sprite2D" parent="CardContainer/Frontside/ManaCost"]
+texture = ExtResource("7_y2qbe")
+
+[node name="ManaCostLabel" type="Label" parent="CardContainer/Frontside/ManaCost"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -28.5
+offset_right = 28.5
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "88"
+label_settings = ExtResource("8_cqafk")
+horizontal_alignment = 1
+
+[node name="EffectsLabel" type="Label" parent="CardContainer/Frontside"]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = 35.0
+offset_right = 110.0
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Effect Text Goes Here"
+label_settings = ExtResource("9_drm3y")
+horizontal_alignment = 1
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="Resources" type="Node2D" parent="CardContainer/Frontside"]
+position = Vector2(10, 140)
+
+[node name="Panel" type="PanelContainer" parent="CardContainer/Frontside/Resources"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("10_xjaxy")
+
+[node name="HBox" type="HBoxContainer" parent="CardContainer/Frontside/Resources/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 7
+alignment = 1
+
+[node name="PowerLabel" type="Label" parent="CardContainer/Frontside/Resources/Panel/HBox"]
+layout_mode = 2
+text = "22"
+label_settings = ExtResource("11_j65xc")
+horizontal_alignment = 2
+
+[node name="DashLabel" type="Label" parent="CardContainer/Frontside/Resources/Panel/HBox"]
+layout_mode = 2
+text = "/"
+label_settings = ExtResource("11_j65xc")
+horizontal_alignment = 1
+
+[node name="HealthLabel" type="Label" parent="CardContainer/Frontside/Resources/Panel/HBox"]
+layout_mode = 2
+text = "33"
+label_settings = ExtResource("11_j65xc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_iyknk")
+}
+
+[connection signal="gui_input" from="CardContainer" to="CardContainer" method="_on_gui_input"]
+[connection signal="mouse_entered" from="CardContainer" to="." method="_on_card_container_mouse_entered"]
+[connection signal="mouse_entered" from="CardContainer" to="CardContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CardContainer" to="." method="_on_card_container_mouse_exited"]
+[connection signal="mouse_exited" from="CardContainer" to="CardContainer" method="_on_mouse_exited"]

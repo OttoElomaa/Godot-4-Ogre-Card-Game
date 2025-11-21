@@ -20,7 +20,7 @@ func activate(targets:Array) -> bool:
 		
 		#### CARD DRAW
 		if rest:
-			target.restAndAnimate(true)
+			target.restAndAnimate()
 			success = true
 
 		

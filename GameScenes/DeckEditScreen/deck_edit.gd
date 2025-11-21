@@ -1,7 +1,7 @@
 extends Node2D
 @onready var CardContainer = preload("res://GameScenes/DeckEditScreen/card_container.tscn")
 @onready var CardPanel = preload("res://GameScenes/DeckEditScreen/card_panel.tscn")
-@onready var ownedCardsContainer = $CanvasLayer2/Panel/Scroll/OwnedCardsContainer
+@onready var ownedCardsContainer = $CanvasLayer2/Panel/Scroll/MarginContainer/OwnedCardsContainer
 @onready var activeCardsContainer = $CanvasLayer/NinePatchRect/VBoxContainer/ActiveCardsContainer
 @onready var cardInfoPanel = $CardInfoPanel
 
@@ -22,10 +22,10 @@ func create_containers():
 		child.queue_free()
 		
 	print('Creating containers')
-	for i in GameInfo.playerOwnedCards:
+	for i:Card in GameInfo.playerOwnedCards:
 		var new_cont = CardContainer.instantiate()
-		new_cont.card = i
 		ownedCardsContainer.add_child(new_cont)
+		new_cont.insert_card(i)
 	for i in GameInfo.playerDeckCards:
 		var new_cont = CardPanel.instantiate()
 		new_cont.card = i

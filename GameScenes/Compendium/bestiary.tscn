@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4jlabkoaauei"]
+
+[ext_resource type="Script" uid="uid://bxtdkr4mixohx" path="res://GameScenes/Compendium/bestiary.gd" id="1_qndvw"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="2_4y1i5"]
+[ext_resource type="Script" uid="uid://dw7x0akbcnnau" path="res://GameScenes/DeckEditScreen/owned_cards_container.gd" id="3_y2ky0"]
+[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="4_f1amn"]
+[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="5_m6uwl"]
+
+[node name="Bestiary" type="Node2D"]
+script = ExtResource("1_qndvw")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer2"]
+custom_minimum_size = Vector2(1000, 1000)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -530.0
+offset_top = -500.0
+offset_right = 470.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_4y1i5")
+metadata/_edit_group_ = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2/Panel"]
+layout_mode = 2
+texture = ExtResource("4_f1amn")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Scroll" type="ScrollContainer" parent="CanvasLayer2/Panel/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="BestiaryCardsContainer" type="GridContainer" parent="CanvasLayer2/Panel/MarginContainer/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 8
+script = ExtResource("3_y2ky0")
+
+[node name="CardInfoPanel" parent="." instance=ExtResource("5_m6uwl")]
+offset_left = 1477.0
+offset_top = 35.0
+offset_right = 1877.0
+offset_bottom = 635.0

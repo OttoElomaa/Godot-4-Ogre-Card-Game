@@ -1,24 +1,48 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnvgrx8n5noeh"]
+[gd_scene load_steps=11 format=3 uid="uid://dnvgrx8n5noeh"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_o7m1v"]
 [ext_resource type="PackedScene" uid="uid://biap5dhvp08qo" path="res://CardScriptsAndComponents/Triggers/BattleArtTrigger.tscn" id="2_6oe4s"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_hrd7b"]
 [ext_resource type="Texture2D" uid="uid://n1kqgxe3iukd" path="res://Art/CardArt/card-art-creature-blinkbeast.jpg" id="2_o7m1v"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_tck54"]
 [ext_resource type="PackedScene" uid="uid://dxa0yse2tdcgv" path="res://CardScriptsAndComponents/Actions/SkillRestAndTravel.tscn" id="3_qriay"]
 [ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/CombatTargeting.tscn" id="5_e0r5v"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q2oda"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jt532"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_q2oda")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u675t"]
+resource_local_to_scene = true
+shader = ExtResource("2_tck54")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_jt532")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
 [node name="Card-Cr-Blinkbeast" instance=ExtResource("1_o7m1v")]
+material = SubResource("ShaderMaterial_u675t")
 cardName = "Blinkbeast"
 subTypeStr = "Astral Beast"
+group = 8
 flavorText = "A playful astral hunter from beyond Achra."
 manaCost = 1
 startingDamage = 1
 startingHealth = 3
+fearless = true
 
 [node name="BattleArtTrigger" parent="Actions" index="0" instance=ExtResource("2_6oe4s")]
 
 [node name="CardAction" parent="Actions/BattleArtTrigger" index="1" instance=ExtResource("2_hrd7b")]
-customActionText = "Battle art: Makes the enemy Rest"
+customActionText = "Battle art: Paralyze the target."
 
 [node name="SkillRestAndTravel" parent="Actions/BattleArtTrigger/CardAction" index="0" instance=ExtResource("3_qriay")]
 rest = true

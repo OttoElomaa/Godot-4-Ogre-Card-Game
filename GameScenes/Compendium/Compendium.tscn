@@ -1,0 +1,122 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccoor1shahiou"]
+
+[ext_resource type="Script" uid="uid://q78svg7ccxcs" path="res://GameScenes/Compendium/compendium.gd" id="1_j4pqd"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="1_ocg8x"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="2_j4pqd"]
+[ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="3_6srq2"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_r1t5t"]
+
+[node name="Compendium" type="Node2D"]
+script = ExtResource("1_j4pqd")
+
+[node name="SectionButtons" type="CanvasLayer" parent="."]
+
+[node name="StartMatchPane" type="MarginContainer" parent="SectionButtons"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -186.0
+offset_right = 120.0
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SectionButtons/StartMatchPane"]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_ocg8x")
+
+[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel"]
+layout_mode = 2
+text = "Book of Cards"
+label_settings = ExtResource("2_j4pqd")
+horizontal_alignment = 1
+
+[node name="BestiaryButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("3_6srq2")
+theme_override_styles/normal = ExtResource("4_r1t5t")
+
+[node name="Panel3" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_ocg8x")
+
+[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel3"]
+layout_mode = 2
+text = "Book of Rules"
+label_settings = ExtResource("2_j4pqd")
+horizontal_alignment = 1
+
+[node name="TutorialButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel3"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("3_6srq2")
+theme_override_styles/normal = ExtResource("4_r1t5t")
+
+[node name="Panel2" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_ocg8x")
+
+[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel2"]
+layout_mode = 2
+text = "Glossary"
+label_settings = ExtResource("2_j4pqd")
+horizontal_alignment = 1
+
+[node name="GlossaryButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel2"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("3_6srq2")
+theme_override_styles/normal = ExtResource("4_r1t5t")
+
+[node name="Panel4" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_ocg8x")
+
+[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel4"]
+layout_mode = 2
+text = "Akashic Archive"
+label_settings = ExtResource("2_j4pqd")
+horizontal_alignment = 1
+
+[node name="LoreButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel4"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("3_6srq2")
+theme_override_styles/normal = ExtResource("4_r1t5t")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer2"]
+custom_minimum_size = Vector2(200, 80)
+offset_right = 200.0
+offset_bottom = 80.0
+theme_override_styles/panel = ExtResource("1_ocg8x")
+
+[node name="Label" type="Label" parent="CanvasLayer2/Panel"]
+layout_mode = 2
+text = "Return"
+label_settings = ExtResource("2_j4pqd")
+horizontal_alignment = 1
+
+[node name="ReturnButton" type="Button" parent="CanvasLayer2/Panel"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("3_6srq2")
+theme_override_styles/normal = ExtResource("4_r1t5t")
+
+[node name="ActiveScene" type="Node2D" parent="."]
+
+[connection signal="pressed" from="SectionButtons/StartMatchPane/VBoxContainer/Panel/BestiaryButton" to="." method="_on_bestiary_button_pressed"]
+[connection signal="pressed" from="CanvasLayer2/Panel/ReturnButton" to="." method="_on_return_button_pressed"]

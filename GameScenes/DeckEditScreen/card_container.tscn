@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://drnejrg0lhyf1"]
 
-[ext_resource type="Script" uid="uid://dg0jpsurpxrxp" path="res://GameScenes/DeckEditScreen/card_container.gd" id="1_diwbn"]
+[ext_resource type="Script" uid="uid://wm8q41etpwli" path="res://GameScenes/DeckEditScreen/card_container_draggable.gd" id="1_wjdic"]
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="2_nd4cv"]
 [ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="3_xq3cd"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_w72ds"]
@@ -17,7 +17,7 @@ offset_top = -89.0
 offset_right = 75.0
 offset_bottom = 111.0
 pivot_offset = Vector2(55, 89)
-script = ExtResource("1_diwbn")
+script = ExtResource("1_wjdic")
 
 [node name="Frontside" type="Node2D" parent="."]
 position = Vector2(50, 76)
@@ -81,6 +81,7 @@ text = "Effect Text Goes Here"
 label_settings = ExtResource("9_8jiv1")
 horizontal_alignment = 1
 autowrap_mode = 2
+text_overrun_behavior = 4
 
 [node name="Resources" type="Node2D" parent="Frontside"]
 position = Vector2(10, 140)

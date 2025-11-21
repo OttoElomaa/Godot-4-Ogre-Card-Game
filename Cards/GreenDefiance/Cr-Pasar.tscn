@@ -1,18 +1,42 @@
-[gd_scene load_steps=7 format=3 uid="uid://colad8r6pikh2"]
+[gd_scene load_steps=11 format=3 uid="uid://colad8r6pikh2"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_yof0k"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_c2w3y"]
 [ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="2_fhqbh"]
 [ext_resource type="Texture2D" uid="uid://cnifcf3galvcl" path="res://Art/CardArt/GreenDefiance/Algae_siren.png" id="2_hbimt"]
 [ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="3_b1ycd"]
 [ext_resource type="PackedScene" uid="uid://21p71ahd2jdd" path="res://CardScriptsAndComponents/Actions/SkillTransformIntoTarget.tscn" id="5_b1ycd"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_c2w3y"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_286kw"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nu4pp"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_286kw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mc7g8"]
+resource_local_to_scene = true
+shader = ExtResource("2_c2w3y")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_nu4pp")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
 [node name="Cr-Pasar" instance=ExtResource("1_yof0k")]
+material = SubResource("ShaderMaterial_mc7g8")
 cardName = "Pasar"
 subTypeStr = "Algae Changeling"
 flavorText = "O Life! Your forms are beyond counting!"
 startingDamage = 1
 startingHealth = 1
+targeting_mode = 1
+priority = 5
 
 [node name="OnCastTrigger" type="Node" parent="Actions" index="0"]
 script = ExtResource("2_fhqbh")

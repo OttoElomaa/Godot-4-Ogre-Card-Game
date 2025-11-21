@@ -12,11 +12,14 @@ var bestiaryCards := []
 
 
 func _ready() -> void:
+	MyTools.get_all_game_cards()
+#	setupBestiary()
 	
-	setupBestiary()
+#	bestiaryVisible = true
+#	buttonPressedToggleBestiary()
 	
-	bestiaryVisible = true
-	buttonPressedToggleBestiary()
+	for child in $Decor/DancingCards.get_children():
+		child.initialize()
 
 
 
@@ -88,22 +91,7 @@ func buttonPressedGoToWorld() -> void:
 
 func buttonPressedToggleBestiary() -> void:
 	
-	if not bestiaryVisible:
-		bestiaryVisible = true
-		States.gameState = States.GameStates.BESTIARY
-		
-		$Bestiary.show()
-		$CanvasLayer/CardInfoPane.show()
-		$Intro.toggleIntro(false)
-		
-	
-	else:
-		bestiaryVisible = false
-		States.statesNone()
-		
-		$Bestiary.hide()
-		$CanvasLayer/CardInfoPane.hide()
-		$Intro.toggleIntro(true)
+	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/Compendium/Compendium.tscn")
 
 func buttonPressedExitGame() -> void:
 	get_tree().quit()
@@ -111,3 +99,6 @@ func buttonPressedExitGame() -> void:
 func toggleCardInfo(enable:bool, card:Card):
 	var cardInfo := $CanvasLayer/CardInfoPane/CardInfoPanel
 	cardInfo.toggleCardInfo(enable, card)
+
+func _on_options_button_pressed():
+	pass # Replace with function body.

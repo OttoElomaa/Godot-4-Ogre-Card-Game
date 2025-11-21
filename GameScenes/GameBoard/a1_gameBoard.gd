@@ -22,6 +22,14 @@ var boardName := "Old Ruins"
 
 var actionMenuCard: Card = null
 
+enum AI_personalities {
+	COMMANDER, ##Default. Summon creatures -> Attack -> Use rituals 
+	WIZARD, ##Ritual focus. If has a blocker, use rituals first, then summon, cast.
+	SPECIALIST ##Cast focus. Summon -> Cast -> Ritual -> Attack
+}
+
+## How the enemy AI will behave.
+@export var AI_personality = AI_personalities.COMMANDER
 
 func _ready() -> void:
 	
@@ -99,6 +107,10 @@ func toggleCardActionMenu(enable:bool, card:Card):
 			if card.mySlot:  #### IS IT PLAYER CARD?
 				if not checkSlotPlayer(card.mySlot): 
 					return
+				if card.isTraveling:
+					return
+				if card.isResting:
+					return
 				
 			#### TURN ON CARD ACTION MENU
 			States.gameState = States.GameStates.CARD_ACT_MENU
@@ -131,9 +143,9 @@ func changeMana(amount:int, isEnemy:bool):
 func changeHealth(amount:int, isEnemy:bool):
 	
 	if isEnemy:
-		$BattleSystem.enemyHealth += amount
+		$BattleSystem.enemyHealth = max($BattleSystem.enemyHealth + amount, 0)
 	else:
-		$BattleSystem.playerHealth += amount
+		$BattleSystem.playerHealth = max($BattleSystem.playerHealth + amount, 0)
 
 ########################################################################################
 
@@ -215,17 +227,30 @@ func enemyChampion() -> Card:
 	else:
 		return null
 
+func playAttackPortraitAnimation(attackingCard: Card):
+	var c = attackingCard
+	var isEnemy = c.isEnemyCard
+	var targetPos = Vector2(0,0)
+	
+	if isEnemy:
+		targetPos = $Portraits/PlayerSprite.position
+	else:
+		targetPos = $Portraits/EnemySprite.position
+	
+	var tween = create_tween()
+	tween.tween_property(c, "position", targetPos, 0.2)
+	await tween.finished
+
 func showPlayerTurnPopup():
 	$Visuals/YourTurnPopup/PopupAnimation.play("ShowPopup")
 
-
+func shake_screen(intensity:float, time:float):
+	cameraMainBoard.screen_shake(intensity, time)
 
 func toggleCardInfo(enable:bool, card:Card):
 	var cardInfo := $CanvasLayer/CardInfoPane/CardInfoPanel
 	cardInfo.toggleCardInfo(enable, card)
 	
-
-
 
 func addLogMessage(text:String, color:Color) -> void:
 	

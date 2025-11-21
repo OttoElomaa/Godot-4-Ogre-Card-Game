@@ -1,14 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://o4288fvn3jsd"]
+[gd_scene load_steps=12 format=3 uid="uid://o4288fvn3jsd"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_tm7ws"]
 [ext_resource type="Texture2D" uid="uid://cao4ayvdqvtj" path="res://Art/CardArt/GreenDefiance/Fronds of Madar.png" id="2_g1f38"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_vkpnd"]
 [ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="2_vqnwm"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_006rp"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="4_gmrsd"]
 [ext_resource type="PackedScene" uid="uid://u4hmn1rmmi48" path="res://CardScriptsAndComponents/Actions/SkillTransformTargetIntoCard.tscn" id="5_gmrsd"]
 [ext_resource type="PackedScene" uid="uid://colad8r6pikh2" path="res://Cards/GreenDefiance/Cr-Pasar.tscn" id="6_vkpnd"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
+noise = SubResource("FastNoiseLite_s5qc8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qiy7j"]
+resource_local_to_scene = true
+shader = ExtResource("2_vkpnd")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_5riqg")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
 [node name="Ri-Fronds of Madar" instance=ExtResource("1_tm7ws")]
+material = SubResource("ShaderMaterial_qiy7j")
 cardName = "Fronds of Madar"
 cardType = 1
 subTypeStr = "Gharch Spell"

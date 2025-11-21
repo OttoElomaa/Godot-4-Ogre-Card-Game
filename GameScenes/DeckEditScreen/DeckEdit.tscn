@@ -76,8 +76,14 @@ metadata/_edit_group_ = true
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="OwnedCardsContainer" type="GridContainer" parent="CanvasLayer2/Panel/Scroll"]
-clip_contents = true
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Panel/Scroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="OwnedCardsContainer" type="GridContainer" parent="CanvasLayer2/Panel/Scroll/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

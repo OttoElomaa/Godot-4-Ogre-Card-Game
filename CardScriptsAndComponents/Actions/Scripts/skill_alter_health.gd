@@ -22,6 +22,7 @@ func activate(targets:Array) -> bool:
 			if isScaled():
 				damage = get_scaling({'target': target})
 			handleInflict(target, damage)
+			MyTools.createCombatLogPrintout(str(target.cardName, '  suffers', damage, ' damage.'), Color('BLUE'))
 			success = true
 
 		#### CORRODE
@@ -30,12 +31,14 @@ func activate(targets:Array) -> bool:
 			if isScaled():
 				damage = get_scaling({'target': target})
 			handleCorrode(target, damage)
+			MyTools.createCombatLogPrintout(str(target.cardName, '  is corroded for', damage, ' damage.'), Color('BLUE'))
 			success = true
 		
 		#### BOLSTER
 		elif bolsterDamage > 0 or bolsterHealth > 0:
 			target.tempDamage += bolsterDamage
 			target.tempHealth += bolsterHealth
+			MyTools.createCombatLogPrintout(str(target.cardName, ' gains +', bolsterDamage, '/', bolsterHealth), Color('BLUE'))
 			success = true
 		
 	return success

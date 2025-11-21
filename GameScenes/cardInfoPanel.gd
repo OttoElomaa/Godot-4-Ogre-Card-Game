@@ -21,8 +21,5 @@ func toggleCardInfo(enable:bool, card:Card):
 	#if card.effectText != "":
 	$Margin/VBox/VBox2/EffectText.text = card.effectText
 	
-	
-	$Margin/VBox/VBox2/FlavorTextLabel.text = card.flavorText
-	
 	$Margin/AttackDefenseLabel.text = "%d / %d" % [card.tempDamage,card.tempHealth]
 	
