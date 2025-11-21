@@ -38,6 +38,9 @@ flavorText = "\"O leaf-clad rider, carrier of mountain's ills! Who rules thee?\"
 manaCost = 2
 startingDamage = 1
 startingHealth = 2
+targeting_mode = 1
+priority = 1
+will_not_charge = true
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_5jlh2")]
 

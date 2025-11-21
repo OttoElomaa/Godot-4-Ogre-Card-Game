@@ -32,11 +32,12 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_u675t")
 cardName = "Blinkbeast"
 subTypeStr = "Astral Beast"
-group = 7
+group = 8
 flavorText = "A playful astral hunter from beyond Achra."
 manaCost = 1
 startingDamage = 1
 startingHealth = 3
+fearless = true
 
 [node name="BattleArtTrigger" parent="Actions" index="0" instance=ExtResource("2_6oe4s")]
 

@@ -54,17 +54,17 @@ func activate(params:SignalParams) -> bool:
 	#### TURN ON MANUAL TARGETING -> No target selected yet!
 	if targetingComponent is AutoTargetingComponent:
 		var targets:Array = targetingComponent.getTargets()
-		success = activateSkillAfterTargeting(targets)
+		success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is EnemyTargetingComponent:
 		var targets:Array = []
 		targets.append(params.targetCard)
-		success = activateSkillAfterTargeting(targets)
+		success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SelfTargetingComponent:
 		var targets:Array = []
 		targets.append(myCard)
-		success = activateSkillAfterTargeting(targets)
+		success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is ManualTargetingComponent:
 		### If the player's card requires manual targeting, await its success
@@ -76,7 +76,7 @@ func activate(params:SignalParams) -> bool:
 			if targetingComponent.target:
 				var targets:Array = []
 				targets.append(targetingComponent.target)
-				success = activateSkillAfterTargeting(targets)
+				success = await activateSkillAfterTargeting(targets)
 			else:
 				return success
 		### If an enemy targets a manual ability, refer to its AI targeting mode value.
@@ -92,10 +92,10 @@ func activate(params:SignalParams) -> bool:
 			else:
 				var targets:Array = []
 				targets.append(possible_targets[0])
-				success = activateSkillAfterTargeting(targets)
+				success = await activateSkillAfterTargeting(targets)
 	else:
 		var targets = []
-		success = activateSkillAfterTargeting(targets)
+		success = await activateSkillAfterTargeting(targets)
 			
 	return success
 
@@ -116,19 +116,23 @@ func handleManualTargeting():
 func activateSkillAfterTargeting(targets:Array) -> bool:
 	var success := false
 	var successfulScript:Node = null
+	var children = get_children()
 	
-	for skill:Node in get_children():
+	
+	for skill:Node in children:
+		
 		if skill is Skill:
 			success = skill.activate(targets)
 			successfulScript = skill
+			await get_tree().process_frame
+			
 			
 	if success:
 		#### REST IF NEEDED
 		if checkHasCast():
-			myCard.restAndAnimate(true)
+			myCard.restAndAnimate()
 			
 		
-		successfulScript.createPrintout(self)  #### CREATE COMBAT LOG ENTRY	
 		MyTools.updateBoardCardsVisuals()
 		
 		
@@ -169,23 +173,6 @@ func getSituationStr() -> String:
 			return "Ritual"
 		else:
 			return "Cast"
-#	var loc := LocalSituations
-#	
-#	match localSituation:
-#		
-#		loc.ARRIVAL:
-#			return "Arrival"
-#		loc.CAST:
-#			return "Cast"
-#		loc.BATTLE_ART:
-#			return "Battle Art"
-#		loc.ON_TURN:
-#			return "On Turn"
-#		loc.RITUAL:
-#			return "Ritual"
-	
-#	return "Unknown Situation"
-		
 
 
 func checkIsActionTargeted() -> bool:
@@ -194,46 +181,5 @@ func checkIsActionTargeted() -> bool:
 			return true
 	return false
 
-
-
-
-
-
-#### BAD CODE, REPLACE WITH SIGNALS
-##########################################################
-
-#func handleArrival() -> bool:
-#	if localSituation == LocalSituations.ARRIVAL:
-#		return activate()
-#	return false
-
-
-#func handleRitual() -> bool:
-#	if localSituation == LocalSituations.RITUAL:
-#		return activate()
-#	return false
-
-
-#func handleCast() -> bool:
-#	var success:bool = activate()
-#	if success:
-#		myCard.restAndAnimate(true)
-	
-#	return success
-
-
 func checkHasCast() -> bool:
 	return hasCast
-
-
-
-#func handleBattleArt() -> bool:
-#	if localSituation == LocalSituations.BATTLE_ART:
-#		return activate()
-#	return false
-
-
-#func handleOnTurn() -> bool:
-#	if localSituation == LocalSituations.ON_TURN:
-#		return activate()
-#	return false

@@ -22,6 +22,14 @@ var boardName := "Old Ruins"
 
 var actionMenuCard: Card = null
 
+enum AI_personalities {
+	COMMANDER, ##Default. Summon creatures -> Attack -> Use rituals 
+	WIZARD, ##Ritual focus. If has a blocker, use rituals first, then summon, cast.
+	SPECIALIST ##Cast focus. Summon -> Cast -> Ritual -> Attack
+}
+
+## How the enemy AI will behave.
+@export var AI_personality = AI_personalities.COMMANDER
 
 func _ready() -> void:
 	

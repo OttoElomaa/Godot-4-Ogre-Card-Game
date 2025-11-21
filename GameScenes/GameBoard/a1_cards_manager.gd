@@ -536,6 +536,7 @@ func getPlayerHandCards() -> Array:
 
 func getEnemyBoardCards() -> Array:
 	var cards = $EnemyBoard.get_children()
+	print(cards)
 	return findValidNodesInArray(cards)
 
 

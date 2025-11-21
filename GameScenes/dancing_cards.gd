@@ -7,7 +7,9 @@ func initialize():
 	$CardContainer.insert_card(random_card())
 	$CardContainer.position.y += randi_range(200, -200)
 	$CardContainer.rotation_degrees += randf_range(20, -20)
-
+	
+	if randf() > 0.3:
+		$TypewriterTextbox.hide()
 	$TypewriterTextbox.text = $CardContainer.card.flavorText
 	if not screen_side_left() == 1:
 		$TypewriterTextbox.position.x += -600

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://kqgho0rddddf" path="res://GameScenes/MainMenu/Flickering_Light.gd" id="2_mfvej"]
 
 [node name="FlickerLight" type="PointLight2D"]
-rotation = 1.48004
+rotation = 1.5708
 shadow_enabled = true
 texture = ExtResource("1_c4i67")
 script = ExtResource("2_mfvej")

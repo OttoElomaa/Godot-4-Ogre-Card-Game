@@ -38,6 +38,7 @@ startingDamage = 1
 startingHealth = 1
 block_on_arrival = false
 action_mode = 2
+priority = 5
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_una4c")]
 

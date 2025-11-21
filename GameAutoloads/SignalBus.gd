@@ -1,6 +1,7 @@
 extends Node
 
 signal turnStarted(params:SignalParams)
+signal turnEnded(params:SignalParams)
 
 signal arrival(params:SignalParams)
 signal champion_placed(params:SignalParams)

@@ -82,10 +82,9 @@ func updateEffectVisuals():
 	
 	
 	var sprite:Sprite2D = null
-	var counter := 0
 	
 	for e:CardEffect in buffs:
-		sprite = buffSprites.get_children()[counter]
+		sprite = buffSprites.get_children()[buffs.find(e)]
 		
 		sprite.show()
 		sprite.texture = e.icon
@@ -93,17 +92,14 @@ func updateEffectVisuals():
 			sprite.get_node("Amount").text = str(e.counter)
 			if e.counter < 1:
 				sprite.hide()
-		counter += 1
 		
-	counter = 0
 	for e:CardEffect in debuffs:
-		sprite = debuffSprites.get_children()[counter]
+		sprite = debuffSprites.get_children()[debuffs.find(e)]
 		
 		sprite.show()
 		sprite.texture = e.icon
 		if e is EffectCounter:
 			sprite.get_node("Amount").text = str(e.counter)
-		counter += 1
 	
 		
 	updatePhasedVisuals()

@@ -43,6 +43,7 @@ flavorText = "The Spirit so spoke unto them:
 manaCost = 3
 startingDamage = 1
 startingHealth = 3
+priority = -1
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_tbg24")]
 

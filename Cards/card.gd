@@ -120,7 +120,7 @@ ATTACKER, ## IF THERE ARE BLOCKERS, ATTACKS THE ENEMY.
 CASTER, ## IF THERE ARE BLOCKERS, USES ITS CAST ABILITY. 
 }
 
-## If the card acts during its turn, who it targets with attacks/manual tagets casts.
+## If the card acts during its turn, who it targets with manual casts.
 @export var action_mode = actionMode.ATTACKER
 
 ## If the card acts during its turn, who it targets with manual tagets casts.
@@ -131,6 +131,17 @@ STRONGEST
 
 ## If the card acts during its turn, who it targets with attacks/manual tagets casts.
 @export var targeting_mode = targetingMode.WEAKEST
+
+## Cards with the higher priority would be used sooner in their AI action step.
+## Cards with equal priorities would act in an order based on their power, from
+## strongest to weakest
+@export var priority = 0
+
+## Will never participate in a charge.
+@export var will_not_charge = false
+
+## Will attack even if it would be killed in the process.
+@export var fearless = false
 
 ################################## UPGRADE PATH 1
 
@@ -431,13 +442,13 @@ func checkAndTerminateEffects():
 		if effect.counter < 1 and !effect.isPermanent:
 			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
 			removeEffect(effect.id)
+	effects.updateEffectVisuals()
 
 
 ## Remove an effect.
 func removeEffect(id):
 	if getEffect(id):
 		getEffect(id).queue_free()
-		await get_tree().process_frame
 
 func clearEffects():
 	for child in $Effects/Buff/Nodes.get_children():
@@ -504,18 +515,15 @@ func toggleFrontSide(toShow:bool):
 #region ######################################### HANDLE REST
 #### ANIMATE = ROTATE CARD IMMEDIATELY
 #### DON'T ANIMATE = PLAY ANIMATION ON DELAY? ->TO PLAY ATTACK ANIMATION FIRST
-func restAndAnimate(toAnimate:bool):
+func restAndAnimate():
 	isResting = true
 	statesPassive()
-	if toAnimate:
-		rotateRestingCard(true)
-	else:
-		$BodyAnimations/RestTimer.start()
+	await rotateRestingCard(true)
 
 
 func wake():
 	isResting = false
-	rotateRestingCard(false)
+	await rotateRestingCard(false)
 
 #endregion
 
@@ -766,16 +774,17 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 #		destroyAndAnimate(true, !isAttacker)
 		await get_tree().create_timer(1).timeout
 		return true
+			
+	await returnToSlot()
 	
 	#### SURVIVES, And IS ATTACKER	
-	elif isAttacker:
+	if isAttacker:
 		#### REST, OR TRAVEL If Vanguard
 		if hasKeyword('Vanguard'):
 			toggleTraveling(true)
 		else:
-			restAndAnimate(false)
-			
-	await returnToSlot()
+			await restAndAnimate()
+
 	$SFX/DefendSound.play()
 	allowInteract = true
 	
@@ -798,7 +807,7 @@ func handleEnterGraveyard():
 #region ######################################## VISUALS - HUD
 func handleAttackingPortrait():
 #	playAttackAnimation()
-	restAndAnimate(false)
+	await restAndAnimate()
 	effects.togglePhased(false)
 	
 
@@ -880,7 +889,7 @@ func returnToSlot():
 #### FOR RESTING	
 func timeoutRestAnimation() -> void:
 	if checkResting():
-		rotateRestingCard(true)
+		await rotateRestingCard(true)
 
 #endregion
 
@@ -1002,6 +1011,7 @@ func rotateRestingCard(willRest:bool):
 		degreesGoal = 25
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
+	await tween.finished
 
 
 

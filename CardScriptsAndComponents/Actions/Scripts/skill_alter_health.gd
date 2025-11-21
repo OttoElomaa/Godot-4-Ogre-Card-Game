@@ -31,6 +31,7 @@ func activate(targets:Array) -> bool:
 			if isScaled():
 				damage = get_scaling({'target': target})
 			handleCorrode(target, damage)
+			MyTools.createCombatLogPrintout(str(target.cardName, '  is corroded for', damage, ' damage.'), Color('BLUE'))
 			success = true
 		
 		#### BOLSTER
