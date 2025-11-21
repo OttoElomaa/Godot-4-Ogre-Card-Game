@@ -31,6 +31,11 @@ flavorText = "A highborn Kingling, not yet anointed in Glory."
 manaCost = 1
 startingDamage = 1
 startingHealth = 2
+alt_card_name_1 = "Trained Kalasirios"
+alt_art_1 = ExtResource("3_5xjtm")
+alt_damage_1 = 2
+alt_health_1 = 2
+alt_mana_cost_1 = 1
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_5xjtm")

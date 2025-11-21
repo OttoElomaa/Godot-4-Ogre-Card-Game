@@ -90,7 +90,7 @@ func updateEffectVisuals():
 		sprite.texture = e.icon
 		if e is EffectCounter:
 			sprite.get_node("Amount").text = str(e.counter)
-			if e.counter < 1:
+			if e.counter < 1 and !e.isPermanent:
 				sprite.hide()
 		
 	for e:CardEffect in debuffs:
@@ -100,6 +100,8 @@ func updateEffectVisuals():
 		sprite.texture = e.icon
 		if e is EffectCounter:
 			sprite.get_node("Amount").text = str(e.counter)
+			if e.counter < 1 and !e.isPermanent:
+				sprite.hide()
 	
 		
 	updatePhasedVisuals()

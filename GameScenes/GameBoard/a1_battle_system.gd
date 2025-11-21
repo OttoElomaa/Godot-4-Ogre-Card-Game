@@ -17,7 +17,7 @@ var playerMana := 0
 var enemyMana := 0
 
 var playerHealth := 20
-var enemyHealth := 20
+@export var enemyHealth := 20
 
 var playerAttackOngoing: bool = false
 var currentAttackingCard: Card = null
@@ -25,8 +25,6 @@ var currentAttackingCard: Card = null
 var castLineShown: bool = false
 var currentCastingCard: Card = null
 
-var enemyAttackers: Array = []
-var enemyCasters: Array = []
 var enemyChargeTarget: Card = null
 var enemyBoardCards:Array:
 	get:
@@ -134,10 +132,6 @@ func timeoutEnemyStartCombat() -> void:
 		card.statesPassive()
 		if card.action_mode == card.actionMode.TANK:
 			card.statesActive()
-		if card.action_mode == card.actionMode.ATTACKER:
-			enemyAttackers.append(card)
-		if card.action_mode == card.actionMode.CASTER:
-			enemyCasters.append(card)
 			
 	### IF THERE ARE NO BLOCKING CARDS, THE STRONGEST ENEMY CARDS ARE SET TO BLOCK.
 
@@ -532,7 +526,7 @@ func declare_charge(target: Card):
 
 func get_attacking_power(defendCard:Card) -> int:
 	var atk_power: int = 0
-	for card:Card in enemyAttackers:
+	for card:Card in get_attackers():
 		if card.checkCanAct() and not card.will_not_charge:
 			atk_power += card.getCombatDamageToTarget(defendCard, true)
 	return atk_power
