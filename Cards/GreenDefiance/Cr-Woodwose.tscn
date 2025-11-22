@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="4_877ti"]
 [ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_gtvc7"]
 [ext_resource type="PackedScene" uid="uid://bjvo1v4qvl7v2" path="res://CardScriptsAndComponents/EffectCounters/EffectRage.tscn" id="6_1ywc3"]
-[ext_resource type="Texture2D" uid="uid://0yg51dfmlxt7" path="res://Art/CardArt/GreenDefiance/Woodwose.png" id="7_neonv"]
+[ext_resource type="Texture2D" uid="uid://drylh143jk12" path="res://Art/CardArt/GreenDefiance/card-art-cr-woodwose-brute.jpg" id="8_o47dh"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
 noise_type = 3
@@ -51,4 +51,4 @@ grantEffect = ExtResource("6_1ywc3")
 grantAmount = 1
 
 [node name="Art" parent="Frontside" index="1"]
-texture = ExtResource("7_neonv")
+texture = ExtResource("8_o47dh")
