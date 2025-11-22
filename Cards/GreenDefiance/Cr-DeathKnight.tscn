@@ -1,13 +1,35 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8h8fv1enpgpb"]
+[gd_scene load_steps=11 format=3 uid="uid://c8h8fv1enpgpb"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m612s"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_2la6j"]
 [ext_resource type="PackedScene" uid="uid://d0e807arj0ef" path="res://CardScriptsAndComponents/Triggers/ArrivalTrigger.tscn" id="2_id566"]
 [ext_resource type="Texture2D" uid="uid://c8fv2mu03csy" path="res://Art/CardArt/GreenDefiance/card-art-creature-deathknight.jpg" id="2_m612s"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_2la6j"]
 [ext_resource type="PackedScene" uid="uid://14fl88rpfs16" path="res://CardScriptsAndComponents/Actions/SkillDeckActions.tscn" id="4_dwvwn"]
 [ext_resource type="PackedScene" uid="uid://b4tndl4w2i3lg" path="res://Cards/GreenDefiance/Cr-SkeletonWarrior.tscn" id="5_jttgo"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2la6j"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dwvwn"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_2la6j")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jttgo"]
+resource_local_to_scene = true
+shader = ExtResource("2_2la6j")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_dwvwn")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
 [node name="Card-Cr-DeathKnight" instance=ExtResource("1_m612s")]
+material = SubResource("ShaderMaterial_jttgo")
 cardName = "Death Knight"
 subTypeStr = "Brud Warrior"
 manaCost = 4
