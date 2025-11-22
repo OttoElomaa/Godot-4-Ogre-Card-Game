@@ -47,7 +47,7 @@ targeting_mode = 1
 customActionText = "Cast: Add 2 Doom to target"
 
 [node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction2" index="0" instance=ExtResource("4_henv4")]
-manualTargetGroup = 3
+manualTargetGroup = 2
 
 [node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction2" index="1" instance=ExtResource("5_efnvc")]
 grantEffect = ExtResource("6_qb0jj")

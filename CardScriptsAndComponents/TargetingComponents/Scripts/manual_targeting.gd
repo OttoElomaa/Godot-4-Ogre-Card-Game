@@ -9,7 +9,6 @@ enum ManualTargetOptions {
 
 var active = false
 var target = null
-var possible_targets = []
 
 signal target_acquired(target:Card)
 signal aborted
@@ -39,32 +38,30 @@ func getTargets() -> Array:
 	var conditions = []
 	var success = true
 	var man = ManualTargetOptions
+	var eligible_targets = MyTools.getAllBoardCards()
 	
 	for child in get_children(true):
 		if child is ConditionalComponent:
 			conditions.append(child)
 	print(name, 'has conditions ', conditions)
 	
-	
 	for card:Card in MyTools.getAllBoardCards():
-		print(name, ' is checking ', card, ' with conditions ', conditions)
-		success = true
+		match manualTargetGroup:
+			man.ENEMIES:
+				if myCard.isEnemyCard == card.isEnemyCard:
+					eligible_targets.erase(card)
+			man.ALLIES:
+				if myCard.isEnemyCard != card.isEnemyCard:
+					eligible_targets.erase(card)
+			man.NONE:
+				eligible_targets.erase(card)
 		for cond in conditions:
 			if cond is ConditionalComponent:
 				if not cond.check(card, myCard):
-					success = false
-		if card.isEnemyCard != myCard.isEnemyCard and manualTargetGroup == man.ENEMIES:
-			pass
-		elif card.isEnemyCard == myCard.isEnemyCard and manualTargetGroup == man.ALLIES:
-			pass
-		elif manualTargetGroup == man.ANY:
-			pass
-		else:
-			success = false
-		if success:
-			possible_targets.append(card)
-	print(name, ' acquired targets ', possible_targets)
-	return possible_targets
+					eligible_targets.erase(card)
+		print(name, ' acquired targets ', eligible_targets)
+	
+	return eligible_targets
 
 
 #### MANUAL TARGETING STUFF

@@ -210,6 +210,12 @@ func setup_all_actions():
 	if alt_actions_node_1:
 		alt_actions_node_1.setup(self)
 		alt_actions_node_1.putTriggersToSleep()
+	if alt_actions_node_2:
+		alt_actions_node_2.setup(self)
+		alt_actions_node_2.putTriggersToSleep()
+	if alt_actions_node_3:
+		alt_actions_node_3.setup(self)
+		alt_actions_node_3.putTriggersToSleep()
 
 
 func setup(gameBoard: GameBoard):
@@ -569,7 +575,7 @@ func statesActive():
 	actionState = CardActionStates.ACTIVE
 	stateHandler.get_node("ActiveIcon").show()
 	
-	animateBlockingState(true)
+	await animateBlockingState(true)
 	
 
 func statesPassive():
@@ -577,7 +583,7 @@ func statesPassive():
 	stateHandler.get_node("ActiveIcon").hide()
 	
 	#### POSITION AS INDICATOR
-	animateBlockingState(false)
+	await animateBlockingState(false)
 
 
 
@@ -756,7 +762,7 @@ func takeDamage(amount:int):
 	##CHECK IF DESTROYED
 
 	if tempHealth <= 0:
-		destroyAndAnimate(true)
+		await destroyAndAnimate(true)
 
 
 
@@ -834,7 +840,7 @@ func handleEnterGraveyard():
 ##################################################################################
 #region ######################################## VISUALS - HUD
 func handleAttackingPortrait():
-#	playAttackAnimation()
+	await returnToSlot()
 	await restAndAnimate()
 	effects.togglePhased(false)
 	
@@ -911,7 +917,7 @@ func playAttackAnimation(defender:Card):
 func returnToSlot():
 	var tween = create_tween()
 	tween.tween_property(self, "position", mySlot.position, 0.2)
-	animateBlockingState(actionState == CardActionStates.ACTIVE)
+	await animateBlockingState(actionState == CardActionStates.ACTIVE)
 	await tween.finished
 
 #### FOR RESTING	

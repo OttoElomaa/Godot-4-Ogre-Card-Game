@@ -117,12 +117,13 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 	var success := false
 	var successfulScript:Node = null
 	var children = get_children()
-	
+
+	MyTools.createCombatLogPrintout(customActionText, Color('WHITE'))
 	
 	for skill:Node in children:
 		
 		if skill is Skill:
-			success = skill.activate(targets)
+			success = await skill.activate(targets)
 			successfulScript = skill
 			await get_tree().process_frame
 			

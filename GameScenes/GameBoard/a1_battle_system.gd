@@ -190,15 +190,13 @@ func get_non_blockers() -> Array:
 	return non_blockers
 
 func decide_blockers():
-	if enemyBoardCards.is_empty():
-		return
-		
-	sort_by_strongest(enemyBoardCards)
-	var projected_number_of_blockers = roundi(cardsManager.getPlayerBoardCards().size() / 2) - cardsManager.getEnemyBlockers().size()
-	
-	for i in range(projected_number_of_blockers):
-		var blocker:Card = get_non_blockers().front()
-		blocker.statesActive()
+	if not enemyBoardCards.is_empty():
+		sort_by_strongest(enemyBoardCards)
+		var projected_number_of_blockers = roundi(cardsManager.getPlayerBoardCards().size() / 2) - cardsManager.getEnemyBlockers().size()
+			
+		for i in range(projected_number_of_blockers):
+			var blocker:Card = get_non_blockers().front()
+			blocker.statesActive()
 
 func playCasters():
 	var enemyCasters = get_casters()
@@ -367,14 +365,13 @@ func handlePlayerAttackEnemy() -> void:
 	#### ATTACK THE ENEMY
 	var c = currentAttackingCard
 	var combatDamage = c.getCombatDamageToTarget(null, true)
-	c.handleAttackingPortrait()
 	endAttackState()
 	await main.playAttackPortraitAnimation(c)
 	main.changeHealth(-combatDamage, !c.isEnemyCard)
 	updateResourceLabels()
 	handlePortraitAttackPrintout(c, combatDamage, true)
 	main.shake_screen(10, 0.5)
-	await c.returnToSlot()
+	c.handleAttackingPortrait()
 	
 	
 #endregion
@@ -576,14 +573,17 @@ func handlePlayerAttackCreature(target:Card) -> void:
 	#### DON'T END TARGETING if it registers CLICKING ON SAME ATTACKING CARD ITSELF
 	var end := false
 	if not target.mySlot:
+		print('Is not in slot!')
 		end = true
 	elif not main.checkSlotEnemy(target.mySlot):
+		print('Is not an enemy!')
 		end = true
 #### DUMMIED CODE: ALLOWS TARGETING PASSIVES IS THERE ARE NO BLOCKERS.
 #	elif not cardsManager.getEnemyBlockers().is_empty() and not target.checkCanBlock():
 #		end = true
 #### CANNOT TARGET PASSIVES AT ALL.
 	elif not target.checkCanBlock():
+		print('Is passive!')
 		end = true
 	elif not target.allowInteract:
 		print('Already fighting!')
@@ -591,6 +591,7 @@ func handlePlayerAttackCreature(target:Card) -> void:
 		
 	if end:
 		if target != currentAttackingCard:
+			print('Cannot attack self!')
 			endAttackState()
 		return
 	

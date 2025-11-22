@@ -52,9 +52,9 @@ func checkNodeValidity(node) -> bool:
 		return false
 	
 	#### SPECIFIC TO CARDS
-	#if node is Card:
-		#if not node.checkAlive():
-			#return false
+	if node is Card:
+		if not node.checkAlive():
+			return false
 	return true
 
 
@@ -63,6 +63,7 @@ func moveCardTweening(c:Card, originalPos:Vector2, newPos:Vector2):
 	c.position = originalPos
 	var tween = get_tree().create_tween()
 	tween.tween_property(c, "position", newPos, 0.2)
+	await tween.finished
 
 
 

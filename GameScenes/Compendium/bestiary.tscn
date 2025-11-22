@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dw7x0akbcnnau" path="res://GameScenes/DeckEditScreen/owned_cards_container.gd" id="3_y2ky0"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="4_f1amn"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="5_m6uwl"]
-[ext_resource type="LabelSettings" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="6_4y1i5"]
+[ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="6_4y1i5"]
 
 [node name="Bestiary" type="Node2D"]
 script = ExtResource("1_qndvw")

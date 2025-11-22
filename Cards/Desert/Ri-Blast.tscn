@@ -40,11 +40,11 @@ flavorText = "O Yazatas! Visit immolation on our enemies!"
 customActionText = "Add 2 Burn on Target"
 
 [node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_jfp56")]
-manualTargetGroup = 3
+manualTargetGroup = 2
 
 [node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="2" instance=ExtResource("6_q4hcx")]
 grantEffect = ExtResource("7_jpqju")
-grantAmount = 1
+grantAmount = 2
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("8_q4hcx")

@@ -21,8 +21,8 @@ func activate(targets:Array) -> bool:
 			var damage = inflictCreature
 			if isScaled():
 				damage = get_scaling({'target': target})
-			handleInflict(target, damage)
-			MyTools.createCombatLogPrintout(str(target.cardName, '  suffers', damage, ' damage.'), Color('BLUE'))
+			await handleInflict(target, damage)
+			MyTools.createCombatLogPrintout(str(target.cardName, '  suffers', damage, ' damage.'), Color.STEEL_BLUE)
 			success = true
 
 		#### CORRODE
@@ -30,15 +30,15 @@ func activate(targets:Array) -> bool:
 			var damage = corrode
 			if isScaled():
 				damage = get_scaling({'target': target})
-			handleCorrode(target, damage)
-			MyTools.createCombatLogPrintout(str(target.cardName, '  is corroded for', damage, ' damage.'), Color('BLUE'))
+			await handleCorrode(target, damage)
+			MyTools.createCombatLogPrintout(str(target.cardName, '  is corroded for ', damage, ' damage.'), Color.STEEL_BLUE)
 			success = true
 		
 		#### BOLSTER
 		elif bolsterDamage > 0 or bolsterHealth > 0:
 			target.tempDamage += bolsterDamage
 			target.tempHealth += bolsterHealth
-			MyTools.createCombatLogPrintout(str(target.cardName, ' gains +', bolsterDamage, '/', bolsterHealth), Color('BLUE'))
+			MyTools.createCombatLogPrintout(str(target.cardName, ' gains +', bolsterDamage, '/', bolsterHealth), Color.STEEL_BLUE)
 			success = true
 		
 	return success
@@ -53,11 +53,9 @@ func handleInflict(target:Card, amount:int):
 #### DEAL TEMPORARY AND PERMANENT DAMAGE TO A CARD
 func handleCorrode(target:Card, amount:int):
 	#target.tempHealth -= amount
+	target.takeDamage(amount)
 	target.health -= amount
-	
-	if target.tempHealth <= 0:
-		target.destroyAndAnimate(true)
-		
+
 		
 	
 	
