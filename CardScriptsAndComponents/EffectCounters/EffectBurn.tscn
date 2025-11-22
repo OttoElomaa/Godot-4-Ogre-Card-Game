@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://devjn27tioxp7"]
 
 [ext_resource type="Script" uid="uid://5c42sqov344m" path="res://CardScriptsAndComponents/Scripts/effect_counter.gd" id="1_y552c"]
-[ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="2_r65xv"]
+[ext_resource type="Texture2D" uid="uid://dcx2qsgic5x6" path="res://Art/CardComponents/card-effect-counter-burn.png" id="2_kj70b"]
 [ext_resource type="PackedScene" uid="uid://jyrj2f2h71w" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnTrigger.tscn" id="3_kj70b"]
 [ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="4_bscki"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="5_hxwhl"]
@@ -18,7 +18,7 @@ description = "Debuff. Corrode 1 per stack on turn, then remove 1 stack."
 metadata/_custom_type_script = "uid://5c42sqov344m"
 
 [node name="Icon" type="Sprite2D" parent="."]
-texture = ExtResource("2_r65xv")
+texture = ExtResource("2_kj70b")
 
 [node name="OnAlliedTurnTrigger" parent="." instance=ExtResource("3_kj70b")]
 

@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="2_16jdu"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_kn400"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_y63ad"]
-[ext_resource type="Texture2D" uid="uid://bps2xijib187r" path="res://Art/CardArt/card-art-creature-slagh-rider.jpg" id="3_4vpam"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_5jlh2"]
+[ext_resource type="Texture2D" uid="uid://2n1ywullykye" path="res://Art/CardArt/card-art-cr-freeslayer-mounted-hiisi.jpg" id="7_kn400"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8tngq"]
 resource_local_to_scene = true
@@ -54,4 +54,4 @@ bolsterDamage = 2
 manualTargetGroup = 1
 
 [node name="Art" parent="Frontside" index="1"]
-texture = ExtResource("3_4vpam")
+texture = ExtResource("7_kn400")

@@ -1,6 +1,8 @@
 extends Node2D
-@onready var BestiaryCardsContainer = $CanvasLayer2/Panel/MarginContainer/Scroll/BestiaryCardsContainer
-@onready var cardInfoPanel = $CardInfoPanel
+@onready var BestiaryCardsContainer := $CanvasLayer2/Panel/MarginContainer/Scroll/BestiaryCardsContainer
+@onready var cardInfoPanel := $CardInfoPanel
+@onready var flavorLabel := $Margin/FlavorLabel
+
 var BestiaryContainer = preload("res://GameScenes/Compendium/BestiaryContainer.tscn")
 
 func _ready():
@@ -19,8 +21,11 @@ func create_containers():
 		BestiaryCardsContainer.add_child(new_cont)
 		new_cont.insert_card(i)
 
-func show_info(card):
+func show_info(card:Card):
 	cardInfoPanel.toggleCardInfo(true, card)
+	flavorLabel.text = card.flavorText
+	
 
 func hide_info():
 	cardInfoPanel.toggleCardInfo(false, null)
+	flavorLabel.text = ""

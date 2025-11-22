@@ -4,10 +4,10 @@
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_1p68a"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_e1l0y"]
 [ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="2_ka4br"]
-[ext_resource type="Texture2D" uid="uid://c3bglrj7apvdw" path="res://Art/CardArt/Desert/card-art-ritual-blast.jpg" id="3_k3mux"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="4_jfp56"]
 [ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="6_q4hcx"]
 [ext_resource type="PackedScene" uid="uid://devjn27tioxp7" path="res://CardScriptsAndComponents/EffectCounters/EffectBurn.tscn" id="7_jpqju"]
+[ext_resource type="Texture2D" uid="uid://b4xr6igsfu2rp" path="res://Art/CardArt/Desert/card-art-ritual-blast-v2.jpg" id="8_q4hcx"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
 noise_type = 3
@@ -36,7 +36,7 @@ flavorText = "O Yazatas! Visit immolation on our enemies!"
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_ka4br")]
 
 [node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("2_e1l0y")]
-customActionText = "Inflict 1. Add 2 Burn"
+customActionText = "Add 2 Burn on Target"
 
 [node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_jfp56")]
 manualTargetGroup = 3
@@ -46,4 +46,4 @@ grantEffect = ExtResource("7_jpqju")
 grantAmount = 1
 
 [node name="Art" parent="Frontside" index="1"]
-texture = ExtResource("3_k3mux")
+texture = ExtResource("8_q4hcx")

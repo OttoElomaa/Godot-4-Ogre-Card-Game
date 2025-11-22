@@ -61,7 +61,7 @@ mouse_target = true
 
 [node name="CanvasLayer2" type="SubViewport" parent="Map_Screen/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1151, 632)
 render_target_update_mode = 4
 
 [node name="LevelSelect" parent="Map_Screen/SubViewportContainer/CanvasLayer2" instance=ExtResource("23_4t6do")]
