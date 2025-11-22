@@ -31,7 +31,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_877ti")
 cardName = "Woodwose"
 subTypeStr = "Woodwose Warrior"
-group = 3
+group = 4
 flavorText = "\"What is the nature of the hairy man? Some say, a person, degraded by overindulgent vice. Some say, our ancestor. The Woodwose does not appear to know nor care.\"
 ~ Astromancer"
 manaCost = 3

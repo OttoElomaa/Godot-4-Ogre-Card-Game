@@ -33,6 +33,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_cyrk5")
 cardName = "Guardmaster"
 subTypeStr = "Human Soldier"
+group = 12
 flavorText = "This one is privy to numbers, and knows Ur-Tekton's scriptures."
 manaCost = 4
 startingDamage = 2

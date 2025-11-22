@@ -39,13 +39,15 @@ enum Factions {
 }
 
 ## Shows which loot table the card belongs to. Cards that cannot be gained from loot
-## (like boss cards or summoned cards) should be set to NONE.
+## (like boss cards or summoned cards) should be set to NONE. Cards from the Generic
+## pool can be recruited from anywhere. Cards from x_GENERIC pools can be always be recruited
+## when in the given location, or always if they are from the player's faction.
 enum Group {
 	NONE, GENERIC,
 	## GREEN DEFIANCE
 	GREEN_GENERIC, VINEMEN, WOODWOSES, SKULL_PRIESTS, GHARCH, GROVE_CLANS,
 	## DESERT
-	DESERT_GENERIC, SALKHI_HORDE, PYRECALLERS,
+	DESERT_GENERIC, SALKHI_HORDE, PYRECALLERS, HIGH_KINGDOM,
 	## CITY
 	CITY_GENERIC, THRONE, GUILDS, TEMPLES, ASTROMANCERS,
 	## OUTCASTS
@@ -109,7 +111,7 @@ var keywords = []
 
 var effectText := ""
 
-################################# AI VALUES
+#region################################ AI VALUES
 
 @export_subgroup('AI Behavior')
 ## This card becomes set as a blocker when summoned.
@@ -142,8 +144,9 @@ STRONGEST
 
 ## Will attack even if it would be killed in the process.
 @export var fearless = false
+#endregion
 
-################################## UPGRADE PATH 1
+#region################################# UPGRADE PATH 1
 
 @export_subgroup('Upgrade Path #1')
 @export var alt_card_name_1: String
@@ -153,6 +156,31 @@ STRONGEST
 @export var alt_damage_1: int
 @export var alt_health_1: int
 @export var alt_mana_cost_1: int
+#endregion
+
+#region################################# UPGRADE PATH 2
+
+@export_subgroup('Upgrade Path #2')
+@export var alt_card_name_2: String
+@export var alt_actions_node_2: Node
+@export var alt_keywords_2: PackedStringArray
+@export var alt_art_2: Texture2D
+@export var alt_damage_2: int
+@export var alt_health_2: int
+@export var alt_mana_cost_2: int
+#endregion
+
+#region################################# UPGRADE PATH 3
+
+@export_subgroup('Upgrade Path #3')
+@export var alt_card_name_3: String
+@export var alt_actions_node_3: Node
+@export var alt_keywords_3: PackedStringArray
+@export var alt_art_3: Texture2D
+@export var alt_damage_3: int
+@export var alt_health_3: int
+@export var alt_mana_cost_3: int
+#endregion
 
 ######################################### CARD ACTION STATE
 #### RESTING = Can't take card actions this turn, such as attack or cast.

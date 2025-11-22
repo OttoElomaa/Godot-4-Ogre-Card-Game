@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk4etb0x0xce3"]
+[gd_scene load_steps=12 format=3 uid="uid://dk4etb0x0xce3"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_ytltf"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_kys8y"]
 [ext_resource type="Texture2D" uid="uid://4l7l8jtu5agq" path="res://Art/CardArt/City/card-art-kalasirios.png" id="3_5xjtm"]
+[ext_resource type="Script" uid="uid://yys4316b4p1r" path="res://CardScriptsAndComponents/Actions/Scripts/cardActionsNode.gd" id="4_n06ho"]
+[ext_resource type="PackedScene" uid="uid://d0e807arj0ef" path="res://CardScriptsAndComponents/Triggers/ArrivalTrigger.tscn" id="5_r5g54"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="6_e06ga"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="7_1bsr7"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="8_ejcq3"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
 noise_type = 3
@@ -22,7 +27,7 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-Pikeman" instance=ExtResource("1_ytltf")]
+[node name="Card-Cr-Pikeman" node_paths=PackedStringArray("alt_actions_node_3") instance=ExtResource("1_ytltf")]
 material = SubResource("ShaderMaterial_bf25j")
 cardName = "Kalasirios"
 subTypeStr = "Ashk'lani Soldier"
@@ -36,6 +41,31 @@ alt_art_1 = ExtResource("3_5xjtm")
 alt_damage_1 = 2
 alt_health_1 = 2
 alt_mana_cost_1 = 1
+alt_card_name_2 = "Inspired Kalasirios"
+alt_art_2 = ExtResource("3_5xjtm")
+alt_damage_2 = 1
+alt_health_2 = 2
+alt_mana_cost_2 = 1
+alt_card_name_3 = "Distinguished Kalasirios"
+alt_actions_node_3 = NodePath("Actions2")
+alt_keywords_3 = PackedStringArray("Weaponmaster")
+alt_art_3 = ExtResource("3_5xjtm")
+alt_damage_3 = 1
+alt_health_3 = 2
+alt_mana_cost_3 = 1
+
+[node name="Actions2" type="Node2D" parent="." index="2"]
+script = ExtResource("4_n06ho")
+
+[node name="ArrivalTrigger" parent="Actions2" index="0" instance=ExtResource("5_r5g54")]
+
+[node name="CardAction" parent="Actions2/ArrivalTrigger" index="1" instance=ExtResource("6_e06ga")]
+customActionText = "Arrival: gain 1 Command."
+
+[node name="TargetSelf" parent="Actions2/ArrivalTrigger/CardAction" index="1" instance=ExtResource("7_1bsr7")]
+
+[node name="SkillEffectCounters" parent="Actions2/ArrivalTrigger/CardAction" index="2" instance=ExtResource("8_ejcq3")]
+grantAmount = 1
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_5xjtm")

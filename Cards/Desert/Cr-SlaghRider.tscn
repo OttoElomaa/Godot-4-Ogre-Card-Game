@@ -32,7 +32,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_xoxae")
 cardName = "Mounted Hiisi"
 subTypeStr = "Freeslayer Rider"
-group = 16
+group = 17
 flavorText = "\"O leaf-clad rider, carrier of mountain's ills! Who rules thee?\"
 \"No god nor man! No god nor man!\""
 manaCost = 2

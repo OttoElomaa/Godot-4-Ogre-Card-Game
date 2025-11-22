@@ -37,6 +37,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_0l6fb")
 cardName = "Outrider"
 subTypeStr = "Salkhi Scout"
+group = 9
 flavorText = "Ah Outrider, sibling of barkhans, carrier of omens!"
 manaCost = 2
 startingDamage = 2

@@ -1,15 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwj4lr0i67frt"]
+[gd_scene load_steps=11 format=3 uid="uid://dwj4lr0i67frt"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_kp5c2"]
 [ext_resource type="PackedScene" uid="uid://biap5dhvp08qo" path="res://CardScriptsAndComponents/Triggers/BattleArtTrigger.tscn" id="2_ghwtv"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_x2mhe"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_yul8c"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="3_dfey6"]
 [ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/CombatTargeting.tscn" id="5_tsj0e"]
 [ext_resource type="Texture2D" uid="uid://dvh2f61ch7mdy" path="res://Art/CardArt/Desert/card-art-ur-hound.jpg" id="6_tsj0e"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aop4y"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kvliy"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_aop4y")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b00k7"]
+resource_local_to_scene = true
+shader = ExtResource("2_yul8c")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_kvliy")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
 [node name="Card-Cr-MardokHound" instance=ExtResource("1_kp5c2")]
+material = SubResource("ShaderMaterial_b00k7")
 cardName = "Ur-Hound"
 subTypeStr = "Sacred Beast"
+group = 8
 flavorText = "A beast from the lost city of stone."
 manaCost = 4
 startingDamage = 2

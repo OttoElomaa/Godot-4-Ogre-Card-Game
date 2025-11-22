@@ -27,6 +27,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_tc6oo")
 cardName = "Fleet Raider"
 subTypeStr = "Umugite Warrior"
+group = 18
 flavorText = "As long as Umug says fight, fight an Umugite shall."
 manaCost = 3
 startingDamage = 2

@@ -31,6 +31,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_q4hcx")
 cardName = "Blast"
 cardType = 1
+group = 1
 flavorText = "O Yazatas! Visit immolation on our enemies!"
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_ka4br")]

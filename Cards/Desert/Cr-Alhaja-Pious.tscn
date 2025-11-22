@@ -29,9 +29,10 @@ shader_parameter/size_3 = 0.05
 
 [node name="Card-Cr-PiousAlhaja" instance=ExtResource("1_6in3p")]
 material = SubResource("ShaderMaterial_a5782")
-cardName = "Starry-Eyed Convert"
-subTypeStr = "Ashk'lani Convert"
-flavorText = "\"The kind Magus opened my eyes! I can see — unearthly sights!\""
+cardName = "Starry-Eyed Initiate"
+subTypeStr = "Worshipper"
+group = 8
+flavorText = "\"The kind Magus opened my eyes! I can finally see those — those unearthly sights!\""
 manaCost = 3
 startingDamage = 2
 startingHealth = 2

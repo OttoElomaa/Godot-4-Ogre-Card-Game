@@ -29,6 +29,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_eqnvv")
 cardName = "Alhaja Bheith Nochti"
 subTypeStr = "Alhaja Warrior"
+group = 8
 flavorText = "“In the purity of the desert, the Bheith Nochti seek the place of utmost piety.”"
 manaCost = 3
 startingDamage = 2
