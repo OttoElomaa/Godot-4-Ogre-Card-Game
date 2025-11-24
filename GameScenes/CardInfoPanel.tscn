@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dtaqr72ueoeng"]
 
-[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="1_0kdtv"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="1_axiiv"]
 [ext_resource type="Texture2D" uid="uid://bvnmf54c4ye2n" path="res://Art/CardComponents/card-background-texture-V4b-ForInfoPane.jpg" id="2_axiiv"]
 [ext_resource type="Script" uid="uid://cjv7n32vxaee8" path="res://GameScenes/cardInfoPanel.gd" id="2_o0dss"]
 [ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSettings/LabelSet-Header-Brown.tres" id="3_o0dss"]
@@ -9,7 +9,7 @@
 
 [node name="CardInfoPanel" type="PanelContainer"]
 custom_minimum_size = Vector2(400, 600)
-theme_override_styles/panel = ExtResource("1_0kdtv")
+theme_override_styles/panel = ExtResource("1_axiiv")
 script = ExtResource("2_o0dss")
 
 [node name="CardBackgroundTexture" type="TextureRect" parent="."]

@@ -13,15 +13,15 @@ script = ExtResource("1_qndvw")
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer2"]
-custom_minimum_size = Vector2(1000, 1000)
+custom_minimum_size = Vector2(800, 1000)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -530.0
+offset_left = -400.0
 offset_top = -500.0
-offset_right = 470.0
+offset_right = 400.0
 offset_bottom = 500.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -53,7 +53,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 8
+columns = 7
 script = ExtResource("3_y2ky0")
 
 [node name="CardInfoPanel" parent="." instance=ExtResource("5_m6uwl")]
@@ -69,16 +69,18 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1489.0
-offset_top = 648.0
+offset_top = 667.0
 offset_right = 1864.0
-offset_bottom = 780.0
+offset_bottom = 823.0
 grow_horizontal = 0
 grow_vertical = 0
+size_flags_vertical = 0
 metadata/_edit_group_ = true
 
 [node name="FlavorLabel" type="Label" parent="Margin"]
 custom_minimum_size = Vector2(370, 0)
 layout_mode = 2
+size_flags_vertical = 0
 text = "Unit flavor text goes here"
 label_settings = ExtResource("6_4y1i5")
 horizontal_alignment = 1
