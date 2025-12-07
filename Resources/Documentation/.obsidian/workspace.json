@@ -1,0 +1,199 @@
+{
+  "main": {
+    "id": "7201e9ce5247cba7",
+    "type": "split",
+    "children": [
+      {
+        "id": "9ec51187b68d60e3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4c9fe35874b17221",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Card Creation Process.canvas",
+                "viewState": {
+                  "x": 1299.1455291971797,
+                  "y": 175.96036036307248,
+                  "zoom": -0.9570212033262511
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Card Creation Process"
+            }
+          },
+          {
+            "id": "dc56f90bb9b0f1a6",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Map Scenario Structure.canvas",
+                "viewState": {
+                  "x": 232.83312182741122,
+                  "y": -48.37880710659897,
+                  "zoom": -0.3687612596972333
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Map Scenario Structure"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d6bdd7541926de2b",
+    "type": "split",
+    "children": [
+      {
+        "id": "6f7f32f919c20a58",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0c7a293132206309",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c58ddfa6f0549a2f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "59a754cb2369e8c9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c67a18125dd2fe8c",
+    "type": "split",
+    "children": [
+      {
+        "id": "2f0061bb71813c0d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "552467bd1ebf5607",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Card Creation Process.canvas",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Card Creation Process"
+            }
+          },
+          {
+            "id": "f4e9dd4204ffa348",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Card Creation Process.canvas",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Card Creation Process"
+            }
+          },
+          {
+            "id": "5fa5e651408f10f4",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "ba6c09e11887ebdc",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Card Creation Process.canvas",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Card Creation Process"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "dc56f90bb9b0f1a6",
+  "lastOpenFiles": [
+    "BattleAI and Turn Order.canvas",
+    "Card Creation Process.canvas",
+    "Map Scenario Structure.canvas"
+  ]
+}

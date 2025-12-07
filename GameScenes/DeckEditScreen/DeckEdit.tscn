@@ -17,9 +17,10 @@ script = ExtResource("1_2aanx")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
-offset_top = 35.0
-offset_right = 388.0
-offset_bottom = 1043.0
+offset_left = 49.0
+offset_top = 148.0
+offset_right = 503.0
+offset_bottom = 836.0
 texture = ExtResource("1_kjltk")
 patch_margin_left = 7
 patch_margin_top = 7
@@ -57,16 +58,16 @@ script = ExtResource("3_2vaow")
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer2"]
-custom_minimum_size = Vector2(1000, 1000)
+custom_minimum_size = Vector2(800, 800)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -530.0
-offset_top = -500.0
-offset_right = 470.0
-offset_bottom = 500.0
+offset_left = -427.0
+offset_top = -440.0
+offset_right = 399.0
+offset_bottom = 386.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("4_wteh1")
@@ -79,15 +80,14 @@ horizontal_scroll_mode = 0
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Panel/Scroll"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_bottom = -25
 
 [node name="OwnedCardsContainer" type="GridContainer" parent="CanvasLayer2/Panel/Scroll/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 8
+columns = 6
 script = ExtResource("4_2vaow")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2/Panel"]
@@ -101,10 +101,10 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="CardInfoPanel" parent="." instance=ExtResource("5_rwrpj")]
-offset_left = 1477.0
-offset_top = 35.0
-offset_right = 1877.0
-offset_bottom = 635.0
+offset_left = 1438.0
+offset_top = 179.0
+offset_right = 1838.0
+offset_bottom = 779.0
 
 [node name="ProceedButton" type="Button" parent="."]
 offset_left = 1473.0

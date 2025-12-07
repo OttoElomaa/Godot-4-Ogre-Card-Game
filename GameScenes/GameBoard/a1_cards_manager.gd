@@ -56,8 +56,6 @@ func dealEnemyHand():
 		var card:Card = drawCard($EnemyDeck, $EnemyHand)
 		dumbHandDrawCounter += 1
 		
-		card.toggleEnemyStatus(true)
-		card.toggleFrontSide(false)
 	updateHandCardsVisuals()
 
 
@@ -126,7 +124,7 @@ func _input(e: InputEvent) -> void:
 			#### LEFT CLICK PROCESSING
 			if e.button_index == MOUSE_BUTTON_LEFT:
 				if currentDraggedCard:
-					currentDraggedCard = handleFinishDraggingCard()
+					currentDraggedCard = await handleFinishDraggingCard()
 				else:
 					startDraggingCardOrAttack()
 					
@@ -281,7 +279,7 @@ func handleFinishDraggingCard() -> Node:
 		if not c.isRitual:
 			if selectedSlot.isAvailable and c.manaCost <= battleSystem.playerMana:
 				if main.checkSlotPlayer(selectedSlot):
-					success = handlePlaceCardInSlot(c, selectedSlot)
+					success = await handlePlaceCardInSlot(c, selectedSlot)
 		
 	if success:
 		c.z_index = 1
@@ -301,7 +299,7 @@ func handleFinishDraggingCard() -> Node:
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	c.cardsManager = self
-	
+
 	######################################
 	#### SLOT STUFF
 	c.mySlot = slot
@@ -311,7 +309,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
-		MyTools.moveCardTweening(c, originalPos, c.position)
+		await MyTools.moveCardTweening(c, originalPos, c.position)
 		if c.is_inside_tree():
 			c.reparent($EnemyBoard)
 		else:
@@ -330,6 +328,8 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 		c.isEnemyCard = false
 		battleSystem.playerMana -= c.manaCost
 	
+	c.setup(main)
+	await get_tree().process_frame
 
 	##############################################
 	#### VISUAL STUFF
@@ -631,7 +631,6 @@ func moveToDeck(card:Card, isEnemy:bool):
 
 
 func moveToHand(card:Card, isEnemy:bool):
-	card.statesHand()
 	
 	var handNode = $PlayerHand
 	if isEnemy:
@@ -641,12 +640,15 @@ func moveToHand(card:Card, isEnemy:bool):
 		card.reparent(handNode)
 	else:
 		handNode.add_child(card)
-		card.setup(main)
 	card.position = Vector2.ZERO
 	card.handleEnterGraveyard()
 	
+	card.isEnemyCard = isEnemy
+	card.setup(main)
+	card.statesHand()
 	updateHandCardsVisuals()
-
+	
+	await get_tree().process_frame
 
 
 func updateGraveyardVisuals():

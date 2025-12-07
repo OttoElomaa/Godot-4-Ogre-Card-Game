@@ -137,7 +137,6 @@ func _on_to_player_graveyard_pressed() -> void:
 		_on_search_card_name_text_changed()
 		MyTools.addCardToGraveyard(found_card.duplicate(), false)
 
-
 func _on_to_player_hand_2_pressed():
 	if found_card:
 		_on_search_card_name_text_changed()

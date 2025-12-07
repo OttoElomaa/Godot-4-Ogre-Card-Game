@@ -1,0 +1,24 @@
+# Enemy AI
+timeoutEnemyStartCombat() - modify to create new AI personalities. An AI personality contains the order
+in with the AI will perform certain actions in battle or check if it's possible or necessary to perform them.
+
+To create an AI personality, arrange these functions in any way you like. 
+
+await enemySummonCreatures()
+await enemyPlayRituals()
+await decide_blockers() - defines the algorythm which has the enemy put cards out as blockers.
+await playCasters()
+await playAttackers()
+
+Feel free to add more functions is necessary.
+
+handleEnemyAttackPlayer(attackCard:Card) - defines the algorythm which has the enemy choose whether to attack the
+opponent's cards and which cards to prioritize.
+
+# Card Actions
+
+handlePlayerAttackCreature(target:Card) - called when a card is made attack another card. Modify to change
+how the game checks whether a card is targetable by attacks.
+resolveAttack(attackCard:Card, targetCard:Card) - called when handlePlayerAttackCreature determines that the 
+	targeted card is eligible for being attacked by attackCard. Runs the necessary functions of attackCard and
+	targetCard to animate and process combat.

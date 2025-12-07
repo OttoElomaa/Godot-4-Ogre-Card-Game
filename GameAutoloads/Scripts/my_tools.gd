@@ -74,8 +74,8 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 	if not slots.is_empty():
 		var slot = slots[0]
 		
-		handlePlaceCardInSlot(card, slot)
-		card.setup(gameBoard)
+		await handlePlaceCardInSlot(card, slot)
+#		card.setup(gameBoard)
 #		changeMana(card.manaCost, isEnemy)
 		return true
 		

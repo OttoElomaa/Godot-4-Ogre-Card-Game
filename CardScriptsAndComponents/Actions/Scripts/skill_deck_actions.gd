@@ -21,7 +21,7 @@ func activate(targets:Array) -> bool:
 	elif summonScene:
 		var creature:Card = summonScene.instantiate()
 		add_child(creature)   #### TEMP PARENT TO TRIGGER _READY
-		success = MyTools.summonCard(creature, action.isEnemy)
+		success = await MyTools.summonCard(creature, action.isEnemy)
 		
 	#### TARGETED ACTIONS
 	for target:Card in targets:

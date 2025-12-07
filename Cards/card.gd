@@ -43,7 +43,7 @@ enum Factions {
 ## pool can be recruited from anywhere. Cards from x_GENERIC pools can be always be recruited
 ## when in the given location, or always if they are from the player's faction.
 enum Group {
-	NONE, GENERIC,
+	NONE, GENERIC, EQUIPMENT,
 	## GREEN DEFIANCE
 	GREEN_GENERIC, VINEMEN, WOODWOSES, SKULL_PRIESTS, GHARCH, GROVE_CLANS,
 	## DESERT
@@ -252,6 +252,8 @@ func setup(gameBoard: GameBoard):
 		$Frontside/ActionState.hide()
 	
 	createEffectText()
+	updateCardVisuals()
+	$Effects.updateEffectVisuals()
 	#$Frontside/CardName/Label.text = cardName
 	
 	$Frontside/CardName.hide()
@@ -627,6 +629,9 @@ func statesHand():
 	vacateSlot()
 	actionState = CardActionStates.HAND
 	cardState = CardStates.HAND
+	if isEnemyCard:
+		toggleEnemyStatus(true)
+		toggleFrontSide(false)
 
 func statesDeck():
 	vacateSlot()
@@ -660,7 +665,6 @@ func checkCanBlock() -> bool:
 			return true
 	return false
 
-
 func checkCanAct() -> bool:
 	if not checkInert():
 		if checkAlive():
@@ -668,8 +672,6 @@ func checkCanAct() -> bool:
 				if not checkTraveling():
 					return true
 	return false
-
-
 
 func checkInert() -> bool:
 	if actionState == CardActionStates.INERT:
@@ -693,7 +695,7 @@ func checkAlive():
 #region #########################################  COMBAT STUFF
 
 #### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
-func takeCombatDamage(card:Card, isAttacker: bool) -> int:
+func takeCombatDamage(card:Card, isAttacker: bool):
 	
 	var selfCombatDamage:int = getCombatDamageToTarget(card, !isAttacker)
 	var enemyCombatDamage:int = card.getCombatDamageToTarget(self, isAttacker)
@@ -710,41 +712,14 @@ func takeCombatDamage(card:Card, isAttacker: bool) -> int:
 				
 	updateCardVisuals()
 	
-	return damageTaken
+	checkAndHandleCombatDeath(isAttacker)
 
 
 #### RETURNS THE INPUT DAMAGE, AND ADDS to it any of 
 #### THIS CARD'S (Damage Taking card) DAMAGE-CHANGING EFFECTS
 func takeDamage(amount:int):
 	
-	## EFFECTS THAT CHANGE *ALL* DAMAGE TAKEN BY THIS CARD, INCLUDING INDIRECT. 
-	var damageModifiers:int = 0
-	## IF THIS IS TRUE, THE CARD WILL TAKE NO DAMAGE.
-	var damageIgnored = false
-	
-			
-	## DOOM
-	if getEffect('Doom'):
-		damageModifiers += getEffect('Doom').counter
-	
-	#### ARMOR
-	if hasEffect("Armor"):
-		var armorStacks:int = getEffect("Armor").counter
-		changeEffectStacks('Armor', -(amount + damageModifiers))
-		damageModifiers -= armorStacks
-		
-	#### PROTECTION
-	if hasEffect('Protection'):
-		damageIgnored = true
-		
-	#### FIX DAMAGE
-	var damageTaken = amount + damageModifiers
-	
-	if damageIgnored:
-		damageTaken = 0
-		
-	if damageTaken < 0:
-		damageTaken = 0
+	var damageTaken = getDamageToSelf(amount)
 	
 	#### DAMAGE IS DEALT
 	tempHealth -= damageTaken
@@ -764,7 +739,37 @@ func takeDamage(amount:int):
 	if tempHealth <= 0:
 		await destroyAndAnimate(true)
 
-
+## Returns damage taken by self after general modifiers.
+func getDamageToSelf(amount:int) -> int:
+	var damageTaken = amount
+	## EFFECTS THAT CHANGE *ALL* DAMAGE TAKEN BY THIS CARD, INCLUDING INDIRECT. 
+	## IF THIS IS TRUE, THE CARD WILL TAKE NO DAMAGE.
+	var damageIgnored = false
+	
+			
+	## DOOM
+	if getEffect('Doom'):
+		damageTaken += getEffect('Doom').counter
+	
+	#### ARMOR
+	if hasEffect("Armor"):
+		var armorStacks:int = getEffect("Armor").counter
+		damageTaken -= armorStacks
+		
+	#### PROTECTION
+	if hasEffect('Protection'):
+		damageIgnored = true
+		
+	#### FIX DAMAGE
+	
+	if damageIgnored:
+		damageTaken = 0
+		
+	if damageTaken < 0:
+		damageTaken = 0
+	
+	return damageTaken
+	
 
 #### RETURNS THE TEMPORARY DAMAGE, AND ADDS to it any of 
 #### THIS CARD'S (Damage Dealer) DAMAGE-CHANGING EFFECTS
@@ -785,8 +790,7 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	
 	
 	#### FIX DAMAGE
-	if combatDamage < 0:
-		combatDamage = 0
+	combatDamage = target.getDamageToSelf(combatDamage)
 	
 	return combatDamage
 

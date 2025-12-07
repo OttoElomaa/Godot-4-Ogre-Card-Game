@@ -1,0 +1,29 @@
+{
+	"nodes":[
+		{"id":"6b4644f818b48fbd","type":"text","text":"Stoneseeker Camps\nPay Glory to buy rare Equipment cards","x":195,"y":-36,"width":250,"height":116},
+		{"id":"2344c4d26e69024b","type":"text","text":"Rest Nodes\nAccess to use your character's special command or restore HP.","x":195,"y":115,"width":250,"height":135},
+		{"id":"844c8308921c448b","type":"text","text":"Bonus Fights\nDefeat them to get extra rewards.","x":480,"y":-36,"width":250,"height":120},
+		{"id":"67850c281c30cce8","type":"text","text":"Recruitment Nodes\nAccess to buy cards from your recruitment pool.","x":480,"y":115,"width":250,"height":135},
+		{"id":"8f7b2fea3ef11954","type":"text","text":"Places of Power\nPay Glory to permanently increase the stats of one of your cards.","x":780,"y":-36,"width":250,"height":151},
+		{"id":"15a14850bcc15ad5","type":"text","text":"Places of Vision\n2 are guaranteed to be found throughout the game. They let you upgrade your Champion unit.","x":780,"y":150,"width":250,"height":150},
+		{"id":"2a76525430c9b08c","type":"text","text":"Extra Nodes","x":480,"y":-230,"width":250,"height":60},
+		{"id":"80af7d982d4fa0a1","type":"text","text":"Mandatory Nodes","x":-449,"y":-230,"width":250,"height":60},
+		{"id":"3f096c7bc5eedae4","type":"text","text":"Zone Screen","x":70,"y":-420,"width":250,"height":60},
+		{"id":"5441d0afc489adf1","type":"text","text":"Dialog Nodes\nContains a choice that the character must make. Choices available may be influenced by the character's faction, their alliances and cards they have.\nDepending on the choices made, other nodes may hide or reveal themselves.","x":-449,"y":-30,"width":275,"height":280},
+		{"id":"fe2b2cff160e4399","type":"text","text":"End Text\nShown to the player after the condition for completion is acheived (mostly by beating the battle node).","x":-100,"y":-30,"width":250,"height":180},
+		{"id":"f54dd7303fcd7a6c","type":"text","text":"Battle Nodes\nRequired. One or more battles that can be fought in a scenario. Battles usually reward Glory and 1 card from a choice of 3 from the deck of the opponent.\nUnless stated otherwise, the battle node must be beaten to progress to next scenario.","x":-820,"y":-30,"width":291,"height":250}
+	],
+	"edges":[
+		{"id":"397294a30f277ee5","fromNode":"3f096c7bc5eedae4","fromSide":"bottom","toNode":"80af7d982d4fa0a1","toSide":"top"},
+		{"id":"b028d379fbf1fe16","fromNode":"80af7d982d4fa0a1","fromSide":"bottom","toNode":"f54dd7303fcd7a6c","toSide":"top"},
+		{"id":"a1d6b0b2ead91366","fromNode":"80af7d982d4fa0a1","fromSide":"bottom","toNode":"5441d0afc489adf1","toSide":"top"},
+		{"id":"b534b5a5dc4b5d67","fromNode":"80af7d982d4fa0a1","fromSide":"bottom","toNode":"fe2b2cff160e4399","toSide":"top"},
+		{"id":"58234e42f4f6ee6f","fromNode":"3f096c7bc5eedae4","fromSide":"bottom","toNode":"2a76525430c9b08c","toSide":"top"},
+		{"id":"1217ed0c7266422a","fromNode":"2a76525430c9b08c","fromSide":"bottom","toNode":"844c8308921c448b","toSide":"top"},
+		{"id":"a05272972a283922","fromNode":"2a76525430c9b08c","fromSide":"bottom","toNode":"67850c281c30cce8","toSide":"top"},
+		{"id":"9b186da871899d75","fromNode":"2a76525430c9b08c","fromSide":"bottom","toNode":"2344c4d26e69024b","toSide":"top"},
+		{"id":"ab6dac0779d0324a","fromNode":"2a76525430c9b08c","fromSide":"bottom","toNode":"8f7b2fea3ef11954","toSide":"top"},
+		{"id":"5b4a0d28ce535993","fromNode":"2a76525430c9b08c","fromSide":"bottom","toNode":"15a14850bcc15ad5","toSide":"top"},
+		{"id":"8eee9967b970ec12","fromNode":"2a76525430c9b08c","fromSide":"bottom","toNode":"6b4644f818b48fbd","toSide":"top"}
+	]
+}

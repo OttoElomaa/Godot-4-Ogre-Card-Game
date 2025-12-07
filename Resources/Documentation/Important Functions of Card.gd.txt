@@ -1,0 +1,23 @@
+# BACKEND
+setup() - ran when a card is added to the game. Initializes a card's visuals as well as scene hierarchy.
+
+# Arrival
+handleArrival() - ran when a card arrives to the board.
+handleTurnStartReset() - sets the health and damage numbers of a creature to their permanent values.
+setInitialActionState() - sets the action state of a creature that arrives on board.
+
+# Combat
+takeCombatDamage(card:Card, isAttacker: bool) - determines how much damage self takes from card, and deals that damage to self. Redundant?
+getDamageToSelf(amount:int) - applies modifiers to all damage taken. Change to add effects that increase or decrease all damage that a card takes, 
+	regardless of source. 
+	Has a variable damageIgnored -- if it is True, damage is set to zero.
+getCombatDamageToTarget(target:Card, isAttacker: bool) - calculates the damage self would do to target.
+	Modify this to add effects that trigger when a card attacks (isAttacker is true) or defends (isAttacked is false).
+
+# Death
+checkAndHandleCombatDeath() - ran from takeDamage to determine if a card survives a combat or dies. Modify to add effects that
+change what happens when a card survives a combat.
+destroyAndAnimate(toAnimate: bool) - calls statesDestroy() and, is toAnimate is true, plays the card death animation. Modify to add effects that change 
+what happens before a card dies.
+statesDestroy() - changes a card's state to GRAVEYARD and vacates its slot. 
+destroyCardTwo() - ran after the graphical effects for a card's death are finished playing. REPARENTS the card to graveyard.

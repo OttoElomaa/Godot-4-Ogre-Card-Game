@@ -42,17 +42,11 @@ func addEffect(appliedEffect: EffectCounter):
 	
 	e.toggleIcon(false)
 	
-	updateEffectInfo()		
 	updateEffectVisuals()
 	
 	var card:Card = get_parent()
 #	var printout := "%s added on %s" % [appliedEffect.id, card.cardName]
 #	MyTools.createCombatLogPrintout(printout, Color.WHITE)
-	
-
-
-func updateEffectInfo():
-	pass
 
 
 func has_similar(array:Array, effect:EffectCounter) -> EffectCounter:

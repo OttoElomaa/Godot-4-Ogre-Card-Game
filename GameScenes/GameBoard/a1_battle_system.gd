@@ -108,7 +108,7 @@ func enemySummonCreatures() -> void:
 		if MyTools.checkNodeValidity(card):
 			if card.manaCost <= enemyMana:
 				if not card.isRitual:
-					var success = playEnemyCard(card)
+					var success = await playEnemyCard(card)
 					if success:
 						enemyMana -= card.manaCost
 
@@ -135,7 +135,6 @@ func timeoutEnemyStartCombat() -> void:
 			
 	### IF THERE ARE NO BLOCKING CARDS, THE STRONGEST ENEMY CARDS ARE SET TO BLOCK.
 
-		
 	#### Perform actions in an order based on AI Personality.
 	match AI_Personality:
 		main.AI_personalities.COMMANDER:
@@ -189,6 +188,9 @@ func get_non_blockers() -> Array:
 	sort_by_strongest(non_blockers)
 	return non_blockers
 
+
+## Current algorithm -- half as many creatures need to be set as blockers as the player has on board. If there are not enough TANKS,
+## sets other cards instead, prioritizing strongest ones.
 func decide_blockers():
 	if not enemyBoardCards.is_empty():
 		sort_by_strongest(enemyBoardCards)
@@ -196,7 +198,8 @@ func decide_blockers():
 			
 		for i in range(projected_number_of_blockers):
 			var blocker:Card = get_non_blockers().front()
-			blocker.statesActive()
+			if has_method('statesActive'):
+				blocker.statesActive()
 
 func playCasters():
 	var enemyCasters = get_casters()
@@ -214,7 +217,7 @@ func playEnemyCard(card:Card) -> bool:
 	for slot:CardSlot in main.getEnemySlots():
 		if slot.isAvailable and card.manaCost <= enemyMana:
 			
-			cardsManager.handlePlaceCardInSlot(card, slot)
+			await cardsManager.handlePlaceCardInSlot(card, slot)
 			return true
 	return false
 
@@ -271,31 +274,20 @@ func updateDamageCalculator(targetC:Card) -> void:
 	
 	var damageToDealLabel := $CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer/TargetDmgTakenLabel
 	var damageToTakeLabel := $CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer/AttackerDmgTakenLabel
-	var extraDamage2Defender: int = 0
-	var extraDamage2Attacker: int = 0
 	
 	var attacker:Card = currentAttackingCard
 	if not attacker:
 		return
 	if targetC == attacker:
 		return
+
 	if not targetC:
-		damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(attacker, true) + extraDamage2Defender) 
+		damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(null, true)) 
 		damageToTakeLabel.text = "0"
 		return
-	
-	if targetC.getEffect('Doom'):
-		extraDamage2Defender += targetC.getEffect('Doom').counter
-	if attacker.getEffect('Doom'):
-		extraDamage2Attacker += attacker.getEffect('Doom').counter
-	
-	if targetC.getEffect('Armor'):
-		extraDamage2Defender -= targetC.getEffect('Armor').counter
-	if attacker.getEffect('Armor'):
-		extraDamage2Attacker -= attacker.getEffect('Armor').counter
-	
-	damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(attacker, true) + extraDamage2Defender) 
-	damageToTakeLabel.text = "%d" % (targetC.getCombatDamageToTarget(targetC, false) + extraDamage2Attacker)
+
+	damageToDealLabel.text = "%d" % (attacker.getCombatDamageToTarget(targetC, true)) 
+	damageToTakeLabel.text = "%d" % (targetC.getCombatDamageToTarget(attacker, false))
 	
 
 
@@ -603,7 +595,7 @@ func handlePlayerAttackCreature(target:Card) -> void:
 
 #### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
-func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
+func resolveAttack(attackCard:Card, targetCard:Card):
 	endAttackState()
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
@@ -625,26 +617,26 @@ func resolveAttack(attackCard:Card, targetCard:Card) -> bool:
 	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, false)
 
 	#### CHECK IF EITHER CARD WAS DESTROYED
-	var attackerDestroyed = await attackCard.checkAndHandleCombatDeath(true)
-	var targetDestroyed = await targetCard.checkAndHandleCombatDeath(false)
+#	var attackerDestroyed = await attackCard.checkAndHandleCombatDeath(true)
+#	var targetDestroyed = await targetCard.checkAndHandleCombatDeath(false)
 	
 	#### COMBAT LOG STUFF ##################################
 	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
 	main.addLogMessage(attackerString, Color.WHITE)	
 	
-	var targetHurtString = "%s %s " % [MyTools.getFactionString(targetCard), targetCard.cardName]
-	if targetDestroyed:
-		targetHurtString += "was destroyed"
-	main.addLogMessage(targetHurtString, targetCard.hurtColor)	
+#	var targetHurtString = "%s %s " % [MyTools.getFactionString(targetCard), targetCard.cardName]
+#	if targetDestroyed:
+#		targetHurtString += "was destroyed"
+#	main.addLogMessage(targetHurtString, targetCard.hurtColor)	
 	
-	var attackerHurtString = "%s %s " % [MyTools.getFactionString(attackCard), attackCard.cardName]
-	if attackerDestroyed:
-		attackerHurtString += "was destroyed"
-	main.addLogMessage(attackerHurtString, attackCard.hurtColor)	
+#	var attackerHurtString = "%s %s " % [MyTools.getFactionString(attackCard), attackCard.cardName]
+#	if attackerDestroyed:
+#		attackerHurtString += "was destroyed"
+#	main.addLogMessage(attackerHurtString, attackCard.hurtColor)	
 	
 	
-	#### RETURN WHETHER ATTACKER IS DESTROYED -> WHY?
-	return attackerDestroyed
+#	#### RETURN WHETHER ATTACKER IS DESTROYED -> WHY?
+#	return attackerDestroyed
 
 
 
