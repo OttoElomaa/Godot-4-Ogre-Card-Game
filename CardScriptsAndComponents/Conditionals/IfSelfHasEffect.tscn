@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://couubh5lnpesh"]
+
+[ext_resource type="Script" uid="uid://cegjcxgs6rljr" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_self_has_effect.gd" id="1_m5233"]
+
+[node name="IfSelfHasEffect" type="Node"]
+script = ExtResource("1_m5233")
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

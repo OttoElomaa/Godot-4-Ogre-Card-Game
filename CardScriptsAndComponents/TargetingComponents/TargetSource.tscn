@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg7fx1wcu8142"]
+
+[ext_resource type="Script" uid="uid://3f4pew5wpn8n" path="res://CardScriptsAndComponents/TargetingComponents/Scripts/TargetSource.gd" id="1_rtw56"]
+
+[node name="TargetSource" type="Node2D"]
+script = ExtResource("1_rtw56")
+metadata/_custom_type_script = "uid://3f4pew5wpn8n"

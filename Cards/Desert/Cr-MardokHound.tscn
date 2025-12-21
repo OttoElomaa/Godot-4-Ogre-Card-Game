@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_x2mhe"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_yul8c"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="3_dfey6"]
-[ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/CombatTargeting.tscn" id="5_tsj0e"]
+[ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/BattleArtTargeting.tscn" id="5_tsj0e"]
 [ext_resource type="Texture2D" uid="uid://dvh2f61ch7mdy" path="res://Art/CardArt/Desert/card-art-ur-hound.jpg" id="6_tsj0e"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_aop4y"]

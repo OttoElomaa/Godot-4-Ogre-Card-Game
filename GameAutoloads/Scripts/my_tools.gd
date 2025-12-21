@@ -165,9 +165,9 @@ func handleDrawCard(isEnemy:bool):
 
 
 
-func changeMana(amount:int, isEnemy:bool):
+func changeMana(amount:int, isEnemy:bool) -> bool:
 	print('Generated ', amount, ' mana')
-	gameBoard.changeMana(amount, isEnemy)
+	return gameBoard.changeMana(amount, isEnemy)
 
 
 func changeHealth(amount:int, isEnemy:bool):

@@ -61,6 +61,11 @@ func activate(params:SignalParams) -> bool:
 		targets.append(params.targetCard)
 		success = await activateSkillAfterTargeting(targets)
 	
+	elif targetingComponent is SourceTargetingComponent:
+		var targets: Array = []
+		targets.append(params.sourceCard)
+		success = await activateSkillAfterTargeting(targets)
+	
 	elif targetingComponent is SelfTargetingComponent:
 		var targets:Array = []
 		targets.append(myCard)

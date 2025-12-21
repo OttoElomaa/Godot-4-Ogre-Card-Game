@@ -25,10 +25,9 @@ func activate(targets:Array) -> bool:
 		var value = alterOwnerMana
 		if isScaled():
 			value = get_scaling({})
-		MyTools.changeMana(value, myCard.isEnemyCard)
-		MyTools.createCombatLogPrintout(str('You gain ', value, ' mana.'), Color.STEEL_BLUE)
-		
-		success = true
+		if MyTools.changeMana(value, myCard.isEnemyCard):
+			MyTools.createCombatLogPrintout(str('You gain ', value, ' mana.'), Color.STEEL_BLUE)
+			success = true
 
 	#### ALTER OWNER RESOURCES
 	if alterOpponentHealth != 0:
@@ -42,9 +41,10 @@ func activate(targets:Array) -> bool:
 		var value = alterOpponentMana
 		if isScaled():
 			value = get_scaling({})
-		MyTools.changeMana(value, !myCard.isEnemyCard)
-		MyTools.createCombatLogPrintout(str('The enemy gains ', value, ' mana.'), Color.ORANGE)
-		success = true
+		if MyTools.changeMana(value, !myCard.isEnemyCard):
+			MyTools.createCombatLogPrintout(str('The enemy gains ', value, ' mana.'), Color.ORANGE)
+			success = true
+			
 
 		
 	#### TARGETED ACTIONS

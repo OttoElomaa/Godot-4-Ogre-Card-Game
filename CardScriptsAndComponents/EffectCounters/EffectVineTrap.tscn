@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3 uid="uid://ck2p0tpm31kyj"]
+
+[ext_resource type="Script" uid="uid://5c42sqov344m" path="res://CardScriptsAndComponents/Scripts/effect_counter.gd" id="1_3twli"]
+[ext_resource type="Script" uid="uid://bs5kjnljmmys" path="res://CardScriptsAndComponents/Triggers/Scripts/Trigger.gd" id="2_tls5v"]
+[ext_resource type="PackedScene" uid="uid://cn0a82cmfvbid" path="res://CardScriptsAndComponents/Conditionals/IfFoe.tscn" id="3_pwjkx"]
+[ext_resource type="PackedScene" uid="uid://couubh5lnpesh" path="res://CardScriptsAndComponents/Conditionals/IfSelfHasEffect.tscn" id="4_13yjd"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="5_or8dw"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="6_8v64x"]
+[ext_resource type="PackedScene" uid="uid://dg7fx1wcu8142" path="res://CardScriptsAndComponents/TargetingComponents/TargetSource.tscn" id="7_6ynr1"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="8_uyejd"]
+[ext_resource type="PackedScene" uid="uid://cvl306ch72ymq" path="res://CardScriptsAndComponents/Actions/SkillChangeEffectStacks.tscn" id="9_ftjhi"]
+[ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="10_pwjkx"]
+
+[node name="EffectVineTrap" type="Node2D"]
+script = ExtResource("1_3twli")
+effectType = 1
+max_counter = 4
+isPermanent = true
+id = "Vine Trap"
+description = "Buff. If an enemy card arrives while an ally has Vine Trap, 1 stack is used up to inflict 2 damage on the card."
+metadata/_custom_type_script = "uid://5c42sqov344m"
+
+[node name="FoeArrivalTrigger" type="Node" parent="."]
+script = ExtResource("2_tls5v")
+triggered_when = "arrival"
+situation_text = "Enemy Arrival"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"
+
+[node name="IfFoe" parent="FoeArrivalTrigger" instance=ExtResource("3_pwjkx")]
+
+[node name="IfSelfHasEffect" parent="FoeArrivalTrigger" instance=ExtResource("4_13yjd")]
+effect_id = "Vine Trap"
+
+[node name="CardAction" type="Node2D" parent="FoeArrivalTrigger"]
+script = ExtResource("5_or8dw")
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillAlterHealth" parent="FoeArrivalTrigger/CardAction" instance=ExtResource("6_8v64x")]
+corrode = 2
+
+[node name="TargetSource" parent="FoeArrivalTrigger/CardAction" instance=ExtResource("7_6ynr1")]
+
+[node name="CardAction2" type="Node2D" parent="FoeArrivalTrigger"]
+script = ExtResource("5_or8dw")
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="TargetSelf" parent="FoeArrivalTrigger/CardAction2" instance=ExtResource("8_uyejd")]
+
+[node name="SkillChangeEffectStacks" parent="FoeArrivalTrigger/CardAction2" instance=ExtResource("9_ftjhi")]
+effectID = "Vine Trap"
+amount = -1
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("10_pwjkx")

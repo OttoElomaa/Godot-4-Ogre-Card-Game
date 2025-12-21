@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://bl47bd1r1tcdm"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m871f"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_m8l2f"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_m871f"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="5_vaeiv"]
+[ext_resource type="PackedScene" uid="uid://ck2p0tpm31kyj" path="res://CardScriptsAndComponents/EffectCounters/EffectVineTrap.tscn" id="6_m8l2f"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="7_21wop"]
+[ext_resource type="PackedScene" uid="uid://hgfd7t0eywau" path="res://CardScriptsAndComponents/Triggers/OnSelfArrivalTrigger.tscn" id="8_nbqp0"]
+[ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="8_qu13p"]
+[ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="9_m8l2f"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xknej"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3twyr"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_xknej")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8vup"]
+resource_local_to_scene = true
+shader = ExtResource("2_m8l2f")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_3twyr")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-Liana_Man" instance=ExtResource("1_m871f")]
+material = SubResource("ShaderMaterial_u8vup")
+cardName = "Liana Man"
+subTypeStr = "Wild Vineman"
+group = 4
+flavorText = "\"If any of you see a comeling's slinking, extend thine arms, and beat it and smother!\""
+manaCost = 4
+startingDamage = 1
+startingHealth = 3
+action_mode = 2
+will_not_charge = true
+
+[node name="OnSelfArrivalTrigger" parent="Actions" index="0" instance=ExtResource("8_nbqp0")]
+
+[node name="CardAction" type="Node2D" parent="Actions/OnSelfArrivalTrigger" index="1"]
+script = ExtResource("5_vaeiv")
+customActionText = "Gains 2 Vine Trap."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillEffectCounters" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("5_m871f")]
+grantEffect = ExtResource("6_m8l2f")
+grantAmount = 2
+
+[node name="TargetSelf" parent="Actions/OnSelfArrivalTrigger/CardAction" index="1" instance=ExtResource("7_21wop")]
+
+[node name="OnCastTrigger" parent="Actions" index="1" instance=ExtResource("8_qu13p")]
+
+[node name="CardAction2" type="Node2D" parent="Actions/OnCastTrigger" index="0"]
+script = ExtResource("5_vaeiv")
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction2" index="0" instance=ExtResource("9_m8l2f")]
+alterOwnerMana = -4
+
+[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="1"]
+script = ExtResource("5_vaeiv")
+customActionText = "Pay 4 Mana to gain 2 Vine Trap."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("5_m871f")]
+grantEffect = ExtResource("6_m8l2f")
+grantAmount = 2
+
+[node name="TargetSelf" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("7_21wop")]

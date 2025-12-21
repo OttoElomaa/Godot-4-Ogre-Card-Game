@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dilmjajwoxlex"]
+
+[ext_resource type="Script" uid="uid://3f4pew5wpn8n" path="res://CardScriptsAndComponents/TargetingComponents/Scripts/TargetSource.gd" id="1_xpa2h"]
+
+[node name="DefenderTarget" type="Node2D"]
+script = ExtResource("1_xpa2h")
+metadata/_custom_type_script = "uid://3f4pew5wpn8n"

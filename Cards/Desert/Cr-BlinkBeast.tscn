@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://n1kqgxe3iukd" path="res://Art/CardArt/card-art-creature-blinkbeast.jpg" id="2_o7m1v"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_tck54"]
 [ext_resource type="PackedScene" uid="uid://dxa0yse2tdcgv" path="res://CardScriptsAndComponents/Actions/SkillRestAndTravel.tscn" id="3_qriay"]
-[ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/CombatTargeting.tscn" id="5_e0r5v"]
+[ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/BattleArtTargeting.tscn" id="5_e0r5v"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_q2oda"]
 resource_local_to_scene = true

@@ -135,9 +135,16 @@ func toggleCardActionMenu(enable:bool, card:Card):
 func changeMana(amount:int, isEnemy:bool):
 	
 	if isEnemy:
-		$BattleSystem.enemyMana += amount
+		if not amount > $BattleSystem.enemyMana:
+			$BattleSystem.enemyMana += amount
+		else:
+			return false
 	else:
-		$BattleSystem.playerMana += amount
+		if not amount > $BattleSystem.playerMana:
+			$BattleSystem.playerMana += amount
+		else:
+			return false
+	return true
 
 
 func changeHealth(amount:int, isEnemy:bool):
