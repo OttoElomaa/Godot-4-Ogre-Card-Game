@@ -21,6 +21,7 @@ func initialize():
 #	$AnimationPlayer.advance(randf_range(0, 13))
 
 func random_card() -> Card:
+	assert(not GameInfo.all_cards.is_empty(), "Why empty??")
 	return GameInfo.all_cards[randi_range(0, GameInfo.all_cards.size() - 1)]
 
 func screen_side_left():

@@ -48,10 +48,9 @@ func _ready() -> void:
 
 func _input(e: InputEvent) -> void:
 	
-	if e is InputEventMouseButton: 
-		if e.is_pressed():
-			if e.button_index == MOUSE_BUTTON_LEFT:
-				inputFetchIcons()
+	if e.is_action_pressed("LMB"):
+		#if e.button_index == MOUSE_BUTTON_LEFT:
+		inputFetchIcons()
 
 
 func inputFetchIcons():	

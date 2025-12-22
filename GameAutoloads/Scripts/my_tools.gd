@@ -23,23 +23,9 @@ func gameBoardSetup(gameBoard:GameBoard):
 	self.cardsManager = gameBoard.cardsManager
 	self.battleSystem = gameBoard.battleSystem
 
+
 func get_all_game_cards():
-	var path = 'res://Cards/City/'
-	for file in DirAccess.get_files_at(path):
-		var new_card = load(str(path, file))
-		GameInfo.all_cards.append(new_card.instantiate())
-	path = 'res://Cards/Desert/'
-	for file in DirAccess.get_files_at(path):
-		var new_card = load(str(path, file))
-		GameInfo.all_cards.append(new_card.instantiate())
-	path = 'res://Cards/Outcasts/'
-	for file in DirAccess.get_files_at('res://Cards/Outcasts/'):
-		var new_card = load(str(path, file))
-		GameInfo.all_cards.append(new_card.instantiate())
-	path = 'res://Cards/GreenDefiance/'
-	for file in DirAccess.get_files_at('res://Cards/GreenDefiance/'):
-		var new_card = load(str(path, file))
-		GameInfo.all_cards.append(new_card.instantiate())
+	return $CardLoader.createAllCardsByAmount(1)
 
 
 func checkNodeValidity(node) -> bool:
@@ -252,9 +238,12 @@ func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
 
 
 
-func createGenericPlayerDeck():
+func createGenericPlayerDeck() -> Array:
 	return $CardLoader.createDesertDeck()
 
+func createAllCardsByAmount(amount:int) -> Array:
+	return $CardLoader.createAllCardsByAmount(amount)
+	
 	
 
 func createCombatLogPrintout(text:String, color:Color):

@@ -63,16 +63,16 @@ func _ready() -> void:
 		card.setup(self)
 		card.show()
 	
-	#### SETUP ENEMY CARDS
-#	var enemyDeckCards:Array = GameInfo.enemyDeckCards
-#	
-#	for card:Card in enemyDeckCards:
-#		if card.is_inside_tree():
-#			card.reparent($CardsManager/EnemyDeck)
-#		else:
-#			$CardsManager/EnemyDeck.add_child(card)
-#		card.setup(self)
-#		card.show()
+	### SETUP ENEMY CARDS
+	var enemyDeckCards:Array = GameInfo.enemyDeckCards
+	
+	for card:Card in enemyDeckCards:
+		if card.is_inside_tree():
+			card.reparent($CardsManager/EnemyDeck)
+		else:
+			$CardsManager/EnemyDeck.add_child(card)
+		card.setup(self)
+		card.show()
 	
 	$CardsManager.setup(self)
 	
