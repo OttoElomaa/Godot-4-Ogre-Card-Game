@@ -4,8 +4,8 @@ class_name GameBoard
 
 
 
-@onready var cardsManager := $CardsManager
-@onready var battleSystem := $BattleSystem
+@onready var cardsManager : CardsManager = $CardsManager
+@onready var battleSystem : BattleSystem = $BattleSystem
 
 @onready var cameraMainBoard := $CameraMainBoard
 
@@ -18,7 +18,7 @@ enum CardStates {
 	DECK, HAND, BOARD, GRAVEYARD
 }
 
-var boardName := "Old Ruins"
+@export var boardName := "Old Ruins"
 
 var actionMenuCard: Card = null
 
@@ -29,6 +29,7 @@ enum AI_personalities {
 }
 
 ## How the enemy AI will behave.
+@export_category("AI")
 @export var AI_personality = AI_personalities.COMMANDER
 
 func _ready() -> void:
@@ -63,19 +64,18 @@ func _ready() -> void:
 		card.show()
 	
 	#### SETUP ENEMY CARDS
-	var enemyDeckCards:Array = GameInfo.enemyDeckCards
-	
-	for card:Card in enemyDeckCards:
-		if card.is_inside_tree():
-			card.reparent($CardsManager/EnemyDeck)
-		else:
-			$CardsManager/EnemyDeck.add_child(card)
-		card.setup(self)
-		card.show()
+#	var enemyDeckCards:Array = GameInfo.enemyDeckCards
+#	
+#	for card:Card in enemyDeckCards:
+#		if card.is_inside_tree():
+#			card.reparent($CardsManager/EnemyDeck)
+#		else:
+#			$CardsManager/EnemyDeck.add_child(card)
+#		card.setup(self)
+#		card.show()
 	
 	$CardsManager.setup(self)
 	
-
 	###################################################
 	#### UI STUFF
 	updateUi($BattleSystem.turnCount)
@@ -96,8 +96,22 @@ func _unhandled_input(e: InputEvent) -> void:
 			if States.gameState == States.GameStates.CARD_ACT_MENU:
 				toggleCardActionMenu(false, null)
 
+func add_card_to_enemy_deck(card:Card):
+		if card.is_inside_tree():
+			card.reparent($CardsManager/EnemyDeck)
+		else:
+			$CardsManager/EnemyDeck.add_child(card)
+		card.setup(self)
+		card.show()
 
+func add_card_to_random_slot(card:Card, isEnemyCard:bool):
+	var empty_slots = MyTools.findEmptyCardSlots(isEnemyCard)
+	var slot = empty_slots.pick_random()
+	cardsManager.handlePlaceCardInSlot(card, slot)
 
+func turn_1_init():
+	cardsManager.dealEnemyHand()
+	cardsManager.dealPlayerHand()
 
 func toggleCardActionMenu(enable:bool, card:Card):
 	

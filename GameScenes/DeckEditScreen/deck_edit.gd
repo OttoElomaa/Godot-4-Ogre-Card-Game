@@ -8,12 +8,8 @@ extends Node2D
 func _ready():
 	create_containers()
 	activeCardsContainer.connect("updated", create_containers)
-	activeCardsContainer.connect("card_mouse_entered", show_info)
-	activeCardsContainer.connect("card_mouse_exited", hide_info)
 	ownedCardsContainer.connect("updated", create_containers)
-	ownedCardsContainer.connect("card_mouse_entered", show_info)
-	ownedCardsContainer.connect("card_mouse_exited", hide_info)
-	
+
 func create_containers():
 	#### EMPTY THE CARD LISTS BEFORE FILLING THEM
 	for child in activeCardsContainer.get_children():
@@ -26,6 +22,7 @@ func create_containers():
 		var new_cont = CardContainer.instantiate()
 		ownedCardsContainer.add_child(new_cont)
 		new_cont.insert_card(i)
+		new_cont.infoPanel = cardInfoPanel
 	for i in GameInfo.playerDeckCards:
 		var new_cont = CardPanel.instantiate()
 		new_cont.card = i
@@ -34,11 +31,6 @@ func create_containers():
 	$"CanvasLayer/NinePatchRect/VBoxContainer/PanelContainer/#CardsInDeck".text = str(GameInfo.playerDeckCards.size(), " / 10")
 	#$ProceedButton.disabled = GameInfo.playerDeckCards.size() < 10
 
-func show_info(card):
-	cardInfoPanel.toggleCardInfo(true, card)
-
-func hide_info():
-	cardInfoPanel.toggleCardInfo(false, null)
 
 func _on_proceed_button_button_up():
 	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/GameBoard/GameBoard.tscn")

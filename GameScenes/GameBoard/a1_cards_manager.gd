@@ -38,8 +38,6 @@ func _ready() -> void:
 func setup(gameBoard):
 	self.main = gameBoard
 	self.battleSystem = main.battleSystem
-	dealPlayerHand()
-	dealEnemyHand()
 	
 
 func dealPlayerHand():

@@ -20,6 +20,7 @@ func create_containers():
 		var new_cont = BestiaryContainer.instantiate()
 		BestiaryCardsContainer.add_child(new_cont)
 		new_cont.insert_card(i)
+		new_cont.infoPanel = cardInfoPanel
 
 func show_info(card:Card):
 	cardInfoPanel.toggleCardInfo(true, card)

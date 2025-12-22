@@ -1,8 +1,9 @@
 extends CardContainer
 
-func _on_mouse_entered():
-	get_parent().card_mouse_entered.emit(card)
+var infoPanel = null
 
+func _on_mouse_entered():
+	infoPanel.toggleCardInfo(true, card)
 
 func _on_mouse_exited():
-	get_parent().card_mouse_exited.emit()
+	infoPanel.toggleCardInfo(false, card)

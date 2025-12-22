@@ -4,4 +4,5 @@
 [ext_resource type="Script" uid="uid://dce3fx7be3af3" path="res://GameScenes/Compendium/bestiary_container.gd" id="2_f8hbt"]
 
 [node name="CardContainer" instance=ExtResource("1_f8hbt")]
+z_index = 1
 script = ExtResource("2_f8hbt")

@@ -84,7 +84,7 @@ func buttonPressedStartMatch() -> void:
 func buttonPressedGoToWorld() -> void:
 	bestiaryVisible = false
 	var newZone:Node = ZoneScene.instantiate()
-	SceneSwitcher.switchToNewScene(newZone, self)
+	SceneSwitcher.switchToNewScene(newZone)
 	#get_tree().change_scene_to_packed(ZoneScene)
 
 

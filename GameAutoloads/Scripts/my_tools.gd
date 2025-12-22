@@ -85,6 +85,7 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 #### LIKE TRANSFORMING ONE CARD INTO A NEW ONE
 func createTempCard(card:Card):
 	add_child(card)
+	await get_tree().process_frame
 
 func removeTempCard(card:Card):
 	remove_child(card)
@@ -153,7 +154,7 @@ func getCollidedObject(result):
 
 func handleCardHover(isHovering:bool, card:Card):
 	if States.gameState == States.GameStates.BESTIARY:
-		card.mainMenu.toggleCardInfo(isHovering, card)
+		card.mainMenu.toggleCardInfo(card)
 	else:
 		cardsManager.toggleCardHover(isHovering, card)
 	

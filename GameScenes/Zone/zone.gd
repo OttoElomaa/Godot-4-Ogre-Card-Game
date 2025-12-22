@@ -4,6 +4,7 @@ extends Node2D
 @export var zoneName := "The Lands"
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
+@onready var cardContainer:PackedScene = preload("res://GameScenes/Compendium/BestiaryContainer.tscn")
 
 ##################################
 
@@ -12,7 +13,6 @@ extends Node2D
 @onready var heroNameLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox/HeroNameLabel
 @onready var gloryAmountLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox/GloryAmountLabel
 @onready var heroPortrait:TextureRect = $CanvasLayer/PlayerInfoPanel/VBox/PanelContainer/HeroPortrait 
-@onready var levelSelect = $Map_Screen/SubViewportContainer/CanvasLayer2/LevelSelect
 
 @onready var actionButtonsHbox:HBoxContainer = $CanvasLayer/BottomActions/VBox/ButtonsHBox
 
@@ -32,9 +32,6 @@ var actionDescLabel:Label:
 
 func _ready() -> void:
 	
-	levelSelect.zoom = Vector2(2.0, 2.0)
-	
-	zoneName = levelSelect.character_position.index
 	zoneNameLabel.text = zoneName
 	
 	heroNameLabel.text = GameInfo.heroName
@@ -44,7 +41,7 @@ func _ready() -> void:
 	for actionButton in actionButtonsHbox.get_children():
 		actionButton.setup(self)
 	
-	for gameBoard in $GameBoards.get_children():
+	for gameBoard in $Zones/GameBoards.get_children():
 		gameBoard.setup(self)
 	
 
@@ -55,8 +52,6 @@ func _input(e: InputEvent) -> void:
 		if e.is_pressed():
 			if e.button_index == MOUSE_BUTTON_LEFT:
 				inputFetchIcons()
-
-
 
 
 func inputFetchIcons():	
@@ -76,7 +71,7 @@ func startBoardMatch(icon:Node):
 	GameInfo.playerDeckCards = MyTools.createGenericPlayerDeck()
 	
 	var newBoard:Node = GameBoardScene.instantiate()
-	SceneSwitcher.switchToNewScene(newBoard, self)
+	SceneSwitcher.switchToNewScene(newBoard)
 
 func updateActionDescription(name:String, desc:String):
 
@@ -96,7 +91,6 @@ func buttonPressedExitGame() -> void:
 	get_tree().quit()
 
 
-
 func startGameBoardBattle(enemyCards:Array):
 	
 	GameInfo.enemyDeckCards = enemyCards
@@ -105,3 +99,18 @@ func startGameBoardBattle(enemyCards:Array):
 func buttonPressedTravel():
 	
 	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/TravelMap/travel_screen.tscn")
+
+func openPrebattle(b_node:Node2D):
+	var enemyCards = $PreBattleWindow/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/EnemyCards
+	$PreBattleWindow.show()
+	for child in enemyCards.get_children():
+		queue_free()
+	for i in b_node.deck_cards:
+		var container = cardContainer.instantiate()
+		enemyCards.add_child(container)
+		container.display_card(i)
+		container.infoPanel = $PreBattleWindow/CardInfoPanel
+	$PreBattleWindow/MarginContainer/PanelContainer/VBoxContainer/GB_Comments.text = b_node.board_comments
+		
+func closePrebattle():
+	$PreBattleWindow.hide()

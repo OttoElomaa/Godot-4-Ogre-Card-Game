@@ -1,28 +1,23 @@
-[gd_scene load_steps=26 format=3 uid="uid://ctrvsaptdulhm"]
+[gd_scene load_steps=21 format=3 uid="uid://ctrvsaptdulhm"]
 
 [ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/Zone/zone.gd" id="1_fjd6i"]
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBoardIcon.tscn" id="2_rmpmb"]
-[ext_resource type="PackedScene" uid="uid://dtps2wa815evx" path="res://Cards/Desert/Cr-Alhaja-Bheith-Nochti.tscn" id="3_f6as4"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="3_xt5s7"]
-[ext_resource type="PackedScene" uid="uid://dk4etb0x0xce3" path="res://Cards/City/Cr-Kalasirios.tscn" id="4_13exd"]
+[ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="4_87jt2"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="4_588s3"]
-[ext_resource type="PackedScene" uid="uid://qd3ll6tcjlep" path="res://Cards/Desert/Cr-Outrider.tscn" id="5_gp5ld"]
+[ext_resource type="PackedScene" uid="uid://cnmsayr5lqvem" path="res://Cards/GreenDefiance/Cr-BriarFolk.tscn" id="4_s5tl3"]
+[ext_resource type="PackedScene" uid="uid://bl47bd1r1tcdm" path="res://Cards/GreenDefiance/cr_liana_man.tscn" id="5_87jt2"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="5_yhj0w"]
-[ext_resource type="PackedScene" uid="uid://ufufchgvc1q8" path="res://Cards/Desert/Cr-Tugar.tscn" id="6_4coas"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="6_4x05h"]
-[ext_resource type="PackedScene" uid="uid://l3rpd1xyh67i" path="res://Cards/Desert/Cr-Ogre.tscn" id="7_47oou"]
+[ext_resource type="PackedScene" uid="uid://bews6x4fcf3mr" path="res://Cards/Desert/Ri-Blast.tscn" id="7_5rm82"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="7_xt5s7"]
-[ext_resource type="PackedScene" uid="uid://ctjoy83adq33o" path="res://Cards/Desert/Cr-SlaghRider.tscn" id="8_4t6do"]
 [ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="8_588s3"]
-[ext_resource type="PackedScene" uid="uid://c8h8fv1enpgpb" path="res://Cards/GreenDefiance/Cr-DeathKnight.tscn" id="9_8633n"]
-[ext_resource type="PackedScene" uid="uid://cqej1t0pa88fs" path="res://Cards/Desert/Cr-Janin-bargainer.tscn" id="10_yxxtt"]
+[ext_resource type="PackedScene" uid="uid://dvy7elkjsgcxn" path="res://Cards/GreenDefiance/ri_knell.tscn" id="8_umgh5"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_bxjdc"]
-[ext_resource type="PackedScene" uid="uid://dnvgrx8n5noeh" path="res://Cards/Desert/Cr-BlinkBeast.tscn" id="11_kqd17"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
-[ext_resource type="PackedScene" uid="uid://dvshdygyjpncb" path="res://Cards/Desert/Cr-Alhaja-Pious.tscn" id="12_01ekw"]
-[ext_resource type="PackedScene" uid="uid://c7v3m7qb227jv" path="res://Cards/Outcasts/Cr-RukRaider.tscn" id="13_k47wg"]
 [ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="15_4t6do"]
-[ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/TravelMap/level_select.tscn" id="23_4t6do"]
+[ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="17_umgh5"]
+[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="18_vu8fe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
 bg_color = Color(0.947752, 0.911757, 0.861921, 1)
@@ -42,7 +37,7 @@ border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
 [node name="Zone" type="Node2D"]
 script = ExtResource("1_fjd6i")
-zoneName = "The Eastern Desert"
+zoneName = "The Vineyards"
 
 [node name="Map_Screen" type="MarginContainer" parent="."]
 show_behind_parent = true
@@ -53,53 +48,60 @@ offset_top = -402.0
 offset_right = 588.0
 offset_bottom = 230.0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Map_Screen"]
-z_index = -5
-layout_mode = 2
-stretch = true
-mouse_target = true
+[node name="Zones" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer2" type="SubViewport" parent="Map_Screen/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 4
+[node name="GameBoards" type="Node2D" parent="Zones"]
+position = Vector2(1012, 654)
 
-[node name="LevelSelect" parent="Map_Screen/SubViewportContainer/CanvasLayer2" instance=ExtResource("23_4t6do")]
-visible = false
-position = Vector2(-21, 13)
-
-[node name="GameBoards" type="Node2D" parent="."]
-
-[node name="Board1" parent="GameBoards" instance=ExtResource("2_rmpmb")]
+[node name="Board1" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
 top_level = true
 z_index = 6
-position = Vector2(0, -250)
-card1 = ExtResource("3_f6as4")
-card2 = ExtResource("4_13exd")
-card3 = ExtResource("5_gp5ld")
-card4 = ExtResource("6_4coas")
+position = Vector2(975, 333)
+board_name = "Vineyards"
+game_board = ExtResource("4_87jt2")
+board_comments = "Raging Vinemen skitter among shadoofs! 
+Beware -- they possess a vile Ritual!"
+deck_cards = Dictionary[PackedScene, int]({
+ExtResource("4_s5tl3"): 4,
+ExtResource("5_87jt2"): 3,
+ExtResource("7_5rm82"): 2,
+ExtResource("8_umgh5"): 4
+})
+presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
+enemy_presummon = true
+presummon_sparcity = 2
 
-[node name="Board2" parent="GameBoards" instance=ExtResource("2_rmpmb")]
+[node name="Board2" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
 position = Vector2(406, -18)
-card1 = ExtResource("4_13exd")
-card2 = ExtResource("7_47oou")
-card3 = ExtResource("8_4t6do")
-card4 = ExtResource("9_8633n")
 
-[node name="Board3" parent="GameBoards" instance=ExtResource("2_rmpmb")]
+[node name="Board3" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
 position = Vector2(-416, -19)
-card1 = ExtResource("10_yxxtt")
-card2 = ExtResource("11_kqd17")
-card3 = ExtResource("12_01ekw")
-card4 = ExtResource("13_k47wg")
 
-[node name="MapArt" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(0, -130)
-scale = Vector2(0.7, 0.7)
+[node name="Map" type="MarginContainer" parent="Zones"]
+z_index = -3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Zones/Map"]
+layout_mode = 2
+texture = ExtResource("11_qjauh")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Zones/Map"]
+layout_mode = 2
 texture = ExtResource("15_4t6do")
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2(-960, -540)
@@ -111,9 +113,10 @@ custom_minimum_size = Vector2(500, 120)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -157.0
-offset_right = 157.0
-offset_bottom = 76.0
+offset_left = 711.0
+offset_top = 547.0
+offset_right = 1211.0
+offset_bottom = 667.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -145,8 +148,10 @@ horizontal_alignment = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
+offset_left = 721.0
+offset_top = 547.0
+offset_right = 961.0
+offset_bottom = 667.0
 grow_horizontal = 0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -169,29 +174,12 @@ layout_mode = 2
 theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
 
-[node name="IdkTest" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/IdkTest"]
-layout_mode = 2
-texture = ExtResource("11_qjauh")
-patch_margin_left = 7
-patch_margin_top = 7
-patch_margin_right = 7
-patch_margin_bottom = 7
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-metadata/_edit_lock_ = true
-
 [node name="PlayerInfoPanel" type="MarginContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(400, 0)
-offset_right = 380.0
-offset_bottom = 520.0
+offset_left = 961.0
+offset_top = 547.0
+offset_right = 1361.0
+offset_bottom = 1067.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -274,9 +262,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+offset_left = 361.0
+offset_top = 263.0
+offset_right = 1561.0
+offset_bottom = 547.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -423,6 +412,60 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
+
+[node name="PreBattleWindow" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="PreBattleWindow"]
+z_index = 4
+offset_left = 377.0
+offset_top = 31.0
+offset_right = 1553.0
+offset_bottom = 901.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="PreBattleWindow/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_xt5s7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PreBattleWindow/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Prepare_For_Battle!" type="Label" parent="PreBattleWindow/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("17_umgh5")
+text = "Prepare for battle!
+"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PreBattleWindow/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="EnemyCards" type="HBoxContainer" parent="PreBattleWindow/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="GB_Comments" type="Label" parent="PreBattleWindow/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "You're getting kicked!"
+label_settings = ExtResource("4_588s3")
+
+[node name="CardInfoPanel" parent="PreBattleWindow" instance=ExtResource("18_vu8fe")]
+z_index = 5
+offset_left = 1064.0
+offset_top = 187.0
+offset_right = 1464.0
+offset_bottom = 787.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
 
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="buttonPressedExitGame"]
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize" method="buttonMouseEntered"]

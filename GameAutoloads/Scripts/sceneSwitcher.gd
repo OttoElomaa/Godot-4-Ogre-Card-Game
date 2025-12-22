@@ -15,8 +15,8 @@ func _ready() -> void:
 func getCurrentScene():
 	return get_tree().root.get_children()[sceneTree.root.get_children().size() - 1]
 
-func switchToNewScene(newSceneB:Node, currScene:Node):
-	
+func switchToNewScene(newSceneB:Node):
+	var currScene = getCurrentScene()
 	print("Switching to a new scene.")
 	print("From: " + currScene.name)
 	print("To: " + newSceneB.name)
@@ -24,8 +24,10 @@ func switchToNewScene(newSceneB:Node, currScene:Node):
 	storedSceneB = currScene
 	currentSceneA = newSceneB
 	
-	sceneTree.root.add_child.call_deferred(newSceneB)
-	sceneTree.current_scene = newSceneB
+	if newSceneB.is_inside_tree():
+		newSceneB.reparent.call_deferred(sceneTree.root)
+	else:
+		sceneTree.root.add_child.call_deferred(newSceneB)
 	sceneTree.root.remove_child.call_deferred(storedSceneB)
 
 func switchToNewSceneFromFile(path:String):

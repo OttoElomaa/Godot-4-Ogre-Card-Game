@@ -1,49 +1,76 @@
 extends Node2D
 
-
 var zone:Node = null
 
-@export var card1: PackedScene = null
-@export var card2: PackedScene = null
-@export var card3: PackedScene = null
-@export var card4: PackedScene = null
+var board : GameBoard = null
 
-var deckCards := []
+@export_category('Game Board')
+@export var board_name = '' ##MANDATORY. Shows up during battle.
+@export var game_board:PackedScene = null ##MANDATORY. Determines visuals of the game board.
+@export var ai_personality = GameBoard.AI_personalities.COMMANDER
+@export_multiline var board_comments = '' ##NON-MANDATORY. Describes presummons/other things for the player.
+@export var use_as_is = false ##If set to true, will not generate a deck for the enemy, instead using only what is within the GameBoard file. Good for unique encounters.
 
+@export_category('Random Deck')
 
+@export var deck_cards : Dictionary[PackedScene, int] = {} ## If this is filled, adds [value] of cards in [key] to the deck. 
+@export var presummoned_cards : Array[PackedScene] = [] ## Will summon these cards at the start of battle.
+@export var enemy_presummon = false ## Creates presummonned cards on enemy side.
+@export var ally_presummon = false ## Creates presummoned cards on allied side.
 
-func _ready() -> void:
-	createDeck()
-
+enum presummon_sparsities {FEW, ## 0-1 object.
+	SCARCE, ## 0-2
+	MANY, ## 2-3
+	TONS, ## 3-4
+}
+@export var presummon_sparcity = presummon_sparsities.FEW ## How many objects will be presummoned.
 
 func setup(zone:Node):
 	self.zone = zone
 
 
-
 func createDeck():
-	createDeckTwo(card1)
-	createDeckTwo(card2)
-	createDeckTwo(card3)
-	createDeckTwo(card4)
+	board = game_board.instantiate().duplicate()
+	MyTools.add_child(board)
+	board.boardName = board_name
+	board.AI_personality = ai_personality
 	
-	deckCards.shuffle()
-	
-	
-	
-func createDeckTwo(cardPacked: PackedScene):
-	if not cardPacked:
+	if use_as_is:
+		print('Set to use as is')
 		return
-		
-	var card:Card = cardPacked.instantiate()
-	for i in range(4):
-		var newCard = card.duplicate()
-		deckCards.append(newCard)
 	
+	for key:PackedScene in deck_cards:
+		for i in range(deck_cards[key]):
+			var newCard:Card = key.instantiate().duplicate()
+			board.add_card_to_enemy_deck(newCard)
+	
+	if enemy_presummon:
+		presummon(true)
+	if ally_presummon:
+		presummon(false)
 
-func getDeckCards() -> Array:
-	return deckCards
+	board.turn_1_init()
 
+func presummon(isEnemyCard):
+	var amount : int = 0
+	match presummon_sparcity:
+		presummon_sparsities.FEW:
+			amount = randi_range(0, 1)
+		presummon_sparsities.SCARCE:
+			amount = randi_range(0, 2)
+		presummon_sparsities.MANY:
+			amount = randi_range(1, 3)
+		presummon_sparsities.TONS:
+			amount = randi_range(2, 4)
+	for i in range(amount):
+		var card:Card = presummoned_cards.pick_random().instantiate().duplicate()
+		board.add_card_to_random_slot(card, isEnemyCard)
+
+func enterBattle():
+	SceneSwitcher.switchToNewScene(board)
 
 func mouseEnteredShowBattleInfo() -> void:
-	zone.showBattleInfo(self)
+	pass
+
+func _on_area_2d_input_event(viewport, event, shape_idx):
+	zone.openPrebattle(self)
