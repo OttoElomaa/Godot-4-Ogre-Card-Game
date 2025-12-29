@@ -75,6 +75,7 @@ func _ready() -> void:
 		card.show()
 	
 	$CardsManager.setup(self)
+	turn_1_init()
 	
 	###################################################
 	#### UI STUFF
