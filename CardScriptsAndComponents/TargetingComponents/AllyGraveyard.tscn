@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://hxa2c3jb5ru4"]
 
-[ext_resource type="Script" uid="uid://dk3jm4ajc4d2" path="res://CardScriptsAndComponents/Actions/Scripts/automatic_targeting_component.gd" id="1_8l8eg"]
+[ext_resource type="Script" uid="uid://dk3jm4ajc4d2" path="res://CardScriptsAndComponents/TargetingComponents/Scripts/automatic_targeting_component.gd" id="1_8l8eg"]
 [ext_resource type="PackedScene" uid="uid://bmewfrpb1dqdt" path="res://CardScriptsAndComponents/Conditionals/IfAlly.tscn" id="2_t0o3u"]
 
 [node name="AllyGraveyard" type="Node2D"]

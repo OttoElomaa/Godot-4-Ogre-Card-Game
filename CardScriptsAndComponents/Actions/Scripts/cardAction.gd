@@ -54,7 +54,8 @@ func activate(params:SignalParams) -> bool:
 	#### TURN ON MANUAL TARGETING -> No target selected yet!
 	if targetingComponent is AutoTargetingComponent:
 		var targets:Array = targetingComponent.getTargets()
-		success = await activateSkillAfterTargeting(targets)
+		if not targets.is_empty():
+			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is EnemyTargetingComponent:
 		var targets:Array = []
