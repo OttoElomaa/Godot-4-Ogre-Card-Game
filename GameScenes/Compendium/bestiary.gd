@@ -7,8 +7,8 @@ var BestiaryContainer = preload("res://GameScenes/Compendium/BestiaryContainer.t
 
 func _ready():
 	create_containers()
-	BestiaryCardsContainer.connect("card_mouse_entered", show_info)
-	BestiaryCardsContainer.connect("card_mouse_exited", hide_info)
+	cardInfoPanel.bestiarySetup(self)  #### FOR SHOWING FLAVOR TEXT LABEL HERE
+
 
 func create_containers():
 	#### EMPTY THE CARD LISTS BEFORE FILLING THEM
@@ -22,11 +22,6 @@ func create_containers():
 		new_cont.insert_card(i)
 		new_cont.infoPanel = cardInfoPanel
 
-func show_info(card:Card):
-	cardInfoPanel.toggleCardInfo(true, card)
-	flavorLabel.text = card.flavorText
-	
 
-func hide_info():
-	cardInfoPanel.toggleCardInfo(false, null)
-	flavorLabel.text = ""
+func setFlavorLabelText(flavor:String):
+	flavorLabel.text = flavor
