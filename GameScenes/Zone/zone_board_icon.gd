@@ -25,8 +25,11 @@ enum presummon_sparsities {FEW, ## 0-1 object.
 }
 @export var presummon_sparcity = presummon_sparsities.FEW ## How many objects will be presummoned.
 
+
+
 func setup(zone:Node):
 	self.zone = zone
+
 
 
 func createDeck():
@@ -51,8 +54,12 @@ func createDeck():
 
 	board.turn_1_init()
 
+
+
 func presummon(isEnemyCard):
 	var amount : int = 0
+	
+	#### SPECIFY AMOUNT OF PRE-SUMMONS
 	match presummon_sparcity:
 		presummon_sparsities.FEW:
 			amount = randi_range(0, 1)
@@ -62,15 +69,24 @@ func presummon(isEnemyCard):
 			amount = randi_range(1, 3)
 		presummon_sparsities.TONS:
 			amount = randi_range(2, 4)
+	
+	#### SUMMON THEM
 	for i in range(amount):
 		var card:Card = presummoned_cards.pick_random().instantiate().duplicate()
 		board.add_card_to_random_slot(card, isEnemyCard)
 
+
+
 func enterBattle():
 	SceneSwitcher.switchToNewScene(board)
 
-func mouseEnteredShowBattleInfo() -> void:
-	pass
 
-func _on_area_2d_input_event(viewport, event, shape_idx):
-	zone.openPrebattle(self)
+
+func _on_area_2d_input_event(viewport, event:InputEvent, shape_idx):
+	if event.is_action_pressed("LMB"):
+		zone.openPrebattle(self)
+
+
+func buttonPressed() -> void:
+	#zone.openPrebattle(self)
+	pass
