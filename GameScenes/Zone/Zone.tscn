@@ -311,7 +311,7 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Proselytize" type="MarginContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox"]
+[node name="BuildArmy" type="MarginContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -320,18 +320,18 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("8_588s3")
 description = "Turn others to your cause: Purchase cards native to this land using Glory"
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_xt5s7")
 
-[node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize/Panel"]
+[node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel"]
 layout_mode = 2
-text = "Proselytize -  "
+text = "Build Army"
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
-[node name="ActionPress" type="Button" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize/Panel"]
+[node name="ActionPress" type="Button" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
@@ -352,7 +352,7 @@ theme_override_styles/panel = ExtResource("3_xt5s7")
 
 [node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel"]
 layout_mode = 2
-text = "Scry -  "
+text = "Scry"
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
@@ -377,7 +377,7 @@ theme_override_styles/panel = ExtResource("3_xt5s7")
 
 [node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel"]
 layout_mode = 2
-text = "Travel -  "
+text = "Travel"
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
@@ -402,7 +402,7 @@ theme_override_styles/panel = ExtResource("3_xt5s7")
 
 [node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel"]
 layout_mode = 2
-text = "Battle -  "
+text = "Battle"
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
@@ -414,12 +414,9 @@ theme_override_styles/normal = ExtResource("6_4x05h")
 [node name="PreBattleCanvas" type="CanvasLayer" parent="."]
 
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="buttonPressedExitGame"]
-[connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize" method="buttonMouseEntered"]
-[connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize" method="buttonPressedActivate"]
+[connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy" method="buttonMouseEntered"]
+[connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="." method="buttonPressedDeckEdit"]
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry" method="buttonMouseEntered"]
-[connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry" method="buttonPressedActivate"]
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel" method="buttonMouseEntered"]
 [connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="." method="buttonPressedTravel"]
-[connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel" method="buttonPressedActivate"]
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle" method="buttonMouseEntered"]
-[connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle" method="buttonPressedActivate"]

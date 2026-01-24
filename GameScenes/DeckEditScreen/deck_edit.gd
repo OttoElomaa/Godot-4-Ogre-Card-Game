@@ -5,10 +5,20 @@ extends Node2D
 @onready var activeCardsContainer = $CanvasLayer/NinePatchRect/VBoxContainer/ActiveCardsContainer
 @onready var cardInfoPanel = $CardInfoPanel
 
+
 func _ready():
 	create_containers()
 	activeCardsContainer.connect("updated", create_containers)
 	ownedCardsContainer.connect("updated", create_containers)
+	
+	#### DO WE SHOW "Proceed" BUTTON
+	if GameInfo.isPreBattle:
+		$Buttons/VBox/Proceed.show()	
+	else:
+		$Buttons/VBox/Proceed.hide()
+		
+	
+	
 
 func create_containers():
 	#### EMPTY THE CARD LISTS BEFORE FILLING THEM
@@ -33,4 +43,10 @@ func create_containers():
 
 
 func _on_proceed_button_button_up():
+	GameInfo.isPreBattle = false
 	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/GameBoard/GameBoard.tscn")
+
+
+func _button_up_back_to_world() -> void:
+	GameInfo.isPreBattle = false
+	SceneSwitcher.switchToStoredScene()

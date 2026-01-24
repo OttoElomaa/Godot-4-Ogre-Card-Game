@@ -20,8 +20,6 @@ func setup(zone:Node):
 func updateDescriptionPanel():
 	zone.updateActionDescription(actionName, description)
 
-func buttonPressedActivate() -> void:
-	pass # Replace with function body.
 
 
 func _on_panel_mouse_entered() -> void:

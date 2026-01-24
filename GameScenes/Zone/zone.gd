@@ -3,6 +3,9 @@ extends Node2D
 
 @export var zoneName := "The Lands"
 
+var travelScreenStr := "res://GameScenes/TravelMap/travel_screen.tscn"
+var deck_edit_str := "res://GameScenes/DeckEditScreen/DeckEdit.tscn"
+
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
 @onready var PreBattleScreen: PackedScene = preload("res://GameScenes/Zone/PreBattleWindow.tscn")
@@ -45,9 +48,7 @@ func _ready() -> void:
 	
 	for gameBoard in $Zones/GameBoards.get_children():
 		gameBoard.setup(self)
-	
-	closePrebattle()
-	
+		
 
 
 func _input(e: InputEvent) -> void:
@@ -103,7 +104,13 @@ func startGameBoardBattle(enemyCards:Array):
 
 func buttonPressedTravel():
 	
-	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/TravelMap/travel_screen.tscn")
+	SceneSwitcher.switchToNewSceneFromFile(travelScreenStr)
+
+
+
+func buttonPressedDeckEdit() -> void:
+	GameInfo.isPreBattle = false
+	SceneSwitcher.switchToNewSceneFromFile(deck_edit_str)
 
 
 

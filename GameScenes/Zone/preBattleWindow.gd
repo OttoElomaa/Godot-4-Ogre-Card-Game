@@ -69,4 +69,5 @@ func cancelButtonPressed() -> void:
 
 func fightButtonPressed() -> void:
 	GameInfo.enemyDeckCards = enemyDeck
+	GameInfo.isPreBattle = true
 	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/DeckEditScreen/DeckEdit.tscn")
