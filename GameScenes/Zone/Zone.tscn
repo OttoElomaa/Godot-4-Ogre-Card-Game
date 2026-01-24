@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ctrvsaptdulhm"]
+[gd_scene load_steps=20 format=3 uid="uid://ctrvsaptdulhm"]
 
 [ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/Zone/zone.gd" id="1_fjd6i"]
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBoardIcon.tscn" id="2_rmpmb"]
@@ -16,9 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_bxjdc"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
 [ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="15_4t6do"]
-[ext_resource type="Script" uid="uid://c0l41v4fhd5w5" path="res://GameScenes/Zone/preBattleWindow.gd" id="17_0pdlr"]
-[ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="17_umgh5"]
-[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="18_vu8fe"]
+[ext_resource type="PackedScene" uid="uid://3nu0jpnyx74m" path="res://GameScenes/Zone/PreBattleWindow.tscn" id="17_umgh5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
 bg_color = Color(0.947752, 0.911757, 0.861921, 1)
@@ -416,78 +414,7 @@ theme_override_styles/normal = ExtResource("6_4x05h")
 
 [node name="PreBattleCanvas" type="CanvasLayer" parent="."]
 
-[node name="PreBattleWindow" type="MarginContainer" parent="PreBattleCanvas"]
-z_index = 4
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -588.0
-offset_right = 588.0
-offset_bottom = 870.0
-grow_horizontal = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 20
-script = ExtResource("17_0pdlr")
-
-[node name="MainPanel" type="PanelContainer" parent="PreBattleCanvas/PreBattleWindow"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("3_xt5s7")
-
-[node name="Margin" type="MarginContainer" parent="PreBattleCanvas/PreBattleWindow/MainPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 20
-
-[node name="MainHBox" type="HBoxContainer" parent="PreBattleCanvas/PreBattleWindow/MainPanel/Margin"]
-layout_mode = 2
-theme_override_constants/separation = 150
-alignment = 1
-
-[node name="Left" type="PanelContainer" parent="PreBattleCanvas/PreBattleWindow/MainPanel/Margin/MainHBox"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("6_4x05h")
-
-[node name="VBox" type="VBoxContainer" parent="PreBattleCanvas/PreBattleWindow/MainPanel/Margin/MainHBox/Left"]
-layout_mode = 2
-
-[node name="Prepare_For_Battle!" type="Label" parent="PreBattleCanvas/PreBattleWindow/MainPanel/Margin/MainHBox/Left/VBox"]
-layout_mode = 2
-theme = ExtResource("17_umgh5")
-text = "Prepare for battle!
-"
-horizontal_alignment = 1
-
-[node name="Margin" type="MarginContainer" parent="PreBattleCanvas/PreBattleWindow/MainPanel/Margin/MainHBox/Left/VBox"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 20
-
-[node name="EnemyCards" type="HBoxContainer" parent="PreBattleCanvas/PreBattleWindow/MainPanel/Margin/MainHBox/Left/VBox/Margin"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-
-[node name="GB_Comments" type="Label" parent="PreBattleCanvas/PreBattleWindow/MainPanel/Margin/MainHBox/Left/VBox"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-text = "You're getting kicked!"
-label_settings = ExtResource("4_588s3")
-
-[node name="Filler" type="MarginContainer" parent="PreBattleCanvas/PreBattleWindow/MainPanel/Margin/MainHBox"]
-custom_minimum_size = Vector2(480, 0)
-layout_mode = 2
-
-[node name="CardInfoPanel" parent="PreBattleCanvas/PreBattleWindow/MainPanel/Margin/MainHBox/Filler" instance=ExtResource("18_vu8fe")]
-z_index = 5
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
+[node name="PreBattleWindow" parent="PreBattleCanvas" instance=ExtResource("17_umgh5")]
 
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="buttonPressedExitGame"]
 [connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Proselytize" method="buttonMouseEntered"]

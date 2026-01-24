@@ -2,7 +2,14 @@ extends MarginContainer
 
 @onready var CardContainerScene:PackedScene = preload("res://GameScenes/Compendium/BestiaryContainer.tscn")
 
+@onready var cardInfoPanel := $MainPanel/Margin/MainHBox/Filler/VBox/CardInfoPanel
+@onready var flavorLabel := $MainPanel/Margin/MainHBox/Filler/VBox/FlavorLabel
+@onready var boardCommentsLabel := $MainPanel/Margin/MainHBox/Left/VBox/GB_Comments
 
+
+
+func _ready() -> void:
+	cardInfoPanel.bestiarySetup(self)  #### FOR SHOWING FLAVOR TEXT LABEL HERE
 
 
 func toggleWindow(enable:bool, battleNode:Node):
@@ -17,9 +24,9 @@ func toggleWindow(enable:bool, battleNode:Node):
 			var container = CardContainerScene.instantiate()
 			enemyCardsHolder.add_child(container)
 			container.display_card(card)
-			container.infoPanel = $MainPanel/Margin/MainHBox/Filler/CardInfoPanel
+			container.infoPanel = cardInfoPanel
 			
-		$MainPanel/Margin/MainHBox/Left/VBox/GB_Comments.text = battleNode.board_comments
+		boardCommentsLabel.text = battleNode.board_comments
 	
 	else:
 		hide()
@@ -32,3 +39,8 @@ func clearOldIcons():
 	var enemyCardsHolder = $MainPanel/Margin/MainHBox/Left/VBox/Margin/EnemyCards
 	for card:Card in enemyCardsHolder.get_children():
 		card.queue_free()
+
+
+#### CALLED FROM CardInfoPanel
+func setFlavorLabelText(flavor:String):
+	flavorLabel.text = flavor

@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://3nu0jpnyx74m"]
+
+[ext_resource type="Script" uid="uid://c0l41v4fhd5w5" path="res://GameScenes/Zone/preBattleWindow.gd" id="1_2waxm"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="2_6gtnb"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="3_wykmi"]
+[ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="4_u3657"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="5_gmchg"]
+[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="6_i3hud"]
+[ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="7_6gtnb"]
+
+[node name="PreBattleWindow" type="MarginContainer"]
+z_index = 4
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -588.0
+offset_right = 588.0
+offset_bottom = 870.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_2waxm")
+
+[node name="MainPanel" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_6gtnb")
+
+[node name="Margin" type="MarginContainer" parent="MainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="MainHBox" type="HBoxContainer" parent="MainPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="Left" type="PanelContainer" parent="MainPanel/Margin/MainHBox"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_wykmi")
+
+[node name="VBox" type="VBoxContainer" parent="MainPanel/Margin/MainHBox/Left"]
+layout_mode = 2
+
+[node name="Prepare_For_Battle!" type="Label" parent="MainPanel/Margin/MainHBox/Left/VBox"]
+layout_mode = 2
+theme = ExtResource("4_u3657")
+text = "Prepare for battle!
+"
+horizontal_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="MainPanel/Margin/MainHBox/Left/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="EnemyCards" type="HBoxContainer" parent="MainPanel/Margin/MainHBox/Left/VBox/Margin"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="GB_Comments" type="Label" parent="MainPanel/Margin/MainHBox/Left/VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "You're getting kicked!"
+label_settings = ExtResource("5_gmchg")
+
+[node name="Filler" type="MarginContainer" parent="MainPanel/Margin/MainHBox"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="MainPanel/Margin/MainHBox/Filler"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CardInfoPanel" parent="MainPanel/Margin/MainHBox/Filler/VBox" instance=ExtResource("6_i3hud")]
+z_index = 5
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="FlavorLabel" type="Label" parent="MainPanel/Margin/MainHBox/Filler/VBox"]
+custom_minimum_size = Vector2(370, 0)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Unit flavor text goes here"
+label_settings = ExtResource("7_6gtnb")
+horizontal_alignment = 1
+autowrap_mode = 2
