@@ -5,6 +5,9 @@ extends Node2D
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
+@onready var PreBattleScreen: PackedScene = preload("res://GameScenes/Zone/PreBattleWindow.tscn")
+var preBattleWindow:Node = null
+
 ##################################
 
 @onready var zoneNameLabel:Label = $CanvasLayer/ZoneInfoPanel/Panel/HBox/ZoneNameLabel
@@ -83,6 +86,8 @@ func updateActionDescription(name:String, desc:String):
 
 
 func showBattleInfo(gameBoard:Node):
+	
+	
 	$CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle.updateDescriptionPanel()
 
 
@@ -103,7 +108,11 @@ func buttonPressedTravel():
 
 
 func openPrebattle(b_node:Node2D):
-	$PreBattleCanvas/PreBattleWindow.toggleWindow(true, b_node)
+	preBattleWindow = PreBattleScreen.instantiate()
+	$PreBattleCanvas.add_child(preBattleWindow)
+	preBattleWindow.setup(b_node)
+	
 		
 func closePrebattle():
-	$PreBattleCanvas/PreBattleWindow.toggleWindow(false, null)
+	if preBattleWindow:
+		preBattleWindow.queue_free()

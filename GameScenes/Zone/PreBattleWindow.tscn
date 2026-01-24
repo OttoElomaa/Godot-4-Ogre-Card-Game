@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://3nu0jpnyx74m"]
+[gd_scene load_steps=9 format=3 uid="uid://3nu0jpnyx74m"]
 
 [ext_resource type="Script" uid="uid://c0l41v4fhd5w5" path="res://GameScenes/Zone/preBattleWindow.gd" id="1_2waxm"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="2_6gtnb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="4_u3657"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="5_gmchg"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="6_i3hud"]
+[ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="6_wykmi"]
 [ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="7_6gtnb"]
 
 [node name="PreBattleWindow" type="MarginContainer"]
@@ -71,6 +72,52 @@ size_flags_vertical = 1
 text = "You're getting kicked!"
 label_settings = ExtResource("5_gmchg")
 
+[node name="ButtonsHBox" type="HBoxContainer" parent="MainPanel/Margin/MainHBox/Left"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="Fight" type="PanelContainer" parent="MainPanel/Margin/MainHBox/Left/ButtonsHBox"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_6gtnb")
+
+[node name="Margin" type="MarginContainer" parent="MainPanel/Margin/MainHBox/Left/ButtonsHBox/Fight"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="MainPanel/Margin/MainHBox/Left/ButtonsHBox/Fight/Margin"]
+layout_mode = 2
+text = "Fight!"
+label_settings = ExtResource("6_wykmi")
+
+[node name="Button" type="Button" parent="MainPanel/Margin/MainHBox/Left/ButtonsHBox/Fight"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_wykmi")
+
+[node name="Cancel" type="PanelContainer" parent="MainPanel/Margin/MainHBox/Left/ButtonsHBox"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = ExtResource("2_6gtnb")
+
+[node name="Margin" type="MarginContainer" parent="MainPanel/Margin/MainHBox/Left/ButtonsHBox/Cancel"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="MainPanel/Margin/MainHBox/Left/ButtonsHBox/Cancel/Margin"]
+layout_mode = 2
+text = "Cancel"
+label_settings = ExtResource("6_wykmi")
+
+[node name="Button" type="Button" parent="MainPanel/Margin/MainHBox/Left/ButtonsHBox/Cancel"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_wykmi")
+
 [node name="Filler" type="MarginContainer" parent="MainPanel/Margin/MainHBox"]
 custom_minimum_size = Vector2(480, 0)
 layout_mode = 2
@@ -93,3 +140,6 @@ text = "Unit flavor text goes here"
 label_settings = ExtResource("7_6gtnb")
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[connection signal="pressed" from="MainPanel/Margin/MainHBox/Left/ButtonsHBox/Fight/Button" to="." method="fightButtonPressed"]
+[connection signal="pressed" from="MainPanel/Margin/MainHBox/Left/ButtonsHBox/Cancel/Button" to="." method="cancelButtonPressed"]

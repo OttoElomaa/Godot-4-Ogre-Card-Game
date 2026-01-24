@@ -34,9 +34,7 @@ offset_top = -45.0
 offset_right = 61.0
 offset_bottom = 68.0
 theme_override_styles/focus = ExtResource("4_bmshh")
-theme_override_styles/hover = ExtResource("4_bmshh")
 theme_override_styles/pressed = ExtResource("4_bmshh")
 theme_override_styles/normal = ExtResource("4_bmshh")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="pressed" from="Button" to="." method="buttonPressed"]

@@ -85,8 +85,3 @@ func enterBattle():
 func _on_area_2d_input_event(viewport, event:InputEvent, shape_idx):
 	if event.is_action_pressed("LMB"):
 		zone.openPrebattle(self)
-
-
-func buttonPressed() -> void:
-	#zone.openPrebattle(self)
-	pass

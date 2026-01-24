@@ -6,13 +6,18 @@ extends MarginContainer
 @onready var flavorLabel := $MainPanel/Margin/MainHBox/Filler/VBox/FlavorLabel
 @onready var boardCommentsLabel := $MainPanel/Margin/MainHBox/Left/VBox/GB_Comments
 
+var battleInfoIcon:Node = null
+var enemyDeck := []
 
 
-func _ready() -> void:
+func setup(icon:Node) -> void:
+	battleInfoIcon = icon
 	cardInfoPanel.bestiarySetup(self)  #### FOR SHOWING FLAVOR TEXT LABEL HERE
+	toggleWindow(true)
 
 
-func toggleWindow(enable:bool, battleNode:Node):
+
+func toggleWindow(enable:bool):
 	var enemyCardsHolder = $MainPanel/Margin/MainHBox/Left/VBox/Margin/EnemyCards
 	
 	if enable:
@@ -20,18 +25,28 @@ func toggleWindow(enable:bool, battleNode:Node):
 		clearOldIcons()
 		
 		#### GENERATE PREVIEW ICONS OF ENEMY DECK	
-		for card in battleNode.deck_cards:
+		for cardScene:PackedScene in battleInfoIcon.deck_cards:
+			
 			var container = CardContainerScene.instantiate()
 			enemyCardsHolder.add_child(container)
-			container.display_card(card)
+			container.display_card(cardScene)
 			container.infoPanel = cardInfoPanel
 			
-		boardCommentsLabel.text = battleNode.board_comments
+			#### POPULATE ENEMY DECK FOR PLAYING
+			putCopiesOfCardIntoEnemyDeck(cardScene, 4)
+			
+		boardCommentsLabel.text = battleInfoIcon.board_comments
 	
 	else:
 		hide()
 		clearOldIcons()
 		
+
+
+func putCopiesOfCardIntoEnemyDeck(card:PackedScene, amount:int):
+	for i in range(amount):
+		var newCard:Card = card.instantiate()
+		enemyDeck.append(newCard)
 
 
 func clearOldIcons():
@@ -44,3 +59,14 @@ func clearOldIcons():
 #### CALLED FROM CardInfoPanel
 func setFlavorLabelText(flavor:String):
 	flavorLabel.text = flavor
+
+
+
+
+func cancelButtonPressed() -> void:
+	queue_free()
+
+
+func fightButtonPressed() -> void:
+	GameInfo.enemyDeckCards = enemyDeck
+	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/DeckEditScreen/DeckEdit.tscn")
