@@ -54,6 +54,7 @@ func _ready() -> void:
 	#### SETUP PLAYER CARDS
 	
 	var playerDeckCards:Array = GameInfo.playerDeckCards
+	playerDeckCards.shuffle()
 	
 	for card:Card in playerDeckCards:
 		if card.is_inside_tree():
@@ -65,6 +66,7 @@ func _ready() -> void:
 	
 	### SETUP ENEMY CARDS
 	var enemyDeckCards:Array = GameInfo.enemyDeckCards
+	enemyDeckCards.shuffle()
 	
 	for card:Card in enemyDeckCards:
 		if card.is_inside_tree():
