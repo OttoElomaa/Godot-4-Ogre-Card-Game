@@ -90,9 +90,9 @@ func activate(params:SignalParams) -> bool:
 			var possible_targets = targetingComponent.getTargets()
 			match myCard.targeting_mode:
 				myCard.targetingMode.WEAKEST:
-					myCard.battleSystem.sort_by_weakest(possible_targets)
+					CardChecks.sort_by_weakest(possible_targets)
 				myCard.targetingMode.STRONGEST:
-					myCard.battleSystem.sort_by_strongest(possible_targets)
+					CardChecks.sort_by_strongest(possible_targets)
 			if possible_targets.is_empty():
 				return success
 			else:

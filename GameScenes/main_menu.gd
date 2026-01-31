@@ -74,6 +74,7 @@ func loadCardsInFolder(folderPath:String) -> Array:
 func buttonPressedStartMatch() -> void:
 	bestiaryVisible = false
 	
+	GameInfo.isPreBattle = true
 	GameInfo.enemyDeckCards = MyTools.createGenericPlayerDeck()
 	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/DeckEditScreen/DeckEdit.tscn")
 	

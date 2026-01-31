@@ -23,6 +23,7 @@ GameInfo="*res://GameAutoloads/GameInfo.tscn"
 SceneSwitcher="*res://GameAutoloads/SceneSwitcher.tscn"
 Cheat="*res://GameScenes/cheat_menu.tscn"
 SignalBus="*res://GameAutoloads/SignalBus.gd"
+CardChecks="*res://GameAutoloads/CardChecks.tscn"
 
 [display]
 

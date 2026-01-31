@@ -26,9 +26,15 @@ var castLineShown: bool = false
 var currentCastingCard: Card = null
 
 var enemyChargeTarget: Card = null
+
+
 var enemyBoardCards:Array:
 	get:
 		return cardsManager.getEnemyBoardCards()
+
+var playerBoardCards:Array:
+	get:
+		return cardsManager.getPlayerBoardCards()
 
 
 func _ready() -> void:
@@ -143,6 +149,7 @@ func timeoutEnemyStartCombat() -> void:
 			await decide_blockers()
 			await playCasters()
 			await playAttackers()
+			
 		main.AI_personalities.WIZARD:
 			if cardsManager.getEnemyBlockers().is_empty():
 				await enemySummonCreatures()
@@ -152,6 +159,7 @@ func timeoutEnemyStartCombat() -> void:
 			await playAttackers()
 			await enemySummonCreatures()
 			await decide_blockers()
+			
 		main.AI_personalities.SPECIALIST:
 			await playCasters()
 			await enemySummonCreatures()
@@ -159,56 +167,33 @@ func timeoutEnemyStartCombat() -> void:
 			await decide_blockers()
 			await playAttackers()
 
-
 	timeoutEndEnemyTurn()
 
-func get_casters():
-	var casters = []
-	for i:Card in enemyBoardCards:
-		if i.action_mode == i.actionMode.CASTER:
-			casters.append(i)
-	sort_by_priority(casters)
-	return casters
 
-func get_attackers():
-	var attackers = []
-	for i:Card in enemyBoardCards:
-		if i.action_mode == i.actionMode.ATTACKER:
-			attackers.append(i)
-	sort_by_strongest(attackers)
-	sort_by_priority(attackers)
-	print(attackers)
-	return attackers
 
-func get_non_blockers() -> Array:
-	var non_blockers = []
-	for i:Card in enemyBoardCards:
-		if not i.checkCanBlock():
-			non_blockers.append(i)
-	sort_by_strongest(non_blockers)
-	return non_blockers
+
 
 
 ## Current algorithm -- half as many creatures need to be set as blockers as the player has on board. If there are not enough TANKS,
 ## sets other cards instead, prioritizing strongest ones.
 func decide_blockers():
 	if not enemyBoardCards.is_empty():
-		sort_by_strongest(enemyBoardCards)
-		var projected_number_of_blockers = roundi(cardsManager.getPlayerBoardCards().size() / 2) - cardsManager.getEnemyBlockers().size()
+		CardChecks.sort_by_strongest(enemyBoardCards)
+		var projected_number_of_blockers = roundi(playerBoardCards.size() / 2) - cardsManager.getEnemyBlockers().size()
 			
 		for i in range(projected_number_of_blockers):
-			var blocker:Card = get_non_blockers().front()
+			var blocker:Card = CardChecks.getNonBlockersInList(enemyBoardCards).front()
 			if has_method('statesActive'):
 				blocker.statesActive()
 
 func playCasters():
-	var enemyCasters = get_casters()
+	var enemyCasters = CardChecks.getCastersInList(enemyBoardCards)
 	for card:Card in enemyCasters:
 		await handleEnemyCast(card)
 		
 ### ATTACKERS ATTACK OR CAST STARTING FROM THE PRIORITIZED/STRONGEST ONES.
 func playAttackers():
-	var enemyAttackers = get_attackers()
+	var enemyAttackers = CardChecks.getAttackersInList(enemyBoardCards)
 	for card:Card in enemyAttackers:
 		if card.checkCanAct():
 			await handleEnemyAttackPlayer(card)
@@ -380,7 +365,7 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	
 	#### PLAYER HAS BLOCKERS, FIND KILLABLE BLOCKER
 	if not blockers.is_empty():
-		sort_by_weakest(blockers)
+		CardChecks.sort_by_weakest(blockers)
 		### CHECK IF THIS CARD CAN KILL AN ENEMY BY ITSELF.
 		if not c.fearless:
 			var individually_killable: Array = blockers
@@ -448,27 +433,11 @@ func check_if_kills(attackCard:Card, defendCard:Card) -> bool:
 	print(attackCard.cardName, ' will deal ', projected_damage, ' damage to ', defendCard)
 	return projected_damage >= defendCard.tempHealth
 		
-#### Calculates a card's relative power to the caller. Most enemies are less
-#### eager to attack cards with higher power.
-func get_card_power(card:Card) -> int:
-	var power: int = 0
-	power = card.tempDamage + card.tempHealth
-	return power
 
-func get_weaker(card_1:Card, card_2:Card) -> bool:
-	return get_card_power(card_1) < get_card_power(card_2)
 
-func get_stronger(card_1:Card, card_2:Card) -> bool:
-	return get_card_power(card_1) > get_card_power(card_2)
 
-#### Sorts an array of Cards with weakest ones going to the front.
-func sort_by_weakest(array:Array) -> Array:
-	array.sort_custom(get_weaker)
-	return array
 
-func sort_by_strongest(array:Array) -> Array:
-	array.sort_custom(get_stronger)
-	return array
+
 
 func remove_dangerous(caller:Card, array:Array) -> Array:
 	var dangerous = []
@@ -515,7 +484,7 @@ func declare_charge(target: Card):
 
 func get_attacking_power(defendCard:Card) -> int:
 	var atk_power: int = 0
-	for card:Card in get_attackers():
+	for card:Card in CardChecks.getAttackersInList(enemyBoardCards):
 		if card.checkCanAct() and not card.will_not_charge:
 			atk_power += card.getCombatDamageToTarget(defendCard, true)
 	return atk_power
@@ -524,13 +493,7 @@ func prioritize_charge_target(array:Array):
 	if enemyChargeTarget in array:
 		array.push_front(enemyChargeTarget)
 
-##Sorts cards in an Array based on their priotity.
-func get_higher_priority(a:Card, b:Card):
-	return a.priority > b.priority
 
-func sort_by_priority(array:Array):
-	array.sort_custom(get_higher_priority)
-	return array
 	
 #endregion
 

@@ -91,7 +91,9 @@ func handleHoverCheck():
 	var lastIndex := currentHoveredCards.size() - 1
 	for i in range(currentHoveredCards.size()):
 		if i != lastIndex:
-			toggleHoverVisuals(false, currentHoveredCards[i])
+			var card = currentHoveredCards[i]
+			if MyTools.checkNodeValidity(card):
+				toggleHoverVisuals(false, card)
 	
 	#### TURN ON HIGHLIGHT For TOP CARD		
 	var topCard:Card = currentHoveredCards[lastIndex]
