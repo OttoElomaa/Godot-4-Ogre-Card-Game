@@ -1,4 +1,5 @@
 extends Node2D
+class_name Scenario
 
 
 @export var zoneName := "The Lands"
@@ -16,13 +17,16 @@ var preBattleWindow:Node = null
 @onready var zoneNameLabel:Label = $CanvasLayer/ZoneInfoPanel/Panel/HBox/ZoneNameLabel
 
 @onready var heroNameLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox/HeroNameLabel
-@onready var gloryAmountLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox/GloryAmountLabel
 @onready var heroPortrait:TextureRect = $CanvasLayer/PlayerInfoPanel/VBox/PanelContainer/HeroPortrait 
+
+@onready var gloryAmountLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox/GloryAmountLabel
+@onready var livesAmountLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/LivesPanel/HBox/LivesLabel
 
 @onready var actionButtonsHbox:HBoxContainer = $CanvasLayer/BottomActions/VBox/ButtonsHBox
 
 
-var hoverCheckNeeded := false
+#var hoverCheckNeeded := false
+var visualsUpdateNeeded := false
 var actionName := ""
 var actionDesc := ""
 
@@ -36,20 +40,35 @@ var actionDescLabel:Label:
 
 
 func _ready() -> void:
-	
-	zoneNameLabel.text = zoneName
-	
-	heroNameLabel.text = GameInfo.heroName
-	gloryAmountLabel.text = "%d" % GameInfo.playerGlory
-	heroPortrait.texture = GameInfo.playerIcon
-	
 	for actionButton in actionButtonsHbox.get_children():
 		actionButton.setup(self)
 	
 	for gameBoard in $Zones/GameBoards.get_children():
 		gameBoard.setup(self)
-		
+	
+	updateZoneVisuals()
 
+
+func _physics_process(delta: float) -> void:
+	if visualsUpdateNeeded:
+		
+		updateZoneVisuals()
+		for gameBoard in $Zones/GameBoards.get_children():
+			gameBoard.toggleHoverInfo(false)
+			
+		visualsUpdateNeeded = false	
+
+
+func updateZoneVisuals():
+	zoneNameLabel.text = zoneName
+	
+	heroNameLabel.text = GameInfo.heroName
+	heroPortrait.texture = GameInfo.playerIcon
+	
+	gloryAmountLabel.text = "%d" % GameInfo.playerGlory
+	livesAmountLabel.text = "%d" % GameInfo.playerLives
+	
+	
 
 func _input(e: InputEvent) -> void:
 	

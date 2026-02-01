@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccbs0m4pq5nbi"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_cw6g5"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_hyloh"]
+[ext_resource type="Texture2D" uid="uid://d3bbyx5b4uahh" path="res://Art/CardArt/Desert/card-art-cr-colossus.jpg" id="3_cw6g5"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g2ju6"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xn38x"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_g2ju6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4nkfu"]
+resource_local_to_scene = true
+shader = ExtResource("2_hyloh")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_xn38x")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Card-Cr-Ogre" instance=ExtResource("1_cw6g5")]
+material = SubResource("ShaderMaterial_4nkfu")
+cardName = "Colossus"
+subTypeStr = "Giant"
+group = 9
+flavorText = "Big guy"
+manaCost = 2
+startingDamage = 10
+startingHealth = 6
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("3_cw6g5")

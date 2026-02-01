@@ -10,6 +10,11 @@ var heroName := "The Amir"
 var character_position: Map_Node
 
 var playerGlory := 0
+var playerLives := 3
+
+var playerWonBattleNames := []
+var currentZone: Scenario = null
+var currentBattleInfo: ZoneBattleIcon = null
 
 var playerIcon:Texture:
 	get:

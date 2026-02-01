@@ -1,4 +1,5 @@
 extends Node2D
+class_name ZoneBattleIcon
 
 var zone:Node = null
 
@@ -29,6 +30,7 @@ enum presummon_sparsities {FEW, ## 0-1 object.
 
 func setup(zone:Node):
 	self.zone = zone
+	toggleHoverInfo(false)
 
 
 
@@ -77,11 +79,31 @@ func presummon(isEnemyCard):
 
 
 
-func enterBattle():
-	SceneSwitcher.switchToNewScene(board)
+#func enterBattle():
+	#SceneSwitcher.switchToNewScene(board)
 
 
-
+#### START THE PRE-BATTLE PROCESS IN ORDER TO FIGHT A BATTLE
 func _on_area_2d_input_event(viewport, event:InputEvent, shape_idx):
 	if event.is_action_pressed("LMB"):
+		GameInfo.currentBattleInfo = self
+		GameInfo.currentZone = zone
 		zone.openPrebattle(self)
+
+
+func _on_area_2d_mouse_entered() -> void:
+	toggleHoverInfo(true)
+
+
+func _on_area_2d_mouse_exited() -> void:
+	toggleHoverInfo(false)
+
+
+func toggleHoverInfo(enable:bool):
+	if enable:
+		$InfoPanel.show()
+		$InfoPanel/HBox/NameLabel.text = board_name
+		$InfoPanel/HBox/DescLabel.text = board_comments
+	else:
+		$InfoPanel.hide()
+	

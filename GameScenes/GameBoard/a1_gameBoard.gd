@@ -9,6 +9,7 @@ class_name GameBoard
 
 @onready var cameraMainBoard := $CameraMainBoard
 
+@onready var battleNameLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel
 
 enum CardSlotTypes {
 	PLAYER, ENEMY
@@ -168,8 +169,24 @@ func changeHealth(amount:int, isEnemy:bool):
 	
 	if isEnemy:
 		$BattleSystem.enemyHealth = max($BattleSystem.enemyHealth + amount, 0)
+		if $BattleSystem.enemyHealth <= 0:
+			endGame(true)
 	else:
 		$BattleSystem.playerHealth = max($BattleSystem.playerHealth + amount, 0)
+		if $BattleSystem.playerHealth <= 0:
+			endGame(false)
+		
+
+func endGame(isWin:bool):
+	if isWin:
+		GameInfo.playerWonBattleNames.append(battleNameLabel.text)
+	else:
+		GameInfo.playerLives -= 1
+	
+	GameInfo.currentZone.visualsUpdateNeeded = true
+	SceneSwitcher.switchToNewScene(GameInfo.currentZone)
+	
+	
 
 ########################################################################################
 
@@ -223,7 +240,11 @@ func buttonPressedHideCardActionMenu() -> void:
 func updateUi(turnCount:int):
 	toggleCardActionMenu(false, null)
 	
-	$CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel.text = boardName
+	battleNameLabel.text = boardName
+	if GameInfo.currentBattleInfo:
+		battleNameLabel.text = GameInfo.currentBattleInfo.board_name
+		
+	
 	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
 
 
