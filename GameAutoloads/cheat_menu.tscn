@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dhescek764odo"]
 
-[ext_resource type="Script" uid="uid://bepqe5wwx3b28" path="res://GameScenes/cheat_menu.gd" id="1_23tl8"]
+[ext_resource type="Script" uid="uid://bepqe5wwx3b28" path="res://GameAutoloads/Scripts/cheat_menu.gd" id="1_23tl8"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Fonts/BasicSmallPixelFont.tres" id="2_ahs3t"]
 [ext_resource type="Texture2D" uid="uid://bv6t2gvsftvsp" path="res://Art/BoardComponents/card-slot-empty-texture.png" id="3_k054w"]
 [ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Fonts/monaco/monaco.ttf" id="4_k054w"]

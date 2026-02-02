@@ -21,7 +21,7 @@ States="*res://GameAutoloads/States.tscn"
 MyTools="*res://GameAutoloads/MyTools.tscn"
 GameInfo="*res://GameAutoloads/GameInfo.tscn"
 SceneSwitcher="*res://GameAutoloads/SceneSwitcher.tscn"
-Cheat="*res://GameScenes/cheat_menu.tscn"
+Cheat="*res://GameAutoloads/cheat_menu.tscn"
 SignalBus="*res://GameAutoloads/SignalBus.gd"
 CardChecks="*res://GameAutoloads/CardChecks.tscn"
 
