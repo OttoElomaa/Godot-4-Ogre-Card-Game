@@ -54,6 +54,8 @@ func _ready() -> void:
 	
 	###################################################
 	#### UI STUFF
+	$CanvasLayer/GameOverPane.hide()
+	
 	updateUi($BattleSystem.turnCount)
 	$BattleSystem.updateResourceLabels()
 	toggleCardInfo(false, null)
@@ -142,17 +144,6 @@ func changeHealth(amount:int, isEnemy:bool):
 		if $BattleSystem.playerHealth <= 0:
 			endGame(false)
 		
-
-func endGame(isWin:bool):
-	if isWin:
-		GameInfo.playerWonBattleNames.append(battleNameLabel.text)
-	else:
-		GameInfo.playerLives -= 1
-	
-	GameInfo.currentZone.visualsUpdateNeeded = true
-	SceneSwitcher.switchToNewScene(GameInfo.currentZone)
-	
-	
 
 ########################################################################################
 
@@ -287,3 +278,23 @@ func add_card_to_board(to, card:Card):
 		$CardsManager/EnemyHand.add_child(card)
 	else:
 		print('WTF MAN?')
+
+
+func endGame(isWin:bool):
+	$CanvasLayer/GameOverPane.show()
+	if isWin:
+		$CanvasLayer/GameOverPane/Margin/VBox/WonHeader.show()
+		$CanvasLayer/GameOverPane/Margin/VBox/LostHeader.hide()
+		GameInfo.playerWonBattleNames.append(battleNameLabel.text)
+	else:
+		$CanvasLayer/GameOverPane/Margin/VBox/WonHeader.hide()
+		$CanvasLayer/GameOverPane/Margin/VBox/LostHeader.show()
+		GameInfo.playerLives -= 1
+		
+	
+	
+
+
+func buttonPressedEndMatch() -> void:
+	GameInfo.currentZone.visualsUpdateNeeded = true
+	SceneSwitcher.switchToNewScene(GameInfo.currentZone)
