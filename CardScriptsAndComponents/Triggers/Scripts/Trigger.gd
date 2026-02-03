@@ -37,7 +37,10 @@ func createActionText():
 	return actionTexts
 			
 
-func execute(params:SignalParams):
+func execute(params:SignalParams) -> bool:
+	if not is_inside_tree():
+		return false
+	
 	var success = false
 
 	if disabled:

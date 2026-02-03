@@ -106,4 +106,11 @@ func toggleHoverInfo(enable:bool):
 		$InfoPanel/HBox/DescLabel.text = board_comments
 	else:
 		$InfoPanel.hide()
-	
+
+
+
+func showCompletionState():
+	if board_name in GameInfo.playerWonBattleNames:
+		$ClearedOverlay.show()
+	else:
+		$ClearedOverlay.hide()

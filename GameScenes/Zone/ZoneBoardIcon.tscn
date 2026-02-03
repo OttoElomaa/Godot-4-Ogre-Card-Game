@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cq8mqxsw7pqjg"]
+[gd_scene load_steps=9 format=3 uid="uid://cq8mqxsw7pqjg"]
 
 [ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="1_0vns5"]
 [ext_resource type="Script" uid="uid://b4jucpsg4wr8b" path="res://GameScenes/Zone/zone_board_icon.gd" id="1_ge5wy"]
 [ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="2_ge5wy"]
+[ext_resource type="Texture2D" uid="uid://be0qsfcp2w37c" path="res://Art/CardComponents/zone-battle-icon-disabled-overlay.png" id="3_4qtng"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_bmshh"]
 [ext_resource type="LabelSettings" uid="uid://dhqgs5cdwbsp2" path="res://Fonts/LabelSettings/LabelSetMiniBrown.tres" id="5_nqyb1"]
 
@@ -26,6 +27,11 @@ script = ExtResource("1_ge5wy")
 position = Vector2(0, 10)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("1_0vns5")
+
+[node name="ClearedOverlay" type="Sprite2D" parent="."]
+position = Vector2(0, 10)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("3_4qtng")
 
 [node name="Frame" type="Sprite2D" parent="."]
 texture = ExtResource("2_ge5wy")

@@ -24,6 +24,9 @@ var preBattleWindow:Node = null
 
 @onready var actionButtonsHbox:HBoxContainer = $CanvasLayer/BottomActions/VBox/ButtonsHBox
 
+var gameBoards: Array:
+	get:
+		return $Zones/GameBoards.get_children()
 
 #var hoverCheckNeeded := false
 var visualsUpdateNeeded := false
@@ -43,7 +46,7 @@ func _ready() -> void:
 	for actionButton in actionButtonsHbox.get_children():
 		actionButton.setup(self)
 	
-	for gameBoard in $Zones/GameBoards.get_children():
+	for gameBoard:ZoneBattleIcon in gameBoards:
 		gameBoard.setup(self)
 	
 	updateZoneVisuals()
@@ -51,11 +54,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if visualsUpdateNeeded:
-		
 		updateZoneVisuals()
-		for gameBoard in $Zones/GameBoards.get_children():
-			gameBoard.toggleHoverInfo(false)
-			
 		visualsUpdateNeeded = false	
 
 
@@ -67,6 +66,10 @@ func updateZoneVisuals():
 	
 	gloryAmountLabel.text = "%d" % GameInfo.playerGlory
 	livesAmountLabel.text = "%d" % GameInfo.playerLives
+	
+	for gameBoard:ZoneBattleIcon in gameBoards:
+		gameBoard.toggleHoverInfo(false)
+		gameBoard.showCompletionState()
 	
 	
 

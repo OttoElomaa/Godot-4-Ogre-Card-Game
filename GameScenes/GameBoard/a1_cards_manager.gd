@@ -44,13 +44,13 @@ func setup(gameBoard):
 	var playerDeckCards:Array = GameInfo.playerDeckCards
 	playerDeckCards.shuffle()
 	for card:Card in playerDeckCards:
-		addCardToDeckAndSetup(card, $PlayerDeck)
+		addCardToDeckAndSetup(card.duplicate(), $PlayerDeck)
 	
 	### SETUP ENEMY CARDS
 	var enemyDeckCards:Array = GameInfo.enemyDeckCards
 	enemyDeckCards.shuffle()
 	for card:Card in enemyDeckCards:
-		addCardToDeckAndSetup(card, $EnemyDeck)
+		addCardToDeckAndSetup(card.duplicate(), $EnemyDeck)
 
 
 
