@@ -4,11 +4,12 @@ class_name GameBoard
 
 
 
-@onready var cardsManager := $CardsManager
-@onready var battleSystem := $BattleSystem
+@onready var cardsManager : CardsManager = $CardsManager
+@onready var battleSystem : BattleSystem = $BattleSystem
 
 @onready var cameraMainBoard := $CameraMainBoard
 
+@onready var battleNameLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel
 
 enum CardSlotTypes {
 	PLAYER, ENEMY
@@ -18,7 +19,7 @@ enum CardStates {
 	DECK, HAND, BOARD, GRAVEYARD
 }
 
-var boardName := "Old Ruins"
+@export var boardName := "Old Ruins"
 
 var actionMenuCard: Card = null
 
@@ -29,6 +30,7 @@ enum AI_personalities {
 }
 
 ## How the enemy AI will behave.
+@export_category("AI")
 @export var AI_personality = AI_personalities.COMMANDER
 
 func _ready() -> void:
@@ -41,43 +43,19 @@ func _ready() -> void:
 	##################################
 	States.statesPlay()
 	
-	$CardsManager.main = self
-	$CardsManager.battleSystem = $BattleSystem
+	#### THIS FUNC SETS UP PLAYER AND ENEMY DECKS BASED ON GameInfo
+	$CardsManager.setup(self)
 	
 	$BattleSystem.main = self
 	$BattleSystem.cardsManager = $CardsManager
 	
 	MyTools.gameBoardSetup(self)
-
-	##################################################
-	#### SETUP PLAYER CARDS
+	turn_1_init()
 	
-	var playerDeckCards:Array = GameInfo.playerDeckCards
-	
-	for card:Card in playerDeckCards:
-		if card.is_inside_tree():
-			card.reparent($CardsManager/PlayerDeck)
-		else:
-			$CardsManager/PlayerDeck.add_child(card)
-		card.setup(self)
-		card.show()
-	
-	#### SETUP ENEMY CARDS
-	var enemyDeckCards:Array = GameInfo.enemyDeckCards
-	
-	for card:Card in enemyDeckCards:
-		if card.is_inside_tree():
-			card.reparent($CardsManager/EnemyDeck)
-		else:
-			$CardsManager/EnemyDeck.add_child(card)
-		card.setup(self)
-		card.show()
-	
-	$CardsManager.setup(self)
-	
-
 	###################################################
 	#### UI STUFF
+	$CanvasLayer/GameOverPane.hide()
+	
 	updateUi($BattleSystem.turnCount)
 	$BattleSystem.updateResourceLabels()
 	toggleCardInfo(false, null)
@@ -98,6 +76,14 @@ func _unhandled_input(e: InputEvent) -> void:
 
 
 
+func add_card_to_random_slot(card:Card, isEnemyCard:bool):
+	var empty_slots = MyTools.findEmptyCardSlots(isEnemyCard)
+	var slot = empty_slots.pick_random()
+	cardsManager.handlePlaceCardInSlot(card, slot)
+
+func turn_1_init():
+	cardsManager.dealEnemyHand()
+	cardsManager.dealPlayerHand()
 
 func toggleCardActionMenu(enable:bool, card:Card):
 	
@@ -151,8 +137,13 @@ func changeHealth(amount:int, isEnemy:bool):
 	
 	if isEnemy:
 		$BattleSystem.enemyHealth = max($BattleSystem.enemyHealth + amount, 0)
+		if $BattleSystem.enemyHealth <= 0:
+			endGame(true)
 	else:
 		$BattleSystem.playerHealth = max($BattleSystem.playerHealth + amount, 0)
+		if $BattleSystem.playerHealth <= 0:
+			endGame(false)
+		
 
 ########################################################################################
 
@@ -206,7 +197,11 @@ func buttonPressedHideCardActionMenu() -> void:
 func updateUi(turnCount:int):
 	toggleCardActionMenu(false, null)
 	
-	$CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel.text = boardName
+	battleNameLabel.text = boardName
+	if GameInfo.currentBattleInfo:
+		battleNameLabel.text = GameInfo.currentBattleInfo.board_name
+		
+	
 	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
 
 
@@ -283,3 +278,26 @@ func add_card_to_board(to, card:Card):
 		$CardsManager/EnemyHand.add_child(card)
 	else:
 		print('WTF MAN?')
+
+
+func endGame(isWin:bool):
+	$CanvasLayer/GameOverPane.show()
+	if isWin:
+		$CanvasLayer/GameOverPane/Margin/VBox/WonHeader.show()
+		$CanvasLayer/GameOverPane/Margin/VBox/LostHeader.hide()
+		GameInfo.playerWonBattleNames.append(battleNameLabel.text)
+	else:
+		$CanvasLayer/GameOverPane/Margin/VBox/WonHeader.hide()
+		$CanvasLayer/GameOverPane/Margin/VBox/LostHeader.show()
+		GameInfo.playerLives -= 1
+		
+	
+	
+
+
+func buttonPressedEndMatch() -> void:
+	if GameInfo.currentZone:
+		GameInfo.currentZone.visualsUpdateNeeded = true
+		SceneSwitcher.switchToNewScene(GameInfo.currentZone)
+	else:
+		SceneSwitcher.returnToMainMenu()

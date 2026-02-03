@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkclkk5p3fw8b"]
+[gd_scene load_steps=12 format=3 uid="uid://dkclkk5p3fw8b"]
 
 [ext_resource type="Script" uid="uid://dvogoklqfpfpc" path="res://GameScenes/DeckEditScreen/deck_edit.gd" id="1_2aanx"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="1_kjltk"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="5_rwrpj"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="6_t6uxs"]
 [ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://PanelStyles/SelectBoxTransparent.tres" id="7_wteh1"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="9_vyoq8"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="10_fk3a6"]
 
 [node name="DeckEdit" type="Node2D"]
@@ -106,28 +107,57 @@ offset_top = 179.0
 offset_right = 1838.0
 offset_bottom = 779.0
 
-[node name="ProceedButton" type="Button" parent="."]
-offset_left = 1473.0
-offset_top = 972.0
-offset_right = 1838.0
-offset_bottom = 1038.0
+[node name="Buttons" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1880.0
+offset_top = 1040.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="VBox" type="VBoxContainer" parent="Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Proceed" type="PanelContainer" parent="Buttons/VBox"]
+custom_minimum_size = Vector2(250, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_vyoq8")
+
+[node name="Button" type="Button" parent="Buttons/VBox/Proceed"]
+layout_mode = 2
 theme_override_styles/hover = ExtResource("6_t6uxs")
 theme_override_styles/normal = ExtResource("7_wteh1")
 
-[node name="Label" type="Label" parent="ProceedButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Label" type="Label" parent="Buttons/VBox/Proceed"]
+layout_mode = 2
 text = "Proceed"
 label_settings = ExtResource("10_fk3a6")
+horizontal_alignment = 1
 
-[connection signal="button_up" from="ProceedButton" to="." method="_on_proceed_button_button_up"]
+[node name="BackToWorld" type="PanelContainer" parent="Buttons/VBox"]
+custom_minimum_size = Vector2(250, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_vyoq8")
+
+[node name="Button" type="Button" parent="Buttons/VBox/BackToWorld"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("6_t6uxs")
+theme_override_styles/normal = ExtResource("7_wteh1")
+
+[node name="Label" type="Label" parent="Buttons/VBox/BackToWorld"]
+layout_mode = 2
+text = "Back to World"
+label_settings = ExtResource("10_fk3a6")
+horizontal_alignment = 1
+
+[connection signal="button_up" from="Buttons/VBox/Proceed/Button" to="." method="_on_proceed_button_button_up"]
+[connection signal="button_up" from="Buttons/VBox/BackToWorld/Button" to="." method="_button_up_back_to_world"]

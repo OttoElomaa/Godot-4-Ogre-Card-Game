@@ -22,4 +22,17 @@ func insert_card(new_card:Card):
 	$Frontside/Resources/Panel/HBox/HealthLabel.text = str(card.startingHealth)
 	$Frontside/EffectsLabel.text = card.createEffectText()
 	
+	if card.isRitual:
+		$Frontside/Background/Creature.hide()
+		$Frontside/Background/Spell.show()
+		$Frontside/Resources/Panel/HBox/PowerLabel.hide()
+		$Frontside/Resources/Panel/HBox/HealthLabel.hide()
+		
 	remove_child(card)
+
+func display_card(new_card:PackedScene):
+	
+	var card = new_card.instantiate()
+	await MyTools.createTempCard(card)
+	insert_card(card.duplicate())
+	MyTools.removeTempCard(card)

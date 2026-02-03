@@ -54,7 +54,8 @@ func activate(params:SignalParams) -> bool:
 	#### TURN ON MANUAL TARGETING -> No target selected yet!
 	if targetingComponent is AutoTargetingComponent:
 		var targets:Array = targetingComponent.getTargets()
-		success = await activateSkillAfterTargeting(targets)
+		if not targets.is_empty():
+			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is EnemyTargetingComponent:
 		var targets:Array = []
@@ -89,9 +90,9 @@ func activate(params:SignalParams) -> bool:
 			var possible_targets = targetingComponent.getTargets()
 			match myCard.targeting_mode:
 				myCard.targetingMode.WEAKEST:
-					myCard.battleSystem.sort_by_weakest(possible_targets)
+					CardChecks.sort_by_weakest(possible_targets)
 				myCard.targetingMode.STRONGEST:
-					myCard.battleSystem.sort_by_strongest(possible_targets)
+					CardChecks.sort_by_strongest(possible_targets)
 			if possible_targets.is_empty():
 				return success
 			else:

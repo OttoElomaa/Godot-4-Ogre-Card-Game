@@ -5,6 +5,8 @@ class_name AutoTargetingComponent
 ## Warning: by default, it checks board, hands, decks etc of both players. 
 ## Use a ConditionalComponent if you only want to check the allied deck, for example.
 @export_category('Target Groups')
+
+
 ## Targets all cards played on board.
 @export var use_board_cards = true
 ## Targets all cards in player and enemy hands. 
@@ -14,32 +16,42 @@ class_name AutoTargetingComponent
 ## Targets all cards in the player and enemy graveyards.
 @export var use_graveyard_cards = false
 
-func ready():
-	pass
+
 
 func getTargets() -> Array:
 	var targets = []
-	var conditions = []
-	var success = true
-	var cards_in_group = get_cards_in_group()
 	
-	for child in get_children(true):
-		if child is ConditionalComponent:
-			conditions.append(child)
-	print(name, 'has conditions ', conditions)
-
+	#### GET TARGETING GROUP AND CONDITIONS
+	var cards_in_group = get_cards_in_group()
+	var conditions: Array = getMyConditions()
+	print("%s targeting group before conditions: %s" % [name, cards_in_group])
+	
+	#### FIND VALID TARGETS IN TARGETING GROUP BASED ON CONDITIONS
 	for card:Card in cards_in_group:
-		print(name, ' is checking ', card.cardName, ' with conditions ', conditions)
-		success = true
-		for cond in conditions:
-			if cond is ConditionalComponent:
-				if not cond.check(card, myCard):
-					success = false
-		if success:
+		if checkAllConditionsOnTarget(card, conditions):
 			targets.append(card)
 	print(name, ' acquired targets ', targets)
 	return targets
 
+
+
+func getMyConditions() -> Array:
+	var conditions := []
+	for child in get_children(true):
+		if child is ConditionalComponent:
+			conditions.append(child)
+			
+	print("%s has conditions: %s" % [name, conditions])
+	return conditions
+
+
+func checkAllConditionsOnTarget(target:Card, conditions:Array):
+	print("%s is checking %s with conditions: %s" % [name, target.cardName, conditions] )
+	var success = true
+	for cond in conditions:
+		if not cond.check(target, myCard):
+			success = false
+	return success
 
 
 func get_cards_in_group() -> Array:

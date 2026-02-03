@@ -38,9 +38,31 @@ func _ready() -> void:
 func setup(gameBoard):
 	self.main = gameBoard
 	self.battleSystem = main.battleSystem
-	dealPlayerHand()
-	dealEnemyHand()
+
+	##################################################
+	#### SETUP PLAYER CARDS
+	var playerDeckCards:Array = GameInfo.playerDeckCards
+	playerDeckCards.shuffle()
+	for card:Card in playerDeckCards:
+		addCardToDeckAndSetup(card.duplicate(), $PlayerDeck)
 	
+	### SETUP ENEMY CARDS
+	var enemyDeckCards:Array = GameInfo.enemyDeckCards
+	enemyDeckCards.shuffle()
+	for card:Card in enemyDeckCards:
+		addCardToDeckAndSetup(card.duplicate(), $EnemyDeck)
+
+
+
+func addCardToDeckAndSetup(card:Card, deck:Node):
+	if card.is_inside_tree():
+		card.reparent(deck)
+	else:
+		deck.add_child(card)
+	card.setup(main)
+	card.show()
+
+
 
 func dealPlayerHand():
 	dumbHandDrawCounter = 0
@@ -93,7 +115,9 @@ func handleHoverCheck():
 	var lastIndex := currentHoveredCards.size() - 1
 	for i in range(currentHoveredCards.size()):
 		if i != lastIndex:
-			toggleHoverVisuals(false, currentHoveredCards[i])
+			var card = currentHoveredCards[i]
+			if MyTools.checkNodeValidity(card):
+				toggleHoverVisuals(false, card)
 	
 	#### TURN ON HIGHLIGHT For TOP CARD		
 	var topCard:Card = currentHoveredCards[lastIndex]

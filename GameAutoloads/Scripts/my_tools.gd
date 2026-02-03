@@ -23,23 +23,9 @@ func gameBoardSetup(gameBoard:GameBoard):
 	self.cardsManager = gameBoard.cardsManager
 	self.battleSystem = gameBoard.battleSystem
 
+
 func get_all_game_cards():
-	var path = 'res://Cards/City/'
-	for file in DirAccess.get_files_at(path):
-		var new_card = load(str(path, file))
-		GameInfo.all_cards.append(new_card.instantiate())
-	path = 'res://Cards/Desert/'
-	for file in DirAccess.get_files_at(path):
-		var new_card = load(str(path, file))
-		GameInfo.all_cards.append(new_card.instantiate())
-	path = 'res://Cards/Outcasts/'
-	for file in DirAccess.get_files_at('res://Cards/Outcasts/'):
-		var new_card = load(str(path, file))
-		GameInfo.all_cards.append(new_card.instantiate())
-	path = 'res://Cards/GreenDefiance/'
-	for file in DirAccess.get_files_at('res://Cards/GreenDefiance/'):
-		var new_card = load(str(path, file))
-		GameInfo.all_cards.append(new_card.instantiate())
+	return $CardLoader.createAllCardsByAmount(1)
 
 
 func checkNodeValidity(node) -> bool:
@@ -52,9 +38,9 @@ func checkNodeValidity(node) -> bool:
 		return false
 	
 	#### SPECIFIC TO CARDS
-	if node is Card:
-		if not node.checkAlive():
-			return false
+	#if node is Card:
+		#if not node.checkAlive():
+			#return false
 	return true
 
 
@@ -85,6 +71,7 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 #### LIKE TRANSFORMING ONE CARD INTO A NEW ONE
 func createTempCard(card:Card):
 	add_child(card)
+	await get_tree().process_frame
 
 func removeTempCard(card:Card):
 	remove_child(card)
@@ -153,7 +140,7 @@ func getCollidedObject(result):
 
 func handleCardHover(isHovering:bool, card:Card):
 	if States.gameState == States.GameStates.BESTIARY:
-		card.mainMenu.toggleCardInfo(isHovering, card)
+		card.mainMenu.toggleCardInfo(card)
 	else:
 		cardsManager.toggleCardHover(isHovering, card)
 	
@@ -251,9 +238,12 @@ func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
 
 
 
-func createGenericPlayerDeck():
+func createGenericPlayerDeck() -> Array:
 	return $CardLoader.createDesertDeck()
 
+func createAllCardsByAmount(amount:int) -> Array:
+	return $CardLoader.createAllCardsByAmount(amount)
+	
 	
 
 func createCombatLogPrintout(text:String, color:Color):

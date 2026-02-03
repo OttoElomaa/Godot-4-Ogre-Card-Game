@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_dvp65"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_ccxni"]
-[ext_resource type="Texture2D" uid="uid://cpje3wokp2ij1" path="res://Art/CardArt/card-art-creature-debug-placeholder.jpg" id="2_s5s5a"]
+[ext_resource type="Texture2D" uid="uid://d4l3aj4vs4qyb" path="res://Art/CardArt/GreenDefiance/card-art-creature-boss-maolmona.jpg" id="3_s5s5a"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
 noise_type = 3
@@ -29,4 +29,4 @@ subTypeStr = "Your dead!!!"
 startingHealth = 200
 
 [node name="Art" parent="Frontside" index="1"]
-texture = ExtResource("2_s5s5a")
+texture = ExtResource("3_s5s5a")

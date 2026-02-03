@@ -34,15 +34,16 @@ cardName = "Risheh Jan"
 cardType = 1
 subTypeStr = "Gharch Spell"
 flavorText = "As long as flesh remains, fungal-knights seldom stay dead."
+manaCost = 3
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_ga422")]
+[node name="RitualTrigger" parent="Actions" index="0" instance=ExtResource("2_ga422")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("3_lkiog")]
-customActionText = "An ally creature is revived and put back to hand."
+[node name="CardAction" parent="Actions/RitualTrigger" index="0" instance=ExtResource("3_lkiog")]
+customActionText = "Return ally from graveyard to your hand."
 
-[node name="SkillDrawCardToHand" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_77jrv")]
+[node name="SkillDrawCardToHand" parent="Actions/RitualTrigger/CardAction" index="0" instance=ExtResource("4_77jrv")]
 
-[node name="AllyGraveyard" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_6n2xt")]
+[node name="AllyGraveyard" parent="Actions/RitualTrigger/CardAction" index="1" instance=ExtResource("5_6n2xt")]
 
-[node name="IfType" parent="Actions/OnCastTrigger/CardAction/AllyGraveyard" index="1" instance=ExtResource("6_iasup")]
+[node name="IfType" parent="Actions/RitualTrigger/CardAction/AllyGraveyard" index="1" instance=ExtResource("6_iasup")]
 card_type = "Creature"

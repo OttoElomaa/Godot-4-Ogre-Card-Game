@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=33 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/GameBoard/a1_gameBoard.gd" id="1_rf3o6"]
 [ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
 [ext_resource type="AudioStream" uid="uid://cqryjjev655kv" path="res://Audio/BGM/Cards of Achra OST - Tunneler Lullaby.ogg" id="26_hysm7"]
+[ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="26_ngg6u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -717,6 +718,67 @@ text = "Goes Here"
 label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
+[node name="GameOverPane" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -60.0
+offset_right = 160.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("12_i42kc")
+
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/GameOverPane"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 30
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GameOverPane/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="LostHeader" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox"]
+layout_mode = 2
+text = "Defeat!"
+label_settings = ExtResource("26_ngg6u")
+horizontal_alignment = 1
+
+[node name="WonHeader" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox"]
+layout_mode = 2
+text = "Victory!"
+label_settings = ExtResource("26_ngg6u")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox"]
+layout_mode = 2
+text = "The match is over."
+label_settings = ExtResource("18_tppv1")
+horizontal_alignment = 1
+
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/GameOverPane/Margin/VBox"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("12_i42kc")
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox/Panel2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Return to World"
+label_settings = ExtResource("18_tppv1")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="EndMatchButton" type="Button" parent="CanvasLayer/GameOverPane/Margin/VBox/Panel2"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("19_j663k")
+theme_override_styles/normal = ExtResource("20_tic85")
+
 [node name="ActionMenuCanvas" type="CanvasLayer" parent="."]
 
 [node name="CardActionMenu" type="PanelContainer" parent="ActionMenuCanvas"]
@@ -781,6 +843,7 @@ bus = &"BGM"
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel2/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
+[connection signal="pressed" from="CanvasLayer/GameOverPane/Margin/VBox/Panel2/EndMatchButton" to="." method="buttonPressedEndMatch"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]

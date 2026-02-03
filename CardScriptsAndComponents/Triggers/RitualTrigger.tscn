@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="1_fbtqd"]
 
-[node name="OnCastTrigger" type="Node"]
+[node name="RitualTrigger" type="Node"]
 script = ExtResource("1_fbtqd")
-situation_text = "Cast"
+situation_text = "Ritual"
 metadata/_custom_type_script = "uid://bs5kjnljmmys"

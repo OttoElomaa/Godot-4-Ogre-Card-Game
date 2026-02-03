@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdhig0ctuoctc"]
+
+[ext_resource type="Script" uid="uid://cqpmc24kqw6pu" path="res://GameAutoloads/Scripts/card_checks.gd" id="1_1xa13"]
+
+[node name="CardChecks" type="Node"]
+script = ExtResource("1_1xa13")

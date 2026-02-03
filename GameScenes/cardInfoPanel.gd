@@ -1,7 +1,11 @@
 extends PanelContainer
 
 
+var bestiary: Node = null
 
+func bestiarySetup(bestiaryScreen:Node):
+	if bestiaryScreen:
+		bestiary = bestiaryScreen
 
 
 func toggleCardInfo(enable:bool, card:Card):
@@ -9,10 +13,15 @@ func toggleCardInfo(enable:bool, card:Card):
 	#### HIDE
 	if not enable:
 		hide()
+		if bestiary:
+			bestiary.setFlavorLabelText("")
 		return
 		
 	#### SHOW
 	show()
+	if bestiary:
+		bestiary.setFlavorLabelText(card.flavorText)
+	
 	$Margin/VBox/NameLabel.text = card.cardName
 	$Margin/VBox/CardArt.texture = card.cardArt
 	

@@ -5,15 +5,21 @@ extends Node2D
 @onready var activeCardsContainer = $CanvasLayer/NinePatchRect/VBoxContainer/ActiveCardsContainer
 @onready var cardInfoPanel = $CardInfoPanel
 
+
 func _ready():
 	create_containers()
 	activeCardsContainer.connect("updated", create_containers)
-	activeCardsContainer.connect("card_mouse_entered", show_info)
-	activeCardsContainer.connect("card_mouse_exited", hide_info)
 	ownedCardsContainer.connect("updated", create_containers)
-	ownedCardsContainer.connect("card_mouse_entered", show_info)
-	ownedCardsContainer.connect("card_mouse_exited", hide_info)
 	
+	#### DO WE SHOW "Proceed" BUTTON
+	if GameInfo.isPreBattle:
+		$Buttons/VBox/Proceed.show()	
+	else:
+		$Buttons/VBox/Proceed.hide()
+		
+	
+	
+
 func create_containers():
 	#### EMPTY THE CARD LISTS BEFORE FILLING THEM
 	for child in activeCardsContainer.get_children():
@@ -26,6 +32,7 @@ func create_containers():
 		var new_cont = CardContainer.instantiate()
 		ownedCardsContainer.add_child(new_cont)
 		new_cont.insert_card(i)
+		new_cont.infoPanel = cardInfoPanel
 	for i in GameInfo.playerDeckCards:
 		var new_cont = CardPanel.instantiate()
 		new_cont.card = i
@@ -34,11 +41,12 @@ func create_containers():
 	$"CanvasLayer/NinePatchRect/VBoxContainer/PanelContainer/#CardsInDeck".text = str(GameInfo.playerDeckCards.size(), " / 10")
 	#$ProceedButton.disabled = GameInfo.playerDeckCards.size() < 10
 
-func show_info(card):
-	cardInfoPanel.toggleCardInfo(true, card)
-
-func hide_info():
-	cardInfoPanel.toggleCardInfo(false, null)
 
 func _on_proceed_button_button_up():
+	GameInfo.isPreBattle = false
 	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/GameBoard/GameBoard.tscn")
+
+
+func _button_up_back_to_world() -> void:
+	GameInfo.isPreBattle = false
+	SceneSwitcher.switchToStoredScene()

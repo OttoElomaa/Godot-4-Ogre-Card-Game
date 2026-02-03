@@ -12,7 +12,8 @@ var bestiaryCards := []
 
 
 func _ready() -> void:
-	MyTools.get_all_game_cards()
+	GameInfo.all_cards = MyTools.createAllCardsByAmount(1)
+	GameInfo.playerOwnedCards = MyTools.createAllCardsByAmount(5)
 #	setupBestiary()
 	
 #	bestiaryVisible = true
@@ -71,12 +72,10 @@ func loadCardsInFolder(folderPath:String) -> Array:
 
 
 func buttonPressedStartMatch() -> void:
-	
-	#var gameBoard: GameBoard = GameBoardScene.instantiate()
 	bestiaryVisible = false
-	GameInfo.playerOwnedCards = MyTools.createGenericPlayerDeck()
+	
+	GameInfo.isPreBattle = true
 	GameInfo.enemyDeckCards = MyTools.createGenericPlayerDeck()
-#	var newBoard:Node = GameBoardScene.instantiate()
 	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/DeckEditScreen/DeckEdit.tscn")
 	
 
@@ -84,7 +83,7 @@ func buttonPressedStartMatch() -> void:
 func buttonPressedGoToWorld() -> void:
 	bestiaryVisible = false
 	var newZone:Node = ZoneScene.instantiate()
-	SceneSwitcher.switchToNewScene(newZone, self)
+	SceneSwitcher.switchToNewScene(newZone)
 	#get_tree().change_scene_to_packed(ZoneScene)
 
 

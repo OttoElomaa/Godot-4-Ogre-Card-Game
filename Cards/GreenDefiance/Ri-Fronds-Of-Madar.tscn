@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://o4288fvn3jsd"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_tm7ws"]
-[ext_resource type="Texture2D" uid="uid://cao4ayvdqvtj" path="res://Art/CardArt/GreenDefiance/Fronds of Madar.png" id="2_g1f38"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_vkpnd"]
 [ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="2_vqnwm"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_006rp"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="4_gmrsd"]
 [ext_resource type="PackedScene" uid="uid://u4hmn1rmmi48" path="res://CardScriptsAndComponents/Actions/SkillTransformTargetIntoCard.tscn" id="5_gmrsd"]
 [ext_resource type="PackedScene" uid="uid://colad8r6pikh2" path="res://Cards/GreenDefiance/Cr-Pasar.tscn" id="6_vkpnd"]
+[ext_resource type="Texture2D" uid="uid://bvlkelg2kmjfq" path="res://Art/CardArt/GreenDefiance/Fronds of Madar.jpg" id="8_vkpnd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
 noise_type = 3
@@ -49,4 +49,4 @@ effect_counters = true
 equipment = true
 
 [node name="Art" parent="Frontside" index="1"]
-texture = ExtResource("2_g1f38")
+texture = ExtResource("8_vkpnd")

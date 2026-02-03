@@ -6,6 +6,48 @@ func createCard(path:String):
 	var cardPacked = load(path)
 	return cardPacked.instantiate()
 
+
+
+func createAllCardsByAmount(amount:int) -> Array:
+	var allCards := []
+	var cardFolderPaths := ['res://Cards/City/', 'res://Cards/Desert/', 
+	'res://Cards/Outcasts/', 'res://Cards/GreenDefiance/']
+
+	for path in cardFolderPaths:    #### READ EACH FOLDER  
+		var files := DirAccess.get_files_at(path)
+		for file:String in files:   ####-> Then each CARD in those folders
+			
+			#### CREATE COPIES of each card based on the AMOUNT specified in input
+			for i in range(amount):
+				var cardPacked:PackedScene = load(str(path, file))
+				var card = cardPacked.instantiate()
+				allCards.append(card)
+	
+	return allCards
+
+
+
+
+func get_all_game_cards():
+	var path = 'res://Cards/City/'
+	for file in DirAccess.get_files_at(path):
+		var new_card = load(str(path, file))
+		GameInfo.all_cards.append(new_card.instantiate())
+	path = 'res://Cards/Desert/'
+	for file in DirAccess.get_files_at(path):
+		var new_card = load(str(path, file))
+		GameInfo.all_cards.append(new_card.instantiate())
+	path = 'res://Cards/Outcasts/'
+	for file in DirAccess.get_files_at('res://Cards/Outcasts/'):
+		var new_card = load(str(path, file))
+		GameInfo.all_cards.append(new_card.instantiate())
+	path = 'res://Cards/GreenDefiance/'
+	for file in DirAccess.get_files_at('res://Cards/GreenDefiance/'):
+		var new_card = load(str(path, file))
+		GameInfo.all_cards.append(new_card.instantiate())
+
+
+
 func createDesertDeck():
 	
 	counter = 0

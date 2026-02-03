@@ -46,7 +46,7 @@ will_not_charge = true
 
 [node name="CardAction" type="Node2D" parent="Actions/OnSelfArrivalTrigger" index="1"]
 script = ExtResource("5_vaeiv")
-customActionText = "Gains 2 Vine Trap."
+customActionText = "Arrival: Gain 2 Vine Trap."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
 [node name="SkillEffectCounters" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("5_m871f")]
