@@ -43,41 +43,13 @@ func _ready() -> void:
 	##################################
 	States.statesPlay()
 	
-	$CardsManager.main = self
-	$CardsManager.battleSystem = $BattleSystem
+	#### THIS FUNC SETS UP PLAYER AND ENEMY DECKS BASED ON GameInfo
+	$CardsManager.setup(self)
 	
 	$BattleSystem.main = self
 	$BattleSystem.cardsManager = $CardsManager
 	
 	MyTools.gameBoardSetup(self)
-
-	##################################################
-	#### SETUP PLAYER CARDS
-	
-	var playerDeckCards:Array = GameInfo.playerDeckCards
-	playerDeckCards.shuffle()
-	
-	for card:Card in playerDeckCards:
-		if card.is_inside_tree():
-			card.reparent($CardsManager/PlayerDeck)
-		else:
-			$CardsManager/PlayerDeck.add_child(card)
-		card.setup(self)
-		card.show()
-	
-	### SETUP ENEMY CARDS
-	var enemyDeckCards:Array = GameInfo.enemyDeckCards
-	enemyDeckCards.shuffle()
-	
-	for card:Card in enemyDeckCards:
-		if card.is_inside_tree():
-			card.reparent($CardsManager/EnemyDeck)
-		else:
-			$CardsManager/EnemyDeck.add_child(card)
-		card.setup(self)
-		card.show()
-	
-	$CardsManager.setup(self)
 	turn_1_init()
 	
 	###################################################
@@ -100,13 +72,7 @@ func _unhandled_input(e: InputEvent) -> void:
 			if States.gameState == States.GameStates.CARD_ACT_MENU:
 				toggleCardActionMenu(false, null)
 
-func add_card_to_enemy_deck(card:Card):
-		if card.is_inside_tree():
-			card.reparent($CardsManager/EnemyDeck)
-		else:
-			$CardsManager/EnemyDeck.add_child(card)
-		card.setup(self)
-		card.show()
+
 
 func add_card_to_random_slot(card:Card, isEnemyCard:bool):
 	var empty_slots = MyTools.findEmptyCardSlots(isEnemyCard)

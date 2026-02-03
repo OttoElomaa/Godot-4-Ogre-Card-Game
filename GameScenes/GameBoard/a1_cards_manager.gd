@@ -38,7 +38,31 @@ func _ready() -> void:
 func setup(gameBoard):
 	self.main = gameBoard
 	self.battleSystem = main.battleSystem
+
+	##################################################
+	#### SETUP PLAYER CARDS
+	var playerDeckCards:Array = GameInfo.playerDeckCards
+	playerDeckCards.shuffle()
+	for card:Card in playerDeckCards:
+		addCardToDeckAndSetup(card, $PlayerDeck)
 	
+	### SETUP ENEMY CARDS
+	var enemyDeckCards:Array = GameInfo.enemyDeckCards
+	enemyDeckCards.shuffle()
+	for card:Card in enemyDeckCards:
+		addCardToDeckAndSetup(card, $EnemyDeck)
+
+
+
+func addCardToDeckAndSetup(card:Card, deck:Node):
+	if card.is_inside_tree():
+		card.reparent(deck)
+	else:
+		deck.add_child(card)
+	card.setup(main)
+	card.show()
+
+
 
 func dealPlayerHand():
 	dumbHandDrawCounter = 0
