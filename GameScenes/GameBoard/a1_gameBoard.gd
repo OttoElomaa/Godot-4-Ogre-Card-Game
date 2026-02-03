@@ -296,5 +296,8 @@ func endGame(isWin:bool):
 
 
 func buttonPressedEndMatch() -> void:
-	GameInfo.currentZone.visualsUpdateNeeded = true
-	SceneSwitcher.switchToNewScene(GameInfo.currentZone)
+	if GameInfo.currentZone:
+		GameInfo.currentZone.visualsUpdateNeeded = true
+		SceneSwitcher.switchToNewScene(GameInfo.currentZone)
+	else:
+		SceneSwitcher.returnToMainMenu()

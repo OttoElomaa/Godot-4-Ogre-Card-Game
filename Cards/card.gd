@@ -590,6 +590,9 @@ func statesPassive():
 
 
 func animateBlockingState(toBlock:bool):
+	if not mySlot:
+		return
+		
 	var newPos = mySlot.position
 	
 	#### POSITION AS INDICATOR
@@ -599,13 +602,11 @@ func animateBlockingState(toBlock:bool):
 			activeOffset *= -1
 		
 		newPos.y += activeOffset
-			
-		#position.y = mySlot.position.y + activeOffset
 		effects.togglePhased(false)
-	#else:
-		#position.y = mySlot.position.y
 	
 	MyTools.moveCardTweening(self, position, newPos)
+
+
 
 func vacateSlot():
 	if mySlot:
