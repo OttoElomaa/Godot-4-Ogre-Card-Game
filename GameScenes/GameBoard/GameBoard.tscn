@@ -20,7 +20,7 @@
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
 [ext_resource type="Script" uid="uid://cq33h3kryyrto" path="res://CardScriptsAndComponents/Scripts/table_card_slot.gd" id="20_7yxuf"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
-[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="21_ufaws"]
+[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="21_ufaws"]
 [ext_resource type="AudioStream" uid="uid://0grfmidlhvlt" path="res://Audio/SE/Player-Damaged.wav" id="24_ikeh1"]
 [ext_resource type="Script" uid="uid://3gv0j2w8kq47" path="res://GameScenes/GameBoard/camera_main_board.gd" id="25_7yxuf"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]

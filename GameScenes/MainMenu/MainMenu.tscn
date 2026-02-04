@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dhgg2oefy2y6e"]
 
-[ext_resource type="Script" uid="uid://dojtnp1c1qm5h" path="res://GameScenes/main_menu.gd" id="1_jd835"]
+[ext_resource type="Script" uid="uid://dojtnp1c1qm5h" path="res://GameScenes/MainMenu/main_menu.gd" id="1_jd835"]
 [ext_resource type="PackedScene" uid="uid://cjwurlo7haie7" path="res://GameScenes/audio.tscn" id="2_18c0x"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="2_b8l8w"]
 [ext_resource type="AudioStream" uid="uid://b12p3w7ls8cpn" path="res://Audio/BGM/Cards of Achra OST - Main Menu Theme.ogg" id="3_3ew8u"]
@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://pd7or3cigyqn" path="res://GameScenes/MainMenu/dancing_card.tscn" id="15_b4hlq"]
 [ext_resource type="PackedScene" uid="uid://yol344fkh60p" path="res://GameScenes/MainMenu/flicker_light.tscn" id="15_uifqy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_18c0x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_820ef"]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ew8u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rf05g"]
 resource_local_to_scene = true
 
 [node name="MainMenu" type="Node2D"]
@@ -171,11 +171,11 @@ y_sort_enabled = true
 
 [node name="DancingCard" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
 light_mask = 0
-material = SubResource("ShaderMaterial_18c0x")
+material = SubResource("ShaderMaterial_820ef")
 position = Vector2(1669, 424)
 
 [node name="DancingCard2" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
-material = SubResource("ShaderMaterial_3ew8u")
+material = SubResource("ShaderMaterial_rf05g")
 position = Vector2(444, 674)
 
 [node name="DancingCard3" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]

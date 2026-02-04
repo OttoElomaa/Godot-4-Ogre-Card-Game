@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="1_718ti"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="2_belcu"]
-[ext_resource type="Script" uid="uid://b2femu4hqkqb8" path="res://GameScenes/Typewriter.gd" id="2_k08e2"]
+[ext_resource type="Script" uid="uid://b2femu4hqkqb8" path="res://GameScenes/MainMenu/Typewriter.gd" id="2_k08e2"]
 [ext_resource type="AudioStream" uid="uid://dhuojolt6ampg" path="res://Audio/SE/Text_Typing.wav" id="3_belcu"]
 
 [node name="TypewriterTextbox" type="PanelContainer"]

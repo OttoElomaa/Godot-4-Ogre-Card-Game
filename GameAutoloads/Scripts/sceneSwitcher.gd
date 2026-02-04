@@ -59,5 +59,5 @@ func switchToStoredScene():
 
 
 func returnToMainMenu():
-	switchToNewSceneFromFile("res://GameScenes/MainMenu.tscn")
+	switchToNewSceneFromFile("res://GameScenes/MainMenu/MainMenu.tscn")
 	

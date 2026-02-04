@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://pd7or3cigyqn"]
 
-[ext_resource type="Script" uid="uid://cf5dhx4ni7a14" path="res://GameScenes/dancing_cards.gd" id="1_h4r8x"]
-[ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/typewriter_textbox.tscn" id="2_s7wik"]
+[ext_resource type="Script" uid="uid://cf5dhx4ni7a14" path="res://GameScenes/MainMenu/dancing_cards.gd" id="1_h4r8x"]
+[ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/MainMenu/typewriter_textbox.tscn" id="2_s7wik"]
 [ext_resource type="Script" uid="uid://bn1ridkmecocv" path="res://GameScenes/MainMenu/card_container_toy.gd" id="3_66xn2"]
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="4_66xn2"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_uvdeu"]
