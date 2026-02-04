@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://drnejrg0lhyf1"]
 
-[ext_resource type="Script" uid="uid://wm8q41etpwli" path="res://GameScenes/DeckEditScreen/card_container_draggable.gd" id="1_wjdic"]
-[ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="2_nd4cv"]
-[ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="3_xq3cd"]
-[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_w72ds"]
-[ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_lfnvi"]
-[ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="6_kedjl"]
-[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="9_8jiv1"]
-[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="10_rkj34"]
-[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="11_ry028"]
+[ext_resource type="Script" uid="uid://wm8q41etpwli" path="res://GameScenes/DeckEditScreen/card_container_draggable.gd" id="1_wl57w"]
+[ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="2_kwypy"]
+[ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="3_f0ver"]
+[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_whp3h"]
+[ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_dwmew"]
+[ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="6_0l8ik"]
+[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="7_hgwgn"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="8_oyvft"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="9_3mglb"]
 
 [node name="CardContainer" type="MarginContainer"]
 custom_minimum_size = Vector2(130, 200)
@@ -17,7 +17,7 @@ offset_top = -89.0
 offset_right = 75.0
 offset_bottom = 111.0
 pivot_offset = Vector2(55, 89)
-script = ExtResource("1_wjdic")
+script = ExtResource("1_wl57w")
 
 [node name="Frontside" type="Node2D" parent="."]
 position = Vector2(50, 76)
@@ -27,24 +27,24 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(10, 12)
 
 [node name="Creature" type="Sprite2D" parent="Frontside/Background"]
-texture = ExtResource("2_nd4cv")
+texture = ExtResource("2_kwypy")
 
 [node name="Spell" type="Sprite2D" parent="Frontside/Background"]
 visible = false
-texture = ExtResource("3_xq3cd")
+texture = ExtResource("3_f0ver")
 
 [node name="Art" type="Sprite2D" parent="Frontside"]
 texture_filter = 6
 position = Vector2(10, -61)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("4_w72ds")
+texture = ExtResource("4_whp3h")
 
 [node name="ManaCost" type="Node2D" parent="Frontside"]
 position = Vector2(10, -162)
 scale = Vector2(0.8, 0.8)
 
 [node name="ManaCostTexture" type="Sprite2D" parent="Frontside/ManaCost"]
-texture = ExtResource("5_lfnvi")
+texture = ExtResource("5_dwmew")
 
 [node name="ManaCostLabel" type="Label" parent="Frontside/ManaCost"]
 texture_filter = 1
@@ -60,7 +60,7 @@ offset_bottom = 28.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "88"
-label_settings = ExtResource("6_kedjl")
+label_settings = ExtResource("6_0l8ik")
 horizontal_alignment = 1
 
 [node name="EffectsLabel" type="Label" parent="Frontside"]
@@ -78,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 text = "Effect Text Goes Here"
-label_settings = ExtResource("9_8jiv1")
+label_settings = ExtResource("7_hgwgn")
 horizontal_alignment = 1
 autowrap_mode = 2
 text_overrun_behavior = 4
@@ -98,7 +98,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_styles/panel = ExtResource("10_rkj34")
+theme_override_styles/panel = ExtResource("8_oyvft")
 
 [node name="HBox" type="HBoxContainer" parent="Frontside/Resources/Panel"]
 layout_mode = 2
@@ -108,19 +108,19 @@ alignment = 1
 [node name="PowerLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
 layout_mode = 2
 text = "22"
-label_settings = ExtResource("11_ry028")
+label_settings = ExtResource("9_3mglb")
 horizontal_alignment = 2
 
 [node name="DashLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
 layout_mode = 2
 text = "/"
-label_settings = ExtResource("11_ry028")
+label_settings = ExtResource("9_3mglb")
 horizontal_alignment = 1
 
 [node name="HealthLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
 layout_mode = 2
 text = "33"
-label_settings = ExtResource("11_ry028")
+label_settings = ExtResource("9_3mglb")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

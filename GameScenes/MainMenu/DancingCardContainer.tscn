@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bdbcbs5103ed3"]
 
-[ext_resource type="Script" uid="uid://dg0jpsurpxrxp" path="res://GameScenes/DeckEditScreen/card_container.gd" id="1_cie0n"]
+[ext_resource type="Script" uid="uid://dg0jpsurpxrxp" path="res://GameScenes/CardDisplayContainers/card_container.gd" id="1_cie0n"]
 
 [node name="DancingCardContainer" type="MarginContainer"]
 script = ExtResource("1_cie0n")

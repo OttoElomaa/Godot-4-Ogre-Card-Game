@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://came4na503n5s"]
 
-[ext_resource type="Script" uid="uid://dg0jpsurpxrxp" path="res://GameScenes/DeckEditScreen/card_container.gd" id="1_71q1e"]
+[ext_resource type="Script" uid="uid://dg0jpsurpxrxp" path="res://GameScenes/CardDisplayContainers/card_container.gd" id="1_71q1e"]
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="2_nd4cv"]
 [ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="3_xq3cd"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_w72ds"]
