@@ -322,34 +322,20 @@ func handleFinishDraggingCard() -> Node:
 	
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
-	c.cardsManager = self
-
-	######################################
-	#### SLOT STUFF
-	c.mySlot = slot
-	slot.toggleAvailable(false)
+	
 	
 	var originalPos = c.position	
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
 		await MyTools.moveCardTweening(c, originalPos, c.position)
-		if c.is_inside_tree():
-			c.reparent($EnemyBoard)
-		else:
-			$EnemyBoard.add_child(c)
-		
-		c.isEnemyCard = true
+		placeCardInSlotTwo(c, slot, true)
 		battleSystem.enemyMana -= c.manaCost
 	
 	#### PLAYER CARD. REPARENT AND TAKE MANA COST
 	else:
 		c.position = slot.position
-		if c.is_inside_tree():
-			c.reparent($PlayerBoard)
-		else:
-			$PlayerBoard.add_child(c)
-		c.isEnemyCard = false
+		placeCardInSlotTwo(c, slot, false)
 		battleSystem.playerMana -= c.manaCost
 	
 	c.setup(main)
@@ -377,56 +363,26 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	return true
 
 
-
-
-#func handlePlaceChampionInSlot(c:Card):
-	#c.cardsManager = self
-	#var mySlot: Node2D = null
-	#
-	#if not c.isEnemyCard:
-		#c.mySlot = $PlayerChampSlot
-		#battleSystem.playerMana -= c.manaCost
-	#else:
-		#c.mySlot = $EnemyChampSlot
-		#battleSystem.enemyMana -= c.manaCost
-	#
-	#var originalPos = c.global_position
-	#c.global_position = c.mySlot.global_position
-##	MyTools.moveCardTweening(c, originalPos, c.global_position)
-	#
-	#if c.is_inside_tree():
-		#c.reparent(mySlot)
-	#else:
-		#c.add_child(mySlot)
-	#updateHandCardsVisuals()
-#
-#
-#
-	#placePermanentInSlotTwo(c)
-	#return true
-
-
-#func placePermanentInSlotTwo(c:Card):
-	#
-	#
-	###############################################
-	##### VISUAL STUFF
-	#c.scale = Vector2.ONE
-	#c.toggleFrontSide(true)
-	#
-	##### SET ACTION STATE AND TRAVEL STATE	
-	#c.toggleTraveling(true)
-	#
-	##### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
-	#c.setInitialActionState()
-	#
-	##### SETUP AND ACTIVATE ARRIVAL TRIGGERS
-	#c.handleArrival()
-	#
-	#battleSystem.updateResourceLabels()
-	#main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
+func placeCardInSlotTwo(c:Card, slot:CardSlot, isEnemy:bool):
+	c.cardsManager = self
+	var board:Node = null
+	######################################
+	#### SLOT STUFF
+	c.mySlot = slot
+	slot.toggleAvailable(false)
 	
-
+	#### HANDLE ENEMY STATUS
+	c.isEnemyCard = isEnemy
+	if isEnemy:
+		board = $EnemyBoard	
+	else:
+		board = $PlayerBoard
+	#### HANDLE PARENTING CARD INTO THE SCENE	
+	if c.is_inside_tree():
+		c.reparent(board)
+	else:
+		board.add_child(c)
+		
 
 
 #### INITIATE A HOVER CHECK
