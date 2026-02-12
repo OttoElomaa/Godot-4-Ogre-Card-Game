@@ -215,6 +215,34 @@ func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
 	$Portraits/PlayerManaLabel.text = "%d" % playerMana
 	$Portraits/EnemyHealthLabel.text = "%d" % enemyHealth
 	$Portraits/EnemyManaLabel.text = "%d" % enemyMana
+	
+	#### PLAYER MANA VISUALS
+	for icon in $Portraits/ManaHBox.get_children():
+		icon.queue_free()   #### CLEAR OLD ONES
+	
+	#### COPY FULL OR DEPLETED GEM TEXTURE	
+	var iconToCopy:TextureRect = null
+	for i in range(15):
+		
+		#### PLAYER HAS THIS MUCH MANA
+		if (i+1) <= playerMana:
+			if (i+1) <= battleSystem.turnCount:  #### BASIC MANA
+				iconToCopy = $Portraits/ManaCopyingHBox/BlueGem
+			else:  #### ABOVE MAX MANA, SHOW EXTRA MANA - GREEN
+				iconToCopy = $Portraits/ManaCopyingHBox/GreenGem
+				
+		#### PLAYER HAS NO MORE MANA TO SHOW
+		else:
+			if (i+1) <= battleSystem.turnCount:  #### SHOW DEPLETED MANA MANA
+				iconToCopy = $Portraits/ManaCopyingHBox/DepletedGem
+			else:   #### ABOVE MAX MANA, SHOW NOTHING
+				iconToCopy = null
+		
+		if iconToCopy:
+			var newIcon = iconToCopy.duplicate()
+			$Portraits/ManaHBox.add_child(newIcon)
+			newIcon.show()
+			
 
 
 func playerChampion() -> Card:
