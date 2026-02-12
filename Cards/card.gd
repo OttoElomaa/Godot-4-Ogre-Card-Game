@@ -352,11 +352,6 @@ func handleArrival():
 	var params = SignalParams.new()
 	params.sourceCard = self
 	SignalBus.arrival.emit(params)
-#	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
-	
-	#if hasShadow:
-		#countersNode.togglePhased(true)
-		#statesPassive()
 	handleTurnStartReset()
 	updateCardVisuals()
 

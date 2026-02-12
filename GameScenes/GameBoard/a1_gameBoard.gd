@@ -271,13 +271,6 @@ func nuke_all_cards():
 	nuke_cards($CardsManager/EnemyHand)
 	nuke_cards($CardsManager/EnemyBoard)
 
-func add_card_to_board(to, card:Card):
-	if to == 'player':
-		$PlayerSlots/TableCardSlot.add_child(card)
-	elif to == 'enemy':
-		$CardsManager/EnemyHand.add_child(card)
-	else:
-		print('WTF MAN?')
 
 
 func endGame(isWin:bool):
@@ -293,8 +286,6 @@ func endGame(isWin:bool):
 		
 	
 	
-
-
 func buttonPressedEndMatch() -> void:
 	if GameInfo.currentZone:
 		GameInfo.currentZone.visualsUpdateNeeded = true
