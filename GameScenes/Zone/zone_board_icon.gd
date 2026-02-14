@@ -1,4 +1,4 @@
-extends Node2D
+extends ZoneNode
 class_name ZoneBattleIcon
 
 var zone:Node = null
@@ -27,11 +27,11 @@ enum presummon_sparsities {FEW, ## 0-1 object.
 @export var presummon_sparcity = presummon_sparsities.FEW ## How many objects will be presummoned.
 
 
-
 func setup(zone:Node):
 	self.zone = zone
+	node_name = board_name
+	node_comments = board_comments
 	toggleHoverInfo(false)
-
 
 
 func createDeck():
@@ -57,7 +57,6 @@ func createDeck():
 	board.turn_1_init()
 
 
-
 func presummon(isEnemyCard):
 	var amount : int = 0
 	
@@ -78,39 +77,17 @@ func presummon(isEnemyCard):
 		board.add_card_to_random_slot(card, isEnemyCard)
 
 
-
 #func enterBattle():
 	#SceneSwitcher.switchToNewScene(board)
-
 
 #### START THE PRE-BATTLE PROCESS IN ORDER TO FIGHT A BATTLE
 func _on_area_2d_input_event(viewport, event:InputEvent, shape_idx):
 	if event.is_action_pressed("LMB"):
+		insta_resolve()
 		GameInfo.currentBattleInfo = self
 		GameInfo.currentZone = zone
 		zone.openPrebattle(self)
 
-
-func _on_area_2d_mouse_entered() -> void:
-	toggleHoverInfo(true)
-
-
-func _on_area_2d_mouse_exited() -> void:
-	toggleHoverInfo(false)
-
-
-func toggleHoverInfo(enable:bool):
-	if enable:
-		$InfoPanel.show()
-		$InfoPanel/HBox/NameLabel.text = board_name
-		$InfoPanel/HBox/DescLabel.text = board_comments
-	else:
-		$InfoPanel.hide()
-
-
-
-func showCompletionState():
+func update_state():
 	if board_name in GameInfo.playerWonBattleNames:
-		$ClearedOverlay.show()
-	else:
-		$ClearedOverlay.hide()
+		resolve()

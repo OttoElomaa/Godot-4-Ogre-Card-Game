@@ -6,5 +6,5 @@
 script = ExtResource("1_ef3uk")
 isPermanent = true
 id = "Apathetic"
-description = "This creature will not attack, cast or retaliate."
+description = "This card will not attack, cast or retaliate."
 metadata/_custom_type_script = "uid://cyai5jj2rdnj4"

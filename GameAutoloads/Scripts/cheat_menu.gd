@@ -13,7 +13,9 @@ var found_card: Card
 @onready var topMenu := $GameBoard_Cheats/TopMenu
 
 var cardEditorVisible := false
+var zoneCheatsVisible := false
 
+var insta_resolve = false
 
 
 func _ready():
@@ -24,9 +26,12 @@ func _ready():
 
 func _input(event):
 	if event.is_action_released("CheatButton"):
-		get_current_scene()
-		toggleCardEditor(!cardEditorVisible)
-
+		match get_current_scene():
+			'GameBoard':
+				toggleCardEditor(!cardEditorVisible)
+			'Zone':
+				toggleZoneCheats()
+		
 
 func toggleCardEditor(toShow:bool):
 	if toShow:
@@ -41,13 +46,16 @@ func toggleCardEditor(toShow:bool):
 
 	cardEditorVisible = toShow
 
-	
+func toggleZoneCheats():
+	$GameBoard_Cheats/ZoneCheats.visible = !zoneCheatsVisible
+		
 
 func get_current_scene():
 	current_scene = get_tree().root.get_child(len(get_tree().root.get_children()) - 1)
 	if current_scene.name == 'GameBoard':
 		$GameBoard_Cheats.visible = true
 		conj_card()
+	return current_scene.name
 
 ###########################################################################################
 # GameBoard Cheats
@@ -141,3 +149,9 @@ func _on_to_player_hand_2_pressed():
 	if found_card:
 		_on_search_card_name_text_changed()
 		MyTools.addCardToHand(found_card.duplicate(), true)
+
+
+##### ZONE CHEATS
+
+func _on_check_box_toggled(toggled_on):
+	insta_resolve = toggled_on

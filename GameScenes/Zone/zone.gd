@@ -55,7 +55,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if visualsUpdateNeeded:
 		updateZoneVisuals()
-		visualsUpdateNeeded = false	
+		visualsUpdateNeeded = false
 
 
 func updateZoneVisuals():
@@ -69,6 +69,7 @@ func updateZoneVisuals():
 	
 	for gameBoard:ZoneBattleIcon in gameBoards:
 		gameBoard.toggleHoverInfo(false)
+		gameBoard.update_state()
 		gameBoard.showCompletionState()
 	
 	
@@ -127,7 +128,6 @@ func startGameBoardBattle(enemyCards:Array):
 func buttonPressedTravel():
 	
 	SceneSwitcher.switchToNewSceneFromFile(travelScreenStr)
-
 
 
 func buttonPressedDeckEdit() -> void:

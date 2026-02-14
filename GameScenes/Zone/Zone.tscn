@@ -53,13 +53,13 @@ offset_bottom = 230.0
 [node name="GameBoards" type="Node2D" parent="Zones"]
 position = Vector2(1012, 654)
 
-[node name="Board1" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
+[node name="Board1" parent="Zones/GameBoards" node_paths=PackedStringArray("unlock_on_resolve") instance=ExtResource("2_rmpmb")]
 top_level = true
 z_index = 6
 position = Vector2(975, 333)
 board_name = "Vineyards"
 game_board = ExtResource("4_87jt2")
-board_comments = "Raging Vinemen skitter among shadows! 
+board_comments = "Raging Vinemen skitter among shadoofs! 
 Beware -- they possess a vile Ritual!"
 deck_cards = Dictionary[PackedScene, int]({
 ExtResource("4_s5tl3"): 4,
@@ -70,6 +70,8 @@ ExtResource("8_umgh5"): 4
 presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
 enemy_presummon = true
 presummon_sparcity = 2
+start_unlocked = true
+unlock_on_resolve = [NodePath("../Board2"), NodePath("../Board3")]
 
 [node name="Board2" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
 position = Vector2(406, -18)

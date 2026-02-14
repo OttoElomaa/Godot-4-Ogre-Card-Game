@@ -1,7 +1,4 @@
-[gd_resource type="JSON" format=3 uid="uid://bl4n2f1nsfqqa"]
-
-[resource]
-data = {
+{
 "arrive": "Triggers when this card is summoned from the hand.",
 "battle art": "Triggers when a card attacks an enemy.",
 "blocking": "Non-blocking cards cannot be attacked while there is at least one blocking card.",

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bximmd3lmqd2k"]
+
+[ext_resource type="Script" uid="uid://cyai5jj2rdnj4" path="res://CardScriptsAndComponents/Scripts/keyword.gd" id="1_apes2"]
+
+[node name="Primordial" type="Node2D"]
+script = ExtResource("1_apes2")
+description = "This card will not recover health at the start of its turn."
+metadata/_custom_type_script = "uid://cyai5jj2rdnj4"

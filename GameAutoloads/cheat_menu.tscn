@@ -199,6 +199,17 @@ text = "To Foe >"
 layout_mode = 2
 text = "To You >"
 
+[node name="ZoneCheats" type="MarginContainer" parent="GameBoard_Cheats"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameBoard_Cheats/ZoneCheats"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="GameBoard_Cheats/ZoneCheats/VBoxContainer"]
+layout_mode = 2
+text = "Insta-resolve"
+
 [connection signal="pressed" from="GameBoard_Cheats/TopMenu/HBox/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
 [connection signal="text_changed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/SearchCardName" to="." method="_on_search_card_name_text_changed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/ToFoe2" to="." method="_on_to_foe_2_pressed"]
@@ -209,3 +220,4 @@ text = "To You >"
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/AddKeyword" to="." method="_on_add_keyword_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/ToFoe" to="." method="_on_to_foe_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/ToYou" to="." method="_on_to_you_pressed"]
+[connection signal="toggled" from="GameBoard_Cheats/ZoneCheats/VBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
