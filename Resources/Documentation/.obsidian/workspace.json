@@ -30,15 +30,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Map Scenario Structure.canvas",
+                "file": "Scenarios/Green Ray at the Vineyards.canvas",
                 "viewState": {
-                  "x": 232.83312182741122,
-                  "y": -48.37880710659897,
-                  "zoom": -0.3687612596972333
+                  "x": 208,
+                  "y": 1226.5,
+                  "zoom": 0
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Map Scenario Structure"
+              "title": "Green Ray at the Vineyards"
             }
           }
         ],
@@ -192,8 +192,24 @@
   },
   "active": "dc56f90bb9b0f1a6",
   "lastOpenFiles": [
-    "BattleAI and Turn Order.canvas",
-    "Card Creation Process.canvas",
-    "Map Scenario Structure.canvas"
+    "Cards/Green Defiance/Grove Clans.canvas",
+    "Scenarios/Green Ray at the Vineyards.canvas",
+    "Scenarios",
+    "Cards/Green Defiance/Gharch.canvas",
+    "Cards/Desert/Salkhi Horde.canvas",
+    "Cards/Desert/Pyrecallers.canvas",
+    "Cards/Desert/Pilgrims.canvas",
+    "Cards/Desert/High Kingdom.canvas",
+    "Cards/City/Throne.canvas",
+    "Cards/City/Slaves.canvas",
+    "Cards/City/Priests.canvas",
+    "Cards/City/Guilds.canvas",
+    "Cards/Outcasts",
+    "Cards/Desert",
+    "Cards/City/Untitled.md",
+    "Cards/City",
+    "Cards/Green Defiance/Untitled.md",
+    "Cards/Green Defiance",
+    "Cards"
   ]
 }

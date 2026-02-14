@@ -15,11 +15,17 @@ func _ready():
 	visible = unlocked
 	update_state()
 
+
+### A Zone Node is resolved after accomplishing its functon. For example,
+### a battle node is resolved when a battle is won, and a dialog node is resolved
+### when the conversation within it is completed.
 func resolve():
 	resolved = true
 	showCompletionState()
 	unlock_connected()
 
+### A Zone Node is visible when unlocked. Nodes can be unlocked at the start,
+### by resolving other nodes, or by making right dialogue choices.
 func unlock():
 	visible = true
 	
@@ -48,6 +54,8 @@ func unlock_connected():
 func update_state():
 	pass
 
+### If 'insta-resolve' is checked in the Cheat menu, this will resolve the node
+### when it's run.
 func insta_resolve():
 	if Cheat.insta_resolve == true:
 		resolve()

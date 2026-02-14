@@ -1,0 +1,36 @@
+{
+	"nodes":[
+		{"id":"2826ed53fedefbe2","type":"text","text":"Kudzu Giant","x":-525,"y":92,"width":171,"height":60},
+		{"id":"dec72c7e7dd2d176","type":"text","text":"Jade Vineman","x":-525,"y":-32,"width":171,"height":60},
+		{"id":"951db7db5dfa1a52","type":"text","text":"Cast: add 1 mana.","x":-80,"y":-32,"width":200,"height":60},
+		{"id":"f31252117aca368e","type":"text","text":"Epic Creature","x":-289,"y":92,"width":129,"height":60},
+		{"id":"731486e45928ddb3","type":"text","text":"Cast: summon 1 Kudzu Man for 2 mana. It has Haste","x":-80,"y":92,"width":250,"height":60},
+		{"id":"ceee5daa8130c3bf","type":"text","text":"Liana Man","x":-525,"y":200,"width":171,"height":60},
+		{"id":"e888642f6109b8cf","type":"text","text":"Common\nCreature","x":-289,"y":-44,"width":120,"height":85},
+		{"id":"04551849e52e2840","type":"text","text":"Rare Creature","x":-289,"y":200,"width":145,"height":60},
+		{"id":"1c6eb3b1ef02b813","type":"text","text":"On enemy arrival: inflict 2 on the arriving creature.","x":-80,"y":200,"width":250,"height":60},
+		{"id":"122345dca719ddd0","type":"text","text":"Kudzu Man","x":-525,"y":300,"width":171,"height":60},
+		{"id":"9685c132cfc0ce72","type":"text","text":"Rare Creature","x":-291,"y":300,"width":134,"height":60},
+		{"id":"08c134997bfbe487","type":"text","text":"Has stats equal to the highest among Vineman allies.","x":-80,"y":285,"width":260,"height":91},
+		{"id":"7268137ad96325aa","type":"text","text":"Main Mechanics:\nMana Gain, Self-Reproduction, Vine Trap.\nWeaknesses:\nBad Offense","x":-525,"y":-300,"width":390,"height":129},
+		{"id":"6b886d311816ad7f","type":"text","text":"Types: Wild Vineman","x":-103,"y":-265,"width":250,"height":60},
+		{"id":"f8f98aaddc7f6c6b","type":"text","text":"Procreate","x":-527,"y":420,"width":176,"height":60},
+		{"id":"f0173495e55286f1","type":"text","text":"Rare Ritual","x":-294,"y":420,"width":137,"height":60},
+		{"id":"d8fb3095d4ec34f1","type":"text","text":"Create a copy of a chosen Wild ally and add it to your hand.","x":-75,"y":403,"width":250,"height":95},
+		{"id":"e3e804cb8262a301","type":"text","text":"\n| Vineman Elder      | Champion                                                                                                                                                                    |\n| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| Starting Abilities | Song of Lament: 2 LP. Permanently bolster an allied Vineman 0/+1. Can be used [level] times per turn. Song of Nourishment: Free. Drains all mana and recovers that much LP. |\n| Upgrade path 1.    | Adds an ability Song of Vengeance: 2 LP. Permanently bolster an allied Vineman +1/0. Can be used [level] times per turn.                                                    |\n| Upgrade path 2.    | Adds an ability Song of the Tangle: 4 LP. Inflict 1 Vine Trap on the opponent.                                                                                              |\n| Upgrade path 3.    | On turn: gain 1 Of One Mind if you have none. Each stack of Of One Mind grants Haste to the next summoned creature, then the effect is reduced by 1.                        |\n|                    | Art done                                                                                                                                                                    |","x":320,"y":-61,"width":828,"height":367},
+		{"id":"99387d7950ba5738","type":"text","text":"Vinemen have been brought forth by the anguish of the dying Feith, brother of the Mangrove Sun. Their culture is solely defined by remembering that event and preparing to exact revenge for it. They are generally slow to react, though their emotions and grudges stay with them for a long time. The Vinemen consider themselves to be above other races, but respond with violence to any intrusion into their jungle.\nTheir speaking style favors long sentences which remind one of Homer's poetry.","x":336,"y":422,"width":724,"height":178},
+		{"id":"90926d73bb0e3495","x":336,"y":661,"width":724,"height":159,"type":"text","text":"Kudzu is an apostate of the Vinemen who preferred an egoistical lifestyle to his kin's greater purpose. Kudzu mostly doesn't grant identity to its offshoots, through some manage to escape. The Kudzu Giant is an epic creature and can only be recruited in a special event. \nThe Kudzu speaks differently from other Vinemen, with each sentence being spoken from a different mouth, shown through parentheses."}
+	],
+	"edges":[
+		{"id":"2c8a35e9f2856c52","fromNode":"dec72c7e7dd2d176","fromSide":"right","toNode":"e888642f6109b8cf","toSide":"left"},
+		{"id":"e52de15df62c9a6d","fromNode":"e888642f6109b8cf","fromSide":"right","toNode":"951db7db5dfa1a52","toSide":"left"},
+		{"id":"9356f138a41a5ad9","fromNode":"2826ed53fedefbe2","fromSide":"right","toNode":"f31252117aca368e","toSide":"left"},
+		{"id":"6a20d19eb856f4f2","fromNode":"f31252117aca368e","fromSide":"right","toNode":"731486e45928ddb3","toSide":"left"},
+		{"id":"3832e2079ca7ca98","fromNode":"ceee5daa8130c3bf","fromSide":"right","toNode":"04551849e52e2840","toSide":"left"},
+		{"id":"e06beea707ada4d1","fromNode":"04551849e52e2840","fromSide":"right","toNode":"1c6eb3b1ef02b813","toSide":"left"},
+		{"id":"087c8fe676a66640","fromNode":"122345dca719ddd0","fromSide":"right","toNode":"9685c132cfc0ce72","toSide":"left"},
+		{"id":"bff366880d8bec28","fromNode":"9685c132cfc0ce72","fromSide":"right","toNode":"08c134997bfbe487","toSide":"left"},
+		{"id":"118f89b73d7f899e","fromNode":"f8f98aaddc7f6c6b","fromSide":"right","toNode":"f0173495e55286f1","toSide":"left"},
+		{"id":"634e748e7d325a83","fromNode":"f0173495e55286f1","fromSide":"right","toNode":"d8fb3095d4ec34f1","toSide":"left"}
+	]
+}
