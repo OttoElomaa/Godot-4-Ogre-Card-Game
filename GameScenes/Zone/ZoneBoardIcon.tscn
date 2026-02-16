@@ -22,6 +22,7 @@ border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 [node name="BattleIcon" type="Node2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_ge5wy")
+node_comments = "A battle awaits!"
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(0, 10)

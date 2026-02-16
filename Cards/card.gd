@@ -197,12 +197,8 @@ var allowInteract := true
 
 #region ######################################## STARTUP
 func _ready() -> void:
-	self.connect('visibility_changed', visibility_debug)
 	setup(null)
 	
-
-func visibility_debug():
-	print('Visibility changed!')
 	
 func setup_all_actions():
 	$Actions.setup(self)

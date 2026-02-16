@@ -32,7 +32,7 @@ cardName = "Knell"
 cardType = 1
 subTypeStr = "Spell"
 group = 3
-flavorText = "\"Extinction erases all... in all of Anghu, he alone presides over the skulls.\""
+flavorText = "\"Extinction erases all... in Anghu, he alone presides over the skulls.\""
 manaCost = 4
 
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("3_cva7b")]

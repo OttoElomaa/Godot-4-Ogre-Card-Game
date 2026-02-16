@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://b3qg4cl1qws0x"
+path="res://.godot/imported/Vineyards_Win_1.dialogue-83bda18947f04573ac1515ee10353008.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/Vineyards_Win_1.dialogue"
+dest_files=["res://.godot/imported/Vineyards_Win_1.dialogue-83bda18947f04573ac1515ee10353008.tres"]
+
+[params]
+
+defaults=true

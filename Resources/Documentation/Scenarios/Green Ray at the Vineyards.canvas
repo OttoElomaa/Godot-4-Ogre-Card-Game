@@ -1,0 +1,32 @@
+{
+	"nodes":[
+		{"id":"b414e9bb7f4252f5","type":"text","text":"Green Ray at the Vineyards","x":-47,"y":-341,"width":250,"height":60},
+		{"id":"0b44b97c4d38dbab","type":"text","text":"From afar, you can hear the commotion in the vineyards. There are screams and sounds of struggle.\n\nA slave runs out towards you, panting, blue in the face. Whip marks on his arms look recent and haphazard.\n\n(Display Militiaman card)\n\n“Master, I don’t know who you are… but I ask for your pity! The vines have come alive! Alive and very angry too!”\n\nIF DEFIANCE or VINEMAN ALLIES:\n\nWhat kind of tradition is it to steal away vines, to crucify them on trellises, to milk their life? It is no wonder that the vines came to desire freedom from their captors. If you are willing, it is your chance to assist their rebellion.","x":-267,"y":-240,"width":690,"height":380},
+		{"id":"c889d50c564defbb","type":"text","text":"Ask for details","x":-451,"y":245,"width":250,"height":60},
+		{"id":"0b6a9aa64658e252","type":"text","text":"Agree to help and press into the vineyards","x":-47,"y":245,"width":250,"height":60},
+		{"id":"873f59637b500241","type":"text","text":"Slay him and step into the vineyards","x":320,"y":245,"width":250,"height":60},
+		{"id":"3f3ecba48a77f48b","type":"text","text":"“When the sun turned all green at yesterday’s dusk, the elders said it was an ill omen. But no one thought it would be now, and like this!”\n\n“Do slay those monsters, Master! We have no one else to turn to now! It is not much, but you will have the little man’s gratitude if you do…”","x":-530,"y":380,"width":409,"height":205},
+		{"id":"4bc957e7bafc32d8","type":"text","text":"You agree to the man’s request and head into the vineyards.\n\nBefore you is a mess of violence: wild vines skittering around, slaves running in panic, tools littering the ground. Whatever caused this, the monsters must be put down.","x":-85,"y":367,"width":327,"height":231},
+		{"id":"d4d3758d4d023663","type":"text","text":"You draw your sword and slay the man then and there. You step into the vineyards.\n\nBefore you is a mess of violence: wild vines skittering around, slaves running in panic, tools littering the ground. A group of king’s men futilely stab at the vines, pressing at them from all directions.\n\n         Seeing your approach, their sergeant snarls:\n\n         “Just our damned luck. Bring it, you vagabonds! The King shan’t let us perish here.”","x":260,"y":367,"width":371,"height":373},
+		{"id":"c5c6b2ef98eba829","type":"text","text":"Unlock Battle Node: Throne","x":320,"y":800,"width":250,"height":50},
+		{"id":"e570d5ddcf6c310b","type":"text","text":"Unlock Battle Node: Vinemen","x":-47,"y":790,"width":250,"height":60},
+		{"id":"d7c606f178b50a3a","type":"text","text":"(Display Spartacus card)\n\n         A strong, well-built slave approaches you, with dignity almost like that of a free man. Looking straight into your eye, he speaks:\n\n         “You have done a service for us, the little men. Our lives come cheap; few would fret for them as you did. In time, we shall be strong enough to repay you in full. Now, at my word, any of us would fight alongside you, not by coercion, but by choice.”\n\n         ~Add alliance: Slaves","x":-112,"y":940,"width":380,"height":360},
+		{"id":"d355739d7187aa55","type":"text","text":"The King’s Men are brought down. The slaves scatter and hide, you do not pursue them. Exultant Vinemen dance and chant all around you, their once-rigid limbs swinging everywhere. Eventually, their dance slows, and one Vineman approaches you.\n\n         (Display Jade Vineman card)\n\n         “Ah, I thank you, kind one, for the service you rendered us – we were, in truth, plenty scared when we could hear all of a sudden, and heard our kin calling. These men – they reap and rend us with sickles, do they not? It is better then that they are gone.\n\n         We have heard the call of home, and of our distant, orphaned kin. The Mangrove Sun… how could we have so soundly slept! Know this, o kind one: we Vinemen fight with you now, one with the vengeance, for the joy of sight and hearing.”\n\n         ~Add alliance: Vinemen","x":320,"y":940,"width":573,"height":440},
+		{"id":"58c7c767073d3942","type":"text","text":"Unlock nodes: recruitment, exit.","x":74,"y":1535,"width":250,"height":60}
+	],
+	"edges":[
+		{"id":"c892bc796e5ac5e1","fromNode":"b414e9bb7f4252f5","fromSide":"bottom","toNode":"0b44b97c4d38dbab","toSide":"top"},
+		{"id":"70cfd4c132de716a","fromNode":"0b44b97c4d38dbab","fromSide":"bottom","toNode":"c889d50c564defbb","toSide":"top"},
+		{"id":"24e5e526bd2625fa","fromNode":"0b44b97c4d38dbab","fromSide":"bottom","toNode":"0b6a9aa64658e252","toSide":"top"},
+		{"id":"42f49fbf071e4712","fromNode":"0b44b97c4d38dbab","fromSide":"bottom","toNode":"873f59637b500241","toSide":"top"},
+		{"id":"9a5b9f80e569f18d","fromNode":"c889d50c564defbb","fromSide":"bottom","toNode":"3f3ecba48a77f48b","toSide":"top"},
+		{"id":"8f7b33aa626fb8d0","fromNode":"0b6a9aa64658e252","fromSide":"bottom","toNode":"4bc957e7bafc32d8","toSide":"top"},
+		{"id":"613d329e2b856489","fromNode":"873f59637b500241","fromSide":"bottom","toNode":"d4d3758d4d023663","toSide":"top"},
+		{"id":"d360b079af9fca6c","fromNode":"d4d3758d4d023663","fromSide":"bottom","toNode":"c5c6b2ef98eba829","toSide":"top"},
+		{"id":"2de5ad6f99becbec","fromNode":"4bc957e7bafc32d8","fromSide":"bottom","toNode":"e570d5ddcf6c310b","toSide":"top"},
+		{"id":"cf5e6896f81202c1","fromNode":"e570d5ddcf6c310b","fromSide":"bottom","toNode":"d7c606f178b50a3a","toSide":"top"},
+		{"id":"562b127e0f49a477","fromNode":"c5c6b2ef98eba829","fromSide":"bottom","toNode":"d355739d7187aa55","toSide":"top"},
+		{"id":"1878ca602782faf0","fromNode":"d355739d7187aa55","fromSide":"bottom","toNode":"58c7c767073d3942","toSide":"top"},
+		{"id":"cff98fe7497fea65","fromNode":"d7c606f178b50a3a","fromSide":"bottom","toNode":"58c7c767073d3942","toSide":"top"}
+	]
+}

@@ -38,7 +38,7 @@ func _ready() -> void:
 func setup(gameBoard):
 	self.main = gameBoard
 	self.battleSystem = main.battleSystem
-
+	print('Card manager sets up')
 	##################################################
 	#### SETUP PLAYER CARDS
 	var playerDeckCards:Array = GameInfo.playerDeckCards

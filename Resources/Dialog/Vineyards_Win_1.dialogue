@@ -1,0 +1,7 @@
+~ start
+A strong, well-built slave approaches you, with dignity almost like that of a free man. Looking straight into your eye, he speaks:
+“You have done a service for us, the little men. Our lives come cheap; few would fret for them as you did. In time, we shall be strong enough to repay you in full. Now, at my word, any of us would fight alongside you, not by coercion, but by choice.”
+
+do GameInfo.playerAlliances.append('Slaves')
+
+=> END

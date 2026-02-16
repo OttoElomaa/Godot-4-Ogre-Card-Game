@@ -14,15 +14,15 @@ var preBattleWindow:Node = null
 
 ##################################
 
-@onready var zoneNameLabel:Label = $CanvasLayer/ZoneInfoPanel/Panel/HBox/ZoneNameLabel
+@onready var zoneNameLabel:Label = $UI/ZoneInfoPanel/Panel/HBox/ZoneNameLabel
 
-@onready var heroNameLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox/HeroNameLabel
-@onready var heroPortrait:TextureRect = $CanvasLayer/PlayerInfoPanel/VBox/PanelContainer/HeroPortrait 
+@onready var heroNameLabel:Label = $UI/PlayerInfoPanel/VBox/Panel/HBox/HeroNameLabel
+@onready var heroPortrait:TextureRect = $UI/PlayerInfoPanel/VBox/PanelContainer/HeroPortrait 
 
-@onready var gloryAmountLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox/GloryAmountLabel
-@onready var livesAmountLabel:Label = $CanvasLayer/PlayerInfoPanel/VBox/LivesPanel/HBox/LivesLabel
+@onready var gloryAmountLabel:Label = $UI/PlayerInfoPanel/VBox/Panel2/HBox/GloryAmountLabel
+@onready var livesAmountLabel:Label = $UI/PlayerInfoPanel/VBox/LivesPanel/HBox/LivesLabel
 
-@onready var actionButtonsHbox:HBoxContainer = $CanvasLayer/BottomActions/VBox/ButtonsHBox
+@onready var actionButtonsHbox:HBoxContainer = $UI/BottomActions/VBox/ButtonsHBox
 
 var gameBoards: Array:
 	get:
@@ -33,7 +33,7 @@ var visualsUpdateNeeded := false
 var actionName := ""
 var actionDesc := ""
 
-@onready var labelsHbox:HBoxContainer = $CanvasLayer/BottomActions/VBox/Description/MarginContainer/HBox
+@onready var labelsHbox:HBoxContainer = $UI/BottomActions/VBox/Description/MarginContainer/HBox
 var actionNameLabel:Label:
 	get:
 		return labelsHbox.get_node("ActionNameLabel")
@@ -46,8 +46,11 @@ func _ready() -> void:
 	for actionButton in actionButtonsHbox.get_children():
 		actionButton.setup(self)
 	
-	for gameBoard:ZoneBattleIcon in gameBoards:
-		gameBoard.setup(self)
+	for gameBoard:ZoneNode in gameBoards:
+		await gameBoard.setup(self)
+	
+	SignalBus.connect('unlock_node', unlockNode)
+	SignalBus.connect('resolve_node', resolveNode)
 	
 	updateZoneVisuals()
 
@@ -55,7 +58,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if visualsUpdateNeeded:
 		updateZoneVisuals()
-		visualsUpdateNeeded = false	
+		visualsUpdateNeeded = false
 
 
 func updateZoneVisuals():
@@ -67,8 +70,9 @@ func updateZoneVisuals():
 	gloryAmountLabel.text = "%d" % GameInfo.playerGlory
 	livesAmountLabel.text = "%d" % GameInfo.playerLives
 	
-	for gameBoard:ZoneBattleIcon in gameBoards:
+	for gameBoard:ZoneNode in gameBoards:
 		gameBoard.toggleHoverInfo(false)
+		gameBoard.update_state()
 		gameBoard.showCompletionState()
 	
 	
@@ -129,12 +133,9 @@ func buttonPressedTravel():
 	SceneSwitcher.switchToNewSceneFromFile(travelScreenStr)
 
 
-
 func buttonPressedDeckEdit() -> void:
 	GameInfo.isPreBattle = false
-	SceneSwitcher.switchToNewSceneFromFile(deck_edit_str)
-
-
+	MyTools.openDeckEdit()
 
 func openPrebattle(b_node:Node2D):
 	preBattleWindow = PreBattleScreen.instantiate()
@@ -145,3 +146,18 @@ func openPrebattle(b_node:Node2D):
 func closePrebattle():
 	if preBattleWindow:
 		preBattleWindow.queue_free()
+
+func toggleUI():
+	var UI = [%Zones, %UI]
+	for i:CanvasLayer in UI:
+		i.visible = !i.visible
+
+func unlockNode(zoneNodeID:String):
+	for child:ZoneNode in %GameBoards.get_children():
+		if child.name == zoneNodeID: 
+			child.unlock()
+
+func resolveNode(zoneNodeID:String):
+	for child:ZoneNode in %GameBoards.get_children():
+		if child.name == zoneNodeID: 
+			child.resolve()

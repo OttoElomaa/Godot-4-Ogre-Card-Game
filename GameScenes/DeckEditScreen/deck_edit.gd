@@ -1,24 +1,30 @@
-extends Node2D
+extends CanvasLayer
 @onready var CardContainer = preload("res://GameScenes/DeckEditScreen/card_container_draggable.tscn")
 @onready var CardPanel = preload("res://GameScenes/DeckEditScreen/card_panel.tscn")
-@onready var ownedCardsContainer = $CanvasLayer2/Panel/Scroll/MarginContainer/OwnedCardsContainer
-@onready var activeCardsContainer = $CanvasLayer/NinePatchRect/VBoxContainer/ActiveCardsContainer
-@onready var cardInfoPanel = $CardInfoPanel
+@onready var ownedCardsContainer = %OwnedCardsContainer
+@onready var activeCardsContainer = %ActiveCardsContainer
+@onready var cardInfoPanel = %CardInfoPanel
+
+var prepared_board: GameBoard = null
 
 
 func _ready():
+#	prepared_board = null
 	create_containers()
 	activeCardsContainer.connect("updated", create_containers)
 	ownedCardsContainer.connect("updated", create_containers)
-	
-	#### DO WE SHOW "Proceed" BUTTON
-	if GameInfo.isPreBattle:
-		$Buttons/VBox/Proceed.show()	
+	if prepared_board is GameBoard:
+		%Proceed.show()
 	else:
-		$Buttons/VBox/Proceed.hide()
+		%Proceed.hide()
 		
-	
-	
+func setup(board:GameBoard):
+	print('Deck Edit Sets Up. Board is ', board)
+	prepared_board = board
+	if prepared_board is GameBoard:
+		%Proceed.show()
+	else:
+		%Proceed.hide()
 
 func create_containers():
 	#### EMPTY THE CARD LISTS BEFORE FILLING THEM
@@ -38,15 +44,21 @@ func create_containers():
 		new_cont.card = i
 		activeCardsContainer.add_child(new_cont)
 		
-	$"CanvasLayer/NinePatchRect/VBoxContainer/PanelContainer/#CardsInDeck".text = str(GameInfo.playerDeckCards.size(), " / 10")
+	%"#CardsInDeck".text = str(GameInfo.playerDeckCards.size(), " / 10")
 	#$ProceedButton.disabled = GameInfo.playerDeckCards.size() < 10
 
 
 func _on_proceed_button_button_up():
 	GameInfo.isPreBattle = false
-	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/GameBoard/GameBoard.tscn")
+	MyTools.closeDeckEdit()
+	SceneSwitcher.switchToNewScene(prepared_board)
+	await get_tree().process_frame
+	prepared_board.setup_board()
+	prepared_board.turn_1_init()
+	prepared_board = null
+
 
 
 func _button_up_back_to_world() -> void:
 	GameInfo.isPreBattle = false
-	SceneSwitcher.switchToStoredScene()
+	MyTools.closeDeckEdit()

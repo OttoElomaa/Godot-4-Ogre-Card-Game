@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfstp05ql6ql0"]
+
+[ext_resource type="Script" uid="uid://cyai5jj2rdnj4" path="res://CardScriptsAndComponents/Scripts/keyword.gd" id="1_iqknw"]
+
+[node name="Fatigation" type="Node2D"]
+script = ExtResource("1_iqknw")
+isPermanent = true
+id = "Fatigation"
+description = "Every time this card is summoned, its mana cost increases by 1 for the rest of the battle."
+metadata/_custom_type_script = "uid://cyai5jj2rdnj4"

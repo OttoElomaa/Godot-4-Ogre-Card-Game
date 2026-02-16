@@ -8,6 +8,8 @@ var card: Card = null
 func _ready():
 	pass
 
+
+## Puts a Card-class object into the container.
 func insert_card(new_card:Card):
 	
 	card = new_card
@@ -30,6 +32,7 @@ func insert_card(new_card:Card):
 		
 	remove_child(card)
 
+## Puts a PackedScene-type object into the container.
 func display_card(new_card:PackedScene):
 	
 	var card = new_card.instantiate()

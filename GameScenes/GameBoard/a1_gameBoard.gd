@@ -54,15 +54,10 @@ func _ready() -> void:
 	##################################
 	States.statesPlay()
 	
+	setup_board()
 	#### THIS FUNC SETS UP PLAYER AND ENEMY DECKS BASED ON GameInfo
-	$CardsManager.setup(self)
-	
-	$BattleSystem.main = self
-	$BattleSystem.cardsManager = $CardsManager
-	
-	MyTools.gameBoardSetup(self)
-	turn_1_init()
-	
+
+#	turn_1_init()
 	###################################################
 	#### UI STUFF
 	$CanvasLayer/GameOverPane.hide()
@@ -78,6 +73,13 @@ func _ready() -> void:
 		slot.slotType = CardSlotTypes.ENEMY
 
 
+func setup_board():
+	$CardsManager.setup(self)
+	
+	$BattleSystem.main = self
+	$BattleSystem.cardsManager = $CardsManager
+	
+	MyTools.gameBoardSetup(self)
 
 func _unhandled_input(e: InputEvent) -> void:
 	if e is InputEventMouseButton: 
@@ -91,6 +93,10 @@ func add_card_to_random_slot(card:Card, isEnemyCard:bool):
 	var empty_slots = MyTools.findEmptyCardSlots(isEnemyCard)
 	var slot = empty_slots.pick_random()
 	cardsManager.handlePlaceCardInSlot(card, slot)
+
+func add_card_to_enemy_deck(card:Card):
+	$CardsManager/EnemyDeck.add_child(card)
+	card.setup(self)
 
 func turn_1_init():
 	cardsManager.dealEnemyHand()

@@ -1,0 +1,7 @@
+{
+	"nodes":[
+		{"id":"0116f59e05e4ef65","x":-167,"y":-238,"width":250,"height":60,"type":"text","text":"These cards are not tied to any faction."},
+		{"id":"d557bae951a0c545","x":-279,"y":-76,"width":479,"height":256,"type":"text","text":"|   |   |   |   |   |\n|---|---|---|---|---|\n|Name|Type|Effect|Visuals|Done?|\n|Blast|Ritual|Inflict 2 Burn.||Yes|\n|Wala|Ritual|Draw 2 Cards.||Yes|\n||||||"}
+	],
+	"edges":[]
+}
