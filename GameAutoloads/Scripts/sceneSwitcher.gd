@@ -56,8 +56,11 @@ func switchToStoredScene():
 	sceneTree.root.add_child(sceneToSwitchIntoB)
 	sceneTree.root.remove_child(storedSceneB)
 	
-
-
 func returnToMainMenu():
 	switchToNewSceneFromFile("res://GameScenes/MainMenu.tscn")
 	
+func openScene(newScene:Node):
+	getCurrentScene().add_child.call_deferred(newScene)
+
+func closeScene(Scene:Node):
+	getCurrentScene().remove_child.call_deferred(Scene)

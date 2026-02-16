@@ -6,11 +6,11 @@ extends MarginContainer
 @onready var flavorLabel := $MainPanel/Margin/MainHBox/Filler/VBox/FlavorLabel
 @onready var boardCommentsLabel := $MainPanel/Margin/MainHBox/Left/VBox/GB_Comments
 
-var battleInfoIcon:Node = null
+var battleInfoIcon:ZoneBattleIcon = null
 var enemyDeck := []
 
 
-func setup(icon:Node) -> void:
+func setup(icon:ZoneBattleIcon) -> void:
 	battleInfoIcon = icon
 	cardInfoPanel.bestiarySetup(self)  #### FOR SHOWING FLAVOR TEXT LABEL HERE
 	toggleWindow(true)
@@ -68,8 +68,10 @@ func cancelButtonPressed() -> void:
 
 
 func fightButtonPressed() -> void:
-	GameInfo.enemyDeckCards = enemyDeck
-	GameInfo.isPreBattle = true
 	
-	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/DeckEditScreen/DeckEdit.tscn")
+	var deck_edit = preload("res://GameScenes/DeckEditScreen/DeckEdit.tscn").instantiate()
+	battleInfoIcon.createDeck()
+	MyTools.setupAndOpenDeckEdit(battleInfoIcon.board)
+	
+	
 	queue_free()

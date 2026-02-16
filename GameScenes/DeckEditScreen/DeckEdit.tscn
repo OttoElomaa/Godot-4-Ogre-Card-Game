@@ -12,12 +12,69 @@
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="9_vyoq8"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="10_fk3a6"]
 
-[node name="DeckEdit" type="Node2D"]
+[node name="DeckEdit" type="CanvasLayer"]
+layer = 100
 script = ExtResource("1_2aanx")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Panel2" type="Panel" parent="."]
+show_behind_parent = true
+offset_right = 1920.0
+offset_bottom = 1088.0
+theme_override_styles/panel = ExtResource("9_vyoq8")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
+[node name="PanelContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1079.0
+
+[node name="Panel" type="PanelContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(800, 800)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -427.0
+offset_top = -439.5
+offset_right = 399.0
+offset_bottom = 386.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_wteh1")
+metadata/_edit_group_ = true
+
+[node name="Scroll" type="ScrollContainer" parent="PanelContainer/Panel"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Panel/Scroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_bottom = -25
+
+[node name="OwnedCardsContainer" type="GridContainer" parent="PanelContainer/Panel/Scroll/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 6
+script = ExtResource("4_2vaow")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/Panel"]
+layout_mode = 2
+texture = ExtResource("1_kjltk")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+layout_mode = 0
 offset_left = 49.0
 offset_top = 148.0
 offset_right = 503.0
@@ -30,7 +87,7 @@ patch_margin_bottom = 7
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/NinePatchRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,126 +95,87 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/NinePatchRect/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/NinePatchRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("7_wteh1")
 
-[node name="#CardsInDeck" type="Label" parent="CanvasLayer/NinePatchRect/VBoxContainer/PanelContainer"]
+[node name="#CardsInDeck" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "0 / 10"
 label_settings = ExtResource("4_xlhhm")
 horizontal_alignment = 1
 
-[node name="ActiveCardsContainer" type="VBoxContainer" parent="CanvasLayer/NinePatchRect/VBoxContainer"]
+[node name="ActiveCardsContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("3_2vaow")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-
-[node name="Panel" type="PanelContainer" parent="CanvasLayer2"]
-custom_minimum_size = Vector2(800, 800)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -427.0
-offset_top = -440.0
-offset_right = 399.0
-offset_bottom = 386.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("4_wteh1")
-metadata/_edit_group_ = true
-
-[node name="Scroll" type="ScrollContainer" parent="CanvasLayer2/Panel"]
-layout_mode = 2
-horizontal_scroll_mode = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Panel/Scroll"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 35
-theme_override_constants/margin_bottom = -25
-
-[node name="OwnedCardsContainer" type="GridContainer" parent="CanvasLayer2/Panel/Scroll/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 6
-script = ExtResource("4_2vaow")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2/Panel"]
-layout_mode = 2
-texture = ExtResource("1_kjltk")
-patch_margin_left = 7
-patch_margin_top = 7
-patch_margin_right = 7
-patch_margin_bottom = 7
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="CardInfoPanel" parent="." instance=ExtResource("5_rwrpj")]
-offset_left = 1438.0
-offset_top = 179.0
-offset_right = 1838.0
-offset_bottom = 779.0
-
-[node name="Buttons" type="MarginContainer" parent="."]
+[node name="Buttons" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1880.0
-offset_top = 1040.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_left = -442.0
+offset_top = -281.0
+offset_right = -132.0
+offset_bottom = -31.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 60
 
-[node name="VBox" type="VBoxContainer" parent="Buttons"]
+[node name="VBox" type="VBoxContainer" parent="PanelContainer/Buttons"]
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Proceed" type="PanelContainer" parent="Buttons/VBox"]
+[node name="Proceed" type="PanelContainer" parent="PanelContainer/Buttons/VBox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_vyoq8")
 
-[node name="Button" type="Button" parent="Buttons/VBox/Proceed"]
+[node name="Button" type="Button" parent="PanelContainer/Buttons/VBox/Proceed"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("6_t6uxs")
 theme_override_styles/normal = ExtResource("7_wteh1")
 
-[node name="Label" type="Label" parent="Buttons/VBox/Proceed"]
+[node name="Label" type="Label" parent="PanelContainer/Buttons/VBox/Proceed"]
 layout_mode = 2
 text = "Proceed"
 label_settings = ExtResource("10_fk3a6")
 horizontal_alignment = 1
 
-[node name="BackToWorld" type="PanelContainer" parent="Buttons/VBox"]
+[node name="BackToWorld" type="PanelContainer" parent="PanelContainer/Buttons/VBox"]
 custom_minimum_size = Vector2(250, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_vyoq8")
 
-[node name="Button" type="Button" parent="Buttons/VBox/BackToWorld"]
+[node name="Button" type="Button" parent="PanelContainer/Buttons/VBox/BackToWorld"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("6_t6uxs")
 theme_override_styles/normal = ExtResource("7_wteh1")
 
-[node name="Label" type="Label" parent="Buttons/VBox/BackToWorld"]
+[node name="Label" type="Label" parent="PanelContainer/Buttons/VBox/BackToWorld"]
 layout_mode = 2
 text = "Back to World"
 label_settings = ExtResource("10_fk3a6")
 horizontal_alignment = 1
 
-[connection signal="button_up" from="Buttons/VBox/Proceed/Button" to="." method="_on_proceed_button_button_up"]
-[connection signal="button_up" from="Buttons/VBox/BackToWorld/Button" to="." method="_button_up_back_to_world"]
+[node name="CardInfoPanel" parent="PanelContainer" instance=ExtResource("5_rwrpj")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1438.0
+offset_top = 179.0
+offset_right = 1838.0
+offset_bottom = 779.0
+
+[connection signal="button_up" from="PanelContainer/Buttons/VBox/Proceed/Button" to="." method="_on_proceed_button_button_up"]
+[connection signal="button_up" from="PanelContainer/Buttons/VBox/BackToWorld/Button" to="." method="_button_up_back_to_world"]

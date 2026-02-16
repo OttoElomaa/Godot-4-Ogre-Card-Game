@@ -14,3 +14,11 @@ signal defended(params:SignalParams)
 signal damage_taken(params:SignalParams)
 
 signal death(params:SignalParams)
+
+####
+signal disp_card(cardName:String)
+signal hide_card(cardName:String)
+signal hide_all()
+
+signal unlock_node(id:String)
+signal resolve_node(id:String)

@@ -1,6 +1,34 @@
 {
 	"nodes":[
-		{"id":"6d64a550fe8fb734","x":-192,"y":-299,"width":332,"height":99,"type":"text","text":"Main Mechanics: Golems, Structure repair and removal.\nWeaknesses: Slow and expensive."}
+		{"id":"6d64a550fe8fb734","type":"text","text":"Main Mechanics: Golems, Structure repair and removal.\nWeaknesses: Mostly slow.","x":-192,"y":-299,"width":332,"height":99},
+		{"id":"8c164a6393499b5b","type":"text","text":"The Guilds encompass all walks of artists, engineers and architects, once come with Ur-Tekton to build up Ashk'lan's glory. They mostly keep to themselves, with disclosure of a guild's secrets being punishable by death. They themselves enforce their own laws, a failing which the Throne begrudgingly looks past.\n\nThis secrecy lends itself well for the Guilds to form a criminal underworld of Ashk'lan -- from peddling forbidden goods, from weapons to alcohol, to performing assassinations at a price.\n\nOne of the greatest wonders of Ashk'lan's Stonemason Guild are their golems -- gigantic automatons capable of wreaking havoc once powered with Anghu. Though created originally at the King's behest, it is known that the Guilds keep the strongest golems to themselves, for purposes no one is allowed to know.","x":682,"y":-133,"width":518,"height":413},
+		{"id":"63004f2a2279f534","type":"text","text":"Mason: Common Creature","x":-293,"y":-142,"width":193,"height":62},
+		{"id":"5879736d9118c034","type":"text","text":"Cast: Heal a Structure/Destroy a Structure.","x":80,"y":-157,"width":280,"height":92},
+		{"id":"184b6ae35096bf96","type":"text","text":"Tekton: Common Creature","x":-317,"y":-13,"width":250,"height":60},
+		{"id":"b81ce4c29e367863","type":"text","text":"Cast: Pay 2 Mana to create a Wall in an empty space. A Wall is a 0/5 structure which always Blocks.","x":80,"y":-40,"width":265,"height":114},
+		{"id":"c17a8fefc74581c3","type":"text","text":"Rapid Deconstruction: Rare Ritual","x":-305,"y":126,"width":217,"height":60},
+		{"id":"b4f8ec71df6b9425","type":"text","text":"Destroy an allied Structure. Inflict its Health worth of damage on all Blocking enemies.","x":88,"y":92,"width":250,"height":129},
+		{"id":"c5f4ad05a359b1f5","x":-312,"y":283,"width":245,"height":57,"type":"text","text":"Blazeheart Golem: Rare Creature"},
+		{"id":"755f15cc1e903342","x":94,"y":267,"width":250,"height":89,"type":"text","text":"Does not untap on its turn. Cast: pay 3 Mana to untap it."},
+		{"id":"2ac17d75af2442dd","x":-307,"y":394,"width":219,"height":94,"type":"text","text":"Sandstone Golem: Common Creature"},
+		{"id":"a4b8d4083d9ee292","x":94,"y":398,"width":250,"height":86,"type":"text","text":"On turn: loses -1/-1. When its max health reaches 0, it is destroyed."},
+		{"id":"3486970aae56b7a4","x":95,"y":527,"width":250,"height":87,"type":"text","text":"Any Structure is destroyed: gain 2 Mana."},
+		{"id":"aef2bc2e465f09d3","x":-307,"y":540,"width":250,"height":60,"type":"text","text":"Thrastis: Common Creature"},
+		{"id":"76c4441a8740b408","x":83,"y":654,"width":261,"height":86,"type":"text","text":"Destroy every Structure on the board. Inflict 2 on all creatures on the board."},
+		{"id":"52e0523674f472ad","x":-295,"y":667,"width":207,"height":60,"type":"text","text":"Seismos: Rare Ritual"},
+		{"id":"6fc020545c3a614b","x":94,"y":778,"width":250,"height":122,"type":"text","text":"Cast: destroy an allied creature or structure and inflict its Health + Attack as damage."},
+		{"id":"a578bc6d3e358d0f","x":-312,"y":809,"width":250,"height":60,"type":"text","text":"Dreige Golem: Rare Creature"},
+		{"id":"fc927f17ac516884","x":-305,"y":920,"width":217,"height":60,"type":"text","text":"Catapult: Rare Structure"},
+		{"id":"88e9fc132e9cd684","x":-316,"y":1020,"width":250,"height":60,"type":"text","text":""}
 	],
-	"edges":[]
+	"edges":[
+		{"id":"5421cff7cf1036f1","fromNode":"184b6ae35096bf96","fromSide":"right","toNode":"b81ce4c29e367863","toSide":"left"},
+		{"id":"705f61fc99729f19","fromNode":"63004f2a2279f534","fromSide":"right","toNode":"5879736d9118c034","toSide":"left"},
+		{"id":"d31959435a81e53e","fromNode":"c17a8fefc74581c3","fromSide":"right","toNode":"b4f8ec71df6b9425","toSide":"left"},
+		{"id":"916ee5430a4cad66","fromNode":"c5f4ad05a359b1f5","fromSide":"right","toNode":"755f15cc1e903342","toSide":"left"},
+		{"id":"09cfbe2aec12b7d7","fromNode":"2ac17d75af2442dd","fromSide":"right","toNode":"a4b8d4083d9ee292","toSide":"left"},
+		{"id":"24e108b525ce4b96","fromNode":"aef2bc2e465f09d3","fromSide":"right","toNode":"3486970aae56b7a4","toSide":"left"},
+		{"id":"1e6fe6740fb8fe67","fromNode":"52e0523674f472ad","fromSide":"right","toNode":"76c4441a8740b408","toSide":"left"},
+		{"id":"28016234cd8ee0ca","fromNode":"a578bc6d3e358d0f","fromSide":"right","toNode":"6fc020545c3a614b","toSide":"left"}
+	]
 }

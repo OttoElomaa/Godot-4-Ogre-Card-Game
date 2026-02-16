@@ -1,7 +1,6 @@
 extends ZoneNode
-class_name ZoneBattleIcon
 
-var zone:Node = null
+class_name ZoneBattleIcon
 
 var board : GameBoard = null
 
@@ -30,13 +29,14 @@ enum presummon_sparsities {FEW, ## 0-1 object.
 func setup(zone:Node):
 	self.zone = zone
 	node_name = board_name
-	node_comments = board_comments
+#	node_comments = board_comments
 	toggleHoverInfo(false)
 
 
 func createDeck():
 	board = game_board.instantiate().duplicate()
-	MyTools.add_child(board)
+	add_child(board)
+	await get_tree().process_frame
 	board.boardName = board_name
 	board.AI_personality = ai_personality
 	
@@ -49,12 +49,16 @@ func createDeck():
 			var newCard:Card = key.instantiate().duplicate()
 			board.add_card_to_enemy_deck(newCard)
 	
-	if enemy_presummon:
-		presummon(true)
-	if ally_presummon:
-		presummon(false)
-
+#	if enemy_presummon:
+#		presummon(true)
+#	if ally_presummon:
+#		presummon(false)
+	board.setup_board()
 	board.turn_1_init()
+	
+	
+	remove_child(board)
+	
 
 
 func presummon(isEnemyCard):
@@ -84,7 +88,7 @@ func presummon(isEnemyCard):
 func _on_area_2d_input_event(viewport, event:InputEvent, shape_idx):
 	if event.is_action_pressed("LMB"):
 		insta_resolve()
-		GameInfo.currentBattleInfo = self
+#		GameInfo.currentBattleInfo = self
 		GameInfo.currentZone = zone
 		zone.openPrebattle(self)
 

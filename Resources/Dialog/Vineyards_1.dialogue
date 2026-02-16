@@ -1,0 +1,38 @@
+~ start
+From afar, you can hear the commotion in the vineyards. There are screams and sounds of struggle.\n\n[do SignalBus.disp_card.emit('Kalasirios')]A slave runs out towards you, panting, blue in the face. Whip marks on his arms look recent and haphazard.\n\n “Master, I don’t know who you are… but I ask for your pity! The vines have come alive! Alive and very angry too!”
+
+if 'Vinemen' in GameInfo.playerAlliances
+	What kind of tradition is it to steal away vines, to crucify them on trellises, to milk their life? It is no wonder that the vines came to desire freedom from their captors. If you are willing, this is your chance to assist their rebellion.
+
+~ choice
+
+- Ask for details
+
+	“When the sun turned all green at yesterday’s dusk, the elders said it was an ill omen.\nBut no one thought it would be now, and like this!”\n\n“Do slay those monsters, Master! We have no one else to turn to now! It is not much, but you will have the little man’s gratitude if you do…”
+	
+	=> choice
+	
+- Agree to help and press into the vineyards
+	do SignalBus.hide_all.emit()
+	You agree to the man’s request and head into the vineyards.
+	do SignalBus.disp_card.emit('Jade Vineman')
+	do SignalBus.disp_card.emit('Jade Vineman')
+	do SignalBus.disp_card.emit('Jade Vineman')
+	Before you is a mess of violence; wild vines skittering around, slaves running in panic, tools littering 	the ground.
+	do SignalBus.unlock_node.emit('Board1')
+	
+- Slay him and step into the vineyards
+	
+	You draw your sword and slay the man then and there. You step into the vineyards.
+	do SignalBus.hide_all.emit()
+	Before you is a mess of violence; wild vines skittering around, slaves running in panic, tools littering the ground. A group of king’s men futilely stab at the vines, pressing at them from all directions.
+	do SignalBus.disp_card.emit('Jade Vineman')
+	do SignalBus.disp_card.emit('Guardmaster')
+	do SignalBus.disp_card.emit('Jade Vineman')
+	Seeing your approach, their sergeant snarls:
+	
+	“Just our damned luck. Bring it, you [wave]vagabonds[/wave]! The King shan’t let us perish here.”
+	do SignalBus.unlock_node.emit('Board2')
+	
+	
+=> END

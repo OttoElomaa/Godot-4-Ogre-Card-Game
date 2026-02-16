@@ -9,6 +9,7 @@ var battleSystem:BattleSystem = null
 var genericCard:Card = preload("res://Cards/GreenDefiance/Cr-Maolmona.tscn").instantiate()
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
+@onready var DeckEdit = preload("res://GameScenes/DeckEditScreen/DeckEdit.tscn").instantiate()
 
 var zoomVector:Vector2:
 	get:
@@ -236,22 +237,27 @@ func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
 	
 	return placedCards
 
-
-
 func createGenericPlayerDeck() -> Array:
 	return $CardLoader.createDesertDeck()
 
 func createAllCardsByAmount(amount:int) -> Array:
 	return $CardLoader.createAllCardsByAmount(amount)
 	
-	
-
 func createCombatLogPrintout(text:String, color:Color):
 	if not gameBoard:
 		return
 	gameBoard.addLogMessage(text, color)
 	
-
-
 func toggleCardActionMenu(enable:bool, card:Card):
 	gameBoard.toggleCardActionMenu(enable, card)
+
+func openDeckEdit():
+	SceneSwitcher.openScene(DeckEdit)
+
+func setupAndOpenDeckEdit(board:GameBoard):
+	openDeckEdit()
+	DeckEdit.setup(board)
+
+func closeDeckEdit():
+	SceneSwitcher.closeScene(DeckEdit) 
+	

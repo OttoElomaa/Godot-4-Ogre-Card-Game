@@ -38,7 +38,7 @@ func _ready() -> void:
 func setup(gameBoard):
 	self.main = gameBoard
 	self.battleSystem = main.battleSystem
-
+	print('Card manager sets up')
 	##################################################
 	#### SETUP PLAYER CARDS
 	var playerDeckCards:Array = GameInfo.playerDeckCards
@@ -329,7 +329,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	c.mySlot = slot
 	slot.toggleAvailable(false)
 	
-	var originalPos = c.position	
+	var originalPos = c.position
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):

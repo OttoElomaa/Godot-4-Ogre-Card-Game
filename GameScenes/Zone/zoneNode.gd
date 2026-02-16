@@ -3,6 +3,7 @@ class_name ZoneNode
 
 var unlocked = false
 var resolved = false
+var zone:Node = null
 
 @export var node_name = ''
 @export var node_comments = ''
@@ -15,6 +16,9 @@ func _ready():
 	visible = unlocked
 	update_state()
 
+func setup(zone:Node):
+	self.zone = zone
+	toggleHoverInfo(false)
 
 ### A Zone Node is resolved after accomplishing its functon. For example,
 ### a battle node is resolved when a battle is won, and a dialog node is resolved
