@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/GameBoard/a1_gameBoard.gd" id="1_rf3o6"]
 [ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
 [ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_1qylb"]
-[ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/BoardComponents/game-mana-health-holder-texture-v2.png" id="5_4lnmq"]
+[ext_resource type="Texture2D" uid="uid://dmu0xu1iuwhib" path="res://Art/BoardComponents/game-mana-health-holder-texture-v3.png" id="5_anhsg"]
 [ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSettings/LabelSetHeaderHealth.tres" id="6_r88d6"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="7_vfgb4"]
 [ext_resource type="PackedScene" uid="uid://dibbmmg0q8s4b" path="res://GameScenes/GameBoard/battle_mana_display.tscn" id="8_anhsg"]
@@ -151,11 +151,11 @@ texture = ExtResource("4_1qylb")
 
 [node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Portraits"]
 position = Vector2(1176.5, 1266)
-texture = ExtResource("5_4lnmq")
+texture = ExtResource("5_anhsg")
 
 [node name="EnemyResourceHolderSprite" type="Sprite2D" parent="Portraits"]
 position = Vector2(1243.5, 150)
-texture = ExtResource("5_4lnmq")
+texture = ExtResource("5_anhsg")
 
 [node name="PlayerHealthLabel" type="Label" parent="Portraits"]
 texture_filter = 1
@@ -179,20 +179,20 @@ horizontal_alignment = 1
 
 [node name="PlayerManaLabel" type="Label" parent="Portraits"]
 texture_filter = 1
-offset_left = 1244.0
-offset_top = 1144.0
-offset_right = 1301.0
-offset_bottom = 1201.0
+offset_left = 1238.0
+offset_top = 1141.0
+offset_right = 1295.0
+offset_bottom = 1198.0
 text = "88"
 label_settings = ExtResource("7_vfgb4")
 horizontal_alignment = 1
 
 [node name="EnemyManaLabel" type="Label" parent="Portraits"]
 texture_filter = 1
-offset_left = 1310.5
-offset_top = 26.0
-offset_right = 1367.5
-offset_bottom = 83.0
+offset_left = 1304.0
+offset_top = 27.0
+offset_right = 1361.0
+offset_bottom = 84.0
 text = "88"
 label_settings = ExtResource("7_vfgb4")
 horizontal_alignment = 1

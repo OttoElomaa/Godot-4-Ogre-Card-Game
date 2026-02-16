@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://wyl0ao77i0bp"]
+[gd_scene load_steps=12 format=3 uid="uid://wyl0ao77i0bp"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_c2kfc"]
 [ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="2_ga422"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cnl53ndg87cwd" path="res://CardScriptsAndComponents/Actions/SkillDrawCardToHand.tscn" id="4_77jrv"]
 [ext_resource type="PackedScene" uid="uid://hxa2c3jb5ru4" path="res://CardScriptsAndComponents/TargetingComponents/AllyGraveyard.tscn" id="5_6n2xt"]
 [ext_resource type="PackedScene" uid="uid://botbjqrlvbhcq" path="res://CardScriptsAndComponents/Conditionals/IfType.tscn" id="6_iasup"]
+[ext_resource type="Texture2D" uid="uid://ds3bc0qulr2a2" path="res://Art/CardArt/GreenDefiance/card-art-ritual-gharch-fronds-arvah.jpg" id="8_lkiog"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_77jrv"]
 resource_local_to_scene = true
@@ -47,3 +48,6 @@ customActionText = "Return ally from graveyard to your hand."
 
 [node name="IfType" parent="Actions/RitualTrigger/CardAction/AllyGraveyard" index="1" instance=ExtResource("6_iasup")]
 card_type = "Creature"
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("8_lkiog")
