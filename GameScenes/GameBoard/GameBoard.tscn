@@ -271,7 +271,7 @@ libraries = {
 [node name="PlayerManaDisplay" parent="Visuals" instance=ExtResource("8_anhsg")]
 z_index = 5
 z_as_relative = false
-position = Vector2(1381, 1172)
+position = Vector2(1350, 1135)
 
 [node name="EnemyManaDisplay" parent="Visuals" instance=ExtResource("8_anhsg")]
 z_index = 5

@@ -12,8 +12,6 @@ var cardsManager:CardsManager = null
 var COLLISION_MASK_CARD := 1
 var COLLISION_MASK_ENEMY_PORTRAIT := 4
 
-var turnCount := 0
-
 
 var playerAttackOngoing: bool = false
 var currentAttackingCard: Card = null
@@ -34,16 +32,10 @@ var playerBoardCards:Array:
 
 
 func _ready() -> void:
-	
-	GameInfo.turnCount = 1
-	GameInfo.playerMana = 1
-	GameInfo.enemyMana = 1
 	GameInfo.enemy_turn = false
-	
 	togglePlayerAttackMode(false, null)
 	
-	
-	
+
 
 func _input(e: InputEvent) -> void:
 	#### ONLY PROCESS ATTACK STATE HERE
@@ -102,7 +94,7 @@ func switchBetweenPlayerEnemyTurns():
 		print("Player turn start")
 		
 	main.updateResourceLabels()
-	main.updateUi(turnCount)
+	main.updateUi(GameInfo.turnCount)
 	cardsManager.startPlayerTurn()
 	
 	var signalparams = SignalParams.new()
@@ -122,8 +114,8 @@ func enemySummonCreatures() -> void:
 			if card.manaCost <= GameInfo.enemyMana:
 				if not card.isRitual:
 					var success = await playEnemyCard(card)
-					if success:
-						GameInfo.enemyMana -= card.manaCost
+					
+					
 
 func enemyPlayRituals() -> void:
 	var enemyHandCards := cardsManager.getEnemyHandCards()

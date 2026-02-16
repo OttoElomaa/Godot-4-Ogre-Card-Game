@@ -37,10 +37,17 @@ func _ready() -> void:
 	
 	#### SETUP GLOBAL INFO
 	##################################
+	GameInfo.turnCount = 1
+	
 	GameInfo.playerHealth = 20
+	GameInfo.playerMana = 1
+	GameInfo.playerManaIncome = 1
+	
 	GameInfo.enemyHealth = 20
-	GameInfo.playerManaIncome = 0
+	GameInfo.enemyMana = 0
 	GameInfo.enemyManaIncome = 0
+	
+	
 	
 	
 	#### SETUP BOARD
@@ -125,12 +132,12 @@ func toggleCardActionMenu(enable:bool, card:Card):
 func changeMana(amount:int, isEnemy:bool):
 	
 	if isEnemy:
-		if not amount > GameInfo.enemyMana:
+		if GameInfo.enemyMana + amount >= 0:
 			GameInfo.enemyMana += amount
 		else:
 			return false
 	else:
-		if not amount > GameInfo.playerMana:
+		if GameInfo.playerMana + amount >= 0:
 			GameInfo.playerMana += amount
 		else:
 			return false
@@ -206,7 +213,7 @@ func updateUi(turnCount:int):
 		battleNameLabel.text = GameInfo.currentBattleInfo.board_name
 		
 	
-	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
+	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % GameInfo.turnCount
 
 
 

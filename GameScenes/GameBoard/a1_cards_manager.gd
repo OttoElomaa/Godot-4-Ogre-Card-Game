@@ -286,11 +286,6 @@ func handleFinishDraggingCard() -> Node:
 			if not getCollidedObject(res) == currentDraggedCard:
 				target = getCollidedObject(res)
 	
-	#### TRIGGER RITUAL WITH OR WITHOUT TARGET FOUND			
-#	if c.isRitual:
-#		success = battleSystem.handlePlayerRitual(c, target)	
-#		if success:
-#			return
 	
 	#############################################################
 	#### HANDLE ATTACKING
@@ -322,8 +317,6 @@ func handleFinishDraggingCard() -> Node:
 	
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
-	
-	
 	var originalPos = c.position	
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
@@ -392,13 +385,13 @@ func toggleCardHover(isHovering:bool, card:Card):
 	
 	#### CALLED WHEN 'HOVER ON' TRIGGERED	
 	if isHovering:
-		prints("hover on card: ", card)
+		#prints("hover on card: ", card)
 		if not card in currentHoveredCards:
 			currentHoveredCards.append(card)
 	
 	#### CALLED WHEN 'HOVER OFF' TRIGGERED
 	else:
-		prints("hover on card off: ", card)
+		#prints("hover on card off: ", card)
 		currentHoveredCards.erase(card)
 		toggleHoverVisuals(false, card) #### TURN OFF HOVER VISUALS ON HOVER OFF -> Not done in CHECK func
 		
