@@ -252,11 +252,13 @@ func toggleCardActionMenu(enable:bool, card:Card):
 	gameBoard.toggleCardActionMenu(enable, card)
 
 func openDeckEdit():
+	DeckEdit.setup(null)
 	SceneSwitcher.openScene(DeckEdit)
 
 func setupAndOpenDeckEdit(board:GameBoard):
-	openDeckEdit()
 	DeckEdit.setup(board)
+	SceneSwitcher.openScene(DeckEdit)
+	
 
 func closeDeckEdit():
 	SceneSwitcher.closeScene(DeckEdit) 

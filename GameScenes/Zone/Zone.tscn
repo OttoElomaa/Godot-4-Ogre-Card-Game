@@ -92,7 +92,6 @@ unlock_on_resolve = [NodePath("../Win_2")]
 position = Vector2(-422, -74)
 dialogue = ExtResource("9_0pdlr")
 node_name = "Vineyard Entrance"
-node_comments = "Someone approaches..."
 start_unlocked = true
 
 [node name="Win_1" parent="Zones/GameBoards" instance=ExtResource("8_vu8fe")]

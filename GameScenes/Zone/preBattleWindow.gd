@@ -60,18 +60,12 @@ func clearOldIcons():
 func setFlavorLabelText(flavor:String):
 	flavorLabel.text = flavor
 
-
-
-
 func cancelButtonPressed() -> void:
 	queue_free()
 
-
 func fightButtonPressed() -> void:
 	
-	var deck_edit = preload("res://GameScenes/DeckEditScreen/DeckEdit.tscn").instantiate()
 	battleInfoIcon.createDeck()
 	MyTools.setupAndOpenDeckEdit(battleInfoIcon.board)
-	
 	
 	queue_free()

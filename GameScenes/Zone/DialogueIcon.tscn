@@ -22,6 +22,7 @@ border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 [node name="DialogueIcon" type="Node2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_urlk5")
+node_comments = "Someone approaches..."
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(0, 10)
