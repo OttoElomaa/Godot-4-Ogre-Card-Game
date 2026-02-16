@@ -35,9 +35,13 @@ enum AI_personalities {
 
 func _ready() -> void:
 	
-	#### SETUP SIGNALS
+	#### SETUP GLOBAL INFO
 	##################################
-
+	GameInfo.playerHealth = 20
+	GameInfo.enemyHealth = 20
+	GameInfo.playerManaIncome = 0
+	GameInfo.enemyManaIncome = 0
+	
 	
 	#### SETUP BOARD
 	##################################
@@ -56,8 +60,8 @@ func _ready() -> void:
 	#### UI STUFF
 	$CanvasLayer/GameOverPane.hide()
 	
-	updateUi($BattleSystem.turnCount)
-	$BattleSystem.updateResourceLabels()
+	updateUi(GameInfo.turnCount)
+	updateResourceLabels()
 	toggleCardInfo(false, null)
 	
 	#### SET SLOTS STATUS
@@ -121,13 +125,13 @@ func toggleCardActionMenu(enable:bool, card:Card):
 func changeMana(amount:int, isEnemy:bool):
 	
 	if isEnemy:
-		if not amount > $BattleSystem.enemyMana:
-			$BattleSystem.enemyMana += amount
+		if not amount > GameInfo.enemyMana:
+			GameInfo.enemyMana += amount
 		else:
 			return false
 	else:
-		if not amount > $BattleSystem.playerMana:
-			$BattleSystem.playerMana += amount
+		if not amount > GameInfo.playerMana:
+			GameInfo.playerMana += amount
 		else:
 			return false
 	return true
@@ -136,12 +140,12 @@ func changeMana(amount:int, isEnemy:bool):
 func changeHealth(amount:int, isEnemy:bool):
 	
 	if isEnemy:
-		$BattleSystem.enemyHealth = max($BattleSystem.enemyHealth + amount, 0)
-		if $BattleSystem.enemyHealth <= 0:
+		GameInfo.enemyHealth = max(GameInfo.enemyHealth + amount, 0)
+		if GameInfo.enemyHealth <= 0:
 			endGame(true)
 	else:
-		$BattleSystem.playerHealth = max($BattleSystem.playerHealth + amount, 0)
-		if $BattleSystem.playerHealth <= 0:
+		GameInfo.playerHealth = max(GameInfo.playerHealth + amount, 0)
+		if GameInfo.playerHealth <= 0:
 			endGame(false)
 		
 
@@ -205,46 +209,20 @@ func updateUi(turnCount:int):
 	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
 
 
-func updateResourceLabelsHelp():
-	updateResourceLabels(battleSystem.playerHealth, 
-	battleSystem.playerMana, battleSystem.enemyHealth, battleSystem.enemyMana)
 
 
-func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
-	$Portraits/PlayerHealthLabel.text = "%d" % playerHealth
-	$Portraits/PlayerManaLabel.text = "%d" % playerMana
-	$Portraits/EnemyHealthLabel.text = "%d" % enemyHealth
-	$Portraits/EnemyManaLabel.text = "%d" % enemyMana
+
+func updateResourceLabels():
+	$Portraits/PlayerHealthLabel.text = "%d" % GameInfo.playerHealth
+	$Portraits/PlayerManaLabel.text = "%d" % GameInfo.playerMana
+	$Portraits/EnemyHealthLabel.text = "%d" % GameInfo.enemyHealth
+	$Portraits/EnemyManaLabel.text = "%d" % GameInfo.enemyMana
 	
-	#### PLAYER MANA VISUALS
-	for icon in $Portraits/ManaHBox.get_children():
-		icon.queue_free()   #### CLEAR OLD ONES
+	$Visuals/PlayerManaDisplay.updateVisual(GameInfo.playerMana, GameInfo.playerManaIncome)
+	$Visuals/EnemyManaDisplay.updateVisual(GameInfo.enemyMana, GameInfo.enemyManaIncome)
 	
-	#### COPY FULL OR DEPLETED GEM TEXTURE	
-	var iconToCopy:TextureRect = null
-	for i in range(15):
-		
-		#### PLAYER HAS THIS MUCH MANA
-		if (i+1) <= playerMana:
-			if (i+1) <= battleSystem.turnCount:  #### BASIC MANA
-				iconToCopy = $Portraits/ManaCopyingHBox/BlueGem
-			else:  #### ABOVE MAX MANA, SHOW EXTRA MANA - GREEN
-				iconToCopy = $Portraits/ManaCopyingHBox/GreenGem
-				
-		#### PLAYER HAS NO MORE MANA TO SHOW
-		else:
-			if (i+1) <= battleSystem.turnCount:  #### SHOW DEPLETED MANA MANA
-				iconToCopy = $Portraits/ManaCopyingHBox/DepletedGem
-			else:   #### ABOVE MAX MANA, SHOW NOTHING
-				iconToCopy = null
-		
-		if iconToCopy:
-			var newIcon = iconToCopy.duplicate()
-			$Portraits/ManaHBox.add_child(newIcon)
-			newIcon.show()
+	
 			
-
-
 func playerChampion() -> Card:
 	if $CardsManager/PlayerChampSlot.get_children().size() > 0:
 		return $CardsManager/PlayerChampSlot.get_child(0)

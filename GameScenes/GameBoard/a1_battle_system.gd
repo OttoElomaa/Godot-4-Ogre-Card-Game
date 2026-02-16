@@ -13,11 +13,7 @@ var COLLISION_MASK_CARD := 1
 var COLLISION_MASK_ENEMY_PORTRAIT := 4
 
 var turnCount := 0
-var playerMana := 0
-var enemyMana := 0
 
-var playerHealth := 20
-@export var enemyHealth := 20
 
 var playerAttackOngoing: bool = false
 var currentAttackingCard: Card = null
@@ -39,20 +35,15 @@ var playerBoardCards:Array:
 
 func _ready() -> void:
 	
-	turnCount += 1
-	playerMana = turnCount
-	enemyMana = turnCount
+	GameInfo.turnCount = 1
+	GameInfo.playerMana = 1
+	GameInfo.enemyMana = 1
 	GameInfo.enemy_turn = false
-#	updateResourceLabels()
 	
 	togglePlayerAttackMode(false, null)
 	
 	
 	
-func updateResourceLabels():
-	main.updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana)
-
-
 
 func _input(e: InputEvent) -> void:
 	#### ONLY PROCESS ATTACK STATE HERE
@@ -93,10 +84,26 @@ func switchBetweenPlayerEnemyTurns():
 	#### SWITCH TURN TYPE BETWEEN PLAYER <--> ENEMY
 	GameInfo.enemy_turn = !GameInfo.enemy_turn
 	
+	#### AFTER THE SWITCH...
+	#### IF ENEMY TURN STARTING
 	if GameInfo.enemy_turn:
+		GameInfo.enemyManaIncome += 1
+		GameInfo.enemyMana = GameInfo.enemyManaIncome
+		
+		main.addLogMessage("Enemy turn!", Color.html("524634"))
 		print("Enemy turn start")
+	#### IF PLAYER TURN STARTING
 	else:
+		GameInfo.playerManaIncome += 1
+		GameInfo.playerMana = GameInfo.playerManaIncome
+		GameInfo.turnCount += 1
+		
+		main.addLogMessage("Player turn!", Color.html("524634"))
 		print("Player turn start")
+		
+	main.updateResourceLabels()
+	main.updateUi(turnCount)
+	cardsManager.startPlayerTurn()
 	
 	var signalparams = SignalParams.new()
 	SignalBus.turnStarted.emit(null)
@@ -112,18 +119,18 @@ func enemySummonCreatures() -> void:
 	
 	for card:Card in enemyHandCards:
 		if MyTools.checkNodeValidity(card):
-			if card.manaCost <= enemyMana:
+			if card.manaCost <= GameInfo.enemyMana:
 				if not card.isRitual:
 					var success = await playEnemyCard(card)
 					if success:
-						enemyMana -= card.manaCost
+						GameInfo.enemyMana -= card.manaCost
 
 func enemyPlayRituals() -> void:
 	var enemyHandCards := cardsManager.getEnemyHandCards()
 	
 	for card:Card in enemyHandCards:
 		if MyTools.checkNodeValidity(card):
-			if card.manaCost <= enemyMana:
+			if card.manaCost <= GameInfo.enemyMana:
 				if card.isRitual:
 					handlePlayerRitual(card)
 
@@ -200,7 +207,7 @@ func playAttackers():
 
 func playEnemyCard(card:Card) -> bool:
 	for slot:CardSlot in main.getEnemySlots():
-		if slot.isAvailable and card.manaCost <= enemyMana:
+		if slot.isAvailable and card.manaCost <= GameInfo.enemyMana:
 			
 			await cardsManager.handlePlaceCardInSlot(card, slot)
 			return true
@@ -210,15 +217,6 @@ func playEnemyCard(card:Card) -> bool:
 
 #### START PLAYER'S TURN AFTER ENEMY ACTION
 func timeoutEndEnemyTurn() -> void:
-	turnCount += 1
-	playerMana = turnCount
-	enemyMana = turnCount
-	updateResourceLabels()
-	
-	main.updateUi(turnCount)
-	cardsManager.startPlayerTurn()
-	
-	main.addLogMessage("Player turn!", Color.html("524634"))
 	switchBetweenPlayerEnemyTurns()
 	
 
@@ -296,7 +294,7 @@ func handlePlayerAttack() -> void:
 func handlePlayerRitual(c:Card) -> bool:
 	var success := false
 	if !c.isEnemyCard:
-		if playerMana < c.manaCost: #### CAN'T AFFORD, RETURN
+		if GameInfo.playerMana < c.manaCost: #### CAN'T AFFORD, RETURN
 			return success
 	
 	#### RESOLVE RITUAL IN CARD'S ACTION NODE (Could be TARGETED or TARGETLESS)
@@ -305,21 +303,18 @@ func handlePlayerRitual(c:Card) -> bool:
 	if success:
 		cardsManager.discardCard(c)
 		if !c.isEnemyCard:
-			playerMana -= c.manaCost
+			GameInfo.playerMana -= c.manaCost
 		else:
-			enemyMana -= c.manaCost
+			GameInfo.enemyMana -= c.manaCost
 		cardsManager.updateHandCardsVisuals()
-		updateResourceLabels()
+		main.updateResourceLabels()
 	
 	if success:
 		main.addLogMessage("%s prayer is recited" % c.cardName, Color.WHITE)	
 	
 	return success
 
-#func attack(attacker:Card, defender:Card):
-#	SignalBus.attacked.emit(attacker, defender)
-#	SignalBus.defended.emit(attacker, defender)
-	
+
 
 func cardCastButtonPressed() -> void:
 	
@@ -345,7 +340,7 @@ func handlePlayerAttackEnemy() -> void:
 	endAttackState()
 	await main.playAttackPortraitAnimation(c)
 	main.changeHealth(-combatDamage, !c.isEnemyCard)
-	updateResourceLabels()
+	main.updateResourceLabels()
 	handlePortraitAttackPrintout(c, combatDamage, true)
 	main.shake_screen(10, 0.5)
 	c.handleAttackingPortrait()
@@ -403,7 +398,7 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 			var damageToPlayer = c.getCombatDamageToTarget(null, true)
 			await main.playAttackPortraitAnimation(c)
 			main.changeHealth(-c.tempDamage, !c.isEnemyCard)
-			updateResourceLabels()
+			main.updateResourceLabels()
 			handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
 			playerAttackedSE()
 			main.shake_screen(10, 0.5)
@@ -500,8 +495,8 @@ func prioritize_charge_target(array:Array):
 func playerAttackedSE():
 	$SE/SE_Player_Damaged.pitch_scale = 1.0 + randf_range(0.2, -0.2)
 	## The bell gets lower-pitched the lower the HP gets.
-	if playerHealth < 20:
-		$SE/SE_Player_Damaged.pitch_scale += 0.02 * (playerHealth - 10)
+	if GameInfo.playerHealth < 20:
+		$SE/SE_Player_Damaged.pitch_scale += 0.02 * (GameInfo.playerHealth - 10)
 	$SE/SE_Player_Damaged.play()
 
 func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEnemy:bool) -> void:
@@ -579,29 +574,12 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, true)
 	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, false)
 
-	#### CHECK IF EITHER CARD WAS DESTROYED
-#	var attackerDestroyed = await attackCard.checkAndHandleCombatDeath(true)
-#	var targetDestroyed = await targetCard.checkAndHandleCombatDeath(false)
-	
+
 	#### COMBAT LOG STUFF ##################################
 	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
 	main.addLogMessage(attackerString, Color.WHITE)	
 	
-#	var targetHurtString = "%s %s " % [MyTools.getFactionString(targetCard), targetCard.cardName]
-#	if targetDestroyed:
-#		targetHurtString += "was destroyed"
-#	main.addLogMessage(targetHurtString, targetCard.hurtColor)	
-	
-#	var attackerHurtString = "%s %s " % [MyTools.getFactionString(attackCard), attackCard.cardName]
-#	if attackerDestroyed:
-#		attackerHurtString += "was destroyed"
-#	main.addLogMessage(attackerHurtString, attackCard.hurtColor)	
-	
-	
-#	#### RETURN WHETHER ATTACKER IS DESTROYED -> WHY?
-#	return attackerDestroyed
-
-
+#	
 
 func endAttackState() -> void:
 	if States.gameState == States.GameStates.ATTACK:

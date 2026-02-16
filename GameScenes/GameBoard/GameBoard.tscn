@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d0m41055ikape"]
+[gd_scene load_steps=34 format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/GameBoard/a1_gameBoard.gd" id="1_rf3o6"]
 [ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
@@ -6,12 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://d0a382rqeqt5t" path="res://Art/BoardComponents/game-mana-health-holder-texture-v2.png" id="5_4lnmq"]
 [ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSettings/LabelSetHeaderHealth.tres" id="6_r88d6"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="7_vfgb4"]
+[ext_resource type="PackedScene" uid="uid://dibbmmg0q8s4b" path="res://GameScenes/GameBoard/battle_mana_display.tscn" id="8_anhsg"]
 [ext_resource type="Texture2D" uid="uid://iro7vjuquihg" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-01.png" id="8_mj3e8"]
-[ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="8_rkqvw"]
-[ext_resource type="Texture2D" uid="uid://b54f63o6lv31f" path="res://Art/CardComponents/player-mana-crystal-depleted.png" id="9_5f6ju"]
 [ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-02.png" id="9_nxc8c"]
 [ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="10_223y2"]
-[ext_resource type="Texture2D" uid="uid://vadqk0ogaens" path="res://Art/CardComponents/player-mana-crystal-extra.png" id="10_o0nbp"]
 [ext_resource type="Texture2D" uid="uid://yy4b6om5as5s" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-02.png" id="11_0xags"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="12_i42kc"]
 [ext_resource type="LabelSettings" uid="uid://df882tsfd50yb" path="res://Fonts/LabelSettings/LabelSettingYellowHeaderFont.tres" id="13_u7g0n"]
@@ -207,37 +205,6 @@ collision_mask = 4
 position = Vector2(1208, 145)
 shape = SubResource("RectangleShape2D_dj0be")
 
-[node name="ManaCopyingHBox" type="HBoxContainer" parent="Portraits"]
-offset_left = 1315.0
-offset_top = 1214.0
-offset_right = 1728.0
-offset_bottom = 1344.0
-scale = Vector2(0.5, 0.5)
-metadata/_edit_group_ = true
-
-[node name="BlueGem" type="TextureRect" parent="Portraits/ManaCopyingHBox"]
-visible = false
-layout_mode = 2
-texture = ExtResource("8_rkqvw")
-
-[node name="DepletedGem" type="TextureRect" parent="Portraits/ManaCopyingHBox"]
-visible = false
-layout_mode = 2
-texture = ExtResource("9_5f6ju")
-
-[node name="GreenGem" type="TextureRect" parent="Portraits/ManaCopyingHBox"]
-visible = false
-layout_mode = 2
-texture = ExtResource("10_o0nbp")
-
-[node name="ManaHBox" type="HBoxContainer" parent="Portraits"]
-offset_left = 1338.0
-offset_top = 1139.0
-offset_right = 1473.0
-offset_bottom = 1277.0
-scale = Vector2(0.5, 0.5)
-metadata/_edit_group_ = true
-
 [node name="Visuals" type="Node2D" parent="."]
 z_index = -5
 
@@ -300,6 +267,16 @@ horizontal_alignment = 1
 libraries = {
 &"": SubResource("AnimationLibrary_on7x6")
 }
+
+[node name="PlayerManaDisplay" parent="Visuals" instance=ExtResource("8_anhsg")]
+z_index = 5
+z_as_relative = false
+position = Vector2(1381, 1172)
+
+[node name="EnemyManaDisplay" parent="Visuals" instance=ExtResource("8_anhsg")]
+z_index = 5
+z_as_relative = false
+position = Vector2(1408, 20)
 
 [node name="BattleSystem" type="Node2D" parent="."]
 script = ExtResource("14_mv2fm")
@@ -880,5 +857,5 @@ bus = &"BGM"
 [connection signal="pressed" from="CanvasLayer/GameOverPane/Margin/VBox/Panel2/EndMatchButton" to="." method="buttonPressedEndMatch"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
-[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]

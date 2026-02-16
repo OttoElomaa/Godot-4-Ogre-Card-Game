@@ -23,6 +23,13 @@ var playerIcon:Texture:
 ## All cards owned by the player. The active deck is made of these.
 var playerOwnedCards := []
 
+## Used to generate playerRecruitmentPool. The game checks for cards whose subtype contains
+## members of this array.
+var playerAlliances: PackedStringArray = []
+
+## Cards available for purchase based on player alliances.
+var playerRecruitmentPool := []
+
 
 ######################################################
 #### ZONE STATE
@@ -37,14 +44,13 @@ var isPreBattle := false
 var enemyDeckCards := []
 var playerDeckCards := []
 
+var playerHealth := 0
+var playerMana := 0
+var playerManaIncome := 0
 
+var enemyHealth := 0
+var enemyMana := 0
+var enemyManaIncome := 0
 
-## Used to generate playerRecruitmentPool. The game checks for cards whose subtype contains
-## members of this array.
-var playerAlliances: PackedStringArray = []
-
-## Cards available for purchase based on player alliances.
-var playerRecruitmentPool := []
-
-## true is enemy (AI) turn, false if player turn
-var enemy_turn: bool
+var turnCount := 0
+var enemy_turn: bool  ## true is enemy (AI) turn, false if player turn

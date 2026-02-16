@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dibbmmg0q8s4b"]
+
+[ext_resource type="Script" uid="uid://dykou46jfjo7s" path="res://GameScenes/GameBoard/battle_mana_display.gd" id="1_ff2iv"]
+[ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="2_adyvf"]
+[ext_resource type="Texture2D" uid="uid://b54f63o6lv31f" path="res://Art/CardComponents/player-mana-crystal-depleted.png" id="3_0drld"]
+[ext_resource type="Texture2D" uid="uid://vadqk0ogaens" path="res://Art/CardComponents/player-mana-crystal-extra.png" id="4_6qqcb"]
+
+[node name="BattleManaDisplay" type="Node2D"]
+script = ExtResource("1_ff2iv")
+
+[node name="CopyingHBox" type="HBoxContainer" parent="."]
+offset_right = 413.0
+offset_bottom = 130.0
+scale = Vector2(0.5, 0.5)
+metadata/_edit_group_ = true
+
+[node name="BlueGem" type="TextureRect" parent="CopyingHBox"]
+layout_mode = 2
+texture = ExtResource("2_adyvf")
+
+[node name="DepletedGem" type="TextureRect" parent="CopyingHBox"]
+layout_mode = 2
+texture = ExtResource("3_0drld")
+
+[node name="GreenGem" type="TextureRect" parent="CopyingHBox"]
+layout_mode = 2
+texture = ExtResource("4_6qqcb")
+
+[node name="ManaHBox" type="HBoxContainer" parent="."]
+offset_right = 135.0
+offset_bottom = 138.0
+scale = Vector2(0.5, 0.5)
+metadata/_edit_group_ = true

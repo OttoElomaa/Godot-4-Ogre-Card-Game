@@ -212,7 +212,7 @@ func getFactionString(card:Card) -> String:
 
 
 func updateBoardCardsVisuals():
-	gameBoard.updateResourceLabelsHelp()
+	gameBoard.updateResourceLabels()
 	
 	for c:Card in getBoardCards(true):
 		c.updateCardVisuals()

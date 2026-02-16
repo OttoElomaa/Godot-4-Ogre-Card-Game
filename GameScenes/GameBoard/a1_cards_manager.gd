@@ -301,7 +301,7 @@ func handleFinishDraggingCard() -> Node:
 		
 		#### CARD IS NOT SPELL: SET CARD To Found AVAILABLE SLOT
 		if not c.isRitual:
-			if selectedSlot.isAvailable and c.manaCost <= battleSystem.playerMana:
+			if selectedSlot.isAvailable and c.manaCost <= GameInfo.playerMana:
 				if main.checkSlotPlayer(selectedSlot):
 					success = await handlePlaceCardInSlot(c, selectedSlot)
 		
@@ -330,13 +330,13 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	if not main.checkSlotPlayer(slot):
 		await MyTools.moveCardTweening(c, originalPos, c.position)
 		placeCardInSlotTwo(c, slot, true)
-		battleSystem.enemyMana -= c.manaCost
+		GameInfo.enemyMana -= c.manaCost
 	
 	#### PLAYER CARD. REPARENT AND TAKE MANA COST
 	else:
 		c.position = slot.position
 		placeCardInSlotTwo(c, slot, false)
-		battleSystem.playerMana -= c.manaCost
+		GameInfo.playerMana -= c.manaCost
 	
 	c.setup(main)
 	await get_tree().process_frame
@@ -355,7 +355,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
 	c.handleArrival()
 	
-	battleSystem.updateResourceLabels()
+	main.updateResourceLabels()
 	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
 
 
