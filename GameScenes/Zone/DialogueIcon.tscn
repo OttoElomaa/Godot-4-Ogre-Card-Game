@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://df8wakx6h0mhe"]
 
-[ext_resource type="Script" uid="uid://i63hgkosko0m" path="res://GameScenes/Zone/dialogue_window.gd" id="1_urlk5"]
+[ext_resource type="Script" uid="uid://i63hgkosko0m" path="res://GameScenes/Zone/zoneNode_dialogue.gd" id="1_urlk5"]
 [ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="2_dp3na"]
 [ext_resource type="Texture2D" uid="uid://be0qsfcp2w37c" path="res://Art/CardComponents/zone-battle-icon-disabled-overlay.png" id="3_nry23"]
 [ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="4_la7db"]

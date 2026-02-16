@@ -81,17 +81,16 @@ func presummon(isEnemyCard):
 		board.add_card_to_random_slot(card, isEnemyCard)
 
 
-#func enterBattle():
-	#SceneSwitcher.switchToNewScene(board)
 
 #### START THE PRE-BATTLE PROCESS IN ORDER TO FIGHT A BATTLE
-func _on_area_2d_input_event(viewport, event:InputEvent, shape_idx):
-	if event.is_action_pressed("LMB"):
-		insta_resolve()
-#		GameInfo.currentBattleInfo = self
-		GameInfo.currentZone = zone
-		zone.openPrebattle(self)
+func handleClick():
+	GameInfo.currentZone = zone
+	zone.openPrebattle(self)
 
+func getBoardName():
+	return board_name
+	
+		
 func update_state():
 	if board_name in GameInfo.playerWonBattleNames:
 		resolve()

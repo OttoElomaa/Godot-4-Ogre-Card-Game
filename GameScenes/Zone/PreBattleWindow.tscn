@@ -66,11 +66,13 @@ custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="GB_Comments" type="Label" parent="MainPanel/Margin/MainHBox/Left/VBox"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
 text = "You're getting kicked!"
 label_settings = ExtResource("5_gmchg")
+autowrap_mode = 2
 
 [node name="ButtonsHBox" type="HBoxContainer" parent="MainPanel/Margin/MainHBox/Left"]
 layout_mode = 2

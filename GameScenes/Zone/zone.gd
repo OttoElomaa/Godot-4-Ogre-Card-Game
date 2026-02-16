@@ -137,6 +137,8 @@ func buttonPressedDeckEdit() -> void:
 	GameInfo.isPreBattle = false
 	MyTools.openDeckEdit()
 
+
+
 func openPrebattle(b_node:Node2D):
 	preBattleWindow = PreBattleScreen.instantiate()
 	$PreBattleCanvas.add_child(preBattleWindow)
@@ -156,6 +158,10 @@ func unlockNode(zoneNodeID:String):
 	for child:ZoneNode in %GameBoards.get_children():
 		if child.name == zoneNodeID: 
 			child.unlock()
+		elif child.node_name == zoneNodeID:
+			child.unlock()
+			
+			
 
 func resolveNode(zoneNodeID:String):
 	for child:ZoneNode in %GameBoards.get_children():

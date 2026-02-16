@@ -58,11 +58,17 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(1012, 654)
 
-[node name="Board1" parent="Zones/GameBoards" node_paths=PackedStringArray("unlock_on_resolve") instance=ExtResource("2_rmpmb")]
+[node name="StartDialogue" parent="Zones/GameBoards" instance=ExtResource("8_vu8fe")]
+position = Vector2(-422, -74)
+dialogue = ExtResource("9_0pdlr")
+node_name = "Vineyard Entrance"
+start_unlocked = true
+
+[node name="Board1" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
 top_level = true
 z_index = 6
 position = Vector2(970, 472)
-board_name = "Vineyards"
+board_name = "Vineyards East"
 game_board = ExtResource("4_87jt2")
 board_comments = "Raging Vinemen skitter among shadoofs! 
 Beware -- they possess a vile Ritual!"
@@ -75,10 +81,11 @@ ExtResource("8_umgh5"): 4
 presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
 enemy_presummon = true
 presummon_sparcity = 2
-unlock_on_resolve = [NodePath("../Win_1")]
+unlockOnResolveStrings = Array[String](["Vineyards Cabin"])
 
-[node name="Board2" parent="Zones/GameBoards" node_paths=PackedStringArray("unlock_on_resolve") instance=ExtResource("2_rmpmb")]
+[node name="Board2" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
 position = Vector2(-40, -182)
+board_name = "Vineyards West"
 game_board = ExtResource("4_87jt2")
 board_comments = "The solders are on their last legs, but still should not be underestimated. They fight in formation, protecting their weak spots. The Vinemen will occasionally help you."
 deck_cards = Dictionary[PackedScene, int]({
@@ -86,21 +93,17 @@ ExtResource("8_vsnug"): 5
 })
 presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
 ally_presummon = true
-unlock_on_resolve = [NodePath("../Win_2")]
-
-[node name="DialogueIcon" parent="Zones/GameBoards" instance=ExtResource("8_vu8fe")]
-position = Vector2(-422, -74)
-dialogue = ExtResource("9_0pdlr")
-node_name = "Vineyard Entrance"
-start_unlocked = true
+unlockOnResolveStrings = Array[String](["Vineyards Gate"])
 
 [node name="Win_1" parent="Zones/GameBoards" instance=ExtResource("8_vu8fe")]
 position = Vector2(369, -48)
 dialogue = ExtResource("10_kl6wr")
+node_name = "Vineyards Cabin"
 
 [node name="Win_2" parent="Zones/GameBoards" instance=ExtResource("8_vu8fe")]
 position = Vector2(369, -47)
 dialogue = ExtResource("11_vsnug")
+node_name = "Vineyards Gate"
 
 [node name="Map" type="MarginContainer" parent="Zones"]
 z_index = -3
@@ -112,6 +115,8 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Zones/Map"]
 layout_mode = 2
