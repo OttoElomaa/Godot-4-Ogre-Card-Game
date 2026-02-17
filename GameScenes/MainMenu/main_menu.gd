@@ -76,7 +76,7 @@ func buttonPressedStartMatch() -> void:
 	
 	GameInfo.isPreBattle = true
 	GameInfo.enemyDeckCards = MyTools.createGenericPlayerDeck()
-	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/DeckEditScreen/DeckEdit.tscn")
+	MyTools.setupAndOpenDeckEdit(GameBoardScene.instantiate())
 	
 
 

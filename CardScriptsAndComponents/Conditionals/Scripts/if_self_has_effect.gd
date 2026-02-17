@@ -4,6 +4,6 @@ extends ConditionalComponent
 
 func check(card:Card, myCard:Card) -> bool:
 	if myCard.hasEffect(effect_id):
-		if myCard.getEffect(effect_id).counter > minimum_stacks:
+		if myCard.getEffect(effect_id).counter >= minimum_stacks:
 			return true
 	return false

@@ -572,6 +572,7 @@ func statesActive():
 	
 
 func statesPassive():
+	print(cardName, ' goes passive')
 	actionState = CardActionStates.PASSIVE
 	stateHandler.get_node("ActiveIcon").hide()
 	
