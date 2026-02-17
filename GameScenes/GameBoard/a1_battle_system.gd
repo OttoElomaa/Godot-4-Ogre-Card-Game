@@ -563,8 +563,8 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 	SignalBus.defended.emit(params2)
 
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, true)
-	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, false)
+	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, false)
+	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, true)
 
 
 	#### COMBAT LOG STUFF ##################################

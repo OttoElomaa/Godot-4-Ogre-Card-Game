@@ -687,7 +687,7 @@ func checkAlive():
 ###############################################################################
 #region #########################################  COMBAT STUFF
 
-#### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
+#### Self: who takes damage. Card -- the other guy.
 func takeCombatDamage(card:Card, isAttacker: bool):
 	
 	var selfCombatDamage:int = getCombatDamageToTarget(card, !isAttacker)
@@ -774,8 +774,11 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	if effects.isPhased:
 		combatDamage += 1
 	
-	if hasEffect('Rage') and isAttacker:
+	if hasEffect('Rage') and not isAttacker:
 		combatDamage += getEffect('Rage').counter
+		
+	if hasEffect('Terror') and isAttacker:
+		combatDamage -= getEffect('Terror').counter
 	
 	#### END OF TARGETLESS DAMAGE CALCULATION
 	if not target:
