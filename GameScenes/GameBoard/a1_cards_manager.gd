@@ -38,7 +38,7 @@ func _ready() -> void:
 func setup(gameBoard):
 	self.main = gameBoard
 	self.battleSystem = main.battleSystem
-
+	print('Card manager sets up')
 	##################################################
 	#### SETUP PLAYER CARDS
 	var playerDeckCards:Array = GameInfo.playerDeckCards
@@ -286,11 +286,6 @@ func handleFinishDraggingCard() -> Node:
 			if not getCollidedObject(res) == currentDraggedCard:
 				target = getCollidedObject(res)
 	
-	#### TRIGGER RITUAL WITH OR WITHOUT TARGET FOUND			
-#	if c.isRitual:
-#		success = battleSystem.handlePlayerRitual(c, target)	
-#		if success:
-#			return
 	
 	#############################################################
 	#### HANDLE ATTACKING
@@ -301,7 +296,7 @@ func handleFinishDraggingCard() -> Node:
 		
 		#### CARD IS NOT SPELL: SET CARD To Found AVAILABLE SLOT
 		if not c.isRitual:
-			if selectedSlot.isAvailable and c.manaCost <= battleSystem.playerMana:
+			if selectedSlot.isAvailable and c.manaCost <= GameInfo.playerMana:
 				if main.checkSlotPlayer(selectedSlot):
 					success = await handlePlaceCardInSlot(c, selectedSlot)
 		
@@ -322,35 +317,19 @@ func handleFinishDraggingCard() -> Node:
 	
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
-	c.cardsManager = self
-
-	######################################
-	#### SLOT STUFF
-	c.mySlot = slot
-	slot.toggleAvailable(false)
-	
 	var originalPos = c.position	
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
 		await MyTools.moveCardTweening(c, originalPos, c.position)
-		if c.is_inside_tree():
-			c.reparent($EnemyBoard)
-		else:
-			$EnemyBoard.add_child(c)
-		
-		c.isEnemyCard = true
-		battleSystem.enemyMana -= c.manaCost
+		placeCardInSlotTwo(c, slot, true)
+		GameInfo.enemyMana -= c.manaCost
 	
 	#### PLAYER CARD. REPARENT AND TAKE MANA COST
 	else:
 		c.position = slot.position
-		if c.is_inside_tree():
-			c.reparent($PlayerBoard)
-		else:
-			$PlayerBoard.add_child(c)
-		c.isEnemyCard = false
-		battleSystem.playerMana -= c.manaCost
+		placeCardInSlotTwo(c, slot, false)
+		GameInfo.playerMana -= c.manaCost
 	
 	c.setup(main)
 	await get_tree().process_frame
@@ -369,7 +348,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
 	c.handleArrival()
 	
-	battleSystem.updateResourceLabels()
+	main.updateResourceLabels()
 	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
 
 
@@ -377,56 +356,26 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	return true
 
 
-
-
-#func handlePlaceChampionInSlot(c:Card):
-	#c.cardsManager = self
-	#var mySlot: Node2D = null
-	#
-	#if not c.isEnemyCard:
-		#c.mySlot = $PlayerChampSlot
-		#battleSystem.playerMana -= c.manaCost
-	#else:
-		#c.mySlot = $EnemyChampSlot
-		#battleSystem.enemyMana -= c.manaCost
-	#
-	#var originalPos = c.global_position
-	#c.global_position = c.mySlot.global_position
-##	MyTools.moveCardTweening(c, originalPos, c.global_position)
-	#
-	#if c.is_inside_tree():
-		#c.reparent(mySlot)
-	#else:
-		#c.add_child(mySlot)
-	#updateHandCardsVisuals()
-#
-#
-#
-	#placePermanentInSlotTwo(c)
-	#return true
-
-
-#func placePermanentInSlotTwo(c:Card):
-	#
-	#
-	###############################################
-	##### VISUAL STUFF
-	#c.scale = Vector2.ONE
-	#c.toggleFrontSide(true)
-	#
-	##### SET ACTION STATE AND TRAVEL STATE	
-	#c.toggleTraveling(true)
-	#
-	##### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
-	#c.setInitialActionState()
-	#
-	##### SETUP AND ACTIVATE ARRIVAL TRIGGERS
-	#c.handleArrival()
-	#
-	#battleSystem.updateResourceLabels()
-	#main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
+func placeCardInSlotTwo(c:Card, slot:CardSlot, isEnemy:bool):
+	c.cardsManager = self
+	var board:Node = null
+	######################################
+	#### SLOT STUFF
+	c.mySlot = slot
+	slot.toggleAvailable(false)
 	
-
+	#### HANDLE ENEMY STATUS
+	c.isEnemyCard = isEnemy
+	if isEnemy:
+		board = $EnemyBoard	
+	else:
+		board = $PlayerBoard
+	#### HANDLE PARENTING CARD INTO THE SCENE	
+	if c.is_inside_tree():
+		c.reparent(board)
+	else:
+		board.add_child(c)
+		
 
 
 #### INITIATE A HOVER CHECK
@@ -436,13 +385,13 @@ func toggleCardHover(isHovering:bool, card:Card):
 	
 	#### CALLED WHEN 'HOVER ON' TRIGGERED	
 	if isHovering:
-		prints("hover on card: ", card)
+		#prints("hover on card: ", card)
 		if not card in currentHoveredCards:
 			currentHoveredCards.append(card)
 	
 	#### CALLED WHEN 'HOVER OFF' TRIGGERED
 	else:
-		prints("hover on card off: ", card)
+		#prints("hover on card off: ", card)
 		currentHoveredCards.erase(card)
 		toggleHoverVisuals(false, card) #### TURN OFF HOVER VISUALS ON HOVER OFF -> Not done in CHECK func
 		

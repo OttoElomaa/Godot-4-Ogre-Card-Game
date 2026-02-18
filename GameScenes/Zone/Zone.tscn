@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ctrvsaptdulhm"]
+[gd_scene load_steps=24 format=3 uid="uid://ctrvsaptdulhm"]
 
 [ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/Zone/zone.gd" id="1_fjd6i"]
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBoardIcon.tscn" id="2_rmpmb"]
@@ -13,10 +13,13 @@
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="7_xt5s7"]
 [ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="8_588s3"]
 [ext_resource type="PackedScene" uid="uid://dvy7elkjsgcxn" path="res://Cards/GreenDefiance/ri_knell.tscn" id="8_umgh5"]
-[ext_resource type="PackedScene" uid="uid://ccbs0m4pq5nbi" path="res://Cards/Desert/Cr-Colossus.tscn" id="8_vu8fe"]
-[ext_resource type="PackedScene" uid="uid://l3rpd1xyh67i" path="res://Cards/Desert/Cr-Ogre.tscn" id="9_0pdlr"]
+[ext_resource type="PackedScene" uid="uid://dk4etb0x0xce3" path="res://Cards/City/Cr-Kalasirios.tscn" id="8_vsnug"]
+[ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="8_vu8fe"]
+[ext_resource type="Resource" uid="uid://datllcfc5jbo3" path="res://Resources/Dialog/Vineyards_1.dialogue" id="9_0pdlr"]
+[ext_resource type="Resource" uid="uid://b3qg4cl1qws0x" path="res://Resources/Dialog/Vineyards_Win_1.dialogue" id="10_kl6wr"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_bxjdc"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
+[ext_resource type="Resource" uid="uid://bgomdu6vhhlji" path="res://Resources/Dialog/Vineyards_Win_2.dialogue" id="11_vsnug"]
 [ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="15_4t6do"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
@@ -49,17 +52,25 @@ offset_right = 588.0
 offset_bottom = 230.0
 
 [node name="Zones" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="GameBoards" type="Node2D" parent="Zones"]
+unique_name_in_owner = true
 position = Vector2(1012, 654)
+
+[node name="StartDialogue" parent="Zones/GameBoards" instance=ExtResource("8_vu8fe")]
+position = Vector2(-422, -74)
+dialogue = ExtResource("9_0pdlr")
+node_name = "Vineyard Entrance"
+start_unlocked = true
 
 [node name="Board1" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
 top_level = true
 z_index = 6
-position = Vector2(975, 333)
-board_name = "Vineyards"
+position = Vector2(970, 472)
+board_name = "Vineyards East"
 game_board = ExtResource("4_87jt2")
-board_comments = "Raging Vinemen skitter among shadows! 
+board_comments = "Raging Vinemen skitter among shadoofs! 
 Beware -- they possess a vile Ritual!"
 deck_cards = Dictionary[PackedScene, int]({
 ExtResource("4_s5tl3"): 4,
@@ -70,20 +81,29 @@ ExtResource("8_umgh5"): 4
 presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
 enemy_presummon = true
 presummon_sparcity = 2
+unlockOnResolveStrings = Array[String](["Vineyards Cabin"])
 
 [node name="Board2" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
-position = Vector2(406, -18)
-
-[node name="Board3" parent="Zones/GameBoards" instance=ExtResource("2_rmpmb")]
-position = Vector2(-416, -19)
-board_name = "Dangerous Place"
-board_comments = "Fuck you
-Here's some giants"
+position = Vector2(-40, -182)
+board_name = "Vineyards West"
+game_board = ExtResource("4_87jt2")
+board_comments = "The solders are on their last legs, but still should not be underestimated. They fight in formation, protecting their weak spots. The Vinemen will occasionally help you."
 deck_cards = Dictionary[PackedScene, int]({
-ExtResource("8_vu8fe"): 3,
-ExtResource("9_0pdlr"): 3,
-ExtResource("7_5rm82"): 3
+ExtResource("8_vsnug"): 5
 })
+presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
+ally_presummon = true
+unlockOnResolveStrings = Array[String](["Vineyards Gate"])
+
+[node name="Win_1" parent="Zones/GameBoards" instance=ExtResource("8_vu8fe")]
+position = Vector2(369, -48)
+dialogue = ExtResource("10_kl6wr")
+node_name = "Vineyards Cabin"
+
+[node name="Win_2" parent="Zones/GameBoards" instance=ExtResource("8_vu8fe")]
+position = Vector2(369, -47)
+dialogue = ExtResource("11_vsnug")
+node_name = "Vineyards Gate"
 
 [node name="Map" type="MarginContainer" parent="Zones"]
 z_index = -3
@@ -95,6 +115,8 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Zones/Map"]
 layout_mode = 2
@@ -111,12 +133,13 @@ metadata/_edit_lock_ = true
 layout_mode = 2
 texture = ExtResource("15_4t6do")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 offset = Vector2(-960, -540)
 transform = Transform2D(1, 0, 0, 1, -960, -540)
 follow_viewport_enabled = true
 
-[node name="ZoneInfoPanel" type="MarginContainer" parent="CanvasLayer"]
+[node name="ZoneInfoPanel" type="MarginContainer" parent="UI"]
 custom_minimum_size = Vector2(500, 120)
 anchors_preset = 5
 anchor_left = 0.5
@@ -131,28 +154,28 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/ZoneInfoPanel"]
+[node name="Panel" type="PanelContainer" parent="UI/ZoneInfoPanel"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_588s3")
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/ZoneInfoPanel/Panel"]
+[node name="HBox" type="HBoxContainer" parent="UI/ZoneInfoPanel/Panel"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/ZoneInfoPanel/Panel/HBox"]
+[node name="Label" type="Label" parent="UI/ZoneInfoPanel/Panel/HBox"]
 layout_mode = 2
 text = "  Zone  -"
 label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 
-[node name="ZoneNameLabel" type="Label" parent="CanvasLayer/ZoneInfoPanel/Panel/HBox"]
+[node name="ZoneNameLabel" type="Label" parent="UI/ZoneInfoPanel/Panel/HBox"]
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 
-[node name="ExitPane" type="MarginContainer" parent="CanvasLayer"]
+[node name="ExitPane" type="MarginContainer" parent="UI"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -166,23 +189,23 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/ExitPane"]
+[node name="Panel" type="PanelContainer" parent="UI/ExitPane"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_xt5s7")
 
-[node name="Label" type="Label" parent="CanvasLayer/ExitPane/Panel"]
+[node name="Label" type="Label" parent="UI/ExitPane/Panel"]
 layout_mode = 2
 text = "Exit Game"
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/ExitPane/Panel"]
+[node name="ExitButton" type="Button" parent="UI/ExitPane/Panel"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
 
-[node name="PlayerInfoPanel" type="MarginContainer" parent="CanvasLayer"]
+[node name="PlayerInfoPanel" type="MarginContainer" parent="UI"]
 custom_minimum_size = Vector2(400, 0)
 offset_left = 961.0
 offset_top = 547.0
@@ -193,15 +216,15 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/PlayerInfoPanel"]
+[node name="VBox" type="VBoxContainer" parent="UI/PlayerInfoPanel"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/PlayerInfoPanel/VBox"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HeroPortrait" type="TextureRect" parent="CanvasLayer/PlayerInfoPanel/VBox/PanelContainer"]
+[node name="HeroPortrait" type="TextureRect" parent="UI/PlayerInfoPanel/VBox/PanelContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -209,7 +232,7 @@ texture = ExtResource("11_bxjdc")
 expand_mode = 4
 stretch_mode = 6
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/PlayerInfoPanel/VBox/PanelContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/PlayerInfoPanel/VBox/PanelContainer"]
 layout_mode = 2
 texture = ExtResource("11_qjauh")
 patch_margin_left = 7
@@ -220,72 +243,72 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/PlayerInfoPanel/VBox"]
+[node name="Panel" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel"]
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/Panel"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox"]
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel/HBox"]
 layout_mode = 2
 text = "  Hero  -"
 label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 
-[node name="HeroNameLabel" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel/HBox"]
+[node name="HeroNameLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel/HBox"]
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/PlayerInfoPanel/VBox"]
+[node name="Panel2" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox"]
 custom_minimum_size = Vector2(340, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel2"]
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/Panel2"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox"]
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel2/HBox"]
 layout_mode = 2
 text = "  Glory  -"
 label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 
-[node name="GloryAmountLabel" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/Panel2/HBox"]
+[node name="GloryAmountLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel2/HBox"]
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 
-[node name="LivesPanel" type="PanelContainer" parent="CanvasLayer/PlayerInfoPanel/VBox"]
+[node name="LivesPanel" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox"]
 custom_minimum_size = Vector2(340, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/PlayerInfoPanel/VBox/LivesPanel"]
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/LivesPanel"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/LivesPanel/HBox"]
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/LivesPanel/HBox"]
 layout_mode = 2
 text = "  Lives  -"
 label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 
-[node name="LivesLabel" type="Label" parent="CanvasLayer/PlayerInfoPanel/VBox/LivesPanel/HBox"]
+[node name="LivesLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/LivesPanel/HBox"]
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 
-[node name="BottomActions" type="MarginContainer" parent="CanvasLayer"]
+[node name="BottomActions" type="MarginContainer" parent="UI"]
 custom_minimum_size = Vector2(1200, 0)
 anchors_preset = 7
 anchor_left = 0.5
@@ -301,36 +324,36 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/margin_bottom = 20
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/BottomActions"]
+[node name="VBox" type="VBoxContainer" parent="UI/BottomActions"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Description" type="PanelContainer" parent="CanvasLayer/BottomActions/VBox"]
+[node name="Description" type="PanelContainer" parent="UI/BottomActions/VBox"]
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_588s3")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BottomActions/VBox/Description"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/BottomActions/VBox/Description"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 30
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/BottomActions/VBox/Description/MarginContainer"]
+[node name="HBox" type="HBoxContainer" parent="UI/BottomActions/VBox/Description/MarginContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="ActionNameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/Description/MarginContainer/HBox"]
+[node name="ActionNameLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox"]
 layout_mode = 2
 text = "  Zone  -"
 label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 
-[node name="ActionDescLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/Description/MarginContainer/HBox"]
+[node name="ActionDescLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox"]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 text = "Goes Here"
@@ -338,12 +361,12 @@ label_settings = ExtResource("7_xt5s7")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ButtonsHBox" type="HBoxContainer" parent="CanvasLayer/BottomActions/VBox"]
+[node name="ButtonsHBox" type="HBoxContainer" parent="UI/BottomActions/VBox"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="BuildArmy" type="MarginContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox"]
+[node name="BuildArmy" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -352,23 +375,23 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("8_588s3")
 description = "Turn others to your cause: Purchase cards native to this land using Glory"
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy"]
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_xt5s7")
 
-[node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel"]
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel"]
 layout_mode = 2
 text = "Build Army"
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
-[node name="ActionPress" type="Button" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel"]
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
 
-[node name="Scry" type="MarginContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox"]
+[node name="Scry" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -377,23 +400,23 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("8_588s3")
 description = "Seek the abyss for rare cards of all sorts"
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry"]
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Scry"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_xt5s7")
 
-[node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel"]
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel"]
 layout_mode = 2
 text = "Scry"
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
-[node name="ActionPress" type="Button" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel"]
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
 
-[node name="Travel" type="MarginContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox"]
+[node name="Travel" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -402,23 +425,23 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("8_588s3")
 description = "Travel to a different land"
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel"]
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Travel"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_xt5s7")
 
-[node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel"]
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel"]
 layout_mode = 2
 text = "Travel"
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
-[node name="ActionPress" type="Button" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel"]
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
 
-[node name="Battle" type="MarginContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox"]
+[node name="Battle" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -427,28 +450,28 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("8_588s3")
 description = "Fight an opponent on one of the available game boards."
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle"]
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Battle"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_xt5s7")
 
-[node name="NameLabel" type="Label" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel"]
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel"]
 layout_mode = 2
 text = "Battle"
 label_settings = ExtResource("4_588s3")
 horizontal_alignment = 1
 
-[node name="ActionPress" type="Button" parent="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel"]
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel"]
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_yhj0w")
 theme_override_styles/normal = ExtResource("6_4x05h")
 
 [node name="PreBattleCanvas" type="CanvasLayer" parent="."]
 
-[connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="buttonPressedExitGame"]
-[connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy" method="buttonMouseEntered"]
-[connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="." method="buttonPressedDeckEdit"]
-[connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Scry" method="buttonMouseEntered"]
-[connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel" method="buttonMouseEntered"]
-[connection signal="pressed" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="." method="buttonPressedTravel"]
-[connection signal="mouse_entered" from="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="CanvasLayer/BottomActions/VBox/ButtonsHBox/Battle" method="buttonMouseEntered"]
+[connection signal="pressed" from="UI/ExitPane/Panel/ExitButton" to="." method="buttonPressedExitGame"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" method="buttonMouseEntered"]
+[connection signal="pressed" from="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="." method="buttonPressedDeckEdit"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Scry" method="buttonMouseEntered"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Travel" method="buttonMouseEntered"]
+[connection signal="pressed" from="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="." method="buttonPressedTravel"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Battle" method="buttonMouseEntered"]

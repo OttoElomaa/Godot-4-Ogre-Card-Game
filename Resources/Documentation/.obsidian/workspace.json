@@ -30,19 +30,36 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Map Scenario Structure.canvas",
+                "file": "Scenarios/Green Ray at the Vineyards.canvas",
                 "viewState": {
-                  "x": 232.83312182741122,
-                  "y": -48.37880710659897,
-                  "zoom": -0.3687612596972333
+                  "x": 374.1438233953279,
+                  "y": 1021.5745764761489,
+                  "zoom": -0.4798070105878211
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Map Scenario Structure"
+              "title": "Green Ray at the Vineyards"
+            }
+          },
+          {
+            "id": "dae68368f3731434",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Scenarios/Green Ray at the Vineyards.canvas",
+                "viewState": {
+                  "x": 181.5,
+                  "y": 1450.5043659043658,
+                  "zoom": -1.1464736772544877
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Green Ray at the Vineyards"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -190,10 +207,26 @@
       "bases:Create new base": false
     }
   },
-  "active": "dc56f90bb9b0f1a6",
+  "active": "dae68368f3731434",
   "lastOpenFiles": [
-    "BattleAI and Turn Order.canvas",
-    "Card Creation Process.canvas",
-    "Map Scenario Structure.canvas"
+    "Cards/Desert/Pyrecallers.canvas",
+    "Cards/Desert/Pilgrims.canvas",
+    "Cards/Desert/High Kingdom.canvas",
+    "Cards/City/Priests.canvas",
+    "Cards/City/Throne.canvas",
+    "Cards/City/Guilds.canvas",
+    "Cards/City/Slaves.canvas",
+    "Cards/Desert/Salkhi Horde.canvas",
+    "Cards/Green Defiance/Gharch.canvas",
+    "Cards/Green Defiance/Grove Clans.canvas",
+    "Cards/Outcasts/Umugites.canvas",
+    "Scenarios",
+    "Cards/Outcasts",
+    "Cards/Desert",
+    "Cards/City/Untitled.md",
+    "Cards/City",
+    "Cards/Green Defiance/Untitled.md",
+    "Cards/Green Defiance",
+    "Cards"
   ]
 }

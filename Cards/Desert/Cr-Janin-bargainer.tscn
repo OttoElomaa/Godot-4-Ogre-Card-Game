@@ -38,7 +38,6 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_osbj1")
 cardName = "Janin Bargainer"
 subTypeStr = "Janin Spirit"
-group = 8
 flavorText = "The Spirit so spoke unto them:
 \"If you are pious, you shall give me your most devoted slave.\""
 manaCost = 3

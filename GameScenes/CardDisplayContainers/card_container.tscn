@@ -1,0 +1,132 @@
+[gd_scene load_steps=10 format=3 uid="uid://came4na503n5s"]
+
+[ext_resource type="Script" uid="uid://dg0jpsurpxrxp" path="res://GameScenes/CardDisplayContainers/card_container.gd" id="1_71q1e"]
+[ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="2_nd4cv"]
+[ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="3_xq3cd"]
+[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_w72ds"]
+[ext_resource type="Texture2D" uid="uid://qngukrd0n58y" path="res://Art/CardComponents/card-mana-cost-indicator-texture.png" id="5_lfnvi"]
+[ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="6_kedjl"]
+[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="9_8jiv1"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="10_rkj34"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="11_ry028"]
+
+[node name="CardContainer" type="MarginContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(130, 200)
+offset_left = -55.0
+offset_top = -89.0
+offset_right = 75.0
+offset_bottom = 111.0
+pivot_offset = Vector2(55, 89)
+script = ExtResource("1_71q1e")
+
+[node name="Frontside" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2(50, 76)
+scale = Vector2(0.5, 0.5)
+
+[node name="Background" type="Node2D" parent="Frontside"]
+use_parent_material = true
+position = Vector2(10, 12)
+
+[node name="Creature" type="Sprite2D" parent="Frontside/Background"]
+use_parent_material = true
+texture = ExtResource("2_nd4cv")
+
+[node name="Spell" type="Sprite2D" parent="Frontside/Background"]
+visible = false
+use_parent_material = true
+texture = ExtResource("3_xq3cd")
+
+[node name="Art" type="Sprite2D" parent="Frontside"]
+texture_filter = 6
+use_parent_material = true
+position = Vector2(10, -61)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_w72ds")
+
+[node name="ManaCost" type="Node2D" parent="Frontside"]
+position = Vector2(10, -162)
+scale = Vector2(0.8, 0.8)
+
+[node name="ManaCostTexture" type="Sprite2D" parent="Frontside/ManaCost"]
+texture = ExtResource("5_lfnvi")
+
+[node name="ManaCostLabel" type="Label" parent="Frontside/ManaCost"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -28.5
+offset_right = 28.5
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "88"
+label_settings = ExtResource("6_kedjl")
+horizontal_alignment = 1
+
+[node name="EffectsLabel" type="Label" parent="Frontside"]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = 35.0
+offset_right = 110.0
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Effect Text Goes Here"
+label_settings = ExtResource("9_8jiv1")
+horizontal_alignment = 1
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="Resources" type="Node2D" parent="Frontside"]
+position = Vector2(10, 140)
+
+[node name="Panel" type="PanelContainer" parent="Frontside/Resources"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("10_rkj34")
+
+[node name="HBox" type="HBoxContainer" parent="Frontside/Resources/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 7
+alignment = 1
+
+[node name="PowerLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+layout_mode = 2
+text = "22"
+label_settings = ExtResource("11_ry028")
+horizontal_alignment = 2
+
+[node name="DashLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+layout_mode = 2
+text = "/"
+label_settings = ExtResource("11_ry028")
+horizontal_alignment = 1
+
+[node name="HealthLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+layout_mode = 2
+text = "33"
+label_settings = ExtResource("11_ry028")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

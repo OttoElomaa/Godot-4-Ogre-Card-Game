@@ -35,29 +35,35 @@ enum AI_personalities {
 
 func _ready() -> void:
 	
-	#### SETUP SIGNALS
+	#### SETUP GLOBAL INFO
 	##################################
-
+	GameInfo.turnCount = 1
+	
+	GameInfo.playerHealth = 20
+	GameInfo.playerMana = 1
+	GameInfo.playerManaIncome = 1
+	
+	GameInfo.enemyHealth = 20
+	GameInfo.enemyMana = 0
+	GameInfo.enemyManaIncome = 0
+	
+	
+	
 	
 	#### SETUP BOARD
 	##################################
 	States.statesPlay()
 	
+	setup_board()
 	#### THIS FUNC SETS UP PLAYER AND ENEMY DECKS BASED ON GameInfo
-	$CardsManager.setup(self)
-	
-	$BattleSystem.main = self
-	$BattleSystem.cardsManager = $CardsManager
-	
-	MyTools.gameBoardSetup(self)
-	turn_1_init()
-	
+
+#	turn_1_init()
 	###################################################
 	#### UI STUFF
 	$CanvasLayer/GameOverPane.hide()
 	
-	updateUi($BattleSystem.turnCount)
-	$BattleSystem.updateResourceLabels()
+	updateUi(GameInfo.turnCount)
+	updateResourceLabels()
 	toggleCardInfo(false, null)
 	
 	#### SET SLOTS STATUS
@@ -67,6 +73,13 @@ func _ready() -> void:
 		slot.slotType = CardSlotTypes.ENEMY
 
 
+func setup_board():
+	$CardsManager.setup(self)
+	
+	$BattleSystem.main = self
+	$BattleSystem.cardsManager = $CardsManager
+	
+	MyTools.gameBoardSetup(self)
 
 func _unhandled_input(e: InputEvent) -> void:
 	if e is InputEventMouseButton: 
@@ -80,6 +93,10 @@ func add_card_to_random_slot(card:Card, isEnemyCard:bool):
 	var empty_slots = MyTools.findEmptyCardSlots(isEnemyCard)
 	var slot = empty_slots.pick_random()
 	cardsManager.handlePlaceCardInSlot(card, slot)
+
+func add_card_to_enemy_deck(card:Card):
+	$CardsManager/EnemyDeck.add_child(card)
+	card.setup(self)
 
 func turn_1_init():
 	cardsManager.dealEnemyHand()
@@ -121,13 +138,13 @@ func toggleCardActionMenu(enable:bool, card:Card):
 func changeMana(amount:int, isEnemy:bool):
 	
 	if isEnemy:
-		if not amount > $BattleSystem.enemyMana:
-			$BattleSystem.enemyMana += amount
+		if GameInfo.enemyMana + amount >= 0:
+			GameInfo.enemyMana += amount
 		else:
 			return false
 	else:
-		if not amount > $BattleSystem.playerMana:
-			$BattleSystem.playerMana += amount
+		if GameInfo.playerMana + amount >= 0:
+			GameInfo.playerMana += amount
 		else:
 			return false
 	return true
@@ -136,12 +153,12 @@ func changeMana(amount:int, isEnemy:bool):
 func changeHealth(amount:int, isEnemy:bool):
 	
 	if isEnemy:
-		$BattleSystem.enemyHealth = max($BattleSystem.enemyHealth + amount, 0)
-		if $BattleSystem.enemyHealth <= 0:
+		GameInfo.enemyHealth = max(GameInfo.enemyHealth + amount, 0)
+		if GameInfo.enemyHealth <= 0:
 			endGame(true)
 	else:
-		$BattleSystem.playerHealth = max($BattleSystem.playerHealth + amount, 0)
-		if $BattleSystem.playerHealth <= 0:
+		GameInfo.playerHealth = max(GameInfo.playerHealth + amount, 0)
+		if GameInfo.playerHealth <= 0:
 			endGame(false)
 		
 
@@ -202,21 +219,23 @@ func updateUi(turnCount:int):
 		battleNameLabel.text = GameInfo.currentBattleInfo.board_name
 		
 	
-	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % turnCount
+	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % GameInfo.turnCount
 
 
-func updateResourceLabelsHelp():
-	updateResourceLabels(battleSystem.playerHealth, 
-	battleSystem.playerMana, battleSystem.enemyHealth, battleSystem.enemyMana)
 
 
-func updateResourceLabels(playerHealth, playerMana, enemyHealth, enemyMana):
-	$Portraits/PlayerHealthLabel.text = "%d" % playerHealth
-	$Portraits/PlayerManaLabel.text = "%d" % playerMana
-	$Portraits/EnemyHealthLabel.text = "%d" % enemyHealth
-	$Portraits/EnemyManaLabel.text = "%d" % enemyMana
 
-
+func updateResourceLabels():
+	$Portraits/PlayerHealthLabel.text = "%d" % GameInfo.playerHealth
+	$Portraits/PlayerManaLabel.text = "%d" % GameInfo.playerMana
+	$Portraits/EnemyHealthLabel.text = "%d" % GameInfo.enemyHealth
+	$Portraits/EnemyManaLabel.text = "%d" % GameInfo.enemyMana
+	
+	$Visuals/PlayerManaDisplay.updateVisual(GameInfo.playerMana, GameInfo.playerManaIncome)
+	$Visuals/EnemyManaDisplay.updateVisual(GameInfo.enemyMana, GameInfo.enemyManaIncome)
+	
+	
+			
 func playerChampion() -> Card:
 	if $CardsManager/PlayerChampSlot.get_children().size() > 0:
 		return $CardsManager/PlayerChampSlot.get_child(0)
@@ -271,13 +290,6 @@ func nuke_all_cards():
 	nuke_cards($CardsManager/EnemyHand)
 	nuke_cards($CardsManager/EnemyBoard)
 
-func add_card_to_board(to, card:Card):
-	if to == 'player':
-		$PlayerSlots/TableCardSlot.add_child(card)
-	elif to == 'enemy':
-		$CardsManager/EnemyHand.add_child(card)
-	else:
-		print('WTF MAN?')
 
 
 func endGame(isWin:bool):
@@ -293,8 +305,6 @@ func endGame(isWin:bool):
 		
 	
 	
-
-
 func buttonPressedEndMatch() -> void:
 	if GameInfo.currentZone:
 		GameInfo.currentZone.visualsUpdateNeeded = true

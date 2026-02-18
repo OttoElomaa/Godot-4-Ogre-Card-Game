@@ -38,7 +38,7 @@ flavorText = "Come, o Life! Reclaim thy wayward child!"
 [node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_vqnwm")]
 
 [node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("3_006rp")]
-customActionText = "Reveals one ally's true form as a shapeshifting Pasar."
+customActionText = "Reveal target ally as a shapeshifting Pasar."
 
 [node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_gmrsd")]
 manualTargetGroup = 1

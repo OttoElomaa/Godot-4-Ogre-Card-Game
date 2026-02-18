@@ -1,0 +1,23 @@
+{
+"arrive": "Triggers when this card is summoned from the hand.",
+"battle art": "Triggers when a card attacks an enemy.",
+"blocking": "Non-blocking cards cannot be attacked while there is at least one blocking card.",
+"bolster": "Increase stats of a creature until next turn.",
+"charge": "A card automatically attacks an enemy, even if it normally would not be able to.",
+"cleanse": "Remove all debuffs from a card.",
+"corrode": "Damage a card and reduce its health for the damage dealt.",
+"defend": "Triggers when a card is attacked by an enemy.",
+"dispel": "Remove all buffs from a card.",
+"fetch": "Put a card from the deck in your hand.",
+"heal": "Set a card's current Health to its Maximum Health.",
+"paralyze": "Force a card to rest.",
+"purge": "Remove a card from the battle.",
+"reclaim": "Return a card from the graveyard and put it in your hand.",
+"rest": "A resting card is placed diagonally and cannot act.",
+"retreat": "Send a card from the battlefield into the deck.",
+"revive": "Return a creature from the graveyard and summon it to the battefield.",
+"sacrifice": "Destroy an allied card.",
+"shoot": "Attack an enemy card without it being able to retaliate.",
+"survive": "A card attacked or was attacked and survived.",
+"travel": "The creature was recently summoned and cannot act."
+}

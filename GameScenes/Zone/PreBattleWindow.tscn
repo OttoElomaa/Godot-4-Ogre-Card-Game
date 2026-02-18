@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="3_wykmi"]
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="4_u3657"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="5_gmchg"]
-[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardInfoPanel.tscn" id="6_i3hud"]
+[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="6_i3hud"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="6_wykmi"]
 [ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="7_6gtnb"]
 
@@ -66,11 +66,13 @@ custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="GB_Comments" type="Label" parent="MainPanel/Margin/MainHBox/Left/VBox"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
 text = "You're getting kicked!"
 label_settings = ExtResource("5_gmchg")
+autowrap_mode = 2
 
 [node name="ButtonsHBox" type="HBoxContainer" parent="MainPanel/Margin/MainHBox/Left"]
 layout_mode = 2

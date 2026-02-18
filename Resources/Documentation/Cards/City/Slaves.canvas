@@ -1,0 +1,16 @@
+{
+	"nodes":[
+		{"id":"628ef4ff10fe2bd3","type":"text","text":"Main Mechanics: ???","x":-220,"y":-340,"width":250,"height":60},
+		{"id":"5a598d09c85f38d1","type":"text","text":"Militiaman","x":-440,"y":-146,"width":128,"height":50},
+		{"id":"d129ed3ae7549de9","type":"text","text":"Common Creature","x":-260,"y":-151,"width":250,"height":60},
+		{"id":"186290efa1d0b91d","type":"text","text":"Can be upgraded mid-battle?","x":100,"y":-151,"width":250,"height":60},
+		{"id":"126829c98966c395","type":"text","text":"Spartacus?","x":-459,"y":-40,"width":167,"height":60},
+		{"id":"c994317400629cb9","type":"text","text":"Bag of the Aratai?","x":-464,"y":64,"width":172,"height":60},
+		{"id":"eacf913541227a6f","type":"text","text":"The Slaves are largely composed of native people captured during wars led by the King. Employed on royal and hallowed grounds alike, they work the soil day in and day out, feeding all of Ashk'lan and indeed a lot of the continent.\nLately a rebellion was brewing among them. They gather under the banner of the Aratai, a legendary earthbreaker-giant, the first farmer, plotting to one day overthrow their masters. ","x":-484,"y":365,"width":784,"height":155},
+		{"id":"2be95bf787bd4ebd","x":-500,"y":160,"width":250,"height":60,"type":"text","text":"Brewers?"}
+	],
+	"edges":[
+		{"id":"3e30b3f420910da9","fromNode":"5a598d09c85f38d1","fromSide":"right","toNode":"d129ed3ae7549de9","toSide":"left"},
+		{"id":"2fcec5b5bcc4dba0","fromNode":"d129ed3ae7549de9","fromSide":"right","toNode":"186290efa1d0b91d","toSide":"left"}
+	]
+}

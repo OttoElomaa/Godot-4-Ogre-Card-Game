@@ -1,6 +1,6 @@
 extends PanelContainer
 @export var card: Card = null
-@onready var CardContainer = preload("res://GameScenes/DeckEditScreen/card_container.tscn")
+@onready var CardContainer = preload("res://GameScenes/DeckEditScreen/card_container_draggable.tscn")
 
 @onready var nameLabel := $Margin/HBox/CardNameLabel
 @onready var statsLabel := $Margin/HBox/StatsLabel

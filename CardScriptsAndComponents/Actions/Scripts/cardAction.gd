@@ -50,6 +50,8 @@ func createActionText() -> String:
 #### CURRENTLY Called by handleRitual(), handleCast() ETC.
 func activate(params:SignalParams) -> bool:
 	var success := false
+	if not is_inside_tree(): #### CRASH PREVENTION?
+		return success
 	
 	#### TURN ON MANUAL TARGETING -> No target selected yet!
 	if targetingComponent is AutoTargetingComponent:
@@ -121,6 +123,9 @@ func handleManualTargeting():
 
 func activateSkillAfterTargeting(targets:Array) -> bool:
 	var success := false
+	if not is_inside_tree(): #### CRASH PREVENTION?
+		return success
+		
 	var successfulScript:Node = null
 	var children = get_children()
 
@@ -130,6 +135,9 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 		
 		if skill is Skill:
 			success = await skill.activate(targets)
+			if not is_inside_tree():  #### CRASH PREVENTION?
+				return success
+			
 			successfulScript = skill
 			await get_tree().process_frame
 			

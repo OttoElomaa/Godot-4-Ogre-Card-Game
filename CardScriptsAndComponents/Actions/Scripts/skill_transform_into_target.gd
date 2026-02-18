@@ -17,6 +17,8 @@ extends Skill
 
 func activate(targets):
 	var target:Card = targets[0]
+	
+	#### KEEP OR REPLACE NAME, FLAVOR TEXT AND ART
 	if !card_name:
 		myCard.cardName = target.cardName
 	if !subtype:
@@ -25,15 +27,17 @@ func activate(targets):
 		myCard.flavorText = target.flavorText
 	if !art:
 		myCard.tempSetCardArt(target.cardArt)
+		
+	#### KEEP OR REPLACE STATS
 	if !health:
 		myCard.health = target.health
 		myCard.tempHealth = myCard.health
 	if !damage:
 		myCard.damage = target.damage
 		myCard.tempDamage = myCard.damage
-		
+	
+	#### KEEP OR REPLACE ACTIONS	
 	if !actions:
-		## Removes all actions from the original.
 		for child in myCard.actions.get_children():
 			myCard.actions.remove_child(child)
 			
@@ -49,6 +53,8 @@ func activate(targets):
 		for kw:Keyword in target.getKeywords():
 			myCard.addKeyword(kw.id)
 	
+	#### TRANSFORMATION COUNTS AS ARRIVAL (i think)
+	myCard.handleArrival()  
 	myCard.updateCardVisuals()
 	myCard.updateCardNameAndBasicInfo(true)
 	return true

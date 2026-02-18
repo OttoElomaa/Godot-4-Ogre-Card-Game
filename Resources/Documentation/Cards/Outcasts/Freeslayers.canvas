@@ -1,0 +1,7 @@
+{
+	"nodes":[
+		{"id":"f3f25c49ac3260ab","type":"text","text":"|               |                 |                                                                   |                          |          |\n| ------------- | --------------- | ----------------------------------------------------------------- | ------------------------ | -------- |\n| Name          | Type            | Effect                                                            | Visuals                  | Done?    |\n| Mounted Hiisi | Common Creature | Bolster an ally +2/0.                                             |                          | Yes      |\n| Falconer      | Common Creature | Flying.                                                           | A hiisi riding a falcon. |          |\n| Terasvaras    | Rare Creature   | Equip: destroy the item and gain +1/0 until the end of the battle |                          | Art Done |\n| Pallid Hiisi  | Common Creature |                                                                   |                          |          |","x":-320,"y":-72,"width":920,"height":332},
+		{"id":"5181707018ddff60","type":"text","text":"Mechanics: most creatures are common. On-equip effects.\nWeaknesses: no general theme.","x":-264,"y":-266,"width":364,"height":106}
+	],
+	"edges":[]
+}

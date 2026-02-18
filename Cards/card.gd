@@ -197,12 +197,8 @@ var allowInteract := true
 
 #region ######################################## STARTUP
 func _ready() -> void:
-	self.connect('visibility_changed', visibility_debug)
 	setup(null)
 	
-
-func visibility_debug():
-	print('Visibility changed!')
 	
 func setup_all_actions():
 	$Actions.setup(self)
@@ -352,11 +348,6 @@ func handleArrival():
 	var params = SignalParams.new()
 	params.sourceCard = self
 	SignalBus.arrival.emit(params)
-#	actions.handleOnTurn()   #### TRIGGER ON-TURN NODE
-	
-	#if hasShadow:
-		#countersNode.togglePhased(true)
-		#statesPassive()
 	handleTurnStartReset()
 	updateCardVisuals()
 
@@ -581,6 +572,7 @@ func statesActive():
 	
 
 func statesPassive():
+	print(cardName, ' goes passive')
 	actionState = CardActionStates.PASSIVE
 	stateHandler.get_node("ActiveIcon").hide()
 	
@@ -695,7 +687,7 @@ func checkAlive():
 ###############################################################################
 #region #########################################  COMBAT STUFF
 
-#### DEAL DAMAGE IF NECESSARY, AND RETURN ANSWER: DID THIS CARD DIE
+#### Self: who takes damage. Card -- the other guy.
 func takeCombatDamage(card:Card, isAttacker: bool):
 	
 	var selfCombatDamage:int = getCombatDamageToTarget(card, !isAttacker)
@@ -782,8 +774,11 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	if effects.isPhased:
 		combatDamage += 1
 	
-	if hasEffect('Rage') and isAttacker:
+	if hasEffect('Rage') and not isAttacker:
 		combatDamage += getEffect('Rage').counter
+		
+	if hasEffect('Terror') and isAttacker:
+		combatDamage -= getEffect('Terror').counter
 	
 	#### END OF TARGETLESS DAMAGE CALCULATION
 	if not target:
