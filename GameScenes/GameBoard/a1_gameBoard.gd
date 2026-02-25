@@ -280,15 +280,23 @@ func addLogMessage(text:String, color:Color) -> void:
 #################################################################
 # Cheat Functions
 
-func nuke_cards(obj):
-	for child in obj.get_children():
-		obj.remove_child(child)
+func nuke_cards(isEnemy: bool):
+	var obj: Node = null
+	if isEnemy:
+		for child in %EnemyDeck.get_children():
+			obj.remove_child(child)
+		for child in %EnemyHand.get_children():
+			obj.remove_child(child)
+	else:
+		for child in %PlayerDeck.get_children():
+			obj.remove_child(child)
+		for child in %PlayerHand.get_children():
+			obj.remove_child(child)
+
 
 func nuke_all_cards():
-	nuke_cards($CardsManager/PlayerBoard)
-	nuke_cards($CardsManager/PlayerHand)
-	nuke_cards($CardsManager/EnemyHand)
-	nuke_cards($CardsManager/EnemyBoard)
+	nuke_cards(true)
+	nuke_cards(false)
 
 
 
@@ -303,8 +311,7 @@ func endGame(isWin:bool):
 		$CanvasLayer/GameOverPane/Margin/VBox/LostHeader.show()
 		GameInfo.playerLives -= 1
 		
-	
-	
+
 func buttonPressedEndMatch() -> void:
 	if GameInfo.currentZone:
 		GameInfo.currentZone.visualsUpdateNeeded = true

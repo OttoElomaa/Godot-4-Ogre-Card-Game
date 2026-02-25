@@ -380,14 +380,18 @@ bus = &"SE"
 script = ExtResource("15_h4god")
 
 [node name="PlayerDeck" type="Node2D" parent="CardsManager"]
+unique_name_in_owner = true
 position = Vector2(-500, 0)
 
 [node name="EnemyDeck" type="Node2D" parent="CardsManager"]
+unique_name_in_owner = true
 position = Vector2(-300, 0)
 
 [node name="PlayerHand" type="Node2D" parent="CardsManager"]
+unique_name_in_owner = true
 
 [node name="EnemyHand" type="Node2D" parent="CardsManager"]
+unique_name_in_owner = true
 
 [node name="PlayerBoard" type="Node2D" parent="CardsManager"]
 
@@ -857,5 +861,5 @@ bus = &"BGM"
 [connection signal="pressed" from="CanvasLayer/GameOverPane/Margin/VBox/Panel2/EndMatchButton" to="." method="buttonPressedEndMatch"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
-[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]
