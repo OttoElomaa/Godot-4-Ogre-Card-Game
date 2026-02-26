@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2r8x7dfnt45s"]
+
+[ext_resource type="PackedScene" uid="uid://ca73vscnr1a8" path="res://CardScriptsAndComponents/EffectCounters/EffectCounter.tscn" id="1_kiton"]
+[ext_resource type="Script" uid="uid://bs5kjnljmmys" path="res://CardScriptsAndComponents/Triggers/Scripts/Trigger.gd" id="2_0q1pd"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_vmvgv"]
+[ext_resource type="PackedScene" uid="uid://cvl306ch72ymq" path="res://CardScriptsAndComponents/Actions/SkillChangeEffectStacks.tscn" id="4_os8w4"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="5_vmvgv"]
+[ext_resource type="PackedScene" uid="uid://bqt3gngoys4mh" path="res://CardScriptsAndComponents/Conditionals/IfSelf.tscn" id="6_os8w4"]
+
+[node name="EffectCounter" instance=ExtResource("1_kiton")]
+effectType = 1
+max_counter = 1
+id = "Defy Death"
+description = "Buff. Can only have 1 stack. When this creature would be killed, it survives and Defy Death is removed."
+
+[node name="Trigger" type="Node" parent="." index="1"]
+script = ExtResource("2_0q1pd")
+triggered_when = "death_defied"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"
+
+[node name="CardAction" parent="Trigger" index="0" instance=ExtResource("3_vmvgv")]
+customActionText = "Defy Death is removed."
+
+[node name="SkillChangeEffectStacks" parent="Trigger/CardAction" index="1" instance=ExtResource("4_os8w4")]
+effectID = "Defy Death"
+amount = -1
+
+[node name="TargetSelf" parent="Trigger/CardAction" index="2" instance=ExtResource("5_vmvgv")]
+
+[node name="IfSelf" parent="Trigger" index="1" instance=ExtResource("6_os8w4")]

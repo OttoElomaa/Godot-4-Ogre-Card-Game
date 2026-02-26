@@ -693,10 +693,14 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 	var selfCombatDamage:int = getCombatDamageToTarget(card, !isAttacker)
 	var enemyCombatDamage:int = card.getCombatDamageToTarget(self, isAttacker)
 	
-	#### CHECK DESTROYED STATUS 1: DUELIST
-	if hasKeyword('Duelist'):
-		if selfCombatDamage >= card.tempHealth:
-			return 0   #### DUELIST KILLS, SURVIVES -> FALSE
+	#### CHECK IF THE ENEMY WOULD BE KILLED IN COMBAT WITH THIS CARD, AND EMIT SIGNAL.
+	if selfCombatDamage >= card.tempHealth + selfCombatDamage:
+		print('This cards can deal ', selfCombatDamage, ' damage and kill the foe ', card.cardName , 'with ', card.tempHealth, ' HP' )
+		var params = SignalParams.new()
+		params.sourceCard = self
+		params.targetCard = card
+		params.amount = selfCombatDamage
+		SignalBus.emit_signal("killed_enemy", params)
 			
 	
 	#### DEAL DAMAGE
@@ -705,7 +709,7 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 				
 	updateCardVisuals()
 	
-	checkAndHandleCombatDeath(isAttacker)
+	await checkAndHandleCombatDeath(isAttacker)
 
 
 #### RETURNS THE INPUT DAMAGE, AND ADDS to it any of 
@@ -730,6 +734,12 @@ func takeDamage(amount:int):
 	##CHECK IF DESTROYED
 
 	if tempHealth <= 0:
+		## Emit the Death signal. Death can still be overwritten by Defy Death etc.
+		## during destroyAndAnimate()
+		var params = SignalParams.new()
+		params.sourceCard = self
+		SignalBus.emit_signal("death", params)
+		
 		await destroyAndAnimate(true)
 
 ## Returns damage taken by self after general modifiers.
@@ -763,6 +773,9 @@ func getDamageToSelf(amount:int) -> int:
 	
 	return damageTaken
 	
+## Restores a card's health to its max value.
+func heal():
+	tempHealth = health
 
 #### RETURNS THE TEMPORARY DAMAGE, AND ADDS to it any of 
 #### THIS CARD'S (Damage Dealer) DAMAGE-CHANGING EFFECTS
@@ -822,8 +835,11 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	$SFX/DefendSound.play()
 	allowInteract = true
 	
+	var params = SignalParams.new()
+	params.sourceCard = self
+	SignalBus.survived.emit(params)
 	return false
-
+	
 func handleEnterGraveyard():
 	handleTurnStartReset()
 
@@ -843,6 +859,11 @@ func handleAttackingPortrait():
 	await returnToSlot()
 	await restAndAnimate()
 	effects.togglePhased(false)
+	
+	var params := SignalParams.new()
+	params.sourceCard = self
+	params.targetCard = null
+	SignalBus.attacked.emit(params)
 	
 
 ###########################################################################
@@ -980,6 +1001,18 @@ func updateCardLabels():
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
+	var params = SignalParams.new()
+	params.sourceCard = self
+	SignalBus.emit_signal("death", params)
+	
+	if hasEffect('Defy Death'):
+		SignalBus.emit_signal("death_defied", params)
+		SignalBus.emit_signal("survived", params)
+		returnToSlot()
+		tempHealth = health
+		updateCardLabels()
+		return
+	
 	statesDestroy()
 		
 	if mySlot:

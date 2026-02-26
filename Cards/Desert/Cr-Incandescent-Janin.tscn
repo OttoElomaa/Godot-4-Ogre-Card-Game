@@ -1,0 +1,57 @@
+[gd_scene load_steps=12 format=3 uid="uid://dpukoa1iadvt7"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_58na1"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_f3ns1"]
+[ext_resource type="PackedScene" uid="uid://biap5dhvp08qo" path="res://CardScriptsAndComponents/Triggers/BattleArtTrigger.tscn" id="3_srsp6"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_4bwe0"]
+[ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="5_ca3w6"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="6_xtu26"]
+[ext_resource type="PackedScene" uid="uid://dxa0yse2tdcgv" path="res://CardScriptsAndComponents/Actions/SkillRestAndTravel.tscn" id="7_glw88"]
+[ext_resource type="Texture2D" uid="uid://coifp8j4fpvk0" path="res://Art/CardArt/Desert/card-art-creature-janinSpirit-Alt-01.jpg" id="8_d6arb"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2q3f6"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6uktb"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_2q3f6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36b5u"]
+resource_local_to_scene = true
+shader = ExtResource("2_f3ns1")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_6uktb")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-Incandescent Janin" instance=ExtResource("1_58na1")]
+material = SubResource("ShaderMaterial_36b5u")
+cardName = "Incandescent Janin"
+subTypeStr = "Janin Spirit"
+flavorText = "\"My want is of flaming things; aside from flame, I ally with no one.\""
+manaCost = 4
+startingDamage = 4
+startingHealth = 3
+
+[node name="BattleArtTrigger" parent="Actions" index="0" instance=ExtResource("3_srsp6")]
+
+[node name="CardAction2" parent="Actions/BattleArtTrigger" index="1" instance=ExtResource("4_4bwe0")]
+customActionText = "Battle Art: pay 4 Mana and wake this creature."
+
+[node name="SkillPlayerHealthMana" parent="Actions/BattleArtTrigger/CardAction2" index="1" instance=ExtResource("5_ca3w6")]
+alterOwnerMana = -4
+
+[node name="CardAction" parent="Actions/BattleArtTrigger" index="2" instance=ExtResource("4_4bwe0")]
+
+[node name="TargetSelf" parent="Actions/BattleArtTrigger/CardAction" index="1" instance=ExtResource("6_xtu26")]
+
+[node name="SkillRestAndTravel" parent="Actions/BattleArtTrigger/CardAction" index="2" instance=ExtResource("7_glw88")]
+wake = true
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("8_d6arb")

@@ -18,12 +18,22 @@ func activate(targets:Array) -> bool:
 	#### TARGETED ACTIONS
 	for target:Card in targets:
 		
+		if not target:
+			return success
+		
 		#### CARD DRAW
 		if rest:
 			target.restAndAnimate()
 			success = true
-
 		
+		if travel:
+			target.toggleTraveling(true)
+			success = true
+		
+		if wake:
+			target.wake()
+			success = true
+
 	return success
 	
 

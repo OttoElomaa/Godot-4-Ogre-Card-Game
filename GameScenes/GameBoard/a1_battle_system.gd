@@ -552,6 +552,17 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 	targetCard.allowInteract = false
 	await attackCard.handleCombatActions(attackCard, targetCard)
 	targetCard.handleCombatActions(attackCard, targetCard)
+
+	#### WHICH CARDS TOOK LETHAL DAMAGE?
+	var damageTakenByTarget = await targetCard.takeCombatDamage(attackCard, false)
+	var damageTakenByAttacker = await attackCard.takeCombatDamage(targetCard, true)
+
+
+	#### COMBAT LOG STUFF ##################################
+	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
+	main.addLogMessage(attackerString, Color.WHITE)	
+	
+	#### EMITTING SIGNALS OF A COMPLETED COMBAT.
 	var params := SignalParams.new()
 	params.sourceCard = attackCard
 	params.targetCard = targetCard
@@ -561,15 +572,6 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 	params2.sourceCard = targetCard
 	params2.targetCard = attackCard
 	SignalBus.defended.emit(params2)
-
-	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, false)
-	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, true)
-
-
-	#### COMBAT LOG STUFF ##################################
-	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
-	main.addLogMessage(attackerString, Color.WHITE)	
 	
 #	
 
