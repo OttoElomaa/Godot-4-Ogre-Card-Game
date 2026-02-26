@@ -61,13 +61,15 @@ func activate(params:SignalParams) -> bool:
 	
 	elif targetingComponent is EnemyTargetingComponent:
 		var targets:Array = []
-		targets.append(params.targetCard)
-		success = await activateSkillAfterTargeting(targets)
+		if params.targetCard:
+			targets.append(params.targetCard)
+			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SourceTargetingComponent:
 		var targets: Array = []
-		targets.append(params.sourceCard)
-		success = await activateSkillAfterTargeting(targets)
+		if params.sourceCard:
+			targets.append(params.sourceCard)
+			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SelfTargetingComponent:
 		var targets:Array = []
@@ -101,11 +103,16 @@ func activate(params:SignalParams) -> bool:
 				var targets:Array = []
 				targets.append(possible_targets[0])
 				success = await activateSkillAfterTargeting(targets)
+	
+	#### TARGETING COMPONENT IS NONE OF THE ABOVE
+	#### -> Most likely IT DOES NOT EXIST -> That's OKAY
 	else:
 		var targets = []
 		success = await activateSkillAfterTargeting(targets)
 			
 	return success
+
+
 
 func get_saved_targets():
 	for child in get_parent().get_children():

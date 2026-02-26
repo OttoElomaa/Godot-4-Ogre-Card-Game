@@ -173,8 +173,8 @@ func timeoutEnemyStartCombat() -> void:
 
 
 
-## Current algorithm -- half as many creatures need to be set as blockers as the player has on board. If there are not enough TANKS,
-## sets other cards instead, prioritizing strongest ones.
+## Current algorithm -- half as many creatures need to be set as blockers as the player has on board. 
+## If there are not enough TANKS, sets other cards instead, prioritizing strongest ones.
 func decide_blockers():
 	if not enemyBoardCards.is_empty():
 		CardChecks.sort_by_strongest(enemyBoardCards)
@@ -182,7 +182,7 @@ func decide_blockers():
 			
 		for i in range(projected_number_of_blockers):
 			var blocker:Card = CardChecks.getNonBlockersInList(enemyBoardCards).front()
-			if has_method('statesActive'):
+			if blocker.has_method('statesActive'):
 				blocker.statesActive()
 
 func playCasters():
