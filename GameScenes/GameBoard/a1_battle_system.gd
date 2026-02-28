@@ -182,8 +182,9 @@ func decide_blockers():
 			
 		for i in range(projected_number_of_blockers):
 			var blocker:Card = CardChecks.getNonBlockersInList(enemyBoardCards).front()
-			if blocker.has_method('statesActive'):
-				blocker.statesActive()
+			if MyTools.checkNodeValidity(blocker):
+				if blocker.has_method('statesActive'):
+					blocker.statesActive()
 
 func playCasters():
 	var enemyCasters = CardChecks.getCastersInList(enemyBoardCards)

@@ -77,38 +77,47 @@ func activate(params:SignalParams) -> bool:
 		success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is ManualTargetingComponent:
-		### If the player's card requires manual targeting, await its success
+		#### It is a PLAYER CARD and requires manual targeting
 		if not myCard.isEnemyCard:
 			var target: Card = null
 			targetingComponent.activate()
 			await targetingComponent.target_acquired or targetingComponent.aborted
 			print("target acquired: ", targetingComponent.target)
+			
+			#### TARGET FOUND
 			if targetingComponent.target:
 				var targets:Array = []
 				targets.append(targetingComponent.target)
 				success = await activateSkillAfterTargeting(targets)
+			#### NO TARGET -> FAIL
 			else:
 				return success
-		### If an enemy targets a manual ability, refer to its AI targeting mode value.
+		### It is an ENEMY CARD using a manual ability, refer to 
 		else:
 			var possible_targets = targetingComponent.getTargets()
-			match myCard.targeting_mode:
+			if possible_targets.is_empty():  #### NO TARGETS FOUND
+				return success
+			
+			#### SORT TARGETS based on the card's AI targeting mode value.
+			match myCard.targeting_mode:  
 				myCard.targetingMode.WEAKEST:
 					CardChecks.sort_by_weakest(possible_targets)
 				myCard.targetingMode.STRONGEST:
 					CardChecks.sort_by_strongest(possible_targets)
-			if possible_targets.is_empty():
-				return success
-			else:
-				var targets:Array = []
-				targets.append(possible_targets[0])
-				success = await activateSkillAfterTargeting(targets)
+			
+			var targets:Array = []
+			targets.append(possible_targets[0])
+			success = await activateSkillAfterTargeting(targets)
 	
 	#### TARGETING COMPONENT IS NONE OF THE ABOVE
 	#### -> Most likely IT DOES NOT EXIST -> That's OKAY
 	else:
 		var targets = []
 		success = await activateSkillAfterTargeting(targets)
+	
+	#### EFFECT ANIMATION
+	if success:
+		EffectAnimationQueue.queueAnimation(myCard, self)
 			
 	return success
 
