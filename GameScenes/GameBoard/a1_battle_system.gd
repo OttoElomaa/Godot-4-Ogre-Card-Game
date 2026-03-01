@@ -179,7 +179,10 @@ func decide_blockers():
 	if not enemyBoardCards.is_empty():
 		CardChecks.sort_by_strongest(enemyBoardCards)
 		var projected_number_of_blockers = roundi(playerBoardCards.size() / 2) - cardsManager.getEnemyBlockers().size()
-			
+		
+		if projected_number_of_blockers < 1:
+			projected_number_of_blockers += 1
+		
 		for i in range(projected_number_of_blockers):
 			var blocker:Card = CardChecks.getNonBlockersInList(enemyBoardCards).front()
 			if MyTools.checkNodeValidity(blocker):
