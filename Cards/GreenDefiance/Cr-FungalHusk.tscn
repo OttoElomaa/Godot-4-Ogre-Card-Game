@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=3 uid="uid://4j36w62j1jr"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_n7s5t"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_pod7x"]
+[ext_resource type="PackedScene" uid="uid://d0e807arj0ef" path="res://CardScriptsAndComponents/Triggers/ArrivalTrigger.tscn" id="3_n7s5t"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_peu22"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="5_v6alb"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="6_q4tjj"]
+[ext_resource type="PackedScene" uid="uid://cl142a4tuklcm" path="res://CardScriptsAndComponents/EffectCounters/EffectExtinct.tscn" id="7_pod7x"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
+noise = SubResource("FastNoiseLite_s5qc8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_877ti"]
+resource_local_to_scene = true
+shader = ExtResource("2_pod7x")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_5riqg")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-FungalHusk" instance=ExtResource("1_n7s5t")]
+material = SubResource("ShaderMaterial_877ti")
+cardName = "Fungal Husk"
+subTypeStr = "Gharch Husk"
+group = 7
+flavorText = "This being, once human, is almost decomposed."
+manaCost = 2
+startingDamage = 3
+startingHealth = 2
+block_on_arrival = false
+
+[node name="ArrivalTrigger" parent="Actions" index="0" instance=ExtResource("3_n7s5t")]
+
+[node name="CardAction" parent="Actions/ArrivalTrigger" index="1" instance=ExtResource("4_peu22")]
+customActionText = "Arrival: Become Extinct."
+
+[node name="TargetSelf" parent="Actions/ArrivalTrigger/CardAction" index="0" instance=ExtResource("5_v6alb")]
+
+[node name="SkillEffectCounters" parent="Actions/ArrivalTrigger/CardAction" index="1" instance=ExtResource("6_q4tjj")]
+grantEffect = ExtResource("7_pod7x")
+grantAmount = 1

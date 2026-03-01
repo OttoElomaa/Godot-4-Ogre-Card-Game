@@ -73,6 +73,10 @@ func _on_end_turn_button_pressed() -> void:
 	
 	
 func switchBetweenPlayerEnemyTurns():
+	var signalParams = SignalParams.new()
+	signalParams.isEnemySide = GameInfo.enemy_turn
+	SignalBus.turnEnded.emit(signalParams)
+	
 	#### SWITCH TURN TYPE BETWEEN PLAYER <--> ENEMY
 	GameInfo.enemy_turn = !GameInfo.enemy_turn
 	
@@ -97,8 +101,8 @@ func switchBetweenPlayerEnemyTurns():
 	main.updateUi(GameInfo.turnCount)
 	cardsManager.startPlayerTurn()
 	
-	var signalparams = SignalParams.new()
-	SignalBus.turnStarted.emit(null)
+	signalParams.isEnemySide = GameInfo.enemy_turn
+	SignalBus.turnStarted.emit(signalParams)
 	
 	
 
