@@ -477,11 +477,13 @@ func removeEffect(id):
 	if getEffect(id):
 		getEffect(id).queue_free()
 
+
 func clearEffects():
 	for child in $Effects/Buff/Nodes.get_children():
 		child.queue_free()
 	for child in $Effects/Debuff/Nodes.get_children():
 		child.queue_free()
+	effects.updateEffectVisuals()
 
 #endregion
 
@@ -856,6 +858,9 @@ func handleEnterGraveyard():
 ##################################################################################
 #region ######################################## VISUALS - HUD
 func handleAttackingPortrait():
+	if not checkAlive():
+		return
+		
 	await returnToSlot()
 	await restAndAnimate()
 	effects.togglePhased(false)
@@ -936,6 +941,9 @@ func playAttackAnimation(defender:Card):
 	await $BodyAnimations.animation_finished
 
 func returnToSlot():
+	if not checkAlive():
+		return
+	
 	var tween = create_tween()
 	tween.tween_property(self, "position", mySlot.position, 0.2)
 	await animateBlockingState(actionState == CardActionStates.ACTIVE)
@@ -1023,10 +1031,18 @@ func destroyAndAnimate(toAnimate:bool):
 	
 	if hasKeyword('Transient'):
 		purge()
+		return
+		
+	cardsManager.moveToDiscard(self, isEnemyCard)
+	reset_shaders()
+	
+	
 	
 
 func purge():
 	queue_free()
+
+
 
 func playCardDestroyedAnimation():
 	if checkAlive():
@@ -1044,7 +1060,8 @@ func playCardDestroyedAnimation():
 	$SFX/DeathSound.play()
 	await burnAwayShader()
 #	visible = false
-	destroyCardTwo()
+	
+	
 
 func burnAwayShader():
 	material = load("res://Resources/Shaders/destroy_card_material.tres")
@@ -1063,11 +1080,7 @@ func reset_shaders():
 	set_shader_property(1.0, 'percentage')
 	
 	
-	
-#### CALLED IN ANIMATION "DestroyBoardCard"
-func destroyCardTwo():
-	cardsManager.moveToDiscard(self, isEnemyCard)
-	reset_shaders()
+
 
 #################################################################################
 

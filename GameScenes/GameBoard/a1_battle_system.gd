@@ -351,6 +351,8 @@ func handlePlayerAttackEnemy() -> void:
 #region### ENEMY ATTACKER AI
 #### BTW, PlayAttackAnimation CALLS THE CARD DESTROY COMMAND
 func handleEnemyAttackPlayer(attackCard: Card) -> void:
+	if not attackCard.checkAlive():
+		return
 	
 	var c = attackCard
 	var blockers:Array = cardsManager.getPlayerBlockers()

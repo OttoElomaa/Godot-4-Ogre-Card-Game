@@ -578,7 +578,7 @@ func discardCard(c:Card):
 
 #### CALLED FROM DESTROY ANIMATION IN CARD NODE
 func moveToDiscard(card:Card, isEnemy:bool):
-	card.statesDestroy()
+	#card.statesDestroy()
 	
 	var discardNode:Node = $Discard/Player/Cards
 	if isEnemy:

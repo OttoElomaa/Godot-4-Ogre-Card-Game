@@ -78,24 +78,26 @@ func updateEffectVisuals():
 	var sprite:Sprite2D = null
 	
 	for e:CardEffect in buffs:
-		sprite = buffSprites.get_children()[buffs.find(e)]
-		
-		sprite.show()
-		sprite.texture = e.icon
-		if e is EffectCounter:
-			sprite.get_node("Amount").text = str(e.counter)
-			if e.counter < 1 and !e.isPermanent:
-				sprite.hide()
+		if MyTools.checkNodeValidity(e):
+			sprite = buffSprites.get_children()[buffs.find(e)]
+			
+			sprite.show()
+			sprite.texture = e.icon
+			if e is EffectCounter:
+				sprite.get_node("Amount").text = str(e.counter)
+				if e.counter < 1 and !e.isPermanent:
+					sprite.hide()
 		
 	for e:CardEffect in debuffs:
-		sprite = debuffSprites.get_children()[debuffs.find(e)]
-		
-		sprite.show()
-		sprite.texture = e.icon
-		if e is EffectCounter:
-			sprite.get_node("Amount").text = str(e.counter)
-			if e.counter < 1 and !e.isPermanent:
-				sprite.hide()
+		if MyTools.checkNodeValidity(e):
+			sprite = debuffSprites.get_children()[debuffs.find(e)]
+			
+			sprite.show()
+			sprite.texture = e.icon
+			if e is EffectCounter:
+				sprite.get_node("Amount").text = str(e.counter)
+				if e.counter < 1 and !e.isPermanent:
+					sprite.hide()
 	
 		
 	updatePhasedVisuals()

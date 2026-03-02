@@ -262,6 +262,8 @@ func playAttackPortraitAnimation(attackingCard: Card):
 	tween.tween_property(c, "position", targetPos, 0.2)
 	await tween.finished
 
+
+
 func showPlayerTurnPopup():
 	$Visuals/YourTurnPopup/PopupAnimation.play("ShowPopup")
 
