@@ -25,7 +25,19 @@ shader_parameter/size_3 = 0.05
 [node name="Cr-Maolmona" instance=ExtResource("1_dvp65")]
 material = SubResource("ShaderMaterial_7ec0m")
 cardName = "Fuckin' Maolmona"
-subTypeStr = "Your dead!!!"
+subTypeStr = "Fungal Demon God"
+flavorText = "Beneath the Mozar’s reaching folds
+Where flowers bloom, where rivers fume
+Of failing mind, of cloying smell
+Of ancient growth, the Second Hell
+
+We found the strain of Maolmona,
+May his spores take the world!
+
+Upon the earth and further still
+The flesh decays, the being frays
+But we are spared from this ill
+We ever live in death."
 startingHealth = 200
 
 [node name="Art" parent="Frontside" index="1"]

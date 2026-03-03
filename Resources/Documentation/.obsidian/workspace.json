@@ -47,15 +47,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Map Scenario Creation Guide.canvas",
+                "file": "Cards/Outcasts/Umugites.canvas",
                 "viewState": {
-                  "x": 204.98604060913692,
-                  "y": 628.9670050761424,
-                  "zoom": -0.993209970737447
+                  "x": 640,
+                  "y": -37.5,
+                  "zoom": -0.4812359889556458
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Map Scenario Creation Guide"
+              "title": "Umugites"
             }
           }
         ],
@@ -209,8 +209,8 @@
   },
   "active": "dae68368f3731434",
   "lastOpenFiles": [
-    "Scenarios/Green Ray at the Vineyards.canvas",
     "Map Scenario Creation Guide.canvas",
+    "Scenarios/Green Ray at the Vineyards.canvas",
     "Card Creation Process.canvas",
     "Cards/Generic Cards.canvas",
     "Cards/Outcasts/Umugites.canvas",
