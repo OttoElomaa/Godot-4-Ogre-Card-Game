@@ -33,11 +33,16 @@ texture = ExtResource("2_kwypy")
 visible = false
 texture = ExtResource("3_f0ver")
 
-[node name="Art" type="Sprite2D" parent="Frontside"]
+[node name="Art" type="TextureRect" parent="Frontside"]
 texture_filter = 6
-position = Vector2(10, -61)
+offset_left = -88.0
+offset_top = -142.0
+offset_right = 912.0
+offset_bottom = 658.0
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_whp3h")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="ManaCost" type="Node2D" parent="Frontside"]
 position = Vector2(10, -162)

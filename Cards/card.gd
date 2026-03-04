@@ -534,9 +534,17 @@ func checkInteractAllowed() -> bool:
 
 func toggleFrontSide(toShow:bool):
 	if toShow:
-		$Frontside.show()
+		faceUp()
 	else:
-		$Frontside.hide()
+		faceDown()
+
+func faceUp():
+	$Frontside.show()
+	$Backside.hide()
+
+func faceDown():
+	$Frontside.hide()
+	$Backside.show()
 
 #endregion
 
@@ -1061,7 +1069,7 @@ func playCardDestroyedAnimation():
 	await burnAwayShader()
 #	visible = false
 	
-	
+
 
 func burnAwayShader():
 	material = load("res://Resources/Shaders/destroy_card_material.tres")
@@ -1093,7 +1101,15 @@ func rotateRestingCard(willRest:bool):
 	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
 	await tween.finished
 
-
+func PlayRitualCastAnimation():
+	var screen_center = Vector2(1050, 350)
+	z_index = 999
+	await MyTools.moveCardTweening(self, position, screen_center)
+	faceUp()
+	var tween = get_tree().create_tween()
+	await tween.tween_property(self, "scale", Vector2(3.0, 3.0), 1)
+	await get_tree().create_timer(1).timeout
+	
 
 
 func toggleCardName(enable:bool):

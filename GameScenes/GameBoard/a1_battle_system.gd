@@ -301,6 +301,7 @@ func handlePlayerRitual(c:Card) -> bool:
 	success = await c.actions.handleRitual()
 	
 	if success:
+		#await c.PlayRitualCastAnimation()
 		cardsManager.discardCard(c)
 		if !c.isEnemyCard:
 			GameInfo.playerMana -= c.manaCost

@@ -15,8 +15,10 @@ script = ExtResource("1_23tl8")
 
 [node name="GameBoard_Cheats" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="TopMenu" type="MarginContainer" parent="GameBoard_Cheats"]
+unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -49,6 +51,8 @@ theme_override_styles/normal = ExtResource("5_wg888")
 text = "!! Nuke All Cards !!"
 
 [node name="RightMenu" type="MarginContainer" parent="GameBoard_Cheats"]
+unique_name_in_owner = true
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -200,6 +204,8 @@ layout_mode = 2
 text = "To You >"
 
 [node name="ZoneCheats" type="MarginContainer" parent="GameBoard_Cheats"]
+unique_name_in_owner = true
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
