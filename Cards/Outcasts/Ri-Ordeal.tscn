@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bde1dj0svh85p"]
+[gd_scene load_steps=11 format=3 uid="uid://bde1dj0svh85p"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_feg3q"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_3uq5a"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_oeap1"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="5_lg7p8"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="6_3uq5a"]
+[ext_resource type="Texture2D" uid="uid://cwm1sioqh8l2c" path="res://Art/CardArt/Depths/card-art-cr-umug-magus-v4.jpg" id="7_qosoe"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_iem55"]
 resource_local_to_scene = true
@@ -48,3 +49,6 @@ inflictCreature = 999
 
 [node name="ManualTargeting" parent="Actions/RitualTrigger/CardAction" index="2" instance=ExtResource("6_3uq5a")]
 manualTargetGroup = 1
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("7_qosoe")
