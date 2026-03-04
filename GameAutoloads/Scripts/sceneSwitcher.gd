@@ -8,6 +8,8 @@ var sceneTree:SceneTree = null
 
 const GameScenePath = "res://GameScenes/"
 
+signal scene_changed
+
 func _ready() -> void:
 	sceneTree = get_tree()
 
@@ -29,6 +31,8 @@ func switchToNewScene(newSceneB:Node):
 	else:
 		sceneTree.root.add_child.call_deferred(newSceneB)
 	sceneTree.root.remove_child.call_deferred(storedSceneB)
+	await get_tree().process_frame
+	scene_changed.emit()
 
 func switchToNewSceneFromFile(path:String):
 	var currScene = getCurrentScene()
@@ -42,6 +46,8 @@ func switchToNewSceneFromFile(path:String):
 	
 	get_tree().root.add_child.call_deferred(newSceneB)
 	get_tree().root.remove_child.call_deferred(storedSceneB)
+	await get_tree().process_frame
+	scene_changed.emit()
 
 func switchToStoredScene():
 	var currentSceneA = getCurrentScene()
@@ -55,12 +61,20 @@ func switchToStoredScene():
 	
 	sceneTree.root.add_child(sceneToSwitchIntoB)
 	sceneTree.root.remove_child(storedSceneB)
+	await get_tree().process_frame
+	scene_changed.emit()
 	
 func returnToMainMenu():
 	switchToNewSceneFromFile("res://GameScenes/MainMenu/MainMenu.tscn")
+	await get_tree().process_frame
+	scene_changed.emit()
 	
 func openScene(newScene:Node):
 	getCurrentScene().add_child.call_deferred(newScene)
+	await get_tree().process_frame
+	scene_changed.emit()
 
 func closeScene(Scene:Node):
 	getCurrentScene().remove_child.call_deferred(Scene)
+	await get_tree().process_frame
+	scene_changed.emit()

@@ -19,6 +19,7 @@ func generate_fight():
 	var cards_for_preview = []
 	
 	board.nuke_cards(true)
+	board.nuke_cards(false)
 	
 	for i in range(4):
 		var cards_in_tier = []
@@ -28,7 +29,17 @@ func generate_fight():
 		mana_cost += 1
 		var new_card:Card = cards_in_tier.pick_random()
 		cards_for_preview.append(new_card.duplicate())
-		for n in range(4 - mana_cost):
+		for n in range(4):
+			board.add_card_to_enemy_deck(new_card.duplicate())
+	
+	for i in range(2):
+		var rituals = []
+		for card:Card in all_cards:
+			if card.isRitual:
+				rituals.append(card)
+		var new_card:Card = rituals.pick_random()
+		cards_for_preview.append(new_card.duplicate())
+		for n in range(4):
 			board.add_card_to_enemy_deck(new_card.duplicate())
 	
 	board.setup_board()

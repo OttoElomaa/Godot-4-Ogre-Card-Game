@@ -29,6 +29,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_ok14u")
 cardName = "Wala"
 cardType = 1
+subTypeStr = "Spell"
 group = 9
 flavorText = "\"His breath wind, his voice thunder, his eyes lightning.\""
 manaCost = 3
