@@ -27,16 +27,10 @@ material = SubResource("ShaderMaterial_7ec0m")
 cardName = "Fuckin' Maolmona"
 subTypeStr = "Fungal Demon God"
 flavorText = "Beneath the Mozar’s reaching folds
-Where flowers bloom, where rivers fume
 Of failing mind, of cloying smell
 Of ancient growth, the Second Hell
-
-We found the strain of Maolmona,
-May his spores take the world!
-
-Upon the earth and further still
-The flesh decays, the being frays
-But we are spared from this ill
+We found the strain of Maolmona
+The flesh decays, the being frays. But we
 We ever live in death."
 startingHealth = 200
 
