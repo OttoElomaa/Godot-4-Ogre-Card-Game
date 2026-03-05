@@ -35,9 +35,9 @@ cardName = "Undying Kit"
 subTypeStr = "Umugite Warrior"
 group = 20
 flavorText = "Their valor is unmatched... they seem to desire death in battle, desire as something unattainable is desired! "
-manaCost = 3
-startingDamage = 2
-startingHealth = 2
+manaCost = 1
+startingDamage = 1
+startingHealth = 1
 
 [node name="Trigger" type="Node" parent="Actions" index="0"]
 script = ExtResource("3_ejohh")
@@ -45,12 +45,11 @@ triggered_when = "death"
 metadata/_custom_type_script = "uid://bs5kjnljmmys"
 
 [node name="CardAction" parent="Actions/Trigger" index="0" instance=ExtResource("4_mttgt")]
-customActionText = "Dies: gains +1/+1 for the duration of the battle."
+customActionText = "Dies: gains +1/+0 for the duration of the battle."
 action_sound = null
 
 [node name="SkillGainStats" parent="Actions/Trigger/CardAction" index="1" instance=ExtResource("5_bhuyf")]
 change_health = 1
-change_damage = 1
 
 [node name="TargetSelf" parent="Actions/Trigger/CardAction" index="2" instance=ExtResource("6_4wno8")]
 

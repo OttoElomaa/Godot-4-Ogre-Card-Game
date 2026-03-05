@@ -131,7 +131,6 @@ theme_override_constants/separation = 20
 [node name="CardInfoPanel" parent="MainPanel/Margin/MainHBox/Filler/VBox" instance=ExtResource("6_i3hud")]
 z_index = 5
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="FlavorLabel" type="Label" parent="MainPanel/Margin/MainHBox/Filler/VBox"]

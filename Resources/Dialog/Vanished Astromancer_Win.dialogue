@@ -1,0 +1,9 @@
+~ start
+After the Umugites are slain, you find the captive in one of the rooms, still in a dusky, glittering robe, though disheveled and almost mindless with shock. At the sight of the woman, his gaze becomes clearer.
+"Ah, my clear and oily Unut!" he cries. "To quote the ancient texts, bene omnia que bene finitur!"
+
+After the reunion is done, the woman approaches you.
+"The Umugites may have taken his treasure, but my... colleague is indubitably alive. Know that you have done a service for the Astromancers -- nay, for knowledge itself, and, when time is right, our knowledge shall serve you."
+do GameInfo.playerAlliances.append("Astromancers")
+
+=> END

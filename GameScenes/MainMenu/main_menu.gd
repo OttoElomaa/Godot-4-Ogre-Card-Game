@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
-@onready var ZoneScene: PackedScene = preload("res://Resources/Scenarios/Vineyards_Ray.tscn")
+@onready var ZoneScene: PackedScene = preload("res://Resources/Scenarios/Vanished_Astromancer.tscn")
 @onready var ArenaScene: PackedScene = preload("res://Resources/Scenarios/Arena.tscn")
 
 var bestiaryVisible := false

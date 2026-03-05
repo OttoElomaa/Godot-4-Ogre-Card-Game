@@ -746,9 +746,9 @@ func takeDamage(amount:int):
 	if tempHealth <= 0:
 		## Emit the Death signal. Death can still be overwritten by Defy Death etc.
 		## during destroyAndAnimate()
-		var params = SignalParams.new()
-		params.sourceCard = self
-		SignalBus.emit_signal("death", params)
+#		var params = SignalParams.new()
+#		params.sourceCard = self
+#		SignalBus.emit_signal("death", params)
 		
 		await destroyAndAnimate(true)
 

@@ -1,0 +1,68 @@
+~ start
+You approach an overgrown mansion, once belonging to a highly-esteemed kingling, now desolate. The Astromancer gestures you towards the front door. You can see movement in the window-holes.
+
+"There, there! Enter now, and kill everyone that you see... but the prisoner, of course!"
+
+- Rush in before the enemy can react
+	The house does not seem be fortified in any way. You decide to use that for a quick assault. 
+	do SignalBus.unlock_node.emit('UmugiteBattle')
+	
+- Cry out for the enemy leader
+	The noise you've made no doubt attracted attention. Many curious eyes peek at you from the window-holes. At last, a imposing figure, with a large collar, appears in the window.
+	
+	do SignalBus.disp_card.emit('Magaal')
+	
+	if GameInfo.heroName == 'General':
+		"A kingling!" he sneers. "It would be my pleasure to dig you in!"
+		
+	else:
+		~ neutral
+		"I don't recognize you," says he. "You don't look like a kingling. What is your pleasure?"
+	
+		- Ask him about his people
+			"We are but wandering warrior-priests. We answer to Umug, the martyr-god."
+			=> neutral
+		
+		- Ask about their purpose here
+			"We camp out here as a part of our pilgrimage. We don't wish anybody no harm."
+			
+			"Damned lies!" the Astromancer yells. "I know you hold Daleth prisoner! You vile thieves!"
+			
+			"Ah, so that's who brought you here," the Umugite sneers. "Listen up. If you agree to give us a wide berth for a while, you will have your man. Else, you will have to get through us. If you must find that out, we Umugites are not easily killed. Perhaps you would rather be on our good side."
+			~ offer
+			
+			- Ask the Astromancer about the Umugites
+				"'Tis nonsense that Umugites should be at large! The legend speaks of them and their god being banished to the deepest Hell! The very memory of Umug's people was so deleted, that only an Astromancer should even remember of their existéncé. Listen not to this brute's lies!"
+				=> offer
+			
+			- Agree to the Umugite's offer
+				Pleased, the leader hides within the shadows of the mansion. In a few hours, something appears in the window. A pair of hands pushes out a naked corpse. It falls down on the ground, its form splayed wide. "Daleth!" the woman screams. "What have you done, you thieves!"
+				"You have your man, as promised!" screeches a voice from inside the house.
+				It is pointless to give chase now. As you waited, the Umugites have all managed to escape.
+				~ failure
+				"You dastards!" the woman is breathless with anger. "Forsooth, no better than those damned vagabonds! I utter upon you a hundred maledictions! Your Life is forfeit."/nWith that, she storms off.
+				
+				As you return to camp, you see a heap of treasure at the center; this must be Umug's gratitude.
+				
+				Next day, a group of King's Men attacks your camp.
+				do SignalBus.unlock_node.emit('ThroneBattle')
+				
+				
+			- Decline the Umugite's offer
+				
+				"It will be my pleasure to dig you in!" shouts the Umugite.
+				Despite the fact that you have no more advantage of surprise, you prepare for combat.
+				do SignalBus.unlock_node.emit('UmugiteBattle')
+
+			- Offer the betray the Astromancer
+				"I see that you wish to be helpful to Umug?" the Umugite intones. "Why, I will keep this in mind. Umug shall remember your gesture."
+				You order your troops to return to camp.
+				do GameInfo.playerAlliances.append('Umugites')
+				
+				=> failure
+				
+			
+			
+
+
+=> END
