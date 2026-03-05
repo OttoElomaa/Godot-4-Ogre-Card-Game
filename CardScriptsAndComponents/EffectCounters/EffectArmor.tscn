@@ -1,13 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvgj3stl7h3fy"]
+[gd_scene load_steps=8 format=3 uid="uid://cvgj3stl7h3fy"]
 
 [ext_resource type="PackedScene" uid="uid://ca73vscnr1a8" path="res://CardScriptsAndComponents/EffectCounters/EffectCounter.tscn" id="1_p8pol"]
 [ext_resource type="Texture2D" uid="uid://cdhdbiyao5vny" path="res://Art/CardComponents/card-effect-counter-texture-armor.png" id="2_dsa08"]
+[ext_resource type="Script" uid="uid://bs5kjnljmmys" path="res://CardScriptsAndComponents/Triggers/Scripts/Trigger.gd" id="3_mrlvx"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_i8b44"]
+[ext_resource type="PackedScene" uid="uid://cvl306ch72ymq" path="res://CardScriptsAndComponents/Actions/SkillChangeEffectStacks.tscn" id="5_tgxel"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="6_xhiys"]
+[ext_resource type="PackedScene" uid="uid://bqt3gngoys4mh" path="res://CardScriptsAndComponents/Conditionals/IfSelf.tscn" id="7_pxn2a"]
 
 [node name="EffectArmor" instance=ExtResource("1_p8pol")]
 effectType = 1
 max_counter = 5
 id = "Armor"
-description = "Buff. On taking damage, reduce it by stacks of Armor, and remove that many stacks."
+description = "Buff. For each stack, reduces damage taken by 1. On being attacked, lose 1 armor."
 
 [node name="Icon" parent="." index="0"]
 texture = ExtResource("2_dsa08")
+
+[node name="Trigger" type="Node" parent="." index="1"]
+script = ExtResource("3_mrlvx")
+triggered_when = "defended"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"
+
+[node name="CardAction" parent="Trigger" index="0" instance=ExtResource("4_i8b44")]
+customActionText = "Armor decreases by 1."
+
+[node name="SkillChangeEffectStacks" parent="Trigger/CardAction" index="1" instance=ExtResource("5_tgxel")]
+effectID = "Armor"
+amount = -1
+
+[node name="TargetSelf" parent="Trigger/CardAction" index="2" instance=ExtResource("6_xhiys")]
+
+[node name="IfSelf" parent="Trigger" index="1" instance=ExtResource("7_pxn2a")]

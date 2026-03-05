@@ -47,15 +47,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Cards/Outcasts/Umugites.canvas",
+                "file": "Cards/Desert/Pyrecallers.canvas",
                 "viewState": {
-                  "x": 640,
-                  "y": -37.5,
-                  "zoom": -0.4812359889556458
+                  "x": -320.17983367983356,
+                  "y": 87.90852390852396,
+                  "zoom": -0.6580629916454247
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Umugites"
+              "title": "Pyrecallers"
             }
           }
         ],
@@ -209,17 +209,17 @@
   },
   "active": "dae68368f3731434",
   "lastOpenFiles": [
-    "Map Scenario Creation Guide.canvas",
-    "Scenarios/Green Ray at the Vineyards.canvas",
-    "Card Creation Process.canvas",
-    "Cards/Generic Cards.canvas",
-    "Cards/Outcasts/Umugites.canvas",
-    "Cards/Outcasts/Necromancers.canvas",
-    "Cards/Outcasts/Morlocks.canvas",
-    "Cards/Outcasts/Freeslayers.canvas",
-    "Cards/City/Astromancers.canvas",
+    "Cards/Desert/Pilgrims.canvas",
+    "Cards/Desert/Pyrecallers.canvas",
+    "Cards/Green Defiance/Gharch.canvas",
+    "Cards/Green Defiance/Grove Clans.canvas",
+    "Cards/Green Defiance/Skull Priests.canvas",
     "Cards/Desert/High Kingdom.canvas",
-    "Cards/Desert/Salkhi Horde.canvas",
+    "Cards/Outcasts/Umugites.canvas",
+    "Cards/Outcasts/Freeslayers.canvas",
+    "Cards/Outcasts/Morlocks.canvas",
+    "Cards/Outcasts/Necromancers.canvas",
+    "Cards/Green Defiance/Vinemen.canvas",
     "Scenarios",
     "Cards/Outcasts",
     "Cards/Desert",

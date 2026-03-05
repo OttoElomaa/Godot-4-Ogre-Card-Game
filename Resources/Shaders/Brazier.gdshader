@@ -1,57 +1,57 @@
 shader_type canvas_item;
-render_mode blend_mix, unshaded;
 
-// Fire properties
-uniform vec2 fire_scale = vec2(1.0, 1.0);
-uniform vec2 fire_speed_direction = vec2(0.0, 1.0);
+// warping and blending textures, Simplex Smooth noise
+uniform sampler2D flame1_texture: repeat_enable;
+uniform sampler2D flame2_texture: repeat_enable;
+uniform sampler2D flame3_texture: repeat_enable;
+// flame color gradient. Use a GradientTexture1D
+uniform sampler2D color_gradient;
+// for capturing the screen
+uniform sampler2D screen_texture: hint_screen_texture, filter_linear_mipmap;
 
-// Fire texture maps
-uniform sampler2D fire_noise : source_color, repeat_enable;
-uniform sampler2D fire_height_gradient : source_color;
-uniform sampler2D fire_shape_gradient : source_color;
-uniform sampler2D flame_height_gradient : source_color;
-uniform sampler2D fire_color : source_color;
+vec4 blend_screen(vec4 base, vec4 blend){
+	return 1.0 - (1.0 - base) * (1.0 - blend);
+}
 
 void fragment() {
-	// Scale UV coordinates based on fire_scale
-	vec2 scaled_uv = (UV - vec2(0.0)) * fire_scale + vec2(0.0);
+	// scrolling vectors for 3 flame textures
+	vec2 f1_uv = vec2(UV.x - TIME * 0.3, UV.y + TIME * 0.1);
+	vec2 f2_uv = vec2(UV.x + TIME * 0.3, UV.y + TIME * 0.1);
+	// gives our upward feeling
+	vec2 f3_uv = vec2(UV.x, UV.y + TIME * 0.8);
 
-	// Animate fire movement using TIME and speed direction
-	vec3 time_offset = vec3(TIME) * vec3(fire_speed_direction, 0.0);
-	vec2 animated_uv = time_offset.xy + scaled_uv;
+	// calculate a flame distortion effect using 2 of the textures
+	// sped up a bit from the samping
+	float warp1 =  texture(flame1_texture, f1_uv * 2.1).r;
+	float warp2 =  texture(flame2_texture, f2_uv * 2.1).r;
+	// we only warp on the X axis as warping effectively in
+	// other directions would require more data
+	vec2 warp = vec2( warp1 - warp2, 0.0) * 0.05;
 
-	// Sample noise texture to create fire flickering effect
-	vec4 noise_tex = texture(fire_noise, animated_uv);
-	float noise_value = noise_tex.r;
+	// sample our flame noise textures
+	float flame1_sample = texture(flame1_texture, f1_uv).r;
+	float flame2_sample = texture(flame2_texture, f2_uv).r;
+	float flame3_sample = texture(flame3_texture, f3_uv + warp).r;
 
-	// Sample fire height gradient to control fire elevation
-	vec4 height_tex = texture(fire_height_gradient, UV);
-	float height_value = height_tex.r;
+	// Fire shape. Could use a texture instead
+	// Half oval from bottom middle
+	float shape_fade = 1.0 - sqrt(pow(UV.x - 0.5, 2.0) + pow(UV.y - 1.0, 2.0) * 0.2) * 2.0;
 
-	// Combine noise and height for flame dynamics
-	float combined_value = noise_value + height_value;
+	// blend all of our flame samples together, giving more weight to the texture moving up
+	float flame = ((flame1_sample + flame2_sample + flame3_sample * 1.5) / 3.5) * shape_fade;
 
-	// Sample fire shape gradient to define fire boundaries
-	vec4 shape_tex = texture(fire_shape_gradient, UV);
-	float shape_value = shape_tex.r;
+	// give us a 1 or 0 to cut off the flame
+	float alpha = step(0.12, flame);
+	// slight larger cut off for warping effect
+	float warp_alpha = smoothstep(0.0, 0.25, flame) * 0.7;
 
-	// Apply shape influence to fire dynamics
-	float shaped_fire = combined_value * shape_value;
+	// sample our background, including warping within the warp_alpha
+	vec3 screen = texture(screen_texture, SCREEN_UV + warp * warp_alpha).rgb;
+	// get a color by applying the color gradient to the flame
+	vec3 color = texture(color_gradient, vec2(flame, 0.0)).rgb * flame * 3.5;
 
-	// Sample flame height gradient to modify fire height
-	vec4 flame_height_tex = texture(flame_height_gradient, UV);
-	float flame_height_value = flame_height_tex.r;
-
-	// Final fire intensity calculation
-	float fire_intensity = shaped_fire - flame_height_value;
-
-	// Clamp fire intensity between 0 and 1
-	fire_intensity = clamp(fire_intensity, 0.0, 1.0);
-
-	// Sample fire color based on intensity
-	vec4 final_fire_color = texture(fire_color, vec2(fire_intensity));
-
-	// Assign final color output
-	COLOR.rgb = final_fire_color.rgb;
-	COLOR.a = final_fire_color.a;
+	// blend the colors with the screen
+	// our mix applies the screen straight where our flame isn't
+	// otherwise we use a screen style color blend
+	COLOR = mix(vec4(screen, 1.0), blend_screen(vec4(screen, 1.0), vec4(color, 1.0)), alpha);
 }

@@ -49,7 +49,7 @@ customActionText = "Dies: gains +1/+0 for the duration of the battle."
 action_sound = null
 
 [node name="SkillGainStats" parent="Actions/Trigger/CardAction" index="1" instance=ExtResource("5_bhuyf")]
-change_health = 1
+change_damage = 1
 
 [node name="TargetSelf" parent="Actions/Trigger/CardAction" index="2" instance=ExtResource("6_4wno8")]
 

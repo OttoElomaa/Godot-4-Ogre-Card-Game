@@ -28,7 +28,7 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_ol1gr")
 cardName = "Zubar"
 subTypeStr = "Tugar Beast"
-flavorText = "A Zubar has a snapping beak and a bristling mane. The Salkhi may claim that is it quite intelligent, able to show piety to gods and process numbers. Let not yourself be deceived: this is nothing but a parlor trick. No intelligent being would let itself be ridden!
+flavorText = "The Salkhi claim that the Zubar is quite intelligent, able to show piety to gods and process numbers. Let not yourself be deceived:  no intelligent being would let itself be ridden!
 ~ Ask'lani Bestiarium"
 manaCost = 3
 startingDamage = 2

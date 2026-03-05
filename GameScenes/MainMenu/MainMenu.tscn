@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://pd7or3cigyqn" path="res://GameScenes/MainMenu/dancing_card.tscn" id="15_b4hlq"]
 [ext_resource type="PackedScene" uid="uid://yol344fkh60p" path="res://GameScenes/MainMenu/flicker_light.tscn" id="15_uifqy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_820ef"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkrw6"]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rf05g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wtpnl"]
 resource_local_to_scene = true
 
 [node name="MainMenu" type="Node2D"]
@@ -190,11 +190,11 @@ y_sort_enabled = true
 
 [node name="DancingCard" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
 light_mask = 0
-material = SubResource("ShaderMaterial_820ef")
+material = SubResource("ShaderMaterial_kkrw6")
 position = Vector2(1669, 424)
 
 [node name="DancingCard2" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
-material = SubResource("ShaderMaterial_rf05g")
+material = SubResource("ShaderMaterial_wtpnl")
 position = Vector2(444, 674)
 
 [node name="DancingCard3" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
@@ -217,7 +217,7 @@ rotation = 1.67203
 position = Vector2(1770, 677)
 
 [node name="FlickerLight4" parent="Decor/FlickeringLIghts" instance=ExtResource("15_uifqy")]
-position = Vector2(799, 750)
+position = Vector2(1325, 641)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(970, -194)

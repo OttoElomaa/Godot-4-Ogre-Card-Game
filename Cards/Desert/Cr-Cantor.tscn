@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://bftf1icnvmuk2"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_bomgd"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_5bvr5"]
+[ext_resource type="Script" uid="uid://bs5kjnljmmys" path="res://CardScriptsAndComponents/Triggers/Scripts/Trigger.gd" id="3_hbyfd"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_mugro"]
+[ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="6_au74s"]
+[ext_resource type="PackedScene" uid="uid://b50qou0nvjrrv" path="res://CardScriptsAndComponents/Conditionals/IfSubtype.tscn" id="7_bja8j"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="7_bomgd"]
+[ext_resource type="PackedScene" uid="uid://bmewfrpb1dqdt" path="res://CardScriptsAndComponents/Conditionals/IfAlly.tscn" id="8_nnroc"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7ui5p"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x3j6j"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_7ui5p")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ak4c3"]
+resource_local_to_scene = true
+shader = ExtResource("2_5bvr5")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_x3j6j")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-Cantor" instance=ExtResource("1_bomgd")]
+material = SubResource("ShaderMaterial_ak4c3")
+cardName = "Cantor"
+subTypeStr = "Pyrecaller"
+group = 11
+flavorText = "\"Emdan Jani! Jalal Jani!\""
+manaCost = 3
+startingDamage = 2
+startingHealth = 2
+block_on_arrival = false
+will_not_charge = true
+
+[node name="Trigger" type="Node" parent="Actions" index="0"]
+script = ExtResource("3_hbyfd")
+triggered_when = "arrival"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"
+
+[node name="CardAction" parent="Actions/Trigger" index="0" instance=ExtResource("4_mugro")]
+customActionText = "A Spirit arrives: bolster allied Spirits +1/+1."
+
+[node name="TargetAllAllies" parent="Actions/Trigger/CardAction" index="1" instance=ExtResource("6_au74s")]
+
+[node name="IfSubtype" parent="Actions/Trigger/CardAction/TargetAllAllies" index="1" instance=ExtResource("7_bja8j")]
+subtype = "Spirit"
+
+[node name="SkillAlterHealth" parent="Actions/Trigger/CardAction" index="2" instance=ExtResource("7_bomgd")]
+bolsterDamage = 1
+bolsterHealth = 1
+
+[node name="IfAlly" parent="Actions/Trigger" index="1" instance=ExtResource("8_nnroc")]
+
+[node name="IfSubtype" parent="Actions/Trigger" index="2" instance=ExtResource("7_bja8j")]
+subtype = "Spirit"
