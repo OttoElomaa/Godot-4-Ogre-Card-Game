@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdy7cdlhxpfw5"]
+[gd_scene load_steps=14 format=3 uid="uid://cdy7cdlhxpfw5"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_43vy7"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_0wwdg"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_ftqvt"]
 [ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_v056e"]
 [ext_resource type="PackedScene" uid="uid://c2r8x7dfnt45s" path="res://CardScriptsAndComponents/EffectCounters/EffectDefyDeath.tscn" id="6_wycxi"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="7_0wwdg"]
 [ext_resource type="PackedScene" uid="uid://b5it2nbxjtkik" path="res://CardScriptsAndComponents/Keywords/Transient.tscn" id="7_yv613"]
+[ext_resource type="PackedScene" uid="uid://cm3ciubhc18jw" path="res://CardScriptsAndComponents/Keywords/Haste.tscn" id="9_unvt6"]
+[ext_resource type="Texture2D" uid="uid://bpm4mby4h7da4" path="res://Art/CardArt/Desert/Cave-Shade.jpg" id="10_ftqvt"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_osdy0"]
 resource_local_to_scene = true
@@ -47,4 +50,12 @@ customActionText = "Arrival: Gain Defy Death."
 grantEffect = ExtResource("6_wycxi")
 grantAmount = 1
 
+[node name="TargetSelf" parent="Actions/OnSelfArrivalTrigger/CardAction" index="2" instance=ExtResource("7_0wwdg")]
+
 [node name="Transient" parent="KeywordHandler/MyKeywords" index="0" instance=ExtResource("7_yv613")]
+
+[node name="Haste" parent="KeywordHandler/MyKeywords" index="1" instance=ExtResource("9_unvt6")]
+description = "This creature can act immediately upon Arriving."
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("10_ftqvt")

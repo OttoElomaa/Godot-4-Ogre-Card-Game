@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://pd7or3cigyqn" path="res://GameScenes/MainMenu/dancing_card.tscn" id="15_b4hlq"]
 [ext_resource type="PackedScene" uid="uid://yol344fkh60p" path="res://GameScenes/MainMenu/flicker_light.tscn" id="15_uifqy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkrw6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_820ef"]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wtpnl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rf05g"]
 resource_local_to_scene = true
 
 [node name="MainMenu" type="Node2D"]
@@ -190,11 +190,11 @@ y_sort_enabled = true
 
 [node name="DancingCard" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
 light_mask = 0
-material = SubResource("ShaderMaterial_kkrw6")
+material = SubResource("ShaderMaterial_820ef")
 position = Vector2(1669, 424)
 
 [node name="DancingCard2" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
-material = SubResource("ShaderMaterial_wtpnl")
+material = SubResource("ShaderMaterial_rf05g")
 position = Vector2(444, 674)
 
 [node name="DancingCard3" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
