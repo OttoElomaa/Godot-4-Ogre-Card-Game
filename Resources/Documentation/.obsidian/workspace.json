@@ -57,9 +57,26 @@
               "icon": "lucide-layout-dashboard",
               "title": "Pyrecallers"
             }
+          },
+          {
+            "id": "89bdf3e2e04ad65a",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Cards/Desert/Salkhi Horde.canvas",
+                "viewState": {
+                  "x": 441,
+                  "y": 300,
+                  "zoom": -0.13450103558841145
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Salkhi Horde"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -82,7 +99,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Файловый менеджер"
             }
           },
           {
@@ -198,28 +215,29 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false,
+      "bases:Создать новую базу": false
     }
   },
-  "active": "dae68368f3731434",
+  "active": "89bdf3e2e04ad65a",
   "lastOpenFiles": [
-    "Cards/Desert/Pilgrims.canvas",
-    "Cards/Desert/Pyrecallers.canvas",
     "Cards/Green Defiance/Gharch.canvas",
-    "Cards/Green Defiance/Grove Clans.canvas",
-    "Cards/Green Defiance/Skull Priests.canvas",
+    "Cards/Desert/Salkhi Horde.canvas",
+    "Cards/City/Guilds.canvas",
+    "Cards/City/Throne.canvas",
+    "Cards/City/Slaves.canvas",
+    "Cards/City/Sea Peoples.canvas",
+    "Cards/City/Priests.canvas",
+    "Cards/Desert/Pilgrims.canvas",
     "Cards/Desert/High Kingdom.canvas",
-    "Cards/Outcasts/Umugites.canvas",
-    "Cards/Outcasts/Freeslayers.canvas",
-    "Cards/Outcasts/Morlocks.canvas",
-    "Cards/Outcasts/Necromancers.canvas",
-    "Cards/Green Defiance/Vinemen.canvas",
+    "Cards/City/Astromancers.canvas",
+    "Cards/Desert/Beasts.canvas",
+    "Cards/City/Без названия.md",
     "Scenarios",
     "Cards/Outcasts",
     "Cards/Desert",

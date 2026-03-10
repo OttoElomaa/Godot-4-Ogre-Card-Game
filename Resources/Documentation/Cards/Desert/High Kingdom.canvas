@@ -2,16 +2,26 @@
 	"nodes":[
 		{"id":"5a560a5ad69f8a60","type":"text","text":"Main Mechanics: Card Draw, Healing, Time magic?\nWeaknesses: Pretty balanced. ","x":-96,"y":-348,"width":336,"height":88},
 		{"id":"38feb454ff32da5f","type":"text","text":"Delavar","x":-258,"y":-174,"width":118,"height":54},
-		{"id":"6f14d70889fb473a","x":-60,"y":-177,"width":152,"height":60,"type":"text","text":"Rare Warrior"},
-		{"id":"243cfeddf07d6a58","x":180,"y":-177,"width":200,"height":60,"type":"text","text":"Survives: gain 0/+1."},
-		{"id":"a97eae6208f757e4","x":-274,"y":-80,"width":150,"height":60,"type":"text","text":"Saint"},
-		{"id":"d4690ee6d7ae1e4b","x":188,"y":-80,"width":185,"height":60,"type":"text","text":"Cast: heal all allies."},
-		{"id":"4c7c01fbaab85d21","x":-78,"y":-80,"width":188,"height":60,"type":"text","text":"Rare Magus"}
+		{"id":"6f14d70889fb473a","type":"text","text":"Rare Soldier","x":-60,"y":-177,"width":152,"height":60},
+		{"id":"243cfeddf07d6a58","type":"text","text":"Survives: gain 0/+1.","x":180,"y":-177,"width":200,"height":60},
+		{"id":"a97eae6208f757e4","type":"text","text":"Saint","x":-274,"y":-80,"width":150,"height":60},
+		{"id":"d4690ee6d7ae1e4b","type":"text","text":"Cast: heal all allies.","x":188,"y":-80,"width":185,"height":60},
+		{"id":"4c7c01fbaab85d21","type":"text","text":"Rare Magus","x":-78,"y":-80,"width":188,"height":60},
+		{"id":"7d2cd50e23563c54","type":"text","text":"Hand of Faith","x":-274,"y":20,"width":144,"height":60},
+		{"id":"cf00538476b9c791","type":"text","text":"Rare Soldier","x":-74,"y":20,"width":166,"height":60},
+		{"id":"f8065372e780cd4c","type":"text","text":"Kills: deal this card's damage to the enemy player.","x":180,"y":0,"width":193,"height":100},
+		{"id":"9080f099ff81277e","x":-60,"y":140,"width":130,"height":60,"type":"text","text":"Rare Priest"},
+		{"id":"e085c237bbfd63a7","x":180,"y":118,"width":192,"height":105,"type":"text","text":"Cast on a Beast: inflicts Hunt and makes target Rest"},
+		{"id":"5f15ef1252312eed","x":-267,"y":140,"width":130,"height":60,"type":"text","text":"Lion Tamer"}
 	],
 	"edges":[
 		{"id":"e404f5f2e4db7a8e","fromNode":"38feb454ff32da5f","fromSide":"right","toNode":"6f14d70889fb473a","toSide":"left"},
 		{"id":"d083f8091addcfe5","fromNode":"6f14d70889fb473a","fromSide":"right","toNode":"243cfeddf07d6a58","toSide":"left"},
 		{"id":"1b6a103fab856987","fromNode":"a97eae6208f757e4","fromSide":"right","toNode":"4c7c01fbaab85d21","toSide":"left"},
-		{"id":"ebf7efe03107f636","fromNode":"4c7c01fbaab85d21","fromSide":"right","toNode":"d4690ee6d7ae1e4b","toSide":"left"}
+		{"id":"ebf7efe03107f636","fromNode":"4c7c01fbaab85d21","fromSide":"right","toNode":"d4690ee6d7ae1e4b","toSide":"left"},
+		{"id":"ee9d3a62347525b9","fromNode":"7d2cd50e23563c54","fromSide":"right","toNode":"cf00538476b9c791","toSide":"left"},
+		{"id":"b53d774b5d73133c","fromNode":"cf00538476b9c791","fromSide":"right","toNode":"f8065372e780cd4c","toSide":"left"},
+		{"id":"b712e51a8e454bbe","fromNode":"5f15ef1252312eed","fromSide":"right","toNode":"9080f099ff81277e","toSide":"left"},
+		{"id":"cd56fc2c19e1f858","fromNode":"9080f099ff81277e","fromSide":"right","toNode":"e085c237bbfd63a7","toSide":"left"}
 	]
 }

@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"7a978dff2bff00aa","type":"text","text":"Main Mechanics: Submerge, Frozen.\nWeaknesses: No middle-coster units. Focus on defense over offense.","x":-120,"y":-760,"width":311,"height":113},
+		{"id":"81fad705d43179d3","x":-253,"y":-280,"width":133,"height":60,"type":"text","text":"Ice Kraken"},
+		{"id":"bbe799153bcfdc20","x":-89,"y":-280,"width":250,"height":60,"type":"text","text":"No powers. Just huge ass stats."},
+		{"id":"ccb7517f1ade0a56","x":-266,"y":-380,"width":160,"height":60,"type":"text","text":""}
+	],
+	"edges":[
+		{"id":"53a188679f830f02","fromNode":"81fad705d43179d3","fromSide":"right","toNode":"bbe799153bcfdc20","toSide":"left"}
+	]
+}
