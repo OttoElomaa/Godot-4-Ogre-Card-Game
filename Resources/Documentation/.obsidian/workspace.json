@@ -64,15 +64,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Cards/Desert/Salkhi Horde.canvas",
+                "file": "Cards/Desert/Beasts.canvas",
                 "viewState": {
-                  "x": 441,
-                  "y": 300,
-                  "zoom": -0.13450103558841145
+                  "x": 438.46153846153845,
+                  "y": 414.1538461538462,
+                  "zoom": -0.7589919004962052
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Salkhi Horde"
+              "title": "Beasts"
             }
           }
         ],
@@ -226,17 +226,17 @@
   },
   "active": "89bdf3e2e04ad65a",
   "lastOpenFiles": [
+    "Cards/Desert/High Kingdom.canvas",
+    "Cards/Desert/Beasts.canvas",
+    "Cards/Green Defiance/Woodwose.canvas",
+    "Cards/Green Defiance/Vinemen.canvas",
+    "Cards/Green Defiance/Grove Clans.canvas",
+    "Cards/City/Priests.canvas",
+    "Cards/City/Guilds.canvas",
+    "Cards/City/Sea Peoples.canvas",
+    "Cards/Green Defiance/Skull Priests.canvas",
     "Cards/Green Defiance/Gharch.canvas",
     "Cards/Desert/Salkhi Horde.canvas",
-    "Cards/City/Guilds.canvas",
-    "Cards/City/Throne.canvas",
-    "Cards/City/Slaves.canvas",
-    "Cards/City/Sea Peoples.canvas",
-    "Cards/City/Priests.canvas",
-    "Cards/Desert/Pilgrims.canvas",
-    "Cards/Desert/High Kingdom.canvas",
-    "Cards/City/Astromancers.canvas",
-    "Cards/Desert/Beasts.canvas",
     "Cards/City/Без названия.md",
     "Scenarios",
     "Cards/Outcasts",
