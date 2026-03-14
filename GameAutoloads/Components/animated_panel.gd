@@ -1,9 +1,9 @@
 extends PanelContainer
 class_name QueueAnimatedPanel
 
-@onready var artRect := $Margin/HBox/CardArt
-@onready var nameLabel := $Margin/HBox/VBox/NameLabel
-@onready var effectTextLabel := $Margin/HBox/VBox/EffectTextLabel
+@onready var artRect := $HBox/CardArt
+@onready var nameLabel := $HBox/Panel/Margin/VBox/NameLabel
+@onready var effectTextLabel := $HBox/Panel/Margin/VBox/EffectTextLabel
 
 signal animationDone
 

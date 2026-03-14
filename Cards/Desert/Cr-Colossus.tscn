@@ -32,7 +32,7 @@ group = 9
 flavorText = "Big guy"
 manaCost = 2
 startingDamage = 10
-startingHealth = 6
+startingHealth = 8
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_cw6g5")

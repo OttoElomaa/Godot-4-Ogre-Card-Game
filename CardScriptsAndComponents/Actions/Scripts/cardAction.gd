@@ -2,31 +2,18 @@
 extends Node2D
 class_name CardAction
 
-enum TargetOptions {NONE, ALLIES, ENEMIES}
 
-#enum LocalSituations {
-#	NONE, ARRIVAL, CAST, BATTLE_ART, ON_TURN, RITUAL
-#}
-#enum GlobalSituations {
-#	NONE, ON_RITUAL, ON_CREATURE_ARRIVAL, ON_CREATURE_DEATH, ON_ALLY_DEATH, ON_ENEMY_DEATH
-#	}
+
+@export_multiline var customActionText := ""
+@export_file('.wav') var action_sound
+@export var particleTexture:Texture = null
 
 var myCard: Card = null
 var isEnemy := false
 var hasCast := false
 
 var targetingComponent: TargetingComponent
-
-#@export var localSituation := LocalSituations.NONE
-#@export var globalSituation := GlobalSituations.NONE
-
-#@export var nodeKeyword := "Action type"
-@export_multiline var customActionText := ""
-@export_file('.wav') var action_sound
-
-#@export var isCost := false
 var savedTargets: Array
-#@export var isPayoff := false
 
 
 
@@ -50,29 +37,27 @@ func createActionText() -> String:
 #### CURRENTLY Called by handleRitual(), handleCast() ETC.
 func activate(params:SignalParams) -> bool:
 	var success := false
+	var targets := []
 	if not is_inside_tree(): #### CRASH PREVENTION?
 		return success
 	
 	#### TURN ON MANUAL TARGETING -> No target selected yet!
 	if targetingComponent is AutoTargetingComponent:
-		var targets:Array = targetingComponent.getTargets()
+		targets = targetingComponent.getTargets()
 		if not targets.is_empty():
 			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is EnemyTargetingComponent:
-		var targets:Array = []
 		if params.targetCard:
 			targets.append(params.targetCard)
 			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SourceTargetingComponent:
-		var targets: Array = []
 		if params.sourceCard:
 			targets.append(params.sourceCard)
 			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SelfTargetingComponent:
-		var targets:Array = []
 		targets.append(myCard)
 		success = await activateSkillAfterTargeting(targets)
 	
@@ -82,11 +67,12 @@ func activate(params:SignalParams) -> bool:
 			var target: Card = null
 			targetingComponent.activate()
 			await targetingComponent.target_acquired or targetingComponent.aborted
+			
+			targets.append(targetingComponent.target)
 			print("target acquired: ", targetingComponent.target)
 			
 			#### TARGET FOUND
 			if targetingComponent.target:
-				var targets:Array = []
 				targets.append(targetingComponent.target)
 				success = await activateSkillAfterTargeting(targets)
 			#### NO TARGET -> FAIL
@@ -105,19 +91,17 @@ func activate(params:SignalParams) -> bool:
 				myCard.targetingMode.STRONGEST:
 					CardChecks.sort_by_strongest(possible_targets)
 			
-			var targets:Array = []
 			targets.append(possible_targets[0])
 			success = await activateSkillAfterTargeting(targets)
 	
 	#### TARGETING COMPONENT IS NONE OF THE ABOVE
 	#### -> Most likely IT DOES NOT EXIST -> That's OKAY
 	else:
-		var targets = []
 		success = await activateSkillAfterTargeting(targets)
 	
 	#### EFFECT ANIMATION
 	if success:
-		EffectAnimationQueue.queueAnimation(myCard, self)
+		EffectAnimationQueue.queueAnimation(myCard, self, targets)
 			
 	return success
 

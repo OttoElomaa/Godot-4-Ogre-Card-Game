@@ -1,6 +1,8 @@
 extends Node2D
 
-@onready var AnimatedPanel:PackedScene = preload("res://GameAutoloads/Components/animated_panel.tscn")
+@onready var AnimatedPanel: PackedScene = preload("res://GameAutoloads/Components/animated_panel.tscn")
+@onready var AnimatedParticlesScene: PackedScene = preload("res://GameAutoloads/Components/AnimatedParticles.tscn")
+
 
 var animationQueue := []
 var isAnimating := false
@@ -10,8 +12,8 @@ func _physics_process(delta: float) -> void:
 		if not animationQueue.is_empty():
 			animateNext()
 
-func queueAnimation(card:Card, effect:CardAction) -> void:
-	animationQueue.append({"card":card, "effect":effect})
+func queueAnimation(card:Card, effect:CardAction, targetCards:Array) -> void:
+	animationQueue.append( {"card":card, "effect":effect, "targets":targetCards} )
 
 
 func animateNext():
@@ -23,6 +25,12 @@ func animateNext():
 	var animatedPanel:QueueAnimatedPanel = AnimatedPanel.instantiate()
 	$Canvas.add_child(animatedPanel)
 	animatedPanel.setupAndAnimate(card, effect)
+	
+	if effect.particleTexture:
+		for target:Card in dict.targets:
+			var particles:AnimatedParticles = AnimatedParticlesScene.instantiate()
+			$Sprites.add_child(particles)
+			particles.setupAndAnimate(target.position, effect.particleTexture)
 	
 	#### SETUP THE QUEUE STUFF, REMOVE THE FIRST ITEM -> It's been processed now
 	animatedPanel.animationDone.connect(onAnimationFinished)

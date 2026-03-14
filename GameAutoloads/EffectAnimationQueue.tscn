@@ -6,3 +6,5 @@
 script = ExtResource("1_x4rnw")
 
 [node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="Sprites" type="Node2D" parent="."]

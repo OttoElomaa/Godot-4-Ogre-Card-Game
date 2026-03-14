@@ -468,14 +468,15 @@ func checkAndTerminateEffects():
 	for effect: EffectCounter in getEffects():
 		if effect.counter < 1 and !effect.isPermanent:
 			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
-			removeEffect(effect.id)
+			removeEffect(effect)
 	effects.updateEffectVisuals()
 
 
 ## Remove an effect.
-func removeEffect(id):
-	if getEffect(id):
-		getEffect(id).queue_free()
+func removeEffect(effect:EffectCounter):
+	if effect in getEffects():
+		if effect.is_inside_tree():
+			effect.queue_free()
 
 
 func clearEffects():
