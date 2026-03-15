@@ -9,10 +9,10 @@ func _ready() -> void:
 func setupAndAnimate(targetPos:Vector2, texture:Texture):
 	position = targetPos   #### MOVE TO TARGET CARD
 	
-	var newPos := position + Vector2(0,-200)
 	for sprite:Sprite2D in $Particles.get_children():
 		sprite.texture = texture
-		
+	
+	var newPos := Vector2(0,-200)	
 	var tween = create_tween()
 	tween.tween_property($Particles, "position", newPos , 2)
 	$DoneTimer.start()
