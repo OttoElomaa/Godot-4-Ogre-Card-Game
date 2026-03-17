@@ -14,7 +14,7 @@ func queueAnimation(card:Card, animationFunction:Callable,
 	animationLength:float, waitingFunction:Callable=doNothing) -> void:
 		 
 	animationQueue.append( 
-		{"card":card, "function":animationFunction, "length":animationLength, "waitingFunction":waitingFunction} 
+		{"card":card, "animationFunction":animationFunction, "length":animationLength, "waitingFunction":waitingFunction} 
 		)
 
 
@@ -36,10 +36,10 @@ func animateNext():
 		
 	
 	var card:Card = dict.card
-	var animationFunction:Callable = dict.function
+	var f:Callable = dict.animationFunction
 	var animationLength:float = dict.length
 	
-	animationFunction.call()
+	f.call()
 	
 	$AnimationTimer.wait_time = animationLength
 	$AnimationTimer.start()
@@ -48,6 +48,7 @@ func animateNext():
 	#### SETUP THE QUEUE STUFF, REMOVE THE FIRST ITEM -> It's been processed now
 	isAnimating = true
 	animationQueue.pop_front()
+
 
 
 #### AN ANIMATION IS FINISHED, PLAY NEXT ANIMATION IN THE QUEUE

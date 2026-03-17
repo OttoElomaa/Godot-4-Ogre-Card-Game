@@ -409,11 +409,7 @@ func replace_keywords(new_k:PackedStringArray):
 
 #######################################################################################
 #region ######################################### COUNTER NODE STUFF
-var isPhased: bool:
-	get:
-		return effects.isPhased
-	set(value):
-		effects.togglePhased(value)
+
 
 #endregion
 
@@ -758,9 +754,7 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	#### BASELINE
 	var combatDamage:int = tempDamage
 	
-	#### ATTACKER'S EFFECTS
-	if effects.isPhased:
-		combatDamage += 1
+	
 	
 	if hasEffect('Rage') and not isAttacker:
 		combatDamage += getEffect('Rage').counter
@@ -792,8 +786,8 @@ func handleCombatActions(attacker:Card, defender:Card, waitingFunction:Callable)
 		z_index = 0
 		waitTime = 1
 		CardAnimationQueue.queueWait(waitTime)
+		
 	return waitTime
-
 
 
 
@@ -869,13 +863,13 @@ func handleAttackingPortrait():
 		return
 		
 	CardAnimationQueue.queueAnimation(self, returnToSlot, 0.2)
-	await restAndAnimate()
-	effects.togglePhased(false)
+	restAndAnimate()
 	
 	var params := SignalParams.new()
 	params.sourceCard = self
 	params.targetCard = null
 	SignalBus.attacked.emit(params)
+	
 	
 
 ###########################################################################
@@ -941,7 +935,7 @@ func playAttackAnimation():
 	var tween = create_tween()
 	var attacking_position = defender.position + offset
 	## The attacking card floats in front of the defending card.
-	tween.tween_property(self, 'position', attacking_position, 0.5)
+	await tween.tween_property(self, 'position', attacking_position, 0.5)
 	
 	## The attacking card pounces on the defending card.
 	if isEnemyCard:
@@ -984,7 +978,6 @@ func animateBlockingState():
 		if isEnemyCard:
 			activeOffset *= -1
 		newPos.y += activeOffset
-		effects.togglePhased(false)
 		
 	MyTools.moveCardTweening(self, position, newPos)
 

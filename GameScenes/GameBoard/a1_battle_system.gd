@@ -13,6 +13,7 @@ var COLLISION_MASK_CARD := 1
 var COLLISION_MASK_ENEMY_PORTRAIT := 4
 
 
+#### STATE MANAGEMENT
 var playerAttackOngoing: bool = false
 var currentAttackingCard: Card = null
 var currentDefendingCard: Card = null
@@ -20,6 +21,7 @@ var currentDefendingCard: Card = null
 var castLineShown: bool = false
 var currentCastingCard: Card = null
 
+#### ENEMY AI
 var enemyChargeTarget: Card = null
 
 
@@ -133,48 +135,60 @@ func enemyPlayRituals() -> void:
 
 
 func timeoutEnemyStartCombat() -> void:
-	#### ATTACK WITH CARDS ON BOARD
-	var AI_Personality = main.AI_personality
 	enemyChargeTarget = null
 	
 	#### TANK CARDS DO NOT ACT ON THEIR TURN.
+	### IF THERE ARE NO BLOCKING CARDS, THE STRONGEST ENEMY CARDS ARE SET TO BLOCK.
 	for card:Card in enemyBoardCards:
 		card.statesPassive()
 		if card.action_mode == card.actionMode.TANK:
 			card.statesActive()
-			
-	### IF THERE ARE NO BLOCKING CARDS, THE STRONGEST ENEMY CARDS ARE SET TO BLOCK.
+	
+	enemyActionsBeforeAttacking()	
+	
 
+
+func enemyActionsBeforeAttacking():
+	var AI_Personality = main.AI_personality
+	
 	#### Perform actions in an order based on AI Personality.
 	match AI_Personality:
 		main.AI_personalities.COMMANDER:
 			await enemySummonCreatures()
 			await enemyPlayRituals()
 			await decide_blockers()
-			await playCasters()
-			await playAttackers()
+			await enemyHandleCasters()
+			enemyAttackersWaiter()
 			
 		main.AI_personalities.WIZARD:
 			if cardsManager.getEnemyBlockers().is_empty():
 				await enemySummonCreatures()
 				await decide_blockers()
 			await enemyPlayRituals()
-			await playCasters()
-			await playAttackers()
-			await enemySummonCreatures()
-			await decide_blockers()
+			await enemyHandleCasters()
+			enemyAttackersWaiter()
 			
 		main.AI_personalities.SPECIALIST:
-			await playCasters()
+			await enemyHandleCasters()
 			await enemySummonCreatures()
 			await enemyPlayRituals()
 			await decide_blockers()
-			await playAttackers()
-
-	timeoutEndEnemyTurn()
+			enemyAttackersWaiter()
 
 
 
+func enemyActionsAfterAttacking():
+	var AI_Personality = main.AI_personality
+	
+	#### Perform actions in an order based on AI Personality.
+	match AI_Personality:
+	
+			
+		main.AI_personalities.WIZARD:
+			await enemySummonCreatures()
+			await decide_blockers()
+
+	endEnemyTurn()
 
 
 
@@ -194,17 +208,28 @@ func decide_blockers():
 				if blocker.has_method('statesActive'):
 					blocker.statesActive()
 
-func playCasters():
+
+
+func enemyHandleCasters():
 	var enemyCasters = CardChecks.getCastersInList(enemyBoardCards)
 	for card:Card in enemyCasters:
 		await handleEnemyCast(card)
-		
+
+
+#### EACH ATTACKER CALLS THIS TO CONTINUE ENEMY COMBAT		
 ### ATTACKERS ATTACK OR CAST STARTING FROM THE PRIORITIZED/STRONGEST ONES.
-func playAttackers():
-	var enemyAttackers = CardChecks.getAttackersInList(enemyBoardCards)
-	for card:Card in enemyAttackers:
+func enemyAttackersWaiter():
+	var enemyAttackers:Array = CardChecks.getAttackersInList(enemyBoardCards)
+	#### ENEMY ATTACKERS FOUND, CONTINUE COMBAT
+	if not enemyAttackers.is_empty():
+		var card:Card = enemyAttackers[0]
 		if card.checkCanAct():
-			await handleEnemyAttackPlayer(card)
+			handleEnemyAttackPlayer(card)
+	#### END ENEMY COMBAT
+	else:
+		enemyActionsAfterAttacking()
+
+
 
 func playEnemyCard(card:Card) -> bool:
 	for slot:CardSlot in main.getEnemySlots():
@@ -217,7 +242,7 @@ func playEnemyCard(card:Card) -> bool:
 
 
 #### START PLAYER'S TURN AFTER ENEMY ACTION
-func timeoutEndEnemyTurn() -> void:
+func endEnemyTurn() -> void:
 	switchBetweenPlayerEnemyTurns()
 	
 
@@ -230,7 +255,7 @@ func togglePlayerAttackMode(enable:bool, card:Card) -> void:
 	
 	#### TURN IT OFF
 	if not enable:
-		currentAttackingCard = null
+		#currentAttackingCard = null
 		States.statesPlay()
 		
 		playerAttackOngoing = enable
@@ -365,7 +390,8 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 	#### PLAYER HAS BLOCKERS, FIND KILLABLE BLOCKER
 	if not blockers.is_empty():
 		CardChecks.sort_by_weakest(blockers)
-		### CHECK IF THIS CARD CAN KILL AN ENEMY BY ITSELF.
+		
+		#### STEP 1 - CHECK IF THIS CARD CAN KILL AN ENEMY BY ITSELF.
 		if not c.fearless:
 			var individually_killable: Array = blockers
 			remove_individually_unkillable(attackCard, individually_killable)
@@ -373,12 +399,14 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 				target = individually_killable[0]
 		else:
 			target = blockers.front()
-		#### TARGET FOUND, ATTACK TARGET CARD
+			
+		#### STEP 2 - TARGET FOUND, ATTACK TARGET CARD
 		if target:
-		#### IF ATTACKER DESTROYED, NO ANIMATIONS
+		#### CASE 1 - IF ATTACKER DESTROYED, NO ANIMATIONS
 			print(c, ' can kill ', target, '. Attacking!')
-			var success = await resolveAttack(c, target)
+			var success = resolveAttack(c, target)  #### HANDLES ANIMATION QUEUE AND CALLS NEXT ATTACKER
 			return
+			
 		elif not c.will_not_charge:
 			
 			var killable_by_charge: Array = cardsManager.getPlayerBlockers()
@@ -387,13 +415,14 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 			if killable_by_charge.size() > 0:
 				declare_charge(killable_by_charge[0])
 			
+			#### CASE 2 - ATTACK AS PART OF CHARGE
 			if enemyChargeTarget:
-				var success = await resolveAttack(c, enemyChargeTarget)
+				var success = resolveAttack(c, enemyChargeTarget)  #### HANDLES ANIMATION QUEUE AND CALLS NEXT ATTACKER
 				return
 			
+			#### CASE 3 - DON'T ATTACK
 			else:
-				await handleEnemyCast(attackCard)
-		
+				handleEnemyCast(attackCard)
 		return
 		
 	#### NO BLOCKERS, ATTACK PLAYER
@@ -419,6 +448,9 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 func handleEnemyCast(castingCard:Card):
 	if castingCard.actions.getCastAction():
 		await castingCard.actions.handleCast()
+		
+	enemyAttackersWaiter()  #### CALL IN NEXT ATTACKER
+
 
 
 #### Checks if attack card would die if it attacks defend card.
@@ -434,10 +466,6 @@ func check_if_kills(attackCard:Card, defendCard:Card) -> bool:
 	print(attackCard.cardName, ' will deal ', projected_damage, ' damage to ', defendCard)
 	return projected_damage >= defendCard.tempHealth
 		
-
-
-
-
 
 
 func remove_dangerous(caller:Card, array:Array) -> Array:
@@ -566,13 +594,11 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
 	targetCard.allowInteract = false
-	var waitTime:float = attackCard.handleCombatActions(attackCard, targetCard, resolveAttackTwo )
-	targetCard.handleCombatActions(attackCard, targetCard, Callable())
+	attackCard.handleCombatActions(attackCard, targetCard, resolveAttackTwo )
+	targetCard.handleCombatActions(attackCard, targetCard, doNothing)
 	
 	
 	
-
-
 func resolveAttackTwo():
 	var attackCard:Card = currentAttackingCard
 	var targetCard: Card = currentDefendingCard
@@ -598,8 +624,11 @@ func resolveAttackTwo():
 	params2.targetCard = attackCard
 	SignalBus.defended.emit(params2)
 	
-	attackCard.checkAndHandleCombatDeath(true)
 	targetCard.checkAndHandleCombatDeath(false)
+	await attackCard.checkAndHandleCombatDeath(true)
+	
+	enemyAttackersWaiter()  #### CALL IN NEXT ATTACKER
+	
 	
 
 
@@ -615,3 +644,11 @@ func _on_enemy_portrait_area_mouse_entered():
 
 func _on_enemy_portrait_area_mouse_exited():
 	damageCalculator.hide()
+
+
+
+func doNothing():
+	pass
+	
+	
+	
