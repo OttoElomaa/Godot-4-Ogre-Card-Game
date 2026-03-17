@@ -27,12 +27,35 @@ shader_parameter/size_3 = 0.05
 [node name="Card-Cr-Ogre" instance=ExtResource("1_cw6g5")]
 material = SubResource("ShaderMaterial_4nkfu")
 cardName = "Colossus"
+cardType = 0
 subTypeStr = "Giant"
 group = 9
 flavorText = "Big guy"
 manaCost = 2
 startingDamage = 10
 startingHealth = 8
+upgraded = 0
+block_on_arrival = true
+action_mode = 1
+targeting_mode = 0
+priority = 0
+will_not_charge = false
+fearless = false
+alt_card_name_1 = ""
+alt_keywords_1 = PackedStringArray()
+alt_damage_1 = 0
+alt_health_1 = 0
+alt_mana_cost_1 = 0
+alt_card_name_2 = ""
+alt_keywords_2 = PackedStringArray()
+alt_damage_2 = 0
+alt_health_2 = 0
+alt_mana_cost_2 = 0
+alt_card_name_3 = ""
+alt_keywords_3 = PackedStringArray()
+alt_damage_3 = 0
+alt_health_3 = 0
+alt_mana_cost_3 = 0
 
 [node name="Art" parent="Frontside" index="1"]
 texture = ExtResource("3_cw6g5")

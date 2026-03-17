@@ -79,6 +79,7 @@ var isChampion:
 
 @export var group := Group.NONE
 
+var gameBoard:GameBoard = null
 var cardsManager:CardsManager = null
 var battleSystem:BattleSystem = null
 var mainMenu: Node = null
@@ -190,7 +191,9 @@ var actionState: CardActionStates = CardActionStates.ACTIVE
 var cardState: CardStates = CardStates.DECK
 var isTraveling := false
 var isResting := false
+
 var allowInteract := true
+var allowEnemyUse := true
 
 
 
@@ -217,6 +220,7 @@ func setup_all_actions():
 func setup(gameBoard: GameBoard):
 	print(cardName, ' sets up.')
 	if gameBoard:
+		self.gameBoard = gameBoard
 		print(cardName, ' has gameboard')
 		cardsManager = gameBoard.cardsManager
 		battleSystem = gameBoard.battleSystem
@@ -552,6 +556,7 @@ func faceDown():
 func restAndAnimate():
 	isResting = true
 	statesPassive()
+	toggleAllowEnemyUse(true)
 	CardAnimationQueue.queueAnimation(self, rotateRestingCard, 0.2)
 
 
@@ -634,11 +639,8 @@ func toggleTraveling(enabled:bool):
 		stateHandler.get_node("TravelingIcon").hide()
 
 
-#func turnOffTravel() -> bool:
-	#if isTraveling:
-		#toggleTraveling(false)
-		#return true
-	#return false
+func toggleAllowEnemyUse(enabled:bool):
+	allowEnemyUse = enabled
 
 ##################################
 
@@ -650,6 +652,10 @@ func checkCanBlock() -> bool:
 	return false
 
 func checkCanAct() -> bool:
+	if isEnemyCard:
+		if not allowEnemyUse:
+			return false
+	
 	if not checkInert():
 		if checkAlive():
 			if not checkResting():
@@ -861,8 +867,6 @@ func handleEnterGraveyard():
 func handleAttackingPortrait():
 	if not checkAlive():
 		return
-		
-	CardAnimationQueue.queueAnimation(self, returnToSlot, 0.2)
 	restAndAnimate()
 	
 	var params := SignalParams.new()
@@ -1031,7 +1035,7 @@ func rotateRestingCard():
 		degreesGoal = 25
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
-	await tween.finished
+	
 
 
 #### LENGTH = 1 + 1 = 2 s ?
@@ -1045,7 +1049,14 @@ func PlayRitualCastAnimation():
 	await get_tree().create_timer(1).timeout
 	
 
-
+func playAttackPortraitAnimation():
+	var targetPos = Vector2(0,0)
+	
+	var portraitPosition: Vector2 = gameBoard.getPortraitPosition(isEnemyCard)
+	
+	var tween = create_tween()
+	tween.tween_property(self, "position", targetPos, 0.2)
+	
 
 
 #endregion

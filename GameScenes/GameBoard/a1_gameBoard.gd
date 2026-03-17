@@ -248,20 +248,6 @@ func enemyChampion() -> Card:
 	else:
 		return null
 
-func playAttackPortraitAnimation(attackingCard: Card):
-	var c = attackingCard
-	var isEnemy = c.isEnemyCard
-	var targetPos = Vector2(0,0)
-	
-	if isEnemy:
-		targetPos = $Portraits/PlayerSprite.position
-	else:
-		targetPos = $Portraits/EnemySprite.position
-	
-	var tween = create_tween()
-	tween.tween_property(c, "position", targetPos, 0.2)
-	await tween.finished
-
 
 
 func showPlayerTurnPopup():
@@ -320,3 +306,9 @@ func buttonPressedEndMatch() -> void:
 		SceneSwitcher.switchToNewScene(GameInfo.currentZone)
 	else:
 		SceneSwitcher.returnToMainMenu()
+
+func getPortraitPosition(isEnemy:bool) -> Vector2:
+	if isEnemy:
+		return $Portraits/PlayerSprite.position
+	else:
+		return $Portraits/EnemySprite.position
