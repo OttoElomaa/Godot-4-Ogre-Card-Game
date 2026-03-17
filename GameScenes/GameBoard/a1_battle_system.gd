@@ -15,6 +15,7 @@ var COLLISION_MASK_ENEMY_PORTRAIT := 4
 
 var playerAttackOngoing: bool = false
 var currentAttackingCard: Card = null
+var currentDefendingCard: Card = null
 
 var castLineShown: bool = false
 var currentCastingCard: Card = null
@@ -406,12 +407,14 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 			playerAttackedSE()
 			main.shake_screen(10, 0.5)
 			c.handleAttackingPortrait()
-			await c.returnToSlot()
+			CardAnimationQueue.queueAnimation(c, c.returnToSlot, 0.2)
 		else:
 			var damageToChampion = c.getCombatDamageToTarget(main.playerChampion(), true)
 			main.playerChampion().takeCombatDamage(c, true)
 			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
 			c.handleAttackingPortrait()
+
+
 
 func handleEnemyCast(castingCard:Card):
 	if castingCard.actions.getCastAction():
@@ -557,16 +560,27 @@ func handlePlayerAttackCreature(target:Card) -> void:
 #### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
 #### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
 func resolveAttack(attackCard:Card, targetCard:Card):
+	currentAttackingCard = attackCard
+	currentDefendingCard = targetCard
 	endAttackState()
 		
 	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
 	targetCard.allowInteract = false
-	await attackCard.handleCombatActions(attackCard, targetCard)
-	targetCard.handleCombatActions(attackCard, targetCard)
+	var waitTime:float = attackCard.handleCombatActions(attackCard, targetCard, resolveAttackTwo )
+	targetCard.handleCombatActions(attackCard, targetCard, Callable())
+	
+	
+	
 
+
+func resolveAttackTwo():
+	var attackCard:Card = currentAttackingCard
+	var targetCard: Card = currentDefendingCard
+	
+	
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	var damageTakenByTarget = await targetCard.takeCombatDamage(attackCard, false)
-	var damageTakenByAttacker = await attackCard.takeCombatDamage(targetCard, true)
+	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, false)
+	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, true)
 
 
 	#### COMBAT LOG STUFF ##################################
@@ -584,7 +598,10 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 	params2.targetCard = attackCard
 	SignalBus.defended.emit(params2)
 	
-#	
+	attackCard.checkAndHandleCombatDeath(true)
+	targetCard.checkAndHandleCombatDeath(false)
+	
+
 
 func endAttackState() -> void:
 	if States.gameState == States.GameStates.ATTACK:

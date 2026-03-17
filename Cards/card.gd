@@ -80,7 +80,7 @@ var isChampion:
 @export var group := Group.NONE
 
 var cardsManager:CardsManager = null
-var battleSystem:Node = null
+var battleSystem:BattleSystem = null
 var mainMenu: Node = null
 
 var mySlot: CardSlot = null
@@ -556,12 +556,12 @@ func faceDown():
 func restAndAnimate():
 	isResting = true
 	statesPassive()
-	await rotateRestingCard(true)
+	CardAnimationQueue.queueAnimation(self, rotateRestingCard, 0.2)
 
 
 func wake():
 	isResting = false
-	await rotateRestingCard(false)
+	CardAnimationQueue.queueAnimation(self, rotateRestingCard, 0.2)
 
 #endregion
 
@@ -579,7 +579,8 @@ func statesActive():
 	actionState = CardActionStates.ACTIVE
 	stateHandler.get_node("ActiveIcon").show()
 	
-	await animateBlockingState(true)
+	CardAnimationQueue.queueAnimation(self, animateBlockingState, 0.2)
+	
 	
 
 func statesPassive():
@@ -588,26 +589,7 @@ func statesPassive():
 	stateHandler.get_node("ActiveIcon").hide()
 	
 	#### POSITION AS INDICATOR
-	await animateBlockingState(false)
-
-
-
-func animateBlockingState(toBlock:bool):
-	if not mySlot:
-		return
-		
-	var newPos = mySlot.position
-	
-	#### POSITION AS INDICATOR
-	if toBlock:
-		var activeOffset := -50
-		if isEnemyCard:
-			activeOffset *= -1
-		
-		newPos.y += activeOffset
-		effects.togglePhased(false)
-	
-	MyTools.moveCardTweening(self, position, newPos)
+	CardAnimationQueue.queueAnimation(self, animateBlockingState, 0.2)
 
 
 
@@ -615,6 +597,8 @@ func vacateSlot():
 	if mySlot:
 		mySlot.toggleAvailable(true)
 	mySlot = null
+
+
 
 func statesInert():
 	actionState = CardActionStates.INERT
@@ -698,29 +682,7 @@ func checkAlive():
 ###############################################################################
 #region #########################################  COMBAT STUFF
 
-#### Self: who takes damage. Card -- the other guy.
-func takeCombatDamage(card:Card, isAttacker: bool):
-	
-	var selfCombatDamage:int = getCombatDamageToTarget(card, !isAttacker)
-	var enemyCombatDamage:int = card.getCombatDamageToTarget(self, isAttacker)
-	
-	#### CHECK IF THE ENEMY WOULD BE KILLED IN COMBAT WITH THIS CARD, AND EMIT SIGNAL.
-	if selfCombatDamage >= card.tempHealth + selfCombatDamage:
-		print('This cards can deal ', selfCombatDamage, ' damage and kill the foe ', card.cardName , 'with ', card.tempHealth, ' HP' )
-		var params = SignalParams.new()
-		params.sourceCard = self
-		params.targetCard = card
-		params.amount = selfCombatDamage
-		SignalBus.emit_signal("killed_enemy", params)
-			
-	
-	#### DEAL DAMAGE
-	var damageTaken = enemyCombatDamage
-	takeDamage(damageTaken)
-				
-	updateCardVisuals()
-	
-	await checkAndHandleCombatDeath(isAttacker)
+
 
 
 #### RETURNS THE INPUT DAMAGE, AND ADDS to it any of 
@@ -742,16 +704,14 @@ func takeDamage(amount:int):
 	signal_data.sourceCard = self
 	SignalBus.damage_taken.emit(signal_data)
 
-	##CHECK IF DESTROYED
 
+
+##CHECK IF DESTROYED
+func checkAndHandleDeathFromTempHealth():
 	if tempHealth <= 0:
-		## Emit the Death signal. Death can still be overwritten by Defy Death etc.
-		## during destroyAndAnimate()
-#		var params = SignalParams.new()
-#		params.sourceCard = self
-#		SignalBus.emit_signal("death", params)
-		
-		await destroyAndAnimate(true)
+		destroyAndAnimate(true)
+
+
 
 ## Returns damage taken by self after general modifiers.
 func getDamageToSelf(amount:int) -> int:
@@ -784,9 +744,13 @@ func getDamageToSelf(amount:int) -> int:
 	
 	return damageTaken
 	
+	
+	
 ## Restores a card's health to its max value.
 func heal():
 	tempHealth = health
+
+
 
 #### RETURNS THE TEMPORARY DAMAGE, AND ADDS to it any of 
 #### THIS CARD'S (Damage Dealer) DAMAGE-CHANGING EFFECTS
@@ -817,23 +781,55 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 
 
 #### HANDLE CARD'S INTERNAL COMBAT STUFF (EXCEPT Damage Calculation)
-func handleCombatActions(attacker, defender):
+func handleCombatActions(attacker:Card, defender:Card, waitingFunction:Callable):
+	var waitTime = 1.5
+	
 	allowInteract = false
 	if attacker == self:
 		z_index = 10
-		await playAttackAnimation(defender)
+		CardAnimationQueue.queueAnimation(self, playAttackAnimation, waitTime, waitingFunction)
 	elif defender == self:
 		z_index = 0
-		await get_tree().create_timer(1).timeout
+		waitTime = 1
+		CardAnimationQueue.queueWait(waitTime)
+	return waitTime
+
+
+
+
+#### Self: who takes damage. Card -- the other guy.
+func takeCombatDamage(card:Card, isAttacker: bool):
+	
+	var selfCombatDamage:int = getCombatDamageToTarget(card, !isAttacker)
+	var enemyCombatDamage:int = card.getCombatDamageToTarget(self, isAttacker)
+	
+	#### CHECK IF THE ENEMY WOULD BE KILLED IN COMBAT WITH THIS CARD, AND EMIT SIGNAL.
+	if selfCombatDamage >= card.tempHealth + selfCombatDamage:
+		print('This cards can deal ', selfCombatDamage, ' damage and kill the foe ', card.cardName , 'with ', card.tempHealth, ' HP' )
+		var params = SignalParams.new()
+		params.sourceCard = self
+		params.targetCard = card
+		params.amount = selfCombatDamage
+		SignalBus.emit_signal("killed_enemy", params)
+			
+	
+	#### DEAL DAMAGE
+	var damageTaken = enemyCombatDamage
+	takeDamage(damageTaken)
+				
+	updateCardVisuals()
+	#return damageTaken
+	
 
 
 func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
+	checkAndHandleDeathFromTempHealth()
+	
 	if tempHealth <= 0:
-#		destroyAndAnimate(true, !isAttacker)
-		await get_tree().create_timer(1).timeout
+		CardAnimationQueue.queueWait(1)
 		return true
 			
-	await returnToSlot()
+	CardAnimationQueue.queueAnimation(self, returnToSlot, 0.2)
 	
 	#### SURVIVES, And IS ATTACKER	
 	if isAttacker:
@@ -841,7 +837,7 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 		if hasKeyword('Vanguard'):
 			toggleTraveling(true)
 		else:
-			await restAndAnimate()
+			restAndAnimate()
 
 	$SFX/DefendSound.play()
 	allowInteract = true
@@ -850,6 +846,8 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	params.sourceCard = self
 	SignalBus.survived.emit(params)
 	return false
+	
+	
 	
 func handleEnterGraveyard():
 	handleTurnStartReset()
@@ -870,7 +868,7 @@ func handleAttackingPortrait():
 	if not checkAlive():
 		return
 		
-	await returnToSlot()
+	CardAnimationQueue.queueAnimation(self, returnToSlot, 0.2)
 	await restAndAnimate()
 	effects.togglePhased(false)
 	
@@ -932,22 +930,26 @@ func turnOnBestiaryVisuals(mainMenu:Node):
 ###############################################################################
 #region ######################################## VISUALS - ANIMATIONS
 
-
-func playAttackAnimation(defender:Card):
+#### LENGTH = 0.5 + 1 = 1.5 s
+func playAttackAnimation():
+	var defender:Card = battleSystem.currentDefendingCard
+	
 	var offset = Vector2(0,300)
 	if isEnemyCard:
 		offset = -offset
+		
 	var tween = create_tween()
 	var attacking_position = defender.position + offset
 	## The attacking card floats in front of the defending card.
 	tween.tween_property(self, 'position', attacking_position, 0.5)
-	await tween.finished
+	
 	## The attacking card pounces on the defending card.
 	if isEnemyCard:
 		$BodyAnimations.play("EnemyAttack")
 	else:
 		$BodyAnimations.play("PlayerAttack")
-	await $BodyAnimations.animation_finished
+	
+
 
 func returnToSlot():
 	if not checkAlive():
@@ -955,13 +957,103 @@ func returnToSlot():
 	
 	var tween = create_tween()
 	tween.tween_property(self, "position", mySlot.position, 0.2)
-	await animateBlockingState(actionState == CardActionStates.ACTIVE)
-	await tween.finished
-
+	CardAnimationQueue.queueAnimation(self, animateBlockingState, 0.2)
+	
+	
+	
 #### FOR RESTING	
 func timeoutRestAnimation() -> void:
 	if checkResting():
-		await rotateRestingCard(true)
+		CardAnimationQueue.queueAnimation(self, rotateRestingCard, 0.2)
+
+
+
+func reset_visuals():
+	$BodyAnimations.play("RESET")
+
+
+func animateBlockingState():
+	var toBlock := (actionState == CardActionStates.ACTIVE)
+	if not mySlot:
+		return	
+	var newPos = mySlot.position
+	
+	#### POSITION AS INDICATOR
+	if toBlock:
+		var activeOffset := -50
+		if isEnemyCard:
+			activeOffset *= -1
+		newPos.y += activeOffset
+		effects.togglePhased(false)
+		
+	MyTools.moveCardTweening(self, position, newPos)
+
+
+
+func playCardDestroyedAnimation():
+	if checkAlive():
+		return
+	
+	## If a card was killed by an attack, it recoils backwards.
+	var tween = create_tween()
+	var change_position = Vector2(0, 30)
+	if isEnemyCard:
+		change_position = -change_position
+	var change_rotation = randf_range(-10.0, 10.0)
+	tween.tween_property(self, "position", position + change_position, 2).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "rotation_degrees", change_rotation, 0.2)
+	
+	$SFX/DeathSound.play()
+	await burnAwayShader()
+#	visible = false
+	
+
+
+func burnAwayShader():
+	material = load("res://Resources/Shaders/destroy_card_material.tres")
+	var tween = create_tween()
+	tween.tween_method(set_shader_property.bind('percentage'), 1.0, 0.0, 2)
+	await tween.finished
+	return true
+	
+func set_shader_property(value:float, property:String):
+	material.set_shader_parameter(property, value)
+	
+
+	
+func reset_shaders():
+	set_shader_property(1.0, 'percentage')
+	
+	
+
+
+#################################################################################
+
+
+func rotateRestingCard():
+	var willRest = isResting
+	
+	var degreesGoal = 0
+	if willRest:
+		degreesGoal = 25
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
+	await tween.finished
+
+
+#### LENGTH = 1 + 1 = 2 s ?
+func PlayRitualCastAnimation():
+	var screen_center = Vector2(1050, 350)
+	z_index = 999
+	await MyTools.moveCardTweening(self, position, screen_center)
+	faceUp()
+	var tween = get_tree().create_tween()
+	await tween.tween_property(self, "scale", Vector2(3.0, 3.0), 1)
+	await get_tree().create_timer(1).timeout
+	
+
+
+
 
 #endregion
 
@@ -1025,7 +1117,7 @@ func destroyAndAnimate(toAnimate:bool):
 	if hasEffect('Defy Death'):
 		SignalBus.emit_signal("death_defied", params)
 		SignalBus.emit_signal("survived", params)
-		returnToSlot()
+		CardAnimationQueue.queueAnimation(self, returnToSlot, 0.2)
 		tempHealth = health
 		updateCardLabels()
 		return
@@ -1036,7 +1128,7 @@ func destroyAndAnimate(toAnimate:bool):
 		mySlot.isAvailable = true
 		
 	if toAnimate:
-		await playCardDestroyedAnimation()
+		CardAnimationQueue.queueAnimation(self, playCardDestroyedAnimation, 0.2)
 	
 	if hasKeyword('Transient'):
 		purge()
@@ -1046,71 +1138,9 @@ func destroyAndAnimate(toAnimate:bool):
 	reset_shaders()
 	
 	
-	
-
 func purge():
 	queue_free()
 
-
-
-func playCardDestroyedAnimation():
-	if checkAlive():
-		return
-	
-	## If a card was killed by an attack, it recoils backwards.
-	var tween = create_tween()
-	var change_position = Vector2(0, 30)
-	if isEnemyCard:
-		change_position = -change_position
-	var change_rotation = randf_range(-10.0, 10.0)
-	tween.tween_property(self, "position", position + change_position, 2).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "rotation_degrees", change_rotation, 0.2)
-	
-	$SFX/DeathSound.play()
-	await burnAwayShader()
-#	visible = false
-	
-
-
-func burnAwayShader():
-	material = load("res://Resources/Shaders/destroy_card_material.tres")
-	var tween = create_tween()
-	tween.tween_method(set_shader_property.bind('percentage'), 1.0, 0.0, 2)
-	await tween.finished
-	return true
-	
-func set_shader_property(value:float, property:String):
-	material.set_shader_parameter(property, value)
-	
-func reset_visuals():
-	$BodyAnimations.play("RESET")
-	
-func reset_shaders():
-	set_shader_property(1.0, 'percentage')
-	
-	
-
-
-#################################################################################
-
-
-func rotateRestingCard(willRest:bool):
-	var degreesGoal = 0
-	if willRest:
-		degreesGoal = 25
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
-	await tween.finished
-
-func PlayRitualCastAnimation():
-	var screen_center = Vector2(1050, 350)
-	z_index = 999
-	await MyTools.moveCardTweening(self, position, screen_center)
-	faceUp()
-	var tween = get_tree().create_tween()
-	await tween.tween_property(self, "scale", Vector2(3.0, 3.0), 1)
-	await get_tree().create_timer(1).timeout
-	
 
 
 func toggleCardName(enable:bool):

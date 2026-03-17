@@ -26,6 +26,7 @@ SignalBus="*res://GameAutoloads/SignalBus.gd"
 CardChecks="*res://GameAutoloads/CardChecks.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 EffectAnimationQueue="*res://GameAutoloads/EffectAnimationQueue.tscn"
+CardAnimationQueue="*res://GameAutoloads/CardAnimationQueue.tscn"
 
 [dialogue_manager]
 

@@ -51,6 +51,7 @@ func activate(targets:Array) -> bool:
 #### DEAL TEMPORARY DAMAGE TO A CARD
 func handleInflict(target:Card, amount:int):
 	target.takeDamage(amount)
+	target.checkAndHandleDeathFromTempHealth()
 		
 
 

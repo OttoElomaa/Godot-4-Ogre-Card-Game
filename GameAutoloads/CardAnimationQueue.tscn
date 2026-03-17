@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7jefjsondk5o"]
+
+[ext_resource type="Script" uid="uid://hv2gwl3s623a" path="res://GameAutoloads/card_animation_queue.gd" id="1_bhhth"]
+
+[node name="CardAnimationQueue" type="Node2D"]
+script = ExtResource("1_bhhth")
+
+[node name="AnimationTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="AnimationTimer" to="." method="timeoutAnimationFinished"]

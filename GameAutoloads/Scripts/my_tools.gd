@@ -50,8 +50,7 @@ func moveCardTweening(c:Card, originalPos:Vector2, newPos:Vector2):
 	c.position = originalPos
 	var tween = get_tree().create_tween()
 	tween.tween_property(c, "position", newPos, 0.2)
-	await tween.finished
-
+	
 
 
 #### CAN BE USED BY SUMMON ABILITIES, DEBUG MENU, ETC
@@ -62,11 +61,10 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 		var slot = slots[0]
 		
 		await handlePlaceCardInSlot(card, slot)
-#		card.setup(gameBoard)
-#		changeMana(card.manaCost, isEnemy)
 		return true
-		
 	return false
+
+
 
 #### CAN BE USED FOR FUNCTIONS THAT ACCESS A CARD'S CHILDREN W/O SUMMONING THE CARD
 #### LIKE TRANSFORMING ONE CARD INTO A NEW ONE
