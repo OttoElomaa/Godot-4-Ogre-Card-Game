@@ -656,12 +656,18 @@ func checkCanAct() -> bool:
 		if not allowEnemyUse:
 			return false
 	
-	if not checkInert():
-		if checkAlive():
-			if not checkResting():
-				if not checkTraveling():
-					return true
-	return false
+	if checkInert():
+		return false
+	if not checkAlive():
+		return false
+	
+	if checkResting():
+		return false
+		
+	if checkTraveling():
+		return false
+					
+	return true
 
 func checkInert() -> bool:
 	if actionState == CardActionStates.INERT:

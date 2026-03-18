@@ -394,8 +394,7 @@ func getWillingEnemyAttackers(initialAttackers:Array) -> Array:
 		return willingAttackers
 	
 	for card:Card in initialAttackers:
-		if card.checkAlive():
-			if card.checkCanAct():
+		if card.checkAlive() and card.checkCanAct():
 				willingAttackers.append(card)
 				
 	return willingAttackers
