@@ -372,7 +372,9 @@ func handlePlayerAttackEnemy() -> void:
 	var c = currentAttackingCard
 	var combatDamage = c.getCombatDamageToTarget(null, true)
 	endAttackState()
-	await main.playAttackPortraitAnimation(c)
+	
+	CardAnimationQueue.queueAnimation(c, c.playAttackPortraitAnimation, 0.2)
+	
 	main.changeHealth(-combatDamage, !c.isEnemyCard)
 	main.updateResourceLabels()
 	handlePortraitAttackPrintout(c, combatDamage, true)

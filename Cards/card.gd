@@ -958,6 +958,8 @@ func playAttackAnimation():
 func returnToSlot():
 	if not checkAlive():
 		return
+	if not mySlot:   #### Removed from slot already?
+		return
 	
 	var tween = create_tween()
 	tween.tween_property(self, "position", mySlot.position, 0.2)

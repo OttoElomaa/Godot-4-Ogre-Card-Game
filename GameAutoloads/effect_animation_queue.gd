@@ -19,6 +19,13 @@ func queueAnimation(card:Card, effect:CardAction, targetCards:Array) -> void:
 func animateNext():
 	#### GET THE FIRST ITEM IN THE QUEUE
 	var dict = animationQueue[0]
+	
+	#### NO VALID CARD OR EFFECT
+	if (not MyTools.checkNodeValidity(dict.card) or not MyTools.checkNodeValidity(dict.effect)):
+		animationQueue.pop_front()   ## REMOVE THE FIRST ITEM -> It's been processed now
+		return
+	
+	#### VALID CARD FOUND	
 	var card:Card = dict.card
 	var effect:CardAction = dict.effect
 	
