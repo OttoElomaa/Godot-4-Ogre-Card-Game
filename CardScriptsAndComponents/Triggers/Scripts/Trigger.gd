@@ -45,14 +45,14 @@ func execute(params:SignalParams) -> bool:
 
 	if disabled:
 		return success
-
+	
 	if myCard.cardState != myCard.CardStates.BOARD and myCard.cardType == myCard.CardTypes.CREATURE:
 		return success 
 	
 	if not params:
 		params = SignalParams.new()
 
-	print(name, ' from ', myCard.cardName, ' is executing')
+	print(name, ' from ', myCard.name, ' is executing')
 
 	for cond:ConditionalComponent in conditions:
 		if not cond.check(params.sourceCard, myCard):

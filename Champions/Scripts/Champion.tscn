@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://chhff8h0vvfgs"]
+
+[ext_resource type="Script" uid="uid://dwyj2ebmqyh2x" path="res://Champions/Scripts/champion.gd" id="1_y1dmd"]
+[ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="2_tubnd"]
+[ext_resource type="Script" uid="uid://dw6ejtqnbwoh2" path="res://Champions/Scripts/ActionsNodeChamp.gd" id="3_tubnd"]
+[ext_resource type="Texture2D" uid="uid://dcx2qsgic5x6" path="res://Art/CardComponents/card-effect-counter-burn.png" id="4_rcnlk"]
+[ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="5_y1dmd"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="6_tubnd"]
+[ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="7_tgu1m"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="7_tubnd"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="8_tgu1m"]
+[ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="10_ftlr4"]
+
+[node name="Champion" type="Node2D" unique_id=1181374962]
+script = ExtResource("1_y1dmd")
+texture = ExtResource("2_tubnd")
+startingHealth = 5
+
+[node name="Actions" type="Node2D" parent="." unique_id=584688096]
+unique_name_in_owner = true
+script = ExtResource("3_tubnd")
+action_name = "Blast"
+texture = ExtResource("4_rcnlk")
+cost_display = Dictionary[int, int]({
+1: 1
+})
+
+[node name="OnCastTrigger" parent="Actions" unique_id=684365065 instance=ExtResource("5_y1dmd")]
+
+[node name="CardAction2" type="Node2D" parent="Actions/OnCastTrigger" unique_id=1993388289]
+script = ExtResource("6_tubnd")
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction2" unique_id=1913252692 instance=ExtResource("7_tgu1m")]
+alterOwnerMana = -1
+
+[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" unique_id=2056107454]
+script = ExtResource("6_tubnd")
+customActionText = "Fireball: inflict 2."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillAlterHealth" parent="Actions/OnCastTrigger/CardAction" unique_id=1254554521 instance=ExtResource("7_tubnd")]
+inflictCreature = 2
+
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" unique_id=135902499 instance=ExtResource("8_tgu1m")]
+manualTargetGroup = 2
+
+[node name="Actions2" type="Node2D" parent="." unique_id=485012379]
+unique_name_in_owner = true
+script = ExtResource("3_tubnd")
+action_name = "Big Blast"
+texture = ExtResource("10_ftlr4")
+cost_display = Dictionary[int, int]({
+1: 3
+})
+
+[node name="OnCastTrigger" parent="Actions2" unique_id=1330261348 instance=ExtResource("5_y1dmd")]
+
+[node name="CardAction2" type="Node2D" parent="Actions2/OnCastTrigger" unique_id=1493195847]
+script = ExtResource("6_tubnd")
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillPlayerHealthMana" parent="Actions2/OnCastTrigger/CardAction2" unique_id=1107762177 instance=ExtResource("7_tgu1m")]
+alterOwnerMana = -1
+
+[node name="CardAction" type="Node2D" parent="Actions2/OnCastTrigger" unique_id=791837580]
+script = ExtResource("6_tubnd")
+customActionText = "Fireball: inflict 2."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillAlterHealth" parent="Actions2/OnCastTrigger/CardAction" unique_id=1457493940 instance=ExtResource("7_tubnd")]
+inflictCreature = 4
+
+[node name="ManualTargeting" parent="Actions2/OnCastTrigger/CardAction" unique_id=48030285 instance=ExtResource("8_tgu1m")]
+manualTargetGroup = 2
