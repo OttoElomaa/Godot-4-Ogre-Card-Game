@@ -10,6 +10,9 @@ class_name GameBoard
 @onready var cameraMainBoard := $CameraMainBoard
 
 @onready var battleNameLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel
+@onready var turnCountLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel
+@onready var endTurnLabel := $CanvasLayer/EndTurnPane/VBoxContainer/EndTurn/Label
+
 
 enum CardSlotTypes {
 	PLAYER, ENEMY
@@ -219,7 +222,14 @@ func updateUi(turnCount:int):
 		battleNameLabel.text = GameInfo.currentBattleInfo.board_name
 		
 	
-	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % GameInfo.turnCount
+	turnCountLabel.text = "%d" % GameInfo.turnCount
+	
+	if GameInfo.enemy_turn:
+		endTurnLabel.text = "Enemy Turn"
+	else:
+		endTurnLabel.text = "End Turn"
+		
+		
 
 
 

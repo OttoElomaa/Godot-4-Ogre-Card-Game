@@ -2,6 +2,8 @@ extends Node2D
 
 
 var animationQueue := []
+var instantQueue := []
+
 var currentAnimation:Dictionary = {}
 var isAnimating := false
 
@@ -9,6 +11,11 @@ func _physics_process(delta: float) -> void:
 	if not isAnimating:
 		if not animationQueue.is_empty():
 			animateNext()
+			
+	if not instantQueue.is_empty():
+		handleInstants()
+			
+			
 
 func queueAnimation(card:Card, animationFunction:Callable, 
 	animationLength:float, waitingFunction:Callable=doNothing) -> void:
@@ -19,14 +26,17 @@ func queueAnimation(card:Card, animationFunction:Callable,
 		)
 
 
+func queueInstant(card:Card, animationFunction:Callable) -> void:
+	instantQueue.append( {"card":card, "animationFunction":animationFunction} )
 
-func queueWait(waitTime:float):
+
+func queueWait(waitTime:float) -> void:
 	print("AnimationQueue: Queue Wait")
 	animationQueue.append({"waitTime": waitTime})
 
 
 
-func animateNext():
+func animateNext() -> void:
 	#### GET THE FIRST ITEM IN THE QUEUE
 	var dict:Dictionary = animationQueue[0]
 	currentAnimation = dict
@@ -50,9 +60,9 @@ func animateNext():
 	$AnimationTimer.wait_time = waitTime
 	$AnimationTimer.start()
 
-	#### SETUP THE QUEUE STUFF, REMOVE THE FIRST ITEM -> It's been processed now
+	#### SETUP THE QUEUE STUFF
 	isAnimating = true
-	animationQueue.pop_front()
+	
 
 
 
@@ -62,11 +72,38 @@ func timeoutAnimationFinished() -> void:
 	if currentAnimation.has("waitingFunction"):
 		var waitingFunction: Callable = currentAnimation.waitingFunction
 		waitingFunction.call()
-		
+	
+	#### REMOVE THE FIRST ITEM -> It's been processed now
+	animationQueue.pop_front()	
 	currentAnimation = {}
 	isAnimating = false
 
 
 
-func doNothing():
+#### ANIMATES AND REMOVES INSTANTS FROM THE QUEUE
+#### INSTANT can only activate IF ITS CARD ISN'T BEING ANIMATED in main QUEUE
+func handleInstants() -> void:
+	var animatingCards: Array = getCurrentAndWaitingCards()
+	var remainingInstants := []
+	
+	for anim:Dictionary in instantQueue:
+		if anim.card in animatingCards:
+			remainingInstants.append(anim)
+		else:
+			anim.animationFunction.call()
+			
+	instantQueue = remainingInstants
+			
+
+
+func getCurrentAndWaitingCards() -> Array:
+	var animatingCards := []
+	
+	for anim:Dictionary in animationQueue:
+		if anim.has("card"):
+			animatingCards.append(anim.card)
+	return animatingCards
+
+
+func doNothing() -> void:
 	pass

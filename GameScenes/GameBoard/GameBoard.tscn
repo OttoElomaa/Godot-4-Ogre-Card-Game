@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://d0m41055ikape"]
+[gd_scene format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/GameBoard/a1_gameBoard.gd" id="1_rf3o6"]
 [ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
@@ -124,17 +124,17 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[node name="GameBoard" type="Node2D" groups=["gameboard"]]
+[node name="GameBoard" type="Node2D" unique_id=1271993025 groups=["gameboard"]]
 script = ExtResource("1_rf3o6")
 
-[node name="CameraMainBoard" type="Camera2D" parent="."]
+[node name="CameraMainBoard" type="Camera2D" parent="." unique_id=1095447748]
 anchor_mode = 0
 zoom = Vector2(0.76, 0.76)
 script = ExtResource("25_7yxuf")
 
-[node name="Portraits" type="Node2D" parent="."]
+[node name="Portraits" type="Node2D" parent="." unique_id=1020186873]
 
-[node name="PlayerSprite" type="TextureRect" parent="Portraits"]
+[node name="PlayerSprite" type="TextureRect" parent="Portraits" unique_id=1798773631]
 custom_minimum_size = Vector2(210, 260)
 offset_left = 1018.0
 offset_top = 1121.0
@@ -145,19 +145,19 @@ texture = ExtResource("3_1phva")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="EnemySprite" type="Sprite2D" parent="Portraits"]
+[node name="EnemySprite" type="Sprite2D" parent="Portraits" unique_id=492536380]
 position = Vector2(1189.5, 135)
 texture = ExtResource("4_1qylb")
 
-[node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Portraits"]
+[node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Portraits" unique_id=160146999]
 position = Vector2(1176.5, 1266)
 texture = ExtResource("5_anhsg")
 
-[node name="EnemyResourceHolderSprite" type="Sprite2D" parent="Portraits"]
+[node name="EnemyResourceHolderSprite" type="Sprite2D" parent="Portraits" unique_id=1828160604]
 position = Vector2(1243.5, 150)
 texture = ExtResource("5_anhsg")
 
-[node name="PlayerHealthLabel" type="Label" parent="Portraits"]
+[node name="PlayerHealthLabel" type="Label" parent="Portraits" unique_id=992693671]
 texture_filter = 1
 offset_left = 1202.0
 offset_top = 1336.0
@@ -167,7 +167,7 @@ text = "99"
 label_settings = ExtResource("6_r88d6")
 horizontal_alignment = 1
 
-[node name="EnemyHealthLabel" type="Label" parent="Portraits"]
+[node name="EnemyHealthLabel" type="Label" parent="Portraits" unique_id=80214992]
 texture_filter = 1
 offset_left = 1268.5
 offset_top = 219.0
@@ -177,7 +177,7 @@ text = "99"
 label_settings = ExtResource("6_r88d6")
 horizontal_alignment = 1
 
-[node name="PlayerManaLabel" type="Label" parent="Portraits"]
+[node name="PlayerManaLabel" type="Label" parent="Portraits" unique_id=2065210245]
 texture_filter = 1
 offset_left = 1238.0
 offset_top = 1141.0
@@ -187,7 +187,7 @@ text = "88"
 label_settings = ExtResource("7_vfgb4")
 horizontal_alignment = 1
 
-[node name="EnemyManaLabel" type="Label" parent="Portraits"]
+[node name="EnemyManaLabel" type="Label" parent="Portraits" unique_id=293941128]
 texture_filter = 1
 offset_left = 1304.0
 offset_top = 27.0
@@ -197,42 +197,42 @@ text = "88"
 label_settings = ExtResource("7_vfgb4")
 horizontal_alignment = 1
 
-[node name="EnemyPortraitArea" type="Area2D" parent="Portraits"]
+[node name="EnemyPortraitArea" type="Area2D" parent="Portraits" unique_id=695706108]
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Portraits/EnemyPortraitArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portraits/EnemyPortraitArea" unique_id=1078858694]
 position = Vector2(1208, 145)
 shape = SubResource("RectangleShape2D_dj0be")
 
-[node name="Visuals" type="Node2D" parent="."]
+[node name="Visuals" type="Node2D" parent="." unique_id=473997814]
 z_index = -5
 
-[node name="Scenery" type="Node2D" parent="Visuals"]
+[node name="Scenery" type="Node2D" parent="Visuals" unique_id=1350799123]
 
-[node name="UpperCornerDecor" type="Sprite2D" parent="Visuals/Scenery"]
+[node name="UpperCornerDecor" type="Sprite2D" parent="Visuals/Scenery" unique_id=2064420804]
 position = Vector2(313, 344)
 texture = ExtResource("8_mj3e8")
 
-[node name="LowerCornerDecor" type="Sprite2D" parent="Visuals/Scenery"]
+[node name="LowerCornerDecor" type="Sprite2D" parent="Visuals/Scenery" unique_id=1681741631]
 position = Vector2(2324, 1148)
 texture = ExtResource("9_nxc8c")
 
-[node name="Leaves" type="Sprite2D" parent="Visuals/Scenery"]
+[node name="Leaves" type="Sprite2D" parent="Visuals/Scenery" unique_id=1366319767]
 position = Vector2(201, 715)
 texture = ExtResource("10_223y2")
 
-[node name="Leaves2" type="Sprite2D" parent="Visuals/Scenery"]
+[node name="Leaves2" type="Sprite2D" parent="Visuals/Scenery" unique_id=2146993615]
 position = Vector2(2445, 1211)
 texture = ExtResource("11_0xags")
 
-[node name="YourTurnPopup" type="Node2D" parent="Visuals"]
+[node name="YourTurnPopup" type="Node2D" parent="Visuals" unique_id=1148570204]
 position = Vector2(0, -200)
 
-[node name="Canvas" type="CanvasLayer" parent="Visuals/YourTurnPopup"]
+[node name="Canvas" type="CanvasLayer" parent="Visuals/YourTurnPopup" unique_id=72386384]
 visible = false
 
-[node name="PopupPanel" type="PanelContainer" parent="Visuals/YourTurnPopup/Canvas"]
+[node name="PopupPanel" type="PanelContainer" parent="Visuals/YourTurnPopup/Canvas" unique_id=1477797465]
 custom_minimum_size = Vector2(150, 80)
 anchors_preset = 8
 anchor_left = 0.5
@@ -249,54 +249,52 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="MarginContainer" type="MarginContainer" parent="Visuals/YourTurnPopup/Canvas/PopupPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="Visuals/YourTurnPopup/Canvas/PopupPanel" unique_id=466888721]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="Visuals/YourTurnPopup/Canvas/PopupPanel/MarginContainer"]
+[node name="Label" type="Label" parent="Visuals/YourTurnPopup/Canvas/PopupPanel/MarginContainer" unique_id=840061737]
 texture_filter = 1
 layout_mode = 2
 text = "Your turn!"
 label_settings = ExtResource("13_u7g0n")
 horizontal_alignment = 1
 
-[node name="PopupAnimation" type="AnimationPlayer" parent="Visuals/YourTurnPopup"]
-libraries = {
-&"": SubResource("AnimationLibrary_on7x6")
-}
+[node name="PopupAnimation" type="AnimationPlayer" parent="Visuals/YourTurnPopup" unique_id=726930322]
+libraries/ = SubResource("AnimationLibrary_on7x6")
 
-[node name="PlayerManaDisplay" parent="Visuals" instance=ExtResource("8_anhsg")]
+[node name="PlayerManaDisplay" parent="Visuals" unique_id=266044100 instance=ExtResource("8_anhsg")]
 z_index = 5
 z_as_relative = false
 position = Vector2(1350, 1135)
 
-[node name="EnemyManaDisplay" parent="Visuals" instance=ExtResource("8_anhsg")]
+[node name="EnemyManaDisplay" parent="Visuals" unique_id=1241190251 instance=ExtResource("8_anhsg")]
 z_index = 5
 z_as_relative = false
 position = Vector2(1408, 20)
 
-[node name="BattleSystem" type="Node2D" parent="."]
+[node name="BattleSystem" type="Node2D" parent="." unique_id=1583350980]
 script = ExtResource("14_mv2fm")
 
-[node name="AttackLine" type="Line2D" parent="BattleSystem"]
+[node name="AttackLine" type="Line2D" parent="BattleSystem" unique_id=1385854312]
 z_index = 10
 points = PackedVector2Array(-287, 209, -492, 528)
 default_color = Color(1, 0.67451, 0.341176, 1)
 
-[node name="EnemyStartCombatTimer" type="Timer" parent="BattleSystem"]
+[node name="EnemyStartCombatTimer" type="Timer" parent="BattleSystem" unique_id=1643807420]
 wait_time = 0.4
 one_shot = true
 
-[node name="EndEnemyTurnTimer" type="Timer" parent="BattleSystem"]
+[node name="EndEnemyTurnTimer" type="Timer" parent="BattleSystem" unique_id=991992179]
 wait_time = 2.0
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="BattleSystem"]
+[node name="CanvasLayer" type="CanvasLayer" parent="BattleSystem" unique_id=2064162852]
 
-[node name="DamageCalculator" type="PanelContainer" parent="BattleSystem/CanvasLayer"]
+[node name="DamageCalculator" type="PanelContainer" parent="BattleSystem/CanvasLayer" unique_id=1399563352]
 custom_minimum_size = Vector2(0, 120)
 anchors_preset = 8
 anchor_left = 0.5
@@ -310,219 +308,219 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("20_tic85")
 
-[node name="Panel" type="PanelContainer" parent="BattleSystem/CanvasLayer/DamageCalculator"]
+[node name="Panel" type="PanelContainer" parent="BattleSystem/CanvasLayer/DamageCalculator" unique_id=1831246375]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Margin" type="MarginContainer" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel"]
+[node name="Margin" type="MarginContainer" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel" unique_id=1924529305]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel/Margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel/Margin" unique_id=1526779808]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer"]
+[node name="Label" type="Label" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer" unique_id=106667948]
 texture_filter = 1
 layout_mode = 2
 text = "Deal:"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="TargetDmgTakenLabel" type="Label" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer"]
+[node name="TargetDmgTakenLabel" type="Label" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel/Margin/HBoxContainer" unique_id=161196280]
 texture_filter = 1
 layout_mode = 2
 text = "x"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="Panel2" type="PanelContainer" parent="BattleSystem/CanvasLayer/DamageCalculator"]
+[node name="Panel2" type="PanelContainer" parent="BattleSystem/CanvasLayer/DamageCalculator" unique_id=1635295432]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Margin" type="MarginContainer" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel2"]
+[node name="Margin" type="MarginContainer" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel2" unique_id=1569228693]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel2/Margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel2/Margin" unique_id=1790170122]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer"]
+[node name="Label" type="Label" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer" unique_id=1525569695]
 texture_filter = 1
 layout_mode = 2
 text = "Receive:"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="AttackerDmgTakenLabel" type="Label" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer"]
+[node name="AttackerDmgTakenLabel" type="Label" parent="BattleSystem/CanvasLayer/DamageCalculator/Panel2/Margin/HBoxContainer" unique_id=1220110086]
 texture_filter = 1
 layout_mode = 2
 text = "x"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="SE" type="Node" parent="BattleSystem"]
+[node name="SE" type="Node" parent="BattleSystem" unique_id=173782439]
 
-[node name="SE_Player_Damaged" type="AudioStreamPlayer" parent="BattleSystem/SE"]
+[node name="SE_Player_Damaged" type="AudioStreamPlayer" parent="BattleSystem/SE" unique_id=1978545401]
 stream = ExtResource("24_ikeh1")
 bus = &"SE"
 
-[node name="CardsManager" type="Node2D" parent="." groups=["cardManager"]]
+[node name="CardsManager" type="Node2D" parent="." unique_id=1243048298 groups=["cardManager"]]
 script = ExtResource("15_h4god")
 
-[node name="PlayerDeck" type="Node2D" parent="CardsManager"]
+[node name="PlayerDeck" type="Node2D" parent="CardsManager" unique_id=278051598]
 unique_name_in_owner = true
 position = Vector2(-500, 0)
 
-[node name="EnemyDeck" type="Node2D" parent="CardsManager"]
+[node name="EnemyDeck" type="Node2D" parent="CardsManager" unique_id=718459274]
 unique_name_in_owner = true
 position = Vector2(-300, 0)
 
-[node name="PlayerHand" type="Node2D" parent="CardsManager"]
+[node name="PlayerHand" type="Node2D" parent="CardsManager" unique_id=88705802]
 unique_name_in_owner = true
 
-[node name="EnemyHand" type="Node2D" parent="CardsManager"]
+[node name="EnemyHand" type="Node2D" parent="CardsManager" unique_id=2123358451]
 unique_name_in_owner = true
 
-[node name="PlayerBoard" type="Node2D" parent="CardsManager"]
+[node name="PlayerBoard" type="Node2D" parent="CardsManager" unique_id=1867990279]
 
-[node name="EnemyBoard" type="Node2D" parent="CardsManager"]
+[node name="EnemyBoard" type="Node2D" parent="CardsManager" unique_id=1855634972]
 
-[node name="PlayerHandPosition" type="Marker2D" parent="CardsManager"]
+[node name="PlayerHandPosition" type="Marker2D" parent="CardsManager" unique_id=1810083127]
 position = Vector2(260, 1392)
 
-[node name="EnemyHandPosition" type="Marker2D" parent="CardsManager"]
+[node name="EnemyHandPosition" type="Marker2D" parent="CardsManager" unique_id=408540324]
 position = Vector2(1505, 109)
 
-[node name="Discard" type="Node2D" parent="CardsManager"]
+[node name="Discard" type="Node2D" parent="CardsManager" unique_id=87476113]
 position = Vector2(-631, -2197)
 
-[node name="DiscardPosition" type="Marker2D" parent="CardsManager/Discard"]
+[node name="DiscardPosition" type="Marker2D" parent="CardsManager/Discard" unique_id=1214384124]
 
-[node name="CameraGraveyard" type="Camera2D" parent="CardsManager/Discard"]
+[node name="CameraGraveyard" type="Camera2D" parent="CardsManager/Discard" unique_id=1308909396]
 anchor_mode = 0
 enabled = false
 zoom = Vector2(0.76, 0.76)
 
-[node name="Player" type="Node2D" parent="CardsManager/Discard"]
+[node name="Player" type="Node2D" parent="CardsManager/Discard" unique_id=1257512540]
 
-[node name="Slots" type="Node2D" parent="CardsManager/Discard/Player"]
+[node name="Slots" type="Node2D" parent="CardsManager/Discard/Player" unique_id=1691327440]
 
-[node name="BestiarySlot" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot" parent="CardsManager/Discard/Player/Slots" unique_id=1411876542 instance=ExtResource("16_8xajj")]
 position = Vector2(636, 438)
 
-[node name="BestiarySlot2" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot2" parent="CardsManager/Discard/Player/Slots" unique_id=1824598943 instance=ExtResource("16_8xajj")]
 position = Vector2(866, 438)
 
-[node name="BestiarySlot3" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot3" parent="CardsManager/Discard/Player/Slots" unique_id=2002025403 instance=ExtResource("16_8xajj")]
 position = Vector2(1096, 438)
 
-[node name="BestiarySlot4" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot4" parent="CardsManager/Discard/Player/Slots" unique_id=1862394818 instance=ExtResource("16_8xajj")]
 position = Vector2(1326, 438)
 
-[node name="BestiarySlot5" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot5" parent="CardsManager/Discard/Player/Slots" unique_id=370445146 instance=ExtResource("16_8xajj")]
 position = Vector2(1556, 438)
 
-[node name="BestiarySlot6" parent="CardsManager/Discard/Player/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot6" parent="CardsManager/Discard/Player/Slots" unique_id=1865543848 instance=ExtResource("16_8xajj")]
 position = Vector2(1786, 438)
 
-[node name="Cards" type="Node2D" parent="CardsManager/Discard/Player"]
+[node name="Cards" type="Node2D" parent="CardsManager/Discard/Player" unique_id=1260777702]
 
-[node name="Enemy" type="Node2D" parent="CardsManager/Discard"]
+[node name="Enemy" type="Node2D" parent="CardsManager/Discard" unique_id=1370863397]
 
-[node name="Slots" type="Node2D" parent="CardsManager/Discard/Enemy"]
+[node name="Slots" type="Node2D" parent="CardsManager/Discard/Enemy" unique_id=1513296548]
 
-[node name="BestiarySlot7" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot7" parent="CardsManager/Discard/Enemy/Slots" unique_id=408522700 instance=ExtResource("16_8xajj")]
 position = Vector2(636, 1038)
 
-[node name="BestiarySlot8" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot8" parent="CardsManager/Discard/Enemy/Slots" unique_id=1488304561 instance=ExtResource("16_8xajj")]
 position = Vector2(866, 1038)
 
-[node name="BestiarySlot9" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot9" parent="CardsManager/Discard/Enemy/Slots" unique_id=668317368 instance=ExtResource("16_8xajj")]
 position = Vector2(1096, 1038)
 
-[node name="BestiarySlot10" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot10" parent="CardsManager/Discard/Enemy/Slots" unique_id=2061182385 instance=ExtResource("16_8xajj")]
 position = Vector2(1326, 1038)
 
-[node name="BestiarySlot11" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot11" parent="CardsManager/Discard/Enemy/Slots" unique_id=1266729306 instance=ExtResource("16_8xajj")]
 position = Vector2(1556, 1038)
 
-[node name="BestiarySlot12" parent="CardsManager/Discard/Enemy/Slots" instance=ExtResource("16_8xajj")]
+[node name="BestiarySlot12" parent="CardsManager/Discard/Enemy/Slots" unique_id=1697983771 instance=ExtResource("16_8xajj")]
 position = Vector2(1786, 1038)
 
-[node name="Cards" type="Node2D" parent="CardsManager/Discard/Enemy"]
+[node name="Cards" type="Node2D" parent="CardsManager/Discard/Enemy" unique_id=1989286332]
 
-[node name="PlayerChampSlot" type="Node2D" parent="CardsManager"]
+[node name="PlayerChampSlot" type="Node2D" parent="CardsManager" unique_id=1281359211]
 position = Vector2(1126, 1242)
 script = ExtResource("20_7yxuf")
 metadata/_custom_type_script = "uid://cq33h3kryyrto"
 
-[node name="EnemyChampSlot" type="Node2D" parent="CardsManager"]
+[node name="EnemyChampSlot" type="Node2D" parent="CardsManager" unique_id=361022038]
 position = Vector2(1208, 147)
 script = ExtResource("20_7yxuf")
 metadata/_custom_type_script = "uid://cq33h3kryyrto"
 
-[node name="PlayerSlots" type="Node2D" parent="."]
+[node name="PlayerSlots" type="Node2D" parent="." unique_id=259577483]
 z_index = -1
 
-[node name="TableCardSlot" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot" parent="PlayerSlots" unique_id=1286014079 instance=ExtResource("16_8xajj")]
 position = Vector2(434, 942)
 
-[node name="TableCardSlot2" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot2" parent="PlayerSlots" unique_id=1515426103 instance=ExtResource("16_8xajj")]
 position = Vector2(664, 942)
 
-[node name="TableCardSlot3" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot3" parent="PlayerSlots" unique_id=2104712618 instance=ExtResource("16_8xajj")]
 position = Vector2(894, 942)
 
-[node name="TableCardSlot4" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot4" parent="PlayerSlots" unique_id=375554022 instance=ExtResource("16_8xajj")]
 position = Vector2(1124, 942)
 
-[node name="TableCardSlot5" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot5" parent="PlayerSlots" unique_id=927223161 instance=ExtResource("16_8xajj")]
 position = Vector2(1354, 942)
 
-[node name="TableCardSlot6" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot6" parent="PlayerSlots" unique_id=286301942 instance=ExtResource("16_8xajj")]
 position = Vector2(1584, 942)
 
-[node name="TableCardSlot7" parent="PlayerSlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot7" parent="PlayerSlots" unique_id=139655016 instance=ExtResource("16_8xajj")]
 position = Vector2(1814, 942)
 
-[node name="EnemySlots" type="Node2D" parent="."]
+[node name="EnemySlots" type="Node2D" parent="." unique_id=506680997]
 z_index = -1
 
-[node name="TableCardSlot" parent="EnemySlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot" parent="EnemySlots" unique_id=1734457386 instance=ExtResource("16_8xajj")]
 position = Vector2(432, 472)
 
-[node name="TableCardSlot2" parent="EnemySlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot2" parent="EnemySlots" unique_id=1222926734 instance=ExtResource("16_8xajj")]
 position = Vector2(662, 472)
 
-[node name="TableCardSlot3" parent="EnemySlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot3" parent="EnemySlots" unique_id=1089736298 instance=ExtResource("16_8xajj")]
 position = Vector2(892, 472)
 
-[node name="TableCardSlot4" parent="EnemySlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot4" parent="EnemySlots" unique_id=402472447 instance=ExtResource("16_8xajj")]
 position = Vector2(1122, 472)
 
-[node name="TableCardSlot5" parent="EnemySlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot5" parent="EnemySlots" unique_id=1423985956 instance=ExtResource("16_8xajj")]
 position = Vector2(1352, 472)
 
-[node name="TableCardSlot6" parent="EnemySlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot6" parent="EnemySlots" unique_id=180671450 instance=ExtResource("16_8xajj")]
 position = Vector2(1582, 472)
 
-[node name="TableCardSlot7" parent="EnemySlots" instance=ExtResource("16_8xajj")]
+[node name="TableCardSlot7" parent="EnemySlots" unique_id=220039443 instance=ExtResource("16_8xajj")]
 position = Vector2(1812, 472)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1442050737]
 layer = 10
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer" unique_id=1850728560]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -538,7 +536,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="ExitPane" type="MarginContainer" parent="CanvasLayer"]
+[node name="ExitPane" type="MarginContainer" parent="CanvasLayer" unique_id=934905514]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -550,23 +548,23 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/ExitPane"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/ExitPane" unique_id=1523356096]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Label" type="Label" parent="CanvasLayer/ExitPane/Panel"]
+[node name="Label" type="Label" parent="CanvasLayer/ExitPane/Panel" unique_id=36728546]
 layout_mode = 2
 text = "Exit Game"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/ExitPane/Panel"]
+[node name="ExitButton" type="Button" parent="CanvasLayer/ExitPane/Panel" unique_id=1177607451]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("19_j663k")
 theme_override_styles/normal = ExtResource("20_tic85")
+theme_override_styles/hover = ExtResource("19_j663k")
 
-[node name="CardInfoPane" type="MarginContainer" parent="CanvasLayer"]
+[node name="CardInfoPane" type="MarginContainer" parent="CanvasLayer" unique_id=1655659754]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -582,10 +580,10 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 20
 
-[node name="CardInfoPanel" parent="CanvasLayer/CardInfoPane" instance=ExtResource("21_ufaws")]
+[node name="CardInfoPanel" parent="CanvasLayer/CardInfoPane" unique_id=1819150970 instance=ExtResource("21_ufaws")]
 layout_mode = 2
 
-[node name="BattleLogPane" type="MarginContainer" parent="CanvasLayer"]
+[node name="BattleLogPane" type="MarginContainer" parent="CanvasLayer" unique_id=1858139788]
 z_index = 10
 z_as_relative = false
 anchors_preset = 3
@@ -604,28 +602,28 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("25_gfnca")
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/BattleLogPane"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/BattleLogPane" unique_id=614948983]
 custom_minimum_size = Vector2(450, 200)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Margin" type="MarginContainer" parent="CanvasLayer/BattleLogPane/Panel"]
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/BattleLogPane/Panel" unique_id=596561439]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Scroll" type="ScrollContainer" parent="CanvasLayer/BattleLogPane/Panel/Margin"]
+[node name="Scroll" type="ScrollContainer" parent="CanvasLayer/BattleLogPane/Panel/Margin" unique_id=2084717871]
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="Rows" type="VBoxContainer" parent="CanvasLayer/BattleLogPane/Panel/Margin/Scroll"]
+[node name="Rows" type="VBoxContainer" parent="CanvasLayer/BattleLogPane/Panel/Margin/Scroll" unique_id=1092298695]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="EndTurnPane" type="MarginContainer" parent="CanvasLayer"]
+[node name="EndTurnPane" type="MarginContainer" parent="CanvasLayer" unique_id=1764691755]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -638,33 +636,33 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EndTurnPane"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EndTurnPane" unique_id=508105226]
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBoxContainer"]
+[node name="EndTurn" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBoxContainer" unique_id=849959866]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel"]
+[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBoxContainer/EndTurn" unique_id=1213001694]
 layout_mode = 2
 text = "End Turn"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="EndTurnButton" type="Button" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel"]
+[node name="EndTurnButton" type="Button" parent="CanvasLayer/EndTurnPane/VBoxContainer/EndTurn" unique_id=1517720506]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("19_j663k")
 theme_override_styles/normal = ExtResource("20_tic85")
+theme_override_styles/hover = ExtResource("19_j663k")
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBoxContainer"]
+[node name="Graveyard" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBoxContainer" unique_id=1570973033]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel2"]
+[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBoxContainer/Graveyard" unique_id=105788981]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Show / Hide Graveyard"
@@ -672,12 +670,12 @@ label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ToggleGraveyardButton" type="Button" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel2"]
+[node name="ToggleGraveyardButton" type="Button" parent="CanvasLayer/EndTurnPane/VBoxContainer/Graveyard" unique_id=597104141]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("19_j663k")
 theme_override_styles/normal = ExtResource("20_tic85")
+theme_override_styles/hover = ExtResource("19_j663k")
 
-[node name="LevelInfoPanel" type="MarginContainer" parent="CanvasLayer"]
+[node name="LevelInfoPanel" type="MarginContainer" parent="CanvasLayer" unique_id=816676528]
 offset_right = 220.0
 offset_bottom = 100.0
 theme_override_constants/margin_left = 20
@@ -685,55 +683,55 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/LevelInfoPanel"]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/LevelInfoPanel" unique_id=672468798]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/LevelInfoPanel/VBox"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/LevelInfoPanel/VBox" unique_id=746363074]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c0uhk")
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/LevelInfoPanel/VBox/Panel"]
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/LevelInfoPanel/VBox/Panel" unique_id=669523827]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel/HBox"]
+[node name="Label" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel/HBox" unique_id=1054979027]
 layout_mode = 2
 text = "  Game board  -"
 label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
-[node name="BoardNameLabel" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel/HBox"]
+[node name="BoardNameLabel" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel/HBox" unique_id=285024987]
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/LevelInfoPanel/VBox"]
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/LevelInfoPanel/VBox" unique_id=1943074086]
 custom_minimum_size = Vector2(340, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_c0uhk")
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2"]
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2" unique_id=236710348]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox"]
+[node name="Label" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox" unique_id=960056354]
 layout_mode = 2
 text = "  Turn  -"
 label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
-[node name="TurnCountLabel" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox"]
+[node name="TurnCountLabel" type="Label" parent="CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox" unique_id=1353060298]
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("26_g4f50")
 horizontal_alignment = 1
 
-[node name="GameOverPane" type="PanelContainer" parent="CanvasLayer"]
+[node name="GameOverPane" type="PanelContainer" parent="CanvasLayer" unique_id=1389929868]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -747,41 +745,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Margin" type="MarginContainer" parent="CanvasLayer/GameOverPane"]
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/GameOverPane" unique_id=267745535]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 30
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GameOverPane/Margin"]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GameOverPane/Margin" unique_id=204830709]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="LostHeader" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox"]
+[node name="LostHeader" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox" unique_id=227520783]
 layout_mode = 2
 text = "Defeat!"
 label_settings = ExtResource("26_ngg6u")
 horizontal_alignment = 1
 
-[node name="WonHeader" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox"]
+[node name="WonHeader" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox" unique_id=350556364]
 layout_mode = 2
 text = "Victory!"
 label_settings = ExtResource("26_ngg6u")
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox"]
+[node name="Label2" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox" unique_id=1988750617]
 layout_mode = 2
 text = "The match is over."
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/GameOverPane/Margin/VBox"]
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/GameOverPane/Margin/VBox" unique_id=466624739]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Label" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox/Panel2"]
+[node name="Label" type="Label" parent="CanvasLayer/GameOverPane/Margin/VBox/Panel2" unique_id=1701122764]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Return to World"
@@ -789,14 +787,14 @@ label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="EndMatchButton" type="Button" parent="CanvasLayer/GameOverPane/Margin/VBox/Panel2"]
+[node name="EndMatchButton" type="Button" parent="CanvasLayer/GameOverPane/Margin/VBox/Panel2" unique_id=1921630323]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("19_j663k")
 theme_override_styles/normal = ExtResource("20_tic85")
+theme_override_styles/hover = ExtResource("19_j663k")
 
-[node name="ActionMenuCanvas" type="CanvasLayer" parent="."]
+[node name="ActionMenuCanvas" type="CanvasLayer" parent="." unique_id=2038995419]
 
-[node name="CardActionMenu" type="PanelContainer" parent="ActionMenuCanvas"]
+[node name="CardActionMenu" type="PanelContainer" parent="ActionMenuCanvas" unique_id=609471108]
 custom_minimum_size = Vector2(0, 200)
 offset_left = -75.0
 offset_top = -40.0
@@ -804,38 +802,38 @@ offset_right = 75.0
 offset_bottom = 160.0
 theme_override_styles/panel = ExtResource("20_tic85")
 
-[node name="CastPanel" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu"]
+[node name="CastPanel" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu" unique_id=494238951]
 custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="CastButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/CastPanel"]
+[node name="CastButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/CastPanel" unique_id=1313811888]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("19_j663k")
 theme_override_styles/normal = ExtResource("20_tic85")
+theme_override_styles/hover = ExtResource("19_j663k")
 
-[node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/CastPanel"]
+[node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/CastPanel" unique_id=402515509]
 texture_filter = 1
 layout_mode = 2
 text = "Cast"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="DefendPanel" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu"]
+[node name="DefendPanel" type="PanelContainer" parent="ActionMenuCanvas/CardActionMenu" unique_id=572256270]
 custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="ToggleDefendButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/DefendPanel"]
+[node name="ToggleDefendButton" type="Button" parent="ActionMenuCanvas/CardActionMenu/DefendPanel" unique_id=829424853]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("19_j663k")
 theme_override_styles/normal = ExtResource("20_tic85")
+theme_override_styles/hover = ExtResource("19_j663k")
 
-[node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/DefendPanel"]
+[node name="Label" type="Label" parent="ActionMenuCanvas/CardActionMenu/DefendPanel" unique_id=896571240]
 texture_filter = 1
 layout_mode = 2
 text = "Toggle 
@@ -843,9 +841,9 @@ Defend"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="Audio" type="Node" parent="."]
+[node name="Audio" type="Node" parent="." unique_id=453615872]
 
-[node name="BGM" type="AudioStreamPlayer" parent="Audio"]
+[node name="BGM" type="AudioStreamPlayer" parent="Audio" unique_id=362373579]
 stream = ExtResource("26_hysm7")
 autoplay = true
 bus = &"BGM"
@@ -855,10 +853,10 @@ bus = &"BGM"
 [connection signal="timeout" from="BattleSystem/EnemyStartCombatTimer" to="BattleSystem" method="timeoutEnemyStartCombat"]
 [connection signal="timeout" from="BattleSystem/EndEnemyTurnTimer" to="BattleSystem" method="timeoutEndEnemyTurn"]
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel2/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
+[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/EndTurn/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Graveyard/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
 [connection signal="pressed" from="CanvasLayer/GameOverPane/Margin/VBox/Panel2/EndMatchButton" to="." method="buttonPressedEndMatch"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
-[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="buttonPressedHideCardActionMenu"]
+[connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/DefendPanel/ToggleDefendButton" to="." method="_on_toggle_defend_button_pressed"]

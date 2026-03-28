@@ -457,8 +457,7 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 			main.changeHealth(-c.tempDamage, !c.isEnemyCard)
 			main.updateResourceLabels()
 			handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
-			playerAttackedSE()
-			main.shake_screen(10, 0.5)
+			
 			
 		else:  #### CASE 3.2 - NO CHAMPION
 			var damageToChampion = c.getCombatDamageToTarget(main.playerChampion(), true)

@@ -963,7 +963,8 @@ func returnToSlot():
 	
 	var tween = create_tween()
 	tween.tween_property(self, "position", mySlot.position, 0.2)
-	CardAnimationQueue.queueAnimation(self, animateBlockingState, 0.2)
+	CardAnimationQueue.queueInstant(self, animateBlockingState)
+	
 	
 	
 	
@@ -1058,12 +1059,13 @@ func PlayRitualCastAnimation():
 	
 
 func playAttackPortraitAnimation():
-	var targetPos = Vector2(0,0)
-	
 	var portraitPosition: Vector2 = gameBoard.getPortraitPosition(isEnemyCard)
 	
 	var tween = create_tween()
-	tween.tween_property(self, "position", targetPos, 0.2)
+	tween.tween_property(self, "position", portraitPosition, 0.2)
+	
+	gameBoard.battleSystem.playerAttackedSE()
+	gameBoard.shake_screen(10, 0.5)
 	
 
 
