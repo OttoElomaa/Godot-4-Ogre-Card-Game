@@ -1,6 +1,9 @@
 extends Node2D
 
 
+
+signal animationQueueEmpty
+
 var animationQueue := []
 var instantQueue := []
 
@@ -77,6 +80,10 @@ func timeoutAnimationFinished() -> void:
 	animationQueue.pop_front()	
 	currentAnimation = {}
 	isAnimating = false
+	
+	#### ANNOUNCE THAT THE QUEUE HAS BEEN EMPTIED FOR NOW
+	if animationQueue.is_empty():
+		animationQueueEmpty.emit()
 
 
 
@@ -103,6 +110,12 @@ func getCurrentAndWaitingCards() -> Array:
 		if anim.has("card"):
 			animatingCards.append(anim.card)
 	return animatingCards
+
+
+func checkQueueEmpty() -> bool:
+	if animationQueue.is_empty():
+		return true
+	return false
 
 
 func doNothing() -> void:

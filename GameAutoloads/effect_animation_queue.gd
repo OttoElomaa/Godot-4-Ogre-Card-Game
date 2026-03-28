@@ -49,3 +49,4 @@ func animateNext():
 func onAnimationFinished():
 	isAnimating = false
 	
+	

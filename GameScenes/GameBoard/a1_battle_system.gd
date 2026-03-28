@@ -233,6 +233,8 @@ func enemyAttackersWaiter():
 		return
 			
 	#### END ENEMY COMBAT
+	if not CardAnimationQueue.checkQueueEmpty():
+		await CardAnimationQueue.animationQueueEmpty
 	print("Waiter: Enemy Combat Ends!")
 	enemyActionsAfterAttacking()
 
