@@ -700,7 +700,8 @@ func resolveAttackTwo():
 	await attackCard.checkAndHandleCombatDeath(true)
 	
 	attackCard.toggleAllowEnemyUse(true)
-	enemyAttackersWaiter()  #### CALL IN NEXT ATTACKER
+	if attackCard.isEnemyCard:
+		enemyAttackersWaiter()  #### CALL IN NEXT ATTACKER
 	
 	
 
