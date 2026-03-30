@@ -110,31 +110,6 @@ func switchBetweenPlayerEnemyTurns():
 	
 	
 
-## Enemy summons creatures.
-func enemySummonCreatures() -> void:
-	main.addLogMessage("Opponent turn!", Color.html("524634"))
-	
-	#### PLAY CARDS FROM HAND
-	var enemyHandCards := cardsManager.getEnemyHandCards()
-	
-	for card:Card in enemyHandCards:
-		if MyTools.checkNodeValidity(card):
-			if card.manaCost <= GameInfo.enemyMana:
-				if not card.isRitual:
-					var success = await playEnemyCard(card)
-					
-					
-
-func enemyPlayRituals() -> void:
-	var enemyHandCards := cardsManager.getEnemyHandCards()
-	
-	for card:Card in enemyHandCards:
-		if MyTools.checkNodeValidity(card):
-			if card.manaCost <= GameInfo.enemyMana:
-				if card.isRitual:
-					handlePlayerRitual(card)
-
-
 func timeoutEnemyStartCombat() -> void:
 	enemyChargeTarget = null
 	
@@ -192,28 +167,81 @@ func enemyActionsAfterAttacking():
 
 
 
+
+## Enemy summons creatures.
+func enemySummonCreatures() -> void:
+	main.addLogMessage("Opponent turn!", Color.html("524634"))
+	
+	#### PLAY CARDS FROM HAND
+	var enemyHandCards := cardsManager.getEnemyHandCards()
+	
+	for card:Card in enemyHandCards:
+		if MyTools.checkNodeValidity(card):
+			if card.manaCost <= GameInfo.enemyMana:
+				if not card.isRitual:
+					var success = playEnemyCard(card)
+	await CardAnimationQueue.checkAndWaitQueueEmpty()
+	return
+					
+					
+
+func enemyPlayRituals() -> void:
+	var enemyHandCards := cardsManager.getEnemyHandCards()
+	
+	for card:Card in enemyHandCards:
+		if MyTools.checkNodeValidity(card):
+			if card.isRitual:
+				if card.manaCost <= GameInfo.enemyMana:
+					handlePlayerRitual(card)
+					
+	await CardAnimationQueue.checkAndWaitQueueEmpty()
+	return
+
+
+
 ## Current algorithm -- half as many creatures need to be set as blockers as the player has on board. 
 ## If there are not enough TANKS, sets other cards instead, prioritizing strongest ones.
 func decide_blockers():
-	if not enemyBoardCards.is_empty():
-		CardChecks.sort_by_strongest(enemyBoardCards)
-		var projected_number_of_blockers = roundi(playerBoardCards.size() / 2) - cardsManager.getEnemyBlockers().size()
-		
-		if projected_number_of_blockers < 1:
-			projected_number_of_blockers += 1
-		
-		for i in range(projected_number_of_blockers):
-			var blocker:Card = CardChecks.getNonBlockersInList(enemyBoardCards).front()
-			if MyTools.checkNodeValidity(blocker):
-				if blocker.has_method('statesActive'):
-					blocker.statesActive()
+	if enemyBoardCards.is_empty():
+		return
+	
+	var blockers = MyTools.findValidNodesInArray(enemyBoardCards)
+	
+	blockers = CardChecks.sort_by_strongest(blockers)
+	var projected_number_of_blockers = roundi(playerBoardCards.size() / 2)
+	
+	if projected_number_of_blockers < 1:
+		projected_number_of_blockers = 1
+	if projected_number_of_blockers < blockers.size():
+		projected_number_of_blockers = blockers.size()
+	
+	for i in range(projected_number_of_blockers):
+		var blocker:Card = blockers.front()
+		if blocker.has_method('statesActive'):
+			blocker.statesActive()
+					
+	await CardAnimationQueue.checkAndWaitQueueEmpty()
+	return
 
 
 
 func enemyHandleCasters():
 	var enemyCasters = CardChecks.getCastersInList(enemyBoardCards)
 	for card:Card in enemyCasters:
-		await handleEnemyCast(card)
+		handleEnemyCast(card)
+		
+	await CardAnimationQueue.checkAndWaitQueueEmpty()
+	return
+
+
+func handleEnemyCast(castingCard:Card):
+	castingCard.toggleAllowEnemyUse(false)
+	if castingCard.actions.getCastAction():
+		await castingCard.actions.handleCast()
+	
+	castingCard.toggleAllowEnemyUse(true)
+	return
+
 
 
 #### EACH ATTACKER CALLS THIS TO CONTINUE ENEMY COMBAT		
@@ -233,8 +261,7 @@ func enemyAttackersWaiter():
 		return
 			
 	#### END ENEMY COMBAT
-	if not CardAnimationQueue.checkQueueEmpty():
-		await CardAnimationQueue.animationQueueEmpty
+	await CardAnimationQueue.checkAndWaitQueueEmpty()
 	print("Waiter: Enemy Combat Ends!")
 	enemyActionsAfterAttacking()
 
@@ -243,8 +270,7 @@ func enemyAttackersWaiter():
 func playEnemyCard(card:Card) -> bool:
 	for slot:CardSlot in main.getEnemySlots():
 		if slot.isAvailable and card.manaCost <= GameInfo.enemyMana:
-			
-			await cardsManager.handlePlaceCardInSlot(card, slot)
+			cardsManager.handlePlaceCardInSlot(card, slot)
 			return true
 	return false
 
@@ -252,12 +278,13 @@ func playEnemyCard(card:Card) -> bool:
 
 #### START PLAYER'S TURN AFTER ENEMY ACTION
 func endEnemyTurn() -> void:
+	await CardAnimationQueue.checkAndWaitQueueEmpty()
 	switchBetweenPlayerEnemyTurns()
 	
 
 
 #############################################################################
-#region### PLAYER ATTACK FUNCTIONS
+#region ### PLAYER ATTACK FUNCTIONS
 
 #### TURN ON PLAYER ATTACK MODE
 func togglePlayerAttackMode(enable:bool, card:Card) -> void:
@@ -386,7 +413,7 @@ func handlePlayerAttackEnemy() -> void:
 	
 #endregion
 
-#region### ENEMY ATTACKER AI
+#region ### ENEMY ATTACKER AI
 func getWillingEnemyAttackers(initialAttackers:Array) -> Array:
 	var willingAttackers := []
 	
@@ -473,12 +500,7 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 		print("Attacked portrait: Calling Waiter")
 
 
-func handleEnemyCast(castingCard:Card):
-	if castingCard.actions.getCastAction():
-		await castingCard.actions.handleCast()
-	
-	castingCard.toggleAllowEnemyUse(true)
-	enemyAttackersWaiter()  #### CALL IN NEXT ATTACKER
+
 
 
 
@@ -599,6 +621,10 @@ func handlePlayerAttackCreature(target:Card) -> void:
 	if not MyTools.checkNodeValidity(target):
 		endAttackState()
 		return
+	if not target.checkAlive():
+		endAttackState()
+		return
+		
 		
 	#### DON'T END TARGETING if it registers CLICKING ON SAME ATTACKING CARD ITSELF
 	var end := false

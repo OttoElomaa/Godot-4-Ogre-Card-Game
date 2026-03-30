@@ -979,6 +979,12 @@ func reset_visuals():
 	$BodyAnimations.play("RESET")
 
 
+
+func animatePlaceInSlot():
+	var originalPos := position
+	MyTools.moveCardTweening(self, originalPos, mySlot.position)
+
+
 func animateBlockingState():
 	var toBlock := (actionState == CardActionStates.ACTIVE)
 	if not mySlot:

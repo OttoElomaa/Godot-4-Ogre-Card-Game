@@ -38,11 +38,16 @@ func checkNodeValidity(node) -> bool:
 	if node.is_queued_for_deletion():
 		return false
 	
-	#### SPECIFIC TO CARDS
-	if node is Card:
-		if not node.checkAlive():
-			return false
 	return true
+
+
+
+func findValidNodesInArray(cards:Array):
+	var validCards := []
+	for c in cards:
+		if MyTools.checkNodeValidity(c):
+			validCards.append(c)
+	return validCards
 
 
 

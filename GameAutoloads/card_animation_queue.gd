@@ -49,16 +49,16 @@ func animateNext() -> void:
 	if dict.has("waitTime"):
 		print("AnimationQueue: AnimateNext: Just wait.")
 		waitTime = dict.waitTime
-	else:	
-		#### NORMAL ANIMATION
-		if MyTools.checkNodeValidity(dict.card):
-			var card:Card = dict.card
-			var f:Callable = dict.animationFunction
-			var animationLength:float = dict.length
-			
-			print("AnimationQueue: Animate Next: Play animation for card: " + card.cardName)
-			f.call()
-			waitTime = animationLength
+		
+	#### NORMAL ANIMATION
+	elif MyTools.checkNodeValidity(dict.card):
+		var card:Card = dict.card
+		var f: Callable = dict.animationFunction
+		var animationLength:float = dict.length
+		
+		print("AnimationQueue: Animate Next: Play animation for card: %s. Animation Function: %s " % [card.cardName, f])
+		f.call()
+		waitTime = animationLength
 		
 	$AnimationTimer.wait_time = waitTime
 	$AnimationTimer.start()
@@ -112,10 +112,10 @@ func getCurrentAndWaitingCards() -> Array:
 	return animatingCards
 
 
-func checkQueueEmpty() -> bool:
-	if animationQueue.is_empty():
-		return true
-	return false
+func checkAndWaitQueueEmpty() -> bool:
+	if not animationQueue.is_empty():
+		await animationQueueEmpty
+	return true
 
 
 func doNothing() -> void:

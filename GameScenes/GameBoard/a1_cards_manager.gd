@@ -321,7 +321,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
-		await MyTools.moveCardTweening(c, originalPos, c.position)
+		CardAnimationQueue.queueAnimation(c, c.animatePlaceInSlot, 0.2)
 		placeCardInSlotTwo(c, slot, true)
 		GameInfo.enemyMana -= c.manaCost
 	
@@ -334,26 +334,23 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	c.setup(main)
 	await get_tree().process_frame
 
-	##############################################
-	#### VISUAL STUFF
-	c.scale = Vector2.ONE
-	c.toggleFrontSide(true)
+	
 	
 	#### SET ACTION STATE AND TRAVEL STATE
 	if not c.hasKeyword('Haste'):
 		c.toggleTraveling(true)
+		
+	c.setInitialActionState()  #### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
+	c.handleArrival()          #### ACTIVATE ARRIVAL TRIGGERS
 	
-	#### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
-	c.setInitialActionState()
 	
-	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
-	c.handleArrival()
-	
+	##############################################
+	#### VISUAL STUFF
+	c.scale = Vector2.ONE
+	c.toggleFrontSide(true)
 	main.updateResourceLabels()
 	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
 
-
-	#placePermanentInSlotTwo(c)
 	return true
 
 
@@ -502,38 +499,38 @@ func arriveTravelingBoardCards(board:Node):
 
 func getEnemyHandCards() -> Array:
 	var cards = $EnemyHand.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 func getPlayerHandCards() -> Array:
 	var cards = $PlayerHand.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 func getEnemyBoardCards() -> Array:
 	var cards = $EnemyBoard.get_children()
 	print(cards)
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 
 func getPlayerBoardCards() -> Array:
 	var cards = $PlayerBoard.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 	
 func getPlayerDeckCards() -> Array:
 	var cards = $PlayerDeck.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 	
 		
 func getEnemyDeckCards() -> Array:
 	var cards = $EnemyDeck.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 	
 func getPlayerGraveyardCards() -> Array:
 	var cards = $Discard/Player/Cards.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 func getEnemyGraveyardCards() -> Array:
 	var cards = $Discard/Enemy/Cards.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 func getPlayerBlockers():
 	var blockers := []
@@ -552,12 +549,7 @@ func getEnemyBlockers():
 	return blockers	
 	
 
-func findValidNodesInArray(cards:Array):
-	var validCards := []
-	for c in cards:
-		if MyTools.checkNodeValidity(c):
-			validCards.append(c)
-	return validCards
+
 
 
 ######################################################
