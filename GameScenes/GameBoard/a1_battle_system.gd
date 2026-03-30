@@ -87,11 +87,13 @@ func switchBetweenPlayerEnemyTurns():
 	#### AFTER THE SWITCH...
 	#### IF ENEMY TURN STARTING
 	if GameInfo.enemy_turn:
+		
 		GameInfo.enemyManaIncome += 1
 		GameInfo.enemyMana = GameInfo.enemyManaIncome
 		
 		main.addLogMessage("Enemy turn!", Color.html("524634"))
 		print("Enemy turn start")
+		
 	#### IF PLAYER TURN STARTING
 	else:
 		GameInfo.playerManaIncome += 1

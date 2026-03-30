@@ -56,11 +56,8 @@ func _ready() -> void:
 	#### SETUP BOARD
 	##################################
 	States.statesPlay()
-	
-	setup_board()
-	#### THIS FUNC SETS UP PLAYER AND ENEMY DECKS BASED ON GameInfo
+	#setup_board()
 
-#	turn_1_init()
 	###################################################
 	#### UI STUFF
 	$CanvasLayer/GameOverPane.hide()
@@ -74,8 +71,12 @@ func _ready() -> void:
 		slot.slotType = CardSlotTypes.PLAYER
 	for slot:CardSlot in $EnemySlots.get_children():
 		slot.slotType = CardSlotTypes.ENEMY
+	
+	print("GameBoard: First turn!")
+	
 
 
+#### CALLED IN ZONE ICON SCENE  ...????
 func setup_board():
 	$CardsManager.setup(self)
 	
@@ -83,6 +84,14 @@ func setup_board():
 	$BattleSystem.cardsManager = $CardsManager
 	
 	MyTools.gameBoardSetup(self)
+
+
+#### CALLED IN ZONE ICON SCENE  ...????
+func turn_1_init():
+	cardsManager.dealEnemyHand()
+	cardsManager.dealPlayerHand()
+
+
 
 func _unhandled_input(e: InputEvent) -> void:
 	if e is InputEventMouseButton: 
@@ -101,9 +110,7 @@ func add_card_to_enemy_deck(card:Card):
 	$CardsManager/EnemyDeck.add_child(card)
 	card.setup(self)
 
-func turn_1_init():
-	cardsManager.dealEnemyHand()
-	cardsManager.dealPlayerHand()
+
 
 func toggleCardActionMenu(enable:bool, card:Card):
 	
@@ -204,7 +211,7 @@ func _on_exit_button_pressed() -> void:
 
 
 func _on_toggle_defend_button_pressed() -> void:
-	actionMenuCard.switchStates()
+	actionMenuCard.switchBlockingState()
 	#toggleCardActionMenu(false, null)
 
 

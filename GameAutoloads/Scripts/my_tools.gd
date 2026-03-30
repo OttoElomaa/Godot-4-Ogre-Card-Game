@@ -38,6 +38,11 @@ func checkNodeValidity(node) -> bool:
 	if node.is_queued_for_deletion():
 		return false
 	
+	#### LIMBO means the CARD IS BETWEEN STATES -> for example, NEITHER IN Board OR Graveyard
+	if node is Card:
+		if node.checkLimbo():
+			return false
+	
 	return true
 
 

@@ -12,11 +12,12 @@ signal hoverOff
 #### DESTROYED STATUS when the card is beaten in combat or otherwise destroyed
 #### INERT REFERS to SPELLS and other cards that can't attack or cast
 enum CardActionStates {
-	ACTIVE, PASSIVE, DISCARD, INERT, HAND, DECK
+	ACTIVE, PASSIVE
 }
 
+#### LIMBO means the CARD IS BETWEEN STATES -> for example, NEITHER IN Board OR Graveyard
 enum CardStates {
-	DECK, HAND, BOARD, GRAVEYARD
+	DECK, HAND, BOARD, GRAVEYARD, LIMBO
 }
 
 
@@ -322,13 +323,7 @@ func createEffectText():
 ################################################
 
 func basicSetup():
-	if isRitual:
-		statesInert()
-	if cardType == CardTypes.CHAMPION:
-		statesInert()
-	
 	#### SETUP FOR ALL ACTION SCRIPTS
-	#### SHARE INFO ON, IS CARD ENEMY
 	$Actions.setup(self)
 
 	
@@ -337,12 +332,6 @@ func handleTurnStartReset():
 	tempDamage = damage
 	tempHealth = health
 	
-
-#func handleTurnStartActions():
-#	#### TRIGGER ON TURN START EFFECTS
-#	if States.isStatePlay():
-#		actions.handleOnTurn() #### TRIGGER ON-TURN NODE
-
 
 
 #### HANDLE CARD BEING PLAYED ON BOARD
@@ -562,13 +551,16 @@ func restAndAnimate():
 
 func wake():
 	isResting = false
-	CardAnimationQueue.queueAnimation(self, rotateRestingCard, 0.2)
+	if checkAlive():
+		CardAnimationQueue.queueAnimation(self, rotateRestingCard, 0.2)
+	else:
+		rotateRestingCard()
 
 #endregion
 
 ##############################################################################
 #region ########################################## STATE STUFF
-func switchStates():
+func switchBlockingState():
 	if actionState == CardActionStates.ACTIVE:
 		statesPassive()
 	elif actionState == CardActionStates.PASSIVE:
@@ -587,10 +579,11 @@ func statesActive():
 func statesPassive():
 	print(cardName, ' goes passive')
 	actionState = CardActionStates.PASSIVE
-	stateHandler.get_node("ActiveIcon").hide()
+	toggleActionStateIndicator(false)
 	
 	#### POSITION AS INDICATOR
-	CardAnimationQueue.queueAnimation(self, animateBlockingState, 0.2)
+	if checkAlive():
+		CardAnimationQueue.queueAnimation(self, animateBlockingState, 0.2)
 
 
 
@@ -601,34 +594,30 @@ func vacateSlot():
 
 
 
-func statesInert():
-	actionState = CardActionStates.INERT
-	var s = $Frontside/ActionState
-	s.get_node("ActiveIcon").hide()
-	
-
-func statesDestroy():
-	vacateSlot()
-	$Frontside/ActionState/ActiveIcon.hide()
-	clearEffects()
-	actionState = CardActionStates.DISCARD
-	cardState = CardStates.GRAVEYARD
-
 func statesHand():
 	vacateSlot()
-	actionState = CardActionStates.HAND
 	cardState = CardStates.HAND
 	if isEnemyCard:
 		toggleEnemyStatus(true)
 		toggleFrontSide(false)
 
+
+func statesDiscard():
+	cardState = CardStates.GRAVEYARD
+
+
 func statesDeck():
 	vacateSlot()
-	actionState = CardActionStates.DECK
 	cardState = CardStates.DECK
+
 
 func statesBoard():
 	cardState = CardStates.BOARD
+
+
+func statesLimbo():
+	cardState = CardStates.LIMBO
+
 
 
 func toggleTraveling(enabled:bool):
@@ -656,8 +645,6 @@ func checkCanAct() -> bool:
 		if not allowEnemyUse:
 			return false
 	
-	if checkInert():
-		return false
 	if not checkAlive():
 		return false
 	
@@ -669,21 +656,24 @@ func checkCanAct() -> bool:
 					
 	return true
 
-func checkInert() -> bool:
-	if actionState == CardActionStates.INERT:
-		return true
-	return false
+
 
 func checkResting() -> bool:
 	return isResting
+
 
 func checkTraveling() -> bool:
 	return isTraveling
 
 
 func checkAlive():
-	return !(actionState == CardActionStates.DISCARD)
-	
+	return cardState == CardStates.BOARD
+
+
+#### LIMBO means the CARD IS BETWEEN STATES -> for example, NEITHER IN Board OR Graveyard
+func checkLimbo():
+	return cardState == CardStates.LIMBO
+
 	
 #endregion
 
@@ -712,12 +702,6 @@ func takeDamage(amount:int):
 	signal_data.sourceCard = self
 	SignalBus.damage_taken.emit(signal_data)
 
-
-
-##CHECK IF DESTROYED
-func checkAndHandleDeathFromTempHealth():
-	if tempHealth <= 0:
-		destroyAndAnimate(true)
 
 
 
@@ -854,17 +838,69 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	return false
 	
 	
+
+##CHECK IF DESTROYED
+func checkAndHandleDeathFromTempHealth():
+	if tempHealth <= 0:
+		destroyAndAnimate(true)
+
+
+
+###############################################################################
+#### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
+#### IN ATTACK ANIMATION, TO BE SPECIFIC
+func destroyAndAnimate(toAnimate:bool):
+	var params = SignalParams.new()
+	params.sourceCard = self
+	SignalBus.emit_signal("death", params)
 	
+	if hasEffect('Defy Death'):
+		SignalBus.emit_signal("death_defied", params)
+		SignalBus.emit_signal("survived", params)
+		CardAnimationQueue.queueAnimation(self, returnToSlot, 0.2)
+		tempHealth = health
+		updateCardLabels()
+		return
+	
+	if mySlot:
+		mySlot.isAvailable = true
+		
+	if toAnimate:
+		statesLimbo()
+		CardAnimationQueue.queueAnimation(self, playCardDestroyedAnimation, 0.2, handleEnterGraveyard)
+	else:
+		handleEnterGraveyard()
+	
+	
+
+
+
 func handleEnterGraveyard():
+	if hasKeyword('Transient'):
+		purge()
+		return
+	
+	statesDiscard()
+	cardsManager.moveToDiscard(self, isEnemyCard)
+	
+	vacateSlot()
+	resetCardAtStateChange()
+	
+
+
+func resetCardAtStateChange():
 	handleTurnStartReset()
 
 	wake()
+	clearEffects()
 	
 	toggleManaCostIndicator(true)
-	toggleActionStateIndicator(false)
+	statesPassive()
 	toggleTraveling(false)
 	
 	updateCardLabels()
+	reset_shaders()
+		
 
 #endregion
 
@@ -1086,7 +1122,7 @@ func updateCardVisuals():
 	updateCardLabels()
 	effects.updateEffectVisuals()
 	
-	if actionState == CardActionStates.HAND:
+	if cardState == CardStates.HAND:
 		toggleManaCostIndicator(true)
 		toggleActionStateIndicator(false)
 		
@@ -1126,37 +1162,7 @@ func updateCardLabels():
 		glow.get_node("HealthGlowDown").show()
 		
 
-###############################################################################
-#### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
-#### IN ATTACK ANIMATION, TO BE SPECIFIC
-func destroyAndAnimate(toAnimate:bool):
-	var params = SignalParams.new()
-	params.sourceCard = self
-	SignalBus.emit_signal("death", params)
-	
-	if hasEffect('Defy Death'):
-		SignalBus.emit_signal("death_defied", params)
-		SignalBus.emit_signal("survived", params)
-		CardAnimationQueue.queueAnimation(self, returnToSlot, 0.2)
-		tempHealth = health
-		updateCardLabels()
-		return
-	
-	statesDestroy()
-		
-	if mySlot:
-		mySlot.isAvailable = true
-		
-	if toAnimate:
-		CardAnimationQueue.queueAnimation(self, playCardDestroyedAnimation, 0.2)
-	
-	if hasKeyword('Transient'):
-		purge()
-		return
-		
-	cardsManager.moveToDiscard(self, isEnemyCard)
-	reset_shaders()
-	
+
 	
 func purge():
 	queue_free()

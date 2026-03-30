@@ -75,15 +75,15 @@ func dealPlayerHand():
 func dealEnemyHand():
 	dumbHandDrawCounter = 0
 	for i in range(STARTING_HAND_SIZE):
-		var card:Card = drawCard($EnemyDeck, $EnemyHand)
+		drawCard($EnemyDeck, $EnemyHand)
 		dumbHandDrawCounter += 1
 		
 	updateHandCardsVisuals()
 
 
+
+############################################################
 #### PHYSICS AND INPUT STUFF
-
-
 func _physics_process(delta: float) -> void:
 	
 	if States.gameState == States.GameStates.NONE:
@@ -175,7 +175,6 @@ func checkIsEnemyAnddrawCard(isEnemy:bool):
 func drawCard(sourceDeck:Node,targetHand:Node):
 	
 	if sourceDeck.get_child_count() < 1:
-#		assert(1==2,"testing launch crash 2")
 		return
 		
 	var cardScene:Card = sourceDeck.get_child(0)	
@@ -248,7 +247,7 @@ func startDraggingCardOrAttack():
 		return
 	if card.isEnemyCard:
 		return
-	if card.actionState == card.CardActionStates.DISCARD:
+	if card.cardState == card.CardStates.GRAVEYARD:
 		return
 	
 	#### ONLY IF IT'S NOT SLOTTED	
@@ -571,16 +570,12 @@ func discardCard(c:Card):
 
 #### CALLED FROM DESTROY ANIMATION IN CARD NODE
 func moveToDiscard(card:Card, isEnemy:bool):
-	#card.statesDestroy()
-	
 	var discardNode:Node = $Discard/Player/Cards
 	if isEnemy:
 		discardNode = $Discard/Enemy/Cards
 	
 	card.reparent(discardNode)
 	card.position = Vector2.ZERO
-	
-	card.handleEnterGraveyard()
 	updateGraveyardVisuals()
 
 	
@@ -593,7 +588,7 @@ func moveToDeck(card:Card, isEnemy:bool):
 	
 	card.reparent(deckNode)
 	card.position = Vector2.ZERO
-	card.handleEnterGraveyard()
+	card.resetCardAtStateChange()
 
 
 func moveToHand(card:Card, isEnemy:bool):
@@ -607,7 +602,7 @@ func moveToHand(card:Card, isEnemy:bool):
 	else:
 		handNode.add_child(card)
 	card.position = Vector2.ZERO
-	card.handleEnterGraveyard()
+	card.resetCardAtStateChange()
 	
 	card.isEnemyCard = isEnemy
 	card.setup(main)
