@@ -815,10 +815,12 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	checkAndHandleDeathFromTempHealth()
 	
+	#### THIS CARD WAS DESTROYED
 	if tempHealth <= 0:
 		CardAnimationQueue.queueWait(1)
 		return true
-			
+	
+	#### THIS CARD SURVIVES		
 	CardAnimationQueue.queueAnimation(self, returnToSlot, 0.2)
 	
 	#### SURVIVES, And IS ATTACKER	
@@ -842,14 +844,14 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 ##CHECK IF DESTROYED
 func checkAndHandleDeathFromTempHealth():
 	if tempHealth <= 0:
-		destroyAndAnimate(true)
+		destroyAndAnimate()
 
 
 
 ###############################################################################
 #### IF TOANIMATE == FALSE, then (Card is DEFENDER?) -> ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
-func destroyAndAnimate(toAnimate:bool):
+func destroyAndAnimate():
 	var params = SignalParams.new()
 	params.sourceCard = self
 	SignalBus.emit_signal("death", params)
@@ -861,43 +863,37 @@ func destroyAndAnimate(toAnimate:bool):
 		tempHealth = health
 		updateCardLabels()
 		return
+			
 	
-	if mySlot:
-		mySlot.isAvailable = true
-		
-	if toAnimate:
-		statesLimbo()
-		CardAnimationQueue.queueAnimation(self, playCardDestroyedAnimation, 2, handleEnterGraveyard)
-	else:
-		handleEnterGraveyard()
+	statesLimbo()
+	CardAnimationQueue.queueAnimation(self, playCardDestroyedAnimation, 2, handleEnterGraveyard)
+	
+	handleEnterGraveyard()
 	
 	
-
-
 
 func handleEnterGraveyard():
+	vacateSlot()
+	
 	if hasKeyword('Transient'):
 		purge()
 		return
 	
 	statesDiscard()
+	resetCardAtStateChange()
 	cardsManager.moveToDiscard(self, isEnemyCard)
 	
-	vacateSlot()
-	resetCardAtStateChange()
 	
-
-
+	
 func resetCardAtStateChange():
 	handleTurnStartReset()
-
-	wake()
 	clearEffects()
 	
-	toggleManaCostIndicator(true)
+	wake()
 	statesPassive()
 	toggleTraveling(false)
 	
+	toggleManaCostIndicator(true)
 	updateCardLabels()
 	reset_shaders()
 		

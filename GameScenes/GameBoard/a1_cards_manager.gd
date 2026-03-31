@@ -564,7 +564,7 @@ func handleDiscardAtTurnEnd():
 
 #### DESTROY ANIMATION CALLS THE moveToDiscard FUNCTION
 func discardCard(c:Card):
-	c.destroyAndAnimate(true)
+	c.destroyAndAnimate()
 	
 
 

@@ -214,7 +214,7 @@ func decide_blockers():
 	
 	if projected_number_of_blockers < 1:
 		projected_number_of_blockers = 1
-	if projected_number_of_blockers < blockers.size():
+	if projected_number_of_blockers > blockers.size():
 		projected_number_of_blockers = blockers.size()
 	
 	for i in range(projected_number_of_blockers):
