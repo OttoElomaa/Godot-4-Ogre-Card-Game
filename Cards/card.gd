@@ -847,7 +847,7 @@ func checkAndHandleDeathFromTempHealth():
 
 
 ###############################################################################
-#### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
+#### IF TOANIMATE == FALSE, then (Card is DEFENDER?) -> ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
 	var params = SignalParams.new()
@@ -867,7 +867,7 @@ func destroyAndAnimate(toAnimate:bool):
 		
 	if toAnimate:
 		statesLimbo()
-		CardAnimationQueue.queueAnimation(self, playCardDestroyedAnimation, 0.2, handleEnterGraveyard)
+		CardAnimationQueue.queueAnimation(self, playCardDestroyedAnimation, 2, handleEnterGraveyard)
 	else:
 		handleEnterGraveyard()
 	
@@ -1038,43 +1038,40 @@ func animateBlockingState():
 
 
 
+#### LENGTH = 2 seconds
 func playCardDestroyedAnimation():
 	if checkAlive():
 		return
 	
 	## If a card was killed by an attack, it recoils backwards.
-	var tween = create_tween()
 	var change_position = Vector2(0, 30)
 	if isEnemyCard:
 		change_position = -change_position
 	var change_rotation = randf_range(-10.0, 10.0)
+	
+	var tween = create_tween()
 	tween.tween_property(self, "position", position + change_position, 2).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(self, "rotation_degrees", change_rotation, 0.2)
 	
 	$SFX/DeathSound.play()
-	await burnAwayShader()
-#	visible = false
+	burnAwayShader()
 	
 
-
+#### LENGTH = 2 seconds, PARALLEL to playCardDestroyedAnimation()
 func burnAwayShader():
 	material = load("res://Resources/Shaders/destroy_card_material.tres")
 	var tween = create_tween()
 	tween.tween_method(set_shader_property.bind('percentage'), 1.0, 0.0, 2)
-	await tween.finished
-	return true
+	
 	
 func set_shader_property(value:float, property:String):
 	material.set_shader_parameter(property, value)
 	
 
-	
 func reset_shaders():
 	set_shader_property(1.0, 'percentage')
 	
 	
-
-
 #################################################################################
 
 
