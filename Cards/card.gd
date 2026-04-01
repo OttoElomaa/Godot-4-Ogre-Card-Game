@@ -705,7 +705,7 @@ func takeDamage(amount:int):
 	signal_data.sourceCard = self
 	SignalBus.damage_taken.emit(signal_data)
 
-
+	checkAndHandleDeathFromTempHealth()
 
 
 ## Returns damage taken by self after general modifiers.
@@ -816,7 +816,7 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 
 
 func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
-	checkAndHandleDeathFromTempHealth()
+#	checkAndHandleDeathFromTempHealth()
 	
 	#### THIS CARD WAS DESTROYED
 	if tempHealth <= 0:
@@ -871,7 +871,7 @@ func destroyAndAnimate():
 	statesLimbo()
 	CardAnimationQueue.queueAnimation(self, playCardDestroyedAnimation, 2, handleEnterGraveyard)
 	
-	handleEnterGraveyard()
+#	handleEnterGraveyard()
 	
 	
 
@@ -1039,8 +1039,8 @@ func animateBlockingState():
 
 #### LENGTH = 2 seconds
 func playCardDestroyedAnimation():
-	if checkAlive():
-		return
+#	if checkAlive():
+#		return
 	
 	## If a card was killed by an attack, it recoils backwards.
 	var change_position = Vector2(0, 30)
@@ -1049,20 +1049,14 @@ func playCardDestroyedAnimation():
 	var change_rotation = randf_range(-10.0, 10.0)
 	
 	var tween = create_tween()
-	tween.tween_property(self, "position", position + change_position, 2).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "rotation_degrees", change_rotation, 0.2)
+	tween.set_parallel()
+	tween.tween_property(self, "position", position + change_position, 2.0).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "rotation_degrees", change_rotation, 0.2)
+	tween.tween_property(material,"shader_parameter/percentage", 0.0, 2.0)
 	
 	$SFX/DeathSound.play()
-	burnAwayShader()
-	
 
-#### LENGTH = 2 seconds, PARALLEL to playCardDestroyedAnimation()
-func burnAwayShader():
-	material = load("res://Resources/Shaders/destroy_card_material.tres")
-	var tween = create_tween()
-	tween.tween_method(set_shader_property.bind('percentage'), 1.0, 0.0, 2)
-	
-	
+
 func set_shader_property(value:float, property:String):
 	material.set_shader_parameter(property, value)
 	
