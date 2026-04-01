@@ -208,12 +208,14 @@ func decide_blockers():
 		return
 	
 	var blockers = MyTools.findValidNodesInArray(enemyBoardCards)
+	var playerCardsAmount := playerBoardCards.size()
 	
 	blockers = CardChecks.sort_by_strongest(blockers)
-	var projected_number_of_blockers = roundi(playerBoardCards.size() / 2)
+	var projected_number_of_blockers = floor(playerCardsAmount / 2)
 	
-	if projected_number_of_blockers < 1:
-		projected_number_of_blockers = 1
+	if playerCardsAmount > 1:
+		if projected_number_of_blockers < 1:
+			projected_number_of_blockers = 1
 	if projected_number_of_blockers > blockers.size():
 		projected_number_of_blockers = blockers.size()
 	

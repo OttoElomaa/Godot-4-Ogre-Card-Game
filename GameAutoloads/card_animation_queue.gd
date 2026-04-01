@@ -74,7 +74,8 @@ func timeoutAnimationFinished() -> void:
 	
 	if currentAnimation.has("waitingFunction"):
 		var waitingFunction: Callable = currentAnimation.waitingFunction
-		waitingFunction.call()
+		if currentAnimation.card and waitingFunction:
+			waitingFunction.call()
 	
 	#### REMOVE THE FIRST ITEM -> It's been processed now
 	animationQueue.pop_front()	
