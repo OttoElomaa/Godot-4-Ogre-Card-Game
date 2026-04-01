@@ -230,7 +230,8 @@ func setup(gameBoard: GameBoard):
 	
 	var boardOrTempNode = get_parent()
 	if boardOrTempNode is Node2D:
-		myOffset = get_parent().position
+		#myOffset = get_parent().position
+		pass
 	
 	change_upgrade_state(upgraded)
 	
@@ -275,8 +276,10 @@ func updateCardNameAndBasicInfo(isCreature:bool):
 		$Frontside/Resources/Panel/HBox/PowerLabel.text = "%d" % startingDamage
 		$Frontside/Resources/Panel/HBox/HealthLabel.text = "%d" % startingHealth
 
+
 func tempSetCardArt(new_art: Texture):
 	$Frontside/Art.texture = new_art
+
 	
 func createEffectText():
 	
@@ -1118,12 +1121,16 @@ func updateCardVisuals():
 	if cardState == CardStates.HAND:
 		toggleManaCostIndicator(true)
 		toggleActionStateIndicator(false)
+		return
 		
-	elif States.gameState == States.GameStates.BESTIARY:
+	if States.gameState == States.GameStates.BESTIARY:
 		toggleManaCostIndicator(true)
+		return
 		
-	else:
-		toggleManaCostIndicator(false)
+	
+	toggleManaCostIndicator(false)
+	
+	if actionState == CardActionStates.ACTIVE:
 		toggleActionStateIndicator(true)
 	
 	

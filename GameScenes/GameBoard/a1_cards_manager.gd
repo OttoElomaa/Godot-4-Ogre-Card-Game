@@ -177,18 +177,19 @@ func drawCard(sourceDeck:Node,targetHand:Node):
 	if sourceDeck.get_child_count() < 1:
 		return
 		
-	var cardScene:Card = sourceDeck.get_child(0)	
-	cardScene.cardsManager = self	
-	cardScene.reparent(targetHand)
+	var card:Card = sourceDeck.get_child(0)	
+	card.cardsManager = self	
+	card.reparent(targetHand)
 	
 	if sourceDeck == $EnemyDeck:
-		cardScene.toggleEnemyStatus(true)
-		cardScene.toggleFrontSide(false)
-		
-	cardScene.updateCardVisuals()
+		card.toggleEnemyStatus(true)
+		card.toggleFrontSide(false)
+	
+	card.statesHand()	
+	card.updateCardVisuals()
 	updateHandCardsVisuals()
 	
-	return cardScene
+	return card
 
 
 	
@@ -213,30 +214,21 @@ func updateHandCardsVisuals():
 	
 	#### t EACH CARD IN PLAYER HAND
 	for c:Card in cards:
-		if c.checkAlive():
-			c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
-			x_offset += offsetChange
-			if increment == incrementTreshold:
-				x_offset += x_gap_amount
-			
-			c.statesHand()
-			c.updateCardVisuals()
-			increment += 1
+		
+		c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
+		x_offset += offsetChange
+		if increment == incrementTreshold:
+			x_offset += x_gap_amount
+		
+		c.updateCardVisuals()
+		increment += 1
 	
 	x_offset = 0
 	for c in $EnemyHand.get_children():
 		c.position = $EnemyHandPosition.position + Vector2(x_offset, 0)
-		#c.scale = Vector2(0.6, 0.6)
 		x_offset += 80
 	
 	
-	
-#c.position.x = clamp(c.position.x, screenSize.position.x, screenSize.end.x)
-#c.position.y = clamp(c.position.y, screenSize.position.y, screenSize.end.y)
-
-		
-	
-
 
 func startDraggingCardOrAttack():
 	var card:Card = fetchCardOnClick()
