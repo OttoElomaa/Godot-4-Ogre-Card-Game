@@ -20,12 +20,11 @@ func _physics_process(delta: float) -> void:
 			
 			
 
-func queueAnimation(card:Card, animationFunction:Callable, 
-	animationLength:float, waitingFunction:Callable=doNothing) -> void:
+func queueAnimation(card:Card, animationFunction:Callable, waitingFunction:Callable=doNothing) -> void:
 	
 	print("AnimationQueue: Queued animation for card: " + card.cardName)	 
 	animationQueue.append( 
-		{"card":card, "animationFunction":animationFunction, "length":animationLength, "waitingFunction":waitingFunction} 
+		{"card":card, "animationFunction":animationFunction, "waitingFunction":waitingFunction} 
 		)
 
 
@@ -43,34 +42,37 @@ func animateNext() -> void:
 	#### GET THE FIRST ITEM IN THE QUEUE
 	var dict:Dictionary = animationQueue[0]
 	currentAnimation = dict
-	var waitTime := 0.1
+	var tween:Tween = null
 	
 	#### WAIT ONLY: EMPTY DICT PROVIDED BY queueWait()
 	if dict.has("waitTime"):
 		print("AnimationQueue: AnimateNext: Just wait.")
-		waitTime = dict.waitTime
+		tween = create_tween()
+		tween.tween_interval(dict.waitTime)		
+		
 		
 	#### NORMAL ANIMATION
 	elif MyTools.checkNodeValidity(dict.card):
 		var card:Card = dict.card
 		var f: Callable = dict.animationFunction
-		var animationLength:float = dict.length
 		
 		print("AnimationQueue: Animate Next: Play animation for card: %s. Animation Function: %s " % [card.cardName, f])
-		f.call()
-		waitTime = animationLength
-		
-	$AnimationTimer.wait_time = waitTime
-	$AnimationTimer.start()
-
-	#### SETUP THE QUEUE STUFF
-	isAnimating = true
+		tween = f.call()
 	
-
-
-
+	
+	#### SETUP THE QUEUE STUFF
+	isAnimating = true	
+	
+	if tween:       ## WAIT FOR TWEEN ANIMATION
+		await tween.finished
+		onAnimationFinished()	
+	else:           ## CONTINUE AT ONCE
+		onAnimationFinished()
+	
+	
+	
 #### AN ANIMATION IS FINISHED, PLAY NEXT ANIMATION IN THE QUEUE
-func timeoutAnimationFinished() -> void:
+func onAnimationFinished() -> void:
 	
 	if currentAnimation.has("waitingFunction"):
 		var waitingFunction: Callable = currentAnimation.waitingFunction

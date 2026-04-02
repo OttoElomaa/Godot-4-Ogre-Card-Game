@@ -60,6 +60,7 @@ func moveCardTweening(c:Card, originalPos:Vector2, newPos:Vector2):
 	c.position = originalPos
 	var tween = get_tree().create_tween()
 	tween.tween_property(c, "position", newPos, 0.2)
+	return tween
 	
 
 

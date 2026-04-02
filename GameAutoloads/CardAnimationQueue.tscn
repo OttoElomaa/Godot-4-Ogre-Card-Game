@@ -4,8 +4,3 @@
 
 [node name="CardAnimationQueue" type="Node2D" unique_id=827273786]
 script = ExtResource("1_bhhth")
-
-[node name="AnimationTimer" type="Timer" parent="." unique_id=930508662]
-one_shot = true
-
-[connection signal="timeout" from="AnimationTimer" to="." method="timeoutAnimationFinished"]

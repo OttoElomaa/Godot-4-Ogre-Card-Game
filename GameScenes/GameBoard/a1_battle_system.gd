@@ -406,7 +406,7 @@ func handlePlayerAttackEnemy() -> void:
 	var combatDamage = c.getCombatDamageToTarget(null, true)
 	endAttackState()
 	
-	CardAnimationQueue.queueAnimation(c, c.playAttackPortraitAnimation, 0.2)
+	CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait)
 	
 	main.changeHealth(-combatDamage, !c.isEnemyCard)
 	main.updateResourceLabels()
@@ -443,7 +443,7 @@ func getKillablePlayerBlockers() -> Array:
 	return blockers
 
 
-#### BTW, PlayAttackAnimation CALLS THE CARD DESTROY COMMAND
+#### BTW, AnimateAttack CALLS THE CARD DESTROY COMMAND
 func handleEnemyAttackPlayer(attackCard: Card) -> void:
 
 	var c = attackCard
@@ -499,8 +499,8 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 		
 		c.handleAttackingPortrait()
 		c.restAndAnimate()
-		CardAnimationQueue.queueAnimation(c, c.playAttackPortraitAnimation, 0.2)
-		CardAnimationQueue.queueAnimation(c, c.returnToSlot, 0.2, enemyAttackersWaiter)  #### HANDLES ANIMATION QUEUE AND CALLS NEXT ATTACKER
+		CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait)
+		CardAnimationQueue.queueAnimation(c, c.animateReturnToSlot, enemyAttackersWaiter)  #### HANDLES ANIMATION QUEUE AND CALLS NEXT ATTACKER
 		print("Attacked portrait: Calling Waiter")
 
 
@@ -700,8 +700,8 @@ func resolveAttackTwo():
 	params2.targetCard = attackCard
 	SignalBus.defended.emit(params2)
 	
-	targetCard.checkAndHandleCombatDeath(false)
-	await attackCard.checkAndHandleCombatDeath(true)
+	targetCard.handleCombatSurvival(false)
+	await attackCard.handleCombatSurvival(true)
 	
 	attackCard.toggleAllowEnemyUse(true)
 	if attackCard.isEnemyCard:
