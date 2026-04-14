@@ -1,0 +1,51 @@
+[gd_scene load_steps=12 format=3 uid="uid://csanaqvtgc7hc"]
+
+[ext_resource type="PackedScene" uid="uid://6803oa1g2t5f" path="res://GameScenes/Zone/Zone.tscn" id="1_jim2b"]
+[ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="2_jewtb"]
+[ext_resource type="Resource" uid="uid://bk3ont1i7ngu2" path="res://Resources/Dialog/Vanished Astromancer_1.dialogue" id="3_oe87p"]
+[ext_resource type="Resource" uid="uid://m82mkv15ve7i" path="res://Resources/Dialog/Vanished Astromancer_2.dialogue" id="4_xjuj7"]
+[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="5_3ft1n"]
+[ext_resource type="PackedScene" uid="uid://dpjhkd8cyqyon" path="res://Cards/Outcasts/Cr-Undying-Kit.tscn" id="6_inlas"]
+[ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="6_jewtb"]
+[ext_resource type="PackedScene" uid="uid://b7q3ro08w0ftn" path="res://Cards/Outcasts/Cr-Magaal.tscn" id="7_j4bph"]
+[ext_resource type="PackedScene" uid="uid://dk4etb0x0xce3" path="res://Cards/City/Cr-Kalasirios.tscn" id="8_dfrpf"]
+[ext_resource type="PackedScene" uid="uid://drfjmc3awv6y7" path="res://Cards/City/Cr-guardmaster.tscn" id="9_cosra"]
+[ext_resource type="Resource" uid="uid://c6ujrcqxic4if" path="res://Resources/Dialog/Vanished Astromancer_Win.dialogue" id="11_oe87p"]
+
+[node name="Zone" instance=ExtResource("1_jim2b")]
+
+[node name="DialogueIcon" parent="Zones/GameBoards" index="0" instance=ExtResource("2_jewtb")]
+position = Vector2(-358, -71)
+dialogue = ExtResource("3_oe87p")
+node_name = "Camp"
+start_unlocked = true
+
+[node name="DialogueIcon2" parent="Zones/GameBoards" index="1" instance=ExtResource("2_jewtb")]
+position = Vector2(-2, -269)
+dialogue = ExtResource("4_xjuj7")
+node_name = "Dilapidated Mansion"
+node_comments = "Is this where the Astromancer is being held?"
+
+[node name="UmugiteBattle" parent="Zones/GameBoards" index="2" node_paths=PackedStringArray("unlock_on_resolve") instance=ExtResource("5_3ft1n")]
+position = Vector2(-9, 0)
+board_name = "Inside the Mansion"
+game_board = ExtResource("6_jewtb")
+board_comments = "The Umugites use the Defy Death effect to survive mortal assaults and grow stronger in the process. Use strategy to defeat them quickly."
+deck_cards = Dictionary[PackedScene, int]({
+ExtResource("6_inlas"): 4,
+ExtResource("7_j4bph"): 2
+})
+unlock_on_resolve = [NodePath("../DialogueIcon3")]
+
+[node name="ThroneBattle" parent="Zones/GameBoards" index="3" instance=ExtResource("5_3ft1n")]
+position = Vector2(-379, -415)
+board_name = "Throne Ambush"
+game_board = ExtResource("6_jewtb")
+deck_cards = Dictionary[PackedScene, int]({
+ExtResource("8_dfrpf"): 5,
+ExtResource("9_cosra"): 2
+})
+
+[node name="DialogueIcon3" parent="Zones/GameBoards" index="4" instance=ExtResource("2_jewtb")]
+position = Vector2(349, -120)
+dialogue = ExtResource("11_oe87p")

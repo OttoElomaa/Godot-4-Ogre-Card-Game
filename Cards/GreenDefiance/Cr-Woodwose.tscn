@@ -32,11 +32,11 @@ material = SubResource("ShaderMaterial_877ti")
 cardName = "Woodwose"
 subTypeStr = "Woodwose Warrior"
 group = 4
-flavorText = "\"What is the nature of the hairy man? Some say, a person, degraded by overindulgent vice. Some say, our ancestor. The Woodwose does not appear to know nor care.\"
+flavorText = "\"What is the nature of the hairy man? Some say, a person, degraded by overindulgent vice. Some say, our ancestor. The Woodwose does not appear to know or care.\"
 ~ Astromancer"
 manaCost = 3
-startingDamage = 3
-startingHealth = 2
+startingDamage = 2
+startingHealth = 3
 block_on_arrival = false
 
 [node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("2_o47dh")]

@@ -1,7 +1,11 @@
 extends Node2D
 class_name CheatMenu
 
-var current_scene
+var current_scene: Node:
+	get:
+		current_scene = get_tree().root.get_child(len(get_tree().root.get_children()) - 1)
+		return current_scene
+
 var template_card = preload("res://Cards/Cr-DebugMenuCard.tscn")
 var active_cheat_scene
 
@@ -12,50 +16,36 @@ var found_card: Card
 @onready var cardSearch := $GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel
 @onready var topMenu := $GameBoard_Cheats/TopMenu
 
-var cardEditorVisible := false
-var zoneCheatsVisible := false
+var cheats_on = false
 
 var insta_resolve = false
 
 
 func _ready():
-	get_current_scene()
-	toggleCardEditor(cardEditorVisible)
-	
-
+	SceneSwitcher.connect("scene_changed", display)
 
 func _input(event):
 	if event.is_action_released("CheatButton"):
-		match get_current_scene():
-			'GameBoard':
-				toggleCardEditor(!cardEditorVisible)
-			'Zone':
-				toggleZoneCheats()
-		
+		cheats_on = !cheats_on
+		display()
 
-func toggleCardEditor(toShow:bool):
-	if toShow:
-		cardEditor.show()
-		cardSearch.show()
-		topMenu.show()
-		
-	else:
-		cardEditor.hide()
-		cardSearch.hide()
-		topMenu.hide()
+func display():
+	print('display called')
+	print(current_scene)
+	$GameBoard_Cheats.visible = cheats_on
+	toggle_visibility(%RightMenu, current_scene is GameBoard)
+	toggle_visibility(%ZoneCheats, current_scene is Scenario)
 
-	cardEditorVisible = toShow
-
-func toggleZoneCheats():
-	$GameBoard_Cheats/ZoneCheats.visible = !zoneCheatsVisible
-		
+func toggle_visibility(control:Control, toShow:bool):
+	if cheats_on:
+		control.visible = toShow
 
 func get_current_scene():
 	current_scene = get_tree().root.get_child(len(get_tree().root.get_children()) - 1)
-	if current_scene.name == 'GameBoard':
+	if current_scene.is_class('GameBoard'):
 		$GameBoard_Cheats.visible = true
 		conj_card()
-	return current_scene.name
+	return current_scene
 
 ###########################################################################################
 # GameBoard Cheats

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfyhxpowqwla7"]
+
+[ext_resource type="Script" uid="uid://raxfbub1vb4a" path="res://CardScriptsAndComponents/Actions/skill_dispel_status.gd" id="1_dutg0"]
+
+[node name="SkillDispelStatus" type="Node2D"]
+script = ExtResource("1_dutg0")
+metadata/_custom_type_script = "uid://cxr3ippvyy8ii"

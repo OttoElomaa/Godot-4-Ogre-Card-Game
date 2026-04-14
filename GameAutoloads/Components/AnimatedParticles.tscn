@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://is78dddp2op4"]
+
+[ext_resource type="Script" uid="uid://bj3cu1v2d18ys" path="res://GameAutoloads/Components/animated_particles.gd" id="1_xktmc"]
+[ext_resource type="Texture2D" uid="uid://c6twqd73dj1um" path="res://Art/CardComponents/card-effect-counter-texture.png" id="2_vqsqo"]
+
+[node name="AnimatedParticles" type="Node2D"]
+z_index = 5
+z_as_relative = false
+script = ExtResource("1_xktmc")
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Particles"]
+position = Vector2(39, 70)
+texture = ExtResource("2_vqsqo")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Particles"]
+position = Vector2(-76, 1)
+texture = ExtResource("2_vqsqo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Particles"]
+position = Vector2(47, -54)
+texture = ExtResource("2_vqsqo")
+
+[node name="DoneTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="DoneTimer" to="." method="timeoutAnimationDone"]

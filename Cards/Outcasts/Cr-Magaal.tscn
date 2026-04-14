@@ -1,0 +1,59 @@
+[gd_scene load_steps=12 format=3 uid="uid://b7q3ro08w0ftn"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_6ldxg"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_thiht"]
+[ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="3_rvbpf"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_ro1wm"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_2pb80"]
+[ext_resource type="PackedScene" uid="uid://c2r8x7dfnt45s" path="res://CardScriptsAndComponents/EffectCounters/EffectDefyDeath.tscn" id="6_35ara"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="7_x7syw"]
+[ext_resource type="Texture2D" uid="uid://c6nhb1ftshhhw" path="res://Art/CardArt/Depths/card-art-cr-umug-magus-v3.jpg" id="8_ro1wm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_twpsf"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ptgjm"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_twpsf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mheji"]
+resource_local_to_scene = true
+shader = ExtResource("2_thiht")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_ptgjm")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-Magaal" instance=ExtResource("1_6ldxg")]
+material = SubResource("ShaderMaterial_mheji")
+cardName = "Magaal"
+subTypeStr = "Umugite Magus"
+group = 20
+flavorText = "\"Our Lord needs you. Unharmed, you shall remain...\""
+manaCost = 3
+startingDamage = 1
+startingHealth = 3
+block_on_arrival = false
+action_mode = 2
+priority = 5
+will_not_charge = true
+
+[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("3_rvbpf")]
+
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("4_ro1wm")]
+customActionText = "Cast: grant Defy Death to a chosen ally."
+
+[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_2pb80")]
+grantEffect = ExtResource("6_35ara")
+grantAmount = 1
+
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="2" instance=ExtResource("7_x7syw")]
+manualTargetGroup = 1
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("8_ro1wm")

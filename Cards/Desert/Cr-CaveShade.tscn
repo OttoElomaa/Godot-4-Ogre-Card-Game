@@ -1,0 +1,61 @@
+[gd_scene load_steps=14 format=3 uid="uid://cdy7cdlhxpfw5"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_43vy7"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_0wwdg"]
+[ext_resource type="PackedScene" uid="uid://hgfd7t0eywau" path="res://CardScriptsAndComponents/Triggers/OnSelfArrivalTrigger.tscn" id="3_unvt6"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_ftqvt"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_v056e"]
+[ext_resource type="PackedScene" uid="uid://c2r8x7dfnt45s" path="res://CardScriptsAndComponents/EffectCounters/EffectDefyDeath.tscn" id="6_wycxi"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="7_0wwdg"]
+[ext_resource type="PackedScene" uid="uid://b5it2nbxjtkik" path="res://CardScriptsAndComponents/Keywords/Transient.tscn" id="7_yv613"]
+[ext_resource type="PackedScene" uid="uid://cm3ciubhc18jw" path="res://CardScriptsAndComponents/Keywords/Haste.tscn" id="9_unvt6"]
+[ext_resource type="Texture2D" uid="uid://bpm4mby4h7da4" path="res://Art/CardArt/Desert/Cave-Shade.jpg" id="10_ftqvt"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_osdy0"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pci1c"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_osdy0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iewbd"]
+resource_local_to_scene = true
+shader = ExtResource("2_0wwdg")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_pci1c")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-CaveShade" instance=ExtResource("1_43vy7")]
+material = SubResource("ShaderMaterial_iewbd")
+cardName = "Cave-Shade"
+subTypeStr = "Spirit"
+flavorText = "\"I can see it... the shadow of a greater world dances on the wall of the cave!\""
+startingDamage = 1
+startingHealth = 1
+action_mode = 0
+will_not_charge = true
+
+[node name="OnSelfArrivalTrigger" parent="Actions" index="0" instance=ExtResource("3_unvt6")]
+
+[node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" instance=ExtResource("4_ftqvt")]
+customActionText = "Arrival: Gain Defy Death."
+
+[node name="SkillEffectCounters" parent="Actions/OnSelfArrivalTrigger/CardAction" index="1" instance=ExtResource("5_v056e")]
+grantEffect = ExtResource("6_wycxi")
+grantAmount = 1
+
+[node name="TargetSelf" parent="Actions/OnSelfArrivalTrigger/CardAction" index="2" instance=ExtResource("7_0wwdg")]
+
+[node name="Transient" parent="KeywordHandler/MyKeywords" index="0" instance=ExtResource("7_yv613")]
+
+[node name="Haste" parent="KeywordHandler/MyKeywords" index="1" instance=ExtResource("9_unvt6")]
+description = "This creature can act immediately upon Arriving."
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("10_ftqvt")

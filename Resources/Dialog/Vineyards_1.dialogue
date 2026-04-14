@@ -29,7 +29,7 @@ if 'Vinemen' in GameInfo.playerAlliances
 	do SignalBus.disp_card.emit('Jade Vineman')
 	do SignalBus.disp_card.emit('Guardmaster')
 	do SignalBus.disp_card.emit('Jade Vineman')
-	Seeing your approach, their sergeant snarls:
+	Seeing you approach, their sergeant snarls:
 	
 	“Just our damned luck. Bring it, you [wave]vagabonds[/wave]! The King shan’t let us perish here.”
 	do SignalBus.unlock_node.emit('Board2')

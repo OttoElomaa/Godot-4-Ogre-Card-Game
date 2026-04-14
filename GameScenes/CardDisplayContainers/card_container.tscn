@@ -38,12 +38,16 @@ visible = false
 use_parent_material = true
 texture = ExtResource("3_xq3cd")
 
-[node name="Art" type="Sprite2D" parent="Frontside"]
+[node name="Art" type="TextureRect" parent="Frontside"]
 texture_filter = 6
 use_parent_material = true
-position = Vector2(10, -61)
+offset_left = -90.0
+offset_top = -142.0
+offset_right = 910.0
+offset_bottom = 658.0
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_w72ds")
+expand_mode = 1
 
 [node name="ManaCost" type="Node2D" parent="Frontside"]
 position = Vector2(10, -162)

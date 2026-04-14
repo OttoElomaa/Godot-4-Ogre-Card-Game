@@ -56,28 +56,29 @@ size_flags_vertical = 3
 columns = 7
 script = ExtResource("3_y2ky0")
 
-[node name="CardInfoPanel" parent="." instance=ExtResource("5_m6uwl")]
-offset_left = 1477.0
-offset_top = 35.0
-offset_right = 1877.0
-offset_bottom = 635.0
-
-[node name="Margin" type="MarginContainer" parent="."]
-anchors_preset = 3
+[node name="CardInfoMargin" type="MarginContainer" parent="CanvasLayer2"]
+anchors_preset = 11
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1489.0
-offset_top = 667.0
-offset_right = 1864.0
-offset_bottom = 823.0
+offset_left = -450.0
 grow_horizontal = 0
-grow_vertical = 0
-size_flags_vertical = 0
-metadata/_edit_group_ = true
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 50
 
-[node name="FlavorLabel" type="Label" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer2/CardInfoMargin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="CardInfoPanel" parent="CanvasLayer2/CardInfoMargin/VBox" instance=ExtResource("5_m6uwl")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="FlavorLabel" type="Label" parent="CanvasLayer2/CardInfoMargin/VBox"]
 custom_minimum_size = Vector2(370, 0)
 layout_mode = 2
 size_flags_vertical = 0

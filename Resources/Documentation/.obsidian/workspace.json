@@ -47,19 +47,36 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Scenarios/Green Ray at the Vineyards.canvas",
+                "file": "Cards/Desert/Pyrecallers.canvas",
                 "viewState": {
-                  "x": 181.5,
-                  "y": 1450.5043659043658,
-                  "zoom": -1.1464736772544877
+                  "x": -320.17983367983356,
+                  "y": 87.90852390852396,
+                  "zoom": -0.6580629916454247
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Green Ray at the Vineyards"
+              "title": "Pyrecallers"
+            }
+          },
+          {
+            "id": "89bdf3e2e04ad65a",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Cards/Desert/Beasts.canvas",
+                "viewState": {
+                  "x": 438.46153846153845,
+                  "y": 414.1538461538462,
+                  "zoom": -0.7589919004962052
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Beasts"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -82,7 +99,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Файловый менеджер"
             }
           },
           {
@@ -198,28 +215,29 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false,
+      "bases:Создать новую базу": false
     }
   },
-  "active": "dae68368f3731434",
+  "active": "89bdf3e2e04ad65a",
   "lastOpenFiles": [
-    "Cards/Desert/Pyrecallers.canvas",
-    "Cards/Desert/Pilgrims.canvas",
     "Cards/Desert/High Kingdom.canvas",
-    "Cards/City/Priests.canvas",
-    "Cards/City/Throne.canvas",
-    "Cards/City/Guilds.canvas",
-    "Cards/City/Slaves.canvas",
-    "Cards/Desert/Salkhi Horde.canvas",
-    "Cards/Green Defiance/Gharch.canvas",
+    "Cards/Desert/Beasts.canvas",
+    "Cards/Green Defiance/Woodwose.canvas",
+    "Cards/Green Defiance/Vinemen.canvas",
     "Cards/Green Defiance/Grove Clans.canvas",
-    "Cards/Outcasts/Umugites.canvas",
+    "Cards/City/Priests.canvas",
+    "Cards/City/Guilds.canvas",
+    "Cards/City/Sea Peoples.canvas",
+    "Cards/Green Defiance/Skull Priests.canvas",
+    "Cards/Green Defiance/Gharch.canvas",
+    "Cards/Desert/Salkhi Horde.canvas",
+    "Cards/City/Без названия.md",
     "Scenarios",
     "Cards/Outcasts",
     "Cards/Desert",

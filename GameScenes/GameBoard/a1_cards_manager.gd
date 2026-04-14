@@ -339,8 +339,9 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	c.scale = Vector2.ONE
 	c.toggleFrontSide(true)
 	
-	#### SET ACTION STATE AND TRAVEL STATE	
-	c.toggleTraveling(true)
+	#### SET ACTION STATE AND TRAVEL STATE
+	if not c.hasKeyword('Haste'):
+		c.toggleTraveling(true)
 	
 	#### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
 	c.setInitialActionState()
@@ -578,7 +579,7 @@ func discardCard(c:Card):
 
 #### CALLED FROM DESTROY ANIMATION IN CARD NODE
 func moveToDiscard(card:Card, isEnemy:bool):
-	card.statesDestroy()
+	#card.statesDestroy()
 	
 	var discardNode:Node = $Discard/Player/Cards
 	if isEnemy:

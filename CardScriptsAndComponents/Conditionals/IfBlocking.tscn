@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://l7olk0aqrfva"]
+
+[ext_resource type="Script" uid="uid://rbsdxe0pi2hk" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_blocking.gd" id="1_utpfx"]
+
+[node name="IfBlocking" type="Node"]
+script = ExtResource("1_utpfx")
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://boieos0xdflds"]
+[gd_scene load_steps=3 format=3 uid="uid://boieos0xdflds"]
 
 [ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="1_awo24"]
+[ext_resource type="Texture2D" uid="uid://dbtq05rni8hg6" path="res://Art/CardComponents/card-action-particle-generic.png" id="2_qou16"]
 
 [node name="CardAction" type="Node2D"]
 script = ExtResource("1_awo24")
+customActionText = null
 action_sound = "<null>"
+particleTexture = ExtResource("2_qou16")
 
 [node name="ActionSE" type="AudioStreamPlayer" parent="."]

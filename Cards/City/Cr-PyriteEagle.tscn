@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://bxl3p72ciee23"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_yvh1c"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_2k8ml"]
+[ext_resource type="PackedScene" uid="uid://jyrj2f2h71w" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnTrigger.tscn" id="3_k62ha"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_i8h7w"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="5_6dc3t"]
+[ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="6_k62ha"]
+[ext_resource type="PackedScene" uid="uid://b50qou0nvjrrv" path="res://CardScriptsAndComponents/Conditionals/IfSubtype.tscn" id="7_i8h7w"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ea101"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mnyc2"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_ea101")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tlfy"]
+resource_local_to_scene = true
+shader = ExtResource("2_2k8ml")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_mnyc2")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-Pyrite-Eagle" instance=ExtResource("1_yvh1c")]
+material = SubResource("ShaderMaterial_0tlfy")
+cardName = "Pyrite Eagle"
+subTypeStr = "Beast"
+flavorText = "This rare bird was once the symbol of Ask'lan's warriors and the Throne itself -- until one day, it is said, the coat of arms was found empty."
+startingDamage = 2
+startingHealth = 3
+
+[node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("3_k62ha")]
+
+[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" instance=ExtResource("4_i8h7w")]
+customActionText = "On turn: bolster allied Warriors 0/+2."
+
+[node name="SkillAlterHealth" parent="Actions/OnAlliedTurnTrigger/CardAction" index="1" instance=ExtResource("5_6dc3t")]
+bolsterHealth = 2
+
+[node name="TargetAllAllies" parent="Actions/OnAlliedTurnTrigger/CardAction" index="2" instance=ExtResource("6_k62ha")]
+
+[node name="IfSubtype" parent="Actions/OnAlliedTurnTrigger/CardAction/TargetAllAllies" index="1" instance=ExtResource("7_i8h7w")]
+subtype = "Warrior"
