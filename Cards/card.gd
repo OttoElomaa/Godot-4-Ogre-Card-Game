@@ -215,7 +215,7 @@ func setup_all_actions():
 
 
 func setup(gameBoard: GameBoard):
-	print(cardName, ' sets up.')
+#	print(cardName, ' sets up.')
 	if gameBoard:
 		print(cardName, ' has gameboard')
 		cardsManager = gameBoard.cardsManager

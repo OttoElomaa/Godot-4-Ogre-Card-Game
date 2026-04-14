@@ -2,7 +2,7 @@ extends ZoneNode
 
 class_name ZoneBattleIcon
 
-var board : GameBoard = null
+var board : GameBoard = DataLoader.boards_by_name['Default'].instantiate() as GameBoard
 
 @export_category('Game Board')
 @export var board_name = '' ##MANDATORY. Shows up during battle.
@@ -13,8 +13,8 @@ var board : GameBoard = null
 
 @export_category('Random Deck')
 
-@export var deck_cards : Dictionary[PackedScene, int] = {} ## If this is filled, adds [value] of cards in [key] to the deck. 
-@export var presummoned_cards : Array[PackedScene] = [] ## Will summon these cards at the start of battle.
+@export var deck_cards : Dictionary[String, int] = {} ## If this is filled, adds [value] of cards in [key] to the deck. 
+@export var presummoned_cards : Array[String] = [] ## Will summon these cards at the start of battle.
 @export var enemy_presummon = false ## Creates presummonned cards on enemy side.
 @export var ally_presummon = false ## Creates presummoned cards on allied side.
 
@@ -34,9 +34,8 @@ func setup(zone:Node):
 
 
 func createDeck():
-	board = game_board.instantiate().duplicate()
-	add_child(board)
-	await get_tree().process_frame
+	if game_board:
+		board = game_board.instantiate().duplicate()
 	board.boardName = board_name
 	board.AI_personality = ai_personality
 	
@@ -44,20 +43,24 @@ func createDeck():
 		print('Set to use as is')
 		return
 	
-	for key:PackedScene in deck_cards:
+	GameInfo.enemyDeckCards.clear()
+	print('Clearing enemyDeckCards')
+	
+	for key:String in deck_cards:
 		for i in range(deck_cards[key]):
-			var newCard:Card = key.instantiate().duplicate()
-			board.add_card_to_enemy_deck(newCard)
+			var newCard:Card = DataLoader.cards_by_name[key].duplicate()
+			print('appending enemy card: ', newCard.cardName)
+			GameInfo.enemyDeckCards.append(newCard)
 	
 #	if enemy_presummon:
 #		presummon(true)
 #	if ally_presummon:
 #		presummon(false)
-	board.setup_board()
-	board.turn_1_init()
+#	board.setup_board()
+#	board.turn_1_init()
 	
 	
-	remove_child(board)
+#	remove_child(board)
 	
 
 
@@ -85,6 +88,7 @@ func presummon(isEnemyCard):
 #### START THE PRE-BATTLE PROCESS IN ORDER TO FIGHT A BATTLE
 func handleClick():
 	GameInfo.currentZone = zone
+	
 	zone.openPrebattle(self)
 
 func getBoardName():

@@ -5,8 +5,11 @@ var all_cards = []
 
 #####################################################
 #### PLAYER PROFILE
+@onready var current_champion:Champion = preload("res://Champions/Scripts/Champion.tscn").instantiate()
 var playerName := "The Player"
-var heroName := "The Amir"
+var heroName: String = '':
+	get:
+		return current_champion.cardName
 var character_position: Map_Node
 
 var playerGlory := 0
@@ -18,7 +21,7 @@ var currentBattleInfo: ZoneBattleIcon = null
 
 var playerIcon:Texture:
 	get:
-		return $PlayerSprite.texture
+		return current_champion.texture
 
 ## All cards owned by the player. The active deck is made of these.
 var playerOwnedCards := []
@@ -48,9 +51,13 @@ var playerHealth := 0
 var playerMana := 0
 var playerManaIncome := 0
 
+@onready var enemyChampion: Champion = preload("res://Champions/Scripts/Champion.tscn").instantiate()
 var enemyHealth := 0
 var enemyMana := 0
 var enemyManaIncome := 0
 
 var turnCount := 0
 var enemy_turn: bool  ## true is enemy (AI) turn, false if player turn
+
+func _ready():
+	DataLoader.get_all_game_cards()

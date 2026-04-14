@@ -24,29 +24,22 @@ func toggleWindow(enable:bool):
 		show()
 		clearOldIcons()
 		
-		if not battleInfoIcon.has_method('generate_fight'):
-			await battleInfoIcon.createDeck()
-			#### GENERATE PREVIEW ICONS OF ENEMY DECK
-			for cardScene:PackedScene in battleInfoIcon.deck_cards:
-				var container = CardContainerScene.instantiate()
-				enemyCardsHolder.add_child(container)
-				container.display_card(cardScene)
-				container.infoPanel = cardInfoPanel
-		else:
-			#### GENERATE PREVIEW ICONS OF ENEMY DECK
-			var cards_for_preview = await battleInfoIcon.generate_fight()
-			for cardScene:Card in cards_for_preview:
-				var container = CardContainerScene.instantiate()
-				enemyCardsHolder.add_child(container)
-				container.insert_card(cardScene)
-				container.infoPanel = cardInfoPanel
-
+		#### GENERATE PREVIEW ICONS OF ENEMY DECK	
+		for cardScene:String in battleInfoIcon.deck_cards:
+			
+			var container = CardContainerScene.instantiate() as CardContainer
+			var card:Card = DataLoader.cards_by_name[cardScene]
+			enemyCardsHolder.add_child(container)
+			container.insert_card(card)
+			container.infoPanel = cardInfoPanel
+			
 		boardCommentsLabel.text = battleInfoIcon.board_comments
 	
 	else:
 		hide()
 		clearOldIcons()
 		
+
 
 func putCopiesOfCardIntoEnemyDeck(card:PackedScene, amount:int):
 	for i in range(amount):

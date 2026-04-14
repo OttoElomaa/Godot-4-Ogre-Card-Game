@@ -17,7 +17,7 @@ var savedTargets: Array
 
 
 
-func setup(card:Card):	
+func setup(card:Card):
 	myCard = card
 	isEnemy = card.isEnemyCard
 	
@@ -27,6 +27,15 @@ func setup(card:Card):
 		if component is TargetingComponent:
 			targetingComponent = component
 
+func setup_variant(parent:Node):
+	myCard = parent
+	isEnemy = parent.isEnemy
+	
+	for component in get_children():
+		if component.has_method("setup"):
+			component.setup(self, myCard)
+		if component is TargetingComponent:
+			targetingComponent = component
 
 func createActionText() -> String:
 	return customActionText

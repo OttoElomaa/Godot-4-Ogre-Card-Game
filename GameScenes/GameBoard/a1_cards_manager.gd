@@ -45,12 +45,15 @@ func setup(gameBoard):
 	playerDeckCards.shuffle()
 	for card:Card in playerDeckCards:
 		addCardToDeckAndSetup(card.duplicate(), $PlayerDeck)
+		print('Card manages adds player card:', card.cardName)
+	dealPlayerHand()
 	
 	### SETUP ENEMY CARDS
 	var enemyDeckCards:Array = GameInfo.enemyDeckCards
 	enemyDeckCards.shuffle()
 	for card:Card in enemyDeckCards:
 		addCardToDeckAndSetup(card.duplicate(), $EnemyDeck)
+	dealEnemyHand()
 
 
 
