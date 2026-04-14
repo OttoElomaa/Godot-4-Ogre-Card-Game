@@ -18,8 +18,7 @@ func generate_fight():
 	var mana_cost = 1
 	var cards_for_preview = []
 	
-	board.nuke_cards(true)
-	board.nuke_cards(false)
+	board.nuke_all_cards()
 	
 	for i in range(4):
 		var cards_in_tier = []

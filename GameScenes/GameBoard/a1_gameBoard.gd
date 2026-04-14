@@ -329,20 +329,11 @@ func addLogMessage(text:String, color:Color) -> void:
 #################################################################
 # Cheat Functions
 
-func nuke_cards(isEnemy: bool):
-	var obj: Node = null
-	if isEnemy:
-		for child in %EnemyDeck.get_children():
-			obj.remove_child(child)
-		for child in %EnemyHand.get_children():
-			obj.remove_child(child)
-	else:
-		for child in %PlayerDeck.get_children():
-			obj.remove_child(child)
-		for child in %PlayerHand.get_children():
-			obj.remove_child(child)
-
-
+func nuke_cards(node: Node):
+	for child in node.get_children():
+		node.remove_child(child)
+		
+	
 func nuke_all_cards():
 	nuke_cards($CardsManager/PlayerBoard)
 	nuke_cards($CardsManager/PlayerHand)
