@@ -53,8 +53,8 @@ func _on_proceed_button_button_up():
 	MyTools.closeDeckEdit()
 	SceneSwitcher.switchToNewScene(prepared_board)
 	await get_tree().process_frame
-#	prepared_board.setup_board()
-#	prepared_board.turn_1_init()
+	prepared_board.setup_board()
+	prepared_board.turn_1_init()
 	prepared_board = null
 
 

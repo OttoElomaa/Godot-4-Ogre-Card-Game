@@ -14,13 +14,13 @@ var preBattleWindow:Node = null
 
 ##################################
 
-@onready var zoneNameLabel:Label = %ZoneNameLabel
+@onready var zoneNameLabel:Label = $UI/ZoneInfoPanel/Panel/HBox/ZoneNameLabel
 
-@onready var heroNameLabel:Label = %HeroNameLabel
-@onready var heroPortrait:TextureRect = %HeroPortrait
+@onready var heroNameLabel:Label = $UI/PlayerInfoPanel/VBox/Panel/HBox/HeroNameLabel
+@onready var heroPortrait:TextureRect = $UI/PlayerInfoPanel/VBox/PanelContainer/HeroPortrait 
 
-@onready var gloryAmountLabel:Label = %GloryAmountLabel
-@onready var livesAmountLabel:Label = %LivesLabel
+@onready var gloryAmountLabel:Label = $UI/PlayerInfoPanel/VBox/Panel2/HBox/GloryAmountLabel
+@onready var livesAmountLabel:Label = $UI/PlayerInfoPanel/VBox/LivesPanel/HBox/LivesLabel
 
 @onready var actionButtonsHbox:HBoxContainer = $UI/BottomActions/VBox/ButtonsHBox
 

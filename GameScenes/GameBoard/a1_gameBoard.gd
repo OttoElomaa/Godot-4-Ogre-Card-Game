@@ -10,7 +10,6 @@ class_name GameBoard
 @onready var cameraMainBoard := $CameraMainBoard
 
 @onready var battleNameLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel
-@onready var champActionButton := preload("res://Champions/Scripts/ChampionActionButton.tscn") 
 
 enum CardSlotTypes {
 	PLAYER, ENEMY
@@ -40,11 +39,11 @@ func _ready() -> void:
 	##################################
 	GameInfo.turnCount = 1
 	
-#	GameInfo.playerHealth = 20
+	GameInfo.playerHealth = 20
 	GameInfo.playerMana = 1
 	GameInfo.playerManaIncome = 1
 	
-#	GameInfo.enemyHealth = 20
+	GameInfo.enemyHealth = 20
 	GameInfo.enemyMana = 0
 	GameInfo.enemyManaIncome = 0
 	
@@ -75,13 +74,10 @@ func _ready() -> void:
 
 
 func setup_board():
-	print(name, ': Game Board set up')
 	$CardsManager.setup(self)
 	
 	$BattleSystem.main = self
 	$BattleSystem.cardsManager = $CardsManager
-	
-	setup_champions(GameInfo.current_champion, GameInfo.enemyChampion)
 	
 	MyTools.gameBoardSetup(self)
 
@@ -91,50 +87,7 @@ func _unhandled_input(e: InputEvent) -> void:
 			if States.gameState == States.GameStates.CARD_ACT_MENU:
 				toggleCardActionMenu(false, null)
 
-func setup_champions(player_champ:Champion, enemy_champ:Champion):
-	%PlayerChampSlot.add_child(player_champ.duplicate())
-	%EnemyChampSlot.add_child(enemy_champ.duplicate())
-	
-	## Set character portrait.
-	%PlayerSprite.texture = player_champ.texture
-	%EnemySprite.texture = enemy_champ.texture
-	
-	## Setup player champion.
-	playerChampion().isEnemyCard = false
-	playerChampion().setup(self)
-	create_action_buttons(false)
-	
-	## Setup enemy champion.
-	enemyChampion().isEnemyCard = true
-	enemyChampion().setup(self)
-	create_action_buttons(true)
 
-func create_action_buttons(isEnemy:bool):
-	var bound_node: Node = null
-	var champion: Champion = null
-	var adjustment = 0
-	
-	if isEnemy:
-		bound_node = $EnemyActionButtons
-		champion = enemyChampion()
-		adjustment = -1
-	else:
-		bound_node = $PlayerActionButtons
-		champion = playerChampion()
-		adjustment = 1
-
-	var index = 0
-	for action in champion.usable_actions:
-		var new_button:ChampActionButton = champActionButton.instantiate()
-		new_button.setup(champion, action)
-		new_button.position.x += (100 * adjustment) * index
-		if (index + 1) % 2:
-			new_button.position.y += 20
-		else:
-			new_button.position.y -= 20
-		bound_node.add_child(new_button)
-		index += 1
-	
 
 func add_card_to_random_slot(card:Card, isEnemyCard:bool):
 	var empty_slots = MyTools.findEmptyCardSlots(isEnemyCard)
@@ -283,13 +236,13 @@ func updateResourceLabels():
 	
 	
 			
-func playerChampion() -> Champion:
+func playerChampion() -> Card:
 	if $CardsManager/PlayerChampSlot.get_children().size() > 0:
 		return $CardsManager/PlayerChampSlot.get_child(0)
 	else:
 		return null
 
-func enemyChampion() -> Champion:
+func enemyChampion() -> Card:
 	if $CardsManager/EnemyChampSlot.get_children().size() > 0:
 		return $CardsManager/EnemyChampSlot.get_child(0)
 	else:
@@ -344,12 +297,8 @@ func nuke_cards(isEnemy: bool):
 
 
 func nuke_all_cards():
-	nuke_cards($CardsManager/PlayerBoard)
-	nuke_cards($CardsManager/PlayerHand)
-	nuke_cards($CardsManager/EnemyHand)
-	nuke_cards($CardsManager/EnemyBoard)
-	nuke_cards(%PlayerChampSlot)
-	nuke_cards(%EnemyChampSlot)
+	nuke_cards(true)
+	nuke_cards(false)
 
 
 

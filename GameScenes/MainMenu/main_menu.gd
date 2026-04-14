@@ -75,7 +75,7 @@ func buttonPressedStartMatch() -> void:
 	bestiaryVisible = false
 	
 	GameInfo.isPreBattle = true
-	GameInfo.enemyDeckCards = DataLoader.createDesertDeck()
+	GameInfo.enemyDeckCards = MyTools.createGenericPlayerDeck()
 	MyTools.setupAndOpenDeckEdit(GameBoardScene.instantiate())
 	
 
