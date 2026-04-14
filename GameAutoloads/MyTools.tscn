@@ -1,10 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5e1japtdj8e"]
+[gd_scene format=3 uid="uid://b5e1japtdj8e"]
 
 [ext_resource type="Script" uid="uid://b06j00lt3vyf1" path="res://GameAutoloads/Scripts/my_tools.gd" id="1_4t0x4"]
-[ext_resource type="Script" uid="uid://x5hp1ama1l5h" path="res://GameAutoloads/card_loader.gd" id="2_rhdjv"]
 
-[node name="MyTools" type="Node2D"]
+[node name="MyTools" type="Node2D" unique_id=16190665]
 script = ExtResource("1_4t0x4")
-
-[node name="CardLoader" type="Node" parent="."]
-script = ExtResource("2_rhdjv")

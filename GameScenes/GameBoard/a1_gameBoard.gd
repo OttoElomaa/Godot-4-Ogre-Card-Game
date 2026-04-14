@@ -75,6 +75,7 @@ func _ready() -> void:
 
 
 func setup_board():
+	print(name, ': Game Board set up')
 	$CardsManager.setup(self)
 	
 	$BattleSystem.main = self

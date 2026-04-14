@@ -7,9 +7,9 @@ var all_cards = []
 #### PLAYER PROFILE
 @onready var current_champion:Champion = preload("res://Champions/Scripts/Champion.tscn").instantiate()
 var playerName := "The Player"
-var heroName:
+var heroName: String = '':
 	get:
-		current_champion.champ_name
+		return current_champion.cardName
 var character_position: Map_Node
 
 var playerGlory := 0
@@ -58,3 +58,6 @@ var enemyManaIncome := 0
 
 var turnCount := 0
 var enemy_turn: bool  ## true is enemy (AI) turn, false if player turn
+
+func _ready():
+	DataLoader.get_all_game_cards()

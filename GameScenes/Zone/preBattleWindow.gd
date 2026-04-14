@@ -25,15 +25,13 @@ func toggleWindow(enable:bool):
 		clearOldIcons()
 		
 		#### GENERATE PREVIEW ICONS OF ENEMY DECK	
-		for cardScene:PackedScene in battleInfoIcon.deck_cards:
+		for cardScene:String in battleInfoIcon.deck_cards:
 			
-			var container = CardContainerScene.instantiate()
+			var container = CardContainerScene.instantiate() as CardContainer
+			var card:Card = DataLoader.cards_by_name[cardScene]
 			enemyCardsHolder.add_child(container)
-			container.display_card(cardScene)
+			container.insert_card(card)
 			container.infoPanel = cardInfoPanel
-			
-			#### POPULATE ENEMY DECK FOR PLAYING
-			putCopiesOfCardIntoEnemyDeck(cardScene, 4)
 			
 		boardCommentsLabel.text = battleInfoIcon.board_comments
 	

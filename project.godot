@@ -29,6 +29,7 @@ Cheat="*res://GameAutoloads/cheat_menu.tscn"
 SignalBus="*res://GameAutoloads/SignalBus.gd"
 CardChecks="*res://GameAutoloads/CardChecks.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+DataLoader="*uid://x5hp1ama1l5h"
 
 [dialogue_manager]
 
