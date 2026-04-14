@@ -397,16 +397,21 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 		
 	#### NO BLOCKERS, ATTACK PLAYER
 	if blockers.is_empty():
-		var damageToPlayer = c.getCombatDamageToTarget(null, true)
-		await main.playAttackPortraitAnimation(c)
-		main.changeHealth(-c.tempDamage, !c.isEnemyCard)
-		main.updateResourceLabels()
-		handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
-		playerAttackedSE()
-		main.shake_screen(10, 0.5)
-		c.handleAttackingPortrait()
-		await c.returnToSlot()
-
+		if not main.playerChampion():
+			var damageToPlayer = c.getCombatDamageToTarget(null, true)
+			await main.playAttackPortraitAnimation(c)
+			main.changeHealth(-c.tempDamage, !c.isEnemyCard)
+			main.updateResourceLabels()
+			handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
+			playerAttackedSE()
+			main.shake_screen(10, 0.5)
+			c.handleAttackingPortrait()
+			await c.returnToSlot()
+		else:
+			var damageToChampion = c.getCombatDamageToTarget(main.playerChampion(), true)
+			main.playerChampion().takeCombatDamage(c, true)
+			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
+			c.handleAttackingPortrait()
 
 func handleEnemyCast(castingCard:Card):
 	if castingCard.actions.getCastAction():

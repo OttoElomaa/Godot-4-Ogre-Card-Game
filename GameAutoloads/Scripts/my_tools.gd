@@ -25,6 +25,10 @@ func gameBoardSetup(gameBoard:GameBoard):
 	self.battleSystem = gameBoard.battleSystem
 
 
+func get_all_game_cards():
+	return $CardLoader.createAllCardsByAmount(1)
+
+
 func checkNodeValidity(node) -> bool:
 	
 	if not node:
@@ -234,10 +238,10 @@ func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
 	return placedCards
 
 func createGenericPlayerDeck() -> Array:
-	return DataLoader.createDesertDeck()
+	return $CardLoader.createDesertDeck()
 
 func createAllCardsByAmount(amount:int) -> Array:
-	return DataLoader.createAllCardsByAmount(amount)
+	return $CardLoader.createAllCardsByAmount(amount)
 	
 func createCombatLogPrintout(text:String, color:Color):
 	if not gameBoard:
