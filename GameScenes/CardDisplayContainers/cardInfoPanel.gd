@@ -33,5 +33,10 @@ func toggleCardInfo(enable:bool, card:Card):
 	#if card.effectText != "":
 	$Margin/VBox/VBox2/EffectText.text = card.effectText
 	
-	$Margin/AttackDefenseLabel.text = "%d / %d" % [card.tempDamage,card.tempHealth]
+	%AttackDefenseLabel.text = "%d / %d" % [card.tempDamage,card.tempHealth]
 	
+	%ExplanationLabel.clear()
+	for i:String in MyTools.fetch_terms_and_explanations(card.effectText):
+		i = i[0].to_upper() + i.substr(1)
+		%ExplanationLabel.append_text(str(i, '[br]'))
+		

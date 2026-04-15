@@ -15,3 +15,4 @@ func _drop_data(at_position, data):
 		GameInfo.playerDeckCards.erase(card)
 		GameInfo.playerOwnedCards.append(card)
 	updated.emit()
+	%PutDown.play()

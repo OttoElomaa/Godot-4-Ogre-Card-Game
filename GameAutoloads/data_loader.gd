@@ -1,11 +1,12 @@
 extends Node
 
+#region CONSTANTS
 const generic_groups:Array[Card.Group] = [Card.Group.GENERIC, Card.Group.GREEN_GENERIC,
 Card.Group.CITY_GENERIC, Card.Group.DESERT_GENERIC, Card.Group.OUTCAST_GENERIC]
 
 const equipment_group:Card.Group = Card.Group.EQUIPMENT
+#endregion
 
-var counter := 0
 ## Arranges all_cards to be referenced by their CardName. Used to instantiate
 ## cards during runtime.
 var cards_by_name:Dictionary[String, Card] = {}
@@ -20,6 +21,17 @@ var scenes_by_name:Dictionary[String, Node] = {
 var boards_by_name:Dictionary[String, PackedScene] = {
 	'Default': preload('uid://be8n1sbdblr6g')
 }
+
+
+## Contains important terms such as 'inflict' or 'battle art' and their explanations,
+## found in the terms.json file.
+var terms:Dictionary[String, String] = {}
+## Contains all of the game's effect counters and their descriptions.
+var effect_counters_desc:Dictionary[String,String] = {}
+## Contains all of the game's keywords and their descriptions.
+var keywords_desc:Dictionary[String, String] = {}
+## Contains verses, used in the Akashic Records as reward for unlocking achievements.
+var verses:Dictionary[String, String] = {}
 
 func createCard(path:String):
 	var cardPacked = load(path)
@@ -69,13 +81,35 @@ func get_all_game_cards():
 		var champ:Champion = new_champ.instantiate()
 		champions_by_name[champ.cardName] = champ
 
+func load_text_data(path:String, dict:Dictionary):
+		var file_path = path
+		var file = FileAccess.open(file_path, FileAccess.READ)
+		var json_object = JSON.new()
+		var parse_err = json_object.parse(file.get_as_text())
+		if parse_err == OK:
+			var data_received = json_object.data
+			if typeof(data_received) == TYPE_DICTIONARY:
+				print(data_received)
+				dict.assign(data_received)
+
+func get_effect_descriptions():
+	var path = 'res://CardScriptsAndComponents/EffectCounters/'
+	for i:String in DirAccess.get_files_at(path):
+		var scene:PackedScene = load(str(path, i))
+		var effect:CardEffect = scene.instantiate()
+		effect_counters_desc[effect.id] = effect.description
+	path = 'res://CardScriptsAndComponents/Keywords/'
+	for i:String in DirAccess.get_files_at(path):
+		var scene:PackedScene = load(str(path, i))
+		var effect:CardEffect = scene.instantiate()
+		keywords_desc[effect.id] = effect.description
+
 func createDesertDeck():
 	
 	var cards := []
 	
 	cards = createAllCardsByAmount(3)
 
-	prints("created cards: ", cards)
 	for c:Card in cards:
 		c.basicSetup()
 		#c.turnStartReset()

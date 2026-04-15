@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dkclkk5p3fw8b"]
 
 [ext_resource type="Script" uid="uid://dvogoklqfpfpc" path="res://GameScenes/DeckEditScreen/deck_edit.gd" id="1_2aanx"]
-[ext_resource type="Script" uid="uid://beo6y8c354myr" path="res://GameScenes/DeckEditScreen/active_deck_container.gd" id="3_2vaow"]
+[ext_resource type="Script" uid="uid://dlhi0eiiqqxh3" path="res://GameScenes/DeckEditScreen/active_deck_container.gd" id="3_2vaow"]
 [ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="3_vnb6w"]
-[ext_resource type="Script" uid="uid://c5gdydjw4aeny" path="res://GameScenes/DeckEditScreen/owned_cards_container.gd" id="4_2vaow"]
+[ext_resource type="Script" uid="uid://dw7x0akbcnnau" path="res://GameScenes/DeckEditScreen/owned_cards_container.gd" id="4_2vaow"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_wteh1"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="4_xlhhm"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="5_rwrpj"]
@@ -14,6 +14,7 @@
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="9_vyoq8"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="10_fk3a6"]
 [ext_resource type="Theme" uid="uid://c586ciarawo0t" path="res://PanelStyles/generic_theme.tres" id="10_wnc1h"]
+[ext_resource type="AudioStream" uid="uid://bwy5cuxuto872" path="res://Audio/SE/Card-Played.wav" id="15_wnc1h"]
 
 [node name="DeckEdit" type="CanvasLayer" unique_id=313935886]
 layer = 100
@@ -113,6 +114,7 @@ theme_override_styles/panel = ExtResource("7_ydr1y")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 5
 script = ExtResource("3_2vaow")
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer" unique_id=1764048148]
@@ -150,7 +152,6 @@ theme_override_constants/margin_right = 9
 theme_override_constants/margin_bottom = 5
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/OwnedCards/NinePatchRect/MarginContainer" unique_id=923521855]
-z_index = 2
 texture_filter = 1
 clip_contents = false
 layout_mode = 2
@@ -232,6 +233,14 @@ layout_mode = 2
 text = "Back to World"
 label_settings = ExtResource("10_fk3a6")
 horizontal_alignment = 1
+
+[node name="Audio" type="Node" parent="." unique_id=1873289973]
+
+[node name="PutDown" type="AudioStreamPlayer" parent="Audio" unique_id=1127495883]
+unique_name_in_owner = true
+stream = ExtResource("15_wnc1h")
+volume_db = 10.0
+bus = &"SE"
 
 [connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer3/Buttons/VBox/Proceed/Button" to="." method="_on_proceed_button_button_up"]
 [connection signal="button_up" from="MarginContainer/HBoxContainer/VBoxContainer3/Buttons/VBox/BackToWorld/Button" to="." method="_button_up_back_to_world"]
