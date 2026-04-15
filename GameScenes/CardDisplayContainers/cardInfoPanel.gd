@@ -3,6 +3,9 @@ extends PanelContainer
 
 var bestiary: Node = null
 
+func _ready():
+	modulate = Color(1, 1, 1, 0)
+
 func bestiarySetup(bestiaryScreen:Node):
 	if bestiaryScreen:
 		bestiary = bestiaryScreen
@@ -12,13 +15,13 @@ func toggleCardInfo(enable:bool, card:Card):
 	
 	#### HIDE
 	if not enable:
-		hide()
+		modulate = Color(1, 1, 1, 0)
 		if bestiary:
 			bestiary.setFlavorLabelText("")
 		return
 		
 	#### SHOW
-	show()
+	modulate = Color(1, 1, 1, 1)
 	if bestiary:
 		bestiary.setFlavorLabelText(card.flavorText)
 	

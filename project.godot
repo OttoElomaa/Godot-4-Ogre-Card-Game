@@ -50,6 +50,10 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 cardManager=""
 gameboard=""
 
+[gui]
+
+theme/custom="uid://c586ciarawo0t"
+
 [input]
 
 scrollUp={
