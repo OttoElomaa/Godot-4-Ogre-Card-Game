@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cfaipsme8ts60"]
+
+[ext_resource type="PackedScene" uid="uid://chhff8h0vvfgs" path="res://Champions/Scripts/Champion.tscn" id="1_y8crd"]
+[ext_resource type="Texture2D" uid="uid://ct78whieh4eej" path="res://Art/CardArt/GreenDefiance/card-art-creature-vineman-elder-v2.jpg" id="2_sddjd"]
+
+[node name="Champion" unique_id=1181374962 instance=ExtResource("1_y8crd")]
+texture = ExtResource("2_sddjd")
+cardName = "Vineman Elder"
+cardType = 2

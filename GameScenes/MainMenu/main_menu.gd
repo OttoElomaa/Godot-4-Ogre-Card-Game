@@ -12,8 +12,9 @@ var bestiaryCards := []
 
 
 func _ready() -> void:
-	GameInfo.all_cards = MyTools.createAllCardsByAmount(1)
-	GameInfo.playerOwnedCards = MyTools.createAllCardsByAmount(5)
+	DataLoader.get_all_game_cards()
+	GameInfo.playerOwnedCards = DataLoader.createDesertDeck()
+	GameInfo.current_champion = DataLoader.champions_by_name['Nameless Warrior']
 #	setupBestiary()
 	
 #	bestiaryVisible = true
