@@ -1,6 +1,7 @@
 extends CanvasLayer
 @onready var CardContainer = preload("res://GameScenes/DeckEditScreen/card_container_draggable.tscn")
 @onready var CardPanel = preload("res://GameScenes/DeckEditScreen/card_panel.tscn")
+@onready var ChampActionCont = preload("res://GameScenes/DeckEditScreen/champ_skill_container.tscn")
 @onready var ownedCardsContainer = %OwnedCardsContainer
 @onready var activeCardsContainer = %ActiveCardsContainer
 @onready var cardInfoPanel = %CardInfoPanel
@@ -10,6 +11,7 @@ var prepared_board: GameBoard = null
 
 func _ready():
 #	prepared_board = null
+	update_champion()
 	create_containers()
 	activeCardsContainer.connect("updated", create_containers)
 	ownedCardsContainer.connect("updated", create_containers)
@@ -57,7 +59,16 @@ func _on_proceed_button_button_up():
 #	prepared_board.turn_1_init()
 	prepared_board = null
 
-
+func update_champion():
+	var champion = GameInfo.current_champion
+	await MyTools.createTempCard(champion)
+	%ChampionTexture.texture = champion.texture
+	%ChampionName.text = champion.cardName
+	for action in champion.usable_actions:
+		var new_cont:ChampSkillContainer = ChampActionCont.instantiate()
+		new_cont.setup(action)
+		%SkillContainer.add_child(new_cont)
+	MyTools.removeTempCard(champion)
 
 func _button_up_back_to_world() -> void:
 	GameInfo.isPreBattle = false

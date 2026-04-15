@@ -1,34 +1,78 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkclkk5p3fw8b"]
+[gd_scene format=3 uid="uid://dkclkk5p3fw8b"]
 
 [ext_resource type="Script" uid="uid://dvogoklqfpfpc" path="res://GameScenes/DeckEditScreen/deck_edit.gd" id="1_2aanx"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="1_kjltk"]
-[ext_resource type="Script" uid="uid://dlhi0eiiqqxh3" path="res://GameScenes/DeckEditScreen/active_deck_container.gd" id="3_2vaow"]
-[ext_resource type="Script" uid="uid://dw7x0akbcnnau" path="res://GameScenes/DeckEditScreen/owned_cards_container.gd" id="4_2vaow"]
+[ext_resource type="Script" uid="uid://beo6y8c354myr" path="res://GameScenes/DeckEditScreen/active_deck_container.gd" id="3_2vaow"]
+[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="3_vnb6w"]
+[ext_resource type="Script" uid="uid://c5gdydjw4aeny" path="res://GameScenes/DeckEditScreen/owned_cards_container.gd" id="4_2vaow"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_wteh1"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="4_xlhhm"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="5_rwrpj"]
+[ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="5_ydr1y"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="6_t6uxs"]
 [ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://PanelStyles/SelectBoxTransparent.tres" id="7_wteh1"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="9_vyoq8"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="10_fk3a6"]
 
-[node name="DeckEdit" type="CanvasLayer"]
+[node name="DeckEdit" type="CanvasLayer" unique_id=313935886]
 layer = 100
 script = ExtResource("1_2aanx")
 
-[node name="Panel2" type="Panel" parent="."]
+[node name="Panel2" type="Panel" parent="." unique_id=939798735]
 show_behind_parent = true
 offset_right = 1920.0
 offset_bottom = 1088.0
 theme_override_styles/panel = ExtResource("9_vyoq8")
 
-[node name="PanelContainer" type="Control" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="Panel2" unique_id=397338657]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 36.0
+offset_right = 296.0
+offset_bottom = 332.0
+theme_override_styles/panel = ExtResource("9_vyoq8")
+
+[node name="ChampionTexture" type="TextureRect" parent="Panel2/PanelContainer" unique_id=747365614]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 280)
+layout_mode = 2
+texture = ExtResource("3_vnb6w")
+expand_mode = 1
+
+[node name="SkillContainer" type="VBoxContainer" parent="Panel2" unique_id=114265950]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 320.0
+offset_top = 37.0
+offset_right = 360.0
+offset_bottom = 77.0
+
+[node name="NinePatchRect2" type="PanelContainer" parent="Panel2" unique_id=1623776040]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 353.0
+offset_right = 498.0
+offset_bottom = 413.0
+theme_override_styles/panel = ExtResource("7_wteh1")
+
+[node name="ChampionName" type="RichTextLabel" parent="Panel2/NinePatchRect2" unique_id=1721547440]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_ydr1y")
+text = "No Champion"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="Control" parent="." unique_id=263194480]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1079.0
+offset_left = 18.0
+offset_top = 4.0
+offset_right = 1938.0
+offset_bottom = 1083.0
 
-[node name="Panel" type="PanelContainer" parent="PanelContainer"]
+[node name="OwnedCards" type="PanelContainer" parent="PanelContainer" unique_id=608712210]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 800)
 layout_mode = 1
 anchors_preset = 8
@@ -37,25 +81,25 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -427.0
-offset_top = -439.5
+offset_top = -418.5
 offset_right = 399.0
-offset_bottom = 386.5
+offset_bottom = 452.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("4_wteh1")
 metadata/_edit_group_ = true
 
-[node name="Scroll" type="ScrollContainer" parent="PanelContainer/Panel"]
+[node name="Scroll" type="ScrollContainer" parent="PanelContainer/OwnedCards" unique_id=388823774]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Panel/Scroll"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/OwnedCards/Scroll" unique_id=1739370787]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 35
 theme_override_constants/margin_bottom = -25
 
-[node name="OwnedCardsContainer" type="GridContainer" parent="PanelContainer/Panel/Scroll/MarginContainer"]
+[node name="OwnedCardsContainer" type="GridContainer" parent="PanelContainer/OwnedCards/Scroll/MarginContainer" unique_id=139474139]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -63,7 +107,7 @@ size_flags_vertical = 3
 columns = 6
 script = ExtResource("4_2vaow")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/Panel"]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/OwnedCards" unique_id=157948650]
 layout_mode = 2
 texture = ExtResource("1_kjltk")
 patch_margin_left = 7
@@ -73,12 +117,12 @@ patch_margin_bottom = 7
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=448698318]
 layout_mode = 0
-offset_left = 49.0
-offset_top = 148.0
-offset_right = 503.0
-offset_bottom = 836.0
+offset_left = 46.0
+offset_top = 517.0
+offset_right = 500.0
+offset_bottom = 989.0
 texture = ExtResource("1_kjltk")
 patch_margin_left = 7
 patch_margin_top = 7
@@ -87,7 +131,7 @@ patch_margin_bottom = 7
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect" unique_id=1595011743]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,13 +139,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/NinePatchRect/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/NinePatchRect/VBoxContainer" unique_id=254296735]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("7_wteh1")
 
-[node name="#CardsInDeck" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/PanelContainer"]
+[node name="#CardsInDeck" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/PanelContainer" unique_id=173021368]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -109,13 +153,13 @@ text = "0 / 10"
 label_settings = ExtResource("4_xlhhm")
 horizontal_alignment = 1
 
-[node name="ActiveCardsContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer"]
+[node name="ActiveCardsContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer" unique_id=339541667]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("3_2vaow")
 
-[node name="Buttons" type="MarginContainer" parent="PanelContainer"]
+[node name="Buttons" type="MarginContainer" parent="PanelContainer" unique_id=120813696]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -131,51 +175,73 @@ grow_vertical = 0
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 60
 
-[node name="VBox" type="VBoxContainer" parent="PanelContainer/Buttons"]
+[node name="VBox" type="VBoxContainer" parent="PanelContainer/Buttons" unique_id=1822315057]
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Proceed" type="PanelContainer" parent="PanelContainer/Buttons/VBox"]
+[node name="Proceed" type="PanelContainer" parent="PanelContainer/Buttons/VBox" unique_id=1885552281]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_vyoq8")
 
-[node name="Button" type="Button" parent="PanelContainer/Buttons/VBox/Proceed"]
+[node name="Button" type="Button" parent="PanelContainer/Buttons/VBox/Proceed" unique_id=1336221356]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("6_t6uxs")
 theme_override_styles/normal = ExtResource("7_wteh1")
+theme_override_styles/hover = ExtResource("6_t6uxs")
 
-[node name="Label" type="Label" parent="PanelContainer/Buttons/VBox/Proceed"]
+[node name="Label" type="Label" parent="PanelContainer/Buttons/VBox/Proceed" unique_id=692960891]
 layout_mode = 2
 text = "Proceed"
 label_settings = ExtResource("10_fk3a6")
 horizontal_alignment = 1
 
-[node name="BackToWorld" type="PanelContainer" parent="PanelContainer/Buttons/VBox"]
+[node name="BackToWorld" type="PanelContainer" parent="PanelContainer/Buttons/VBox" unique_id=1563562226]
 custom_minimum_size = Vector2(250, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_vyoq8")
 
-[node name="Button" type="Button" parent="PanelContainer/Buttons/VBox/BackToWorld"]
+[node name="Button" type="Button" parent="PanelContainer/Buttons/VBox/BackToWorld" unique_id=811135838]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("6_t6uxs")
 theme_override_styles/normal = ExtResource("7_wteh1")
+theme_override_styles/hover = ExtResource("6_t6uxs")
 
-[node name="Label" type="Label" parent="PanelContainer/Buttons/VBox/BackToWorld"]
+[node name="Label" type="Label" parent="PanelContainer/Buttons/VBox/BackToWorld" unique_id=1560785752]
 layout_mode = 2
 text = "Back to World"
 label_settings = ExtResource("10_fk3a6")
 horizontal_alignment = 1
 
-[node name="CardInfoPanel" parent="PanelContainer" instance=ExtResource("5_rwrpj")]
+[node name="CardInfoPanel" parent="PanelContainer" unique_id=2106214364 instance=ExtResource("5_rwrpj")]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 1438.0
 offset_top = 179.0
 offset_right = 1838.0
 offset_bottom = 779.0
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=1875149601]
+layout_mode = 0
+offset_left = 534.0
+offset_top = 40.0
+offset_right = 1356.0
+offset_bottom = 87.0
+theme = ExtResource("5_ydr1y")
+text = "Cards you own"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="PanelContainer" unique_id=885494523]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 452.0
+offset_right = 500.0
+offset_bottom = 499.0
+theme = ExtResource("5_ydr1y")
+text = "Your army"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="button_up" from="PanelContainer/Buttons/VBox/Proceed/Button" to="." method="_on_proceed_button_button_up"]
 [connection signal="button_up" from="PanelContainer/Buttons/VBox/BackToWorld/Button" to="." method="_button_up_back_to_world"]

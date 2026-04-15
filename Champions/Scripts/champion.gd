@@ -10,7 +10,8 @@ var usable_actions:Array = []
 var gameBoard:GameBoard = null
 
 func _ready() -> void:
-	pass
+	for child:ActionsNode in get_children():
+		usable_actions.append(child)
 
 func setup(board:GameBoard):
 	gameBoard = board

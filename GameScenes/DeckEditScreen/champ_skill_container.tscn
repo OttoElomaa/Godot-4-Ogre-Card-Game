@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cc07uuuw1gknl"]
+
+[ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="1_2f2of"]
+[ext_resource type="Script" uid="uid://bihrec7raflly" path="res://GameScenes/DeckEditScreen/champ_skill_container.gd" id="1_ht37o"]
+[ext_resource type="Texture2D" uid="uid://dcx2qsgic5x6" path="res://Art/CardComponents/card-effect-counter-burn.png" id="2_ht37o"]
+[ext_resource type="Texture2D" uid="uid://jyilkyb2wtn3" path="res://Art/CardComponents/player-mana-crystal-fortified.png" id="3_u35y2"]
+[ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Fonts/BasicSmallPixelFont.tres" id="4_jkb7v"]
+
+[node name="Skill_1" type="HBoxContainer" unique_id=1231671677]
+custom_minimum_size = Vector2(0, 40)
+script = ExtResource("1_ht37o")
+
+[node name="SkillBorder" type="TextureRect" parent="." unique_id=953554711]
+z_index = 1
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_2f2of")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="SkillTexture" type="TextureRect" parent="SkillBorder" unique_id=1694853060]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 0
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 60.0
+offset_bottom = 62.0
+texture = ExtResource("2_ht37o")
+
+[node name="ManaCostTexture" type="TextureRect" parent="SkillBorder/SkillTexture" unique_id=1611245957]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 28.0
+offset_top = 22.0
+offset_right = 68.0
+offset_bottom = 61.0
+texture = ExtResource("3_u35y2")
+expand_mode = 1
+
+[node name="Cost" type="Label" parent="SkillBorder/SkillTexture" unique_id=262093771]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 29.0
+offset_top = 30.0
+offset_right = 69.0
+offset_bottom = 53.0
+theme = ExtResource("4_jkb7v")
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionName" type="RichTextLabel" parent="." unique_id=60054506]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 2
+theme = ExtResource("4_jkb7v")
+bbcode_enabled = true
+text = "Big Boom"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1

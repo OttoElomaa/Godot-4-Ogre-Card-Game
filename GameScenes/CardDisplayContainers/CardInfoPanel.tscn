@@ -1,33 +1,33 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtaqr72ueoeng"]
+[gd_scene format=3 uid="uid://dtaqr72ueoeng"]
 
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="1_axiiv"]
 [ext_resource type="Texture2D" uid="uid://bvnmf54c4ye2n" path="res://Art/CardComponents/card-background-texture-V4b-ForInfoPane.jpg" id="2_axiiv"]
-[ext_resource type="Script" uid="uid://cjv7n32vxaee8" path="res://GameScenes/CardDisplayContainers/cardInfoPanel.gd" id="2_o0dss"]
+[ext_resource type="Script" uid="uid://6nyx4n5icx41" path="res://GameScenes/CardDisplayContainers/cardInfoPanel.gd" id="2_o0dss"]
 [ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSettings/LabelSet-Header-Brown.tres" id="3_o0dss"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_ykqoc"]
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="5_f5wib"]
 
-[node name="CardInfoPanel" type="PanelContainer"]
+[node name="CardInfoPanel" type="PanelContainer" unique_id=1345369115]
 custom_minimum_size = Vector2(400, 600)
 theme_override_styles/panel = ExtResource("1_axiiv")
 script = ExtResource("2_o0dss")
 
-[node name="CardBackgroundTexture" type="TextureRect" parent="."]
+[node name="CardBackgroundTexture" type="TextureRect" parent="." unique_id=220574376]
 layout_mode = 2
 texture = ExtResource("2_axiiv")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=340755870]
 layout_mode = 2
 theme_override_constants/margin_left = 22
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 22
 theme_override_constants/margin_bottom = 10
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1567262020]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="NameLabel" type="Label" parent="Margin/VBox"]
+[node name="NameLabel" type="Label" parent="Margin/VBox" unique_id=1325996088]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Card Name"
@@ -35,23 +35,23 @@ label_settings = ExtResource("3_o0dss")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="CardArt" type="TextureRect" parent="Margin/VBox"]
+[node name="CardArt" type="TextureRect" parent="Margin/VBox" unique_id=836676011]
 layout_mode = 2
 texture = ExtResource("4_ykqoc")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="VBox2" type="VBoxContainer" parent="Margin/VBox"]
+[node name="VBox2" type="VBoxContainer" parent="Margin/VBox" unique_id=1407441477]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="SubTypeLine" type="Label" parent="Margin/VBox/VBox2"]
+[node name="SubTypeLine" type="Label" parent="Margin/VBox/VBox2" unique_id=285487385]
 layout_mode = 2
 text = "Sub-type line goes here."
 label_settings = ExtResource("5_f5wib")
 horizontal_alignment = 1
 
-[node name="EffectText" type="Label" parent="Margin/VBox/VBox2"]
+[node name="EffectText" type="Label" parent="Margin/VBox/VBox2" unique_id=1980011061]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 text = "Effect text goes here."
@@ -59,7 +59,7 @@ label_settings = ExtResource("5_f5wib")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="FlavorTextLabel" type="Label" parent="Margin/VBox/VBox2"]
+[node name="FlavorTextLabel" type="Label" parent="Margin/VBox/VBox2" unique_id=490531091]
 visible = false
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
@@ -68,7 +68,7 @@ label_settings = ExtResource("5_f5wib")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="AttackDefenseLabel" type="Label" parent="Margin"]
+[node name="AttackDefenseLabel" type="Label" parent="Margin" unique_id=73014179]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Attack / Defense"
