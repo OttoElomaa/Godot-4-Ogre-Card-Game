@@ -5,7 +5,7 @@ var all_cards = []
 
 #####################################################
 #### PLAYER PROFILE
-@onready var current_champion:Champion = preload("res://Champions/Scripts/Champion.tscn").instantiate()
+var current_champion:Champion = null
 var playerName := "The Player"
 var heroName: String = '':
 	get:
@@ -54,7 +54,7 @@ var playerHealth := 0
 var playerMana := 0
 var playerManaIncome := 0
 
-@onready var enemyChampion: Champion = preload("res://Champions/Scripts/Champion.tscn").instantiate()
+@onready var enemyChampion: Champion = preload('uid://clkhslocsqkuh').instantiate()
 var enemyHealth := 0
 var enemyMana := 0
 var enemyManaIncome := 0

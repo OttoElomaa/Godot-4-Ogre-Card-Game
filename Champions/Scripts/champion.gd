@@ -1,8 +1,6 @@
 extends Card
 class_name Champion
 
-@export var texture:Texture
-
 var level = 1
 
 var usable_actions:Array = []
@@ -16,7 +14,7 @@ func _ready() -> void:
 func setup(board:GameBoard):
 	gameBoard = board
 	if gameBoard:
-		print(cardName, ' has gameboard')
+#		print(cardName, ' has gameboard')
 		cardsManager = gameBoard.cardsManager
 		battleSystem = gameBoard.battleSystem
 		cardsManager.connectCardSignal(self)
@@ -30,4 +28,3 @@ func setup(board:GameBoard):
 	for child:ActionsNode in get_children():
 		child.awakenTriggers()
 		child.setup(self)
-		usable_actions.append(child)

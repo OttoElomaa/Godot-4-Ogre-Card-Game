@@ -161,7 +161,8 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 		
 		
 	#### CLEAR THE INITIAL TARGET AFTER ACTION USE
-	myCard.actions.setInitialTarget(null)
+	if myCard.actions:
+		myCard.actions.setInitialTarget(null)
 	
 	return success
 

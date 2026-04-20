@@ -1,6 +1,8 @@
 [gd_resource type="Theme" format=3 uid="uid://c586ciarawo0t"]
 
 [ext_resource type="StyleBox" uid="uid://c2fu18mjsfki7" path="res://PanelStyles/ScrollBarTexture.tres" id="1_s58hc"]
+[ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Fonts/monaco/monaco.ttf" id="1_ysu35"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="2_qe2fn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwwbq"]
 bg_color = Color(0.16078432, 0.12156863, 0.07058824, 1)
@@ -27,6 +29,11 @@ anti_aliasing = false
 
 [resource]
 resource_local_to_scene = true
+default_font = ExtResource("1_ysu35")
+default_font_size = 32
+TooltipLabel/font_sizes/font_size = 32
+TooltipPanel/fonts/title_font = ExtResource("1_ysu35")
+TooltipPanel/styles/panel = ExtResource("2_qe2fn")
 VScrollBar/styles/grabber = ExtResource("1_s58hc")
 VScrollBar/styles/grabber_highlight = ExtResource("1_s58hc")
 VScrollBar/styles/grabber_pressed = ExtResource("1_s58hc")

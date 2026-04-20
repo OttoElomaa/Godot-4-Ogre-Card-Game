@@ -23,8 +23,8 @@
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="21_ufaws"]
 [ext_resource type="AudioStream" uid="uid://0grfmidlhvlt" path="res://Audio/SE/Player-Damaged.wav" id="24_ikeh1"]
-[ext_resource type="Script" uid="uid://cpd622ppqkx7o" path="res://GameScenes/GameBoard/camera_main_board.gd" id="25_7yxuf"]
-[ext_resource type="Script" uid="uid://cjsknel528ibh" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]
+[ext_resource type="Script" uid="uid://3gv0j2w8kq47" path="res://GameScenes/GameBoard/camera_main_board.gd" id="25_7yxuf"]
+[ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
 [ext_resource type="AudioStream" uid="uid://cqryjjev655kv" path="res://Audio/BGM/Cards of Achra OST - Tunneler Lullaby.ogg" id="26_hysm7"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="26_ngg6u"]
@@ -852,8 +852,32 @@ bus = &"BGM"
 [node name="PlayerActionButtons" type="Node2D" parent="." unique_id=145877137]
 position = Vector2(1038, 1379)
 
+[node name="ActionButton_1" type="Marker2D" parent="PlayerActionButtons" unique_id=1583950859]
+position = Vector2(-7, -306)
+
+[node name="ActionButton_2" type="Marker2D" parent="PlayerActionButtons" unique_id=251573390]
+position = Vector2(137, -306)
+
+[node name="ActionButton_3" type="Marker2D" parent="PlayerActionButtons" unique_id=584684755]
+position = Vector2(70, -305)
+
+[node name="ActionButton_4" type="Marker2D" parent="PlayerActionButtons" unique_id=1454376773]
+position = Vector2(-70, -237)
+
 [node name="EnemyActionButtons" type="Node2D" parent="." unique_id=1495512634]
 position = Vector2(1123, 274)
+
+[node name="ActionButton_1" type="Marker2D" parent="EnemyActionButtons" unique_id=492886559]
+position = Vector2(130, 35)
+
+[node name="ActionButton_2" type="Marker2D" parent="EnemyActionButtons" unique_id=1527912255]
+position = Vector2(4, 34)
+
+[node name="ActionButton_3" type="Marker2D" parent="EnemyActionButtons" unique_id=287918643]
+position = Vector2(59, 34)
+
+[node name="ActionButton_4" type="Marker2D" parent="EnemyActionButtons" unique_id=1726559165]
+position = Vector2(-77, -36)
 
 [connection signal="mouse_entered" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_entered"]
 [connection signal="mouse_exited" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_exited"]

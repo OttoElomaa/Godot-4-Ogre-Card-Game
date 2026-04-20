@@ -12,7 +12,7 @@
 
 [node name="Champion" unique_id=1181374962 instance=ExtResource("1_5utre")]
 
-[node name="Actions3" type="Node2D" parent="." index="0" unique_id=1678552215]
+[node name="Actions1" type="Node2D" parent="." index="0" unique_id=1678552215]
 unique_name_in_owner = true
 script = ExtResource("3_gkfi1")
 action_name = "Blast"
@@ -21,27 +21,27 @@ cost_display = Dictionary[int, int]({
 1: 1
 })
 
-[node name="OnCastTrigger" parent="Actions3" index="0" unique_id=1137959010 instance=ExtResource("5_tqudo")]
+[node name="OnCastTrigger" parent="Actions1" index="0" unique_id=1137959010 instance=ExtResource("5_tqudo")]
 
-[node name="CardAction2" type="Node2D" parent="Actions3/OnCastTrigger" index="0" unique_id=1847338307]
+[node name="CardAction2" type="Node2D" parent="Actions1/OnCastTrigger" index="0" unique_id=1847338307]
 script = ExtResource("6_6dmsq")
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillPlayerHealthMana" parent="Actions3/OnCastTrigger/CardAction2" index="0" unique_id=1091936336 instance=ExtResource("7_4ubxy")]
+[node name="SkillPlayerHealthMana" parent="Actions1/OnCastTrigger/CardAction2" index="0" unique_id=1091936336 instance=ExtResource("7_4ubxy")]
 alterOwnerMana = -1
 
-[node name="CardAction" type="Node2D" parent="Actions3/OnCastTrigger" index="1" unique_id=708453459]
+[node name="CardAction" type="Node2D" parent="Actions1/OnCastTrigger" index="1" unique_id=708453459]
 script = ExtResource("6_6dmsq")
-customActionText = "Fireball: inflict 2."
+customActionText = "Inflict 2."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillAlterHealth" parent="Actions3/OnCastTrigger/CardAction" index="0" unique_id=1665380405 instance=ExtResource("8_wmtlw")]
+[node name="SkillAlterHealth" parent="Actions1/OnCastTrigger/CardAction" index="0" unique_id=1665380405 instance=ExtResource("8_wmtlw")]
 inflictCreature = 2
 
-[node name="ManualTargeting" parent="Actions3/OnCastTrigger/CardAction" index="1" unique_id=781687576 instance=ExtResource("9_ptf25")]
+[node name="ManualTargeting" parent="Actions1/OnCastTrigger/CardAction" index="1" unique_id=781687576 instance=ExtResource("9_ptf25")]
 manualTargetGroup = 2
 
-[node name="Actions4" type="Node2D" parent="." index="1" unique_id=1228623026]
+[node name="Actions2" type="Node2D" parent="." index="1" unique_id=1228623026]
 unique_name_in_owner = true
 script = ExtResource("3_gkfi1")
 action_name = "Big Blast"
@@ -50,22 +50,22 @@ cost_display = Dictionary[int, int]({
 1: 3
 })
 
-[node name="OnCastTrigger" parent="Actions4" index="0" unique_id=193398484 instance=ExtResource("5_tqudo")]
+[node name="OnCastTrigger" parent="Actions2" index="0" unique_id=193398484 instance=ExtResource("5_tqudo")]
 
-[node name="CardAction2" type="Node2D" parent="Actions4/OnCastTrigger" index="0" unique_id=972908857]
+[node name="CardAction2" type="Node2D" parent="Actions2/OnCastTrigger" index="0" unique_id=972908857]
 script = ExtResource("6_6dmsq")
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillPlayerHealthMana" parent="Actions4/OnCastTrigger/CardAction2" index="0" unique_id=860139769 instance=ExtResource("7_4ubxy")]
-alterOwnerMana = -1
+[node name="SkillPlayerHealthMana" parent="Actions2/OnCastTrigger/CardAction2" index="0" unique_id=860139769 instance=ExtResource("7_4ubxy")]
+alterOwnerMana = -3
 
-[node name="CardAction" type="Node2D" parent="Actions4/OnCastTrigger" index="1" unique_id=1049069721]
+[node name="CardAction" type="Node2D" parent="Actions2/OnCastTrigger" index="1" unique_id=1049069721]
 script = ExtResource("6_6dmsq")
 customActionText = "Fireball: inflict 2."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillAlterHealth" parent="Actions4/OnCastTrigger/CardAction" index="0" unique_id=785528433 instance=ExtResource("8_wmtlw")]
+[node name="SkillAlterHealth" parent="Actions2/OnCastTrigger/CardAction" index="0" unique_id=785528433 instance=ExtResource("8_wmtlw")]
 inflictCreature = 4
 
-[node name="ManualTargeting" parent="Actions4/OnCastTrigger/CardAction" index="1" unique_id=192819429 instance=ExtResource("9_ptf25")]
+[node name="ManualTargeting" parent="Actions2/OnCastTrigger/CardAction" index="1" unique_id=192819429 instance=ExtResource("9_ptf25")]
 manualTargetGroup = 2

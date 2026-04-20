@@ -60,7 +60,7 @@ func _on_proceed_button_button_up():
 	prepared_board = null
 
 func update_champion():
-	var champion = GameInfo.current_champion
+	var champion = GameInfo.current_champion.duplicate()
 	await MyTools.createTempCard(champion)
 	%ChampionTexture.texture = champion.texture
 	%ChampionName.text = champion.cardName

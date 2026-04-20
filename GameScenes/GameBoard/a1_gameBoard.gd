@@ -112,27 +112,23 @@ func setup_champions(player_champ:Champion, enemy_champ:Champion):
 func create_action_buttons(isEnemy:bool):
 	var bound_node: Node = null
 	var champion: Champion = null
-	var adjustment = 0
+	print('create action button called with ', isEnemy)
 	
 	if isEnemy:
 		bound_node = $EnemyActionButtons
 		champion = enemyChampion()
-		adjustment = -1
 	else:
 		bound_node = $PlayerActionButtons
 		champion = playerChampion()
-		adjustment = 1
 
+	var positions: Array = bound_node.get_children()
 	var index = 0
 	for action in champion.usable_actions:
 		var new_button:ChampActionButton = champActionButton.instantiate()
+		var marker: Marker2D = positions[index]
 		new_button.setup(champion, action)
-		new_button.position.x += (100 * adjustment) * index
-		if (index + 1) % 2:
-			new_button.position.y += 20
-		else:
-			new_button.position.y -= 20
 		bound_node.add_child(new_button)
+		new_button.position = marker.position
 		index += 1
 	
 
