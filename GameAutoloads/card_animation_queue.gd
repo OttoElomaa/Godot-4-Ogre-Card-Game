@@ -22,7 +22,8 @@ func _physics_process(delta: float) -> void:
 
 func queueAnimation(card:Card, animationFunction:Callable, waitingFunction:Callable=doNothing) -> void:
 	
-	print("AnimationQueue: Queued animation for card: " + card.cardName)	 
+	print("AnimationQueue: Queue Animation for card: %s. Animation Function: %s " % [card.cardName, animationFunction])
+			 
 	animationQueue.append( 
 		{"card":card, "animationFunction":animationFunction, "waitingFunction":waitingFunction} 
 		)

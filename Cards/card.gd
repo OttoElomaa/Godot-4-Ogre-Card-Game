@@ -196,6 +196,7 @@ var isResting := false
 var allowInteract := true
 var allowEnemyUse := true
 
+var attackTarget:Card = null
 
 
 
@@ -218,20 +219,14 @@ func setup_all_actions():
 		alt_actions_node_3.putTriggersToSleep()
 
 
-func setup(gameBoard: GameBoard):
+func setup(board: GameBoard):
 	print(cardName, ' sets up.')
-	if gameBoard:
-		self.gameBoard = gameBoard
+	if board:
+		self.gameBoard = board
 		print(cardName, ' has gameboard')
 		cardsManager = gameBoard.cardsManager
 		battleSystem = gameBoard.battleSystem
 		cardsManager.connectCardSignal(self)
-
-	
-	var boardOrTempNode = get_parent()
-	if boardOrTempNode is Node2D:
-		#myOffset = get_parent().position
-		pass
 	
 	change_upgrade_state(upgraded)
 	
@@ -240,11 +235,13 @@ func setup(gameBoard: GameBoard):
 #	actions.setup(self)
 	reset_shaders()
 	
+	#### IS CREATURE
 	if cardType == CardTypes.CREATURE:
 		updateCardNameAndBasicInfo(true)
 		$Frontside/Background/Creature.show()
 		$Frontside/Background/Spell.hide()
-		
+	
+	#### IS RITUAL OR SOME OTHER NON-CREATURE	
 	else:
 		updateCardNameAndBasicInfo(false)
 		
@@ -760,8 +757,6 @@ func getCombatDamageToTarget(target:Card, isAttacker: bool):
 	#### BASELINE
 	var combatDamage:int = tempDamage
 	
-	
-	
 	if hasEffect('Rage') and not isAttacker:
 		combatDamage += getEffect('Rage').counter
 		
@@ -787,6 +782,7 @@ func handleCombatActions(attacker:Card, defender:Card, waitingFunction:Callable)
 	allowInteract = false
 	if attacker == self:
 		z_index = 10
+		attackTarget = defender
 		CardAnimationQueue.queueAnimation(self, animateAttack, waitingFunction)
 	elif defender == self:
 		z_index = 0
@@ -849,10 +845,6 @@ func handleCombatSurvival(isAttacker:bool) -> bool:
 	
 	
 
-
-
-
-
 ###############################################################################
 #### IF TOANIMATE == FALSE, then (Card is DEFENDER?) -> ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
@@ -875,9 +867,7 @@ func destroyAndAnimate():
 	statesLimbo()
 	CardAnimationQueue.queueAnimation(self, animateCardDestroyed, handleEnterGraveyard)
 	
-#	handleEnterGraveyard()
-	
-	
+
 
 func handleEnterGraveyard():
 	vacateSlot()
@@ -956,8 +946,8 @@ func toggleActionStateIndicator(enable:bool):
 
 
 
-func turnOnBestiaryVisuals(mainMenu:Node):
-	self.mainMenu = mainMenu
+func turnOnBestiaryVisuals(menu:Node):
+	self.mainMenu = menu
 	
 	toggleManaCostIndicator(true)
 	toggleActionStateIndicator(false)
@@ -973,35 +963,28 @@ func turnOnBestiaryVisuals(mainMenu:Node):
 ###############################################################################
 #region ######################################## VISUALS - ANIMATIONS
 
-#### FOR RESTING	
-func timeoutRestAnimation() -> void:
-	if checkResting():
-		CardAnimationQueue.queueAnimation(self, animateRestingRotation)
-
-
-
 
 #### LENGTH = 0.5 + 1 = 1.5 s
 func animateAttack() -> Tween:
-	var defender:Card = battleSystem.currentDefendingCard
+	var defender:Card = attackTarget
 	
 	var offset = Vector2(0,300)
+	var small_offset = Vector2(0,100)
 	if isEnemyCard:
 		offset = -offset
+		small_offset = -small_offset
 		
 	var tween = create_tween()
 	var attacking_position = defender.position + offset
+	var lunge_endpoint_pos = attacking_position - small_offset
+	
 	## The attacking card floats in front of the defending card.
-	await tween.tween_property(self, 'position', attacking_position, 0.5)
+	tween.tween_property(self, 'position', attacking_position, 0.5)
 	
-	## The attacking card pounces on the defending card.
-	if isEnemyCard:
-		$BodyAnimations.play("EnemyAttack")
-	else:
-		$BodyAnimations.play("PlayerAttack")
+	## It lunges in, and then returns backwards.
+	tween.tween_property(self, 'position', lunge_endpoint_pos, 0.2)
+	tween.tween_property(self, 'position', attacking_position, 0.6)
 	
-	#### WAIT FOR BODYANIMATION "Punch the defender" TO FINISH
-	tween.tween_interval(1)
 	return tween
 	
 
