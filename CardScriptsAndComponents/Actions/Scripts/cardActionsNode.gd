@@ -1,6 +1,6 @@
 @icon("res://Art/icons/16x16/swords.png")
 extends Node2D
-
+class_name ActionsNode
 
 
 var myCard: Card = null
@@ -77,7 +77,7 @@ func handleRitual() -> bool:
 
 func handleCast() -> bool:
 	var success := false
-	
+
 	for child in get_children():
 		if child is OnCastTrigger:
 			if await child.execute(null):

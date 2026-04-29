@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://drnejrg0lhyf1"]
+[gd_scene format=3 uid="uid://drnejrg0lhyf1"]
 
 [ext_resource type="Script" uid="uid://wm8q41etpwli" path="res://GameScenes/DeckEditScreen/card_container_draggable.gd" id="1_wl57w"]
 [ext_resource type="Texture2D" uid="uid://mnmcpj4cb26w" path="res://Art/CardComponents/card-background-texture-V4.jpg" id="2_kwypy"]
@@ -9,8 +9,9 @@
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="7_hgwgn"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="8_oyvft"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="9_3mglb"]
+[ext_resource type="AudioStream" uid="uid://bwy5cuxuto872" path="res://Audio/SE/Card-Played.wav" id="10_kwypy"]
 
-[node name="CardContainer" type="MarginContainer"]
+[node name="CardContainer" type="MarginContainer" unique_id=410174868]
 custom_minimum_size = Vector2(130, 200)
 offset_left = -55.0
 offset_top = -89.0
@@ -19,17 +20,17 @@ offset_bottom = 111.0
 pivot_offset = Vector2(55, 89)
 script = ExtResource("1_wl57w")
 
-[node name="Frontside" type="Node2D" parent="."]
+[node name="Frontside" type="Node2D" parent="." unique_id=361414676]
 position = Vector2(50, 76)
 scale = Vector2(0.5, 0.5)
 
-[node name="Background" type="Node2D" parent="Frontside"]
+[node name="Background" type="Node2D" parent="Frontside" unique_id=286682301]
 position = Vector2(10, 12)
 
-[node name="Creature" type="Sprite2D" parent="Frontside/Background"]
+[node name="Creature" type="Sprite2D" parent="Frontside/Background" unique_id=1924234044]
 texture = ExtResource("2_kwypy")
 
-[node name="Spell" type="Sprite2D" parent="Frontside/Background"]
+[node name="Spell" type="Sprite2D" parent="Frontside/Background" unique_id=1706653028]
 visible = false
 texture = ExtResource("3_f0ver")
 
@@ -44,14 +45,14 @@ texture = ExtResource("4_whp3h")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="ManaCost" type="Node2D" parent="Frontside"]
+[node name="ManaCost" type="Node2D" parent="Frontside" unique_id=669939330]
 position = Vector2(10, -162)
 scale = Vector2(0.8, 0.8)
 
-[node name="ManaCostTexture" type="Sprite2D" parent="Frontside/ManaCost"]
+[node name="ManaCostTexture" type="Sprite2D" parent="Frontside/ManaCost" unique_id=187541602]
 texture = ExtResource("5_dwmew")
 
-[node name="ManaCostLabel" type="Label" parent="Frontside/ManaCost"]
+[node name="ManaCostLabel" type="Label" parent="Frontside/ManaCost" unique_id=1505057951]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,7 +69,7 @@ text = "88"
 label_settings = ExtResource("6_0l8ik")
 horizontal_alignment = 1
 
-[node name="EffectsLabel" type="Label" parent="Frontside"]
+[node name="EffectsLabel" type="Label" parent="Frontside" unique_id=1147455050]
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -88,10 +89,10 @@ horizontal_alignment = 1
 autowrap_mode = 2
 text_overrun_behavior = 4
 
-[node name="Resources" type="Node2D" parent="Frontside"]
+[node name="Resources" type="Node2D" parent="Frontside" unique_id=702020287]
 position = Vector2(10, 140)
 
-[node name="Panel" type="PanelContainer" parent="Frontside/Resources"]
+[node name="Panel" type="PanelContainer" parent="Frontside/Resources" unique_id=382828402]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -105,27 +106,32 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("8_oyvft")
 
-[node name="HBox" type="HBoxContainer" parent="Frontside/Resources/Panel"]
+[node name="HBox" type="HBoxContainer" parent="Frontside/Resources/Panel" unique_id=2128003927]
 layout_mode = 2
 theme_override_constants/separation = 7
 alignment = 1
 
-[node name="PowerLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+[node name="PowerLabel" type="Label" parent="Frontside/Resources/Panel/HBox" unique_id=2093028773]
 layout_mode = 2
 text = "22"
 label_settings = ExtResource("9_3mglb")
 horizontal_alignment = 2
 
-[node name="DashLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+[node name="DashLabel" type="Label" parent="Frontside/Resources/Panel/HBox" unique_id=38826047]
 layout_mode = 2
 text = "/"
 label_settings = ExtResource("9_3mglb")
 horizontal_alignment = 1
 
-[node name="HealthLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+[node name="HealthLabel" type="Label" parent="Frontside/Resources/Panel/HBox" unique_id=1417644628]
 layout_mode = 2
 text = "33"
 label_settings = ExtResource("9_3mglb")
+
+[node name="PickUp" type="AudioStreamPlayer" parent="." unique_id=918839638]
+unique_name_in_owner = true
+stream = ExtResource("10_kwypy")
+bus = &"SE"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

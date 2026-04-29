@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://054n3rxi0suh"]
+
+[ext_resource type="PackedScene" uid="uid://chhff8h0vvfgs" path="res://Champions/Scripts/Champion.tscn" id="1_s1kgq"]
+[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="2_yv76x"]
+
+[node name="Champion" unique_id=1181374962 instance=ExtResource("1_s1kgq")]
+texture = ExtResource("2_yv76x")
+cardName = "Tatzelwurm"
+cardType = 2

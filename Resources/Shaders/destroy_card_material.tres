@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dccxbrxmkylit"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dccxbrxmkylit"]
 
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="1_ggdle"]
 

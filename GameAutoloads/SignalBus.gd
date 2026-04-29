@@ -25,3 +25,6 @@ signal hide_all()
 
 signal unlock_node(id:String)
 signal resolve_node(id:String)
+
+signal add_alliance(idx:Card.Group)
+signal remove_alliance(idx:Card.Group)

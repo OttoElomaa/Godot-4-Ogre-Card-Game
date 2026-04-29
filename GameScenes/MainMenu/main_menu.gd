@@ -12,8 +12,11 @@ var bestiaryCards := []
 
 
 func _ready() -> void:
-	GameInfo.all_cards = MyTools.createAllCardsByAmount(1)
-	GameInfo.playerOwnedCards = MyTools.createAllCardsByAmount(5)
+	DataLoader.get_all_game_cards()
+	DataLoader.load_text_data('res://Resources/Data/Terms.json', DataLoader.terms)
+	DataLoader.get_effect_descriptions()
+	GameInfo.playerOwnedCards = DataLoader.createDesertDeck()
+	GameInfo.current_champion = DataLoader.champions_by_name['Nameless Warrior']
 #	setupBestiary()
 	
 #	bestiaryVisible = true
@@ -75,7 +78,7 @@ func buttonPressedStartMatch() -> void:
 	bestiaryVisible = false
 	
 	GameInfo.isPreBattle = true
-	GameInfo.enemyDeckCards = MyTools.createGenericPlayerDeck()
+	GameInfo.enemyDeckCards = DataLoader.createDesertDeck()
 	MyTools.setupAndOpenDeckEdit(GameBoardScene.instantiate())
 	
 

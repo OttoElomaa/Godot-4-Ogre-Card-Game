@@ -3,6 +3,6 @@ The King’s Men are brought down. The slaves scatter and hide, you do not pursu
 do SignalBus.disp_card.emit('Vineman Elder')
 “Ah, I thank you, kind one, for the service you rendered us – we were, in truth, plenty scared when we could hear all of a sudden, and heard our kin calling. These men – they reap and rend us with sickles, do they not? It is better then that they are gone.
 We have heard the call of home, and of our distant, orphaned kin. The Mangrove Sun… how could we have so soundly slept! Know this, o kind one: we Vinemen fight with you now, one with the vengeance, for the joy of sight and hearing.”
-do GameInfo.playerAlliances.append('Vinemen')
+do GameInfo.add_alliance(Card.Group.VINEMEN)
 
 => END

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhgg2oefy2y6e"]
+[gd_scene format=3 uid="uid://dhgg2oefy2y6e"]
 
 [ext_resource type="Script" uid="uid://dojtnp1c1qm5h" path="res://GameScenes/MainMenu/main_menu.gd" id="1_jd835"]
 [ext_resource type="PackedScene" uid="uid://cjwurlo7haie7" path="res://GameScenes/audio.tscn" id="2_18c0x"]
@@ -17,18 +17,18 @@ resource_local_to_scene = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rf05g"]
 resource_local_to_scene = true
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Node2D" unique_id=1388111977]
 script = ExtResource("1_jd835")
 
-[node name="Audio" parent="." instance=ExtResource("2_18c0x")]
+[node name="Audio" parent="." unique_id=1318804510 instance=ExtResource("2_18c0x")]
 BGM = ExtResource("3_3ew8u")
 
-[node name="MenuCamera" type="Camera2D" parent="."]
+[node name="MenuCamera" type="Camera2D" parent="." unique_id=616443089]
 position = Vector2(1299, 540)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=107314622]
 
-[node name="StartMatchPane" type="MarginContainer" parent="CanvasLayer"]
+[node name="StartMatchPane" type="MarginContainer" parent="CanvasLayer" unique_id=2141664622]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -76,7 +76,23 @@ layout_mode = 2
 theme_override_styles/hover = ExtResource("4_duqux")
 theme_override_styles/normal = ExtResource("5_26mog")
 
-[node name="StartGamePane" type="MarginContainer" parent="CanvasLayer"]
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/StartMatchPane/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_b8l8w")
+
+[node name="Label" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2"]
+layout_mode = 2
+text = "Endless Mode"
+label_settings = ExtResource("3_wqb3i")
+horizontal_alignment = 1
+
+[node name="EndlessButton" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("5_26mog")
+theme_override_styles/hover = ExtResource("4_duqux")
+
+[node name="StartGamePane" type="MarginContainer" parent="CanvasLayer" unique_id=650320013]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -92,23 +108,23 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 100
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/StartGamePane"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/StartGamePane" unique_id=1300992498]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_b8l8w")
 
-[node name="Label" type="Label" parent="CanvasLayer/StartGamePane/Panel"]
+[node name="Label" type="Label" parent="CanvasLayer/StartGamePane/Panel" unique_id=319638399]
 layout_mode = 2
 text = "Enter the World"
 label_settings = ExtResource("3_wqb3i")
 horizontal_alignment = 1
 
-[node name="StartGameButton" type="Button" parent="CanvasLayer/StartGamePane/Panel"]
+[node name="StartGameButton" type="Button" parent="CanvasLayer/StartGamePane/Panel" unique_id=178827261]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("4_duqux")
 theme_override_styles/normal = ExtResource("5_26mog")
+theme_override_styles/hover = ExtResource("4_duqux")
 
-[node name="ShowBestiaryPane" type="MarginContainer" parent="CanvasLayer"]
+[node name="ShowBestiaryPane" type="MarginContainer" parent="CanvasLayer" unique_id=1637190893]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -120,106 +136,106 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ShowBestiaryPane"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ShowBestiaryPane" unique_id=1267181225]
 layout_mode = 2
 
-[node name="BestiaryPane" type="PanelContainer" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer"]
+[node name="BestiaryPane" type="PanelContainer" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer" unique_id=313577127]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_b8l8w")
 
-[node name="Label" type="Label" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/BestiaryPane"]
+[node name="Label" type="Label" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/BestiaryPane" unique_id=833117883]
 layout_mode = 2
 text = "Compendium"
 label_settings = ExtResource("3_wqb3i")
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/BestiaryPane"]
+[node name="Button" type="Button" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/BestiaryPane" unique_id=570114271]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("4_duqux")
 theme_override_styles/normal = ExtResource("5_26mog")
+theme_override_styles/hover = ExtResource("4_duqux")
 
-[node name="BestiaryPane2" type="PanelContainer" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer"]
+[node name="BestiaryPane2" type="PanelContainer" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer" unique_id=372767332]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_b8l8w")
 
-[node name="Label" type="Label" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/BestiaryPane2"]
+[node name="Label" type="Label" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/BestiaryPane2" unique_id=2073187600]
 layout_mode = 2
 text = "Options"
 label_settings = ExtResource("3_wqb3i")
 horizontal_alignment = 1
 
-[node name="OptionsButton" type="Button" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/BestiaryPane2"]
+[node name="OptionsButton" type="Button" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/BestiaryPane2" unique_id=1519616734]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("4_duqux")
 theme_override_styles/normal = ExtResource("5_26mog")
+theme_override_styles/hover = ExtResource("4_duqux")
 
-[node name="ExitPane" type="PanelContainer" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer"]
+[node name="ExitPane" type="PanelContainer" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer" unique_id=1831020754]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_b8l8w")
 
-[node name="Label" type="Label" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/ExitPane"]
+[node name="Label" type="Label" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/ExitPane" unique_id=1382873923]
 layout_mode = 2
 text = "Exit Game"
 label_settings = ExtResource("3_wqb3i")
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/ExitPane"]
+[node name="Button" type="Button" parent="CanvasLayer/ShowBestiaryPane/VBoxContainer/ExitPane" unique_id=1883985731]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("4_duqux")
 theme_override_styles/normal = ExtResource("5_26mog")
+theme_override_styles/hover = ExtResource("4_duqux")
 
-[node name="Decor" type="Node2D" parent="."]
+[node name="Decor" type="Node2D" parent="." unique_id=615253132]
 
-[node name="Leaves" type="Sprite2D" parent="Decor"]
+[node name="Leaves" type="Sprite2D" parent="Decor" unique_id=183828220]
 z_index = 2
 position = Vector2(467, 845)
 texture = ExtResource("13_b4hlq")
 
-[node name="Leaves2" type="Sprite2D" parent="Decor"]
+[node name="Leaves2" type="Sprite2D" parent="Decor" unique_id=1206844786]
 z_index = 2
 position = Vector2(2061, 364)
 texture = ExtResource("13_b4hlq")
 flip_h = true
 
-[node name="DancingCards" type="Node2D" parent="Decor"]
+[node name="DancingCards" type="Node2D" parent="Decor" unique_id=543844429]
 z_index = 1
 y_sort_enabled = true
 
-[node name="DancingCard" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
+[node name="DancingCard" parent="Decor/DancingCards" unique_id=364356307 instance=ExtResource("15_b4hlq")]
 light_mask = 0
 material = SubResource("ShaderMaterial_820ef")
 position = Vector2(1669, 424)
 
-[node name="DancingCard2" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
+[node name="DancingCard2" parent="Decor/DancingCards" unique_id=88608294 instance=ExtResource("15_b4hlq")]
 material = SubResource("ShaderMaterial_rf05g")
 position = Vector2(444, 674)
 
-[node name="DancingCard3" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
+[node name="DancingCard3" parent="Decor/DancingCards" unique_id=1255174092 instance=ExtResource("15_b4hlq")]
 position = Vector2(653, 122)
 
-[node name="DancingCard4" parent="Decor/DancingCards" instance=ExtResource("15_b4hlq")]
+[node name="DancingCard4" parent="Decor/DancingCards" unique_id=2139357782 instance=ExtResource("15_b4hlq")]
 position = Vector2(1315, 716)
 
-[node name="FlickeringLIghts" type="Node2D" parent="Decor"]
+[node name="FlickeringLIghts" type="Node2D" parent="Decor" unique_id=1347058747]
 z_index = -2
 
-[node name="FlickerLight" parent="Decor/FlickeringLIghts" instance=ExtResource("15_uifqy")]
+[node name="FlickerLight" parent="Decor/FlickeringLIghts" unique_id=1592123597 instance=ExtResource("15_uifqy")]
 position = Vector2(1387, 839)
 
-[node name="FlickerLight2" parent="Decor/FlickeringLIghts" instance=ExtResource("15_uifqy")]
+[node name="FlickerLight2" parent="Decor/FlickeringLIghts" unique_id=934774806 instance=ExtResource("15_uifqy")]
 position = Vector2(616, 648)
 rotation = 1.67203
 
-[node name="FlickerLight3" parent="Decor/FlickeringLIghts" instance=ExtResource("15_uifqy")]
+[node name="FlickerLight3" parent="Decor/FlickeringLIghts" unique_id=2035613637 instance=ExtResource("15_uifqy")]
 position = Vector2(1770, 677)
 
 [node name="FlickerLight4" parent="Decor/FlickeringLIghts" instance=ExtResource("15_uifqy")]
 position = Vector2(1325, 641)
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=957192026]
 position = Vector2(970, -194)
 energy = 0.61
 blend_mode = 1

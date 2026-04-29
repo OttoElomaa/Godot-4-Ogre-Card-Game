@@ -1,16 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://6803oa1g2t5f"]
+[gd_scene format=3 uid="uid://ctrvsaptdulhm"]
 
-[ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/Zone/zone.gd" id="1_mrk0e"]
-[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="13_2owsf"]
+[ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/Zone/zone.gd" id="1_fjd6i"]
+[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBoardIcon.tscn" id="2_rmpmb"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="3_xt5s7"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="4_588s3"]
+[ext_resource type="PackedScene" uid="uid://cnmsayr5lqvem" path="res://Cards/GreenDefiance/Cr-BriarFolk.tscn" id="4_s5tl3"]
+[ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="5_yhj0w"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="6_4x05h"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="7_xt5s7"]
+[ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="8_588s3"]
+[ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="8_vu8fe"]
+[ext_resource type="Resource" uid="uid://datllcfc5jbo3" path="res://Resources/Dialog/Vineyards_1.dialogue" id="9_0pdlr"]
+[ext_resource type="Resource" uid="uid://b3qg4cl1qws0x" path="res://Resources/Dialog/Vineyards_Win_1.dialogue" id="10_kl6wr"]
+[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_bxjdc"]
+[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
+[ext_resource type="Resource" uid="uid://bgomdu6vhhlji" path="res://Resources/Dialog/Vineyards_Win_2.dialogue" id="11_vsnug"]
+[ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="15_4t6do"]
 [ext_resource type="AudioStream" uid="uid://c78hgvqitkhsr" path="res://Audio/BGM/Anghu Musica - In Presence of Piety.ogg" id="13_g6unp"]
-[ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="14_feswd"]
-[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="15_i4k1m"]
-[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="16_g8fak"]
-[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="17_6c7se"]
-[ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="18_ap65v"]
-[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="19_5te08"]
-[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="20_fhfxq"]
-[ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="21_x3h5e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
 bg_color = Color(0.947752, 0.911757, 0.861921, 1)
@@ -32,7 +38,7 @@ border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 script = ExtResource("1_mrk0e")
 zoneName = "The Vineyards"
 
-[node name="Map_Screen" type="MarginContainer" parent="."]
+[node name="Map_Screen" type="MarginContainer" parent="." unique_id=2026431070]
 show_behind_parent = true
 z_index = -6
 z_as_relative = false
@@ -41,14 +47,59 @@ offset_top = -402.0
 offset_right = 588.0
 offset_bottom = 230.0
 
-[node name="Zones" type="CanvasLayer" parent="."]
+[node name="Zones" type="CanvasLayer" parent="." unique_id=771970424]
 unique_name_in_owner = true
 
-[node name="GameBoards" type="Node2D" parent="Zones"]
+[node name="GameBoards" type="Node2D" parent="Zones" unique_id=541473321]
 unique_name_in_owner = true
 position = Vector2(1012, 654)
 
-[node name="Map" type="MarginContainer" parent="Zones"]
+[node name="StartDialogue" parent="Zones/GameBoards" unique_id=1012873170 instance=ExtResource("8_vu8fe")]
+position = Vector2(-422, -74)
+dialogue = ExtResource("9_0pdlr")
+node_name = "Vineyard Entrance"
+start_unlocked = true
+
+[node name="Board1" parent="Zones/GameBoards" unique_id=184432424 instance=ExtResource("2_rmpmb")]
+top_level = true
+z_index = 6
+position = Vector2(970, 472)
+board_name = "Vineyards East"
+board_comments = "Raging Vinemen skitter among shadoofs! 
+Beware -- they possess a vile Ritual!"
+deck_cards = Dictionary[String, int]({
+"Jade Vineman": 5,
+"Knell": 3,
+"Liana Man": 2
+})
+presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
+enemy_presummon = true
+presummon_sparcity = 2
+unlockOnResolveStrings = Array[String](["Vineyards Cabin"])
+
+[node name="Board2" parent="Zones/GameBoards" unique_id=187480154 instance=ExtResource("2_rmpmb")]
+position = Vector2(-40, -182)
+board_name = "Vineyards West"
+board_comments = "The solders are on their last legs, but still should not be underestimated. They fight in formation, protecting their weak spots. The Vinemen will occasionally help you."
+deck_cards = Dictionary[String, int]({
+"Guardmaster": 3,
+"Kalasirios": 5
+})
+presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
+ally_presummon = true
+unlockOnResolveStrings = Array[String](["Vineyards Gate"])
+
+[node name="Win_1" parent="Zones/GameBoards" unique_id=70945849 instance=ExtResource("8_vu8fe")]
+position = Vector2(369, -48)
+dialogue = ExtResource("10_kl6wr")
+node_name = "Vineyards Cabin"
+
+[node name="Win_2" parent="Zones/GameBoards" unique_id=493545666 instance=ExtResource("8_vu8fe")]
+position = Vector2(369, -47)
+dialogue = ExtResource("11_vsnug")
+node_name = "Vineyards Gate"
+
+[node name="Map" type="MarginContainer" parent="Zones" unique_id=1770207814]
 z_index = -3
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +112,7 @@ mouse_filter = 2
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Zones/Map"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Zones/Map" unique_id=622670562]
 layout_mode = 2
 texture = ExtResource("13_2owsf")
 patch_margin_left = 7
@@ -72,17 +123,17 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Zones/Map"]
+[node name="TextureRect" type="TextureRect" parent="Zones/Map" unique_id=1932221943]
 layout_mode = 2
 texture = ExtResource("14_feswd")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=704724463]
 unique_name_in_owner = true
 offset = Vector2(-960, -540)
 transform = Transform2D(1, 0, 0, 1, -960, -540)
 follow_viewport_enabled = true
 
-[node name="ZoneInfoPanel" type="MarginContainer" parent="UI"]
+[node name="ZoneInfoPanel" type="MarginContainer" parent="UI" unique_id=2025427726]
 custom_minimum_size = Vector2(500, 120)
 anchors_preset = 5
 anchor_left = 0.5
@@ -97,28 +148,29 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Panel" type="PanelContainer" parent="UI/ZoneInfoPanel"]
+[node name="Panel" type="PanelContainer" parent="UI/ZoneInfoPanel" unique_id=2005866164]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_588s3")
 
-[node name="HBox" type="HBoxContainer" parent="UI/ZoneInfoPanel/Panel"]
+[node name="HBox" type="HBoxContainer" parent="UI/ZoneInfoPanel/Panel" unique_id=1665202290]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/ZoneInfoPanel/Panel/HBox"]
+[node name="Label" type="Label" parent="UI/ZoneInfoPanel/Panel/HBox" unique_id=70254093]
 layout_mode = 2
 text = "  Zone  -"
 label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 
-[node name="ZoneNameLabel" type="Label" parent="UI/ZoneInfoPanel/Panel/HBox"]
+[node name="ZoneNameLabel" type="Label" parent="UI/ZoneInfoPanel/Panel/HBox" unique_id=153348252]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 
-[node name="ExitPane" type="MarginContainer" parent="UI"]
+[node name="ExitPane" type="MarginContainer" parent="UI" unique_id=1170279421]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -132,23 +184,23 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Panel" type="PanelContainer" parent="UI/ExitPane"]
+[node name="Panel" type="PanelContainer" parent="UI/ExitPane" unique_id=348814191]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("16_g8fak")
 
-[node name="Label" type="Label" parent="UI/ExitPane/Panel"]
+[node name="Label" type="Label" parent="UI/ExitPane/Panel" unique_id=1369267124]
 layout_mode = 2
 text = "Exit Game"
 label_settings = ExtResource("17_6c7se")
 horizontal_alignment = 1
 
-[node name="ExitButton" type="Button" parent="UI/ExitPane/Panel"]
+[node name="ExitButton" type="Button" parent="UI/ExitPane/Panel" unique_id=972087735]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("18_ap65v")
-theme_override_styles/normal = ExtResource("19_5te08")
+theme_override_styles/normal = ExtResource("6_4x05h")
+theme_override_styles/hover = ExtResource("5_yhj0w")
 
-[node name="PlayerInfoPanel" type="MarginContainer" parent="UI"]
+[node name="PlayerInfoPanel" type="MarginContainer" parent="UI" unique_id=1417805562]
 custom_minimum_size = Vector2(400, 0)
 offset_left = 961.0
 offset_top = 547.0
@@ -159,15 +211,16 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBox" type="VBoxContainer" parent="UI/PlayerInfoPanel"]
+[node name="VBox" type="VBoxContainer" parent="UI/PlayerInfoPanel" unique_id=353519246]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox" unique_id=1324864583]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HeroPortrait" type="TextureRect" parent="UI/PlayerInfoPanel/VBox/PanelContainer"]
+[node name="HeroPortrait" type="TextureRect" parent="UI/PlayerInfoPanel/VBox/PanelContainer" unique_id=1998334430]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -175,7 +228,7 @@ texture = ExtResource("20_fhfxq")
 expand_mode = 4
 stretch_mode = 6
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/PlayerInfoPanel/VBox/PanelContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/PlayerInfoPanel/VBox/PanelContainer" unique_id=1548393056]
 layout_mode = 2
 texture = ExtResource("13_2owsf")
 patch_margin_left = 7
@@ -186,72 +239,75 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="Panel" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox"]
+[node name="Panel" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox" unique_id=1186292361]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
 
-[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/Panel"]
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/Panel" unique_id=99849850]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel/HBox"]
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel/HBox" unique_id=1394252393]
 layout_mode = 2
 text = "  Hero  -"
 label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 
-[node name="HeroNameLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel/HBox"]
+[node name="HeroNameLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel/HBox" unique_id=2064824349]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 
-[node name="Panel2" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox"]
+[node name="Panel2" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox" unique_id=1929558500]
 custom_minimum_size = Vector2(340, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
 
-[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/Panel2"]
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/Panel2" unique_id=511089429]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel2/HBox"]
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel2/HBox" unique_id=2106504887]
 layout_mode = 2
 text = "  Glory  -"
 label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 
-[node name="GloryAmountLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel2/HBox"]
+[node name="GloryAmountLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel2/HBox" unique_id=1651720812]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 
-[node name="LivesPanel" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox"]
+[node name="LivesPanel" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox" unique_id=1923842995]
 custom_minimum_size = Vector2(340, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4x05h")
 
-[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/LivesPanel"]
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/LivesPanel" unique_id=1757118202]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/LivesPanel/HBox"]
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/LivesPanel/HBox" unique_id=688787750]
 layout_mode = 2
 text = "  Lives  -"
 label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 
-[node name="LivesLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/LivesPanel/HBox"]
+[node name="LivesLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/LivesPanel/HBox" unique_id=2104953954]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Goes Here"
 label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 
-[node name="BottomActions" type="MarginContainer" parent="UI"]
+[node name="BottomActions" type="MarginContainer" parent="UI" unique_id=854975188]
 custom_minimum_size = Vector2(1200, 0)
 anchors_preset = 7
 anchor_left = 0.5
@@ -267,36 +323,36 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/margin_bottom = 20
 
-[node name="VBox" type="VBoxContainer" parent="UI/BottomActions"]
+[node name="VBox" type="VBoxContainer" parent="UI/BottomActions" unique_id=404165671]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Description" type="PanelContainer" parent="UI/BottomActions/VBox"]
+[node name="Description" type="PanelContainer" parent="UI/BottomActions/VBox" unique_id=489119032]
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_588s3")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/BottomActions/VBox/Description"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/BottomActions/VBox/Description" unique_id=750094916]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 30
 
-[node name="HBox" type="HBoxContainer" parent="UI/BottomActions/VBox/Description/MarginContainer"]
+[node name="HBox" type="HBoxContainer" parent="UI/BottomActions/VBox/Description/MarginContainer" unique_id=570254555]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="ActionNameLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox"]
+[node name="ActionNameLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox" unique_id=840548857]
 layout_mode = 2
 text = "  Zone  -"
 label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 
-[node name="ActionDescLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox"]
+[node name="ActionDescLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox" unique_id=846996623]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 text = "Goes Here"
@@ -304,12 +360,12 @@ label_settings = ExtResource("15_i4k1m")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ButtonsHBox" type="HBoxContainer" parent="UI/BottomActions/VBox"]
+[node name="ButtonsHBox" type="HBoxContainer" parent="UI/BottomActions/VBox" unique_id=1867163095]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="BuildArmy" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox"]
+[node name="BuildArmy" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=1525127111]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -318,23 +374,23 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("21_x3h5e")
 description = "Turn others to your cause: Purchase cards native to this land using Glory"
 
-[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy"]
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" unique_id=1802454149]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("16_g8fak")
 
-[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel"]
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel" unique_id=261941590]
 layout_mode = 2
 text = "Build Army"
 label_settings = ExtResource("17_6c7se")
 horizontal_alignment = 1
 
-[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel"]
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel" unique_id=1506898543]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("18_ap65v")
-theme_override_styles/normal = ExtResource("19_5te08")
+theme_override_styles/normal = ExtResource("6_4x05h")
+theme_override_styles/hover = ExtResource("5_yhj0w")
 
-[node name="Scry" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox"]
+[node name="Scry" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=182278436]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -343,23 +399,23 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("21_x3h5e")
 description = "Seek the abyss for rare cards of all sorts"
 
-[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Scry"]
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Scry" unique_id=1277316617]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("16_g8fak")
 
-[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel"]
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel" unique_id=1643074004]
 layout_mode = 2
 text = "Scry"
 label_settings = ExtResource("17_6c7se")
 horizontal_alignment = 1
 
-[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel"]
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel" unique_id=1106063645]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("18_ap65v")
-theme_override_styles/normal = ExtResource("19_5te08")
+theme_override_styles/normal = ExtResource("6_4x05h")
+theme_override_styles/hover = ExtResource("5_yhj0w")
 
-[node name="Travel" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox"]
+[node name="Travel" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=1323973257]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -368,23 +424,23 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("21_x3h5e")
 description = "Travel to a different land"
 
-[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Travel"]
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Travel" unique_id=775169959]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("16_g8fak")
 
-[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel"]
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel" unique_id=1516356374]
 layout_mode = 2
 text = "Travel"
 label_settings = ExtResource("17_6c7se")
 horizontal_alignment = 1
 
-[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel"]
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel" unique_id=1172804712]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("18_ap65v")
-theme_override_styles/normal = ExtResource("19_5te08")
+theme_override_styles/normal = ExtResource("6_4x05h")
+theme_override_styles/hover = ExtResource("5_yhj0w")
 
-[node name="Battle" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox"]
+[node name="Battle" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=905819729]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -393,23 +449,30 @@ theme_override_constants/margin_bottom = 20
 script = ExtResource("21_x3h5e")
 description = "Fight an opponent on one of the available game boards."
 
-[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Battle"]
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Battle" unique_id=1641063657]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("16_g8fak")
 
-[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel"]
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel" unique_id=1100999268]
 layout_mode = 2
 text = "Battle"
 label_settings = ExtResource("17_6c7se")
 horizontal_alignment = 1
 
-[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel"]
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel" unique_id=2019332675]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("18_ap65v")
-theme_override_styles/normal = ExtResource("19_5te08")
+theme_override_styles/normal = ExtResource("6_4x05h")
+theme_override_styles/hover = ExtResource("5_yhj0w")
 
-[node name="PreBattleCanvas" type="CanvasLayer" parent="."]
+[node name="PreBattleCanvas" type="CanvasLayer" parent="." unique_id=1449351173]
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("13_g6unp")
+autoplay = true
+bus = &"BGM"
 
 [node name="Audio" type="Node" parent="."]
 
