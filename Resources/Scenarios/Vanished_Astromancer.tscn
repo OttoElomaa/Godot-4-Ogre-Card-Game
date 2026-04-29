@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://csanaqvtgc7hc"]
+[gd_scene format=3 uid="uid://csanaqvtgc7hc"]
 
-[ext_resource type="PackedScene" uid="uid://6803oa1g2t5f" path="res://GameScenes/Zone/Zone.tscn" id="1_jim2b"]
+[ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/Zone.tscn" id="1_jim2b"]
 [ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="2_jewtb"]
 [ext_resource type="Resource" uid="uid://bk3ont1i7ngu2" path="res://Resources/Dialog/Vanished Astromancer_1.dialogue" id="3_oe87p"]
 [ext_resource type="Resource" uid="uid://m82mkv15ve7i" path="res://Resources/Dialog/Vanished Astromancer_2.dialogue" id="4_xjuj7"]

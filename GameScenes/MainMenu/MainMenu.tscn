@@ -41,56 +41,56 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StartMatchPane"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StartMatchPane" unique_id=696445818]
 layout_mode = 2
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/StartMatchPane/VBoxContainer"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/StartMatchPane/VBoxContainer" unique_id=1122793748]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_b8l8w")
 
-[node name="Label" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel"]
+[node name="Label" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel" unique_id=2127354886]
 layout_mode = 2
 text = "Battle Simulation"
 label_settings = ExtResource("3_wqb3i")
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel"]
+[node name="StartButton" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel" unique_id=39318494]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("4_duqux")
 theme_override_styles/normal = ExtResource("5_26mog")
+theme_override_styles/hover = ExtResource("4_duqux")
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/StartMatchPane/VBoxContainer"]
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/StartMatchPane/VBoxContainer" unique_id=358063378]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_b8l8w")
 
-[node name="Label" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2"]
+[node name="Label" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2" unique_id=150671102]
 layout_mode = 2
 text = "Endless Mode"
 label_settings = ExtResource("3_wqb3i")
 horizontal_alignment = 1
 
-[node name="EndlessButton" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2"]
+[node name="EndlessButton" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2" unique_id=1767512479]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("4_duqux")
 theme_override_styles/normal = ExtResource("5_26mog")
+theme_override_styles/hover = ExtResource("4_duqux")
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/StartMatchPane/VBoxContainer"]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("2_b8l8w")
-
-[node name="Label" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2"]
+[node name="Label2" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2" unique_id=2058892734]
 layout_mode = 2
 text = "Endless Mode"
 label_settings = ExtResource("3_wqb3i")
 horizontal_alignment = 1
 
-[node name="EndlessButton" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2"]
+[node name="EndlessButton2" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2" unique_id=1460334535]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_26mog")
 theme_override_styles/hover = ExtResource("4_duqux")
+
+[node name="Panel3" type="PanelContainer" parent="CanvasLayer/StartMatchPane/VBoxContainer" unique_id=170997872]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_b8l8w")
 
 [node name="StartGamePane" type="MarginContainer" parent="CanvasLayer" unique_id=650320013]
 anchors_preset = 7
@@ -232,7 +232,7 @@ rotation = 1.67203
 [node name="FlickerLight3" parent="Decor/FlickeringLIghts" unique_id=2035613637 instance=ExtResource("15_uifqy")]
 position = Vector2(1770, 677)
 
-[node name="FlickerLight4" parent="Decor/FlickeringLIghts" instance=ExtResource("15_uifqy")]
+[node name="FlickerLight4" parent="Decor/FlickeringLIghts" unique_id=1821735649 instance=ExtResource("15_uifqy")]
 position = Vector2(1325, 641)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=957192026]

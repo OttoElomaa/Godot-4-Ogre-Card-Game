@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://mxfejwivkelm"]
+[gd_scene format=3 uid="uid://mxfejwivkelm"]
 
 [ext_resource type="Script" uid="uid://drheo1lr8gec8" path="res://Cards/card.gd" id="1_i5yq8"]
 [ext_resource type="Material" uid="uid://dccxbrxmkylit" path="res://Resources/Shaders/destroy_card_material.tres" id="1_m45w5"]
@@ -274,33 +274,33 @@ _data = {
 &"RESET": SubResource("Animation_u70hd")
 }
 
-[node name="Card" type="Node2D"]
+[node name="Card" type="Node2D" unique_id=1161983731]
 material = ExtResource("1_m45w5")
 script = ExtResource("1_i5yq8")
 
-[node name="Effects" type="Node2D" parent="."]
+[node name="Effects" type="Node2D" parent="." unique_id=1694159209]
 z_index = 1
 use_parent_material = true
 script = ExtResource("2_07jhh")
 
-[node name="PhasedTexture" type="Sprite2D" parent="Effects"]
+[node name="PhasedTexture" type="Sprite2D" parent="Effects" unique_id=1931896869]
 visible = false
 z_index = 1
 texture = ExtResource("3_8geja")
 
-[node name="Buff" type="Node2D" parent="Effects"]
+[node name="Buff" type="Node2D" parent="Effects" unique_id=1095681417]
 position = Vector2(-100, -150)
 
-[node name="Nodes" type="Node2D" parent="Effects/Buff"]
+[node name="Nodes" type="Node2D" parent="Effects/Buff" unique_id=1476789320]
 
-[node name="Sprites" type="Node2D" parent="Effects/Buff"]
+[node name="Sprites" type="Node2D" parent="Effects/Buff" unique_id=1439175147]
 position = Vector2(100, 150)
 
-[node name="BuffSprite1" type="Sprite2D" parent="Effects/Buff/Sprites"]
+[node name="BuffSprite1" type="Sprite2D" parent="Effects/Buff/Sprites" unique_id=1545769808]
 position = Vector2(-100, -150)
 texture = ExtResource("4_s5qc8")
 
-[node name="Shadow" type="TextureRect" parent="Effects/Buff/Sprites/BuffSprite1"]
+[node name="Shadow" type="TextureRect" parent="Effects/Buff/Sprites/BuffSprite1" unique_id=1860753447]
 offset_left = -25.0
 offset_top = -25.0
 offset_right = 41.0
@@ -308,7 +308,7 @@ offset_bottom = 37.0
 texture = ExtResource("5_q2hgj")
 stretch_mode = 2
 
-[node name="Amount" type="Label" parent="Effects/Buff/Sprites/BuffSprite1"]
+[node name="Amount" type="Label" parent="Effects/Buff/Sprites/BuffSprite1" unique_id=1958762707]
 offset_left = 15.0
 offset_top = 8.0
 offset_right = 39.0
@@ -317,12 +317,12 @@ theme = ExtResource("5_8geja")
 text = "0"
 horizontal_alignment = 1
 
-[node name="BuffSprite2" type="Sprite2D" parent="Effects/Buff/Sprites"]
+[node name="BuffSprite2" type="Sprite2D" parent="Effects/Buff/Sprites" unique_id=2110197]
 position = Vector2(-100, -150)
 texture = ExtResource("4_s5qc8")
 offset = Vector2(0, 50)
 
-[node name="Shadow" type="TextureRect" parent="Effects/Buff/Sprites/BuffSprite2"]
+[node name="Shadow" type="TextureRect" parent="Effects/Buff/Sprites/BuffSprite2" unique_id=266414508]
 offset_left = -25.0
 offset_top = 25.0
 offset_right = 41.0
@@ -330,7 +330,7 @@ offset_bottom = 87.0
 texture = ExtResource("5_q2hgj")
 stretch_mode = 2
 
-[node name="Amount" type="Label" parent="Effects/Buff/Sprites/BuffSprite2"]
+[node name="Amount" type="Label" parent="Effects/Buff/Sprites/BuffSprite2" unique_id=1097601465]
 offset_left = 15.0
 offset_top = 58.0
 offset_right = 39.0
@@ -339,12 +339,12 @@ theme = ExtResource("5_8geja")
 text = "0"
 horizontal_alignment = 1
 
-[node name="BuffSprite3" type="Sprite2D" parent="Effects/Buff/Sprites"]
+[node name="BuffSprite3" type="Sprite2D" parent="Effects/Buff/Sprites" unique_id=86541505]
 position = Vector2(-100, -150)
 texture = ExtResource("4_s5qc8")
 offset = Vector2(0, 100)
 
-[node name="Shadow" type="TextureRect" parent="Effects/Buff/Sprites/BuffSprite3"]
+[node name="Shadow" type="TextureRect" parent="Effects/Buff/Sprites/BuffSprite3" unique_id=1409506915]
 offset_left = -25.0
 offset_top = 75.0
 offset_right = 41.0
@@ -352,7 +352,7 @@ offset_bottom = 137.0
 texture = ExtResource("5_q2hgj")
 stretch_mode = 2
 
-[node name="Amount" type="Label" parent="Effects/Buff/Sprites/BuffSprite3"]
+[node name="Amount" type="Label" parent="Effects/Buff/Sprites/BuffSprite3" unique_id=728618071]
 offset_left = 15.0
 offset_top = 108.0
 offset_right = 39.0
@@ -361,17 +361,17 @@ theme = ExtResource("5_8geja")
 text = "0"
 horizontal_alignment = 1
 
-[node name="Debuff" type="Node2D" parent="Effects"]
+[node name="Debuff" type="Node2D" parent="Effects" unique_id=1678883113]
 position = Vector2(100, -150)
 
-[node name="Nodes" type="Node2D" parent="Effects/Debuff"]
+[node name="Nodes" type="Node2D" parent="Effects/Debuff" unique_id=1218822077]
 
-[node name="Sprites" type="Node2D" parent="Effects/Debuff"]
+[node name="Sprites" type="Node2D" parent="Effects/Debuff" unique_id=854428983]
 
-[node name="DebuffSprite1" type="Sprite2D" parent="Effects/Debuff/Sprites"]
+[node name="DebuffSprite1" type="Sprite2D" parent="Effects/Debuff/Sprites" unique_id=1278894672]
 texture = ExtResource("4_s5qc8")
 
-[node name="Shadow" type="TextureRect" parent="Effects/Debuff/Sprites/DebuffSprite1"]
+[node name="Shadow" type="TextureRect" parent="Effects/Debuff/Sprites/DebuffSprite1" unique_id=1730495601]
 offset_left = -25.0
 offset_top = -25.0
 offset_right = 41.0
@@ -379,7 +379,7 @@ offset_bottom = 37.0
 texture = ExtResource("5_q2hgj")
 stretch_mode = 2
 
-[node name="Amount" type="Label" parent="Effects/Debuff/Sprites/DebuffSprite1"]
+[node name="Amount" type="Label" parent="Effects/Debuff/Sprites/DebuffSprite1" unique_id=863794849]
 offset_left = 15.0
 offset_top = 8.0
 offset_right = 39.0
@@ -388,11 +388,11 @@ theme = ExtResource("5_8geja")
 text = "0"
 horizontal_alignment = 1
 
-[node name="DebuffSprite2" type="Sprite2D" parent="Effects/Debuff/Sprites"]
+[node name="DebuffSprite2" type="Sprite2D" parent="Effects/Debuff/Sprites" unique_id=166924236]
 texture = ExtResource("4_s5qc8")
 offset = Vector2(0, 50)
 
-[node name="Shadow" type="TextureRect" parent="Effects/Debuff/Sprites/DebuffSprite2"]
+[node name="Shadow" type="TextureRect" parent="Effects/Debuff/Sprites/DebuffSprite2" unique_id=84983791]
 offset_left = -25.0
 offset_top = 25.0
 offset_right = 41.0
@@ -400,7 +400,7 @@ offset_bottom = 87.0
 texture = ExtResource("5_q2hgj")
 stretch_mode = 2
 
-[node name="Amount" type="Label" parent="Effects/Debuff/Sprites/DebuffSprite2"]
+[node name="Amount" type="Label" parent="Effects/Debuff/Sprites/DebuffSprite2" unique_id=738657521]
 offset_left = 15.0
 offset_top = 58.0
 offset_right = 39.0
@@ -409,11 +409,11 @@ theme = ExtResource("5_8geja")
 text = "0"
 horizontal_alignment = 1
 
-[node name="DebuffSprite3" type="Sprite2D" parent="Effects/Debuff/Sprites"]
+[node name="DebuffSprite3" type="Sprite2D" parent="Effects/Debuff/Sprites" unique_id=347213413]
 texture = ExtResource("4_s5qc8")
 offset = Vector2(0, 100)
 
-[node name="Shadow" type="TextureRect" parent="Effects/Debuff/Sprites/DebuffSprite3"]
+[node name="Shadow" type="TextureRect" parent="Effects/Debuff/Sprites/DebuffSprite3" unique_id=176662224]
 offset_left = -25.0
 offset_top = 75.0
 offset_right = 41.0
@@ -421,7 +421,7 @@ offset_bottom = 137.0
 texture = ExtResource("5_q2hgj")
 stretch_mode = 2
 
-[node name="Amount" type="Label" parent="Effects/Debuff/Sprites/DebuffSprite3"]
+[node name="Amount" type="Label" parent="Effects/Debuff/Sprites/DebuffSprite3" unique_id=1700449648]
 offset_left = 15.0
 offset_top = 108.0
 offset_right = 39.0
@@ -430,36 +430,36 @@ theme = ExtResource("5_8geja")
 text = "0"
 horizontal_alignment = 1
 
-[node name="Actions" type="Node2D" parent="."]
+[node name="Actions" type="Node2D" parent="." unique_id=824348485]
 script = ExtResource("4_q2hgj")
 
-[node name="KeywordHandler" type="Node" parent="."]
+[node name="KeywordHandler" type="Node" parent="." unique_id=498378116]
 script = ExtResource("3_lcq1x")
 
-[node name="MyKeywords" type="Node" parent="KeywordHandler"]
+[node name="MyKeywords" type="Node" parent="KeywordHandler" unique_id=180108696]
 
-[node name="KeywordsToGrant" type="Node" parent="KeywordHandler"]
+[node name="KeywordsToGrant" type="Node" parent="KeywordHandler" unique_id=1752685570]
 
-[node name="Backside" type="Sprite2D" parent="."]
+[node name="Backside" type="Sprite2D" parent="." unique_id=85600403]
 use_parent_material = true
 texture = ExtResource("5_lcq1x")
 
-[node name="Frontside" type="Node2D" parent="."]
+[node name="Frontside" type="Node2D" parent="." unique_id=1770822252]
 use_parent_material = true
 
-[node name="Background" type="Node2D" parent="Frontside"]
+[node name="Background" type="Node2D" parent="Frontside" unique_id=1928325088]
 use_parent_material = true
 
-[node name="Creature" type="Sprite2D" parent="Frontside/Background"]
+[node name="Creature" type="Sprite2D" parent="Frontside/Background" unique_id=1894888681]
 use_parent_material = true
 texture = ExtResource("6_lcq1x")
 
-[node name="Spell" type="Sprite2D" parent="Frontside/Background"]
+[node name="Spell" type="Sprite2D" parent="Frontside/Background" unique_id=1921400968]
 visible = false
 use_parent_material = true
 texture = ExtResource("5_jsedn")
 
-[node name="Art" type="TextureRect" parent="Frontside"]
+[node name="Art" type="TextureRect" parent="Frontside" unique_id=821856897]
 texture_filter = 6
 use_parent_material = true
 custom_minimum_size = Vector2(1000, 800)
@@ -474,14 +474,14 @@ texture = ExtResource("11_8geja")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="ManaCost" type="Node2D" parent="Frontside"]
+[node name="ManaCost" type="Node2D" parent="Frontside" unique_id=2003092376]
 position = Vector2(0, -174)
 scale = Vector2(0.8, 0.8)
 
-[node name="ManaCostTexture" type="Sprite2D" parent="Frontside/ManaCost"]
+[node name="ManaCostTexture" type="Sprite2D" parent="Frontside/ManaCost" unique_id=1946179225]
 texture = ExtResource("5_6ma8t")
 
-[node name="ManaCostLabel" type="Label" parent="Frontside/ManaCost"]
+[node name="ManaCostLabel" type="Label" parent="Frontside/ManaCost" unique_id=1985944102]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -498,14 +498,14 @@ text = "88"
 label_settings = ExtResource("6_u70hd")
 horizontal_alignment = 1
 
-[node name="CardName" type="Node2D" parent="Frontside"]
+[node name="CardName" type="Node2D" parent="Frontside" unique_id=1490579971]
 visible = false
 position = Vector2(0, -220)
 
-[node name="Shadow" type="Sprite2D" parent="Frontside/CardName"]
+[node name="Shadow" type="Sprite2D" parent="Frontside/CardName" unique_id=301281401]
 texture = ExtResource("9_i3xqw")
 
-[node name="Label" type="Label" parent="Frontside/CardName"]
+[node name="Label" type="Label" parent="Frontside/CardName" unique_id=2052410594]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -521,15 +521,15 @@ text = "Card Name"
 label_settings = ExtResource("9_l781d")
 horizontal_alignment = 1
 
-[node name="CardNameBestiary" type="Node2D" parent="Frontside"]
+[node name="CardNameBestiary" type="Node2D" parent="Frontside" unique_id=1103142793]
 position = Vector2(0, -216)
 
-[node name="Shadow" type="Sprite2D" parent="Frontside/CardNameBestiary"]
+[node name="Shadow" type="Sprite2D" parent="Frontside/CardNameBestiary" unique_id=1942917162]
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("9_i3xqw")
 offset = Vector2(0, -20)
 
-[node name="Label" type="Label" parent="Frontside/CardNameBestiary"]
+[node name="Label" type="Label" parent="Frontside/CardNameBestiary" unique_id=61878551]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -545,22 +545,22 @@ text = "Card Name"
 label_settings = ExtResource("9_l781d")
 horizontal_alignment = 1
 
-[node name="ActionState" type="Node2D" parent="Frontside"]
+[node name="ActionState" type="Node2D" parent="Frontside" unique_id=481323894]
 z_index = 1
 use_parent_material = true
 position = Vector2(0, -174)
 scale = Vector2(0.6, 0.6)
 
-[node name="ActiveIcon" type="Sprite2D" parent="Frontside/ActionState"]
+[node name="ActiveIcon" type="Sprite2D" parent="Frontside/ActionState" unique_id=880637158]
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("16_8geja")
 
-[node name="TravelingIcon" type="Sprite2D" parent="Frontside/ActionState"]
+[node name="TravelingIcon" type="Sprite2D" parent="Frontside/ActionState" unique_id=1887190872]
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("9_gi0db")
 offset = Vector2(-110, -10)
 
-[node name="EffectText" type="Label" parent="Frontside"]
+[node name="EffectText" type="Label" parent="Frontside" unique_id=1673997128]
 use_parent_material = true
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
@@ -580,36 +580,36 @@ label_settings = ExtResource("13_j3lys")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Resources" type="Node2D" parent="Frontside"]
+[node name="Resources" type="Node2D" parent="Frontside" unique_id=380844774]
 use_parent_material = true
 position = Vector2(0, 128)
 
-[node name="Glow" type="Node2D" parent="Frontside/Resources"]
+[node name="Glow" type="Node2D" parent="Frontside/Resources" unique_id=204192039]
 use_parent_material = true
 
-[node name="PowerGlowDown" type="Sprite2D" parent="Frontside/Resources/Glow"]
+[node name="PowerGlowDown" type="Sprite2D" parent="Frontside/Resources/Glow" unique_id=1808835386]
 visible = false
 use_parent_material = true
 texture = ExtResource("19_07jhh")
 offset = Vector2(-30, 18)
 
-[node name="PowerGlowUp" type="Sprite2D" parent="Frontside/Resources/Glow"]
+[node name="PowerGlowUp" type="Sprite2D" parent="Frontside/Resources/Glow" unique_id=1334702265]
 use_parent_material = true
 texture = ExtResource("20_8geja")
 offset = Vector2(-30, 18)
 
-[node name="HealthGlowDown" type="Sprite2D" parent="Frontside/Resources/Glow"]
+[node name="HealthGlowDown" type="Sprite2D" parent="Frontside/Resources/Glow" unique_id=256332939]
 use_parent_material = true
 texture = ExtResource("19_07jhh")
 offset = Vector2(30, 18)
 
-[node name="HealthGlowUp" type="Sprite2D" parent="Frontside/Resources/Glow"]
+[node name="HealthGlowUp" type="Sprite2D" parent="Frontside/Resources/Glow" unique_id=1271394507]
 visible = false
 use_parent_material = true
 texture = ExtResource("20_8geja")
 offset = Vector2(30, 18)
 
-[node name="Panel" type="PanelContainer" parent="Frontside/Resources"]
+[node name="Panel" type="PanelContainer" parent="Frontside/Resources" unique_id=1829719819]
 use_parent_material = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -624,60 +624,58 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("4_w0fdq")
 
-[node name="HBox" type="HBoxContainer" parent="Frontside/Resources/Panel"]
+[node name="HBox" type="HBoxContainer" parent="Frontside/Resources/Panel" unique_id=1513598373]
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/separation = 7
 alignment = 1
 
-[node name="PowerLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+[node name="PowerLabel" type="Label" parent="Frontside/Resources/Panel/HBox" unique_id=1465138455]
 use_parent_material = true
 layout_mode = 2
 text = "22"
 label_settings = ExtResource("4_7bc8n")
 horizontal_alignment = 2
 
-[node name="DashLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+[node name="DashLabel" type="Label" parent="Frontside/Resources/Panel/HBox" unique_id=1984738828]
 use_parent_material = true
 layout_mode = 2
 text = "/"
 label_settings = ExtResource("4_7bc8n")
 horizontal_alignment = 1
 
-[node name="HealthLabel" type="Label" parent="Frontside/Resources/Panel/HBox"]
+[node name="HealthLabel" type="Label" parent="Frontside/Resources/Panel/HBox" unique_id=1962243178]
 use_parent_material = true
 layout_mode = 2
 text = "33"
 label_settings = ExtResource("4_7bc8n")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=2120456906]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=753587719]
 visible = false
 shape = SubResource("RectangleShape2D_kd3xj")
 
-[node name="BodyAnimations" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_wrqsm")
-}
+[node name="BodyAnimations" type="AnimationPlayer" parent="." unique_id=997976347]
+libraries/ = SubResource("AnimationLibrary_wrqsm")
 
-[node name="RestTimer" type="Timer" parent="BodyAnimations"]
+[node name="RestTimer" type="Timer" parent="BodyAnimations" unique_id=628784672]
 one_shot = true
 
-[node name="SFX" type="Node" parent="."]
+[node name="SFX" type="Node" parent="." unique_id=804611384]
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="SFX"]
+[node name="DeathSound" type="AudioStreamPlayer" parent="SFX" unique_id=2058013730]
 stream = ExtResource("25_s5qc8")
 volume_db = -20.0
 pitch_scale = 0.5
 bus = &"SE"
 
-[node name="AttackSound" type="AudioStreamPlayer" parent="SFX"]
+[node name="AttackSound" type="AudioStreamPlayer" parent="SFX" unique_id=531842973]
 stream = ExtResource("26_5riqg")
 volume_db = -10.0
 pitch_scale = 0.8
 
-[node name="DefendSound" type="AudioStreamPlayer" parent="SFX"]
+[node name="DefendSound" type="AudioStreamPlayer" parent="SFX" unique_id=1637608311]
 stream = ExtResource("27_lgw4w")
 volume_db = -20.0
 
