@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://cl142a4tuklcm"]
+
+[ext_resource type="PackedScene" uid="uid://ca73vscnr1a8" path="res://CardScriptsAndComponents/EffectCounters/EffectCounter.tscn" id="1_hhtl1"]
+[ext_resource type="Texture2D" uid="uid://jdx3t0aywipm" path="res://Art/CardComponents/card-effect-counter-extinct.png" id="2_505p8"]
+[ext_resource type="PackedScene" uid="uid://tb7q1inrq0x6" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnEndTrigger.tscn" id="2_lsdy7"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_1y07w"]
+[ext_resource type="PackedScene" uid="uid://c48goee1xgt00" path="res://CardScriptsAndComponents/Actions/SkillSendToGraveyard.tscn" id="4_505p8"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="5_3tlrb"]
+
+[node name="EffectExtinct" instance=ExtResource("1_hhtl1")]
+effectType = 2
+max_counter = 1
+description = "Extinct: At the end of allied turn, this card is moved to the graveyard."
+
+[node name="Icon" parent="." index="0"]
+texture = ExtResource("2_505p8")
+
+[node name="OnAlliedTurnEndTrigger" parent="." index="1" instance=ExtResource("2_lsdy7")]
+
+[node name="CardAction" parent="OnAlliedTurnEndTrigger" index="1" instance=ExtResource("3_1y07w")]
+customActionText = "Extinct: At the end of allied turn, this card is moved to the graveyard."
+
+[node name="SkillSendToGraveyard" parent="OnAlliedTurnEndTrigger/CardAction" index="1" instance=ExtResource("4_505p8")]
+
+[node name="TargetSelf" parent="OnAlliedTurnEndTrigger/CardAction" index="2" instance=ExtResource("5_3tlrb")]

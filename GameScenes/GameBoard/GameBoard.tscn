@@ -379,15 +379,19 @@ bus = &"SE"
 [node name="CardsManager" type="Node2D" parent="." unique_id=1422854690 groups=["cardManager"]]
 script = ExtResource("15_h4god")
 
-[node name="PlayerDeck" type="Node2D" parent="CardsManager" unique_id=1237236361]
+[node name="PlayerDeck" type="Node2D" parent="CardsManager"]
+unique_name_in_owner = true
 position = Vector2(-500, 0)
 
-[node name="EnemyDeck" type="Node2D" parent="CardsManager" unique_id=1534628851]
+[node name="EnemyDeck" type="Node2D" parent="CardsManager"]
+unique_name_in_owner = true
 position = Vector2(-300, 0)
 
-[node name="PlayerHand" type="Node2D" parent="CardsManager" unique_id=318460944]
+[node name="PlayerHand" type="Node2D" parent="CardsManager"]
+unique_name_in_owner = true
 
-[node name="EnemyHand" type="Node2D" parent="CardsManager" unique_id=960914836]
+[node name="EnemyHand" type="Node2D" parent="CardsManager"]
+unique_name_in_owner = true
 
 [node name="PlayerBoard" type="Node2D" parent="CardsManager" unique_id=353511353]
 
@@ -845,7 +849,6 @@ horizontal_alignment = 1
 
 [node name="BGM" type="AudioStreamPlayer" parent="Audio" unique_id=424188395]
 stream = ExtResource("26_hysm7")
-volume_db = -10.0
 autoplay = true
 bus = &"BGM"
 

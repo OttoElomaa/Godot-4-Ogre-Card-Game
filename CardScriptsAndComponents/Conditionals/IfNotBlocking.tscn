@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmadw4234rjhv"]
+
+[ext_resource type="Script" uid="uid://cogumm5oevb3e" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_not_blocking.gd" id="1_pxm06"]
+
+[node name="IfNotBlocking" type="Node"]
+script = ExtResource("1_pxm06")
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

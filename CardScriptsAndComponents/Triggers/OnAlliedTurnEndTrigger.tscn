@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://tb7q1inrq0x6"]
+
+[ext_resource type="Script" uid="uid://bs5kjnljmmys" path="res://CardScriptsAndComponents/Triggers/Scripts/Trigger.gd" id="1_gcy43"]
+[ext_resource type="PackedScene" uid="uid://bij1gb3rf0kq2" path="res://CardScriptsAndComponents/Conditionals/IfAlliedTurn.tscn" id="2_v1kdk"]
+
+[node name="OnAlliedTurnEndTrigger" type="Node"]
+script = ExtResource("1_gcy43")
+triggered_when = "turnEnded"
+situation_text = "Turn Ended"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"
+
+[node name="IfAlliedTurn" parent="." instance=ExtResource("2_v1kdk")]

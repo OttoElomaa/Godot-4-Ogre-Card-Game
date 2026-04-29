@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://c6ujrcqxic4if"
+path="res://.godot/imported/Vanished Astromancer_Win.dialogue-53be9b56f1443e4c6297c5c5473cf87b.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/Vanished Astromancer_Win.dialogue"
+dest_files=["res://.godot/imported/Vanished Astromancer_Win.dialogue-53be9b56f1443e4c6297c5c5473cf87b.tres"]
+
+[params]
+
+defaults=true

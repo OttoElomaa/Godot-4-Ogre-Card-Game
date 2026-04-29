@@ -3,8 +3,8 @@ extends Node2D
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
 
-@onready var ZoneScene: PackedScene = preload("res://GameScenes/Zone/Zone.tscn")
-
+@onready var ZoneScene: PackedScene = preload("res://Resources/Scenarios/Vanished_Astromancer.tscn")
+@onready var ArenaScene: PackedScene = preload("res://Resources/Scenarios/Arena.tscn")
 
 var bestiaryVisible := false
 
@@ -82,15 +82,6 @@ func buttonPressedStartMatch() -> void:
 	MyTools.setupAndOpenDeckEdit(GameBoardScene.instantiate())
 	
 
-
-func buttonPressedGoToWorld() -> void:
-	bestiaryVisible = false
-	var newZone:Node = ZoneScene.instantiate()
-	SceneSwitcher.switchToNewScene(newZone)
-	#get_tree().change_scene_to_packed(ZoneScene)
-
-
-
 func buttonPressedToggleBestiary() -> void:
 	
 	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/Compendium/Compendium.tscn")
@@ -104,3 +95,15 @@ func toggleCardInfo(enable:bool, card:Card):
 
 func _on_options_button_pressed():
 	pass # Replace with function body.
+
+
+func _on_endless_button_pressed():
+	bestiaryVisible = false
+	var newZone:Node = ArenaScene.instantiate()
+	SceneSwitcher.switchToNewScene(newZone)
+
+func _on_start_game_button_pressed():
+	bestiaryVisible = false
+	var newZone:Node = ZoneScene.instantiate()
+	SceneSwitcher.switchToNewScene(newZone)
+	#get_tree().change_scene_to_packed(ZoneScene)

@@ -1,0 +1,58 @@
+~ start
+While you and your army camp in the outskirts of Aşk'lan, a veiled woman suddenly approaches you. You do not know how she managed to get past your watch, in broad daylight, in her heavy attire, made for parlors, not travel. Her veil is so thick you can barely see her face; on her fingers are long fake nails of cold iron. The hem of her dusky, glittering robe is not at all dirtied, though the roads are quite dusty at this time of the year. She speaks to you, with noble, headstrong bearing, standing straight as a trellis. 
+
+"I have come on the behalf on the Astomancers," she begins. "It has come to our attentiòn that you to us may be of much assistànce. We expect not you to render us this service our of sheer magnanimité; we have the informatiòn that may prevent your destructiòn. It is most unlikely that you should refuse, lest you will to part with your Life." 
+
+~ choice
+- Ask her about her dialect
+	"My speech, strange? Pah! It is like an ignoramus to say that. 'Tis your speech that is most unrefined, as with the majoritè. Know that our speech is true, and yours is distorted -- by time. We speak as our ancestors spake. You speak like your contemporaries. You are a beholden to Time; and He is beholden to us. Were it not for a pressing necéssité, I would have not stood such fatuous enquiries."
+	=> choice
+
+- Ask about her people
+	"We are the Astromancers of Aşk'lan, of course. Proprietors of lore, archivarii of éternité, the dextra 	of the King himself. The stars and beyond is the domain of our gods. It is not often that a like of you 	gets to speak to a like of me."
+	=> choice
+
+- Ask her what "destructiòn" she speaks of
+	"All shall be revealed in due time," she returns. "Alpha, I await your décision. To offer prudently 	assistancé, or fall, another victim to hubris."
+	=> choice
+
+- Agree to hear her out
+	~ agreed
+	"Why, I am most pleased with your love of reason," you can hear a smile in her voice. "It so happened that one of us had foolishly left the ivory tower and made a foray into the city below. We have not seen him since. We will you to rescue him, and terminate the Life of whomever is responsible. For the last part, we need someone such as you."
+	
+	- Ask why the Throne cannot deal with this
+		"We have determined that they may be involved with the threspass. Besiden, these muttonheads have long abandoned knowledge for hamfisted subjugation. By the fact that I am freely saying these things, you can surmise how they failed even at that."
+		=> agreed
+	- Ask who captured him
+		"Lowly felons, most like," she sneers. "Why does it matter? We have divined his location and I am to bring you to his tormentors' very threshold. "You are to penertate the premise and work your violence as you see fit."
+		=> agreed
+		
+	- Tell her to lead you
+		do SignalBus.unlock_node.emit('DialogueIcon2')
+		=> END!
+
+- Tell her to leave
+	"You shall regret this, you -- you ignorant buffoon," there is suddenly a tinge of desperation in her voice. For a moment, her feigned pomp is displaced by genune emotion. "Think with that calloused heart of yours! By morn, you all shall most likely perish! Your ignorance of the stars' omens shall cost you dearly."
+	
+	- Tell her you've had it with her audacity
+		=> forced_out
+	
+	- Force her out of the camp
+		=> forced_out
+		
+	- Agree to let her stay and listen to her
+	=> agreed
+	
+~ forced_out
+You can hear the woman cursing in barely intelligible names as she is forced out of the camp. You cannot shake the feeling of impending doom -- was it possible that the woman's gods truly gave an omen for you? To know of an omen and yet to know not from where it would come; what could be worse? 
+	
+- Get on the move and try to escape
+	You order your troops to pack camp and get on the move before dusk. You are held back by many unexpected, unfortunate circumstances, not the least of which is a small fire. Anxiety rises. It is already almost dark when your troops are finally in a condition to move. It is then that you see a group moving directly at you. It seems like the omen had caught up with you!
+	do SignalBus.unlock_node.emit('ThroneBattle')
+	=> END!
+
+- Stay and await the omen
+	As the night falls, fires continue to burn in your camp. Anxiety rises. At last, your watchmen report a group approaching your camp. These news come almost as a relief. You rally your troops for combat.
+	do SignalBus.unlock_node.emit('ThroneBattle')
+	=> END!
+=> END

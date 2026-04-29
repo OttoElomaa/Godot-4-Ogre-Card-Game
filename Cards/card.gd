@@ -472,20 +472,23 @@ func checkAndTerminateEffects():
 	for effect: EffectCounter in getEffects():
 		if effect.counter < 1 and !effect.isPermanent:
 			MyTools.createCombatLogPrintout(str(effect.id, ' was removed from ', MyTools.getFactionString(self), ' ', name), Color('DARK_SALMON'))
-			removeEffect(effect.id)
+			removeEffect(effect)
 	effects.updateEffectVisuals()
 
 
 ## Remove an effect.
-func removeEffect(id):
-	if getEffect(id):
-		getEffect(id).queue_free()
+func removeEffect(effect:EffectCounter):
+	if effect in getEffects():
+		if effect.is_inside_tree():
+			effect.queue_free()
+
 
 func clearEffects():
 	for child in $Effects/Buff/Nodes.get_children():
 		child.queue_free()
 	for child in $Effects/Debuff/Nodes.get_children():
 		child.queue_free()
+	effects.updateEffectVisuals()
 
 #endregion
 
@@ -536,9 +539,17 @@ func checkInteractAllowed() -> bool:
 
 func toggleFrontSide(toShow:bool):
 	if toShow:
-		$Frontside.show()
+		faceUp()
 	else:
-		$Frontside.hide()
+		faceDown()
+
+func faceUp():
+	$Frontside.show()
+	$Backside.hide()
+
+func faceDown():
+	$Frontside.hide()
+	$Backside.show()
 
 #endregion
 
@@ -697,10 +708,14 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 	var selfCombatDamage:int = getCombatDamageToTarget(card, !isAttacker)
 	var enemyCombatDamage:int = card.getCombatDamageToTarget(self, isAttacker)
 	
-	#### CHECK DESTROYED STATUS 1: DUELIST
-	if hasKeyword('Duelist'):
-		if selfCombatDamage >= card.tempHealth:
-			return 0   #### DUELIST KILLS, SURVIVES -> FALSE
+	#### CHECK IF THE ENEMY WOULD BE KILLED IN COMBAT WITH THIS CARD, AND EMIT SIGNAL.
+	if selfCombatDamage >= card.tempHealth + selfCombatDamage:
+		print('This cards can deal ', selfCombatDamage, ' damage and kill the foe ', card.cardName , 'with ', card.tempHealth, ' HP' )
+		var params = SignalParams.new()
+		params.sourceCard = self
+		params.targetCard = card
+		params.amount = selfCombatDamage
+		SignalBus.emit_signal("killed_enemy", params)
 			
 	
 	#### DEAL DAMAGE
@@ -709,7 +724,7 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 				
 	updateCardVisuals()
 	
-	checkAndHandleCombatDeath(isAttacker)
+	await checkAndHandleCombatDeath(isAttacker)
 
 
 #### RETURNS THE INPUT DAMAGE, AND ADDS to it any of 
@@ -734,6 +749,12 @@ func takeDamage(amount:int):
 	##CHECK IF DESTROYED
 
 	if tempHealth <= 0:
+		## Emit the Death signal. Death can still be overwritten by Defy Death etc.
+		## during destroyAndAnimate()
+#		var params = SignalParams.new()
+#		params.sourceCard = self
+#		SignalBus.emit_signal("death", params)
+		
 		await destroyAndAnimate(true)
 
 ## Returns damage taken by self after general modifiers.
@@ -767,6 +788,9 @@ func getDamageToSelf(amount:int) -> int:
 	
 	return damageTaken
 	
+## Restores a card's health to its max value.
+func heal():
+	tempHealth = health
 
 #### RETURNS THE TEMPORARY DAMAGE, AND ADDS to it any of 
 #### THIS CARD'S (Damage Dealer) DAMAGE-CHANGING EFFECTS
@@ -826,8 +850,11 @@ func checkAndHandleCombatDeath(isAttacker:bool) -> bool:
 	$SFX/DefendSound.play()
 	allowInteract = true
 	
+	var params = SignalParams.new()
+	params.sourceCard = self
+	SignalBus.survived.emit(params)
 	return false
-
+	
 func handleEnterGraveyard():
 	handleTurnStartReset()
 
@@ -844,9 +871,17 @@ func handleEnterGraveyard():
 ##################################################################################
 #region ######################################## VISUALS - HUD
 func handleAttackingPortrait():
+	if not checkAlive():
+		return
+		
 	await returnToSlot()
 	await restAndAnimate()
 	effects.togglePhased(false)
+	
+	var params := SignalParams.new()
+	params.sourceCard = self
+	params.targetCard = null
+	SignalBus.attacked.emit(params)
 	
 
 ###########################################################################
@@ -919,6 +954,9 @@ func playAttackAnimation(defender:Card):
 	await $BodyAnimations.animation_finished
 
 func returnToSlot():
+	if not checkAlive():
+		return
+	
 	var tween = create_tween()
 	tween.tween_property(self, "position", mySlot.position, 0.2)
 	await animateBlockingState(actionState == CardActionStates.ACTIVE)
@@ -984,6 +1022,18 @@ func updateCardLabels():
 #### IF TOANIMATE == FALSE, THEN ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate(toAnimate:bool):
+	var params = SignalParams.new()
+	params.sourceCard = self
+	SignalBus.emit_signal("death", params)
+	
+	if hasEffect('Defy Death'):
+		SignalBus.emit_signal("death_defied", params)
+		SignalBus.emit_signal("survived", params)
+		returnToSlot()
+		tempHealth = health
+		updateCardLabels()
+		return
+	
 	statesDestroy()
 		
 	if mySlot:
@@ -994,10 +1044,18 @@ func destroyAndAnimate(toAnimate:bool):
 	
 	if hasKeyword('Transient'):
 		purge()
+		return
+		
+	cardsManager.moveToDiscard(self, isEnemyCard)
+	reset_shaders()
+	
+	
 	
 
 func purge():
 	queue_free()
+
+
 
 func playCardDestroyedAnimation():
 	if checkAlive():
@@ -1015,7 +1073,8 @@ func playCardDestroyedAnimation():
 	$SFX/DeathSound.play()
 	await burnAwayShader()
 #	visible = false
-	destroyCardTwo()
+	
+
 
 func burnAwayShader():
 	material = load("res://Resources/Shaders/destroy_card_material.tres")
@@ -1034,11 +1093,7 @@ func reset_shaders():
 	set_shader_property(1.0, 'percentage')
 	
 	
-	
-#### CALLED IN ANIMATION "DestroyBoardCard"
-func destroyCardTwo():
-	cardsManager.moveToDiscard(self, isEnemyCard)
-	reset_shaders()
+
 
 #################################################################################
 
@@ -1051,7 +1106,15 @@ func rotateRestingCard(willRest:bool):
 	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
 	await tween.finished
 
-
+func PlayRitualCastAnimation():
+	var screen_center = Vector2(1050, 350)
+	z_index = 999
+	await MyTools.moveCardTweening(self, position, screen_center)
+	faceUp()
+	var tween = get_tree().create_tween()
+	await tween.tween_property(self, "scale", Vector2(3.0, 3.0), 1)
+	await get_tree().create_timer(1).timeout
+	
 
 
 func toggleCardName(enable:bool):

@@ -30,6 +30,7 @@ SignalBus="*res://GameAutoloads/SignalBus.gd"
 CardChecks="*res://GameAutoloads/CardChecks.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DataLoader="*uid://x5hp1ama1l5h"
+EffectAnimationQueue="*res://GameAutoloads/EffectAnimationQueue.tscn"
 
 [debug]
 
@@ -37,6 +38,8 @@ gdscript/warnings/unassigned_variable=0
 gdscript/warnings/unused_variable=0
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
+
+
 
 [dialogue_manager]
 
@@ -86,7 +89,7 @@ CheatButton={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Resources/Dialog/Vineyards_1.dialogue", "res://Resources/Dialog/Vineyards_Win_1.dialogue", "res://Resources/Dialog/Vineyards_Win_2.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Resources/Dialog/Vineyards_1.dialogue", "res://Resources/Dialog/Vineyards_Win_1.dialogue", "res://Resources/Dialog/Vineyards_Win_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_1.dialogue", "res://Resources/Dialog/Vanished Astromancer_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_Win.dialogue")
 
 [layer_names]
 

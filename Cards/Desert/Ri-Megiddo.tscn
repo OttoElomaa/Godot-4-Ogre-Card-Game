@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://cgj73nnbhfgfk"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_0ukc4"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_1rpqg"]
+[ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="3_x0w0h"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_kyaah"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="5_k8ltm"]
+[ext_resource type="Script" uid="uid://dk3jm4ajc4d2" path="res://CardScriptsAndComponents/TargetingComponents/Scripts/automatic_targeting_component.gd" id="6_wjmtk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l3k67"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qlufl"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_l3k67")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lsj0"]
+resource_local_to_scene = true
+shader = ExtResource("2_1rpqg")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_qlufl")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Ri-Megiddo" instance=ExtResource("1_0ukc4")]
+material = SubResource("ShaderMaterial_2lsj0")
+cardName = "Megiddo"
+cardType = 1
+subTypeStr = "Ritual"
+group = 12
+flavorText = "They say it all started with a flash in the sky and a ripple through the clouds. 
+
+The horror, the horror of long-dead gods falling from the sky, like speared birds."
+manaCost = 5
+
+[node name="RitualTrigger" parent="Actions" index="0" instance=ExtResource("3_x0w0h")]
+
+[node name="CardAction" parent="Actions/RitualTrigger" index="0" instance=ExtResource("4_kyaah")]
+customActionText = "Ritual: inflict 4 on all creatures."
+
+[node name="SkillAlterHealth" parent="Actions/RitualTrigger/CardAction" index="1" instance=ExtResource("5_k8ltm")]
+inflictCreature = 4
+
+[node name="AutoTargetingComponent" type="Node2D" parent="Actions/RitualTrigger/CardAction" index="2"]
+script = ExtResource("6_wjmtk")
+metadata/_custom_type_script = "uid://dk3jm4ajc4d2"

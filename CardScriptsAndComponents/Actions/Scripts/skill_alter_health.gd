@@ -16,6 +16,10 @@ func activate(targets:Array) -> bool:
 	var success := false
 	
 	for target:Card in targets:
+		
+		if not target:
+			continue
+			
 		#### INFLICT
 		if inflictCreature > 0:
 			var damage = inflictCreature

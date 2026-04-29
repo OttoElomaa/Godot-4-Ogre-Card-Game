@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_yof0k"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_c2w3y"]
 [ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="2_fhqbh"]
-[ext_resource type="Texture2D" uid="uid://cnifcf3galvcl" path="res://Art/CardArt/GreenDefiance/Algae_siren.png" id="2_hbimt"]
 [ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="3_b1ycd"]
 [ext_resource type="PackedScene" uid="uid://21p71ahd2jdd" path="res://CardScriptsAndComponents/Actions/SkillTransformIntoTarget.tscn" id="5_b1ycd"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_c2w3y"]
+[ext_resource type="Texture2D" uid="uid://ww0b4xqte60o" path="res://Art/CardArt/GreenDefiance/card-art-cr-pasar.jpg" id="7_c2w3y"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_286kw"]
 resource_local_to_scene = true
@@ -60,4 +60,4 @@ manualTargetGroup = 3
 
 [node name="Art" parent="Frontside" index="1"]
 z_index = 1
-texture = ExtResource("2_hbimt")
+texture = ExtResource("7_c2w3y")

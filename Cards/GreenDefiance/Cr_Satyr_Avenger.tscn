@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6jaq07fc0tyl"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_48n3d"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_iuewb"]
+[ext_resource type="Script" uid="uid://bs5kjnljmmys" path="res://CardScriptsAndComponents/Triggers/Scripts/Trigger.gd" id="3_14ukk"]
+[ext_resource type="PackedScene" uid="uid://bmewfrpb1dqdt" path="res://CardScriptsAndComponents/Conditionals/IfAlly.tscn" id="4_7c7mq"]
+[ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="5_po637"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="6_2cpop"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="7_8p477"]
+[ext_resource type="PackedScene" uid="uid://bjvo1v4qvl7v2" path="res://CardScriptsAndComponents/EffectCounters/EffectRage.tscn" id="8_t73vv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fjg5t"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d3xox"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_fjg5t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m6slr"]
+resource_local_to_scene = true
+shader = ExtResource("2_iuewb")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_d3xox")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-Satyr-Avenger" instance=ExtResource("1_48n3d")]
+material = SubResource("ShaderMaterial_m6slr")
+cardName = "Satyr Avenger"
+subTypeStr = "Woodwose Satyr"
+group = 5
+manaCost = 4
+startingDamage = 2
+startingHealth = 3
+
+[node name="Trigger" type="Node" parent="Actions" index="0"]
+script = ExtResource("3_14ukk")
+triggered_when = "death"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"
+
+[node name="IfAlly" parent="Actions/Trigger" index="0" instance=ExtResource("4_7c7mq")]
+
+[node name="CardAction" parent="Actions/Trigger" index="1" instance=ExtResource("5_po637")]
+customActionText = "Ally dies: gain 1 Rage."
+
+[node name="TargetSelf" parent="Actions/Trigger/CardAction" index="1" instance=ExtResource("6_2cpop")]
+
+[node name="SkillEffectCounters" parent="Actions/Trigger/CardAction" index="2" instance=ExtResource("7_8p477")]
+grantEffect = ExtResource("8_t73vv")
+grantAmount = 1

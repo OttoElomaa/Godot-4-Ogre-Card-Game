@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvy7elkjsgcxn"]
+[gd_scene load_steps=10 format=3 uid="uid://dvy7elkjsgcxn"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_804mc"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_w4rxy"]
 [ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="3_cva7b"]
 [ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="4_ln4x7"]
 [ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="5_ggk3f"]
+[ext_resource type="Texture2D" uid="uid://dbw1qf7epxuht" path="res://Art/CardArt/GreenDefiance/card-art-ri-knell.png" id="6_ln4x7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_q0x0d"]
 resource_local_to_scene = true
@@ -44,3 +45,12 @@ metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
 [node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("5_ggk3f")]
 alterOpponentHealth = -3
+
+[node name="Art" parent="Frontside" index="1"]
+texture = ExtResource("6_ln4x7")
+
+[node name="ManaCost" parent="Frontside" index="2"]
+visible = false
+
+[node name="ActionState" parent="Frontside" index="5"]
+visible = false

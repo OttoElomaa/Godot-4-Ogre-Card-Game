@@ -14,6 +14,9 @@ signal defended(params:SignalParams)
 signal damage_taken(params:SignalParams)
 
 signal death(params:SignalParams)
+signal death_defied(params:SignalParams)
+signal survived(params:SignalParams)
+signal killed_enemy(params:SignalParams)
 
 ####
 signal disp_card(cardName:String)

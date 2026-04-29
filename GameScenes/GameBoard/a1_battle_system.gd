@@ -73,6 +73,10 @@ func _on_end_turn_button_pressed() -> void:
 	
 	
 func switchBetweenPlayerEnemyTurns():
+	var signalParams = SignalParams.new()
+	signalParams.isEnemySide = GameInfo.enemy_turn
+	SignalBus.turnEnded.emit(signalParams)
+	
 	#### SWITCH TURN TYPE BETWEEN PLAYER <--> ENEMY
 	GameInfo.enemy_turn = !GameInfo.enemy_turn
 	
@@ -97,8 +101,8 @@ func switchBetweenPlayerEnemyTurns():
 	main.updateUi(GameInfo.turnCount)
 	cardsManager.startPlayerTurn()
 	
-	var signalparams = SignalParams.new()
-	SignalBus.turnStarted.emit(null)
+	signalParams.isEnemySide = GameInfo.enemy_turn
+	SignalBus.turnStarted.emit(signalParams)
 	
 	
 
@@ -173,17 +177,21 @@ func timeoutEnemyStartCombat() -> void:
 
 
 
-## Current algorithm -- half as many creatures need to be set as blockers as the player has on board. If there are not enough TANKS,
-## sets other cards instead, prioritizing strongest ones.
+## Current algorithm -- half as many creatures need to be set as blockers as the player has on board. 
+## If there are not enough TANKS, sets other cards instead, prioritizing strongest ones.
 func decide_blockers():
 	if not enemyBoardCards.is_empty():
 		CardChecks.sort_by_strongest(enemyBoardCards)
 		var projected_number_of_blockers = roundi(playerBoardCards.size() / 2) - cardsManager.getEnemyBlockers().size()
-			
+		
+		if projected_number_of_blockers < 1:
+			projected_number_of_blockers += 1
+		
 		for i in range(projected_number_of_blockers):
 			var blocker:Card = CardChecks.getNonBlockersInList(enemyBoardCards).front()
-			if has_method('statesActive'):
-				blocker.statesActive()
+			if MyTools.checkNodeValidity(blocker):
+				if blocker.has_method('statesActive'):
+					blocker.statesActive()
 
 func playCasters():
 	var enemyCasters = CardChecks.getCastersInList(enemyBoardCards)
@@ -293,6 +301,7 @@ func handlePlayerRitual(c:Card) -> bool:
 	success = await c.actions.handleRitual()
 	
 	if success:
+		#await c.PlayRitualCastAnimation()
 		cardsManager.discardCard(c)
 		if !c.isEnemyCard:
 			GameInfo.playerMana -= c.manaCost
@@ -343,6 +352,8 @@ func handlePlayerAttackEnemy() -> void:
 #region### ENEMY ATTACKER AI
 #### BTW, PlayAttackAnimation CALLS THE CARD DESTROY COMMAND
 func handleEnemyAttackPlayer(attackCard: Card) -> void:
+	if not attackCard.checkAlive():
+		return
 	
 	var c = attackCard
 	var blockers:Array = cardsManager.getPlayerBlockers()
@@ -547,6 +558,17 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 	targetCard.allowInteract = false
 	await attackCard.handleCombatActions(attackCard, targetCard)
 	targetCard.handleCombatActions(attackCard, targetCard)
+
+	#### WHICH CARDS TOOK LETHAL DAMAGE?
+	var damageTakenByTarget = await targetCard.takeCombatDamage(attackCard, false)
+	var damageTakenByAttacker = await attackCard.takeCombatDamage(targetCard, true)
+
+
+	#### COMBAT LOG STUFF ##################################
+	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
+	main.addLogMessage(attackerString, Color.WHITE)	
+	
+	#### EMITTING SIGNALS OF A COMPLETED COMBAT.
 	var params := SignalParams.new()
 	params.sourceCard = attackCard
 	params.targetCard = targetCard
@@ -556,15 +578,6 @@ func resolveAttack(attackCard:Card, targetCard:Card):
 	params2.sourceCard = targetCard
 	params2.targetCard = attackCard
 	SignalBus.defended.emit(params2)
-
-	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, false)
-	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, true)
-
-
-	#### COMBAT LOG STUFF ##################################
-	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
-	main.addLogMessage(attackerString, Color.WHITE)	
 	
 #	
 

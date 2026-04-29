@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5tcem8t7co6n"]
+
+[ext_resource type="Script" uid="uid://bs5kjnljmmys" path="res://CardScriptsAndComponents/Triggers/Scripts/Trigger.gd" id="1_jpics"]
+[ext_resource type="PackedScene" uid="uid://bqt3gngoys4mh" path="res://CardScriptsAndComponents/Conditionals/IfSelf.tscn" id="2_eqpgv"]
+
+[node name="OnSelfSurvivalTrigger" type="Node"]
+script = ExtResource("1_jpics")
+triggered_when = "survived"
+metadata/_custom_type_script = "uid://bs5kjnljmmys"
+
+[node name="IfSelf" parent="." instance=ExtResource("2_eqpgv")]

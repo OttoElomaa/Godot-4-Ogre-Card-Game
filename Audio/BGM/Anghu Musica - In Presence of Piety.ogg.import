@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c78hgvqitkhsr"
+path="res://.godot/imported/Anghu Musica - In Presence of Piety.ogg-469ad3aeffcbf36cc5ff55992e8a8974.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/BGM/Anghu Musica - In Presence of Piety.ogg"
+dest_files=["res://.godot/imported/Anghu Musica - In Presence of Piety.ogg-469ad3aeffcbf36cc5ff55992e8a8974.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

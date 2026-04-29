@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu0e7fgg0vk3s"]
+
+[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="1_8eteb"]
+[ext_resource type="Script" uid="uid://ddoi4axhq8s8m" path="res://randomized_battle_icon.gd" id="2_815ux"]
+
+[node name="BattleIcon" instance=ExtResource("1_8eteb")]
+script = ExtResource("2_815ux")
+start_unlocked = true
