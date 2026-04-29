@@ -708,6 +708,13 @@ func takeDamage(amount:int):
 	checkAndHandleDeathFromTempHealth()
 
 
+
+##CHECK IF DESTROYED
+func checkAndHandleDeathFromTempHealth():
+	if tempHealth <= 0:
+		destroyAndAnimate()
+
+
 ## Returns damage taken by self after general modifiers.
 func getDamageToSelf(amount:int) -> int:
 	var damageTaken = amount
@@ -818,7 +825,7 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 func handleCombatSurvival(isAttacker:bool) -> bool:
 	#### THIS CARD WAS DESTROYED
 	if tempHealth <= 0:
-		CardAnimationQueue.queueWait(1)
+		#CardAnimationQueue.queueWait(1)
 		return true
 	
 	#### THIS CARD SURVIVES		
@@ -842,10 +849,7 @@ func handleCombatSurvival(isAttacker:bool) -> bool:
 	
 	
 
-##CHECK IF DESTROYED
-func checkAndHandleDeathFromTempHealth():
-	if tempHealth <= 0:
-		destroyAndAnimate()
+
 
 
 
@@ -857,6 +861,7 @@ func destroyAndAnimate():
 	params.sourceCard = self
 	SignalBus.emit_signal("death", params)
 	
+	#### SURVIVES
 	if hasEffect('Defy Death'):
 		SignalBus.emit_signal("death_defied", params)
 		SignalBus.emit_signal("survived", params)
@@ -865,7 +870,8 @@ func destroyAndAnimate():
 		updateCardLabels()
 		return
 			
-	
+	#### DOESN'T SURVIVE
+	#### STAYS IN LIMBO UNTIL IT CAN BE PLACED TO GRAVEYARD
 	statesLimbo()
 	CardAnimationQueue.queueAnimation(self, animateCardDestroyed, handleEnterGraveyard)
 	
@@ -973,9 +979,6 @@ func timeoutRestAnimation() -> void:
 		CardAnimationQueue.queueAnimation(self, animateRestingRotation)
 
 
-func reset_visuals():
-	$BodyAnimations.play("RESET")
-
 
 
 #### LENGTH = 0.5 + 1 = 1.5 s
@@ -1009,10 +1012,9 @@ func animateReturnToSlot() -> Tween:
 	if not mySlot:   #### Removed from slot already?
 		return
 	
-	animateBlockingState() #### NO QUEUING NEEDED
 	
-	var tween = create_tween()
-	tween.tween_property(self, "position", mySlot.position, 0.2)
+	
+	var tween = animateBlockingState() 
 	return tween
 	
 	
@@ -1038,6 +1040,7 @@ func animateBlockingState() -> Tween:
 		newPos.y += activeOffset
 		
 	var tween = MyTools.moveCardTweening(self, position, newPos)
+	toggleActionStateIndicator(toBlock)
 	return tween
 
 
