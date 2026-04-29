@@ -474,6 +474,13 @@ stream = ExtResource("13_g6unp")
 autoplay = true
 bus = &"BGM"
 
+[node name="Audio" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("13_g6unp")
+autoplay = true
+bus = &"BGM"
+
 [connection signal="pressed" from="UI/ExitPane/Panel/ExitButton" to="." method="buttonPressedExitGame"]
 [connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" method="buttonMouseEntered"]
 [connection signal="pressed" from="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="." method="buttonPressedDeckEdit"]

@@ -73,6 +73,22 @@ horizontal_alignment = 1
 
 [node name="EndlessButton" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2"]
 layout_mode = 2
+theme_override_styles/hover = ExtResource("4_duqux")
+theme_override_styles/normal = ExtResource("5_26mog")
+
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/StartMatchPane/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_b8l8w")
+
+[node name="Label" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2"]
+layout_mode = 2
+text = "Endless Mode"
+label_settings = ExtResource("3_wqb3i")
+horizontal_alignment = 1
+
+[node name="EndlessButton" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2"]
+layout_mode = 2
 theme_override_styles/normal = ExtResource("5_26mog")
 theme_override_styles/hover = ExtResource("4_duqux")
 
