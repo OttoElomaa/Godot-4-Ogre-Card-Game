@@ -29,8 +29,7 @@ func get_all_game_cards():
 	return $CardLoader.createAllCardsByAmount(1)
 
 
-func checkNodeValidity(node) -> bool:
-	
+func checkNodeValidity(node:Node) -> bool:
 	if not node:
 		return false
 	if not is_instance_valid(node):
@@ -38,13 +37,17 @@ func checkNodeValidity(node) -> bool:
 	if node.is_queued_for_deletion():
 		return false
 	
+	return true
+
+
+func validateNotLimbo(node) -> bool:
+	if not checkNodeValidity(node):
+		return false
 	#### LIMBO means the CARD IS BETWEEN STATES -> for example, NEITHER IN Board OR Graveyard
 	if node is Card:
 		if node.checkLimbo():
 			return false
-	
 	return true
-
 
 
 func findValidNodesInArray(cards:Array):

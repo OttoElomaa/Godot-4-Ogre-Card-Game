@@ -821,7 +821,6 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 func handleCombatSurvival(isAttacker:bool) -> bool:
 	#### THIS CARD WAS DESTROYED
 	if tempHealth <= 0:
-		#CardAnimationQueue.queueWait(1)
 		return true
 	
 	#### THIS CARD SURVIVES		

@@ -5,7 +5,6 @@ extends Node2D
 signal animationQueueEmpty
 
 var animationQueue := []
-var instantQueue := []
 
 var currentAnimation:Dictionary = {}
 var isAnimating := false
@@ -15,10 +14,7 @@ func _physics_process(delta: float) -> void:
 		if not animationQueue.is_empty():
 			animateNext()
 			
-	if not instantQueue.is_empty():
-		handleInstants()
-			
-			
+
 
 func queueAnimation(card:Card, animationFunction:Callable, waitingFunction:Callable=doNothing) -> void:
 	
@@ -29,8 +25,6 @@ func queueAnimation(card:Card, animationFunction:Callable, waitingFunction:Calla
 		)
 
 
-func queueInstant(card:Card, animationFunction:Callable) -> void:
-	instantQueue.append( {"card":card, "animationFunction":animationFunction} )
 
 
 func queueWait(waitTime:float) -> void:
@@ -74,11 +68,15 @@ func animateNext() -> void:
 	
 #### AN ANIMATION IS FINISHED, PLAY NEXT ANIMATION IN THE QUEUE
 func onAnimationFinished() -> void:
+	var curr := currentAnimation
 	
-	if currentAnimation.has("waitingFunction"):
-		var waitingFunction: Callable = currentAnimation.waitingFunction
-		if currentAnimation.card and waitingFunction:
-			waitingFunction.call()
+	#### PLAY THE ATTACHED FOLLOW-UP FUNCTION - Different from ANIMATENEXT
+	if curr.has("waitingFunction"):
+		var waitingFunction: Callable = curr.waitingFunction
+		if curr.card and waitingFunction:
+			if not waitingFunction == doNothing:
+				print("AnimationQueue: Play Waiting Function for card: %s. Function: %s " % [curr.card.cardName, curr.waitingFunction])
+				waitingFunction.call()
 	
 	#### REMOVE THE FIRST ITEM -> It's been processed now
 	animationQueue.pop_front()	
@@ -89,22 +87,6 @@ func onAnimationFinished() -> void:
 	if animationQueue.is_empty():
 		animationQueueEmpty.emit()
 
-
-
-#### ANIMATES AND REMOVES INSTANTS FROM THE QUEUE
-#### INSTANT can only activate IF ITS CARD ISN'T BEING ANIMATED in main QUEUE
-func handleInstants() -> void:
-	var animatingCards: Array = getCurrentAndWaitingCards()
-	var remainingInstants := []
-	
-	for anim:Dictionary in instantQueue:
-		if anim.card in animatingCards:
-			remainingInstants.append(anim)
-		else:
-			anim.animationFunction.call()
-			
-	instantQueue = remainingInstants
-			
 
 
 func getCurrentAndWaitingCards() -> Array:
