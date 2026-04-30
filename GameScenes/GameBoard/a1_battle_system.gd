@@ -232,7 +232,7 @@ func decide_blockers():
 func enemyHandleCasters():
 	var enemyCasters = CardChecks.getCastersInList(enemyBoardCards)
 	for card:Card in enemyCasters:
-		handleEnemyCast(card)
+		await handleEnemyCast(card)
 		
 	await CardAnimationQueue.checkAndWaitQueueEmpty()
 	return
