@@ -901,12 +901,12 @@ func resetCardAtStateChange():
 func handleAttackingPortrait():
 	if not checkAlive():
 		return
-	restAndAnimate()
-	
+		
 	var params := SignalParams.new()
 	params.sourceCard = self
 	params.targetCard = null
 	SignalBus.attacked.emit(params)
+	
 	
 	
 

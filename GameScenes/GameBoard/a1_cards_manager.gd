@@ -158,7 +158,7 @@ func _input(e: InputEvent) -> void:
 			#### RIGHT CLICK PROCESSING -> CARD ACTION MENU	
 			elif e.button_index == MOUSE_BUTTON_RIGHT:
 				var card = fetchCardOnClick()
-				if MyTools.checkNodeValidity(card):
+				if MyTools.validateNodeNotLimbo(card):
 					main.toggleCardActionMenu(true, card)
 	
 		
@@ -526,8 +526,9 @@ func getEnemyGraveyardCards() -> Array:
 func getPlayerBlockers():
 	var blockers := []
 	for c:Card in getPlayerBoardCards():
-		if c.checkCanBlock():
-			blockers.append(c)
+		if MyTools.validateNodeNotLimbo(c):
+			if c.checkCanBlock():
+				blockers.append(c)
 	return blockers
 				
 	

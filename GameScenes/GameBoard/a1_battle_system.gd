@@ -178,7 +178,7 @@ func enemySummonCreatures() -> void:
 	var enemyHandCards := cardsManager.getEnemyHandCards()
 	
 	for card:Card in enemyHandCards:
-		if MyTools.checkNodeValidity(card):
+		if MyTools.validateNodeNotLimbo(card):
 			if card.manaCost <= GameInfo.enemyMana:
 				if not card.isRitual:
 					var success = playEnemyCard(card)
@@ -191,7 +191,7 @@ func enemyPlayRituals() -> void:
 	var enemyHandCards := cardsManager.getEnemyHandCards()
 	
 	for card:Card in enemyHandCards:
-		if MyTools.checkNodeValidity(card):
+		if MyTools.validateNodeNotLimbo(card):
 			if card.isRitual:
 				if card.manaCost <= GameInfo.enemyMana:
 					handlePlayerRitual(card)
@@ -407,6 +407,8 @@ func handlePlayerAttackEnemy() -> void:
 	endAttackState()
 	
 	CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait)
+	CardAnimationQueue.queueAnimation(c, c.animateReturnToSlot)  
+	CardAnimationQueue.queueAnimation(c, c.restAndAnimate)
 	
 	main.changeHealth(-combatDamage, !c.isEnemyCard)
 	main.updateResourceLabels()
@@ -485,26 +487,25 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 		
 	#### CASE 3 - NO BLOCKERS, ATTACK PLAYER
 	if blockers.is_empty():
-		if not main.playerChampion():  #### CASE 3.1 - CHAMPION ON BOARD
+		if not main.playerChampion():  #### CASE 3.1 - NO CHAMPION
 			var damageToPlayer = c.getCombatDamageToTarget(null, true)
 			main.changeHealth(-c.tempDamage, !c.isEnemyCard)
 			main.updateResourceLabels()
 			handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
 			
 			
-		else:  #### CASE 3.2 - NO CHAMPION
+		else:  #### CASE 3.2 - CHAMPION ON BOARD
 			var damageToChampion = c.getCombatDamageToTarget(main.playerChampion(), true)
 			main.playerChampion().takeCombatDamage(c, true)
 			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
 		
 		c.handleAttackingPortrait()
-		c.restAndAnimate()
 		CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait)
-		CardAnimationQueue.queueAnimation(c, c.animateReturnToSlot, enemyAttackersWaiter)  #### HANDLES ANIMATION QUEUE AND CALLS NEXT ATTACKER
+		CardAnimationQueue.queueAnimation(c, c.animateReturnToSlot)  
+		#### HANDLES ANIMATION QUEUE AND CALLS NEXT ATTACKER
+		CardAnimationQueue.queueAnimation(c, c.restAndAnimate, enemyAttackersWaiter)
+		
 		print("Attacked portrait: Calling Waiter")
-
-
-
 
 
 

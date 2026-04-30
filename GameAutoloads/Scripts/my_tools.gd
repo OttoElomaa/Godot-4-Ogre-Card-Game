@@ -40,12 +40,22 @@ func checkNodeValidity(node:Node) -> bool:
 	return true
 
 
-func validateNotLimbo(node) -> bool:
+func validateNodeNotLimbo(node) -> bool:
 	if not checkNodeValidity(node):
 		return false
 	#### LIMBO means the CARD IS BETWEEN STATES -> for example, NEITHER IN Board OR Graveyard
 	if node is Card:
 		if node.checkLimbo():
+			return false
+	return true
+
+
+func validateNodeAlive(node) -> bool:
+	if not checkNodeValidity(node):
+		return false
+	#### LIMBO means the CARD IS BETWEEN STATES -> for example, NEITHER IN Board OR Graveyard
+	if node is Card:
+		if not node.checkAlive():
 			return false
 	return true
 
