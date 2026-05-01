@@ -258,6 +258,7 @@ func setup(board: GameBoard):
 	$Frontside/CardName.hide()
 	$Frontside/CardNameBestiary.hide()
 	
+	toggleTraveling(false)
 	handleTurnStartReset()
 
 
@@ -341,6 +342,11 @@ func handleArrival():
 	var params = SignalParams.new()
 	params.sourceCard = self
 	SignalBus.arrival.emit(params)
+	
+	#### SET ACTION STATE AND TRAVEL STATE
+	if not hasKeyword('Haste'):
+		toggleTraveling(true)
+		
 	handleTurnStartReset()
 	updateCardVisuals()
 
@@ -623,9 +629,9 @@ func statesLimbo():
 func toggleTraveling(enabled:bool):
 	isTraveling = enabled
 	if enabled:
-		stateHandler.get_node("TravelingIcon").show()
+		$Frontside/ActionState/TravelingIcon.show()
 	else:
-		stateHandler.get_node("TravelingIcon").hide()
+		$Frontside/ActionState/TravelingIcon.hide()
 
 
 func toggleAllowEnemyUse(enabled:bool):
@@ -938,10 +944,10 @@ func toggleManaCostIndicator(enable:bool):
 
 func toggleActionStateIndicator(enable:bool):
 	if enable:
-		$Frontside/ActionState.show()
+		$Frontside/ActionState/ActiveIcon.show()
 		#$Frontside/ManaCost/ManaCostLabel.text = "%d" % manaCost
 	else:
-		$Frontside/ActionState.hide()
+		$Frontside/ActionState/ActiveIcon.hide()
 
 
 

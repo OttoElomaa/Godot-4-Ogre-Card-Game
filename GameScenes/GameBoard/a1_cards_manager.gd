@@ -271,31 +271,29 @@ func handleFinishDraggingCard() -> Node:
 	var resultCards:Array = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	var target:Card = null
 	
-	#### GET CARDS UNDER MOUSE WHEN DRAGGING FINISHED
-	if not resultCards.is_empty():
+	#### Ritual: GET CARDS UNDER MOUSE WHEN DRAGGING FINISHED
+	if c.isRitual:
 		for res in resultCards:
 			if not getCollidedObject(res) == currentDraggedCard:
 				target = getCollidedObject(res)
 	
-	
 	#############################################################
-	#### HANDLE ATTACKING
-	#### FIND CARD SLOT
-	var results:Array = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
-	if results.size() > 0:
-		var selectedSlot:CardSlot = getCollidedObject(results[0])
+	#### HANDLE PLACE CARD IN SLOT
+	else:
+		resultCards = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
 		
-		#### CARD IS NOT SPELL: SET CARD To Found AVAILABLE SLOT
-		if not c.isRitual:
+		if not resultCards.is_empty():
+			#### Place card: SET CARD To Found AVAILABLE SLOT
+			var selectedSlot:CardSlot = getCollidedObject(resultCards[0])
 			if selectedSlot.isAvailable and c.manaCost <= GameInfo.playerMana:
 				if main.checkSlotPlayer(selectedSlot):
 					success = await handlePlaceCardInSlot(c, selectedSlot)
-		
+	
+	#### RESET Z index (card is no longer on top of all other cards)
 	if success:
-		c.z_index = 1
-			
-	#### CLEAR SLOT FROM CARD'S END -> Why? What?
-	if not success:
+		c.z_index = 1	
+	#### CLEAR SLOT FROM CARD'S END -> Because you only drag slotless cards
+	else:
 		if currentDraggedCard:
 			if currentDraggedCard.mySlot:
 				currentDraggedCard.mySlot.toggleAvailable(true)
@@ -305,13 +303,13 @@ func handleFinishDraggingCard() -> Node:
 	return null
 
 
-	
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	var originalPos = c.position	
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
+		assert(GameInfo.enemy_turn, "WTF")
 		CardAnimationQueue.queueAnimation(c, c.animatePlaceInSlot)
 		placeCardInSlotTwo(c, slot, true)
 		GameInfo.enemyMana -= c.manaCost
@@ -324,13 +322,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
 	c.setup(main)
 	await get_tree().process_frame
-
 	
-	
-	#### SET ACTION STATE AND TRAVEL STATE
-	if not c.hasKeyword('Haste'):
-		c.toggleTraveling(true)
-		
 	c.setInitialActionState()  #### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
 	c.handleArrival()          #### ACTIVATE ARRIVAL TRIGGERS
 	
