@@ -258,7 +258,7 @@ func enemyAttackersWaiter():
 	
 	#### ENEMY ATTACKERS FOUND, CONTINUE COMBAT
 	if not enemyWillingAttackers.is_empty():
-		var card:Card = enemyAttackers[0]
+		var card:Card = enemyWillingAttackers[0]
 		print("Waiter: %s Attacks!" % card.cardName)
 		handleEnemyAttackPlayer(card)
 		card.toggleAllowEnemyUse(false)
@@ -356,6 +356,130 @@ func handlePlayerAttack() -> void:
 		return
 
 
+#### ATTACK ENEMY PORTRAIT
+func handlePlayerAttackEnemy() -> void:
+	#### ENEMY HAS BLOCKERS, CAN'T ATTACK ENEMY
+	if not cardsManager.getEnemyBlockers().is_empty():
+		endAttackState()
+		return
+		
+	#### ATTACK THE ENEMY
+	var c = currentAttackingCard
+	var combatDamage = c.getCombatDamageToTarget(null, true)
+	endAttackState()
+	
+	#### QUEUE THE ATTACK ANIMATIONS, THEN TELL RESPONSE QUEUE TO PLAY DEFENSE ANIMATIONS
+	CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait, CardAnimationQueue.startResponseQueue)
+	CardAnimationQueue.queueAnimation(c, c.animateReturnToSlot)  
+	CardAnimationQueue.queueAnimation(c, c.restAndAnimate)
+	
+	main.changeHealth(-combatDamage, !c.isEnemyCard)
+	main.updateResourceLabels()
+	handlePortraitAttackPrintout(c, combatDamage, true)
+	main.shake_screen(10, 0.5)
+	c.handleAttackingPortrait()
+	
+
+
+func handlePlayerAttackCreature(target:Card) -> void:
+	#### INVALID TARGET - END TARGETING ANYWAY
+	if not MyTools.checkNodeValidity(target):
+		endAttackState()
+		return
+	if not target.checkAlive():
+		endAttackState()
+		return
+		
+	#### DON'T END TARGETING if it registers CLICKING ON SAME ATTACKING CARD ITSELF
+	var end := false
+	if not target.mySlot:
+		print('Is not in slot!')
+		end = true
+	elif not main.checkSlotEnemy(target.mySlot):
+		print('Is not an enemy!')
+		end = true
+#### DUMMIED CODE: ALLOWS TARGETING PASSIVES IS THERE ARE NO BLOCKERS.
+#	elif not cardsManager.getEnemyBlockers().is_empty() and not target.checkCanBlock():
+#		end = true
+#### CANNOT TARGET PASSIVES AT ALL.
+	elif not target.checkCanBlock():
+		print('Is passive!')
+		end = true
+	elif not target.allowInteract:
+		print('Already fighting!')
+		end = true
+		
+	if end:
+		if target != currentAttackingCard:
+			print('Cannot attack self!')
+			endAttackState()
+		return
+	
+	#### VALID TARGET - RESOLVE ATTACK
+	resolveAttack(currentAttackingCard, target)
+		
+
+
+#### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
+#### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
+func resolveAttack(attackCard:Card, targetCard:Card):
+	attackCard.isAttacking = true
+	targetCard.isAttacking = false
+	
+	currentAttackingCard = attackCard
+	currentDefendingCard = targetCard
+	endAttackState()
+		
+	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
+	targetCard.allowInteract = false
+	attackCard.handleCombatActions(attackCard, targetCard, resolveAttackTwo )
+	targetCard.handleCombatActions(attackCard, targetCard, doNothing)
+	
+	
+	
+func resolveAttackTwo():
+	CardAnimationQueue.queueFunction(CardAnimationQueue.startResponseQueue)
+	
+	var attackCard:Card = currentAttackingCard
+	var targetCard: Card = currentDefendingCard
+	
+	#### WHICH CARDS TOOK LETHAL DAMAGE?
+	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, false)
+	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, true)
+	
+	#### COMBAT LOG STUFF ##################################
+	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
+	main.addLogMessage(attackerString, Color.WHITE)	
+	
+	#### EMITTING SIGNALS OF A COMPLETED COMBAT.
+	var params := SignalParams.new()
+	params.sourceCard = attackCard
+	params.targetCard = targetCard
+	SignalBus.attacked.emit(params)
+	
+	var params2 := SignalParams.new()
+	params2.sourceCard = targetCard
+	params2.targetCard = attackCard
+	SignalBus.defended.emit(params2)
+	
+	targetCard.handleCombatSurvival(false)
+	await attackCard.handleCombatSurvival(true)
+	
+	attackCard.isAttacking = false
+	targetCard.isAttacking = false
+	attackCard.toggleAllowEnemyUse(true)
+	
+	if attackCard.isEnemyCard:
+		enemyAttackersWaiter()  #### CALL IN NEXT ATTACKER
+	
+	
+
+func endAttackState() -> void:
+	if States.gameState == States.GameStates.ATTACK:
+		togglePlayerAttackMode(false, null)
+	
+
+
 #### FOR PLAYING 'RITUAL' CARDS
 func handlePlayerRitual(c:Card) -> bool:
 	var success := false
@@ -365,6 +489,7 @@ func handlePlayerRitual(c:Card) -> bool:
 	
 	#### RESOLVE RITUAL IN CARD'S ACTION NODE (Could be TARGETED or TARGETLESS)
 	success = await c.actions.handleRitual()
+	CardAnimationQueue.startResponseQueue()
 	
 	if success:
 		#await c.PlayRitualCastAnimation()
@@ -395,27 +520,7 @@ func cardCastButtonPressed() -> void:
 		
 	
 	
-func handlePlayerAttackEnemy() -> void:
-	#### ENEMY HAS BLOCKERS, CAN'T ATTACK ENEMY
-	if not cardsManager.getEnemyBlockers().is_empty():
-		endAttackState()
-		return
-		
-	#### ATTACK THE ENEMY
-	var c = currentAttackingCard
-	var combatDamage = c.getCombatDamageToTarget(null, true)
-	endAttackState()
-	
-	CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait)
-	CardAnimationQueue.queueAnimation(c, c.animateReturnToSlot)  
-	CardAnimationQueue.queueAnimation(c, c.restAndAnimate)
-	
-	main.changeHealth(-combatDamage, !c.isEnemyCard)
-	main.updateResourceLabels()
-	handlePortraitAttackPrintout(c, combatDamage, true)
-	main.shake_screen(10, 0.5)
-	c.handleAttackingPortrait()
-	
+
 	
 #endregion
 
@@ -492,15 +597,15 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 			main.changeHealth(-c.tempDamage, !c.isEnemyCard)
 			main.updateResourceLabels()
 			handlePortraitAttackPrintout(attackCard, damageToPlayer, false)
-			
-			
+
 		else:  #### CASE 3.2 - CHAMPION ON BOARD
 			var damageToChampion = c.getCombatDamageToTarget(main.playerChampion(), true)
 			main.playerChampion().takeCombatDamage(c, true)
 			handlePortraitAttackPrintout(attackCard, damageToChampion, false)
 		
 		c.handleAttackingPortrait()
-		CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait)
+		#### QUEUE THE ATTACK ANIMATIONS, THEN TELL RESPONSE QUEUE TO PLAY DEFENSE ANIMATIONS
+		CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait, CardAnimationQueue.startResponseQueue)
 		CardAnimationQueue.queueAnimation(c, c.animateReturnToSlot)  
 		#### HANDLES ANIMATION QUEUE AND CALLS NEXT ATTACKER
 		CardAnimationQueue.queueAnimation(c, c.restAndAnimate, enemyAttackersWaiter)
@@ -618,103 +723,6 @@ func handlePortraitAttackPrintout(attackCard:Card, damageAmount:int, targetIsEne
 	main.addLogMessage(attackString, Color.WHITE)
 	
 
-
-func handlePlayerAttackCreature(target:Card) -> void:
-	
-	
-	#### INVALID TARGET - END TARGETING ANYWAY
-	if not MyTools.checkNodeValidity(target):
-		endAttackState()
-		return
-	if not target.checkAlive():
-		endAttackState()
-		return
-		
-		
-	#### DON'T END TARGETING if it registers CLICKING ON SAME ATTACKING CARD ITSELF
-	var end := false
-	if not target.mySlot:
-		print('Is not in slot!')
-		end = true
-	elif not main.checkSlotEnemy(target.mySlot):
-		print('Is not an enemy!')
-		end = true
-#### DUMMIED CODE: ALLOWS TARGETING PASSIVES IS THERE ARE NO BLOCKERS.
-#	elif not cardsManager.getEnemyBlockers().is_empty() and not target.checkCanBlock():
-#		end = true
-#### CANNOT TARGET PASSIVES AT ALL.
-	elif not target.checkCanBlock():
-		print('Is passive!')
-		end = true
-	elif not target.allowInteract:
-		print('Already fighting!')
-		end = true
-		
-	if end:
-		if target != currentAttackingCard:
-			print('Cannot attack self!')
-			endAttackState()
-		return
-	
-	#### VALID TARGET - RESOLVE ATTACK
-	await resolveAttack(currentAttackingCard, target)
-		
-
-
-
-#### THIS FUNCTION PLAYS OUT THE COMBAT BETWEEN TWO CARDS, 
-#### AFTER OTHER FUNCTIONS OKAYED THE COMBAT
-func resolveAttack(attackCard:Card, targetCard:Card):
-	currentAttackingCard = attackCard
-	currentDefendingCard = targetCard
-	endAttackState()
-		
-	#### HANDLE COMBAT ARTS AND OTHER ACTIONS
-	targetCard.allowInteract = false
-	attackCard.handleCombatActions(attackCard, targetCard, resolveAttackTwo )
-	targetCard.handleCombatActions(attackCard, targetCard, doNothing)
-	
-	
-	
-func resolveAttackTwo():
-	var attackCard:Card = currentAttackingCard
-	var targetCard: Card = currentDefendingCard
-	
-	
-	#### WHICH CARDS TOOK LETHAL DAMAGE?
-	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, false)
-	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, true)
-
-
-	#### COMBAT LOG STUFF ##################################
-	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]
-	main.addLogMessage(attackerString, Color.WHITE)	
-	
-	#### EMITTING SIGNALS OF A COMPLETED COMBAT.
-	var params := SignalParams.new()
-	params.sourceCard = attackCard
-	params.targetCard = targetCard
-	SignalBus.attacked.emit(params)
-	
-	var params2 := SignalParams.new()
-	params2.sourceCard = targetCard
-	params2.targetCard = attackCard
-	SignalBus.defended.emit(params2)
-	
-	targetCard.handleCombatSurvival(false)
-	await attackCard.handleCombatSurvival(true)
-	
-	attackCard.toggleAllowEnemyUse(true)
-	if attackCard.isEnemyCard:
-		enemyAttackersWaiter()  #### CALL IN NEXT ATTACKER
-	
-	
-
-
-func endAttackState() -> void:
-	if States.gameState == States.GameStates.ATTACK:
-		togglePlayerAttackMode(false, null)
-	
 
 func _on_enemy_portrait_area_mouse_entered():
 	damageCalculator.show()

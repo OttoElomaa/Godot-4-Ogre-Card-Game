@@ -6,25 +6,54 @@ signal animationQueueEmpty
 
 var animationQueue := []
 
-var currentAnimation:Dictionary = {}
+var responseQueue := []
 var isAnimating := false
 
+var responseAnimating := false
+var isResponseBlocked := true
+
+
 func _physics_process(delta: float) -> void:
-	if not isAnimating:
-		if not animationQueue.is_empty():
-			animateNext()
-			
-
-
-func queueAnimation(card:Card, animationFunction:Callable, waitingFunction:Callable=doNothing) -> void:
 	
+	#### THE MAIN QUEUE ACTIVATES whenever there is ANIMATIONS IN THE QUEUE
+	if not isAnimating:
+		animateNext(animationQueue)
+	
+	#### THE RESPONSE QUEUE WAITS until ANIMATING=TRUE, SHUTS DOWN once it's emptied again
+	if not responseAnimating:
+		if not isResponseBlocked:
+			animateNext(responseQueue)
+				
+
+
+func startResponseQueue():
+	print("AnimationQueue: Starting the response queue!  Length: %d" % responseQueue.size())
+	isResponseBlocked = false
+
+
+##########################################
+#### QUEUING PART
+func queueAnimation(card:Card, animationFunction:Callable, waitingFunction:Callable=doNothing) -> void:
 	print("AnimationQueue: Queue Animation for card: %s. Animation Function: %s " % [card.cardName, animationFunction])
-			 
-	animationQueue.append( 
+	
+	queueAnimationGeneric(card, animationQueue, animationFunction, waitingFunction)
+
+
+func queueResponse(card:Card, animationFunction:Callable, waitingFunction:Callable=doNothing) -> void:
+	print("AnimationQueue: Queue Response for card: %s. Animation Function: %s " % [card.cardName, animationFunction])
+	
+	queueAnimationGeneric(card, responseQueue, animationFunction, waitingFunction)
+
+
+func queueAnimationGeneric(card:Card, queue:Array, animationFunction:Callable, waitingFunction:Callable=doNothing) -> void:		 
+	queue.append( 
 		{"card":card, "animationFunction":animationFunction, "waitingFunction":waitingFunction} 
 		)
 
-
+#### THIS QUEUE ITEM ONLY has a FUNCTION whose running TIME ISN'T RELEVANT to the queue
+func queueFunction(function:Callable):
+	print("AnimationQueue: Queue Function: %s" % function)
+	animationQueue.append({"function": function})
 
 
 func queueWait(waitTime:float) -> void:
@@ -32,11 +61,24 @@ func queueWait(waitTime:float) -> void:
 	animationQueue.append({"waitTime": waitTime})
 
 
+###########################################
+#### ANIMATING THINGS OFF THE QUEUE
 
-func animateNext() -> void:
+func animateNext(queue:Array) -> void:
+	if queue.is_empty():  #### EMPTY QUEUE, DO NOTHING
+		return
+	
+	var queueText := "AnimationQueue: Animate Next."
+	
+	match queue:
+		animationQueue:
+			isAnimating = true	
+		responseQueue:
+			queueText = "AnimationQueue: Animate Next Response."
+			responseAnimating = true
+	
 	#### GET THE FIRST ITEM IN THE QUEUE
-	var dict:Dictionary = animationQueue[0]
-	currentAnimation = dict
+	var dict:Dictionary = queue[0]
 	var tween:Tween = null
 	
 	#### WAIT ONLY: EMPTY DICT PROVIDED BY queueWait()
@@ -44,34 +86,41 @@ func animateNext() -> void:
 		print("AnimationQueue: AnimateNext: Just wait.")
 		tween = create_tween()
 		tween.tween_interval(dict.waitTime)		
-		
+	
+	#### THIS QUEUE ITEM ONLY has a FUNCTION whose running TIME ISN'T RELEVANT to the queue
+	elif dict.has("function"):
+		var f = dict.function
+		if f is Callable:
+			print("AnimationQueue: Animate Next: Call Function: %s" % f)
+			f.call()
+	
 		
 	#### NORMAL ANIMATION
 	elif MyTools.checkNodeValidity(dict.card):
 		var card:Card = dict.card
 		var f: Callable = dict.animationFunction
 		
-		print("AnimationQueue: Animate Next: Play animation for card: %s. Animation Function: %s " % [card.cardName, f])
+		print("%s Play animation for card: %s. Animation Function: %s " % [queueText, card.cardName, f])
 		tween = f.call()
 	
+	else:
+		print("%s Animation failed due to invalid Card node." % queueText)
 	
-	#### SETUP THE QUEUE STUFF
-	isAnimating = true	
 	
 	if tween:       ## WAIT FOR TWEEN ANIMATION
 		await tween.finished
-		onAnimationFinished()	
+		onAnimationFinished(queue)	
 	else:           ## CONTINUE AT ONCE
-		onAnimationFinished()
+		onAnimationFinished(queue)
 	
 	
 	
 #### AN ANIMATION IS FINISHED, PLAY NEXT ANIMATION IN THE QUEUE
-func onAnimationFinished() -> void:
-	var curr := currentAnimation
-	
-	#### PLAY THE ATTACHED FOLLOW-UP FUNCTION - Different from ANIMATENEXT
-	if curr.has("waitingFunction"):
+func onAnimationFinished(queue:Array) -> void:
+	var curr = queue.front()
+	if curr is Dictionary and curr.has("waitingFunction"):
+		
+		#### PLAY THE ATTACHED FOLLOW-UP FUNCTION - Different from ANIMATENEXT
 		var waitingFunction: Callable = curr.waitingFunction
 		if curr.card and waitingFunction:
 			if not waitingFunction == doNothing:
@@ -79,23 +128,20 @@ func onAnimationFinished() -> void:
 				waitingFunction.call()
 	
 	#### REMOVE THE FIRST ITEM -> It's been processed now
-	animationQueue.pop_front()	
-	currentAnimation = {}
-	isAnimating = false
+	queue.pop_front()
 	
-	#### ANNOUNCE THAT THE QUEUE HAS BEEN EMPTIED FOR NOW
-	if animationQueue.is_empty():
-		animationQueueEmpty.emit()
+	match queue:
+		animationQueue:
+			isAnimating = false
+			if queue.is_empty():  #### ANNOUNCE IF THE PRIMARY QUEUE HAS BEEN EMPTIED FOR NOW
+				animationQueueEmpty.emit()
+				
+		responseQueue:
+			responseAnimating = false
+			if queue.is_empty():
+				print("AnimationQueue: Pausing the response queue.")
+				isResponseBlocked = true  #### CLOSE RESPONSE QUEUE FOR NOW, WHEN IT HAS EMPTIED
 
-
-
-func getCurrentAndWaitingCards() -> Array:
-	var animatingCards := []
-	
-	for anim:Dictionary in animationQueue:
-		if anim.has("card"):
-			animatingCards.append(anim.card)
-	return animatingCards
 
 
 func checkAndWaitQueueEmpty() -> bool:

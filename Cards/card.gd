@@ -196,6 +196,7 @@ var isResting := false
 var allowInteract := true
 var allowEnemyUse := true
 
+var isAttacking := false
 var attackTarget:Card = null
 
 
@@ -793,7 +794,7 @@ func handleCombatActions(attacker:Card, defender:Card, waitingFunction:Callable)
 	elif defender == self:
 		z_index = 0
 		waitTime = 1
-		CardAnimationQueue.queueWait(waitTime)
+		#CardAnimationQueue.queueWait(waitTime)
 		
 	return waitTime
 
@@ -824,13 +825,16 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 	
 
 
-func handleCombatSurvival(isAttacker:bool) -> bool:
+func handleCombatSurvival(isAttacker:bool) -> bool:	
 	#### THIS CARD WAS DESTROYED
 	if tempHealth <= 0:
 		return true
 	
 	#### THIS CARD SURVIVES		
-	CardAnimationQueue.queueAnimation(self, animateReturnToSlot)
+	if isAttacker:
+		CardAnimationQueue.queueAnimation(self, animateReturnToSlot)
+	else:
+		CardAnimationQueue.queueResponse(self, animateReturnToSlot)
 	
 	#### SURVIVES, And IS ATTACKER	
 	if isAttacker:
@@ -862,7 +866,7 @@ func destroyAndAnimate():
 	if hasEffect('Defy Death'):
 		SignalBus.emit_signal("death_defied", params)
 		SignalBus.emit_signal("survived", params)
-		CardAnimationQueue.queueAnimation(self, animateReturnToSlot)
+		
 		tempHealth = health
 		updateCardLabels()
 		return
@@ -870,10 +874,13 @@ func destroyAndAnimate():
 	#### DOESN'T SURVIVE
 	#### STAYS IN LIMBO UNTIL IT CAN BE PLACED TO GRAVEYARD
 	statesLimbo()
-	CardAnimationQueue.queueAnimation(self, animateCardDestroyed, handleEnterGraveyard)
+	if isAttacking or isRitual:
+		CardAnimationQueue.queueAnimation(self, animateCardDestroyed, handleEnterGraveyard)
+	else:
+		CardAnimationQueue.queueResponse(self, animateCardDestroyed, handleEnterGraveyard)
 	
-
-
+	
+	
 func handleEnterGraveyard():
 	vacateSlot()
 	
@@ -999,9 +1006,7 @@ func animateReturnToSlot() -> Tween:
 		return
 	if not mySlot:   #### Removed from slot already?
 		return
-	
-	
-	
+		
 	var tween = animateBlockingState() 
 	return tween
 	
@@ -1032,7 +1037,7 @@ func animateBlockingState() -> Tween:
 	return tween
 
 
-
+ 
 #### LENGTH = 2 seconds
 func animateCardDestroyed() -> Tween:
 	## If a card was killed by an attack, it recoils backwards.
@@ -1051,7 +1056,7 @@ func animateCardDestroyed() -> Tween:
 	return tween
 
 
-	
+
 func animateRestingRotation() -> Tween:
 	var willRest = isResting
 	
@@ -1061,7 +1066,7 @@ func animateRestingRotation() -> Tween:
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "rotation_degrees", degreesGoal, 0.2)
 	return tween
-	
+
 
 
 #### LENGTH = 1 + 1 = 2 s ?

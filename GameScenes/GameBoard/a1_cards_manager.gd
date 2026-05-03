@@ -309,7 +309,7 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
-		assert(GameInfo.enemy_turn, "WTF")
+		##assert(GameInfo.enemy_turn, "WTF")
 		CardAnimationQueue.queueAnimation(c, c.animatePlaceInSlot)
 		placeCardInSlotTwo(c, slot, true)
 		GameInfo.enemyMana -= c.manaCost
