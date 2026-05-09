@@ -369,7 +369,8 @@ func handlePlayerAttackEnemy() -> void:
 	endAttackState()
 	
 	#### QUEUE THE ATTACK ANIMATIONS, THEN TELL RESPONSE QUEUE TO PLAY DEFENSE ANIMATIONS
-	CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait, CardAnimationQueue.startResponseQueue)
+	CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait)
+	CardAnimationQueue.queueFunction(CardAnimationQueue.startResponseQueue)
 	CardAnimationQueue.queueAnimation(c, c.animateReturnToSlot)  
 	CardAnimationQueue.queueAnimation(c, c.restAndAnimate)
 	
@@ -489,7 +490,6 @@ func handlePlayerRitual(c:Card) -> bool:
 	
 	#### RESOLVE RITUAL IN CARD'S ACTION NODE (Could be TARGETED or TARGETLESS)
 	success = await c.actions.handleRitual()
-	CardAnimationQueue.startResponseQueue()
 	
 	if success:
 		#await c.PlayRitualCastAnimation()
@@ -605,7 +605,8 @@ func handleEnemyAttackPlayer(attackCard: Card) -> void:
 		
 		c.handleAttackingPortrait()
 		#### QUEUE THE ATTACK ANIMATIONS, THEN TELL RESPONSE QUEUE TO PLAY DEFENSE ANIMATIONS
-		CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait, CardAnimationQueue.startResponseQueue)
+		CardAnimationQueue.queueAnimation(c, c.animateAttackPortrait)
+		CardAnimationQueue.queueFunction(CardAnimationQueue.startResponseQueue)
 		CardAnimationQueue.queueAnimation(c, c.animateReturnToSlot)  
 		#### HANDLES ANIMATION QUEUE AND CALLS NEXT ATTACKER
 		CardAnimationQueue.queueAnimation(c, c.restAndAnimate, enemyAttackersWaiter)

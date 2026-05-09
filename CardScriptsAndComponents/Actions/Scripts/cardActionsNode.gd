@@ -72,6 +72,7 @@ func handleRitual() -> bool:
 
 	if success:
 		SignalBus.ritual.emit()
+		CardAnimationQueue.queueFunction(CardAnimationQueue.startResponseQueue) 
 	return success
 
 

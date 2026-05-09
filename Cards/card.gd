@@ -830,19 +830,24 @@ func handleCombatSurvival(isAttacker:bool) -> bool:
 	if tempHealth <= 0:
 		return true
 	
-	#### THIS CARD SURVIVES		
+	#### THIS CARD SURVIVES
+	#### SURVIVES, And IS ATTACKER		
 	if isAttacker:
 		CardAnimationQueue.queueAnimation(self, animateReturnToSlot)
-	else:
-		CardAnimationQueue.queueResponse(self, animateReturnToSlot)
-	
-	#### SURVIVES, And IS ATTACKER	
-	if isAttacker:
+		
 		#### REST, OR TRAVEL If Vanguard
 		if hasKeyword('Vanguard'):
 			toggleTraveling(true)
 		else:
 			restAndAnimate()
+			
+	#### SURVIVES, NOT AN ATTACKER
+	else:
+		CardAnimationQueue.queueResponse(self, animateReturnToSlot)
+	
+		
+	
+		
 
 	$SFX/DefendSound.play()
 	allowInteract = true
@@ -858,6 +863,9 @@ func handleCombatSurvival(isAttacker:bool) -> bool:
 #### IF TOANIMATE == FALSE, then (Card is DEFENDER?) -> ANIMATION CALLED ELSEWHERE
 #### IN ATTACK ANIMATION, TO BE SPECIFIC
 func destroyAndAnimate():
+	if checkLimbo(): #### ALREADY BEING DESTROYED
+		return
+	
 	var params = SignalParams.new()
 	params.sourceCard = self
 	SignalBus.emit_signal("death", params)
