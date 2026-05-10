@@ -20,15 +20,29 @@ func _physics_process(delta: float) -> void:
 		animateNext(animationQueue)
 	
 	#### THE RESPONSE QUEUE WAITS until ANIMATING=TRUE, SHUTS DOWN once it's emptied again
-	if not responseAnimating:
+	if responseQueue.is_empty():
+		responseAnimating = false
 		if not isResponseBlocked:
-			animateNext(responseQueue)
+			print("AnimationQueue: Pausing the response queue.")
+			isResponseBlocked = true  #### CLOSE RESPONSE QUEUE FOR NOW, WHEN IT HAS EMPTIED
+		
+	if responseAnimating:
+		pass
+	elif isResponseBlocked:
+		pass
+	else:
+		animateNext(responseQueue)
+	
+		
 				
 
 
 func startResponseQueue():
-	print("AnimationQueue: Starting the response queue!  Length: %d" % responseQueue.size())
-	isResponseBlocked = false
+	if not isResponseBlocked:
+		return
+	if not responseQueue.is_empty():
+		print("AnimationQueue: Starting the response queue!  Length: %d" % responseQueue.size())
+		isResponseBlocked = false
 
 
 ##########################################
@@ -138,9 +152,9 @@ func onAnimationFinished(queue:Array) -> void:
 				
 		responseQueue:
 			responseAnimating = false
-			if queue.is_empty():
-				print("AnimationQueue: Pausing the response queue.")
-				isResponseBlocked = true  #### CLOSE RESPONSE QUEUE FOR NOW, WHEN IT HAS EMPTIED
+			#if queue.is_empty():
+				#print("AnimationQueue: Pausing the response queue.")
+				#isResponseBlocked = true  #### CLOSE RESPONSE QUEUE FOR NOW, WHEN IT HAS EMPTIED
 
 
 

@@ -830,8 +830,7 @@ func handleCombatSurvival(isAttacker:bool) -> bool:
 	if tempHealth <= 0:
 		return true
 	
-	#### THIS CARD SURVIVES
-	#### SURVIVES, And IS ATTACKER		
+	#### THIS CARD IS ATTACKER, SURVIVES		
 	if isAttacker:
 		CardAnimationQueue.queueAnimation(self, animateReturnToSlot)
 		
@@ -840,14 +839,7 @@ func handleCombatSurvival(isAttacker:bool) -> bool:
 			toggleTraveling(true)
 		else:
 			restAndAnimate()
-			
-	#### SURVIVES, NOT AN ATTACKER
-	else:
-		CardAnimationQueue.queueResponse(self, animateReturnToSlot)
-	
-		
-	
-		
+
 
 	$SFX/DefendSound.play()
 	allowInteract = true
@@ -890,10 +882,13 @@ func destroyAndAnimate():
 	
 	
 func handleEnterGraveyard():
-	vacateSlot()
+	if cardState == CardStates.GRAVEYARD:
+		return
+	
+	vacateSlot()  #### FREE UP THE BOARD SLOT for new cards to use
 	
 	if hasKeyword('Transient'):
-		purge()
+		purge()  #### DOESN'T GO TO GRAVEYARD, IS REMOVED entirely
 		return
 	
 	statesDiscard()
