@@ -3,7 +3,7 @@ extends Node2D
 @onready var cardInfoPanel := $CanvasLayer2/CardInfoMargin/VBox/CardInfoPanel
 @onready var flavorLabel := $CanvasLayer2/CardInfoMargin/VBox/FlavorLabel
 
-var BestiaryContainer = preload("res://GameScenes/Compendium/BestiaryContainer.tscn")
+var BestiaryContainer = preload("res://GameScenes/CardDisplayContainers/BestiaryContainer.tscn")
 
 func _ready():
 	create_containers()

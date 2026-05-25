@@ -33,9 +33,12 @@ func insert_card(new_card:Card):
 	remove_child(card)
 
 ## Puts a PackedScene-type object into the container.
-func display_card(new_card:PackedScene):
+func display_card_packed(new_card:PackedScene):
+	var card:Card = new_card.instantiate()
+	display_card(card)
 	
-	var card = new_card.instantiate()
-	await MyTools.createTempCard(card)
-	insert_card(card.duplicate())
-	MyTools.removeTempCard(card)
+
+func display_card(new_card:Card):	
+	#await MyTools.createTempCard(card)
+	insert_card(new_card.duplicate())
+	#MyTools.removeTempCard(card)

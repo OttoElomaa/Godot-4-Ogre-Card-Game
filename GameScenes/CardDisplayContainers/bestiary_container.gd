@@ -1,4 +1,5 @@
 extends CardContainer
+class_name  BestiaryContainer
 
 var infoPanel = null
 

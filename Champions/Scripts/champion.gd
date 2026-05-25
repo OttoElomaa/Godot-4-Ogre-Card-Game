@@ -5,8 +5,6 @@ var level = 1
 
 var usable_actions:Array = []
 
-var gameBoard:GameBoard = null
-
 func _ready() -> void:
 	for child:ActionsNode in get_children():
 		usable_actions.append(child)

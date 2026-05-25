@@ -3,7 +3,6 @@ extends Node2D
 class_name GameBoard
 
 
-
 @onready var cardsManager : CardsManager = $CardsManager
 @onready var battleSystem : BattleSystem = $BattleSystem
 
@@ -11,7 +10,7 @@ class_name GameBoard
 
 @onready var battleNameLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel
 @onready var turnCountLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel
-@onready var endTurnLabel := $CanvasLayer/EndTurnPane/VBoxContainer/EndTurn/Label
+@onready var endTurnLabel := $CanvasLayer/EndTurnPane/VBoxContainer/Panel/Label
 
 @onready var champActionButton := preload("res://Champions/Scripts/ChampionActionButton.tscn") 
 

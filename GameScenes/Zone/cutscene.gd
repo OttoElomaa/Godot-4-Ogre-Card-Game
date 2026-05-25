@@ -1,7 +1,7 @@
 extends MarginContainer
 
 @onready var card_box = $PanelContainer/HBoxContainer
-var BestiaryContainer = preload("res://GameScenes/Compendium/BestiaryContainer.tscn")
+var BestiaryContainer = preload("res://GameScenes/CardDisplayContainers/BestiaryContainer.tscn")
 
 func _ready():
 	SignalBus.connect('disp_card', display_cutscene_card)
