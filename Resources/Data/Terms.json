@@ -13,7 +13,7 @@
 "paralyze": "Force a card to rest.",
 "purge": "Remove a card from the battle.",
 "reclaim": "Return a card from the graveyard and put it in your hand.",
-"rest": "A resting card is placed diagonally and cannot act.",
+"rest": "A resting card is placed diagonally and cannot act. Cards rest after acting.",
 "retreat": "Send a card from the battlefield into the deck.",
 "revive": "Return a creature from the graveyard and summon it to the battefield.",
 "sacrifice": "Destroy an allied card.",

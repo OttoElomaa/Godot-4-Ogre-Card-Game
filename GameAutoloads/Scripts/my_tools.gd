@@ -260,10 +260,10 @@ func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
 	return placedCards
 
 func createGenericPlayerDeck() -> Array:
-	return $CardLoader.createDesertDeck()
+	return DataLoader.createDesertDeck()
 
 func createAllCardsByAmount(amount:int) -> Array:
-	return $CardLoader.createAllCardsByAmount(amount)
+	return DataLoader.createAllCardsByAmount(amount)
 	
 func createCombatLogPrintout(text:String, color:Color):
 	if not gameBoard:
@@ -285,3 +285,18 @@ func setupAndOpenDeckEdit(board:GameBoard):
 func closeDeckEdit():
 	SceneSwitcher.closeScene(DeckEdit) 
 	
+##################################################
+
+##Checks string for any terms from the terms.json file. Returns an array of strings
+##comprised of terms and their explanations.
+func fetch_terms_and_explanations(string:String) -> Array[String]:
+	var all_terms:Array[String]
+	var terms:Dictionary[String, String] = DataLoader.terms
+	terms.merge(DataLoader.effect_counters_desc)
+	terms.merge(DataLoader.keywords_desc)
+	print(terms)
+	for key:String in terms:
+		if string.containsn(key):
+			var excerpt = str(key, ': ', terms[key])
+			all_terms.append(excerpt)
+	return all_terms

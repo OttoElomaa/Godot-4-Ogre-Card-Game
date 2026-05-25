@@ -29,8 +29,16 @@ Cheat="*res://GameAutoloads/cheat_menu.tscn"
 SignalBus="*res://GameAutoloads/SignalBus.gd"
 CardChecks="*res://GameAutoloads/CardChecks.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+DataLoader="*uid://x5hp1ama1l5h"
 EffectAnimationQueue="*res://GameAutoloads/EffectAnimationQueue.tscn"
 CardAnimationQueue="*res://GameAutoloads/CardAnimationQueue.tscn"
+
+[debug]
+
+gdscript/warnings/unassigned_variable=0
+gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_parameter=0
+gdscript/warnings/unused_signal=0
 
 [dialogue_manager]
 
@@ -51,6 +59,10 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 cardManager=""
 gameboard=""
+
+[gui]
+
+theme/custom="uid://c586ciarawo0t"
 
 [input]
 

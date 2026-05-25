@@ -1,0 +1,41 @@
+[gd_resource type="Theme" format=3 uid="uid://c586ciarawo0t"]
+
+[ext_resource type="StyleBox" uid="uid://c2fu18mjsfki7" path="res://PanelStyles/ScrollBarTexture.tres" id="1_s58hc"]
+[ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Fonts/monaco/monaco.ttf" id="1_ysu35"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="2_qe2fn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwwbq"]
+bg_color = Color(0.16078432, 0.12156863, 0.07058824, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.976471, 0.819608, 0.447059, 1)
+corner_detail = 1
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+shadow_size = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s58hc"]
+bg_color = Color(0.159132, 0.123224, 0.0711235, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.976471, 0.819608, 0.447059, 1)
+corner_detail = 1
+anti_aliasing = false
+
+[resource]
+resource_local_to_scene = true
+default_font = ExtResource("1_ysu35")
+default_font_size = 32
+TooltipLabel/font_sizes/font_size = 32
+TooltipPanel/fonts/title_font = ExtResource("1_ysu35")
+TooltipPanel/styles/panel = ExtResource("2_qe2fn")
+VScrollBar/styles/grabber = ExtResource("1_s58hc")
+VScrollBar/styles/grabber_highlight = ExtResource("1_s58hc")
+VScrollBar/styles/grabber_pressed = ExtResource("1_s58hc")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_bwwbq")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_s58hc")

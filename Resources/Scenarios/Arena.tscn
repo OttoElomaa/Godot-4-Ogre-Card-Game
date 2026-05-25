@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cur0336ypyp8w"]
+[gd_scene format=3 uid="uid://cur0336ypyp8w"]
 
-[ext_resource type="PackedScene" uid="uid://6803oa1g2t5f" path="res://GameScenes/Zone/Zone.tscn" id="1_kwmog"]
+[ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/Zone.tscn" id="1_kwmog"]
 [ext_resource type="PackedScene" uid="uid://cu0e7fgg0vk3s" path="res://GameScenes/Zone/RandomizedBattleIcon.tscn" id="2_jpcrx"]
 [ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="3_iaren"]
 

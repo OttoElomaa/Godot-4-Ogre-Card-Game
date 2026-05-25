@@ -77,6 +77,7 @@ var isChampion:
 @export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE
 @export var subTypeStr := "Card Sub-Type"
+@export var texture: Texture2D
 
 @export var group := Group.NONE
 
@@ -96,7 +97,10 @@ var cardTypeStr := ""
 
 var cardArt:
 	get:
-		return $Frontside/Art.texture
+		if not texture:
+			return $Frontside/Art.texture
+		else:
+			return texture
 
 @export var manaCost := 0
 @export var startingDamage := 0
