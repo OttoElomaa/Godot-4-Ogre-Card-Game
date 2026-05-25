@@ -425,6 +425,8 @@ func replace_keywords(new_k:PackedStringArray):
 #### GET ALL EFFECTS -> USED BY hasEffect() AND OTHER STUFF
 func getEffects() -> Array:
 	var counters = []
+	if isChampion:
+		return counters
 	for e:EffectCounter in $Effects/Buff/Nodes.get_children():
 		counters.append(e)
 	for e:EffectCounter in $Effects/Debuff/Nodes.get_children():
@@ -700,6 +702,10 @@ func takeDamage(amount:int):
 	
 	var damageTaken = getDamageToSelf(amount)
 	
+	if isChampion:
+		gameBoard.changeHealth(-amount, isEnemyCard)
+		return
+	
 	#### DAMAGE IS DEALT
 	tempHealth -= damageTaken
 	var amountString := "%s %s takes %d damage" % [MyTools.getFactionString(self), self.cardName, amount]
@@ -826,7 +832,8 @@ func takeCombatDamage(card:Card, isAttacker: bool):
 	var damageTaken = enemyCombatDamage
 	takeDamage(damageTaken)
 				
-	updateCardVisuals()
+	if not isChampion:
+		updateCardVisuals()
 	#return damageTaken
 	
 

@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="10_jsy8n"]
 
 [node name="Champion" unique_id=1181374962 instance=ExtResource("1_5utre")]
+cardType = 2
 
 [node name="Actions1" type="Node2D" parent="." index="0" unique_id=1678552215]
 unique_name_in_owner = true

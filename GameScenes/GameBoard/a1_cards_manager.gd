@@ -192,6 +192,7 @@ func drawCard(sourceDeck:Node,targetHand:Node):
 	card.updateCardVisuals()
 	updateHandCardsVisuals()
 	
+	print('Drew an ', MyTools.getFactionString(card), ' ', card.cardName)
 	return card
 
 

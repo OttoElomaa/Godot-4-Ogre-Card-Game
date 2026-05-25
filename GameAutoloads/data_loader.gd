@@ -89,7 +89,7 @@ func load_text_data(path:String, dict:Dictionary):
 		if parse_err == OK:
 			var data_received = json_object.data
 			if typeof(data_received) == TYPE_DICTIONARY:
-				print(data_received)
+#				print(data_received)
 				dict.assign(data_received)
 
 func get_effect_descriptions():

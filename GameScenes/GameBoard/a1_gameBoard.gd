@@ -92,8 +92,9 @@ func setup_board():
 
 #### CALLED IN ZONE ICON SCENE  ...????
 func turn_1_init():
-	cardsManager.dealEnemyHand()
-	cardsManager.dealPlayerHand()
+	#cardsManager.dealEnemyHand()
+	#cardsManager.dealPlayerHand()
+	pass
 
 
 

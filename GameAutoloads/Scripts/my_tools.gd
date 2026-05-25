@@ -294,7 +294,7 @@ func fetch_terms_and_explanations(string:String) -> Array[String]:
 	var terms:Dictionary[String, String] = DataLoader.terms
 	terms.merge(DataLoader.effect_counters_desc)
 	terms.merge(DataLoader.keywords_desc)
-	print(terms)
+#	print(terms)
 	for key:String in terms:
 		if string.containsn(key):
 			var excerpt = str(key, ': ', terms[key])

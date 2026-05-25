@@ -1,20 +1,14 @@
 [gd_scene format=3 uid="uid://ctrvsaptdulhm"]
 
 [ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/Zone/zone.gd" id="1_fjd6i"]
-[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBoardIcon.tscn" id="2_rmpmb"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="3_xt5s7"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="4_588s3"]
-[ext_resource type="PackedScene" uid="uid://cnmsayr5lqvem" path="res://Cards/GreenDefiance/Cr-BriarFolk.tscn" id="4_s5tl3"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="5_yhj0w"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="6_4x05h"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="7_xt5s7"]
 [ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="8_588s3"]
-[ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="8_vu8fe"]
-[ext_resource type="Resource" uid="uid://datllcfc5jbo3" path="res://Resources/Dialog/Vineyards_1.dialogue" id="9_0pdlr"]
-[ext_resource type="Resource" uid="uid://b3qg4cl1qws0x" path="res://Resources/Dialog/Vineyards_Win_1.dialogue" id="10_kl6wr"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="11_bxjdc"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="11_qjauh"]
-[ext_resource type="Resource" uid="uid://bgomdu6vhhlji" path="res://Resources/Dialog/Vineyards_Win_2.dialogue" id="11_vsnug"]
 [ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="15_4t6do"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_588s3"]
@@ -52,51 +46,6 @@ unique_name_in_owner = true
 [node name="GameBoards" type="Node2D" parent="Zones" unique_id=541473321]
 unique_name_in_owner = true
 position = Vector2(1012, 654)
-
-[node name="StartDialogue" parent="Zones/GameBoards" unique_id=1012873170 instance=ExtResource("8_vu8fe")]
-position = Vector2(-422, -74)
-dialogue = ExtResource("9_0pdlr")
-node_name = "Vineyard Entrance"
-start_unlocked = true
-
-[node name="Board1" parent="Zones/GameBoards" unique_id=184432424 instance=ExtResource("2_rmpmb")]
-top_level = true
-z_index = 6
-position = Vector2(970, 472)
-board_name = "Vineyards East"
-board_comments = "Raging Vinemen skitter among shadoofs! 
-Beware -- they possess a vile Ritual!"
-deck_cards = Dictionary[String, int]({
-"Jade Vineman": 5,
-"Knell": 3,
-"Liana Man": 2
-})
-presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
-enemy_presummon = true
-presummon_sparcity = 2
-unlockOnResolveStrings = Array[String](["Vineyards Cabin"])
-
-[node name="Board2" parent="Zones/GameBoards" unique_id=187480154 instance=ExtResource("2_rmpmb")]
-position = Vector2(-40, -182)
-board_name = "Vineyards West"
-board_comments = "The solders are on their last legs, but still should not be underestimated. They fight in formation, protecting their weak spots. The Vinemen will occasionally help you."
-deck_cards = Dictionary[String, int]({
-"Guardmaster": 3,
-"Kalasirios": 5
-})
-presummoned_cards = Array[PackedScene]([ExtResource("4_s5tl3")])
-ally_presummon = true
-unlockOnResolveStrings = Array[String](["Vineyards Gate"])
-
-[node name="Win_1" parent="Zones/GameBoards" unique_id=70945849 instance=ExtResource("8_vu8fe")]
-position = Vector2(369, -48)
-dialogue = ExtResource("10_kl6wr")
-node_name = "Vineyards Cabin"
-
-[node name="Win_2" parent="Zones/GameBoards" unique_id=493545666 instance=ExtResource("8_vu8fe")]
-position = Vector2(369, -47)
-dialogue = ExtResource("11_vsnug")
-node_name = "Vineyards Gate"
 
 [node name="Map" type="MarginContainer" parent="Zones" unique_id=1770207814]
 z_index = -3
