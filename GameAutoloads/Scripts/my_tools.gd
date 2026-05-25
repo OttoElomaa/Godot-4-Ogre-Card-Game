@@ -25,8 +25,11 @@ func gameBoardSetup(gameBoard:GameBoard):
 	self.battleSystem = gameBoard.battleSystem
 
 
-func checkNodeValidity(node) -> bool:
-	
+func get_all_game_cards():
+	return $CardLoader.createAllCardsByAmount(1)
+
+
+func checkNodeValidity(node:Node) -> bool:
 	if not node:
 		return false
 	if not is_instance_valid(node):
@@ -34,11 +37,35 @@ func checkNodeValidity(node) -> bool:
 	if node.is_queued_for_deletion():
 		return false
 	
-	#### SPECIFIC TO CARDS
+	return true
+
+
+func validateNodeNotLimbo(node) -> bool:
+	if not checkNodeValidity(node):
+		return false
+	#### LIMBO means the CARD IS BETWEEN STATES -> for example, NEITHER IN Board OR Graveyard
+	if node is Card:
+		if node.checkLimbo():
+			return false
+	return true
+
+
+func validateNodeAlive(node) -> bool:
+	if not checkNodeValidity(node):
+		return false
+	#### LIMBO means the CARD IS BETWEEN STATES -> for example, NEITHER IN Board OR Graveyard
 	if node is Card:
 		if not node.checkAlive():
 			return false
 	return true
+
+
+func findValidNodesInArray(cards:Array):
+	var validCards := []
+	for c in cards:
+		if MyTools.checkNodeValidity(c):
+			validCards.append(c)
+	return validCards
 
 
 
@@ -46,8 +73,8 @@ func moveCardTweening(c:Card, originalPos:Vector2, newPos:Vector2):
 	c.position = originalPos
 	var tween = get_tree().create_tween()
 	tween.tween_property(c, "position", newPos, 0.2)
-	await tween.finished
-
+	return tween
+	
 
 
 #### CAN BE USED BY SUMMON ABILITIES, DEBUG MENU, ETC
@@ -58,11 +85,10 @@ func summonCard(card:Card, isEnemy:bool) -> bool:
 		var slot = slots[0]
 		
 		await handlePlaceCardInSlot(card, slot)
-#		card.setup(gameBoard)
-#		changeMana(card.manaCost, isEnemy)
 		return true
-		
 	return false
+
+
 
 #### CAN BE USED FOR FUNCTIONS THAT ACCESS A CARD'S CHILDREN W/O SUMMONING THE CARD
 #### LIKE TRANSFORMING ONE CARD INTO A NEW ONE

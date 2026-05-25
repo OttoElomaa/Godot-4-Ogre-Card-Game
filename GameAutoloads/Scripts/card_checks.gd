@@ -60,7 +60,7 @@ func getCastersInList(list:Array):
 func getAttackersInList(list:Array):
 	var attackers = []
 	for c:Card in list:
-		if c.action_mode == c.actionMode.ATTACKER:
+		if c.action_mode == c.actionMode.ATTACKER and c.checkCanAct():
 			attackers.append(c)
 	sort_by_strongest(attackers)
 	sort_by_priority(attackers)

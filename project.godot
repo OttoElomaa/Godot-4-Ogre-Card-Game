@@ -31,6 +31,7 @@ CardChecks="*res://GameAutoloads/CardChecks.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DataLoader="*uid://x5hp1ama1l5h"
 EffectAnimationQueue="*res://GameAutoloads/EffectAnimationQueue.tscn"
+CardAnimationQueue="*res://GameAutoloads/CardAnimationQueue.tscn"
 
 [debug]
 
@@ -48,6 +49,7 @@ runtime/balloon_path="res://GameScenes/Zone/balloon.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 
 [editor_plugins]
 

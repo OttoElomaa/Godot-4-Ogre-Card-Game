@@ -1,7 +1,10 @@
 extends Skill
 
+
+var myAction:CardAction = get_parent()
+
 func activate(targets):
-	for card:Card in targets:
-		get_parent().savedTargets.clear()
-		get_parent().savedTargets.append_array(targets)
-	return true
+	myAction.savedTargets.clear()
+	myAction.savedTargets.append_array(targets)
+		
+	

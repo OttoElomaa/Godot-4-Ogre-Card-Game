@@ -4,19 +4,10 @@ extends Skill
 @export var grantEffect: PackedScene
 @export var grantAmount := 0
 
-@export var phaseOut := false
-
 
 func activate(targets:Array) -> bool:
 	var success := false
 	
-	#### PHASE OUT SELF
-	if targets.is_empty():
-		if phaseOut:
-			myCard.effects.togglePhased(true)
-			myCard.statesPassive()
-			success = true
-
 	#### TARGETED ACTIONS
 	for target:Card in targets:
 
@@ -24,9 +15,7 @@ func activate(targets:Array) -> bool:
 		if grantEffect:
 			success = handleGrantEffect(target)
 			
-		#### PHASE OUT
-		if phaseOut:
-			success = handlePhaseOut(target)
+		
 	
 		
 	return success
@@ -44,12 +33,4 @@ func handleGrantEffect(target:Card) -> bool:
 		target.updateCardVisuals()
 		success = true
 	
-	return success
-
-
-
-func handlePhaseOut(target:Card) -> bool:
-	target.effects.togglePhased(true)
-	target.statesPassive()
-	var success = true
 	return success

@@ -78,15 +78,15 @@ func dealPlayerHand():
 func dealEnemyHand():
 	dumbHandDrawCounter = 0
 	for i in range(STARTING_HAND_SIZE):
-		var card:Card = drawCard($EnemyDeck, $EnemyHand)
+		drawCard($EnemyDeck, $EnemyHand)
 		dumbHandDrawCounter += 1
 		
 	updateHandCardsVisuals()
 
 
+
+############################################################
 #### PHYSICS AND INPUT STUFF
-
-
 func _physics_process(delta: float) -> void:
 	
 	if States.gameState == States.GameStates.NONE:
@@ -161,7 +161,7 @@ func _input(e: InputEvent) -> void:
 			#### RIGHT CLICK PROCESSING -> CARD ACTION MENU	
 			elif e.button_index == MOUSE_BUTTON_RIGHT:
 				var card = fetchCardOnClick()
-				if MyTools.checkNodeValidity(card):
+				if MyTools.validateNodeNotLimbo(card):
 					main.toggleCardActionMenu(true, card)
 	
 		
@@ -178,21 +178,21 @@ func checkIsEnemyAnddrawCard(isEnemy:bool):
 func drawCard(sourceDeck:Node,targetHand:Node):
 	
 	if sourceDeck.get_child_count() < 1:
-#		assert(1==2,"testing launch crash 2")
 		return
 		
-	var cardScene:Card = sourceDeck.get_child(0)	
-	cardScene.cardsManager = self	
-	cardScene.reparent(targetHand)
+	var card:Card = sourceDeck.get_child(0)	
+	card.cardsManager = self	
+	card.reparent(targetHand)
 	
 	if sourceDeck == $EnemyDeck:
-		cardScene.toggleEnemyStatus(true)
-		cardScene.toggleFrontSide(false)
-		
-	cardScene.updateCardVisuals()
+		card.toggleEnemyStatus(true)
+		card.toggleFrontSide(false)
+	
+	card.statesHand()	
+	card.updateCardVisuals()
 	updateHandCardsVisuals()
 	
-	return cardScene
+	return card
 
 
 	
@@ -217,30 +217,21 @@ func updateHandCardsVisuals():
 	
 	#### t EACH CARD IN PLAYER HAND
 	for c:Card in cards:
-		if c.checkAlive():
-			c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
-			x_offset += offsetChange
-			if increment == incrementTreshold:
-				x_offset += x_gap_amount
-			
-			c.statesHand()
-			c.updateCardVisuals()
-			increment += 1
+		
+		c.position = $PlayerHandPosition.position + Vector2(x_offset, 0)
+		x_offset += offsetChange
+		if increment == incrementTreshold:
+			x_offset += x_gap_amount
+		
+		c.updateCardVisuals()
+		increment += 1
 	
 	x_offset = 0
 	for c in $EnemyHand.get_children():
 		c.position = $EnemyHandPosition.position + Vector2(x_offset, 0)
-		#c.scale = Vector2(0.6, 0.6)
 		x_offset += 80
 	
 	
-	
-#c.position.x = clamp(c.position.x, screenSize.position.x, screenSize.end.x)
-#c.position.y = clamp(c.position.y, screenSize.position.y, screenSize.end.y)
-
-		
-	
-
 
 func startDraggingCardOrAttack():
 	var card:Card = fetchCardOnClick()
@@ -251,7 +242,7 @@ func startDraggingCardOrAttack():
 		return
 	if card.isEnemyCard:
 		return
-	if card.actionState == card.CardActionStates.DISCARD:
+	if card.cardState == card.CardStates.GRAVEYARD:
 		return
 	
 	#### ONLY IF IT'S NOT SLOTTED	
@@ -283,31 +274,29 @@ func handleFinishDraggingCard() -> Node:
 	var resultCards:Array = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
 	var target:Card = null
 	
-	#### GET CARDS UNDER MOUSE WHEN DRAGGING FINISHED
-	if not resultCards.is_empty():
+	#### Ritual: GET CARDS UNDER MOUSE WHEN DRAGGING FINISHED
+	if c.isRitual:
 		for res in resultCards:
 			if not getCollidedObject(res) == currentDraggedCard:
 				target = getCollidedObject(res)
 	
-	
 	#############################################################
-	#### HANDLE ATTACKING
-	#### FIND CARD SLOT
-	var results:Array = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
-	if results.size() > 0:
-		var selectedSlot:CardSlot = getCollidedObject(results[0])
+	#### HANDLE PLACE CARD IN SLOT
+	else:
+		resultCards = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD_SLOT)
 		
-		#### CARD IS NOT SPELL: SET CARD To Found AVAILABLE SLOT
-		if not c.isRitual:
+		if not resultCards.is_empty():
+			#### Place card: SET CARD To Found AVAILABLE SLOT
+			var selectedSlot:CardSlot = getCollidedObject(resultCards[0])
 			if selectedSlot.isAvailable and c.manaCost <= GameInfo.playerMana:
 				if main.checkSlotPlayer(selectedSlot):
 					success = await handlePlaceCardInSlot(c, selectedSlot)
-		
+	
+	#### RESET Z index (card is no longer on top of all other cards)
 	if success:
-		c.z_index = 1
-			
-	#### CLEAR SLOT FROM CARD'S END -> Why? What?
-	if not success:
+		c.z_index = 1	
+	#### CLEAR SLOT FROM CARD'S END -> Because you only drag slotless cards
+	else:
 		if currentDraggedCard:
 			if currentDraggedCard.mySlot:
 				currentDraggedCard.mySlot.toggleAvailable(true)
@@ -317,14 +306,14 @@ func handleFinishDraggingCard() -> Node:
 	return null
 
 
-	
 
 func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	var originalPos = c.position	
 	
 	#### ANIMATE ENEMY CARD PLACEMENT -> Slides into slot	 
 	if not main.checkSlotPlayer(slot):
-		await MyTools.moveCardTweening(c, originalPos, c.position)
+		##assert(GameInfo.enemy_turn, "WTF")
+		CardAnimationQueue.queueAnimation(c, c.animatePlaceInSlot)
 		placeCardInSlotTwo(c, slot, true)
 		GameInfo.enemyMana -= c.manaCost
 	
@@ -336,27 +325,18 @@ func handlePlaceCardInSlot(c:Card, slot:CardSlot):
 	
 	c.setup(main)
 	await get_tree().process_frame
-
+	
+	c.setInitialActionState()  #### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
+	c.handleArrival()          #### ACTIVATE ARRIVAL TRIGGERS
+	
+	
 	##############################################
 	#### VISUAL STUFF
 	c.scale = Vector2.ONE
 	c.toggleFrontSide(true)
-	
-	#### SET ACTION STATE AND TRAVEL STATE
-	if not c.hasKeyword('Haste'):
-		c.toggleTraveling(true)
-	
-	#### DEFAULT STATE FOR PLAYER CARDS = PASSIVE
-	c.setInitialActionState()
-	
-	#### SETUP AND ACTIVATE ARRIVAL TRIGGERS
-	c.handleArrival()
-	
 	main.updateResourceLabels()
 	main.addLogMessage("%s played on board" % c.cardName, Color.WHITE)	
 
-
-	#placePermanentInSlotTwo(c)
 	return true
 
 
@@ -505,44 +485,45 @@ func arriveTravelingBoardCards(board:Node):
 
 func getEnemyHandCards() -> Array:
 	var cards = $EnemyHand.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 func getPlayerHandCards() -> Array:
 	var cards = $PlayerHand.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 func getEnemyBoardCards() -> Array:
 	var cards = $EnemyBoard.get_children()
 	print(cards)
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 
 func getPlayerBoardCards() -> Array:
 	var cards = $PlayerBoard.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 	
 func getPlayerDeckCards() -> Array:
 	var cards = $PlayerDeck.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 	
 		
 func getEnemyDeckCards() -> Array:
 	var cards = $EnemyDeck.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 	
 func getPlayerGraveyardCards() -> Array:
 	var cards = $Discard/Player/Cards.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 func getEnemyGraveyardCards() -> Array:
 	var cards = $Discard/Enemy/Cards.get_children()
-	return findValidNodesInArray(cards)
+	return MyTools.findValidNodesInArray(cards)
 
 func getPlayerBlockers():
 	var blockers := []
 	for c:Card in getPlayerBoardCards():
-		if c.checkCanBlock():
-			blockers.append(c)
+		if MyTools.validateNodeNotLimbo(c):
+			if c.checkCanBlock():
+				blockers.append(c)
 	return blockers
 				
 	
@@ -555,12 +536,7 @@ func getEnemyBlockers():
 	return blockers	
 	
 
-func findValidNodesInArray(cards:Array):
-	var validCards := []
-	for c in cards:
-		if MyTools.checkNodeValidity(c):
-			validCards.append(c)
-	return validCards
+
 
 
 ######################################################
@@ -576,22 +552,18 @@ func handleDiscardAtTurnEnd():
 
 #### DESTROY ANIMATION CALLS THE moveToDiscard FUNCTION
 func discardCard(c:Card):
-	c.destroyAndAnimate(true)
+	c.destroyAndAnimate()
 	
 
 
 #### CALLED FROM DESTROY ANIMATION IN CARD NODE
 func moveToDiscard(card:Card, isEnemy:bool):
-	#card.statesDestroy()
-	
 	var discardNode:Node = $Discard/Player/Cards
 	if isEnemy:
 		discardNode = $Discard/Enemy/Cards
 	
 	card.reparent(discardNode)
 	card.position = Vector2.ZERO
-	
-	card.handleEnterGraveyard()
 	updateGraveyardVisuals()
 
 	
@@ -604,7 +576,7 @@ func moveToDeck(card:Card, isEnemy:bool):
 	
 	card.reparent(deckNode)
 	card.position = Vector2.ZERO
-	card.handleEnterGraveyard()
+	card.resetCardAtStateChange()
 
 
 func moveToHand(card:Card, isEnemy:bool):
@@ -618,7 +590,7 @@ func moveToHand(card:Card, isEnemy:bool):
 	else:
 		handNode.add_child(card)
 	card.position = Vector2.ZERO
-	card.handleEnterGraveyard()
+	card.resetCardAtStateChange()
 	
 	card.isEnemyCard = isEnemy
 	card.setup(main)

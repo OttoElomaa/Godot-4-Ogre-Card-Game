@@ -1,24 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://dk32f6b6uasm2"]
+[gd_scene format=3 uid="uid://dk32f6b6uasm2"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_lx2xq"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_73jba"]
 [ext_resource type="PackedScene" uid="uid://b5tcem8t7co6n" path="res://CardScriptsAndComponents/Triggers/OnSelfSurvivalTrigger.tscn" id="3_5cfuv"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_1w66u"]
 [ext_resource type="PackedScene" uid="uid://d0s8i2byddp5k" path="res://CardScriptsAndComponents/Actions/SkillGainStats.tscn" id="5_ocid7"]
+[ext_resource type="Texture2D" uid="uid://dc3eovwmn82up" path="res://Art/CardArt/Desert/card-art-cr-delavar-v3.jpg" id="6_73jba"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1t3jh"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_73jba"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_duwvw"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5cfuv"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_1t3jh")
+noise = SubResource("FastNoiseLite_73jba")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajs5r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1w66u"]
 resource_local_to_scene = true
 shader = ExtResource("2_73jba")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_duwvw")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_5cfuv")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -26,8 +27,8 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Cr-Delavar" instance=ExtResource("1_lx2xq")]
-material = SubResource("ShaderMaterial_ajs5r")
+[node name="Cr-Delavar" unique_id=404144859 instance=ExtResource("1_lx2xq")]
+material = SubResource("ShaderMaterial_1w66u")
 cardName = "Delavar"
 subTypeStr = "Soldier"
 group = 12
@@ -35,10 +36,13 @@ manaCost = 2
 startingDamage = 2
 startingHealth = 2
 
-[node name="OnSelfSurvivalTrigger" parent="Actions" index="0" instance=ExtResource("3_5cfuv")]
+[node name="OnSelfSurvivalTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=18194385 instance=ExtResource("3_5cfuv")]
 
-[node name="CardAction" parent="Actions/OnSelfSurvivalTrigger" index="1" instance=ExtResource("4_1w66u")]
+[node name="CardAction" parent="Actions/OnSelfSurvivalTrigger" index="1" unique_id=2009227234 instance=ExtResource("4_1w66u")]
 customActionText = "Survives: gain  0/+1."
 
-[node name="SkillGainStats" parent="Actions/OnSelfSurvivalTrigger/CardAction" index="1" instance=ExtResource("5_ocid7")]
+[node name="SkillGainStats" parent="Actions/OnSelfSurvivalTrigger/CardAction" index="1" unique_id=1599920408 instance=ExtResource("5_ocid7")]
 change_health = 1
+
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
+texture = ExtResource("6_73jba")

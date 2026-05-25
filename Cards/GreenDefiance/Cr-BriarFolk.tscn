@@ -1,25 +1,52 @@
-[gd_scene load_steps=10 format=3 uid="uid://cnmsayr5lqvem"]
+[gd_scene format=3 uid="uid://cnmsayr5lqvem"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_epv8e"]
-[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_etjnd"]
 [ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="2_una4c"]
 [ext_resource type="Texture2D" uid="uid://b01fgy8k28uhs" path="res://Art/CardArt/GreenDefiance/card-art-creature-briarfolk.jpg" id="3_c7feh"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="3_una4c"]
 [ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="4_etjnd"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ytepn"]
+[sub_resource type="Shader" id="Shader_una4c"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+// --- Uniforms --- //
+uniform float percentage: hint_range(0.0, 1.0, 0.01) = 1.0;
+
+uniform sampler2D burn_texture;
+group_uniforms layer_1;
+uniform vec4 layer_1: source_color = vec4(0.2, 0.2, 0.2, 1.0);
+uniform float size_1 = 0.05;
+group_uniforms layer_2;
+uniform vec4 layer_2: source_color = vec4(1.0, 0.0, 0.0, 1.0);
+uniform float size_2 = 0.05;
+group_uniforms layer_3;
+uniform vec4 layer_3: source_color = vec4(1.0, 0.5, 0.0, 1.0);
+uniform float size_3 = 0.05;
+
+// --- Functions --- //
+void fragment() {
+	float noise = texture(burn_texture, UV).r * (1.0 - (size_1 + size_2 + size_3 + 0.01));
+
+	COLOR.a -= step(percentage, noise);
+	COLOR.rgb = mix(COLOR.rgb, layer_3.rgb, step(percentage, noise + size_1 + size_2 + size_3));
+	COLOR.rgb = mix(COLOR.rgb, layer_2.rgb, step(percentage, noise + size_1 + size_2));
+	COLOR.rgb = mix(COLOR.rgb, layer_1.rgb, step(percentage, noise + size_1));
+}"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_etjnd"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3x0ef"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ytepn"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_ytepn")
+noise = SubResource("FastNoiseLite_etjnd")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjcdb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3x0ef"]
 resource_local_to_scene = true
-shader = ExtResource("2_etjnd")
-shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_3x0ef")
+shader = SubResource("Shader_una4c")
+shader_parameter/percentage = 0.999999977648
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_ytepn")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -27,8 +54,8 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-BriarFolk" instance=ExtResource("1_epv8e")]
-material = SubResource("ShaderMaterial_pjcdb")
+[node name="Card-Cr-BriarFolk" unique_id=223653070 instance=ExtResource("1_epv8e")]
+material = SubResource("ShaderMaterial_3x0ef")
 cardName = "Jade Vineman"
 subTypeStr = "Wild Vineman"
 group = 3
@@ -40,13 +67,13 @@ block_on_arrival = false
 action_mode = 2
 priority = 5
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_una4c")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1085379340 instance=ExtResource("2_una4c")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("3_una4c")]
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" unique_id=1288938955 instance=ExtResource("3_una4c")]
 customActionText = "Cast: Owner Gains 1 Mana"
 
-[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_etjnd")]
+[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=1543967210 instance=ExtResource("4_etjnd")]
 alterOwnerMana = 1
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("3_c7feh")

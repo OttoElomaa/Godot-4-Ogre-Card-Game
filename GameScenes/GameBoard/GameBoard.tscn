@@ -124,10 +124,10 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[node name="GameBoard" type="Node2D" unique_id=961223785 groups=["gameboard"]]
+[node name="GameBoard" type="Node2D" unique_id=1271993025 groups=["gameboard"]]
 script = ExtResource("1_rf3o6")
 
-[node name="CameraMainBoard" type="Camera2D" parent="." unique_id=763234092]
+[node name="CameraMainBoard" type="Camera2D" parent="." unique_id=1095447748]
 anchor_mode = 0
 zoom = Vector2(0.76, 0.76)
 script = ExtResource("25_7yxuf")
@@ -379,18 +379,18 @@ bus = &"SE"
 [node name="CardsManager" type="Node2D" parent="." unique_id=1422854690 groups=["cardManager"]]
 script = ExtResource("15_h4god")
 
-[node name="PlayerDeck" type="Node2D" parent="CardsManager"]
+[node name="PlayerDeck" type="Node2D" parent="CardsManager" unique_id=278051598]
 unique_name_in_owner = true
 position = Vector2(-500, 0)
 
-[node name="EnemyDeck" type="Node2D" parent="CardsManager"]
+[node name="EnemyDeck" type="Node2D" parent="CardsManager" unique_id=718459274]
 unique_name_in_owner = true
 position = Vector2(-300, 0)
 
-[node name="PlayerHand" type="Node2D" parent="CardsManager"]
+[node name="PlayerHand" type="Node2D" parent="CardsManager" unique_id=88705802]
 unique_name_in_owner = true
 
-[node name="EnemyHand" type="Node2D" parent="CardsManager"]
+[node name="EnemyHand" type="Node2D" parent="CardsManager" unique_id=2123358451]
 unique_name_in_owner = true
 
 [node name="PlayerBoard" type="Node2D" parent="CardsManager" unique_id=353511353]
@@ -887,8 +887,8 @@ position = Vector2(-77, -36)
 [connection signal="timeout" from="BattleSystem/EnemyStartCombatTimer" to="BattleSystem" method="timeoutEnemyStartCombat"]
 [connection signal="timeout" from="BattleSystem/EndEnemyTurnTimer" to="BattleSystem" method="timeoutEndEnemyTurn"]
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel2/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
+[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/EndTurn/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Graveyard/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
 [connection signal="pressed" from="CanvasLayer/GameOverPane/Margin/VBox/Panel2/EndMatchButton" to="." method="buttonPressedEndMatch"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]
