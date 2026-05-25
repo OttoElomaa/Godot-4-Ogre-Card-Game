@@ -718,9 +718,11 @@ func takeDamage(amount:int):
 
 
 ##CHECK IF DESTROYED
-func checkAndHandleDeathFromTempHealth():
+func checkAndHandleDeathFromTempHealth() -> bool:
 	if tempHealth <= 0:
 		destroyAndAnimate()
+		return true
+	return false
 
 
 ## Returns damage taken by self after general modifiers.

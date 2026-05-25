@@ -19,8 +19,8 @@ var zoomVector:Vector2:
 		
 
 
-func gameBoardSetup(gameBoard:GameBoard):
-	self.gameBoard = gameBoard
+func gameBoardSetup(board:GameBoard):
+	self.gameBoard = board
 	self.cardsManager = gameBoard.cardsManager
 	self.battleSystem = gameBoard.battleSystem
 

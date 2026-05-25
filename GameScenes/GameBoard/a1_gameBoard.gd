@@ -10,7 +10,7 @@ class_name GameBoard
 
 @onready var battleNameLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel
 @onready var turnCountLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel
-@onready var endTurnLabel := $CanvasLayer/EndTurnPane/VBoxContainer/Panel/Label
+@onready var endTurnLabel := $CanvasLayer/EndTurnPane/VBox/EndTurn/Label
 
 @onready var champActionButton := preload("res://Champions/Scripts/ChampionActionButton.tscn") 
 
@@ -56,7 +56,8 @@ func _ready() -> void:
 	#### SETUP BOARD
 	##################################
 	States.statesPlay()
-	#setup_board()
+	setup_board()
+	turn_1_init()
 
 	###################################################
 	#### UI STUFF

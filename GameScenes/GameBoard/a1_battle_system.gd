@@ -554,6 +554,9 @@ func getKillablePlayerBlockers() -> Array:
 func handleEnemyAttackPlayer(attackCard: Card) -> void:
 
 	var c = attackCard
+	if not MyTools.checkNodeValidity(c):
+		return
+	
 	var blockers:Array = getKillablePlayerBlockers()
 	var target:Card = null
 	var action_modes = attackCard.actionMode
