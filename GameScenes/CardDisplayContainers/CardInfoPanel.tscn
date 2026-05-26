@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_ykqoc"]
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="5_f5wib"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Fonts/BasicSmallPixelFont.tres" id="7_cwpxl"]
+[ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="8_85glx"]
 
 [node name="CardInfoPanel" type="PanelContainer" unique_id=1345369115]
 custom_minimum_size = Vector2(345, 420)
@@ -75,12 +76,20 @@ label_settings = ExtResource("5_f5wib")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Margin" unique_id=2138089089]
+[node name="VBoxWithOuterText" type="VBoxContainer" parent="Margin" unique_id=892016139]
+layout_mode = 2
+
+[node name="JustFiller" type="PanelContainer" parent="Margin/VBoxWithOuterText" unique_id=779092771]
+custom_minimum_size = Vector2(0, 465)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_axiiv")
+
+[node name="CardBottomMargin" type="MarginContainer" parent="Margin/VBoxWithOuterText" unique_id=2138089089]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_bottom = 12
 
-[node name="AttackDefenseLabel" type="Label" parent="Margin/MarginContainer" unique_id=73014179]
+[node name="AttackDefenseLabel" type="Label" parent="Margin/VBoxWithOuterText/CardBottomMargin" unique_id=73014179]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
@@ -88,33 +97,32 @@ text = "Attack / Defense"
 label_settings = ExtResource("5_f5wib")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin" unique_id=892016139]
+[node name="Scroll" type="ScrollContainer" parent="Margin/VBoxWithOuterText" unique_id=1285797549]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
-[node name="JustFiller" type="PanelContainer" parent="Margin/VBoxContainer" unique_id=779092771]
-custom_minimum_size = Vector2(0, 500)
+[node name="VBox" type="VBoxContainer" parent="Margin/VBoxWithOuterText/Scroll" unique_id=1379295554]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("1_axiiv")
+size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer" unique_id=550948353]
+[node name="FlavorLabel" type="Label" parent="Margin/VBoxWithOuterText/Scroll/VBox" unique_id=1751756641]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_vertical = 10
-theme_override_constants/margin_top = 18
-theme_override_constants/margin_bottom = -200
+text = "text here"
+label_settings = ExtResource("8_85glx")
+horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="ExplanationLabel" type="RichTextLabel" parent="Margin/VBoxContainer/MarginContainer" unique_id=950048570]
+[node name="ExplanationLabel" type="RichTextLabel" parent="Margin/VBoxWithOuterText/Scroll/VBox" unique_id=950048570]
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 2
-size_flags_vertical = 2
 theme = ExtResource("7_cwpxl")
 bbcode_enabled = true
 text = "Shinparo: Makes enemies run away in fear.
 Shinparity: The quality of Shinparo: completely useless, very charming."
 fit_content = true
-
-[node name="Scroll" type="ScrollContainer" parent="Margin/VBoxContainer" unique_id=1285797549]
-layout_mode = 2
-
-[node name="VBox" type="VBoxContainer" parent="Margin/VBoxContainer/Scroll" unique_id=1379295554]
-layout_mode = 2
+scroll_active = false

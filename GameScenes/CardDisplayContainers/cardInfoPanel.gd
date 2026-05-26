@@ -6,24 +6,40 @@ var bestiary: Node = null
 func _ready():
 	modulate = Color(1, 1, 1, 0)
 
+
+func _process(delta: float) -> void:
+	var scrollContentsHeight:int = $Margin/VBoxWithOuterText/Scroll/VBox.size.y
+	var scroll := $Margin/VBoxWithOuterText/Scroll
+	
+	if scrollContentsHeight > 700:
+		scroll.size.y = 700
+	else:
+		scroll.size.y = scrollContentsHeight
+
+
 func bestiarySetup(bestiaryScreen:Node):
 	if bestiaryScreen:
 		bestiary = bestiaryScreen
 
 
 func toggleCardInfo(enable:bool, card:Card):
+	var flavorTextLabel := $Margin/VBoxWithOuterText/Scroll/VBox/FlavorLabel
+	flavorTextLabel.hide()
 	
 	#### HIDE
 	if not enable:
 		modulate = Color(1, 1, 1, 0)
 		if bestiary:
-			bestiary.setFlavorLabelText("")
+			#bestiary.setFlavorLabelText("")
+			flavorTextLabel.text = ""
 		return
 		
 	#### SHOW
 	modulate = Color(1, 1, 1, 1)
 	if bestiary:
-		bestiary.setFlavorLabelText(card.flavorText)
+		#bestiary.setFlavorLabelText(card.flavorText)
+		flavorTextLabel.show()
+		flavorTextLabel.text = card.flavorText
 	
 	$Margin/VBox/NameLabel.text = card.cardName
 	$Margin/VBox/ArtMargin/CardArt.texture = card.cardArt

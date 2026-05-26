@@ -1,18 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4jlabkoaauei"]
+[gd_scene format=3 uid="uid://c4jlabkoaauei"]
 
 [ext_resource type="Script" uid="uid://bxtdkr4mixohx" path="res://GameScenes/Compendium/bestiary.gd" id="1_qndvw"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="2_4y1i5"]
 [ext_resource type="Script" uid="uid://dw7x0akbcnnau" path="res://GameScenes/DeckEditScreen/owned_cards_container.gd" id="3_y2ky0"]
 [ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="4_f1amn"]
 [ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="5_m6uwl"]
-[ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="6_4y1i5"]
 
-[node name="Bestiary" type="Node2D"]
+[node name="Bestiary" type="Node2D" unique_id=1568120110]
 script = ExtResource("1_qndvw")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=341764890]
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer2"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer2" unique_id=988669125]
 custom_minimum_size = Vector2(800, 1000)
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,7 +27,7 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_4y1i5")
 metadata/_edit_group_ = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2/Panel"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2/Panel" unique_id=816995920]
 layout_mode = 2
 texture = ExtResource("4_f1amn")
 patch_margin_left = 7
@@ -38,25 +37,25 @@ patch_margin_bottom = 7
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Panel" unique_id=847404705]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="Scroll" type="ScrollContainer" parent="CanvasLayer2/Panel/MarginContainer"]
+[node name="Scroll" type="ScrollContainer" parent="CanvasLayer2/Panel/MarginContainer" unique_id=1511456960]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="BestiaryCardsContainer" type="GridContainer" parent="CanvasLayer2/Panel/MarginContainer/Scroll"]
+[node name="BestiaryCardsContainer" type="GridContainer" parent="CanvasLayer2/Panel/MarginContainer/Scroll" unique_id=1007367229]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 7
 script = ExtResource("3_y2ky0")
 
-[node name="CardInfoMargin" type="MarginContainer" parent="CanvasLayer2"]
+[node name="CardInfoMargin" type="MarginContainer" parent="CanvasLayer2" unique_id=757670387]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -69,20 +68,11 @@ size_flags_vertical = 3
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 50
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer2/CardInfoMargin"]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer2/CardInfoMargin" unique_id=295369820]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="CardInfoPanel" parent="CanvasLayer2/CardInfoMargin/VBox" instance=ExtResource("5_m6uwl")]
+[node name="CardInfoPanel" parent="CanvasLayer2/CardInfoMargin/VBox" unique_id=373871188 instance=ExtResource("5_m6uwl")]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-
-[node name="FlavorLabel" type="Label" parent="CanvasLayer2/CardInfoMargin/VBox"]
-custom_minimum_size = Vector2(370, 0)
-layout_mode = 2
-size_flags_vertical = 0
-text = "Unit flavor text goes here"
-label_settings = ExtResource("6_4y1i5")
-horizontal_alignment = 1
-autowrap_mode = 2
