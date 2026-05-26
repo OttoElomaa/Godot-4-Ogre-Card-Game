@@ -8,8 +8,8 @@ func _ready():
 
 
 func _process(delta: float) -> void:
-	var scrollContentsHeight:int = $Margin/VBoxWithOuterText/Scroll/VBox.size.y
-	var scroll := $Margin/VBoxWithOuterText/Scroll
+	var scrollContentsHeight:int = $MarginWithOuter/VBoxWithOuterText/Scroll/VBox.size.y
+	var scroll := $MarginWithOuter/VBoxWithOuterText/Scroll
 	
 	if scrollContentsHeight > 700:
 		scroll.size.y = 700
@@ -23,7 +23,7 @@ func bestiarySetup(bestiaryScreen:Node):
 
 
 func toggleCardInfo(enable:bool, card:Card):
-	var flavorTextLabel := $Margin/VBoxWithOuterText/Scroll/VBox/FlavorLabel
+	var flavorTextLabel := $MarginWithOuter/VBoxWithOuterText/Scroll/VBox/FlavorLabel
 	flavorTextLabel.hide()
 	
 	#### HIDE
@@ -41,13 +41,13 @@ func toggleCardInfo(enable:bool, card:Card):
 		flavorTextLabel.show()
 		flavorTextLabel.text = card.flavorText
 	
-	$Margin/VBox/NameLabel.text = card.cardName
-	$Margin/VBox/ArtMargin/CardArt.texture = card.cardArt
+	%NameLabel.text = card.cardName
+	%CardArt.texture = card.cardArt
 	
-	$Margin/VBox/VBox2/SubTypeLine.text = "%s - %s" % [card.cardTypeStr,card.subTypeStr]
+	%SubTypeLine.text = "%s - %s" % [card.cardTypeStr,card.subTypeStr]
 	
 	#if card.effectText != "":
-	$Margin/VBox/VBox2/EffectText.text = card.effectText
+	%EffectText.text = card.effectText
 	
 	%AttackDefenseLabel.text = "%d / %d" % [card.tempDamage,card.tempHealth]
 	

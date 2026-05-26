@@ -10,7 +10,7 @@
 [ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="8_85glx"]
 
 [node name="CardInfoPanel" type="PanelContainer" unique_id=1345369115]
-custom_minimum_size = Vector2(345, 420)
+custom_minimum_size = Vector2(400, 420)
 offset_right = 325.0
 offset_bottom = 591.0
 size_flags_horizontal = 4
@@ -18,13 +18,18 @@ size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("1_axiiv")
 script = ExtResource("2_o0dss")
 
-[node name="CardBackgroundTexture" type="TextureRect" parent="." unique_id=220574376]
+[node name="CardMargin" type="MarginContainer" parent="." unique_id=2144792257]
+custom_minimum_size = Vector2(345, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CardBackgroundTexture" type="TextureRect" parent="CardMargin" unique_id=220574376]
 layout_mode = 2
 texture = ExtResource("2_axiiv")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Margin" type="MarginContainer" parent="." unique_id=340755870]
+[node name="Margin" type="MarginContainer" parent="CardMargin" unique_id=340755870]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 8
@@ -32,12 +37,13 @@ theme_override_constants/margin_top = 14
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 10
 
-[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1567262020]
+[node name="VBox" type="VBoxContainer" parent="CardMargin/Margin" unique_id=1567262020]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/separation = 14
+theme_override_constants/separation = 10
 
-[node name="NameLabel" type="Label" parent="Margin/VBox" unique_id=1325996088]
+[node name="NameLabel" type="Label" parent="CardMargin/Margin/VBox" unique_id=1325996088]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Card Name"
@@ -45,22 +51,24 @@ label_settings = ExtResource("3_o0dss")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ArtMargin" type="MarginContainer" parent="Margin/VBox" unique_id=608544940]
+[node name="ArtMargin" type="MarginContainer" parent="CardMargin/Margin/VBox" unique_id=608544940]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = 12
 
-[node name="CardArt" type="TextureRect" parent="Margin/VBox/ArtMargin" unique_id=836676011]
+[node name="CardArt" type="TextureRect" parent="CardMargin/Margin/VBox/ArtMargin" unique_id=836676011]
+unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("4_ykqoc")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="VBox2" type="VBoxContainer" parent="Margin/VBox" unique_id=1407441477]
+[node name="VBox2" type="VBoxContainer" parent="CardMargin/Margin/VBox" unique_id=1407441477]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="SubTypeLine" type="Label" parent="Margin/VBox/VBox2" unique_id=285487385]
+[node name="SubTypeLine" type="Label" parent="CardMargin/Margin/VBox/VBox2" unique_id=285487385]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Sub-type line goes here."
@@ -68,7 +76,8 @@ label_settings = ExtResource("5_f5wib")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="EffectText" type="Label" parent="Margin/VBox/VBox2" unique_id=1980011061]
+[node name="EffectText" type="Label" parent="CardMargin/Margin/VBox/VBox2" unique_id=1980011061]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Effect text goes here."
@@ -76,20 +85,24 @@ label_settings = ExtResource("5_f5wib")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="VBoxWithOuterText" type="VBoxContainer" parent="Margin" unique_id=892016139]
+[node name="MarginWithOuter" type="MarginContainer" parent="." unique_id=551882397]
 layout_mode = 2
 
-[node name="JustFiller" type="PanelContainer" parent="Margin/VBoxWithOuterText" unique_id=779092771]
-custom_minimum_size = Vector2(0, 465)
+[node name="VBoxWithOuterText" type="VBoxContainer" parent="MarginWithOuter" unique_id=892016139]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="JustFiller" type="PanelContainer" parent="MarginWithOuter/VBoxWithOuterText" unique_id=779092771]
+custom_minimum_size = Vector2(0, 475)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_axiiv")
 
-[node name="CardBottomMargin" type="MarginContainer" parent="Margin/VBoxWithOuterText" unique_id=2138089089]
+[node name="CardBottomMargin" type="MarginContainer" parent="MarginWithOuter/VBoxWithOuterText" unique_id=2138089089]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_bottom = 12
 
-[node name="AttackDefenseLabel" type="Label" parent="Margin/VBoxWithOuterText/CardBottomMargin" unique_id=73014179]
+[node name="AttackDefenseLabel" type="Label" parent="MarginWithOuter/VBoxWithOuterText/CardBottomMargin" unique_id=73014179]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
@@ -97,18 +110,19 @@ text = "Attack / Defense"
 label_settings = ExtResource("5_f5wib")
 horizontal_alignment = 1
 
-[node name="Scroll" type="ScrollContainer" parent="Margin/VBoxWithOuterText" unique_id=1285797549]
+[node name="Scroll" type="ScrollContainer" parent="MarginWithOuter/VBoxWithOuterText" unique_id=1285797549]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="Margin/VBoxWithOuterText/Scroll" unique_id=1379295554]
+[node name="VBox" type="VBoxContainer" parent="MarginWithOuter/VBoxWithOuterText/Scroll" unique_id=1379295554]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 10
 
-[node name="FlavorLabel" type="Label" parent="Margin/VBoxWithOuterText/Scroll/VBox" unique_id=1751756641]
+[node name="FlavorLabel" type="Label" parent="MarginWithOuter/VBoxWithOuterText/Scroll/VBox" unique_id=1751756641]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "text here"
@@ -116,7 +130,7 @@ label_settings = ExtResource("8_85glx")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ExplanationLabel" type="RichTextLabel" parent="Margin/VBoxWithOuterText/Scroll/VBox" unique_id=950048570]
+[node name="ExplanationLabel" type="RichTextLabel" parent="MarginWithOuter/VBoxWithOuterText/Scroll/VBox" unique_id=950048570]
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 2
