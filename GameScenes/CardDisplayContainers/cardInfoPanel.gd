@@ -26,7 +26,7 @@ func toggleCardInfo(enable:bool, card:Card):
 		bestiary.setFlavorLabelText(card.flavorText)
 	
 	$Margin/VBox/NameLabel.text = card.cardName
-	$Margin/VBox/CardArt.texture = card.cardArt
+	$Margin/VBox/ArtMargin/CardArt.texture = card.cardArt
 	
 	$Margin/VBox/VBox2/SubTypeLine.text = "%s - %s" % [card.cardTypeStr,card.subTypeStr]
 	
