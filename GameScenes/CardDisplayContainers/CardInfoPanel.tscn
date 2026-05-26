@@ -9,9 +9,9 @@
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Fonts/BasicSmallPixelFont.tres" id="7_cwpxl"]
 
 [node name="CardInfoPanel" type="PanelContainer" unique_id=1345369115]
-custom_minimum_size = Vector2(400, 600)
-offset_right = 400.0
-offset_bottom = 600.0
+custom_minimum_size = Vector2(345, 420)
+offset_right = 325.0
+offset_bottom = 591.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("1_axiiv")
@@ -20,11 +20,13 @@ script = ExtResource("2_o0dss")
 [node name="CardBackgroundTexture" type="TextureRect" parent="." unique_id=220574376]
 layout_mode = 2
 texture = ExtResource("2_axiiv")
+expand_mode = 5
+stretch_mode = 4
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=340755870]
 layout_mode = 2
 theme_override_constants/margin_left = 22
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 14
 theme_override_constants/margin_right = 22
 theme_override_constants/margin_bottom = 10
 
@@ -51,13 +53,15 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="SubTypeLine" type="Label" parent="Margin/VBox/VBox2" unique_id=285487385]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Sub-type line goes here."
 label_settings = ExtResource("5_f5wib")
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="EffectText" type="Label" parent="Margin/VBox/VBox2" unique_id=1980011061]
-custom_minimum_size = Vector2(350, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Effect text goes here."
 label_settings = ExtResource("5_f5wib")
@@ -66,7 +70,7 @@ autowrap_mode = 2
 
 [node name="FlavorTextLabel" type="Label" parent="Margin/VBox/VBox2" unique_id=490531091]
 visible = false
-custom_minimum_size = Vector2(350, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Flavor text"
 label_settings = ExtResource("5_f5wib")
