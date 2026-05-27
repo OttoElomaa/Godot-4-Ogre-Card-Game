@@ -13,7 +13,7 @@ You approach an overgrown mansion, once belonging to a highly-esteemed kingling,
 	do SignalBus.disp_card.emit('Magaal')
 	
 	if GameInfo.heroName == 'General':
-		"A kingling!" he sneers. "It would be my pleasure to dig you in!"
+		"A kingling!" he sneers. "I will bring your heads to Umug!"
 		
 	else:
 		~ neutral
@@ -24,15 +24,15 @@ You approach an overgrown mansion, once belonging to a highly-esteemed kingling,
 			=> neutral
 		
 		- Ask about their purpose here
-			"We camp out here as a part of our pilgrimage. We don't wish anybody no harm."
+			"We camp out here as a part of our pilgrimage. We wish nobody no harm."
 			
-			"Damned lies!" the Astromancer yells. "I know you hold Daleth prisoner! You vile thieves!"
+			"Damned Lies!" the Astromancer yells. "I know you hold Daleth prisoner! You vile Thieves!"
 			
-			"Ah, so that's who brought you here," the Umugite sneers. "Listen up. If you agree to give us a wide berth for a while, you will have your man. Else, you will have to get through us. If you must find that out, we Umugites are not easily killed. Perhaps you would rather be on our good side."
+			"Ah, so that's who brought you here," the Umugite sneers. "Listen up. If you agree to give us a wide berth for a while, you will have your man. Else, you will have to go through us. If you must find that out, we Umugites are not easily killed. Perhaps you would rather be on our good side."
 			~ offer
 			
 			- Ask the Astromancer about the Umugites
-				"'Tis nonsense that Umugites should be at large! The legend speaks of them and their god being banished to the deepest Hell! The very memory of Umug's people was so deleted, that only an Astromancer should even remember of their existéncé. Listen not to this brute's lies!"
+				"'Tis most Absurd that Umugites should be at large! The Legend speaks of them, and their God likewise, being Banished to the Deepest of Hells! The very Memory of Umug's people was so Deleted, quoth it, that only an Astromancer should even remember of their Existéncé. Listen not to this Brute's Lies!"
 				=> offer
 			
 			- Agree to the Umugite's offer
@@ -40,7 +40,8 @@ You approach an overgrown mansion, once belonging to a highly-esteemed kingling,
 				"You have your man, as promised!" screeches a voice from inside the house.
 				It is pointless to give chase now. As you waited, the Umugites have all managed to escape.
 				~ failure
-				"You dastards!" the woman is breathless with anger. "Forsooth, no better than those damned vagabonds! I utter upon you a hundred maledictions! Your Life is forfeit."/nWith that, she storms off.
+				"You dastards!" the woman is breathless with anger. "Forsooth, no better than those damned Vagabonds! I utter upon you a Hundred Curses! Your Life is forfeit."
+				With that, she storms off.
 				
 				As you return to camp, you see a heap of treasure at the center; this must be Umug's gratitude.
 				
@@ -50,14 +51,14 @@ You approach an overgrown mansion, once belonging to a highly-esteemed kingling,
 				
 			- Decline the Umugite's offer
 				
-				"It will be my pleasure to dig you in!" shouts the Umugite.
+				"Umug shall have your heads!" shouts the Umugite.
 				Despite the fact that you have no more advantage of surprise, you prepare for combat.
 				do SignalBus.unlock_node.emit('UmugiteBattle')
 
 			- Offer the betray the Astromancer
 				"I see that you wish to be helpful to Umug?" the Umugite intones. "Why, I will keep this in mind. Umug shall remember your gesture."
 				You order your troops to return to camp.
-				do GameInfo.playerAlliances.append('Umugites')
+				do GameInfo.playerAlliances.append(Card.Group.UMUGITES)
 				
 				=> failure
 				

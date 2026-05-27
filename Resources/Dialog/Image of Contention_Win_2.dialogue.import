@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bsshkm8ejqpbj"
+path="res://.godot/imported/Image of Contention_Win_2.dialogue-619a98ecd8b909df3adfb55cb3a7c28b.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/Image of Contention_Win_2.dialogue"
+dest_files=["res://.godot/imported/Image of Contention_Win_2.dialogue-619a98ecd8b909df3adfb55cb3a7c28b.tres"]
+
+[params]
+
+defaults=true
