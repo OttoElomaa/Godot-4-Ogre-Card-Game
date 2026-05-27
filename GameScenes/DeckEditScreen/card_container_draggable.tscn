@@ -34,7 +34,7 @@ texture = ExtResource("2_kwypy")
 visible = false
 texture = ExtResource("3_f0ver")
 
-[node name="Art" type="TextureRect" parent="Frontside"]
+[node name="Art" type="TextureRect" parent="Frontside" unique_id=515691074]
 texture_filter = 6
 offset_left = -88.0
 offset_top = -142.0
@@ -133,5 +133,13 @@ unique_name_in_owner = true
 stream = ExtResource("10_kwypy")
 bus = &"SE"
 
+[node name="InfoPanelPosition" type="Marker2D" parent="." unique_id=2086632393]
+position = Vector2(135, -60)
+
+[node name="InfoPanelTimer" type="Timer" parent="." unique_id=295510158]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="InfoPanelTimer" to="." method="_on_info_panel_timer_timeout"]

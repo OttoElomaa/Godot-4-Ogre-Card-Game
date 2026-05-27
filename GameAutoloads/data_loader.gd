@@ -5,6 +5,11 @@ const generic_groups:Array[Card.Group] = [Card.Group.GENERIC, Card.Group.GREEN_G
 Card.Group.CITY_GENERIC, Card.Group.DESERT_GENERIC, Card.Group.OUTCAST_GENERIC]
 
 const equipment_group:Card.Group = Card.Group.EQUIPMENT
+
+const scenes_by_name:Dictionary[String, PackedScene] = {
+	'TermTooltip': preload('uid://cn15aob5lrp56')
+}
+
 #endregion
 
 ## Arranges all_cards to be referenced by their CardName. Used to instantiate
@@ -14,9 +19,7 @@ var cards_by_name:Dictionary[String, Card] = {}
 var cards_by_group:Dictionary[Card.Group, Array] = {}
 	
 var champions_by_name:Dictionary[String, Champion] = {}
-var scenes_by_name:Dictionary[String, Node] = {
-	
-}
+
 
 var boards_by_name:Dictionary[String, PackedScene] = {
 	'Default': preload('uid://be8n1sbdblr6g')

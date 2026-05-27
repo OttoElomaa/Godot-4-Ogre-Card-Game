@@ -21,13 +21,13 @@
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
 [ext_resource type="Script" uid="uid://cq33h3kryyrto" path="res://CardScriptsAndComponents/Scripts/table_card_slot.gd" id="20_7yxuf"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
-[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="21_ufaws"]
 [ext_resource type="AudioStream" uid="uid://0grfmidlhvlt" path="res://Audio/SE/Player-Damaged.wav" id="24_ikeh1"]
 [ext_resource type="Script" uid="uid://3gv0j2w8kq47" path="res://GameScenes/GameBoard/camera_main_board.gd" id="25_7yxuf"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
 [ext_resource type="AudioStream" uid="uid://cqryjjev655kv" path="res://Audio/BGM/Cards of Achra OST - Tunneler Lullaby.ogg" id="26_hysm7"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="26_ngg6u"]
+[ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="27_anhsg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -128,8 +128,9 @@ border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 script = ExtResource("1_rf3o6")
 
 [node name="CameraMainBoard" type="Camera2D" parent="." unique_id=1095447748]
+unique_name_in_owner = true
 anchor_mode = 0
-zoom = Vector2(0.76, 0.76)
+zoom = Vector2(0.75, 0.75)
 script = ExtResource("25_7yxuf")
 
 [node name="Portraits" type="Node2D" parent="." unique_id=865813432]
@@ -398,7 +399,7 @@ unique_name_in_owner = true
 [node name="EnemyBoard" type="Node2D" parent="CardsManager" unique_id=573317099]
 
 [node name="PlayerHandPosition" type="Marker2D" parent="CardsManager" unique_id=1764255656]
-position = Vector2(260, 1392)
+position = Vector2(260, 1250)
 
 [node name="EnemyHandPosition" type="Marker2D" parent="CardsManager" unique_id=1756878658]
 position = Vector2(1505, 109)
@@ -567,25 +568,6 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_styles/normal = ExtResource("20_tic85")
 theme_override_styles/hover = ExtResource("19_j663k")
-
-[node name="CardInfoPane" type="MarginContainer" parent="CanvasLayer" unique_id=1649571130]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -60.0
-offset_bottom = 60.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 20
-
-[node name="CardInfoPanel" parent="CanvasLayer/CardInfoPane" unique_id=106991370 instance=ExtResource("21_ufaws")]
-layout_mode = 2
 
 [node name="BattleLogPane" type="MarginContainer" parent="CanvasLayer" unique_id=1714224520]
 z_index = 10
@@ -795,6 +777,11 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_styles/normal = ExtResource("20_tic85")
 theme_override_styles/hover = ExtResource("19_j663k")
+
+[node name="CardInfoPanel" parent="CanvasLayer" unique_id=1345369115 instance=ExtResource("27_anhsg")]
+unique_name_in_owner = true
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="ActionMenuCanvas" type="CanvasLayer" parent="." unique_id=258061817]
 

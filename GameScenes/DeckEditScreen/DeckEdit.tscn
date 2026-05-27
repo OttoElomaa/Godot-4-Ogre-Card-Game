@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://dw7x0akbcnnau" path="res://GameScenes/DeckEditScreen/owned_cards_container.gd" id="4_2vaow"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_wteh1"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="4_xlhhm"]
-[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="5_rwrpj"]
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="5_ydr1y"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="6_t6uxs"]
 [ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://PanelStyles/SelectBoxTransparent.tres" id="7_wteh1"]
@@ -14,6 +13,7 @@
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="9_vyoq8"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="10_fk3a6"]
 [ext_resource type="Theme" uid="uid://c586ciarawo0t" path="res://PanelStyles/generic_theme.tres" id="10_wnc1h"]
+[ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="14_wnc1h"]
 [ext_resource type="AudioStream" uid="uid://bwy5cuxuto872" path="res://Audio/SE/Card-Played.wav" id="15_wnc1h"]
 
 [node name="DeckEdit" type="CanvasLayer" unique_id=313935886]
@@ -134,7 +134,7 @@ vertical_alignment = 1
 
 [node name="OwnedCards" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=608712210]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(830, 900)
+custom_minimum_size = Vector2(875, 900)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_wteh1")
 metadata/_edit_group_ = true
@@ -183,21 +183,16 @@ layout_mode = 2
 [node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1294324832]
 layout_mode = 2
 
-[node name="CardInfoPanel" parent="MarginContainer/HBoxContainer/VBoxContainer3" unique_id=2106214364 instance=ExtResource("5_rwrpj")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-
 [node name="Buttons" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer3" unique_id=120813696]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 10
+size_flags_horizontal = 4
+size_flags_vertical = 6
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 60
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer3/Buttons" unique_id=1822315057]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 30
 alignment = 1
 
@@ -233,6 +228,11 @@ layout_mode = 2
 text = "Back to World"
 label_settings = ExtResource("10_fk3a6")
 horizontal_alignment = 1
+
+[node name="CardInfoPanelFloaty" parent="." unique_id=1345369115 instance=ExtResource("14_wnc1h")]
+unique_name_in_owner = true
+visible = false
+offset_right = 512.0
 
 [node name="Audio" type="Node" parent="." unique_id=1873289973]
 

@@ -318,8 +318,14 @@ func shake_screen(intensity:float, time:float):
 	cameraMainBoard.screen_shake(intensity, time)
 
 func toggleCardInfo(enable:bool, card:Card):
-	var cardInfo := $CanvasLayer/CardInfoPane/CardInfoPanel
+	var cardInfo := %CardInfoPanel
 	cardInfo.toggleCardInfo(enable, card)
+	
+	if enable:
+		var global_center:Vector2 = %CameraMainBoard.get_screen_center_position()
+		var screen_pos = card.get_global_transform_with_canvas().get_origin()
+		print(screen_pos)
+		cardInfo.show_at(screen_pos)
 	
 
 func addLogMessage(text:String, color:Color) -> void:

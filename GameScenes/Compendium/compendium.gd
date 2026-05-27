@@ -20,6 +20,7 @@ func show_buttons():
 	$SectionButtons.show()
 
 func _on_return_button_pressed():
+	print('return button pressed')
 	if active_scene:
 		close_book()
 	else:

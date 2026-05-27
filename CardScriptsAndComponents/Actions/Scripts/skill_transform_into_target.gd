@@ -57,4 +57,5 @@ func activate(targets):
 	myCard.handleArrival()  
 	myCard.updateCardVisuals()
 	myCard.updateCardNameAndBasicInfo(true)
+	myCard.createEffectText()
 	return true

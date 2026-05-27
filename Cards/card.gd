@@ -73,6 +73,7 @@ var isChampion:
 
 @onready var effectTextLabel := $Frontside/EffectText
 
+var term_tooltip = DataLoader.scenes_by_name['TermTooltip']
 ####################################### EXPORT VARIABLES
 @export var cardName := "Card Name"
 @export var cardType := CardTypes.CREATURE
@@ -323,6 +324,7 @@ func createEffectText():
 	effectText = effectText.lstrip(",. ")
 	
 	effectTextLabel.text = effectText
+
 	return effectText
 	
 	
@@ -548,6 +550,8 @@ func faceUp():
 func faceDown():
 	$Frontside.hide()
 	$Backside.show()
+
+
 
 #endregion
 
@@ -985,6 +989,21 @@ func turnOnBestiaryVisuals(menu:Node):
 	$Frontside/CardNameBestiary/Label.text = cardName
 	
 	updateCardVisuals()
+
+func start_tooltip_timer():
+	%TooltipTimer.start(0.5)
+
+func stop_tooltip_timer():
+	%TooltipTimer.stop()
+
+func display_info():
+	gameBoard.toggleCardInfo(true, self)
+
+func hide_info():
+	gameBoard.toggleCardInfo(false, self)
+
+func _on_tooltip_timer_timeout():
+	display_info()
 
 #endregion
 

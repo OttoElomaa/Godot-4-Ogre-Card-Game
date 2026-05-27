@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://21p71ahd2jdd"]
+[gd_scene format=3 uid="uid://21p71ahd2jdd"]
 
 [ext_resource type="Script" uid="uid://bdm6m5xbkkg8h" path="res://CardScriptsAndComponents/Actions/Scripts/skill_transform_into_target.gd" id="1_6vghl"]
 
-[node name="SkillTransformSelfIntoTarget" type="Node2D"]
+[node name="SkillTransformSelfIntoTarget" type="Node2D" unique_id=1516292052]
 script = ExtResource("1_6vghl")
 metadata/_custom_type_script = "uid://cxr3ippvyy8ii"

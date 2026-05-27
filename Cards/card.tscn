@@ -432,5 +432,18 @@ pitch_scale = 0.8
 stream = ExtResource("27_lgw4w")
 volume_db = -20.0
 
+[node name="TermTooltips" type="VBoxContainer" parent="." unique_id=1652029269]
+unique_name_in_owner = true
+offset_left = 144.0
+offset_top = -186.0
+offset_right = 144.0
+offset_bottom = -186.0
+
+[node name="TooltipTimer" type="Timer" parent="." unique_id=1991248887]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="timeout" from="TooltipTimer" to="." method="_on_tooltip_timer_timeout"]

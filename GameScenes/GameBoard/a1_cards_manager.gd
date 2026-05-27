@@ -125,13 +125,16 @@ func handleHoverCheck():
 	#### TURN ON HIGHLIGHT For TOP CARD		
 	var topCard:Card = currentHoveredCards[lastIndex]
 	toggleHoverVisuals(true, topCard)
-	if topCard.isEnemyCard and battleSystem.playerAttackOngoing:
-		battleSystem.damageCalculator.show()
-		battleSystem.updateDamageCalculator(topCard)
+	if topCard.isEnemyCard:
+		if battleSystem.playerAttackOngoing:
+			battleSystem.damageCalculator.show()
+			battleSystem.updateDamageCalculator(topCard)
+	else:
+		mainCardInfoShown = true
+#		main.toggleCardInfo(true, topCard)
 	
 	#### SHOW TOP CARD'S INFO, TURN OFF HOVER CHECK
-	mainCardInfoShown = true
-	main.toggleCardInfo(true, topCard)
+
 	hoverCheckNeeded = false
 
 
@@ -380,7 +383,8 @@ func toggleCardHover(isHovering:bool, card:Card):
 		currentHoveredCards.erase(card)
 		toggleHoverVisuals(false, card) #### TURN OFF HOVER VISUALS ON HOVER OFF -> Not done in CHECK func
 		
-	card.toggleCardName(isHovering)	
+	card.toggleCardName(isHovering)
+	
 	hoverCheckNeeded = true
 	
 	
@@ -390,12 +394,15 @@ func toggleHoverVisuals(enable:bool, card:Card):
 	if enable:
 		card.scale = CARD_HIGHLIGHTED_SCALE
 		indexToSet = 5
+		card.start_tooltip_timer()
 	else:
 		card.scale = CARD_NORMAL_SCALE
 		if card.isResting:
 			indexToSet = 2
 		else:
 			indexToSet = 1
+		card.stop_tooltip_timer()
+		card.hide_info()
 	
 	card.z_index = indexToSet
 		

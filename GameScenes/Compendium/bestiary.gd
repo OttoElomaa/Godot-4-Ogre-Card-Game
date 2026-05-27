@@ -1,6 +1,6 @@
 extends Node2D
-@onready var BestiaryCardsContainer := $CanvasLayer2/Panel/MarginContainer/Scroll/BestiaryCardsContainer
-@onready var cardInfoPanel := $CanvasLayer2/CardInfoMargin/VBox/CardInfoPanel
+@onready var BestiaryCardsContainer := %BestiaryCardsContainer
+@onready var cardInfoPanel := %CardInfoPanel
 
 var BestiaryContainer = preload("res://GameScenes/CardDisplayContainers/BestiaryContainer.tscn")
 

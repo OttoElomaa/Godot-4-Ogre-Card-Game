@@ -1,22 +1,22 @@
-[gd_scene format=3 uid="uid://dtaqr72ueoeng"]
+[gd_scene format=3 uid="uid://d4hd17vynaptf"]
 
-[ext_resource type="StyleBox" uid="uid://bocokxxjamm42" path="res://PanelStyles/StyleBoxTiled.tres" id="1_cwpxl"]
-[ext_resource type="Texture2D" uid="uid://bvnmf54c4ye2n" path="res://Art/CardComponents/card-background-texture-V4b-ForInfoPane.jpg" id="2_axiiv"]
-[ext_resource type="Script" uid="uid://cjv7n32vxaee8" path="res://GameScenes/CardDisplayContainers/cardInfoPanel.gd" id="2_o0dss"]
-[ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSettings/LabelSet-Header-Brown.tres" id="3_o0dss"]
-[ext_resource type="Texture2D" uid="uid://bv6t2gvsftvsp" path="res://Art/BoardComponents/card-slot-empty-texture.png" id="4_85glx"]
-[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_ykqoc"]
-[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="5_f5wib"]
-[ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="8_85glx"]
+[ext_resource type="Script" uid="uid://ccnp7aycda66" path="res://GameScenes/CardDisplayContainers/card_info_panel_floaty.gd" id="1_owy2s"]
+[ext_resource type="Texture2D" uid="uid://bvnmf54c4ye2n" path="res://Art/CardComponents/card-background-texture-V4b-ForInfoPane.jpg" id="3_bajmq"]
+[ext_resource type="Texture2D" uid="uid://bv6t2gvsftvsp" path="res://Art/BoardComponents/card-slot-empty-texture.png" id="4_68gqi"]
+[ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSettings/LabelSet-Header-Brown.tres" id="5_umej5"]
+[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="6_oc4yc"]
+[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="7_6byni"]
+[ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="8_52e1a"]
 
-[node name="CardInfoPanel" type="PanelContainer" unique_id=1345369115]
-custom_minimum_size = Vector2(675, 420)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbdad"]
+
+[node name="CardInfoPanel" type="PanelContainer" unique_id=1321294665]
+custom_minimum_size = Vector2(675, 517)
 offset_right = 675.0
-offset_bottom = 531.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("1_cwpxl")
-script = ExtResource("2_o0dss")
+offset_bottom = 517.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tbdad")
+script = ExtResource("1_owy2s")
+disappearing = true
 
 [node name="MarginWithOuter" type="MarginContainer" parent="." unique_id=551882397]
 layout_mode = 2
@@ -32,7 +32,7 @@ size_flags_horizontal = 0
 [node name="CardBackgroundTexture" type="TextureRect" parent="HBoxContainer/CardMargin" unique_id=220574376]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("2_axiiv")
+texture = ExtResource("3_bajmq")
 expand_mode = 5
 stretch_mode = 4
 
@@ -40,7 +40,7 @@ stretch_mode = 4
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-texture = ExtResource("4_85glx")
+texture = ExtResource("4_68gqi")
 expand_mode = 5
 stretch_mode = 4
 
@@ -63,7 +63,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Card Name"
-label_settings = ExtResource("3_o0dss")
+label_settings = ExtResource("5_umej5")
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -75,7 +75,7 @@ theme_override_constants/margin_right = 12
 [node name="CardArt" type="TextureRect" parent="HBoxContainer/CardMargin/Margin/VBox/ArtMargin" unique_id=836676011]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("4_ykqoc")
+texture = ExtResource("6_oc4yc")
 expand_mode = 5
 stretch_mode = 5
 
@@ -89,7 +89,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Sub-type line goes here."
-label_settings = ExtResource("5_f5wib")
+label_settings = ExtResource("7_6byni")
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -103,7 +103,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Effect text goes here."
-label_settings = ExtResource("5_f5wib")
+label_settings = ExtResource("7_6byni")
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -127,7 +127,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "..."
-label_settings = ExtResource("8_85glx")
+label_settings = ExtResource("8_52e1a")
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -139,17 +139,18 @@ alignment = 1
 [node name="CardBottomMargin" type="MarginContainer" parent="." unique_id=2138089089]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_constants/margin_left = 70
+theme_override_constants/margin_left = 60
 theme_override_constants/margin_top = 400
 theme_override_constants/margin_right = 400
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_bottom = 13
 
 [node name="AttackDefenseLabel" type="Label" parent="CardBottomMargin" unique_id=73014179]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 text = "2 / 2"
-label_settings = ExtResource("5_f5wib")
+label_settings = ExtResource("7_6byni")
 horizontal_alignment = 1
 vertical_alignment = 1
