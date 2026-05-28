@@ -50,7 +50,7 @@ func createAllCardsByAmount(amount:int) -> Array:
 	return allCards
 
 
-func get_all_game_cards():
+func createAllGameCards():
 	var cardFolderPaths := ['res://Cards/City/', 'res://Cards/Desert/', 
 	'res://Cards/Outcasts/', 'res://Cards/GreenDefiance/']
 
@@ -67,9 +67,8 @@ func get_all_game_cards():
 	for card:Card in GameInfo.all_cards:
 		cards_by_name[card.cardName] = card
 		if not cards_by_group.has(card.group):
-			cards_by_group[card.group] = [card]
-		else:
-			cards_by_group[card.group].append(card)
+			cards_by_group[card.group] = []
+		cards_by_group[card.group].append(card)
 	
 	## Putting generic cards into the recruitment pool.
 	for idx:Card.Group in generic_groups:

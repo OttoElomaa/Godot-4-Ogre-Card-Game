@@ -25,9 +25,6 @@ func gameBoardSetup(board:GameBoard):
 	self.battleSystem = gameBoard.battleSystem
 
 
-func get_all_game_cards():
-	return $CardLoader.createAllCardsByAmount(1)
-
 
 func checkNodeValidity(node:Node) -> bool:
 	if not node:

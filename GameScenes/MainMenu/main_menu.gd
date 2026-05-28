@@ -12,7 +12,7 @@ var bestiaryCards := []
 
 
 func _ready() -> void:
-	DataLoader.get_all_game_cards()
+	DataLoader.createAllGameCards()
 	DataLoader.load_text_data('res://Resources/Data/Terms.json', DataLoader.terms)
 	DataLoader.get_effect_descriptions()
 	GameInfo.playerOwnedCards = DataLoader.createDesertDeck()

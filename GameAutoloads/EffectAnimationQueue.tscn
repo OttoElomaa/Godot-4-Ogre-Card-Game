@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://fdhkm8e65wmg"]
+[gd_scene format=3 uid="uid://fdhkm8e65wmg"]
 
-[ext_resource type="Script" uid="uid://clw4ws77usamx" path="res://GameAutoloads/effect_animation_queue.gd" id="1_x4rnw"]
+[ext_resource type="Script" uid="uid://clw4ws77usamx" path="res://GameAutoloads/Scripts/effect_animation_queue.gd" id="1_x4rnw"]
 
 [node name="EffectAnimationQueue" type="Node2D"]
 script = ExtResource("1_x4rnw")
