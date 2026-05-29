@@ -32,6 +32,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DataLoader="*uid://x5hp1ama1l5h"
 EffectAnimationQueue="*res://GameAutoloads/EffectAnimationQueue.tscn"
 CardAnimationQueue="*res://GameAutoloads/CardAnimationQueue.tscn"
+LevelLoader="*uid://cyon8t1pwfw2b"
 
 [debug]
 

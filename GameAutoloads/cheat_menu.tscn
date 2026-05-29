@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhescek764odo"]
+[gd_scene format=3 uid="uid://dhescek764odo"]
 
 [ext_resource type="Script" uid="uid://bepqe5wwx3b28" path="res://GameAutoloads/Scripts/cheat_menu.gd" id="1_23tl8"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Fonts/BasicSmallPixelFont.tres" id="2_ahs3t"]
@@ -6,24 +6,26 @@
 [ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Fonts/monaco/monaco.ttf" id="4_k054w"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="4_wg888"]
 [ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://PanelStyles/SelectBoxTransparent.tres" id="5_wg888"]
+[ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="7_e8rgb"]
+[ext_resource type="Script" uid="uid://drbikd8ffv5i3" path="res://GameAutoloads/cheat_level_menu.gd" id="7_m8jd3"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="8_1k18f"]
 
-[node name="CheatMenu" type="Node2D"]
+[node name="CheatMenu" type="Node2D" unique_id=1328893935]
 top_level = true
 z_index = 20
 z_as_relative = false
 script = ExtResource("1_23tl8")
 
-[node name="GameBoard_Cheats" type="CanvasLayer" parent="."]
+[node name="GameBoard_Cheats" type="CanvasLayer" parent="." unique_id=1254457414]
 layer = 10
-visible = false
 
-[node name="TopMenu" type="MarginContainer" parent="GameBoard_Cheats"]
+[node name="TopMenu" type="MarginContainer" parent="GameBoard_Cheats" unique_id=1881447343]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -457.0
-offset_right = -43.0
+offset_left = -477.0
+offset_right = -63.0
 offset_bottom = 70.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 30
@@ -31,17 +33,17 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/TopMenu"]
+[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/TopMenu" unique_id=1358894946]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Label" type="Label" parent="GameBoard_Cheats/TopMenu/HBox"]
+[node name="Label" type="Label" parent="GameBoard_Cheats/TopMenu/HBox" unique_id=1369343841]
 texture_filter = 1
 layout_mode = 2
 text = "Cheats on~"
 label_settings = ExtResource("4_wg888")
 
-[node name="NukeAllCards" type="Button" parent="GameBoard_Cheats/TopMenu/HBox"]
+[node name="NukeAllCards" type="Button" parent="GameBoard_Cheats/TopMenu/HBox" unique_id=1983211074]
 texture_filter = 1
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
@@ -50,9 +52,8 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("5_wg888")
 text = "!! Nuke All Cards !!"
 
-[node name="RightMenu" type="MarginContainer" parent="GameBoard_Cheats"]
+[node name="RightMenu" type="MarginContainer" parent="GameBoard_Cheats" unique_id=119415029]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -68,87 +69,87 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 200
 
-[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/RightMenu"]
+[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/RightMenu" unique_id=115506719]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="SearchCardsPanel" type="PanelContainer" parent="GameBoard_Cheats/RightMenu/HBox"]
+[node name="SearchCardsPanel" type="PanelContainer" parent="GameBoard_Cheats/RightMenu/HBox" unique_id=1375934276]
 custom_minimum_size = Vector2(235, 350)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_ahs3t")
 
-[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel"]
+[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel" unique_id=1270720582]
 layout_mode = 2
 texture = ExtResource("3_k054w")
 expand_mode = 3
 stretch_mode = 6
 
-[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel"]
+[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel" unique_id=1749204723]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+[node name="Label2" type="Label" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox" unique_id=889459286]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Search by name..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SearchCardName" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+[node name="SearchCardName" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox" unique_id=1915522888]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_k054w")
 theme_override_styles/normal = ExtResource("5_wg888")
 placeholder_text = "Card Name"
 
-[node name="CardFace" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+[node name="CardFace" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox" unique_id=800083672]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 expand_mode = 1
 
-[node name="Label" type="Label" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+[node name="Label" type="Label" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox" unique_id=1652343366]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Add card..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ToFoe2" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+[node name="ToFoe2" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox" unique_id=1381283227]
 layout_mode = 2
 text = "To Foe >"
 
-[node name="ToYou2" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+[node name="ToYou2" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox" unique_id=1731378705]
 layout_mode = 2
 text = "To You >"
 
-[node name="ToPlayerHand" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+[node name="ToPlayerHand" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox" unique_id=1921975763]
 layout_mode = 2
 text = "To Your Hand >"
 
-[node name="ToPlayerHand2" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+[node name="ToPlayerHand2" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox" unique_id=674266641]
 layout_mode = 2
 text = "To Foe's Hand >"
 
-[node name="ToPlayerGraveyard" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox"]
+[node name="ToPlayerGraveyard" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox" unique_id=529344090]
 layout_mode = 2
 text = "To Your Graveyard >"
 
-[node name="CardEditor" type="PanelContainer" parent="GameBoard_Cheats/RightMenu/HBox"]
+[node name="CardEditor" type="PanelContainer" parent="GameBoard_Cheats/RightMenu/HBox" unique_id=261994303]
 custom_minimum_size = Vector2(235, 350)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_ahs3t")
 
-[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor"]
+[node name="TextureRect" type="TextureRect" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor" unique_id=1735954255]
 layout_mode = 2
 texture = ExtResource("3_k054w")
 expand_mode = 3
 stretch_mode = 6
 
-[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor"]
+[node name="VBox" type="VBoxContainer" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor" unique_id=808044727]
 layout_mode = 2
 
-[node name="CardName" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+[node name="CardName" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox" unique_id=1272205652]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_k054w")
@@ -156,65 +157,131 @@ theme_override_styles/normal = ExtResource("5_wg888")
 text = "Card Name"
 placeholder_text = "Card Name"
 
-[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+[node name="HBox" type="HBoxContainer" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox" unique_id=347582074]
 layout_mode = 2
 alignment = 1
 
-[node name="Attack" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/HBox"]
+[node name="Attack" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/HBox" unique_id=1180256058]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_wg888")
 text = "0"
 
-[node name="HP" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/HBox"]
+[node name="HP" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/HBox" unique_id=619754879]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_wg888")
 text = "0"
 
-[node name="NewKeyword" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+[node name="NewKeyword" type="TextEdit" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox" unique_id=668287094]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_wg888")
 placeholder_text = "New Keyword
 "
 
-[node name="Keywords" type="RichTextLabel" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+[node name="Keywords" type="RichTextLabel" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox" unique_id=106453299]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "No Keywords"
 
-[node name="AddKeyword" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+[node name="AddKeyword" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox" unique_id=775624004]
 layout_mode = 2
 text = "Add Keyword"
 
-[node name="Label" type="Label" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+[node name="Label" type="Label" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox" unique_id=457515689]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Add card..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ToFoe" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+[node name="ToFoe" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox" unique_id=1063279750]
 layout_mode = 2
 text = "To Foe >"
 
-[node name="ToYou" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox"]
+[node name="ToYou" type="Button" parent="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox" unique_id=1514641045]
 layout_mode = 2
 text = "To You >"
 
-[node name="ZoneCheats" type="MarginContainer" parent="GameBoard_Cheats"]
+[node name="ZoneCheats" type="MarginContainer" parent="GameBoard_Cheats" unique_id=1157590149]
 unique_name_in_owner = true
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameBoard_Cheats/ZoneCheats"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameBoard_Cheats/ZoneCheats" unique_id=1583680332]
 layout_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="GameBoard_Cheats/ZoneCheats/VBoxContainer"]
+[node name="CheckBox" type="CheckBox" parent="GameBoard_Cheats/ZoneCheats/VBoxContainer" unique_id=443661168]
 layout_mode = 2
 text = "Insta-resolve"
+
+[node name="LevelMenuCanvas" type="CanvasLayer" parent="." unique_id=1742420847]
+layer = 10
+
+[node name="CheatLevelMenu" type="PanelContainer" parent="LevelMenuCanvas" unique_id=2036538712 node_paths=PackedStringArray("rows")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7_e8rgb")
+script = ExtResource("7_m8jd3")
+rows = NodePath("VBox/ScrollContainer/Rows")
+
+[node name="VBox" type="VBoxContainer" parent="LevelMenuCanvas/CheatLevelMenu" unique_id=1480432258]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="LevelMenuCanvas/CheatLevelMenu/VBox" unique_id=963245253]
+texture_filter = 1
+layout_mode = 2
+text = "Cheat level menu"
+label_settings = ExtResource("4_wg888")
+horizontal_alignment = 1
+
+[node name="NoLevelsLabel" type="Label" parent="LevelMenuCanvas/CheatLevelMenu/VBox" unique_id=1151613303]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "No levels found"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LevelMenuCanvas/CheatLevelMenu/VBox" unique_id=1572277516]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Rows" type="VBoxContainer" parent="LevelMenuCanvas/CheatLevelMenu/VBox/ScrollContainer" unique_id=1075172651]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LevelMenuTop" type="MarginContainer" parent="LevelMenuCanvas" unique_id=720336674]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_right = 75.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 20
+
+[node name="LevelMenuButton" type="Button" parent="LevelMenuCanvas/LevelMenuTop" unique_id=1158123232]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k054w")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("8_1k18f")
+text = "Level menu"
 
 [connection signal="pressed" from="GameBoard_Cheats/TopMenu/HBox/NukeAllCards" to="." method="_on_nuke_all_cards_pressed"]
 [connection signal="text_changed" from="GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel/VBox/SearchCardName" to="." method="_on_search_card_name_text_changed"]
@@ -227,3 +294,4 @@ text = "Insta-resolve"
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/ToFoe" to="." method="_on_to_foe_pressed"]
 [connection signal="pressed" from="GameBoard_Cheats/RightMenu/HBox/CardEditor/VBox/ToYou" to="." method="_on_to_you_pressed"]
 [connection signal="toggled" from="GameBoard_Cheats/ZoneCheats/VBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="pressed" from="LevelMenuCanvas/LevelMenuTop/LevelMenuButton" to="LevelMenuCanvas/CheatLevelMenu" method="buttonPressedToggleVisibility"]
