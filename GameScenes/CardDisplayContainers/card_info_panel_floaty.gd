@@ -1,4 +1,4 @@
-extends "res://GameScenes/CardDisplayContainers/cardInfoPanel.gd"
+extends CardInfoPanel
 
 func show_at(pos: Vector2):
 	var screen_size = get_viewport().get_visible_rect().size

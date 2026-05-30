@@ -1,30 +1,35 @@
 extends PanelContainer
+class_name CardInfoPanel
 
-const term_tooltip = DataLoader.scenes_by_name['TermTooltip']
+const TermTooltipScene = DataLoader.scenes_by_name['TermTooltip']
 
 var bestiary: Node = null
 
 ## If true, the panel will disappear if no card is currently hovered over.
 @export var disappearing = false
 
+@onready var defaultRightWidth = $MarginWithOuter/VBoxWithBottom/HBox/VBoxRight.get_minimum_size().x
+
+
 func _ready():
 	toggleCardInfo(false, null)
-
-
-func _process(delta: float) -> void:
-#	var scrollContentsHeight:int = $MarginWithOuter/VBoxWithOuterText/Scroll/VBox.size.y
-#	var scroll := $MarginWithOuter/VBoxWithOuterText/Scroll
-	
-#	if scrollContentsHeight > 700:
-#		scroll.size.y = 700
-#	else:
-#		scroll.size.y = scrollContentsHeight
-	pass
 
 
 func bestiarySetup(bestiaryScreen:Node):
 	if bestiaryScreen:
 		bestiary = bestiaryScreen
+
+
+func toggleStaticExplanationLabels(toShow:bool):
+	var rightBox := $MarginWithOuter/VBoxWithBottom/HBox/VBoxRight
+	rightBox.visible = toShow
+	self.reset_size()
+	#if toShow:
+		#rightBox.custom_minimum_size.x = defaultRightWidth
+	#else:
+		#rightBox.custom_minimum_size.x = 0
+	#rightBox.reset_size()
+	
 
 func toggle_text(visiblility: bool):
 	%Margin.visible = visiblility
@@ -42,7 +47,6 @@ func toggleCardInfo(enable:bool, card:Card):
 		if disappearing:
 			hide()
 			if bestiary:
-				#bestiary.setFlavorLabelText("")
 				flavorTextLabel.text = ""
 		else:
 			toggle_text(false)
@@ -54,17 +58,14 @@ func toggleCardInfo(enable:bool, card:Card):
 	print('showing')
 	toggle_text(true)
 	%EmptySlot.hide()
+	
 	if bestiary:
-		#bestiary.setFlavorLabelText(card.flavorText)
 		flavorTextLabel.show()
 		flavorTextLabel.text = card.flavorText
 	
 	%NameLabel.text = card.cardName
 	%CardArt.texture = card.cardArt
-	
 	%SubTypeLine.text = "%s - %s" % [card.cardTypeStr,card.subTypeStr]
-	
-	#if card.effectText != "":
 	%EffectText.text = card.effectText
 	
 	%AttackDefenseLabel.text = "%d / %d" % [card.tempDamage,card.tempHealth]
@@ -73,7 +74,7 @@ func toggleCardInfo(enable:bool, card:Card):
 		i.queue_free()
 	
 	for i:String in MyTools.fetch_terms_and_explanations(card.effectText):
-		var new = term_tooltip.instantiate() as TermTooltip
+		var new = TermTooltipScene.instantiate() as TermTooltip
 		var new_text = ''
 		i = i[0].to_upper() + i.substr(1)
 		new_text = str(i)

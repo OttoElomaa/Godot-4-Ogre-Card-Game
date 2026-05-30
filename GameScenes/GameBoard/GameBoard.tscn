@@ -27,7 +27,7 @@
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
 [ext_resource type="AudioStream" uid="uid://cqryjjev655kv" path="res://Audio/BGM/Cards of Achra OST - Tunneler Lullaby.ogg" id="26_hysm7"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="26_ngg6u"]
-[ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="27_anhsg"]
+[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="27_anhsg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -780,8 +780,18 @@ theme_override_styles/hover = ExtResource("19_j663k")
 
 [node name="CardInfoPanel" parent="CanvasLayer" unique_id=1345369115 instance=ExtResource("27_anhsg")]
 unique_name_in_owner = true
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -653.0
+offset_top = -304.0
 offset_right = 0.0
-offset_bottom = 0.0
+offset_bottom = 304.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
 
 [node name="ActionMenuCanvas" type="CanvasLayer" parent="." unique_id=258061817]
 

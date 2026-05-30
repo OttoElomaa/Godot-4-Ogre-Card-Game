@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://vhtjn8jewlw1" path="res://CardScriptsAndComponents/Scripts/term_tooltip.gd" id="2_1iq8m"]
 
 [node name="Term Tooltip" type="PanelContainer" unique_id=2018910501]
-visible = false
 custom_minimum_size = Vector2(300, 0)
 offset_left = 1.0
 offset_right = 301.0
@@ -22,6 +21,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="TermLabel" type="RichTextLabel" parent="MarginContainer" unique_id=994708658]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
 bbcode_enabled = true
 text = "Term: description."

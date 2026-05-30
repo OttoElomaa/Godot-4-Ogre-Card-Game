@@ -84,6 +84,11 @@ func dealEnemyHand():
 	updateHandCardsVisuals()
 
 
+func connectCardSignal(card:Card):
+	pass
+	#card.connect("hoverOn", onHoverCard)
+	#card.connect("hoverOff", onHoverCardOff)
+
 
 ############################################################
 #### PHYSICS AND INPUT STUFF
@@ -107,7 +112,7 @@ func _physics_process(delta: float) -> void:
 	if mainCardInfoShown:
 		if currentHoveredCards.is_empty():
 			mainCardInfoShown = false
-			main.toggleCardInfo(false, null)
+			%CardInfoPanel.toggleCardInfo(false, null)
 
 
 #### HIGHLIGHT A CARD ON HOVER -> Not when mouse over a stack of cards
@@ -131,7 +136,7 @@ func handleHoverCheck():
 			battleSystem.updateDamageCalculator(topCard)
 	else:
 		mainCardInfoShown = true
-#		main.toggleCardInfo(true, topCard)
+		#main.toggleCardInfo(true, topCard)
 	
 	#### SHOW TOP CARD'S INFO, TURN OFF HOVER CHECK
 
@@ -167,7 +172,54 @@ func _input(e: InputEvent) -> void:
 				if MyTools.validateNodeNotLimbo(card):
 					main.toggleCardActionMenu(true, card)
 	
+
+#### INITIATE A HOVER CHECK
+func toggleCardHover(isHovering:bool, card:Card):
+	if not MyTools.checkNodeValidity(card):
+		return
+	
+	#### CALLED WHEN 'HOVER ON' TRIGGERED	
+	if isHovering:
+		#prints("hover on card: ", card)
+		if not card in currentHoveredCards:
+			currentHoveredCards.append(card)
+	
+	#### CALLED WHEN 'HOVER OFF' TRIGGERED
+	else:
+		#prints("hover on card off: ", card)
+		currentHoveredCards.erase(card)
+		toggleHoverVisuals(false, card) #### TURN OFF HOVER VISUALS ON HOVER OFF -> Not done in CHECK func
 		
+	card.toggleCardName(isHovering)
+	
+	hoverCheckNeeded = true
+	
+	
+func toggleHoverVisuals(enable:bool, card:Card):
+	var indexToSet := 1
+		
+	if enable:
+		card.scale = CARD_HIGHLIGHTED_SCALE
+		indexToSet = 5
+		%CardInfoPanel.toggleCardInfo(enable, card)
+		%CardInfoPanel.toggleStaticExplanationLabels(false)
+		card.start_tooltip_timer()
+		print("SHOWING CARD INFO PANEL")
+	else:
+		card.scale = CARD_NORMAL_SCALE
+		if card.isResting:
+			indexToSet = 2
+		else:
+			indexToSet = 1
+		card.stop_tooltip_timer()
+		#card.hide_info()
+		%CardInfoPanel.toggleCardInfo(enable, null)
+		%CardInfoPanel.toggleStaticExplanationLabels(false)
+	
+	card.z_index = indexToSet
+		
+
+	
 
 
 #### CARD DRAW STUFF ################################################
@@ -236,6 +288,30 @@ func updateHandCardsVisuals():
 		x_offset += 80
 	
 	
+
+func fetchCardOnClick() -> Card:
+	#### GET CARDS AT MOUSE POSITION
+	var result = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
+	if result.size() > 0:
+		var topCard = getCollidedObject(result[0])
+		
+		#### GET TOPMOST CARD IF CARDS ARE ON TOP OF EACH OTHER
+		for c in result:
+			var try = getCollidedObject(c)
+			if try is Card:
+				if try.z_index > topCard.z_index:
+					topCard = try
+		
+		#### MAKE SURE NOTHING NON-CARD WAS SELECTED
+		if topCard is Card:
+			return(topCard)	
+	return null
+
+
+func getCollidedObject(result):
+	return result.collider.get_parent()
+
+
 
 func startDraggingCardOrAttack():
 	var card:Card = fetchCardOnClick()
@@ -366,79 +442,13 @@ func placeCardInSlotTwo(c:Card, slot:CardSlot, isEnemy:bool):
 		
 
 
-#### INITIATE A HOVER CHECK
-func toggleCardHover(isHovering:bool, card:Card):
-	if not MyTools.checkNodeValidity(card):
-		return
-	
-	#### CALLED WHEN 'HOVER ON' TRIGGERED	
-	if isHovering:
-		#prints("hover on card: ", card)
-		if not card in currentHoveredCards:
-			currentHoveredCards.append(card)
-	
-	#### CALLED WHEN 'HOVER OFF' TRIGGERED
-	else:
-		#prints("hover on card off: ", card)
-		currentHoveredCards.erase(card)
-		toggleHoverVisuals(false, card) #### TURN OFF HOVER VISUALS ON HOVER OFF -> Not done in CHECK func
-		
-	card.toggleCardName(isHovering)
-	
-	hoverCheckNeeded = true
-	
-	
-func toggleHoverVisuals(enable:bool, card:Card):
-	var indexToSet := 1
-		
-	if enable:
-		card.scale = CARD_HIGHLIGHTED_SCALE
-		indexToSet = 5
-		card.start_tooltip_timer()
-	else:
-		card.scale = CARD_NORMAL_SCALE
-		if card.isResting:
-			indexToSet = 2
-		else:
-			indexToSet = 1
-		card.stop_tooltip_timer()
-		card.hide_info()
-	
-	card.z_index = indexToSet
-		
-
-
-func fetchCardOnClick() -> Card:
-	#### GET CARDS AT MOUSE POSITION
-	var result = MyTools.fetchMouseOverObjects(COLLISION_MASK_CARD)
-	if result.size() > 0:
-		var topCard = getCollidedObject(result[0])
-		
-		#### GET TOPMOST CARD IF CARDS ARE ON TOP OF EACH OTHER
-		for c in result:
-			var try = getCollidedObject(c)
-			if try is Card:
-				if try.z_index > topCard.z_index:
-					topCard = try
-		
-		#### MAKE SURE NOTHING NON-CARD WAS SELECTED
-		if topCard is Card:
-			return(topCard)
-		
-	return null
 
 
 
 
-func getCollidedObject(result):
-	return result.collider.get_parent()
 	
 
 
-func connectCardSignal(card:Card):
-	pass
-	#card.connect("hoverOn", onHoverCard)
-	#card.connect("hoverOff", onHoverCardOff)
 
 ####################################################
 

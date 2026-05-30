@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var ChampActionCont = preload("res://GameScenes/DeckEditScreen/champ_skill_container.tscn")
 @onready var ownedCardsContainer = %OwnedCardsContainer
 @onready var activeCardsContainer = %ActiveCardsContainer
-@onready var cardInfoPanel = %CardInfoPanelFloaty
+@onready var cardInfoPanel = %CardInfoPanel
 
 var prepared_board: GameBoard = null
 

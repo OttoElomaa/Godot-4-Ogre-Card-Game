@@ -335,6 +335,33 @@ func basicSetup():
 	$Actions.setup(self)
 
 	
+
+##############################################################################
+#region ######################################## MOUSE INTERACTION
+func _on_area_2d_mouse_entered() -> void:
+	#emit_signal("hoverOn", self)
+	MyTools.handleCardHover(true, self)
+
+
+func _on_area_2d_mouse_exited() -> void:
+	#emit_signal("hoverOff", self)
+	MyTools.handleCardHover(false, self)
+
+
+
+func removeMouseInteraction():
+	#$Area2D.queue_free()
+	allowInteract = false
+
+
+func checkInteractAllowed() -> bool:
+	return allowInteract
+
+#endregion
+
+
+
+
 	
 func handleTurnStartReset():
 	tempDamage = damage
@@ -515,26 +542,6 @@ var healColor:
 
 #######################################################################################
 
-##############################################################################
-#region ######################################## MOUSE INTERACTION
-func _on_area_2d_mouse_entered() -> void:
-	#emit_signal("hoverOn", self)
-	MyTools.handleCardHover(true, self)
-
-
-func _on_area_2d_mouse_exited() -> void:
-	#emit_signal("hoverOff", self)
-	MyTools.handleCardHover(false, self)
-
-
-
-func removeMouseInteraction():
-	#$Area2D.queue_free()
-	allowInteract = false
-
-
-func checkInteractAllowed() -> bool:
-	return allowInteract
 
 
 func toggleFrontSide(toShow:bool):
@@ -551,9 +558,6 @@ func faceDown():
 	$Frontside.hide()
 	$Backside.show()
 
-
-
-#endregion
 
 #############################################################################
 #region ######################################### HANDLE REST
@@ -996,14 +1000,12 @@ func start_tooltip_timer():
 func stop_tooltip_timer():
 	%TooltipTimer.stop()
 
-func display_info():
-	gameBoard.toggleCardInfo(true, self)
 
-func hide_info():
-	gameBoard.toggleCardInfo(false, self)
+
 
 func _on_tooltip_timer_timeout():
-	display_info()
+	#display_info()
+	pass
 
 #endregion
 
