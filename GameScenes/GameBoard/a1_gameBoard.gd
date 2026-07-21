@@ -317,6 +317,43 @@ func showPlayerTurnPopup():
 func shake_screen(intensity:float, time:float):
 	cameraMainBoard.screen_shake(intensity, time)
 
+func darken_screen(time:float):
+	States.ignoreMouseInput = true
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, 'modulate', Color(0.256, 0.256, 0.256, 1.0), time)
+	await tween.finished
+
+func brighten_screen(time:float):
+	States.ignoreMouseInput = false
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, 'modulate', Color(1.0, 1.0, 1.0, 1.0), time)
+	await tween.finished
+
+func unfold_ritual_container(card:Card):
+	%RitualContainer.insert_card(card.duplicate())
+	
+	#The ritual container appears offscreen, either on top or at the bottom depending on whose card it is.
+	if card.isEnemyCard:
+		%RitualContainer.position.y = -465.0
+		%RitualContainer.face_down()
+	else:
+		%RitualContainer.position.y = 1650.0
+	%RitualContainer.show()
+	
+	#The ritual container moves to the middle of the screen and the card is turned face up.
+	var tween = get_tree().create_tween()
+	tween.tween_property(%RitualContainer, 'position', Vector2(%RitualContainer.position.x, 400), 1).set_ease(Tween.EASE_IN)
+	await tween.finished
+	await get_tree().create_timer(0.3).timeout
+	%RitualContainer.face_up()
+	
+	await get_tree().create_timer(0.5).timeout
+	tween = get_tree().create_tween()
+	tween.tween_property(%RitualContainer.material, 'shader_parameter/percentage', 0.1, 2.0)
+	await tween.finished
+	%RitualContainer.hide()
+	
+
 func toggleCardInfo(enable:bool, card:Card):
 	var cardInfo := %CardInfoPanel
 	cardInfo.toggleCardInfo(enable, card)
@@ -352,7 +389,6 @@ func nuke_cards(isEnemy: bool):
 func nuke_all_cards():
 	nuke_cards(true)
 	nuke_cards(false)
-
 
 
 func endGame(isWin:bool):

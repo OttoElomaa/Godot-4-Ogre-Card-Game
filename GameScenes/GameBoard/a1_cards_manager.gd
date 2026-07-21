@@ -394,9 +394,11 @@ func toggleHoverVisuals(enable:bool, card:Card):
 	if enable:
 		card.scale = CARD_HIGHLIGHTED_SCALE
 		indexToSet = 5
+		card.z_index = 1
 		card.start_tooltip_timer()
 	else:
 		card.scale = CARD_NORMAL_SCALE
+		card.z_index = 0
 		if card.isResting:
 			indexToSet = 2
 		else:

@@ -19,6 +19,10 @@ run/main_scene="uid://dhgg2oefy2y6e"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/windows_native_icon="res://CoA.ico"
 
+[audio]
+
+buses/default_bus_layout="uid://dx7pxmsb6c5sb"
+
 [autoload]
 
 States="*res://GameAutoloads/States.tscn"
@@ -48,8 +52,6 @@ runtime/balloon_path="res://GameScenes/Zone/balloon.tscn"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
 window/size/mode=3
 
 [editor_plugins]

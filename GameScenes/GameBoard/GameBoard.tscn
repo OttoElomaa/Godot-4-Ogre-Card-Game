@@ -28,6 +28,8 @@
 [ext_resource type="AudioStream" uid="uid://cqryjjev655kv" path="res://Audio/BGM/Cards of Achra OST - Tunneler Lullaby.ogg" id="26_hysm7"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="26_ngg6u"]
 [ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="27_anhsg"]
+[ext_resource type="PackedScene" uid="uid://came4na503n5s" path="res://GameScenes/CardDisplayContainers/card_container.tscn" id="29_rkqvw"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="30_rkqvw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -123,6 +125,26 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5f6ju"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o0nbp"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_5f6ju")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7kvl"]
+resource_local_to_scene = true
+shader = ExtResource("30_rkqvw")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_o0nbp")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
 
 [node name="GameBoard" type="Node2D" unique_id=1271993025 groups=["gameboard"]]
 script = ExtResource("1_rf3o6")
@@ -870,6 +892,19 @@ position = Vector2(59, 34)
 
 [node name="ActionButton_4" type="Marker2D" parent="EnemyActionButtons" unique_id=1726559165]
 position = Vector2(-77, -36)
+
+[node name="AnimationLayer" type="CanvasLayer" parent="." unique_id=2025717798]
+
+[node name="RitualContainer" parent="AnimationLayer" unique_id=1429469794 instance=ExtResource("29_rkqvw")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_y7kvl")
+offset_left = 915.0
+offset_top = 1650.0
+offset_right = 1045.0
+offset_bottom = 1850.0
+scale = Vector2(3, 3)
+show_name = true
+show_mana_cost = false
 
 [connection signal="mouse_entered" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_entered"]
 [connection signal="mouse_exited" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_exited"]

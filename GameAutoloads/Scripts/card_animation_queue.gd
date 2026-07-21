@@ -115,7 +115,7 @@ func animateNext(queue:Array) -> void:
 		var f: Callable = dict.animationFunction
 		
 		print("%s Play animation for card: %s. Animation Function: %s " % [queueText, card.cardName, f])
-		tween = f.call()
+		tween = await f.call()
 	
 	else:
 		print("%s Animation failed due to invalid Card node." % queueText)

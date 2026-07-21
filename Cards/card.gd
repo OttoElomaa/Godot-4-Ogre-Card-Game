@@ -1126,7 +1126,21 @@ func animateAttackPortrait() -> Tween:
 	tween.tween_property(self, "position", portraitPosition, 0.2)
 	return tween
 	
+
+func animateRitualCast() -> Tween:
+	var tween = create_tween()
+	var side_number = 1
+	if isEnemyCard:
+		side_number = -1
 	
+	tween.tween_property(self, "position", position + (side_number * Vector2(0, 400)), 0.5)
+	await tween.finished
+	
+	await gameBoard.darken_screen(0.3)
+	await gameBoard.unfold_ritual_container(self)
+	await gameBoard.brighten_screen(0.3)
+	
+	return tween
 
 
 
