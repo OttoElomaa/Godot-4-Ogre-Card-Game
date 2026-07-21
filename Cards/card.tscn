@@ -441,7 +441,7 @@ offset_bottom = -186.0
 
 [node name="TooltipTimer" type="Timer" parent="." unique_id=1991248887]
 unique_name_in_owner = true
-wait_time = 0.5
+wait_time = 1.5
 one_shot = true
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
