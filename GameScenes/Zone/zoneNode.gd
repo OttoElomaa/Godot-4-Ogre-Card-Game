@@ -9,7 +9,10 @@ var zone:Scenario = null
 @export var node_comments = ''
 
 @export var start_unlocked = false
+
+## What nodes will be unlocked after this one is resolved. Can assign ZoneNode values.
 @export var unlock_on_resolve: Array[Node] 
+## What nodes will be unlocked after this one is resolved. Can assign String values; unlocks nodes with that node_name.
 @export var unlockOnResolveStrings: Array[String]
 
 func _ready():

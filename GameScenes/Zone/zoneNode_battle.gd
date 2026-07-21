@@ -94,7 +94,6 @@ func handleClick():
 func getBoardName():
 	return board_name
 	
-		
 func update_state():
 	if board_name in GameInfo.playerWonBattleNames:
 		resolve()

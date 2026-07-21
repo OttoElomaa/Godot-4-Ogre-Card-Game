@@ -23,9 +23,12 @@ func _ready() -> void:
 #	buttonPressedToggleBestiary()
 	
 	for child in $Decor/DancingCards.get_children():
-		child.initialize()
+		child.initialize(self)
+	
 
-
+func put_on_top(node:Node2D):
+	var parent = node.get_parent()
+	parent.move_child(node, -1)
 
 func setupBestiary():
 	

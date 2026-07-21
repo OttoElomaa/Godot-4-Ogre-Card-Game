@@ -2,7 +2,6 @@ extends Node2D
 
 var all_cards = []
 
-
 #####################################################
 #### PLAYER PROFILE
 var current_champion:Champion = null
@@ -32,6 +31,8 @@ var playerOwnedChampions: Array[Champion] = []
 ## Used to generate playerRecruitmentPool. The game checks for cards whose subtype contains
 ## members of this array.
 var playerAlliances: Array[Card.Group] = []
+
+
 
 ## Cards available for purchase based on player alliances.
 var playerRecruitmentPool := []

@@ -7,6 +7,9 @@ var bestiary: Node = null
 ## If true, the panel will disappear if no card is currently hovered over.
 @export var disappearing = false
 
+## If true, shows the card's flavor text underneath.
+@export var show_flavor_text = false
+
 func _ready():
 	toggleCardInfo(false, null)
 
@@ -50,6 +53,9 @@ func toggleCardInfo(enable:bool, card:Card):
 		return
 		
 	#### SHOW
+	if show_flavor_text:
+		%FlavorLabel.show()
+	
 	show()
 	print('showing')
 	toggle_text(true)

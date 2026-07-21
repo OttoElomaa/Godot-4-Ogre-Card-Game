@@ -197,7 +197,6 @@ flip_h = true
 
 [node name="DancingCards" type="Node2D" parent="Decor" unique_id=543844429]
 z_index = 1
-y_sort_enabled = true
 
 [node name="DancingCard" parent="Decor/DancingCards" unique_id=364356307 instance=ExtResource("15_b4hlq")]
 light_mask = 0

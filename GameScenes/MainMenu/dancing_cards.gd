@@ -1,9 +1,12 @@
 extends Node2D
 
+var main: Node = null
+
 func _ready():
 	pass
 	
-func initialize():
+func initialize(Main:Node):
+	main = Main
 	$CardContainer.insert_card(random_card())
 	$CardContainer.position.y += randi_range(200, -200)
 	$CardContainer.rotation_degrees += randf_range(20, -20)
@@ -19,6 +22,9 @@ func initialize():
 	$TypewriterTextbox.start()
 #	$AnimationPlayer.play("CardDance")
 #	$AnimationPlayer.advance(randf_range(0, 13))
+
+func put_on_top():
+	main.put_on_top(self)
 
 func random_card() -> Card:
 	assert(not GameInfo.all_cards.is_empty(), "Why empty??")

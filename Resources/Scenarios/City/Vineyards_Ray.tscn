@@ -10,7 +10,7 @@
 
 [node name="Zone2" unique_id=407343750 instance=ExtResource("1_n86vg")]
 
-[node name="Board3" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="0" unique_id=986256382 instance=ExtResource("2_ka680")]
+[node name="Board1" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="0" unique_id=986256382 instance=ExtResource("2_ka680")]
 top_level = true
 z_index = 6
 position = Vector2(972, 470)
@@ -22,11 +22,15 @@ enemy_presummon = true
 presummon_sparcity = 2
 unlockOnResolveStrings = Array[String](["Vineyards Cabin"])
 
-[node name="Board4" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="1" unique_id=1977585547 instance=ExtResource("2_ka680")]
+[node name="Board2" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="1" unique_id=1977585547 instance=ExtResource("2_ka680")]
 position = Vector2(-40, -182)
 board_name = "Vineyards West"
 game_board = ExtResource("3_qa0a7")
 board_comments = "The solders are on their last legs, but still should not be underestimated. They fight in formation, protecting their weak spots. The Vinemen will occasionally help you."
+deck_cards = Dictionary[String, int]({
+"Guardmaster": 1,
+"Kalasirios": 3
+})
 ally_presummon = true
 unlockOnResolveStrings = Array[String](["Vineyards Gate"])
 
@@ -45,9 +49,3 @@ position = Vector2(-367, -75)
 dialogue = ExtResource("12_ka680")
 node_name = "Vineyards Entrance"
 start_unlocked = true
-
-[node name="Board1" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="6" unique_id=184432424]
-presummoned_cards = Array[String]([])
-
-[node name="Board2" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="7" unique_id=187480154]
-presummoned_cards = Array[String]([])

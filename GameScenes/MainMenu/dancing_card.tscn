@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://pd7or3cigyqn"]
+[gd_scene format=3 uid="uid://pd7or3cigyqn"]
 
 [ext_resource type="Script" uid="uid://cf5dhx4ni7a14" path="res://GameScenes/MainMenu/dancing_cards.gd" id="1_h4r8x"]
 [ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/MainMenu/typewriter_textbox.tscn" id="2_s7wik"]
@@ -50,11 +50,11 @@ _data = {
 &"RESET": SubResource("Animation_c0kru")
 }
 
-[node name="DancingCard" type="Node2D"]
+[node name="DancingCard" type="Node2D" unique_id=23779757]
 modulate = Color(0.644663, 0.644663, 0.644663, 1)
 script = ExtResource("1_h4r8x")
 
-[node name="TypewriterTextbox" parent="." instance=ExtResource("2_s7wik")]
+[node name="TypewriterTextbox" parent="." unique_id=397115659 instance=ExtResource("2_s7wik")]
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -68,49 +68,51 @@ grow_horizontal = 1
 grow_vertical = 1
 sound_off = true
 
-[node name="CardContainer" type="MarginContainer" parent="."]
+[node name="CardContainer" type="MarginContainer" parent="." unique_id=1314857501]
 use_parent_material = true
-custom_minimum_size = Vector2(130, 200)
-offset_right = 130.0
-offset_bottom = 200.0
+clip_contents = true
+custom_minimum_size = Vector2(110, 165)
+offset_right = 110.0
+offset_bottom = 165.0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(55, 89)
+mouse_filter = 0
 script = ExtResource("3_66xn2")
 
-[node name="Frontside" type="Node2D" parent="CardContainer"]
+[node name="Frontside" type="Node2D" parent="CardContainer" unique_id=463171521]
 use_parent_material = true
 position = Vector2(50, 76)
 scale = Vector2(0.5, 0.5)
 
-[node name="Background" type="Node2D" parent="CardContainer/Frontside"]
+[node name="Background" type="Node2D" parent="CardContainer/Frontside" unique_id=310753461]
 use_parent_material = true
 position = Vector2(10, 12)
 
-[node name="Creature" type="Sprite2D" parent="CardContainer/Frontside/Background"]
+[node name="Creature" type="Sprite2D" parent="CardContainer/Frontside/Background" unique_id=1308892740]
 use_parent_material = true
 texture = ExtResource("4_66xn2")
 
-[node name="Spell" type="Sprite2D" parent="CardContainer/Frontside/Background"]
+[node name="Spell" type="Sprite2D" parent="CardContainer/Frontside/Background" unique_id=1417744891]
 visible = false
 use_parent_material = true
 texture = ExtResource("5_6yyfd")
 
-[node name="Art" type="Sprite2D" parent="CardContainer/Frontside"]
+[node name="Art" type="Sprite2D" parent="CardContainer/Frontside" unique_id=1713222342]
 texture_filter = 6
 use_parent_material = true
 position = Vector2(10, -61)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_uvdeu")
 
-[node name="ManaCost" type="Node2D" parent="CardContainer/Frontside"]
+[node name="ManaCost" type="Node2D" parent="CardContainer/Frontside" unique_id=981828012]
 visible = false
 position = Vector2(10, -162)
 scale = Vector2(0.8, 0.8)
 
-[node name="ManaCostTexture" type="Sprite2D" parent="CardContainer/Frontside/ManaCost"]
+[node name="ManaCostTexture" type="Sprite2D" parent="CardContainer/Frontside/ManaCost" unique_id=586837680]
 texture = ExtResource("7_y2qbe")
 
-[node name="ManaCostLabel" type="Label" parent="CardContainer/Frontside/ManaCost"]
+[node name="ManaCostLabel" type="Label" parent="CardContainer/Frontside/ManaCost" unique_id=798206680]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -127,7 +129,7 @@ text = "88"
 label_settings = ExtResource("8_cqafk")
 horizontal_alignment = 1
 
-[node name="EffectsLabel" type="Label" parent="CardContainer/Frontside"]
+[node name="EffectsLabel" type="Label" parent="CardContainer/Frontside" unique_id=1209837548]
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -147,10 +149,10 @@ horizontal_alignment = 1
 autowrap_mode = 2
 text_overrun_behavior = 3
 
-[node name="Resources" type="Node2D" parent="CardContainer/Frontside"]
+[node name="Resources" type="Node2D" parent="CardContainer/Frontside" unique_id=1685405955]
 position = Vector2(10, 140)
 
-[node name="Panel" type="PanelContainer" parent="CardContainer/Frontside/Resources"]
+[node name="Panel" type="PanelContainer" parent="CardContainer/Frontside/Resources" unique_id=737778453]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -164,32 +166,30 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("10_xjaxy")
 
-[node name="HBox" type="HBoxContainer" parent="CardContainer/Frontside/Resources/Panel"]
+[node name="HBox" type="HBoxContainer" parent="CardContainer/Frontside/Resources/Panel" unique_id=1894344851]
 layout_mode = 2
 theme_override_constants/separation = 7
 alignment = 1
 
-[node name="PowerLabel" type="Label" parent="CardContainer/Frontside/Resources/Panel/HBox"]
+[node name="PowerLabel" type="Label" parent="CardContainer/Frontside/Resources/Panel/HBox" unique_id=1670801664]
 layout_mode = 2
 text = "22"
 label_settings = ExtResource("11_j65xc")
 horizontal_alignment = 2
 
-[node name="DashLabel" type="Label" parent="CardContainer/Frontside/Resources/Panel/HBox"]
+[node name="DashLabel" type="Label" parent="CardContainer/Frontside/Resources/Panel/HBox" unique_id=795278866]
 layout_mode = 2
 text = "/"
 label_settings = ExtResource("11_j65xc")
 horizontal_alignment = 1
 
-[node name="HealthLabel" type="Label" parent="CardContainer/Frontside/Resources/Panel/HBox"]
+[node name="HealthLabel" type="Label" parent="CardContainer/Frontside/Resources/Panel/HBox" unique_id=1880528804]
 layout_mode = 2
 text = "33"
 label_settings = ExtResource("11_j65xc")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_iyknk")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=647388203]
+libraries/ = SubResource("AnimationLibrary_iyknk")
 
 [connection signal="gui_input" from="CardContainer" to="CardContainer" method="_on_gui_input"]
 [connection signal="mouse_entered" from="CardContainer" to="." method="_on_card_container_mouse_entered"]

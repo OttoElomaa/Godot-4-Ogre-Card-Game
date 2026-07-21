@@ -12,6 +12,7 @@ const scenes_by_name:Dictionary[String, PackedScene] = {
 
 #endregion
 
+#region Databases
 ## Arranges all_cards to be referenced by their CardName. Used to instantiate
 ## cards during runtime.
 var cards_by_name:Dictionary[String, Card] = {}
@@ -35,6 +36,19 @@ var effect_counters_desc:Dictionary[String,String] = {}
 var keywords_desc:Dictionary[String, String] = {}
 ## Contains verses, used in the Akashic Records as reward for unlocking achievements.
 var verses:Dictionary[String, String] = {}
+
+#endregion
+
+#region Initial Loading
+
+var all_cards_created:
+	get:
+		cards_by_name.is_empty()
+var has_initial_deck = false:
+	get:
+		GameInfo.playerDeckCards.is_empty()
+
+#endregion
 
 func createCard(path:String):
 	var cardPacked = load(path)
