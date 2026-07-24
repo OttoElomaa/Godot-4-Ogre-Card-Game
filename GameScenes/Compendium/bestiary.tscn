@@ -15,38 +15,38 @@ font_color = Color(1, 1, 0.960784, 1)
 [node name="Bestiary" type="Node2D" unique_id=1568120110]
 script = ExtResource("1_qndvw")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=341764890]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=341764890]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer2" unique_id=2028818340]
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer" unique_id=2028818340]
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 
-[node name="ButtonSpace" type="PanelContainer" parent="CanvasLayer2/HBoxContainer" unique_id=284284914]
+[node name="ButtonSpace" type="PanelContainer" parent="CanvasLayer/HBox" unique_id=284284914]
 z_index = -4
 custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_4y1i5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/HBoxContainer" unique_id=1218131683]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/HBox" unique_id=1218131683]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="CanvasLayer2/HBoxContainer/VBoxContainer" unique_id=2053751140]
+[node name="Header" type="Label" parent="CanvasLayer/HBox/VBox" unique_id=2053751140]
 layout_mode = 2
 text = "*** Book of Cards ***"
 label_settings = SubResource("LabelSettings_y2ky0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer2/HBoxContainer/VBoxContainer" unique_id=797911181]
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/HBox/VBox" unique_id=797911181]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1021529830]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBox/VBox/HBox" unique_id=1021529830]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 
-[node name="CardsContainer" type="PanelContainer" parent="CanvasLayer2/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer" unique_id=988669125]
+[node name="CardsContainer" type="PanelContainer" parent="CanvasLayer/HBox/VBox/HBox/MarginContainer" unique_id=988669125]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 1000)
 layout_mode = 2
@@ -54,7 +54,7 @@ size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("2_4y1i5")
 metadata/_edit_group_ = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer/CardsContainer" unique_id=816995920]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/HBox/VBox/HBox/MarginContainer/CardsContainer" unique_id=816995920]
 layout_mode = 2
 texture = ExtResource("4_f1amn")
 patch_margin_left = 7
@@ -64,18 +64,18 @@ patch_margin_bottom = 7
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer/CardsContainer" unique_id=847404705]
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/HBox/VBox/HBox/MarginContainer/CardsContainer" unique_id=847404705]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="Scroll" type="ScrollContainer" parent="CanvasLayer2/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer/CardsContainer/MarginContainer" unique_id=1511456960]
+[node name="Scroll" type="ScrollContainer" parent="CanvasLayer/HBox/VBox/HBox/MarginContainer/CardsContainer/Margin" unique_id=1511456960]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="BestiaryCardsContainer" type="GridContainer" parent="CanvasLayer2/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer/CardsContainer/MarginContainer/Scroll" unique_id=1007367229]
+[node name="BestiaryCardsContainer" type="GridContainer" parent="CanvasLayer/HBox/VBox/HBox/MarginContainer/CardsContainer/Margin/Scroll" unique_id=1007367229]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -83,19 +83,20 @@ size_flags_vertical = 3
 columns = 7
 script = ExtResource("3_y2ky0")
 
-[node name="CardInfoMargin" type="MarginContainer" parent="CanvasLayer2/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=757670387]
+[node name="CardInfoMargin" type="MarginContainer" parent="CanvasLayer/HBox/VBox/HBox" unique_id=757670387]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 50
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer2/HBoxContainer/VBoxContainer/HBoxContainer/CardInfoMargin" unique_id=295369820]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/HBox/VBox/HBox/CardInfoMargin" unique_id=295369820]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="CardInfoPanel" parent="CanvasLayer2/HBoxContainer/VBoxContainer/HBoxContainer/CardInfoMargin/VBox" unique_id=373871188 instance=ExtResource("5_m6uwl")]
+[node name="CardInfoPanel" parent="CanvasLayer/HBox/VBox/HBox/CardInfoMargin/VBox" unique_id=373871188 instance=ExtResource("5_m6uwl")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 0
+hasFloatyTooltips = false
+showLore = true

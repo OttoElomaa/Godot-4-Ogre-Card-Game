@@ -6,12 +6,20 @@ const TermTooltipScene = DataLoader.scenes_by_name['TermTooltip']
 var bestiary: Node = null
 
 ## If true, the panel will disappear if no card is currently hovered over.
-@export var disappearing = false
+@export var disappearing := false
 
-@onready var defaultRightWidth = $MarginWithOuter/VBoxWithBottom/HBox/VBoxRight.get_minimum_size().x
+@export var hasFloatyTooltips := true
+@export var showLore := false
 
 
 func _ready():
+	if hasFloatyTooltips:
+		%VBoxRight.reparent(%FloatyOffset)
+		reset_size()
+		#set_position(Vector2.ZERO)
+		set_anchors_preset(Control.PRESET_CENTER_RIGHT, true)
+		
+	
 	toggleCardInfo(false, null)
 
 
@@ -21,14 +29,9 @@ func bestiarySetup(bestiaryScreen:Node):
 
 
 func toggleStaticExplanationLabels(toShow:bool):
-	var rightBox := $MarginWithOuter/VBoxWithBottom/HBox/VBoxRight
-	rightBox.visible = toShow
+	%VBoxRight.visible = toShow
 	self.reset_size()
-	#if toShow:
-		#rightBox.custom_minimum_size.x = defaultRightWidth
-	#else:
-		#rightBox.custom_minimum_size.x = 0
-	#rightBox.reset_size()
+	
 	
 
 func toggle_text(visiblility: bool):
@@ -37,28 +40,37 @@ func toggle_text(visiblility: bool):
 	%CardBottomMargin.visible = visiblility
 	%TermTooltips.visible = visiblility
 
-func toggleCardInfo(enable:bool, card:Card):
-	print('Toggled card info with ', card)
-	var flavorTextLabel := %FlavorLabel
-	flavorTextLabel.hide()
 
-	#### HIDE
+#### ON/OFF TOGGLE. NEEDS CARD. OPTIONAL SCREEN POSITION FOR FLOATY TOOLTIPS
+func toggleCardInfo(enable:bool, card:Card, screenPosition:Vector2 = Vector2.ZERO):
+	print('Toggled card info with ', card)
+	var flavorTextLabel:Label = %FlavorLabel
+
+	#### CASE 1 - HIDE
 	if not enable:
 		if disappearing:
 			hide()
-			if bestiary:
-				flavorTextLabel.text = ""
 		else:
 			toggle_text(false)
 			%EmptySlot.show()
 		return
-		
-	#### SHOW
+	
+	############################
+	#### CASE 2 - SHOW
 	show()
 	print('showing')
 	toggle_text(true)
 	%EmptySlot.hide()
 	
+	#if not screenPosition == Vector2.ZERO:
+	$FloatyCanvas.offset = screenPosition
+	
+	if showLore:
+		%FlavorLabel.show()
+	else:
+		%FlavorLabel.hide()
+	
+	#### SHOW FLAVOR TEXT
 	if bestiary:
 		flavorTextLabel.show()
 		flavorTextLabel.text = card.flavorText

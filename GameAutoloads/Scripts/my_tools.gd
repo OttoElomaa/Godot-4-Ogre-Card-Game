@@ -256,6 +256,14 @@ func placeCardsInSlotArray(cards:Array, slots:Array) -> Array:
 	
 	return placedCards
 
+
+func isLeftOfScreenCenter(screenPos:Vector2) -> bool:
+	
+	var screen_center_x := get_viewport_rect().size.x * 0.5
+	return screenPos.x < screen_center_x
+
+
+
 func createGenericPlayerDeck() -> Array:
 	return DataLoader.createDesertDeck()
 

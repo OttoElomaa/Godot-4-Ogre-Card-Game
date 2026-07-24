@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://bwy5cuxuto872" path="res://Audio/SE/Card-Played.wav" id="15_wnc1h"]
 
 [node name="DeckEdit" type="CanvasLayer" unique_id=313935886]
-layer = 100
+layer = 20
 script = ExtResource("1_2aanx")
 
 [node name="Panel2" type="Panel" parent="." unique_id=939798735]
@@ -36,6 +36,7 @@ theme_override_constants/margin_bottom = 50
 
 [node name="HBoxMain" type="HBoxContainer" parent="Margin" unique_id=1573187742]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="VBoxLeft" type="VBoxContainer" parent="Margin/HBoxMain" unique_id=1282137532]
 layout_mode = 2
@@ -109,11 +110,6 @@ size_flags_vertical = 3
 theme_override_constants/separation = 5
 script = ExtResource("3_2vaow")
 
-[node name="VSeparator" type="VSeparator" parent="Margin/HBoxMain" unique_id=1764048148]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
 [node name="VBoxMiddle" type="VBoxContainer" parent="Margin/HBoxMain" unique_id=223424918]
 layout_mode = 2
 
@@ -166,11 +162,6 @@ layout_mode = 2
 theme = ExtResource("10_wnc1h")
 columns = 6
 script = ExtResource("4_2vaow")
-
-[node name="VSeparator2" type="VSeparator" parent="Margin/HBoxMain" unique_id=1359200008]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
 
 [node name="VBoxRight" type="VBoxContainer" parent="Margin/HBoxMain" unique_id=1294324832]
 layout_mode = 2

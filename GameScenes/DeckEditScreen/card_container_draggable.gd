@@ -11,6 +11,8 @@ func _get_drag_data(at_position):
 	return data
 
 func _on_mouse_entered():
+	if not infoPanel:
+		return
 	if infoPanel.has_method('show_at'):
 		$InfoPanelTimer.start(0.5)
 	else:
@@ -18,6 +20,13 @@ func _on_mouse_entered():
 
 
 func _on_mouse_exited():
+	if not infoPanel:
+		return
+	
+	#### IF THE MOUSE IS STILL ON TOP OF THIS ELEMENT - even if there's OTHER ELEMENTS ON TOP, DON'T HIDE	
+	##if get_global_rect().has_point(get_global_mouse_position()):
+		#return
+		
 	infoPanel.toggleCardInfo(false, null)
 	$InfoPanelTimer.stop()
 

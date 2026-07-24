@@ -16,7 +16,7 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -703.0
+offset_left = -719.0
 offset_top = -304.0
 offset_bottom = 304.0
 grow_horizontal = 0
@@ -41,6 +41,7 @@ size_flags_horizontal = 4
 [node name="HBox" type="HBoxContainer" parent="MarginWithOuter/VBoxWithBottom" unique_id=821098112]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/separation = 20
 
 [node name="Card" type="PanelContainer" parent="MarginWithOuter/VBoxWithBottom/HBox" unique_id=1166651739]
 custom_minimum_size = Vector2(345, 0)
@@ -143,18 +144,14 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="VBoxRight" type="VBoxContainer" parent="MarginWithOuter/VBoxWithBottom/HBox" unique_id=892016139]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="VBox" type="VBoxContainer" parent="MarginWithOuter/VBoxWithBottom/HBox/VBoxRight" unique_id=1379295554]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 10
-
-[node name="TermTooltips" type="VBoxContainer" parent="MarginWithOuter/VBoxWithBottom/HBox/VBoxRight/VBox" unique_id=1177089930]
+[node name="TermTooltips" type="VBoxContainer" parent="MarginWithOuter/VBoxWithBottom/HBox/VBoxRight" unique_id=1177089930]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
@@ -174,3 +171,13 @@ text = "lore lore lore lore"
 label_settings = ExtResource("8_85glx")
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="FloatyCanvas" type="CanvasLayer" parent="." unique_id=1784307218]
+layer = 30
+
+[node name="FloatyOffset" type="PanelContainer" parent="FloatyCanvas" unique_id=940874813]
+unique_name_in_owner = true
+offset_left = 80.0
+offset_right = 120.0
+offset_bottom = 40.0
+theme_override_styles/panel = ExtResource("8_ndjm8")

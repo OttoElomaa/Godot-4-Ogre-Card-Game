@@ -9,6 +9,7 @@ offset_left = 1.0
 offset_right = 301.0
 offset_bottom = 35.0
 size_flags_vertical = 3
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("1_omnlv")
 script = ExtResource("2_1iq8m")
 
@@ -23,6 +24,7 @@ theme_override_constants/margin_bottom = 5
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
+mouse_filter = 1
 bbcode_enabled = true
 text = "Term: description."
 fit_content = true

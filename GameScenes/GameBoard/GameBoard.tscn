@@ -778,20 +778,18 @@ layout_mode = 2
 theme_override_styles/normal = ExtResource("20_tic85")
 theme_override_styles/hover = ExtResource("19_j663k")
 
-[node name="CardInfoPanel" parent="CanvasLayer" unique_id=1345369115 instance=ExtResource("27_anhsg")]
-unique_name_in_owner = true
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+[node name="FullRect" type="PanelContainer" parent="CanvasLayer" unique_id=2124598489]
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -653.0
-offset_top = -304.0
-offset_right = 0.0
-offset_bottom = 304.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 8
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("20_tic85")
+
+[node name="CardInfoPanel" parent="CanvasLayer/FullRect" unique_id=1345369115 instance=ExtResource("27_anhsg")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="ActionMenuCanvas" type="CanvasLayer" parent="." unique_id=258061817]
 
