@@ -18,13 +18,20 @@ const scenes_by_name:Dictionary[String, PackedScene] = {
 var cards_by_name:Dictionary[String, Card] = {}
 ## Arranges all_cards into arrays based on their group. Used to generate loot tables.
 var cards_by_group:Dictionary[Card.Group, Array] = {}
-	
+## Loads and arranges all champions by their CardName. Used to instantiate champions.
 var champions_by_name:Dictionary[String, Champion] = {}
 
+var animations_by_filename:Dictionary[String, PackedScene] = {}
 
-var boards_by_name:Dictionary[String, PackedScene] = {
+const boards_by_name:Dictionary[String, PackedScene] = {
 	'Default': preload('uid://be8n1sbdblr6g')
 }
+
+## Preloads all ShaderMaterials to be dynamically assigned when a certain shader is needed.
+const materials_by_name:Dictionary[String, Material] = {
+	'destroy_card': preload("res://Resources/Shaders/destroy_card_material.tres")
+}
+
 
 
 ## Contains important terms such as 'inflict' or 'battle art' and their explanations,
@@ -96,6 +103,16 @@ func createAllGameCards():
 		var new_champ:PackedScene = load(str(path, file))
 		var champ:Champion = new_champ.instantiate()
 		champions_by_name[champ.cardName] = champ
+		
+	## Filling out animations_by_filename.
+	load_scenes_from_directory('res://GameScenes/ParticlesAnimations/', animations_by_filename)
+
+		
+## Fills out a dictionary with loaded files from a chosen folder, in a style of filename: resource.
+func load_scenes_from_directory(path:String, dict:Dictionary):
+	var files := DirAccess.get_files_at(path)
+	for file:String in files:
+		dict[file] = load(str(path, file))
 
 func load_text_data(path:String, dict:Dictionary):
 		var file_path = path

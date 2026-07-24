@@ -13,6 +13,8 @@ var isEnemy := false
 var hasCast := false
 
 var targetingComponent: TargetingComponent
+var animation_onTarget: AnimationActuator
+var animation_onScreen: AnimationActuator
 var savedTargets: Array
 
 
@@ -26,6 +28,12 @@ func setup(card:Card):
 			component.setup(self, myCard)
 		if component is TargetingComponent:
 			targetingComponent = component
+		if component is AnimationActuator:
+			match component.play_on:
+				AnimationActuator.actuator_types.ON_TARGET:
+					animation_onTarget = component
+				AnimationActuator.actuator_types.ON_SCREEN:
+					animation_onScreen = component
 
 func setup_variant(parent:Node):
 	myCard = parent
@@ -150,8 +158,14 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 			successfulScript = skill
 			await get_tree().process_frame
 			
+			if animation_onTarget:
+				for card:Card in targets:
+					await animation_onTarget.activate(card)
 			
 	if success:
+		
+		if animation_onScreen:
+			await animation_onScreen.activate(myCard)
 		#### REST IF NEEDED
 		if checkHasCast():
 			myCard.restAndAnimate()

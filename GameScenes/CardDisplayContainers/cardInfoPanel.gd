@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Node2D
 
 const term_tooltip = DataLoader.scenes_by_name['TermTooltip']
 

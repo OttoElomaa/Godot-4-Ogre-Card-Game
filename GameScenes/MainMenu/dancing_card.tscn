@@ -1,24 +1,24 @@
 [gd_scene format=3 uid="uid://pd7or3cigyqn"]
 
 [ext_resource type="Script" uid="uid://cf5dhx4ni7a14" path="res://GameScenes/MainMenu/dancing_cards.gd" id="1_h4r8x"]
-[ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/MainMenu/typewriter_textbox.tscn" id="2_s7wik"]
+[ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/ParticlesAnimations/typewriter_textbox.tscn" id="2_s7wik"]
 [ext_resource type="Script" uid="uid://bn1ridkmecocv" path="res://GameScenes/MainMenu/card_container_toy.gd" id="3_66xn2"]
 [ext_resource type="PackedScene" uid="uid://came4na503n5s" path="res://GameScenes/CardDisplayContainers/card_container.tscn" id="3_uvdeu"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="4_cifao"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_sy2fh"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uvdeu"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3pa1q"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cifao"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_sy2fh")
+noise = SubResource("FastNoiseLite_uvdeu")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7x407"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sy2fh"]
 resource_local_to_scene = true
 shader = ExtResource("4_cifao")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_3pa1q")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_cifao")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -46,7 +46,7 @@ sound_off = true
 
 [node name="CardContainer" parent="." unique_id=1429469794 instance=ExtResource("3_uvdeu")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_7x407")
+material = SubResource("ShaderMaterial_sy2fh")
 scale = Vector2(2, 2)
 mouse_filter = 0
 script = ExtResource("3_66xn2")

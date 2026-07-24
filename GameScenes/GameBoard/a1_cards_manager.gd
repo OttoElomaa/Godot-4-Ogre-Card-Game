@@ -395,10 +395,17 @@ func toggleHoverVisuals(enable:bool, card:Card):
 		card.scale = CARD_HIGHLIGHTED_SCALE
 		indexToSet = 5
 		card.z_index = 1
-		card.start_tooltip_timer()
+		if not card.isEnemyCard:
+			if card.cardState == Card.CardStates.HAND:
+				card.position.y = 1200
+			card.start_tooltip_timer()
+		elif [Card.CardStates.BOARD, Card.CardStates.GRAVEYARD].has(card.cardState):
+			card.start_tooltip_timer()
 	else:
 		card.scale = CARD_NORMAL_SCALE
 		card.z_index = 0
+		if not card.isEnemyCard and card.cardState == Card.CardStates.HAND:
+			card.position.y = 1350
 		if card.isResting:
 			indexToSet = 2
 		else:

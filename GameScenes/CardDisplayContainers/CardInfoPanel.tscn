@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dtaqr72ueoeng"]
 
-[ext_resource type="StyleBox" uid="uid://bocokxxjamm42" path="res://PanelStyles/StyleBoxTiled.tres" id="1_cwpxl"]
 [ext_resource type="Texture2D" uid="uid://bvnmf54c4ye2n" path="res://Art/CardComponents/card-background-texture-V4b-ForInfoPane.jpg" id="2_axiiv"]
 [ext_resource type="Script" uid="uid://cjv7n32vxaee8" path="res://GameScenes/CardDisplayContainers/cardInfoPanel.gd" id="2_o0dss"]
 [ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSettings/LabelSet-Header-Brown.tres" id="3_o0dss"]
@@ -10,17 +9,14 @@
 [ext_resource type="LabelSettings" uid="uid://bt6oe2y1xatyg" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow-smaller.tres" id="8_85glx"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="8_ndjm8"]
 
-[node name="CardInfoPanel" type="PanelContainer" unique_id=1345369115]
-custom_minimum_size = Vector2(675, 420)
-offset_right = 675.0
-offset_bottom = 531.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("1_cwpxl")
+[node name="CardInfoPanel" type="Node2D" unique_id=71686905]
 script = ExtResource("2_o0dss")
 
 [node name="MarginWithOuter" type="MarginContainer" parent="." unique_id=551882397]
-layout_mode = 2
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 668.0
+offset_bottom = 568.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20

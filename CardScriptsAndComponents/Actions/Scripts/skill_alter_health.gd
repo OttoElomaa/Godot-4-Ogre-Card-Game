@@ -53,7 +53,7 @@ func handleInflict(target:Card, amount:int):
 	target.takeDamage(amount)
 	var died = target.checkAndHandleDeathFromTempHealth()
 	if died:
-		CardAnimationQueue.startResponseQueue()		
+		CardAnimationQueue.startResponseQueue()
 
 
 #### DEAL TEMPORARY AND PERMANENT DAMAGE TO A CARD
@@ -61,7 +61,9 @@ func handleCorrode(target:Card, amount:int):
 	#target.tempHealth -= amount
 	target.takeDamage(amount)
 	target.health -= amount
-
+	var died = target.checkAndHandleDeathFromTempHealth()
+	if died:
+		CardAnimationQueue.startResponseQueue()
 		
 	
 	

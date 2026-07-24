@@ -100,6 +100,7 @@ label_settings = ExtResource("6_kedjl")
 horizontal_alignment = 1
 
 [node name="EffectsLabel" type="Label" parent="Frontside" unique_id=1325477538]
+use_parent_material = true
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -171,17 +172,18 @@ size_flags_vertical = 3
 texture = ExtResource("10_y6tjk")
 stretch_mode = 2
 
-[node name="CardName" type="Node2D" parent="Frontside" unique_id=169079758]
+[node name="CardName" type="Node2D" parent="." unique_id=169079758]
 unique_name_in_owner = true
 visible = false
-position = Vector2(0, -216)
+position = Vector2(50, -32)
+scale = Vector2(0.5, 0.5)
 
-[node name="Shadow" type="Sprite2D" parent="Frontside/CardName" unique_id=1887319430]
+[node name="Shadow" type="Sprite2D" parent="CardName" unique_id=1887319430]
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("12_sksbx")
 offset = Vector2(0, -20)
 
-[node name="Label" type="Label" parent="Frontside/CardName" unique_id=1843268345]
+[node name="Label" type="Label" parent="CardName" unique_id=1843268345]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

@@ -5,10 +5,16 @@ class_name CardContainer
 var card: Card = null
 
 ## If true, shows the name of the card at all times.
-@export var show_name = false
+@export var show_name = false:
+	set(new):
+		%CardName.visible = new
+		show_name = new
 		
 ## If true, shows the mana cost of the card at all times.
-@export var show_mana_cost = true
+@export var show_mana_cost = true:
+	set(new):
+		%ManaCost.visible = new
+		show_mana_cost = new
 
 func _ready():
 	pass
@@ -27,6 +33,7 @@ func insert_card(new_card:Card):
 	%CardName.visible = show_name
 	%ManaCost.visible = show_mana_cost
 	
+	$CardName/Label.text = card.cardName
 	$Frontside/ManaCost/ManaCostLabel.text = str(card.manaCost)
 	$Frontside/Resources/Panel/HBox/PowerLabel.text = str(card.startingDamage)
 	$Frontside/Resources/Panel/HBox/HealthLabel.text = str(card.startingHealth)

@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="27_anhsg"]
 [ext_resource type="PackedScene" uid="uid://came4na503n5s" path="res://GameScenes/CardDisplayContainers/card_container.tscn" id="29_rkqvw"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="30_rkqvw"]
+[ext_resource type="PackedScene" uid="uid://bdw6fi1o8el8n" path="res://GameScenes/ParticlesAnimations/smoke.tscn" id="31_5f6ju"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -126,19 +127,19 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_5f6ju"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rkqvw"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o0nbp"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5f6ju"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_5f6ju")
+noise = SubResource("FastNoiseLite_rkqvw")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7kvl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0nbp"]
 resource_local_to_scene = true
 shader = ExtResource("30_rkqvw")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_o0nbp")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_5f6ju")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -421,7 +422,7 @@ unique_name_in_owner = true
 [node name="EnemyBoard" type="Node2D" parent="CardsManager" unique_id=573317099]
 
 [node name="PlayerHandPosition" type="Marker2D" parent="CardsManager" unique_id=1764255656]
-position = Vector2(260, 1250)
+position = Vector2(260, 1350)
 
 [node name="EnemyHandPosition" type="Marker2D" parent="CardsManager" unique_id=1756878658]
 position = Vector2(1505, 109)
@@ -802,9 +803,6 @@ theme_override_styles/hover = ExtResource("19_j663k")
 
 [node name="CardInfoPanel" parent="CanvasLayer" unique_id=1345369115 instance=ExtResource("27_anhsg")]
 unique_name_in_owner = true
-offset_right = 0.0
-offset_bottom = 0.0
-mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="ActionMenuCanvas" type="CanvasLayer" parent="." unique_id=258061817]
@@ -897,7 +895,8 @@ position = Vector2(-77, -36)
 
 [node name="RitualContainer" parent="AnimationLayer" unique_id=1429469794 instance=ExtResource("29_rkqvw")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_y7kvl")
+z_index = 1
+material = SubResource("ShaderMaterial_o0nbp")
 offset_left = 915.0
 offset_top = 1650.0
 offset_right = 1045.0
@@ -905,6 +904,9 @@ offset_bottom = 1850.0
 scale = Vector2(3, 3)
 show_name = true
 show_mana_cost = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Smoke" parent="AnimationLayer/RitualContainer" unique_id=652588044 instance=ExtResource("31_5f6ju")]
 
 [connection signal="mouse_entered" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_entered"]
 [connection signal="mouse_exited" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_exited"]

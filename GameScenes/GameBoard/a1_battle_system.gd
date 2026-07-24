@@ -211,7 +211,7 @@ func decide_blockers():
 	var playerCardsAmount := playerBoardCards.size()
 	
 	blockers = CardChecks.sort_by_strongest(blockers)
-	var projected_number_of_blockers = floor(playerCardsAmount / 2)
+	var projected_number_of_blockers = floor(playerCardsAmount / 2.0)
 	
 	if playerCardsAmount > 1:
 		if projected_number_of_blockers < 1:
@@ -492,7 +492,8 @@ func handlePlayerRitual(c:Card) -> bool:
 	success = await c.actions.handleRitual()
 	
 	if success:
-		CardAnimationQueue.queueAnimation(c, c.animateRitualCast, cardsManager.discardCard.bind(c))
+		await c.animateRitualCast()
+		cardsManager.discardCard(c)
 		if !c.isEnemyCard:
 			GameInfo.playerMana -= c.manaCost
 		else:

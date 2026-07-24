@@ -330,9 +330,41 @@ func brighten_screen(time:float):
 	await tween.finished
 
 func unfold_ritual_container(card:Card):
-	%RitualContainer.insert_card(card.duplicate())
+	var smoke = DataLoader.animations_by_filename['smoke.tscn'].instantiate()
+	var typewriter_textbox = DataLoader.animations_by_filename["typewriter_textbox.tscn"].instantiate()
+	var typewriter_textbox2 = DataLoader.animations_by_filename["typewriter_textbox.tscn"].instantiate()
+	var screen_flash = DataLoader.animations_by_filename["screen_flash.tscn"].instantiate()
 	
-	#The ritual container appears offscreen, either on top or at the bottom depending on whose card it is.
+	smoke.position += Vector2(%RitualContainer.size.x/2, %RitualContainer.size.y/2)
+	
+	%RitualContainer.insert_card(card.duplicate())
+	%RitualContainer.material.set_shader_parameter('percentage', 1.0)
+	%RitualContainer.show_name = false
+	
+	## Typewriter textboxes with the ritual's flavor text are set up.
+	typewriter_textbox.hide()
+	$AnimationLayer.add_child(typewriter_textbox)
+	typewriter_textbox.text = card.flavorText
+	typewriter_textbox.sound_off = true
+	typewriter_textbox.start()
+	typewriter_textbox.position.x = 552.0
+	typewriter_textbox.position.y = randi_range(600, 150)
+	var box_scale = randf_range(1.0, 3.0)
+	typewriter_textbox.scale = Vector2(box_scale, box_scale)
+	typewriter_textbox.rotation_degrees = randf_range(25, -25) 
+	
+	typewriter_textbox2.hide()
+	$AnimationLayer.add_child(typewriter_textbox2)
+	box_scale = randf_range(1.0, 3.0)
+	typewriter_textbox2.text = card.flavorText
+	typewriter_textbox2.sound_off = true
+	typewriter_textbox2.start()
+	typewriter_textbox2.position.x = 1241.0
+	typewriter_textbox2.position.y = randi_range(600, 150)
+	typewriter_textbox2.scale = Vector2(box_scale, box_scale)
+	typewriter_textbox2.rotation_degrees = randf_range(25, -25) 
+	
+	## The ritual container appears offscreen, either on top or at the bottom depending on whose card it is.
 	if card.isEnemyCard:
 		%RitualContainer.position.y = -465.0
 		%RitualContainer.face_down()
@@ -340,18 +372,28 @@ func unfold_ritual_container(card:Card):
 		%RitualContainer.position.y = 1650.0
 	%RitualContainer.show()
 	
-	#The ritual container moves to the middle of the screen and the card is turned face up.
+	## The ritual container moves to the middle of the screen and the card is turned face up.
 	var tween = get_tree().create_tween()
-	tween.tween_property(%RitualContainer, 'position', Vector2(%RitualContainer.position.x, 400), 1).set_ease(Tween.EASE_IN)
+	tween.tween_property(%RitualContainer, 'position', Vector2(%RitualContainer.position.x, 400), 2).set_ease(Tween.EASE_OUT)
 	await tween.finished
-	await get_tree().create_timer(0.3).timeout
+	$AnimationLayer.add_child(screen_flash)
+	await screen_flash.tree_exited
 	%RitualContainer.face_up()
+	%RitualContainer.show_name = true
+	typewriter_textbox.show()
+	typewriter_textbox2.show()
 	
-	await get_tree().create_timer(0.5).timeout
+	## How long the card stays face up on-screen, letting the player read its effects.
+	await get_tree().create_timer(3).timeout
+	%RitualContainer.add_child(smoke)
 	tween = get_tree().create_tween()
+	smoke.emitting = true
 	tween.tween_property(%RitualContainer.material, 'shader_parameter/percentage', 0.1, 2.0)
 	await tween.finished
 	%RitualContainer.hide()
+	smoke.queue_free()
+	typewriter_textbox.queue_free()
+	typewriter_textbox2.queue_free()
 	
 
 func toggleCardInfo(enable:bool, card:Card):

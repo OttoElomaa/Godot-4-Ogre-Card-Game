@@ -8,21 +8,17 @@
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="7_6byni"]
 [ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="8_52e1a"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbdad"]
-
-[node name="CardInfoPanel" type="PanelContainer" unique_id=1321294665]
-custom_minimum_size = Vector2(675, 517)
-offset_right = 675.0
-offset_bottom = 517.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_tbdad")
+[node name="CardInfoPanel" type="Node2D" unique_id=669207405]
 script = ExtResource("1_owy2s")
 disappearing = true
 
 [node name="MarginWithOuter" type="MarginContainer" parent="." unique_id=551882397]
-layout_mode = 2
+offset_right = 675.0
+offset_bottom = 517.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=821098112]
-layout_mode = 2
+offset_right = 675.0
+offset_bottom = 517.0
 
 [node name="CardMargin" type="MarginContainer" parent="HBoxContainer" unique_id=2144792257]
 custom_minimum_size = Vector2(345, 0)
@@ -138,18 +134,20 @@ alignment = 1
 
 [node name="CardBottomMargin" type="MarginContainer" parent="." unique_id=2138089089]
 unique_name_in_owner = true
-layout_mode = 2
+offset_right = 675.0
+offset_bottom = 517.0
 size_flags_horizontal = 3
-size_flags_vertical = 8
 theme_override_constants/margin_left = 60
 theme_override_constants/margin_top = 400
 theme_override_constants/margin_right = 400
 theme_override_constants/margin_bottom = 13
 
-[node name="AttackDefenseLabel" type="Label" parent="CardBottomMargin" unique_id=73014179]
+[node name="AttackDefenseLabel" type="Label" parent="." unique_id=73014179]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 8
+offset_left = 6.0
+offset_top = 481.0
+offset_right = 338.0
+offset_bottom = 505.0
 text = "2 / 2"
 label_settings = ExtResource("7_6byni")
 horizontal_alignment = 1

@@ -87,6 +87,7 @@ var cardsManager:CardsManager = null
 var battleSystem:BattleSystem = null
 var mainMenu: Node = null
 
+
 var mySlot: CardSlot = null
 var isEnemyCard := false
 var myOffset := Vector2.ZERO
@@ -110,8 +111,8 @@ var cardArt:
 
 var damage := 0
 var health := 0
-var tempDamage := 0
-var tempHealth := 0
+var tempDamage : int = 0
+var tempHealth : int = 0
 
 var keywords = []
 #var counters = []
@@ -226,6 +227,8 @@ func setup_all_actions():
 
 
 func setup(board: GameBoard):
+	
+	
 	print(cardName, ' sets up.')
 	if board:
 		self.gameBoard = board
@@ -255,6 +258,7 @@ func setup(board: GameBoard):
 		$Frontside/Background/Spell.show()
 		$Frontside/Resources.hide()
 		$Frontside/ActionState.hide()
+	
 	
 	createEffectText()
 	updateCardVisuals()
@@ -620,6 +624,7 @@ func statesHand():
 
 
 func statesDiscard():
+	vacateSlot()
 	cardState = CardStates.GRAVEYARD
 
 
@@ -633,6 +638,7 @@ func statesBoard():
 
 
 func statesLimbo():
+	vacateSlot()
 	cardState = CardStates.LIMBO
 
 
@@ -729,7 +735,7 @@ func takeDamage(amount:int):
 
 ##CHECK IF DESTROYED
 func checkAndHandleDeathFromTempHealth() -> bool:
-	if tempHealth <= 0:
+	if tempHealth <= 0 or health <= 0:
 		destroyAndAnimate()
 		return true
 	return false
@@ -991,7 +997,7 @@ func turnOnBestiaryVisuals(menu:Node):
 	updateCardVisuals()
 
 func start_tooltip_timer():
-	%TooltipTimer.start(0.5)
+	%TooltipTimer.start()
 
 func stop_tooltip_timer():
 	%TooltipTimer.stop()
@@ -1081,6 +1087,8 @@ func animateCardDestroyed() -> Tween:
 		change_position = -change_position
 	var change_rotation = randf_range(-10.0, 10.0)
 	
+	##The card assumes the 'destroy_card' shader and burns away
+	material = DataLoader.materials_by_name['destroy_card'].duplicate_deep()
 	var tween = create_tween()
 	tween.set_parallel()
 	tween.tween_property(self, "position", position + change_position, 2.0).set_ease(Tween.EASE_OUT)
@@ -1135,6 +1143,7 @@ func animateRitualCast() -> Tween:
 	
 	tween.tween_property(self, "position", position + (side_number * Vector2(0, 400)), 0.5)
 	await tween.finished
+	hide()
 	
 	await gameBoard.darken_screen(0.3)
 	await gameBoard.unfold_ritual_container(self)

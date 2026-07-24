@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dr7vv4ahjw5qo"]
+
+[ext_resource type="Shader" uid="uid://bg73nmt2lh7l8" path="res://Resources/Shaders/screen_flash.gdshader" id="1_1is1x"]
+[ext_resource type="Script" uid="uid://b74qv27cchq4v" path="res://GameScenes/GameBoard/screen_flash.gd" id="2_r0mup"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6psvl"]
+shader = ExtResource("1_1is1x")
+shader_parameter/alpha_percentage = 0.0
+
+[node name="ScreenFlash" type="ColorRect" unique_id=272000941]
+visible = false
+top_level = true
+material = SubResource("ShaderMaterial_6psvl")
+offset_right = 2687.0
+offset_bottom = 1502.0
+mouse_filter = 2
+script = ExtResource("2_r0mup")

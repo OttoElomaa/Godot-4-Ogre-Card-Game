@@ -7,14 +7,15 @@
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="3_wqb3i"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="4_duqux"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="5_26mog"]
+[ext_resource type="Texture2D" uid="uid://13r4d8qxd1ja" path="res://Art/ZoneComponents/Logo.png" id="11_rf05g"]
 [ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="13_b4hlq"]
 [ext_resource type="PackedScene" uid="uid://pd7or3cigyqn" path="res://GameScenes/MainMenu/dancing_card.tscn" id="15_b4hlq"]
 [ext_resource type="PackedScene" uid="uid://yol344fkh60p" path="res://GameScenes/MainMenu/flicker_light.tscn" id="15_uifqy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_820ef"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkrw6"]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rf05g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wtpnl"]
 resource_local_to_scene = true
 
 [node name="MainMenu" type="Node2D" unique_id=1388111977]
@@ -200,11 +201,11 @@ z_index = 1
 
 [node name="DancingCard" parent="Decor/DancingCards" unique_id=364356307 instance=ExtResource("15_b4hlq")]
 light_mask = 0
-material = SubResource("ShaderMaterial_820ef")
+material = SubResource("ShaderMaterial_kkrw6")
 position = Vector2(1669, 424)
 
 [node name="DancingCard2" parent="Decor/DancingCards" unique_id=88608294 instance=ExtResource("15_b4hlq")]
-material = SubResource("ShaderMaterial_rf05g")
+material = SubResource("ShaderMaterial_wtpnl")
 position = Vector2(444, 674)
 
 [node name="DancingCard3" parent="Decor/DancingCards" unique_id=1255174092 instance=ExtResource("15_b4hlq")]
@@ -233,6 +234,11 @@ position = Vector2(1325, 641)
 position = Vector2(970, -194)
 energy = 0.61
 blend_mode = 1
+
+[node name="Logo" type="Sprite2D" parent="." unique_id=538729775]
+z_index = -2
+position = Vector2(1288, 540)
+texture = ExtResource("11_rf05g")
 
 [connection signal="pressed" from="CanvasLayer/StartMatchPane/VBoxContainer/Panel/StartButton" to="." method="buttonPressedStartMatch"]
 [connection signal="pressed" from="CanvasLayer/StartMatchPane/VBoxContainer/Panel2/EndlessButton" to="." method="_on_endless_button_pressed"]

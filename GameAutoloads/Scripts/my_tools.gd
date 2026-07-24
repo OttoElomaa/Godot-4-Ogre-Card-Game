@@ -26,7 +26,7 @@ func gameBoardSetup(board:GameBoard):
 
 
 
-func checkNodeValidity(node:Node) -> bool:
+func checkNodeValidity(node) -> bool:
 	if not node:
 		return false
 	if not is_instance_valid(node):
