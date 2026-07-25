@@ -1,10 +1,11 @@
 extends Skill
 
+var myAction:CardAction
 
-var myAction:CardAction = get_parent()
+func setup(action:Node, card:Card):
+	myAction = action
 
 func activate(targets):
 	myAction.savedTargets.clear()
 	myAction.savedTargets.append_array(targets)
-		
 	

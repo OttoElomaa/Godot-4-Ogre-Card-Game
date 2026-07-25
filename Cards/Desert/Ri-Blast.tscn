@@ -10,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://dblhui0i328ur" path="res://CardScriptsAndComponents/animation_on_target.tscn" id="8_j7fkx"]
 [ext_resource type="Texture2D" uid="uid://b4xr6igsfu2rp" path="res://Art/CardArt/Desert/card-art-ritual-blast-v2.jpg" id="8_q4hcx"]
 [ext_resource type="PackedScene" uid="uid://bdw6fi1o8el8n" path="res://GameScenes/ParticlesAnimations/smoke.tscn" id="9_2kp1v"]
-[ext_resource type="AudioStream" uid="uid://i6vufojx318b" path="res://Audio/SE/Attack-Spear.wav" id="10_t4q4n"]
+[ext_resource type="AudioStream" uid="uid://chus33tcodx6m" path="res://Audio/SE/Spell_SummonAnger_1.wav" id="10_j7fkx"]
+[ext_resource type="Script" uid="uid://yys4316b4p1r" path="res://CardScriptsAndComponents/Actions/Scripts/cardActionsNode.gd" id="11_t4q4n"]
+[ext_resource type="PackedScene" uid="uid://mf6mhdd0aiij" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllFoes.tscn" id="12_wur21"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s5qc8"]
 noise_type = 3
@@ -18,7 +20,7 @@ noise_type = 3
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
 noise = SubResource("FastNoiseLite_s5qc8")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wur21"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2kp1v"]
 resource_local_to_scene = true
 shader = ExtResource("2_1p68a")
 shader_parameter/percentage = 1.0
@@ -30,13 +32,16 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Sp-Blast" unique_id=1525264252 instance=ExtResource("1_07d1u")]
-material = SubResource("ShaderMaterial_wur21")
+[node name="Card-Sp-Blast" unique_id=1525264252 node_paths=PackedStringArray("alt_actions_node_1") instance=ExtResource("1_07d1u")]
+material = SubResource("ShaderMaterial_2kp1v")
 cardName = "Blast"
 cardType = 1
 subTypeStr = "Spell"
 group = 1
 flavorText = "O Janins! Visit immolation on our enemies!"
+alt_card_name_1 = "Blaze"
+alt_actions_node_1 = NodePath("Actions2")
+alt_mana_cost_1 = 3
 
 [node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1501724909 instance=ExtResource("2_ka4br")]
 
@@ -51,7 +56,24 @@ grantEffect = ExtResource("7_jpqju")
 grantAmount = 2
 
 [node name="AnimationOnTarget" parent="Actions/OnCastTrigger/CardAction" index="3" unique_id=619397888 instance=ExtResource("8_j7fkx")]
-to_display = Array[Resource]([ExtResource("9_2kp1v"), ExtResource("10_t4q4n")])
+to_display = Array[Resource]([ExtResource("9_2kp1v"), ExtResource("10_j7fkx")])
+
+[node name="Actions2" type="Node2D" parent="." index="2" unique_id=1790108672]
+script = ExtResource("11_t4q4n")
+
+[node name="OnCastTrigger" parent="Actions2" index="0" unique_id=1754870393 instance=ExtResource("2_ka4br")]
+
+[node name="CardAction" parent="Actions2/OnCastTrigger" index="0" unique_id=781273654 instance=ExtResource("2_e1l0y")]
+customActionText = "Add 2 Burn on Target"
+
+[node name="TargetAllFoes" parent="Actions2/OnCastTrigger/CardAction" index="0" unique_id=748276570 instance=ExtResource("12_wur21")]
+
+[node name="SkillEffectCounters" parent="Actions2/OnCastTrigger/CardAction" index="2" unique_id=416560612 instance=ExtResource("6_q4hcx")]
+grantEffect = ExtResource("7_jpqju")
+grantAmount = 2
+
+[node name="AnimationOnTarget" parent="Actions2/OnCastTrigger/CardAction" index="3" unique_id=1315400619 instance=ExtResource("8_j7fkx")]
+to_display = Array[Resource]([ExtResource("9_2kp1v"), ExtResource("10_j7fkx")])
 
 [node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("8_q4hcx")

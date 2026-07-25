@@ -347,7 +347,7 @@ func unfold_ritual_container(card:Card):
 	typewriter_textbox.text = card.flavorText
 	typewriter_textbox.sound_off = true
 	typewriter_textbox.start()
-	typewriter_textbox.position.x = 552.0
+	typewriter_textbox.position.x = 200.0
 	typewriter_textbox.position.y = randi_range(600, 150)
 	var box_scale = randf_range(1.0, 3.0)
 	typewriter_textbox.scale = Vector2(box_scale, box_scale)
@@ -359,7 +359,7 @@ func unfold_ritual_container(card:Card):
 	typewriter_textbox2.text = card.flavorText
 	typewriter_textbox2.sound_off = true
 	typewriter_textbox2.start()
-	typewriter_textbox2.position.x = 1241.0
+	typewriter_textbox2.position.x = 1000.0
 	typewriter_textbox2.position.y = randi_range(600, 150)
 	typewriter_textbox2.scale = Vector2(box_scale, box_scale)
 	typewriter_textbox2.rotation_degrees = randf_range(25, -25) 

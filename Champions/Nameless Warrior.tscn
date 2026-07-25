@@ -5,13 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://dcx2qsgic5x6" path="res://Art/CardComponents/card-effect-counter-burn.png" id="4_5em3h"]
 [ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="5_tqudo"]
 [ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="6_6dmsq"]
-[ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="7_4ubxy"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="8_wmtlw"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="9_ptf25"]
 [ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="10_jsy8n"]
 
 [node name="Champion" unique_id=1181374962 instance=ExtResource("1_5utre")]
-cardType = 2
 
 [node name="Actions1" type="Node2D" parent="." index="0" unique_id=1678552215]
 unique_name_in_owner = true
@@ -24,14 +22,7 @@ cost_display = Dictionary[int, int]({
 
 [node name="OnCastTrigger" parent="Actions1" index="0" unique_id=1137959010 instance=ExtResource("5_tqudo")]
 
-[node name="CardAction2" type="Node2D" parent="Actions1/OnCastTrigger" index="0" unique_id=1847338307]
-script = ExtResource("6_6dmsq")
-metadata/_custom_type_script = "uid://dfqyywxg05ds"
-
-[node name="SkillPlayerHealthMana" parent="Actions1/OnCastTrigger/CardAction2" index="0" unique_id=1091936336 instance=ExtResource("7_4ubxy")]
-alterOwnerMana = -1
-
-[node name="CardAction" type="Node2D" parent="Actions1/OnCastTrigger" index="1" unique_id=708453459]
+[node name="CardAction" type="Node2D" parent="Actions1/OnCastTrigger" index="0" unique_id=708453459]
 script = ExtResource("6_6dmsq")
 customActionText = "Inflict 2."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
@@ -53,14 +44,7 @@ cost_display = Dictionary[int, int]({
 
 [node name="OnCastTrigger" parent="Actions2" index="0" unique_id=193398484 instance=ExtResource("5_tqudo")]
 
-[node name="CardAction2" type="Node2D" parent="Actions2/OnCastTrigger" index="0" unique_id=972908857]
-script = ExtResource("6_6dmsq")
-metadata/_custom_type_script = "uid://dfqyywxg05ds"
-
-[node name="SkillPlayerHealthMana" parent="Actions2/OnCastTrigger/CardAction2" index="0" unique_id=860139769 instance=ExtResource("7_4ubxy")]
-alterOwnerMana = -3
-
-[node name="CardAction" type="Node2D" parent="Actions2/OnCastTrigger" index="1" unique_id=1049069721]
+[node name="CardAction" type="Node2D" parent="Actions2/OnCastTrigger" index="0" unique_id=1049069721]
 script = ExtResource("6_6dmsq")
 customActionText = "Fireball: inflict 2."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"

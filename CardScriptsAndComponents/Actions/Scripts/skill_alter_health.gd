@@ -26,7 +26,6 @@ func activate(targets:Array) -> bool:
 			if isScaled():
 				damage = get_scaling({'target': target})
 			await handleInflict(target, damage)
-			MyTools.createCombatLogPrintout(str(target.cardName, '  suffers', damage, ' damage.'), Color.STEEL_BLUE)
 			success = true
 
 		#### CORRODE
