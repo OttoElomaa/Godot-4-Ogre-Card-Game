@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var AnimatedPanel: PackedScene = preload("res://GameAutoloads/Components/animated_panel.tscn")
-@onready var AnimatedParticlesScene: PackedScene = preload("res://GameAutoloads/Components/AnimatedParticles.tscn")
+@onready var AnimatedPanel: PackedScene = preload("res://GameScenes/ParticlesAnimations/animated_panel.tscn")
+@onready var GenericParticles: PackedScene = preload("res://GameScenes/ParticlesAnimations/generic_particles.tscn")
 
 
 var animationQueue := []
@@ -25,26 +25,25 @@ func animateNext():
 		animationQueue.pop_front()   ## REMOVE THE FIRST ITEM -> It's been processed now
 		return
 	
-	#### VALID CARD FOUND	
+	#### VALID CARD FOUND
 	var card:Card = dict.card
 	var effect:CardAction = dict.effect
 	
-	var animatedPanel:QueueAnimatedPanel = AnimatedPanel.instantiate()
+	var animatedPanel:QueueAnimatedPanel = AnimatedPanel.instantiate() as QueueAnimatedPanel
 	$Canvas.add_child(animatedPanel)
 	animatedPanel.setupAndAnimate(card, effect)
 	
 	if effect.particleTexture:
 		for target:Card in dict.targets:
-			var particles:AnimatedParticles = AnimatedParticlesScene.instantiate()
-			$Sprites.add_child(particles)
-			particles.setupAndAnimate(target.position, effect.particleTexture)
+			var particles:Node = GenericParticles.instantiate()
+			target.add_child(particles)
 	
 	#### SETUP THE QUEUE STUFF, REMOVE THE FIRST ITEM -> It's been processed now
 	animatedPanel.animationDone.connect(onAnimationFinished)
 	isAnimating = true
 	animationQueue.pop_front()
-
-
+	
+	
 #### AN ANIMATION IS FINISHED, PLAY NEXT ANIMATION IN THE QUEUE
 func onAnimationFinished():
 	isAnimating = false

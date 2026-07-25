@@ -61,22 +61,17 @@ func activate(params:SignalParams) -> bool:
 	#### TURN ON MANUAL TARGETING -> No target selected yet!
 	if targetingComponent is AutoTargetingComponent:
 		targets = targetingComponent.getTargets()
-		if not targets.is_empty():
-			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is EnemyTargetingComponent:
 		if params.targetCard:
 			targets.append(params.targetCard)
-			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SourceTargetingComponent:
 		if params.sourceCard:
 			targets.append(params.sourceCard)
-			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SelfTargetingComponent:
 		targets.append(myCard)
-		success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is ManualTargetingComponent:
 		#### It is a PLAYER CARD and requires manual targeting
@@ -91,10 +86,8 @@ func activate(params:SignalParams) -> bool:
 			#### TARGET FOUND
 			if targetingComponent.target:
 				targets.append(targetingComponent.target)
-				success = await activateSkillAfterTargeting(targets)
 			#### NO TARGET -> FAIL
-			else:
-				return success
+			
 		### It is an ENEMY CARD using a manual ability, refer to 
 		else:
 			var possible_targets = targetingComponent.getTargets()
@@ -109,12 +102,16 @@ func activate(params:SignalParams) -> bool:
 					CardChecks.sort_by_strongest(possible_targets)
 			
 			targets.append(possible_targets[0])
-			success = await activateSkillAfterTargeting(targets)
 	
 	#### TARGETING COMPONENT IS NONE OF THE ABOVE
 	#### -> Most likely IT DOES NOT EXIST -> That's OKAY
 	else:
+		pass
+	
+	if not targets.is_empty():
 		success = await activateSkillAfterTargeting(targets)
+	else:
+		return success
 	
 	#### EFFECT ANIMATION
 	if success:

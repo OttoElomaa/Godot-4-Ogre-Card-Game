@@ -12,7 +12,7 @@ func setupAndAnimate(targetPos:Vector2, texture:Texture):
 	for sprite:Sprite2D in $Particles.get_children():
 		sprite.texture = texture
 	
-	var newPos := Vector2(0,-200)	
+	var newPos := Vector2(0,-200)
 	var tween = create_tween()
 	tween.tween_property($Particles, "position", newPos , 2)
 	$DoneTimer.start()

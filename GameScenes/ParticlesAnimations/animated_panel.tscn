@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://cnuv4j73nesfv"]
+
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="1_aj246"]
+[ext_resource type="Script" uid="uid://c5d8qf1lpqi2l" path="res://GameAutoloads/Components/animated_panel.gd" id="2_x1k4r"]
+[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="3_q4l60"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="4_wvfkc"]
+[ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="5_kuret"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="6_vgclq"]
+
+[node name="AnimatedPanel" type="PanelContainer" unique_id=968342942]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -305.0
+offset_top = -142.0
+offset_right = 305.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_aj246")
+script = ExtResource("2_x1k4r")
+
+[node name="HBox" type="HBoxContainer" parent="." unique_id=1929373245]
+layout_mode = 2
+alignment = 1
+
+[node name="CardArt" type="TextureRect" parent="HBox" unique_id=1236207513]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+texture = ExtResource("3_q4l60")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Panel" type="PanelContainer" parent="HBox" unique_id=1118647840]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("4_wvfkc")
+
+[node name="Margin" type="MarginContainer" parent="HBox/Panel" unique_id=975500488]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 30
+
+[node name="VBox" type="VBoxContainer" parent="HBox/Panel/Margin" unique_id=1531872077]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="HBox/Panel/Margin/VBox" unique_id=830695191]
+layout_mode = 2
+text = "Card Name"
+label_settings = ExtResource("5_kuret")
+horizontal_alignment = 1
+
+[node name="EffectTextLabel" type="Label" parent="HBox/Panel/Margin/VBox" unique_id=794226170]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Effect description here"
+label_settings = ExtResource("6_vgclq")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DoneTimer" type="Timer" parent="." unique_id=627850868]
+wait_time = 2.0
+one_shot = true
+
+[node name="MidwayTimer" type="Timer" parent="." unique_id=1419177435]
+
+[connection signal="timeout" from="DoneTimer" to="." method="timeoutAnimationDone"]
+[connection signal="timeout" from="MidwayTimer" to="." method="timeoutAnimationMidway"]

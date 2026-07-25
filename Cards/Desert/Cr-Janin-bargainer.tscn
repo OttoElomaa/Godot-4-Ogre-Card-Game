@@ -48,7 +48,7 @@ priority = -1
 [node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1340705927 instance=ExtResource("2_tbg24")]
 
 [node name="CardAction" parent="Actions/OnCastTrigger" index="0" unique_id=57926609 instance=ExtResource("3_r07h0")]
-customActionText = "Janin Bargainer: Trade of Life!"
+customActionText = "Cast: sacrifice an ally."
 
 [node name="SkillSendToGraveyard" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=1164302346 instance=ExtResource("4_u2phu")]
 
@@ -60,7 +60,7 @@ manualTargetGroup = 1
 [node name="SaveTargets" parent="Actions/OnCastTrigger/CardAction" index="2" unique_id=884607477 instance=ExtResource("6_dfmyb")]
 
 [node name="CardAction2" parent="Actions/OnCastTrigger" index="1" unique_id=804289790 instance=ExtResource("3_r07h0")]
-customActionText = "Gain mana equal to sacrificed creature's cost times two."
+customActionText = "Gain 2x worth of Mana, where x is the sacrificed card's mana cost."
 
 [node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction2" index="0" unique_id=1263273763 instance=ExtResource("7_8lj54")]
 alterOwnerMana = 1
