@@ -1152,8 +1152,6 @@ func animateRitualCast() -> Tween:
 	return tween
 
 
-
-
 func set_shader_property(value:float, property:String):
 	material.set_shader_parameter(property, value)
 	

@@ -79,8 +79,6 @@ func activate(params:SignalParams) -> bool:
 			var target: Card = null
 			targetingComponent.activate()
 			await targetingComponent.target_acquired or targetingComponent.aborted
-			
-			targets.append(targetingComponent.target)
 			print("target acquired: ", targetingComponent.target)
 			
 			#### TARGET FOUND
@@ -109,14 +107,15 @@ func activate(params:SignalParams) -> bool:
 		pass
 	
 	if not targets.is_empty():
+		EffectAnimationQueue.queueAnimation(myCard, self, targets)
+		if myCard.isRitual:
+			await myCard.animateRitualCast()
+		if animation_onScreen:
+			EffectAnimationQueue.queueAnimation(myCard, self, targets, animation_onScreen.activate) 
 		success = await activateSkillAfterTargeting(targets)
 	else:
 		return success
 	
-	#### EFFECT ANIMATION
-	if success:
-		EffectAnimationQueue.queueAnimation(myCard, self, targets)
-			
 	return success
 
 
@@ -155,14 +154,12 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 			successfulScript = skill
 			await get_tree().process_frame
 			
-			if animation_onTarget:
-				for card:Card in targets:
-					await animation_onTarget.activate(card)
-			
 	if success:
 		
-		if animation_onScreen:
-			await animation_onScreen.activate(myCard)
+		if animation_onTarget:
+			for card:Card in targets:
+				EffectAnimationQueue.queueAnimation(myCard, self, targets, animation_onTarget.activate)
+				 
 		#### REST IF NEEDED
 		if checkHasCast():
 			myCard.restAndAnimate()

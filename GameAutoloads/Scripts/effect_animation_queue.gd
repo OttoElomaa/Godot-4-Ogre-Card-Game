@@ -12,22 +12,26 @@ func _physics_process(delta: float) -> void:
 		if not animationQueue.is_empty():
 			animateNext()
 
-func queueAnimation(card:Card, effect:CardAction, targetCards:Array) -> void:
-	animationQueue.append( {"card":card, "effect":effect, "targets":targetCards} )
-
+func queueAnimation(card:Card, effect:CardAction, targetCards:Array, callable:Callable = animateGenericTrigger) -> void:
+	animationQueue.append( {"card":card, "effect":effect, "targets":targetCards, "callable":callable} )
 
 func animateNext():
 	#### GET THE FIRST ITEM IN THE QUEUE
-	var dict = animationQueue[0]
+	var dict:Dictionary = animationQueue[0]
 	
 	#### NO VALID CARD OR EFFECT
 	if (not MyTools.checkNodeValidity(dict.card) or not MyTools.checkNodeValidity(dict.effect)):
 		animationQueue.pop_front()   ## REMOVE THE FIRST ITEM -> It's been processed now
 		return
-	
-	#### VALID CARD FOUND
-	var card:Card = dict.card
-	var effect:CardAction = dict.effect
+	isAnimating = true
+	await dict["callable"].call(dict)
+
+	animationQueue.pop_front()
+	isAnimating = false
+
+func animateGenericTrigger(dict):
+	var card:Card = dict['card']
+	var effect:CardAction = dict['effect']
 	
 	var animatedPanel:QueueAnimatedPanel = AnimatedPanel.instantiate() as QueueAnimatedPanel
 	$Canvas.add_child(animatedPanel)
@@ -38,14 +42,6 @@ func animateNext():
 			var particles:Node = GenericParticles.instantiate()
 			target.add_child(particles)
 	
-	#### SETUP THE QUEUE STUFF, REMOVE THE FIRST ITEM -> It's been processed now
-	animatedPanel.animationDone.connect(onAnimationFinished)
-	isAnimating = true
-	animationQueue.pop_front()
-	
-	
-#### AN ANIMATION IS FINISHED, PLAY NEXT ANIMATION IN THE QUEUE
-func onAnimationFinished():
-	isAnimating = false
+	await animatedPanel.tree_exited
 	
 	
