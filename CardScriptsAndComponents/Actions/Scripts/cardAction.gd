@@ -108,10 +108,15 @@ func activate(params:SignalParams) -> bool:
 	
 	if not targets.is_empty():
 		EffectAnimationQueue.queueAnimation(myCard, self, targets)
-		if myCard.isRitual:
-			await myCard.animateRitualCast()
-		if animation_onScreen:
-			EffectAnimationQueue.queueAnimation(myCard, self, targets, animation_onScreen.activate) 
+		
+		##If this is the last action under this trigger, play following animations.
+		if MyTools.isLastSibling(self):
+			if myCard.isRitual:
+				await myCard.animateRitualCast()
+				
+			if animation_onScreen:
+				EffectAnimationQueue.queueAnimation(myCard, self, targets, animation_onScreen.activate) 
+			
 		success = await activateSkillAfterTargeting(targets)
 	else:
 		return success

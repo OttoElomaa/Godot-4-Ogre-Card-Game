@@ -64,7 +64,17 @@ func findValidNodesInArray(cards:Array):
 			validCards.append(c)
 	return validCards
 
+##Return a node's location in the scene tree among its siblings.
+func findIndexAmongSiblings(node:Node) -> int:
+	var parent = node.get_parent()
+	var children = parent.get_children()
+	return children.find(node)
 
+##Returns true is node is the last among its siblings in the scene tree.
+func isLastSibling(node:Node) -> bool:
+	var parent = node.get_parent()
+	var children = parent.get_children()
+	return len(children) == findIndexAmongSiblings(node) - 1
 
 func moveCardTweening(c:Card, originalPos:Vector2, newPos:Vector2):
 	c.position = originalPos
