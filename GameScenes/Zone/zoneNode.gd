@@ -3,7 +3,7 @@ class_name ZoneNode
 
 var unlocked = false
 var resolved = false
-var zone:Scenario = null
+var scenario:Scenario = null
 
 @export var node_name = ''
 @export var node_comments = ''
@@ -24,7 +24,7 @@ func _ready():
 	update_state()
 
 func setup(zone:Node):
-	self.zone = zone
+	self.scenario = zone
 	toggleHoverInfo(false)
 
 
@@ -102,8 +102,8 @@ func showCompletionState():
 func unlock_connected():
 	for n:ZoneNode in unlock_on_resolve:
 		n.unlock()
-	for name:String in unlockOnResolveStrings:
-		zone.unlockNode(name)
+	for n:String in unlockOnResolveStrings:
+		scenario.unlockNode(n)
 
 
 ### A Zone Node is visible when unlocked. Nodes can be unlocked at the start,

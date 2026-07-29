@@ -54,7 +54,7 @@ func toggleCardInfo(enable:bool, card:Card):
 		
 	#### SHOW
 	if show_flavor_text:
-		%FlavorLabel.show()
+		%FlavorTextContainer.show()
 	
 	show()
 	print('showing')

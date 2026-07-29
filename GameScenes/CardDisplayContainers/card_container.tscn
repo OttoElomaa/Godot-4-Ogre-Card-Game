@@ -37,7 +37,7 @@ shader_parameter/size_3 = 0.05
 [node name="CardContainer" type="MarginContainer" unique_id=1429469794]
 material = SubResource("ShaderMaterial_s2vvh")
 use_parent_material = true
-custom_minimum_size = Vector2(130, 200)
+custom_minimum_size = Vector2(110, 200)
 offset_left = -55.0
 offset_top = -89.0
 offset_right = 75.0

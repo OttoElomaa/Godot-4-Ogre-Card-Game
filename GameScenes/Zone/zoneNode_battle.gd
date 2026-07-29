@@ -1,3 +1,4 @@
+@tool
 extends ZoneNode
 
 class_name ZoneBattleIcon
@@ -17,17 +18,37 @@ var board : GameBoard = DataLoader.boards_by_name['Default'].instantiate() as Ga
 @export var presummoned_cards : Array[String] = [] ## Will summon these cards at the start of battle.
 @export var enemy_presummon = false ## Creates presummonned cards on enemy side.
 @export var ally_presummon = false ## Creates presummoned cards on allied side.
+@export var presummon_sparcity = presummon_sparsities.FEW ## How many objects will be presummoned.
+
+@export_category('Champion')
+
+@export var generic_champion:bool = true:
+	set(value):
+		generic_champion = value
+		notify_property_list_changed()
+
+@export var art:Texture = null
+@export var champ_name:String = ''
+@export var health:int = 5
+
+@export var champion:String = '' ## The name of the champion fighting for the enemy.
 
 enum presummon_sparsities {FEW, ## 0-1 object.
 	SCARCE, ## 0-2
 	MANY, ## 2-3
 	TONS, ## 3-4
 }
-@export var presummon_sparcity = presummon_sparsities.FEW ## How many objects will be presummoned.
 
+func _validate_property(property):
+	if property.name in ['art', 'champ_name', 'health']:
+		if not generic_champion:
+			property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name == 'champion':
+		if generic_champion:
+			property.usage = PROPERTY_USAGE_NO_EDITOR
 
 func setup(zone:Node):
-	self.zone = zone
+	self.scenario = zone
 	node_name = board_name
 #	node_comments = board_comments
 	toggleHoverInfo(false)
@@ -52,6 +73,14 @@ func createDeck():
 			print('appending enemy card: ', newCard.cardName)
 			GameInfo.enemyDeckCards.append(newCard)
 	
+	if generic_champion:
+		var generic = Champion.make_generic_champion(champ_name, art, health)
+		GameInfo.enemyChampion = generic
+	else:
+		var new = DataLoader.champions_by_name[champion]
+		GameInfo.enemyChampion = new
+	
+		
 #	if enemy_presummon:
 #		presummon(true)
 #	if ally_presummon:
@@ -87,9 +116,9 @@ func presummon(isEnemyCard):
 
 #### START THE PRE-BATTLE PROCESS IN ORDER TO FIGHT A BATTLE
 func handleClick():
-	GameInfo.currentZone = zone
+	GameInfo.currentZone = scenario
 	
-	zone.openPrebattle(self)
+	scenario.openPrebattle(self)
 
 func getBoardName():
 	return board_name

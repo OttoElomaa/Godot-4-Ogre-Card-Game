@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/GameBoard/a1_gameBoard.gd" id="1_rf3o6"]
-[ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
-[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_1qylb"]
+[ext_resource type="PackedScene" uid="uid://8a68hh76lcve" path="res://GameScenes/DeckEditScreen/champion_container.tscn" id="3_rkqvw"]
 [ext_resource type="Texture2D" uid="uid://dmu0xu1iuwhib" path="res://Art/BoardComponents/game-mana-health-holder-texture-v3.png" id="5_anhsg"]
 [ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSettings/LabelSetHeaderHealth.tres" id="6_r88d6"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="7_vfgb4"]
@@ -127,19 +126,19 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rkqvw"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5f6ju"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5f6ju"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o0nbp"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_rkqvw")
+noise = SubResource("FastNoiseLite_5f6ju")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0nbp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7kvl"]
 resource_local_to_scene = true
 shader = ExtResource("30_rkqvw")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_5f6ju")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_o0nbp")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -153,27 +152,28 @@ script = ExtResource("1_rf3o6")
 [node name="CameraMainBoard" type="Camera2D" parent="." unique_id=1095447748]
 unique_name_in_owner = true
 anchor_mode = 0
-zoom = Vector2(0.75, 0.75)
+zoom = Vector2(0.7, 0.7)
 script = ExtResource("25_7yxuf")
 
 [node name="Portraits" type="Node2D" parent="." unique_id=865813432]
 
-[node name="PlayerSprite" type="TextureRect" parent="Portraits" unique_id=211758377]
+[node name="PlayerSprite" parent="Portraits" unique_id=334304769 instance=ExtResource("3_rkqvw")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(210, 260)
-offset_left = 1018.0
-offset_top = 1121.0
-offset_right = 1245.0
-offset_bottom = 1386.0
-pivot_offset = Vector2(113.5, 152)
-texture = ExtResource("3_1phva")
-expand_mode = 1
-stretch_mode = 4
+offset_left = 1024.0
+offset_top = 1118.0
+offset_right = 1256.0
+offset_bottom = 1512.0
+scale = Vector2(0.9, 0.9)
+show_name = false
 
-[node name="EnemySprite" type="Sprite2D" parent="Portraits" unique_id=1302467631]
+[node name="EnemySprite" parent="Portraits" unique_id=735003844 instance=ExtResource("3_rkqvw")]
 unique_name_in_owner = true
-position = Vector2(1189.5, 135)
-texture = ExtResource("4_1qylb")
+offset_left = 1091.0
+offset_top = 6.0
+offset_right = 1323.0
+offset_bottom = 400.0
+scale = Vector2(0.9, 0.9)
+show_name = false
 
 [node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Portraits" unique_id=1225120905]
 position = Vector2(1176.5, 1266)
@@ -896,7 +896,7 @@ position = Vector2(-77, -36)
 [node name="RitualContainer" parent="AnimationLayer" unique_id=1429469794 instance=ExtResource("29_rkqvw")]
 unique_name_in_owner = true
 z_index = 1
-material = SubResource("ShaderMaterial_o0nbp")
+material = SubResource("ShaderMaterial_y7kvl")
 offset_left = 915.0
 offset_top = 1650.0
 offset_right = 1045.0

@@ -43,6 +43,9 @@ var actionDescLabel:Label:
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+		
 	for actionButton in actionButtonsHbox.get_children():
 		actionButton.setup(self)
 	
@@ -56,6 +59,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+		
 	if visualsUpdateNeeded:
 		updateZoneVisuals()
 		visualsUpdateNeeded = false
@@ -103,9 +109,9 @@ func startBoardMatch(icon:Node):
 	var newBoard:Node = GameBoardScene.instantiate()
 	SceneSwitcher.switchToNewScene(newBoard)
 
-func updateActionDescription(name:String, desc:String):
+func updateActionDescription(a_name:String, desc:String):
 
-	actionNameLabel.text = name
+	actionNameLabel.text = a_name
 	actionDescLabel.text = desc
 	
 	actionName = ""

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bv6t2gvsftvsp" path="res://Art/BoardComponents/card-slot-empty-texture.png" id="4_85glx"]
 [ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="4_ykqoc"]
 [ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="5_f5wib"]
+[ext_resource type="Texture2D" uid="uid://t83v3cphysuw" path="res://Art/CardComponents/card-background-spell-texture.png" id="5_ndjm8"]
 [ext_resource type="LabelSettings" uid="uid://bt6oe2y1xatyg" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow-smaller.tres" id="8_85glx"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="8_ndjm8"]
 
@@ -49,8 +50,16 @@ texture = ExtResource("4_85glx")
 expand_mode = 5
 stretch_mode = 4
 
+[node name="TextureRect" type="TextureRect" parent="MarginWithOuter/VBoxWithBottom/HBox/Card" unique_id=468600971]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_ndjm8")
+expand_mode = 5
+stretch_mode = 4
+
 [node name="CardBottomMargin" type="MarginContainer" parent="MarginWithOuter/VBoxWithBottom/HBox/Card" unique_id=2138089089]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -146,15 +155,14 @@ alignment = 1
 [node name="FlavorTextContainer" type="PanelContainer" parent="MarginWithOuter/VBoxWithBottom" unique_id=88329219]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_styles/panel = ExtResource("8_ndjm8")
 
 [node name="FlavorLabel" type="Label" parent="MarginWithOuter/VBoxWithBottom/FlavorTextContainer" unique_id=2101272804]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "lore lore lore lore"
 label_settings = ExtResource("8_85glx")
-horizontal_alignment = 1
 autowrap_mode = 2

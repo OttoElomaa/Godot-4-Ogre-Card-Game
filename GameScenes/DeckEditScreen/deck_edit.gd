@@ -62,7 +62,7 @@ func _on_proceed_button_button_up():
 func update_champion():
 	var champion = GameInfo.current_champion.duplicate()
 	await MyTools.createTempCard(champion)
-	%ChampionTexture.texture = champion.texture
+	%ChampionContainer.insert_champion(champion)
 	%ChampionName.text = champion.cardName
 	for action in champion.usable_actions:
 		var new_cont:ChampSkillContainer = ChampActionCont.instantiate()

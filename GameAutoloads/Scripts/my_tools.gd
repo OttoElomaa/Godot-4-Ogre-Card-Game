@@ -74,7 +74,9 @@ func findIndexAmongSiblings(node:Node) -> int:
 func isLastSibling(node:Node) -> bool:
 	var parent = node.get_parent()
 	var children = parent.get_children()
-	return len(children) == findIndexAmongSiblings(node) - 1
+	
+	print('Is number ', findIndexAmongSiblings(node))
+	return len(children) - 1 == findIndexAmongSiblings(node)
 
 func moveCardTweening(c:Card, originalPos:Vector2, newPos:Vector2):
 	c.position = originalPos

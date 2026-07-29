@@ -12,10 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://pd7or3cigyqn" path="res://GameScenes/MainMenu/dancing_card.tscn" id="15_b4hlq"]
 [ext_resource type="PackedScene" uid="uid://yol344fkh60p" path="res://GameScenes/MainMenu/flicker_light.tscn" id="15_uifqy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkrw6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rf05g"]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wtpnl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkrw6"]
 resource_local_to_scene = true
 
 [node name="MainMenu" type="Node2D" unique_id=1388111977]
@@ -73,17 +73,6 @@ label_settings = ExtResource("3_wqb3i")
 horizontal_alignment = 1
 
 [node name="EndlessButton" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2" unique_id=1767512479]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("5_26mog")
-theme_override_styles/hover = ExtResource("4_duqux")
-
-[node name="Label2" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2" unique_id=2058892734]
-layout_mode = 2
-text = "Endless Mode"
-label_settings = ExtResource("3_wqb3i")
-horizontal_alignment = 1
-
-[node name="EndlessButton2" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2" unique_id=1460334535]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_26mog")
 theme_override_styles/hover = ExtResource("4_duqux")
@@ -201,18 +190,18 @@ z_index = 1
 
 [node name="DancingCard" parent="Decor/DancingCards" unique_id=364356307 instance=ExtResource("15_b4hlq")]
 light_mask = 0
-material = SubResource("ShaderMaterial_kkrw6")
-position = Vector2(1669, 424)
+material = SubResource("ShaderMaterial_rf05g")
+position = Vector2(1246, -193)
 
 [node name="DancingCard2" parent="Decor/DancingCards" unique_id=88608294 instance=ExtResource("15_b4hlq")]
-material = SubResource("ShaderMaterial_wtpnl")
-position = Vector2(444, 674)
+material = SubResource("ShaderMaterial_kkrw6")
+position = Vector2(1233, -212)
 
 [node name="DancingCard3" parent="Decor/DancingCards" unique_id=1255174092 instance=ExtResource("15_b4hlq")]
-position = Vector2(653, 122)
+position = Vector2(1266, -166)
 
 [node name="DancingCard4" parent="Decor/DancingCards" unique_id=2139357782 instance=ExtResource("15_b4hlq")]
-position = Vector2(1315, 716)
+position = Vector2(1254, -221)
 
 [node name="FlickeringLIghts" type="Node2D" parent="Decor" unique_id=1347058747]
 z_index = -2

@@ -20,6 +20,7 @@ border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
 [node name="BattleIcon" type="Node2D" unique_id=1922959725]
+visible = false
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_ge5wy")
 node_comments = "A battle awaits!"
@@ -54,6 +55,7 @@ theme_override_styles/pressed = ExtResource("4_bmshh")
 theme_override_styles/focus = ExtResource("4_bmshh")
 
 [node name="InfoPanel" type="PanelContainer" parent="." unique_id=128407108]
+visible = false
 custom_minimum_size = Vector2(200, 80)
 anchors_preset = 8
 anchor_left = 0.5

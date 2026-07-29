@@ -16,6 +16,7 @@ func _ready() -> void:
 	DataLoader.load_text_data('res://Resources/Data/Terms.json', DataLoader.terms)
 	DataLoader.get_effect_descriptions()
 	GameInfo.playerOwnedCards = DataLoader.createDesertDeck()
+	GameInfo.enemyDeckCards = DataLoader.createDesertDeck()
 	GameInfo.current_champion = DataLoader.champions_by_name['Nameless Warrior']
 #	setupBestiary()
 	
@@ -24,6 +25,7 @@ func _ready() -> void:
 	
 	for child in $Decor/DancingCards.get_children():
 		child.initialize(self)
+		await get_tree().create_timer(0.15).timeout
 	
 
 func put_on_top(node:Node2D):
@@ -81,7 +83,6 @@ func buttonPressedStartMatch() -> void:
 	bestiaryVisible = false
 	
 	GameInfo.isPreBattle = true
-	GameInfo.enemyDeckCards = DataLoader.createDesertDeck()
 	MyTools.setupAndOpenDeckEdit(GameBoardScene.instantiate())
 	
 

@@ -12,7 +12,7 @@ func _get_drag_data(at_position):
 
 func _on_mouse_entered():
 	if infoPanel.has_method('show_at'):
-		$InfoPanelTimer.start(0.5)
+		$InfoPanelTimer.start(3.0)
 	else:
 		infoPanel.toggleCardInfo(true, card)
 

@@ -106,7 +106,7 @@ func activate(params:SignalParams) -> bool:
 	else:
 		pass
 	
-	if not targets.is_empty():
+	if not targets.is_empty() or not targetingComponent:
 		EffectAnimationQueue.queueAnimation(myCard, self, targets)
 		
 		##If this is the last action under this trigger, play following animations.
@@ -119,6 +119,7 @@ func activate(params:SignalParams) -> bool:
 			
 		success = await activateSkillAfterTargeting(targets)
 	else:
+		MyTools.createCombatLogPrintout(str(myCard.cardName), ": cannot target anybody!")
 		return success
 	
 	return success

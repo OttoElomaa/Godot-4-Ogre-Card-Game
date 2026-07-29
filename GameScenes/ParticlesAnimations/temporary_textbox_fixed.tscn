@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dcsq271d0m34u"]
+
+[ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="1_idr3p"]
+
+[node name="TemporaryTextboxFixed" type="RichTextLabel" unique_id=1056470729]
+offset_right = 603.0
+offset_bottom = 82.0
+theme = ExtResource("1_idr3p")
+text = "dfsdsf"
+fit_content = true

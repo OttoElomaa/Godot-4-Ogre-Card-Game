@@ -109,8 +109,8 @@ func setup_champions(player_champ:Champion, enemy_champ:Champion):
 	%EnemyChampSlot.add_child(enemy_champ.duplicate())
 	
 	## Set character portrait.
-	%PlayerSprite.texture = player_champ.texture
-	%EnemySprite.texture = enemy_champ.texture
+	%PlayerSprite.insert_champion(player_champ)
+	%EnemySprite.insert_champion(enemy_champ)
 	
 	## Setup player champion.
 	playerChampion().isEnemyCard = false
@@ -331,8 +331,8 @@ func brighten_screen(time:float):
 
 func unfold_ritual_container(card:Card):
 	var smoke = DataLoader.animations_by_filename['smoke.tscn'].instantiate()
-	var typewriter_textbox = DataLoader.animations_by_filename["typewriter_textbox.tscn"].instantiate()
-	var typewriter_textbox2 = DataLoader.animations_by_filename["typewriter_textbox.tscn"].instantiate()
+	var typewriter_textbox = DataLoader.animations_by_filename["temporary_textbox_fixed.tscn"].instantiate()
+	var typewriter_textbox2 = DataLoader.animations_by_filename["temporary_textbox_fixed.tscn"].instantiate()
 	var screen_flash = DataLoader.animations_by_filename["screen_flash.tscn"].instantiate()
 	
 	smoke.position += Vector2(%RitualContainer.size.x/2, %RitualContainer.size.y/2)
@@ -345,11 +345,9 @@ func unfold_ritual_container(card:Card):
 	typewriter_textbox.hide()
 	$AnimationLayer.add_child(typewriter_textbox)
 	typewriter_textbox.text = card.flavorText
-	typewriter_textbox.sound_off = true
-	typewriter_textbox.start()
 	typewriter_textbox.position.x = 200.0
 	typewriter_textbox.position.y = randi_range(600, 150)
-	var box_scale = randf_range(1.0, 3.0)
+	var box_scale = randf_range(1.0, 2.0)
 	typewriter_textbox.scale = Vector2(box_scale, box_scale)
 	typewriter_textbox.rotation_degrees = randf_range(25, -25) 
 	
@@ -357,8 +355,6 @@ func unfold_ritual_container(card:Card):
 	$AnimationLayer.add_child(typewriter_textbox2)
 	box_scale = randf_range(1.0, 3.0)
 	typewriter_textbox2.text = card.flavorText
-	typewriter_textbox2.sound_off = true
-	typewriter_textbox2.start()
 	typewriter_textbox2.position.x = 1000.0
 	typewriter_textbox2.position.y = randi_range(600, 150)
 	typewriter_textbox2.scale = Vector2(box_scale, box_scale)

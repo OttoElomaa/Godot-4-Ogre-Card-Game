@@ -15,6 +15,8 @@ func _ready():
 
 func start():
 	$MarginContainer/RichTextLabel.text = text
+	var darken = randf_range(0.35, 1.0)
+	$MarginContainer/RichTextLabel.add_theme_color_override("default_color", Color(darken, darken, darken, 1.0)) 
 	$MarginContainer/RichTextLabel.visible_characters = 0
 	
 	if not text:

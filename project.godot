@@ -52,7 +52,9 @@ runtime/balloon_path="res://GameScenes/Zone/balloon.tscn"
 
 [display]
 
-window/size/mode=3
+window/size/viewport_width=1740
+window/size/viewport_height=979
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

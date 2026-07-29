@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://8a68hh76lcve"]
+
+[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="2_1gan8"]
+[ext_resource type="Script" uid="uid://c6g2j4pme4r7q" path="res://GameScenes/DeckEditScreen/champion_container.gd" id="2_vmjbk"]
+[ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://PanelStyles/SelectBoxTransparent.tres" id="3_vmjbk"]
+[ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="4_vy0to"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfnwv"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.16470589, 0.13333334, 0.12156863, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.976471, 0.819608, 0.447059, 1)
+corner_radius_top_left = 124
+corner_radius_top_right = 125
+corner_radius_bottom_right = 125
+corner_radius_bottom_left = 125
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfpk2"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.976471, 0.819608, 0.447059, 1)
+corner_radius_top_left = 124
+corner_radius_top_right = 125
+corner_radius_bottom_right = 125
+corner_radius_bottom_left = 125
+corner_detail = 20
+
+[node name="PanelContainer" type="VBoxContainer" unique_id=334304769]
+offset_right = 232.0
+offset_bottom = 292.0
+script = ExtResource("2_vmjbk")
+show_name = true
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=322412716]
+clip_children = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pfnwv")
+
+[node name="ChampionTexture" type="TextureRect" parent="PanelContainer" unique_id=1898590618]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(220, 280)
+layout_mode = 2
+texture = ExtResource("2_1gan8")
+expand_mode = 4
+stretch_mode = 6
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=1231744694]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dfpk2")
+
+[node name="NameContainer" type="PanelContainer" parent="." unique_id=633895378]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_vmjbk")
+
+[node name="ChampionName" type="RichTextLabel" parent="NameContainer" unique_id=472341527]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = ExtResource("4_vy0to")
+text = "Nameless Warrior"
+horizontal_alignment = 1
+vertical_alignment = 1
