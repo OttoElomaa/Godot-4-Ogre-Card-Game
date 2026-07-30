@@ -32,7 +32,7 @@ var is_waiting_for_input: bool = false
 ## See if we are running a long mutation and should hide the balloon
 var will_hide_balloon: bool = false
 
-@onready var cutscene_container: Control = $Cutscene/PanelContainer/HBoxContainer
+@onready var cutscene_container: Control = %CardBox
 ## A dictionary to store any ephemeral variables
 var locals: Dictionary = {}
 

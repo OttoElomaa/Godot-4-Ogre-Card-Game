@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://m0wuvw38wnbi"]
+
+[ext_resource type="Script" uid="uid://5c42sqov344m" path="res://CardScriptsAndComponents/Scripts/effect_counter.gd" id="1_tpaka"]
+[ext_resource type="PackedScene" uid="uid://dqlw64r7a01ex" path="res://CardScriptsAndComponents/Triggers/OnSelfDamageTaken.tscn" id="2_5y45p"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="3_18056"]
+[ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="4_diiy3"]
+[ext_resource type="PackedScene" uid="uid://cvl306ch72ymq" path="res://CardScriptsAndComponents/Actions/SkillChangeEffectStacks.tscn" id="5_yyxfe"]
+[ext_resource type="PackedScene" uid="uid://dr6800mm8qc7j" path="res://CardScriptsAndComponents/Conditionals/IfSourceDoesn'tHaveKeyword.tscn" id="6_18056"]
+
+[node name="EffectSleep" type="Node2D" unique_id=276472621]
+script = ExtResource("1_tpaka")
+effectType = 2
+max_counter = 1
+id = "Sleep"
+description = "Cannot be controlled. Removed on damage."
+metadata/_custom_type_script = "uid://5c42sqov344m"
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=149693454]
+
+[node name="OnSelfDamageTaken" parent="." unique_id=751867979 instance=ExtResource("2_5y45p")]
+
+[node name="CardAction" type="Node2D" parent="OnSelfDamageTaken" unique_id=743136630]
+script = ExtResource("3_18056")
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="TargetSelf" parent="OnSelfDamageTaken/CardAction" unique_id=1664263507 instance=ExtResource("4_diiy3")]
+
+[node name="SkillChangeEffectStacks" parent="OnSelfDamageTaken/CardAction" unique_id=1488528640 instance=ExtResource("5_yyxfe")]
+effectID = "Sleep"
+amount = -1
+
+[node name="IfSourceDoesn\'tHaveKeyword" parent="OnSelfDamageTaken" unique_id=2093946286 instance=ExtResource("6_18056")]
+keyword = "Dream Assault"

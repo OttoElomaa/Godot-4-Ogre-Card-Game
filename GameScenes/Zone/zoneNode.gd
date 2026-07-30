@@ -91,10 +91,12 @@ func _on_area_2d_mouse_exited() -> void:
 func toggleHoverInfo(enable:bool):
 	if enable:
 		$InfoPanel.show()
+		$InfoPanel.z_index = 1
 		$InfoPanel/HBox/NameLabel.text = getNodeName()
 		$InfoPanel/HBox/DescLabel.text = node_comments
 	else:
 		$InfoPanel.hide()
+		$InfoPanel.z_index = 0
 
 func showCompletionState():
 	$ClearedOverlay.visible = resolved

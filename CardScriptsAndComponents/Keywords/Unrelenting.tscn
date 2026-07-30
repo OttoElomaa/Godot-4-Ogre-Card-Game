@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cnmnqnm85jy04"]
+
+[ext_resource type="Script" uid="uid://cyai5jj2rdnj4" path="res://CardScriptsAndComponents/Scripts/keyword.gd" id="1_hqxl6"]
+
+[node name="Unrelenting" type="Node2D" unique_id=1107183040]
+script = ExtResource("1_hqxl6")
+id = "Unrelenting"
+description = "This creature arrives Blocking. It cannot be made Passive."
+metadata/_custom_type_script = "uid://cyai5jj2rdnj4"

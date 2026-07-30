@@ -1,4 +1,5 @@
 @tool
+
 extends ZoneNode
 
 class_name ZoneBattleIcon

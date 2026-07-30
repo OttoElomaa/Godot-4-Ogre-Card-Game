@@ -1,4 +1,5 @@
 @icon("res://Art/icons/16x16/character.png")
+@tool
 extends Node2D
 class_name Card
 
@@ -76,7 +77,12 @@ var isChampion:
 var term_tooltip = DataLoader.scenes_by_name['TermTooltip']
 ####################################### EXPORT VARIABLES
 @export var cardName := "Card Name"
-@export var cardType := CardTypes.CREATURE
+
+@export var cardType := CardTypes.CREATURE:
+	set(value):
+		cardType = value
+		notify_property_list_changed()
+		
 @export var subTypeStr := "Card Sub-Type"
 @export var texture: Texture2D
 
@@ -205,7 +211,22 @@ var allowEnemyUse := true
 var isAttacking := false
 var attackTarget:Card = null
 
-
+#region ########################################## IN-EDITOR CODE
+func _validate_property(property):
+	match cardType:
+		CardTypes.RITUAL:
+			if property.name in ['startingHealth', 'startingDamage', 'block_on_arrival', 'will_not_charge', 'fearless', 'action_mode']:
+				property.usage = PROPERTY_USAGE_NO_EDITOR
+		CardTypes.CHAMPION:
+			if property.name in ['startingHealth', 'startingDamage', 'subTypeStr', 'group', 'upgraded', 'block_on_arrival', 'will_not_charge', 'fearless', 'action_mode']:
+				property.usage = PROPERTY_USAGE_NO_EDITOR
+		CardTypes.ITEM:
+			if property.name in ['startingHealth', 'startingDamage', 'block_on_arrival', 'will_not_charge', 'fearless', 'action_mode']:
+				property.usage = PROPERTY_USAGE_NO_EDITOR
+		CardTypes.STRUCTURE:
+			if property.name in ['block_on_arrival', 'will_not_charge', 'fearless', 'action_mode', 'targeting_mode', 'priority']:
+				property.usage = PROPERTY_USAGE_NO_EDITOR
+#endregion
 
 #region ######################################## STARTUP
 func _ready() -> void:
@@ -374,8 +395,6 @@ func setInitialActionState():
 
 #endregion
 
-
-
 #######################################################################################
 #region ######################################### KEYWORD HANDLER STUFF
 
@@ -415,15 +434,11 @@ func replace_keywords(new_k:PackedStringArray):
 
 #endregion
 
-
-
 #######################################################################################
 #region ######################################### COUNTER NODE STUFF
 
 
 #endregion
-
-
 
 #######################################################################################
 #region ######################################### EFFECT COUNTER STUFF
@@ -495,8 +510,6 @@ func clearEffects():
 	effects.updateEffectVisuals()
 
 #endregion
-
-
 
 #######################################################################################
 #region ######################################## COLOR FETCHERS
@@ -1252,6 +1265,7 @@ func change_upgrade_state(new_state:UpgradeStates):
 			damage = startingDamage
 			health = startingHealth
 		_:
+			@warning_ignore("assert_always_false")
 			assert(1==2, 'Value out of bounds')
 	actions.awakenTriggers()
 	updateCardNameAndBasicInfo(cardType==CardTypes.CREATURE)

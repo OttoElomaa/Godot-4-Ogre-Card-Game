@@ -14,13 +14,14 @@
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="12_dwmew"]
 
 [node name="CardContainer" type="MarginContainer" unique_id=410174868]
-custom_minimum_size = Vector2(130, 200)
+custom_minimum_size = Vector2(110, 160)
 offset_left = -55.0
 offset_top = -89.0
 offset_right = 55.0
 offset_bottom = 75.0
 pivot_offset = Vector2(55, 89)
 script = ExtResource("1_wl57w")
+has_margin = true
 
 [node name="Frontside" type="Node2D" parent="." unique_id=361414676]
 position = Vector2(50, 76)
@@ -169,6 +170,12 @@ text = "Card Name"
 label_settings = ExtResource("12_dwmew")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=195727051]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_right = -20
+theme_override_constants/margin_bottom = -20
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

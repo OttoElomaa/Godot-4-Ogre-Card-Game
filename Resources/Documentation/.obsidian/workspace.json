@@ -81,15 +81,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Cards/City/Priests.canvas",
+                "file": "Cards/City/Astromancers.canvas",
                 "viewState": {
-                  "x": 400.63681637239216,
-                  "y": 955.9355916058142,
-                  "zoom": -1
+                  "x": 957.0992723492727,
+                  "y": 283.5857588357586,
+                  "zoom": -0.6632807009164439
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Priests"
+              "title": "Astromancers"
             }
           }
         ],
@@ -243,17 +243,17 @@
   },
   "active": "2e7d6aea36d7b080",
   "lastOpenFiles": [
+    "Cards/Green Defiance/Woodwose.canvas",
+    "Cards/City/Priests.canvas",
     "Cards/City/Slaves.canvas",
     "Cards/City/Sea Peoples.canvas",
     "Cards/City/Throne.canvas",
     "Cards/City/Guilds.canvas",
-    "Cards/City/Priests.canvas",
     "Cards/Desert/Beasts.canvas",
     "Cards/Desert/High Kingdom.canvas",
     "Cards/Desert/Pilgrims.canvas",
     "Cards/Outcasts/Freeslayers.canvas",
     "Cards/Green Defiance/Vinemen.canvas",
-    "Cards/Green Defiance/Skull Priests.canvas",
     "Cards/City/Без названия.md",
     "Scenarios",
     "Cards/Outcasts",

@@ -26,13 +26,13 @@ You approach an overgrown mansion, once belonging to a highly-esteemed kingling,
 		- Ask about their purpose here
 			"We camp out here as a part of our pilgrimage. We wish nobody no harm."
 			
-			"Damned Lies!" the Astromancer yells. "I know you hold Daleth prisoner! You vile Thieves!"
+			"Damned Lies!" the Astromancer yells. "I know you hold Daleth prisoner, you vile Thieves!"
 			
 			"Ah, so that's who brought you here," the Umugite sneers. "Listen up. If you agree to give us a wide berth for a while, you will have your man. Else, you will have to go through us. If you must find that out, we Umugites are not easily killed. Perhaps you would rather be on our good side."
 			~ offer
 			
 			- Ask the Astromancer about the Umugites
-				"'Tis most Absurd that Umugites should be at large! The Legend speaks of them, and their God likewise, being Banished to the Deepest of Hells! The very Memory of Umug's people was so Deleted, quoth it, that only an Astromancer should even remember of their Existéncé. Listen not to this Brute's Lies!"
+				"'Tis most Absurd that Umugites should be at large! The Legende speaks of them, and their God likewise, being Banished to the Deepest of Hells! The very Memorie of Umug's people was so Deleted, quoth it, that only an Astromancer should even remember of their Existéncé. Listen not to this Brute's Lies!"
 				=> offer
 			
 			- Agree to the Umugite's offer

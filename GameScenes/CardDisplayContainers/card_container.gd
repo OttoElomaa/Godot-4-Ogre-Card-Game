@@ -16,12 +16,16 @@ var card: Card = null
 		%ManaCost.visible = new
 		show_mana_cost = new
 
+@export var has_margin = false
+
 func _ready():
 	pass
 
 
 ## Puts a Card-class object into the container.
 func insert_card(new_card:Card):
+	if has_margin:
+		custom_minimum_size += Vector2(20, 20)
 	
 	card = new_card
 	#### NEED TO INSTANTIATE THE CREATED CARD, SO IT CAN HAVE ITS OWN get_children() CALLS

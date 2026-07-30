@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://0yevoktm0llg"]
+
+[ext_resource type="Script" uid="uid://cmck0ar3ai637" path="res://CardScriptsAndComponents/Actions/Scripts/SkillShoot.gd" id="1_34le7"]
+
+[node name="SkillShoot" type="Node2D" unique_id=581391036]
+script = ExtResource("1_34le7")
+skillName = "Shoot"
+metadata/_custom_type_script = "uid://cxr3ippvyy8ii"

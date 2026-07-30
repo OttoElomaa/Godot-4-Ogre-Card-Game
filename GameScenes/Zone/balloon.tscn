@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://nlh51xk2popv"]
+[gd_scene format=3 uid="uid://nlh51xk2popv"]
 
 [ext_resource type="Script" uid="uid://dm0o5r3sgn0xa" path="res://GameScenes/Zone/balloon.gd" id="1_08txh"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_4r60f"]
 [ext_resource type="Resource" uid="uid://datllcfc5jbo3" path="res://Resources/Dialog/Vineyards_1.dialogue" id="2_mjxrt"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_mjxrt"]
 [ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Fonts/FancyPixelFontWhite.tres" id="5_q6va3"]
+[ext_resource type="FontFile" uid="uid://dbdpwrj1wq4d6" path="res://Fonts/stepalange-font/StepalangeShort-p7GZd.otf" id="6_nsbs0"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="7_q6va3"]
 [ext_resource type="Script" uid="uid://cibsutmvysjbv" path="res://GameScenes/Zone/cutscene.gd" id="8_nsbs0"]
 
@@ -103,14 +104,14 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="ExampleBalloon" type="CanvasLayer"]
+[node name="ExampleBalloon" type="CanvasLayer" unique_id=265513849]
 layer = 100
 script = ExtResource("1_08txh")
 dialogue_resource = ExtResource("2_mjxrt")
 auto_start = true
 will_block_other_input = false
 
-[node name="Balloon" type="Control" parent="."]
+[node name="Balloon" type="Control" parent="." unique_id=1514618638]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -120,105 +121,90 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_qq3yp")
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon"]
+[node name="MarginContainer" type="MarginContainer" parent="Balloon" unique_id=598047031]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 209.0
-offset_top = -553.0
-offset_right = -145.0
-offset_bottom = -12.0
+offset_left = 366.0
+offset_top = -903.0
+offset_right = -406.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer" unique_id=1998292107]
 clip_children = 2
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("7_q6va3")
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer" unique_id=626277345]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer" unique_id=1629460106]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=984479325]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_4r60f")]
+[node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1253546228 instance=ExtResource("2_4r60f")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_q6va3")
+theme_override_fonts/normal_font = ExtResource("6_nsbs0")
 theme_override_font_sizes/normal_font_size = 45
 text = "Dialogue..."
 seconds_per_step = 0.04
 pause_at_characters = ".?!\\"
 
-[node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=970675715]
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Progress" type="Polygon2D" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
+[node name="Progress" type="Polygon2D" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Control" unique_id=321622226]
 unique_name_in_owner = true
 polygon = PackedVector2Array(0, 0, 10, 10, 20, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
-libraries = {
-&"": SubResource("AnimationLibrary_1337t")
-}
-autoplay = "progress"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Control" unique_id=1858314362]
+libraries/ = SubResource("AnimationLibrary_1337t")
+autoplay = &"progress"
 
-[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon" node_paths=PackedStringArray("response_template")]
+[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=7159823 node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -729.0
-offset_top = -139.0
-offset_right = 92.0
-offset_bottom = -69.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 2
 alignment = 1
 script = ExtResource("3_mjxrt")
 response_template = NodePath("ResponseExample")
 
-[node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu"]
+[node name="ResponseExample" type="Button" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponsesMenu" unique_id=1321659112]
 layout_mode = 2
 theme = ExtResource("5_q6va3")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = ExtResource("7_q6va3")
 text = "Response example"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1796785169]
 unique_name_in_owner = true
 
-[node name="Cutscene" type="MarginContainer" parent="."]
-offset_left = 495.0
-offset_top = 50.0
-offset_right = 1585.0
-offset_bottom = 319.0
-theme_override_constants/margin_top = 50
+[node name="Cutscene" type="MarginContainer" parent="." unique_id=1369277661]
+z_index = -1
+offset_left = 1350.0
+offset_top = 95.0
+offset_right = 1466.0
+offset_bottom = 418.0
+scale = Vector2(2, 2)
 script = ExtResource("8_nsbs0")
 
-[node name="PanelContainer" type="PanelContainer" parent="Cutscene"]
+[node name="CardBox" type="VBoxContainer" parent="Cutscene" unique_id=1600311449]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_styles/panel = ExtResource("7_q6va3")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Cutscene/PanelContainer"]
-layout_mode = 2
-alignment = 1
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
-[connection signal="response_selected" from="Balloon/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
+[connection signal="response_selected" from="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

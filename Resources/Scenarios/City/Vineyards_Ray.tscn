@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/Zone.tscn" id="1_n86vg"]
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="2_ka680"]
 [ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="3_qa0a7"]
+[ext_resource type="Texture2D" uid="uid://b01fgy8k28uhs" path="res://Art/CardArt/GreenDefiance/card-art-creature-briarfolk.jpg" id="4_l8due"]
+[ext_resource type="Texture2D" uid="uid://8wgmpwys7a5" path="res://Art/CardArt/City/card-art-guardmaster.jpg" id="5_44eiw"]
 [ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="9_5xf3a"]
 [ext_resource type="Resource" uid="uid://b3qg4cl1qws0x" path="res://Resources/Dialog/Vineyards_Win_1.dialogue" id="10_swk0g"]
 [ext_resource type="Resource" uid="uid://bgomdu6vhhlji" path="res://Resources/Dialog/Vineyards_Win_2.dialogue" id="11_shl4j"]
@@ -18,8 +20,15 @@ board_name = "Vineyards East"
 game_board = ExtResource("3_qa0a7")
 board_comments = "Raging Vinemen skitter among shadoofs! 
 Beware -- they possess a vile Ritual!"
+deck_cards = Dictionary[String, int]({
+"Jade Vineman": 3,
+"Knell": 2,
+"Liana Man": 1
+})
 enemy_presummon = true
 presummon_sparcity = 2
+art = ExtResource("4_l8due")
+champ_name = "Vineman"
 unlockOnResolveStrings = Array[String](["Vineyards Cabin"])
 
 [node name="Board2" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="1" unique_id=1977585547 instance=ExtResource("2_ka680")]
@@ -32,6 +41,8 @@ deck_cards = Dictionary[String, int]({
 "Kalasirios": 3
 })
 ally_presummon = true
+art = ExtResource("5_44eiw")
+champ_name = "Guardmaster"
 unlockOnResolveStrings = Array[String](["Vineyards Gate"])
 
 [node name="Win_3" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="2" unique_id=949245689 instance=ExtResource("9_5xf3a")]
