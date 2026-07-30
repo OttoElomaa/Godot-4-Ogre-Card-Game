@@ -363,7 +363,9 @@ func basicSetup():
 	
 func handleTurnStartReset():
 	tempDamage = damage
-	tempHealth = health
+	
+	if checkCanRegenerate():
+		tempHealth = health
 	
 
 
@@ -693,6 +695,15 @@ func checkCanAct() -> bool:
 	for e:CardEffect in getEffects():
 		if e.block_action:
 			return false
+	
+	return true
+
+func checkCanRegenerate() -> bool:
+	if hasKeyword('Primordial'):
+		return false
+	
+	if cardType == CardTypes.STRUCTURE:
+		return false
 	
 	return true
 
