@@ -446,7 +446,8 @@ func resolveAttackTwo():
 	
 	#### WHICH CARDS TOOK LETHAL DAMAGE?
 	var damageTakenByTarget = targetCard.takeCombatDamage(attackCard, false)
-	var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, true)
+	if targetCard.checkCanRetaliate():
+		var damageTakenByAttacker = attackCard.takeCombatDamage(targetCard, true)
 	
 	#### COMBAT LOG STUFF ##################################
 	var attackerString = "%s attacks %s!" % [attackCard.cardName, targetCard.cardName]

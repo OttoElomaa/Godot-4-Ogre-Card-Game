@@ -13,6 +13,8 @@ effectType = 2
 max_counter = 1
 id = "Sleep"
 description = "Cannot be controlled. Removed on damage."
+block_action = true
+block_retaliation = true
 metadata/_custom_type_script = "uid://5c42sqov344m"
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=149693454]

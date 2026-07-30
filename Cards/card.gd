@@ -689,10 +689,24 @@ func checkCanAct() -> bool:
 		
 	if checkTraveling():
 		return false
-					
+	
+	for e:CardEffect in getEffects():
+		if e.block_action:
+			return false
+	
 	return true
 
-
+func checkCanRetaliate() -> bool:
+	if hasKeyword('Apathetic'):
+		return false
+	if cardType == CardTypes.STRUCTURE:
+		return false
+	
+	for e:CardEffect in getEffects():
+		if e.block_retaliation:
+			return false
+	
+	return true
 
 func checkResting() -> bool:
 	return isResting
@@ -704,7 +718,6 @@ func checkTraveling() -> bool:
 
 func checkAlive():
 	return cardState == CardStates.BOARD
-
 
 #### LIMBO means the CARD IS BETWEEN STATES -> for example, NEITHER IN Board OR Graveyard
 func checkLimbo():
