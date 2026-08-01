@@ -37,6 +37,7 @@ DataLoader="*uid://x5hp1ama1l5h"
 EffectAnimationQueue="*res://GameAutoloads/EffectAnimationQueue.tscn"
 CardAnimationQueue="*res://GameAutoloads/CardAnimationQueue.tscn"
 LevelLoader="*uid://cyon8t1pwfw2b"
+Options="*uid://bdfp88tc8xnig"
 
 [debug]
 

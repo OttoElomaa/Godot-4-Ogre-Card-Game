@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://15y1b6iy4qeb"]
+
+[ext_resource type="Script" uid="uid://bdfp88tc8xnig" path="res://GameAutoloads/Scripts/options.gd" id="1_qihkp"]
+
+[node name="Options" type="Node2D" unique_id=1435541088]
+script = ExtResource("1_qihkp")

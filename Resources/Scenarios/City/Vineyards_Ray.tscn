@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b8sjtf3n3ibxc"]
 
 [ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/Zone.tscn" id="1_n86vg"]
+[ext_resource type="Texture2D" uid="uid://ca4dud8vo4eti" path="res://Art/CardArt/card-art-background-city.png" id="2_44eiw"]
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="2_ka680"]
 [ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="3_qa0a7"]
 [ext_resource type="Texture2D" uid="uid://b01fgy8k28uhs" path="res://Art/CardArt/GreenDefiance/card-art-creature-briarfolk.jpg" id="4_l8due"]
@@ -11,6 +12,11 @@
 [ext_resource type="Resource" uid="uid://datllcfc5jbo3" path="res://Resources/Dialog/Vineyards_1.dialogue" id="12_ka680"]
 
 [node name="Zone2" unique_id=407343750 instance=ExtResource("1_n86vg")]
+graphic = ExtResource("2_44eiw")
+description = "Ask'lani vineyards are vast and beholden to temples and rich families alike. The holy vine made from the grapes that grow here is said to have been enjoyed even by the gods.
+
+You can hear a commotion from among the trellises..."
+things_you_may_gain = 33
 
 [node name="Board1" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="0" unique_id=986256382 instance=ExtResource("2_ka680")]
 top_level = true

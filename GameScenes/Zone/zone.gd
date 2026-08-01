@@ -1,8 +1,14 @@
 extends Node2D
 class_name Scenario
 
+const GainStrings: Array[String] = []
 
 @export var zoneName := "The Lands"
+@export var graphic:Texture2D = null
+@export_multiline var description: String
+@export var groups_you_may_meet = []
+@export_flags('New Allies', 'Glory and Treasure', 'A Place of Power', 'An Untimely Death',
+'A Stoneseeker Caravan', 'New Recruits') var things_you_may_gain
 
 var travelScreenStr := "res://GameScenes/TravelMap/travel_screen.tscn"
 var deck_edit_str := "res://GameScenes/DeckEditScreen/DeckEdit.tscn"
@@ -81,7 +87,11 @@ func updateZoneVisuals():
 		gameBoard.update_state()
 		gameBoard.showCompletionState()
 	
-	
+func create_scenario_description():
+	var desc_string: String = ''
+	desc_string += str(description, '[br][br]')
+	desc_string += str('Groups you may meet: ', groups_you_may_meet, '[br]')
+	desc_string += str('Things you may gain: ', things_you_may_gain, '[br]')
 
 func _input(e: InputEvent) -> void:
 	

@@ -81,15 +81,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Cards/City/Astromancers.canvas",
+                "file": "Cards/City/Guilds.canvas",
                 "viewState": {
-                  "x": 957.0992723492727,
-                  "y": 283.5857588357586,
-                  "zoom": -0.6632807009164439
+                  "x": 441.5,
+                  "y": 703.7434511434512,
+                  "zoom": -0.6860170532164257
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Astromancers"
+              "title": "Guilds"
             }
           }
         ],
@@ -243,17 +243,17 @@
   },
   "active": "2e7d6aea36d7b080",
   "lastOpenFiles": [
-    "Cards/Green Defiance/Woodwose.canvas",
+    "Cards/Green Defiance/Grove Clans.canvas",
+    "Cards/Desert/Salkhi Horde.canvas",
+    "Cards/Desert/Pyrecallers.canvas",
+    "Cards/Desert/Pilgrims.canvas",
     "Cards/City/Priests.canvas",
-    "Cards/City/Slaves.canvas",
     "Cards/City/Sea Peoples.canvas",
     "Cards/City/Throne.canvas",
-    "Cards/City/Guilds.canvas",
+    "Cards/City/Slaves.canvas",
     "Cards/Desert/Beasts.canvas",
     "Cards/Desert/High Kingdom.canvas",
-    "Cards/Desert/Pilgrims.canvas",
-    "Cards/Outcasts/Freeslayers.canvas",
-    "Cards/Green Defiance/Vinemen.canvas",
+    "Cards/Green Defiance/Woodwose.canvas",
     "Cards/City/Без названия.md",
     "Scenarios",
     "Cards/Outcasts",

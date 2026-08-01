@@ -71,6 +71,7 @@ var mutation_cooldown: Timer = Timer.new()
 
 func _ready() -> void:
 	balloon.hide()
+	%ChampContainer.insert_champion(GameInfo.current_champion)
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
 	# If the responses menu doesn't have a next action set, use this one

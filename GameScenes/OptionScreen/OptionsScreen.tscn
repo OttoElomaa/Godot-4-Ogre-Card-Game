@@ -1,0 +1,160 @@
+[gd_scene format=3 uid="uid://beb0tf1tvlow4"]
+
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="1_5h0b4"]
+[ext_resource type="Script" uid="uid://cwlu0s3vskdvw" path="res://GameScenes/OptionScreen/options_screen.gd" id="2_53jt4"]
+[ext_resource type="PackedScene" uid="uid://dp4r52h5abw7u" path="res://GameScenes/OptionScreen/OptionSlider.tscn" id="3_2jvft"]
+[ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Fonts/stepalange-font/Stepalange-x3BLm.otf" id="4_vsxbk"]
+[ext_resource type="StyleBox" uid="uid://bw3n8tfbjep0m" path="res://PanelStyles/ScrollBarTextureButton.tres" id="5_cnbrg"]
+[ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Fonts/FancyPixelFontWhite.tres" id="6_28s1n"]
+
+[sub_resource type="Theme" id="Theme_tsd66"]
+default_font = ExtResource("4_vsxbk")
+
+[node name="OptionsScreen" type="CanvasLayer" unique_id=1129479949]
+layer = 2
+script = ExtResource("2_53jt4")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=304920501]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.105882354, 0.105882354, 0.105882354, 0.5176471)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=793043632]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -341.0
+offset_top = -425.0
+offset_right = 341.0
+offset_bottom = 425.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/panel = ExtResource("1_5h0b4")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=794531060]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=434205353]
+layout_mode = 2
+
+[node name="Divider" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=286507783]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "Audio
+[hr]"
+fit_content = true
+
+[node name="OptionSlider_GeneralVolume" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1180156959 instance=ExtResource("3_2jvft")]
+unique_name_in_owner = true
+layout_mode = 2
+property_name = "General Volume"
+
+[node name="OptionSlider_MusicVolume" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=731176162 instance=ExtResource("3_2jvft")]
+unique_name_in_owner = true
+layout_mode = 2
+property_name = "Music Volume"
+
+[node name="OptionSlider_SFXVolume" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=124895402 instance=ExtResource("3_2jvft")]
+unique_name_in_owner = true
+layout_mode = 2
+property_name = "SFX Volume"
+
+[node name="Divider2" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=381088201]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "Video
+[hr]"
+fit_content = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1011846154]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 60
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1242613785]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1189920087]
+layout_mode = 2
+text = "Window Mode"
+
+[node name="DisplayOptions" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=871055543]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+selected = 0
+item_count = 2
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+
+[node name="Divider3" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1377751247]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "Gameplay
+[hr]"
+fit_content = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1649159701]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 60
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2" unique_id=2127775375]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=1894762801]
+layout_mode = 2
+text = "Animation Speed (WIP! Does nothing)"
+
+[node name="AnimationSpeed" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=1842940833]
+layout_mode = 2
+size_flags_horizontal = 10
+selected = 0
+item_count = 2
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Double"
+popup/item_1/id = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=951491191]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Confirm" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=222231992]
+layout_mode = 2
+theme = SubResource("Theme_tsd66")
+theme_override_styles/normal = ExtResource("5_cnbrg")
+text = "Confirm"
+
+[node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1441238165]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("6_28s1n")
+theme_override_styles/normal = ExtResource("5_cnbrg")
+text = "Cancel"
+
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OptionSlider_GeneralVolume" to="." method="_on_option_slider_general_volume_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OptionSlider_MusicVolume" to="." method="_on_option_slider_music_volume_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OptionSlider_SFXVolume" to="." method="_on_option_slider_sfx_volume_value_changed"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/DisplayOptions" to="." method="_on_display_options_item_selected"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/AnimationSpeed" to="." method="_on_animation_speed_item_selected"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

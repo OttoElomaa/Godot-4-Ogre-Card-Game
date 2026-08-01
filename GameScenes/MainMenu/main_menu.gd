@@ -2,7 +2,7 @@ extends Node2D
 
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
-
+@onready var OptionsScreen: PackedScene = preload("res://GameScenes/OptionScreen/OptionsScreen.tscn")
 @onready var ZoneScene: PackedScene = preload("res://Resources/Scenarios/City/Vanished_Astromancer.tscn")
 @onready var ArenaScene: PackedScene = preload("res://Resources/Scenarios/City/Arena.tscn")
 
@@ -12,6 +12,7 @@ var bestiaryCards := []
 
 
 func _ready() -> void:
+	Options.load_options()
 	DataLoader.createAllGameCards()
 	DataLoader.load_text_data('res://Resources/Data/Terms.json', DataLoader.terms)
 	DataLoader.get_effect_descriptions()
@@ -98,7 +99,7 @@ func toggleCardInfo(enable:bool, card:Card):
 	cardInfo.toggleCardInfo(enable, card)
 
 func _on_options_button_pressed():
-	pass # Replace with function body.
+	get_tree().root.add_child(OptionsScreen.instantiate())
 
 
 func _on_endless_button_pressed():

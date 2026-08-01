@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dbdpwrj1wq4d6" path="res://Fonts/stepalange-font/StepalangeShort-p7GZd.otf" id="6_nsbs0"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="7_q6va3"]
 [ext_resource type="Script" uid="uid://cibsutmvysjbv" path="res://GameScenes/Zone/cutscene.gd" id="8_nsbs0"]
+[ext_resource type="PackedScene" uid="uid://8a68hh76lcve" path="res://GameScenes/DeckEditScreen/champion_container.tscn" id="9_08tpy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -205,6 +206,15 @@ script = ExtResource("8_nsbs0")
 [node name="CardBox" type="VBoxContainer" parent="Cutscene" unique_id=1600311449]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="ChampContainer" parent="." unique_id=334304769 instance=ExtResource("9_08tpy")]
+unique_name_in_owner = true
+offset_left = 75.0
+offset_top = 87.0
+offset_right = 307.0
+offset_bottom = 481.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
