@@ -1,27 +1,24 @@
 [gd_scene format=3 uid="uid://b8sjtf3n3ibxc"]
 
 [ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/Zone.tscn" id="1_n86vg"]
-[ext_resource type="Texture2D" uid="uid://ca4dud8vo4eti" path="res://Art/CardArt/card-art-background-city.png" id="2_44eiw"]
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="2_ka680"]
 [ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="3_qa0a7"]
 [ext_resource type="Texture2D" uid="uid://b01fgy8k28uhs" path="res://Art/CardArt/GreenDefiance/card-art-creature-briarfolk.jpg" id="4_l8due"]
 [ext_resource type="Texture2D" uid="uid://8wgmpwys7a5" path="res://Art/CardArt/City/card-art-guardmaster.jpg" id="5_44eiw"]
 [ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="9_5xf3a"]
+[ext_resource type="PackedScene" uid="uid://df57edgdrwbbe" path="res://GameScenes/TravelMap/map_askelan.tscn" id="10_44eiw"]
 [ext_resource type="Resource" uid="uid://b3qg4cl1qws0x" path="res://Resources/Dialog/Vineyards_Win_1.dialogue" id="10_swk0g"]
 [ext_resource type="Resource" uid="uid://bgomdu6vhhlji" path="res://Resources/Dialog/Vineyards_Win_2.dialogue" id="11_shl4j"]
 [ext_resource type="Resource" uid="uid://datllcfc5jbo3" path="res://Resources/Dialog/Vineyards_1.dialogue" id="12_ka680"]
 
-[node name="Zone2" unique_id=407343750 instance=ExtResource("1_n86vg")]
-graphic = ExtResource("2_44eiw")
-description = "Ask'lani vineyards are vast and beholden to temples and rich families alike. The holy vine made from the grapes that grow here is said to have been enjoyed even by the gods.
-
-You can hear a commotion from among the trellises..."
-things_you_may_gain = 33
+[node name="Green_Ray_Vineyards" unique_id=407343750 instance=ExtResource("1_n86vg")]
+map_scene = ExtResource("10_44eiw")
 
 [node name="Board1" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="0" unique_id=986256382 instance=ExtResource("2_ka680")]
+visible = false
 top_level = true
 z_index = 6
-position = Vector2(972, 470)
+position = Vector2(1556, 731)
 board_name = "Vineyards East"
 game_board = ExtResource("3_qa0a7")
 board_comments = "Raging Vinemen skitter among shadoofs! 
@@ -38,7 +35,8 @@ champ_name = "Vineman"
 unlockOnResolveStrings = Array[String](["Vineyards Cabin"])
 
 [node name="Board2" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="1" unique_id=1977585547 instance=ExtResource("2_ka680")]
-position = Vector2(-40, -182)
+visible = false
+position = Vector2(1556, 731)
 board_name = "Vineyards West"
 game_board = ExtResource("3_qa0a7")
 board_comments = "The solders are on their last legs, but still should not be underestimated. They fight in formation, protecting their weak spots. The Vinemen will occasionally help you."
@@ -52,17 +50,17 @@ champ_name = "Guardmaster"
 unlockOnResolveStrings = Array[String](["Vineyards Gate"])
 
 [node name="Win_3" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="2" unique_id=949245689 instance=ExtResource("9_5xf3a")]
-position = Vector2(369, -48)
+position = Vector2(1556, 731)
 dialogue = ExtResource("10_swk0g")
 node_name = "Vineyards Cabin"
 
 [node name="Win_4" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="3" unique_id=685341780 instance=ExtResource("9_5xf3a")]
-position = Vector2(369, -47)
+position = Vector2(1556, 731)
 dialogue = ExtResource("11_shl4j")
 node_name = "Vineyards Gate"
 
 [node name="DialogueIcon" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="4" unique_id=638108719 instance=ExtResource("9_5xf3a")]
-position = Vector2(-367, -75)
+position = Vector2(1556, 731)
 dialogue = ExtResource("12_ka680")
 node_name = "Vineyards Entrance"
 start_unlocked = true

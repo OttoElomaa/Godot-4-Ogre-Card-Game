@@ -49,7 +49,7 @@ func _validate_property(property):
 			property.usage = PROPERTY_USAGE_NO_EDITOR
 
 func setup(zone:Node):
-	self.scenario = zone
+	travel_screen = zone
 	node_name = board_name
 #	node_comments = board_comments
 	toggleHoverInfo(false)
@@ -117,13 +117,10 @@ func presummon(isEnemyCard):
 
 #### START THE PRE-BATTLE PROCESS IN ORDER TO FIGHT A BATTLE
 func handleClick():
-	GameInfo.currentZone = scenario
+	GameInfo.currentZone = travel_screen
 	
-	scenario.openPrebattle(self)
+	travel_screen.openPrebattle(self)
 
 func getBoardName():
 	return board_name
 	
-func update_state():
-	if board_name in GameInfo.playerWonBattleNames:
-		resolve()

@@ -76,5 +76,6 @@ func cancelButtonPressed() -> void:
 func fightButtonPressed() -> void:
 	
 	MyTools.setupAndOpenDeckEdit(battleInfoIcon.board)
+	battleInfoIcon.resolve()
 	
 	queue_free()

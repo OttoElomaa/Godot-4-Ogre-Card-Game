@@ -1,11 +1,10 @@
+@tool
 extends ZoneBattleIcon
 
 var fight_number = 0
 
 func resolve():
-	generate_fight()
-	fight_number += 1
-	board_name = str(board_name, ' +', fight_number)
+	queue_free()
 
 func generate_fight():
 	if game_board:

@@ -1,14 +1,139 @@
 extends Node2D
 class_name TravelScreen
 
-func _ready():
-	$AnimationPlayer.play("zoom_out")
+const map_name_to_folder = {'MapAskelan': 'City'}
 
-func add_node_scenario():
+@export var map:Map
+var event_positions_events:Dictionary[Vector2, ZoneNode] = {}
+var visualsUpdateNeeded = true
+
+var randomBattleNodeScene = preload("uid://cu0e7fgg0vk3s")
+
+@onready var PreBattleScreen: PackedScene = preload("res://GameScenes/Zone/PreBattleWindow.tscn")
+var preBattleWindow:Node = null
+
+var active_scenario_nodes:Array[ZoneNode] = []
+var completed_scenarios = []
+
+var turn = 0
+
+func _ready():
+	for i:Marker2D in map.markers:
+		event_positions_events[i.global_position] = null
+		
+	SignalBus.connect('unlock_node', unlockNode)
+	SignalBus.connect('resolve_node', resolveNode)
 	
+	updateZoneVisuals()
+	updateUI()
+	
+
+func process_turn():
+	if turn == 0 or turn % 4 == 0:
+		load_scenario()
+	if turn % 2 == 0:
+		create_random_battle()
+	for i:ZoneNode in %MapNodes.get_children():
+		i.process_turn()
+
+func increment_turn():
+	turn += 1
+	process_turn()
+
+func load_scenario():
+	var possible_scenarios: Array
+	
+	for i in DataLoader.scenarios_by_location:
+		if map_name_to_folder[map.name] == DataLoader.scenarios_by_location[i]:
+			possible_scenarios.append(i)
+	possible_scenarios = possible_scenarios.filter(func(i): return not completed_scenarios.has(i))
+	var new = possible_scenarios.pick_random()
+	if not new:
+		return
+	completed_scenarios.append(new.duplicate())
+	new = new.instantiate() as Scenario
+	MyTools.add_child(new)
+	print('Travel Screen: loaded scenario ', new.name)
+	await get_tree().process_frame
+	var nodes = new.get_all_nodes()
+	for i:ZoneNode in nodes:
+		assign_node_to_marker(i.position, i)
+		active_scenario_nodes.append(i)
+	MyTools.remove_child(new)
+
+func toggleUI():
+	%UI.visible = !%UI.visible
+
+func updateUI():
+	%ChampContainer.insert_champion(GameInfo.current_champion)
+	%GloryAmountLabel.text = str(GameInfo.playerGlory)
+	%ZoneNameLabel.text = map.map_name
+
+func updateZoneVisuals():
+	for zoneNode in GameInfo.nodesToResolve:
+		zoneNode.resolve()
+		
+	GameInfo.nodesToResolve.clear()
+	
+	process_turn()
+
+func unlockNode(zoneNodeID:String):
+	for child:ZoneNode in %MapNodes.get_children():
+		if child.name == zoneNodeID: 
+			child.unlock()
+		elif child.node_name == zoneNodeID:
+			child.unlock()
+
+func resolveNode(zoneNodeID:String):
+	for child:ZoneNode in %MapNodes.get_children():
+		if child.name == zoneNodeID: 
+			child.resolve()
+
+func openPrebattle(b_node:Node2D):
+	print('Travel Screen: Opening Prebattle')
+	%UI.hide()
+	preBattleWindow = PreBattleScreen.instantiate()
+	$PreBattleCanvas.add_child(preBattleWindow)
+	preBattleWindow.setup(b_node)
+	
+func closePrebattle():
+	if preBattleWindow:
+		preBattleWindow.queue_free()
+		%UI.show()
+
+func assign_node_to_marker(coords: Vector2, node:ZoneNode):
+	var new = node.duplicate()
+	%MapNodes.add_child(new)
+
+	if event_positions_events.has(coords):
+		event_positions_events[coords] = node
+		new.global_position = coords
+
+	new.setup(self)
+	print('added child ', new)
+
+func get_random_free_marker() -> Vector2:
+	print('getting random free marker')
+	var free_nodes:Array[Vector2] = []
+	for c in event_positions_events:
+		if event_positions_events[c] == null:
+			free_nodes.append(c)
+	var random_marker = free_nodes.pick_random()
+	print('placing node at ', random_marker)
+	return random_marker
+
+func create_random_battle():
+	var new = randomBattleNodeScene.instantiate() as ZoneBattleIcon
+	print(new)
+	assign_node_to_marker(get_random_free_marker(), new)
+	new.generate_fight()
 
 func _on_node_entered(node:Map_Node):
 	print('node entered')
 	$AnimationPlayer.play('zoom_in')
 	await $AnimationPlayer.animation_finished
 	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/Zone/Zone.tscn")
+
+
+func _on_exit_button_pressed():
+	get_tree().quit()

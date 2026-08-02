@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://df57edgdrwbbe"]
+
+[ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="1_ikc43"]
+[ext_resource type="Script" uid="uid://dndfijp64kjv" path="res://GameScenes/TravelMap/Map.gd" id="2_ru6ll"]
+
+[node name="MapAskelan" type="TextureRect" unique_id=2040580641]
+offset_right = 1737.0
+offset_bottom = 1080.0
+texture = ExtResource("1_ikc43")
+script = ExtResource("2_ru6ll")
+map_name = "Golden City of Ask'lan"
+
+[node name="Royal Palace Entrance" type="Marker2D" parent="." unique_id=597345683]
+position = Vector2(864, 225)
+
+[node name="Royal Palace Inner Sanctum" type="Marker2D" parent="." unique_id=1973844]
+position = Vector2(860, 109)
+
+[node name="Temple of Balhadad" type="Marker2D" parent="." unique_id=688431630]
+position = Vector2(977, 154)
+
+[node name="Guardhouse" type="Marker2D" parent="." unique_id=162049153]
+position = Vector2(1025, 493)
+
+[node name="Temple of Cyr" type="Marker2D" parent="." unique_id=311710893]
+position = Vector2(1213, 352)
+
+[node name="Temple of Atash" type="Marker2D" parent="." unique_id=2028173367]
+position = Vector2(568, 388)
+
+[node name="Backstreet" type="Marker2D" parent="." unique_id=675761380]
+position = Vector2(294, 628)
+
+[node name="Tavern" type="Marker2D" parent="." unique_id=957213204]
+position = Vector2(712, 570)
+
+[node name="River_1" type="Marker2D" parent="." unique_id=1191733862]
+position = Vector2(1438, 379)
+
+[node name="River_2" type="Marker2D" parent="." unique_id=1482601432]
+position = Vector2(1218, 789)
+
+[node name="Vineyards" type="Marker2D" parent="." unique_id=1917674988]
+position = Vector2(1453, 587)
+
+[node name="Villas" type="Marker2D" parent="." unique_id=526025477]
+position = Vector2(1556, 731)
+
+[node name="Abandoned Villa" type="Marker2D" parent="." unique_id=937377223]
+position = Vector2(1659, 609)
+
+[node name="City Square" type="Marker2D" parent="." unique_id=1995288186]
+position = Vector2(860, 377)
+
+[node name="Slums" type="Marker2D" parent="." unique_id=699304664]
+position = Vector2(356, 390)
+
+[node name="Guild Hideout" type="Marker2D" parent="." unique_id=928923066]
+position = Vector2(236, 199)

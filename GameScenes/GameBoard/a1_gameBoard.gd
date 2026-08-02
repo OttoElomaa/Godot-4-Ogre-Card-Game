@@ -434,12 +434,15 @@ func endGame(isWin:bool):
 	if isWin:
 		$CanvasLayer/GameOverPane/Margin/VBox/WonHeader.show()
 		$CanvasLayer/GameOverPane/Margin/VBox/LostHeader.hide()
-		GameInfo.playerWonBattleNames.append(battleNameLabel.text)
 	else:
 		$CanvasLayer/GameOverPane/Margin/VBox/WonHeader.hide()
 		$CanvasLayer/GameOverPane/Margin/VBox/LostHeader.show()
-		GameInfo.playerLives -= 1
-		
+		lose_champion()
+
+func lose_champion():
+	GameInfo.playerOwnedChampions.erase(GameInfo.current_champion)
+	if not GameInfo.playerOwnedChampions.is_empty():
+		GameInfo.current_champion = GameInfo.playerOwnedChampions[0]
 
 func buttonPressedEndMatch() -> void:
 	if GameInfo.currentZone:

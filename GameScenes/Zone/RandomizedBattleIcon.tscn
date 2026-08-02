@@ -1,8 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cu0e7fgg0vk3s"]
+[gd_scene format=3 uid="uid://cu0e7fgg0vk3s"]
 
 [ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="1_8eteb"]
 [ext_resource type="Script" uid="uid://ddoi4axhq8s8m" path="res://randomized_battle_icon.gd" id="2_815ux"]
+[ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="3_815ux"]
+[ext_resource type="Texture2D" uid="uid://cfbb15lvephsf" path="res://Art/CardArt/Depths/card-art-cr-umug-magus-v2.jpg" id="4_g6emo"]
 
-[node name="BattleIcon" instance=ExtResource("1_8eteb")]
+[node name="BattleIcon" unique_id=2114541506 instance=ExtResource("1_8eteb")]
+visible = false
 script = ExtResource("2_815ux")
+board_name = "Skirmish"
+game_board = ExtResource("3_815ux")
+board_comments = "A group of vagabonds menace the local population."
+art = ExtResource("4_g6emo")
+duration = 1
+node_comments = ""
 start_unlocked = true
