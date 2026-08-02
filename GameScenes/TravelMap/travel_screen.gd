@@ -29,12 +29,12 @@ func _ready():
 	
 
 func process_turn():
+	for i:ZoneNode in %MapNodes.get_children():
+		i.process_turn()
 	if turn == 0 or turn % 4 == 0:
 		load_scenario()
 	if turn % 2 == 0:
 		create_random_battle()
-	for i:ZoneNode in %MapNodes.get_children():
-		i.process_turn()
 
 func increment_turn():
 	turn += 1

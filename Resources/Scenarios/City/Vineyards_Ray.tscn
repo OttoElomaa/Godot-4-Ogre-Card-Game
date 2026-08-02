@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="9_5xf3a"]
 [ext_resource type="PackedScene" uid="uid://df57edgdrwbbe" path="res://GameScenes/TravelMap/map_askelan.tscn" id="10_44eiw"]
 [ext_resource type="Resource" uid="uid://b3qg4cl1qws0x" path="res://Resources/Dialog/Vineyards_Win_1.dialogue" id="10_swk0g"]
+[ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="11_pt8e4"]
 [ext_resource type="Resource" uid="uid://bgomdu6vhhlji" path="res://Resources/Dialog/Vineyards_Win_2.dialogue" id="11_shl4j"]
+[ext_resource type="Script" uid="uid://dndfijp64kjv" path="res://GameScenes/TravelMap/Map.gd" id="12_btxsb"]
 [ext_resource type="Resource" uid="uid://datllcfc5jbo3" path="res://Resources/Dialog/Vineyards_1.dialogue" id="12_ka680"]
 
 [node name="Green_Ray_Vineyards" unique_id=407343750 instance=ExtResource("1_n86vg")]
@@ -18,7 +20,7 @@ map_scene = ExtResource("10_44eiw")
 visible = false
 top_level = true
 z_index = 6
-position = Vector2(1556, 731)
+position = Vector2(1453, 587)
 board_name = "Vineyards East"
 game_board = ExtResource("3_qa0a7")
 board_comments = "Raging Vinemen skitter among shadoofs! 
@@ -36,7 +38,7 @@ unlockOnResolveStrings = Array[String](["Vineyards Cabin"])
 
 [node name="Board2" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="1" unique_id=1977585547 instance=ExtResource("2_ka680")]
 visible = false
-position = Vector2(1556, 731)
+position = Vector2(1453, 587)
 board_name = "Vineyards West"
 game_board = ExtResource("3_qa0a7")
 board_comments = "The solders are on their last legs, but still should not be underestimated. They fight in formation, protecting their weak spots. The Vinemen will occasionally help you."
@@ -50,17 +52,74 @@ champ_name = "Guardmaster"
 unlockOnResolveStrings = Array[String](["Vineyards Gate"])
 
 [node name="Win_3" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="2" unique_id=949245689 instance=ExtResource("9_5xf3a")]
-position = Vector2(1556, 731)
+position = Vector2(1453, 587)
 dialogue = ExtResource("10_swk0g")
 node_name = "Vineyards Cabin"
 
 [node name="Win_4" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="3" unique_id=685341780 instance=ExtResource("9_5xf3a")]
-position = Vector2(1556, 731)
+position = Vector2(1453, 587)
 dialogue = ExtResource("11_shl4j")
 node_name = "Vineyards Gate"
 
 [node name="DialogueIcon" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="4" unique_id=638108719 instance=ExtResource("9_5xf3a")]
-position = Vector2(1556, 731)
+position = Vector2(1453, 587)
 dialogue = ExtResource("12_ka680")
 node_name = "Vineyards Entrance"
 start_unlocked = true
+
+[node name="MapAskelan" parent="." index="2" unique_id=2040580641 instance=ExtResource("10_44eiw")]
+offset_right = 1737.0
+offset_bottom = 1080.0
+texture = ExtResource("11_pt8e4")
+script = ExtResource("12_btxsb")
+map_name = "Golden City of Ask'lan"
+
+[node name="Royal Palace Entrance" parent="MapAskelan" index="0" unique_id=597345683]
+position = Vector2(864, 225)
+
+[node name="Royal Palace Inner Sanctum" parent="MapAskelan" index="1" unique_id=1973844]
+position = Vector2(860, 109)
+
+[node name="Temple of Balhadad" parent="MapAskelan" index="2" unique_id=688431630]
+position = Vector2(977, 154)
+
+[node name="Guardhouse" parent="MapAskelan" index="3" unique_id=162049153]
+position = Vector2(1025, 493)
+
+[node name="Temple of Cyr" parent="MapAskelan" index="4" unique_id=311710893]
+position = Vector2(1213, 352)
+
+[node name="Temple of Atash" parent="MapAskelan" index="5" unique_id=2028173367]
+position = Vector2(568, 388)
+
+[node name="Backstreet" parent="MapAskelan" index="6" unique_id=675761380]
+position = Vector2(294, 628)
+
+[node name="Tavern" parent="MapAskelan" index="7" unique_id=957213204]
+position = Vector2(712, 570)
+
+[node name="River_1" parent="MapAskelan" index="8" unique_id=1191733862]
+position = Vector2(1438, 379)
+
+[node name="River_2" parent="MapAskelan" index="9" unique_id=1482601432]
+position = Vector2(1218, 789)
+
+[node name="Vineyards" parent="MapAskelan" index="10" unique_id=1917674988]
+position = Vector2(1453, 587)
+
+[node name="Villas" parent="MapAskelan" index="11" unique_id=526025477]
+position = Vector2(1556, 731)
+
+[node name="Abandoned Villa" parent="MapAskelan" index="12" unique_id=937377223]
+position = Vector2(1659, 609)
+
+[node name="City Square" parent="MapAskelan" index="13" unique_id=1995288186]
+position = Vector2(860, 377)
+
+[node name="Slums" parent="MapAskelan" index="14" unique_id=699304664]
+position = Vector2(356, 390)
+
+[node name="Guild Hideout" parent="MapAskelan" index="15" unique_id=928923066]
+position = Vector2(236, 199)
+
+[editable path="MapAskelan"]

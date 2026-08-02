@@ -36,9 +36,9 @@ A jackal-headed man approaches you, you cannot tell from where. "Ah, the old Arc
 		"Why, it lets one peer into the workings of a truly godless mind! One, the goddess Unut is not to look like a common broad; not she of the hyracian head. To displace the lady of beauty with the scandalous beauty of the form is blasphemy! Two, she belongs not here, where respectable men of faith ply their humble ritual, but in the pleasure district! Three, all mercenary carvers are wretches."
 		=> priest
 	- Ask who is behind this
-		"Why, it's clear that the Guilds, funded by merchants, mercenaries and usurers have put this up to taunt us, or worse yet, threaten us! It is known that their statues are wont to move on their own! Or else how to explain that it appeared here overnight?"
+		"Why, it's clear that the Guilds, funded by merchants, mercenaries and usurers have put this up to taunt us, or worse yet, threaten us! It is known that their statues' wont is to move on their own! Or else how to explain that it appeared here overnight?"
 		
-		"They have long been a thorn in our side, with their godless craft winning the heart of the King over ours. We priests all believe they must be redeemed."
+		"We have a grudge with them, yes, with their godless craft winning the heart of the King over ours. We priests all believe they must be redeemed."
 		=> priest
 	- Offer to help destroying the statue
 		A group of people suddenly rushes into the square. The man from before is among them. \n "Hands off our work! You loafers know not the cost of our labors! An attack on art is an attack on Unut and on the City herself!"

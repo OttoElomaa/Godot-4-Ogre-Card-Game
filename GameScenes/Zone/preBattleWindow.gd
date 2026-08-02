@@ -1,4 +1,4 @@
-extends MarginContainer
+extends CanvasLayer
 
 @onready var BestiaryContainerScene:PackedScene = preload("res://GameScenes/CardDisplayContainers/BestiaryContainer.tscn")
 

@@ -85,7 +85,7 @@ func getNodeName():
 
 func process_turn():
 	time_elapsed += 1
-	if time_elapsed > duration:
+	if time_elapsed >= duration:
 		queue_free()
 	
 func _on_area_2d_mouse_entered() -> void:

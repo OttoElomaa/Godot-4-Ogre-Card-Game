@@ -6,12 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cfbb15lvephsf" path="res://Art/CardArt/Depths/card-art-cr-umug-magus-v2.jpg" id="4_g6emo"]
 
 [node name="BattleIcon" unique_id=2114541506 instance=ExtResource("1_8eteb")]
-visible = false
 script = ExtResource("2_815ux")
 board_name = "Skirmish"
 game_board = ExtResource("3_815ux")
 board_comments = "A group of vagabonds menace the local population."
 art = ExtResource("4_g6emo")
-duration = 1
+duration = 2
 node_comments = ""
 start_unlocked = true

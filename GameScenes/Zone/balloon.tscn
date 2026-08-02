@@ -112,6 +112,16 @@ dialogue_resource = ExtResource("2_mjxrt")
 auto_start = true
 will_block_other_input = false
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=80669529]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.105882354, 0.105882354, 0.105882354, 0.5176471)
+
 [node name="Balloon" type="Control" parent="." unique_id=1514618638]
 unique_name_in_owner = true
 layout_mode = 3
