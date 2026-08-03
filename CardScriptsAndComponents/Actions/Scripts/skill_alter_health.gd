@@ -26,7 +26,6 @@ func activate(targets:Array) -> bool:
 			if isScaled():
 				damage = get_scaling({'target': target})
 			await handleInflict(target, damage)
-			MyTools.createCombatLogPrintout(str(target.cardName, '  suffers', damage, ' damage.'), Color.STEEL_BLUE)
 			success = true
 
 		#### CORRODE
@@ -51,7 +50,9 @@ func activate(targets:Array) -> bool:
 #### DEAL TEMPORARY DAMAGE TO A CARD
 func handleInflict(target:Card, amount:int):
 	target.takeDamage(amount)
-		
+	var died = target.checkAndHandleDeathFromTempHealth()
+	if died:
+		CardAnimationQueue.startResponseQueue()
 
 
 #### DEAL TEMPORARY AND PERMANENT DAMAGE TO A CARD
@@ -59,7 +60,9 @@ func handleCorrode(target:Card, amount:int):
 	#target.tempHealth -= amount
 	target.takeDamage(amount)
 	target.health -= amount
-
+	var died = target.checkAndHandleDeathFromTempHealth()
+	if died:
+		CardAnimationQueue.startResponseQueue()
 		
 	
 	

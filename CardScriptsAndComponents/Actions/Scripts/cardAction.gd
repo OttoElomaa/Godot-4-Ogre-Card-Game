@@ -13,6 +13,8 @@ var isEnemy := false
 var hasCast := false
 
 var targetingComponent: TargetingComponent
+var animation_onTarget: AnimationActuator
+var animation_onScreen: AnimationActuator
 var savedTargets: Array
 
 
@@ -26,6 +28,12 @@ func setup(card:Card):
 			component.setup(self, myCard)
 		if component is TargetingComponent:
 			targetingComponent = component
+		if component is AnimationActuator:
+			match component.play_on:
+				AnimationActuator.actuator_types.ON_TARGET:
+					animation_onTarget = component
+				AnimationActuator.actuator_types.ON_SCREEN:
+					animation_onScreen = component
 
 func setup_variant(parent:Node):
 	myCard = parent
@@ -53,22 +61,17 @@ func activate(params:SignalParams) -> bool:
 	#### TURN ON MANUAL TARGETING -> No target selected yet!
 	if targetingComponent is AutoTargetingComponent:
 		targets = targetingComponent.getTargets()
-		if not targets.is_empty():
-			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is EnemyTargetingComponent:
 		if params.targetCard:
 			targets.append(params.targetCard)
-			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SourceTargetingComponent:
 		if params.sourceCard:
 			targets.append(params.sourceCard)
-			success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is SelfTargetingComponent:
 		targets.append(myCard)
-		success = await activateSkillAfterTargeting(targets)
 	
 	elif targetingComponent is ManualTargetingComponent:
 		#### It is a PLAYER CARD and requires manual targeting
@@ -76,17 +79,13 @@ func activate(params:SignalParams) -> bool:
 			var target: Card = null
 			targetingComponent.activate()
 			await targetingComponent.target_acquired or targetingComponent.aborted
-			
-			targets.append(targetingComponent.target)
 			print("target acquired: ", targetingComponent.target)
 			
 			#### TARGET FOUND
 			if targetingComponent.target:
 				targets.append(targetingComponent.target)
-				success = await activateSkillAfterTargeting(targets)
 			#### NO TARGET -> FAIL
-			else:
-				return success
+			
 		### It is an ENEMY CARD using a manual ability, refer to 
 		else:
 			var possible_targets = targetingComponent.getTargets()
@@ -101,17 +100,28 @@ func activate(params:SignalParams) -> bool:
 					CardChecks.sort_by_strongest(possible_targets)
 			
 			targets.append(possible_targets[0])
-			success = await activateSkillAfterTargeting(targets)
 	
 	#### TARGETING COMPONENT IS NONE OF THE ABOVE
 	#### -> Most likely IT DOES NOT EXIST -> That's OKAY
 	else:
-		success = await activateSkillAfterTargeting(targets)
+		pass
 	
-	#### EFFECT ANIMATION
-	if success:
+	if not targets.is_empty() or not targetingComponent:
 		EffectAnimationQueue.queueAnimation(myCard, self, targets)
+		
+		##If this is the last action under this trigger, play following animations.
+		if MyTools.isLastSibling(self):
+			if myCard.isRitual:
+				await myCard.animateRitualCast()
+				
+			if animation_onScreen:
+				EffectAnimationQueue.queueAnimation(myCard, self, targets, animation_onScreen.activate) 
 			
+		success = await activateSkillAfterTargeting(targets)
+	else:
+		MyTools.createCombatLogPrintout(str(myCard.cardName), ": cannot target anybody!")
+		return success
+	
 	return success
 
 
@@ -150,8 +160,12 @@ func activateSkillAfterTargeting(targets:Array) -> bool:
 			successfulScript = skill
 			await get_tree().process_frame
 			
-			
 	if success:
+		
+		if animation_onTarget:
+			for card:Card in targets:
+				EffectAnimationQueue.queueAnimation(myCard, self, targets, animation_onTarget.activate)
+				 
 		#### REST IF NEEDED
 		if checkHasCast():
 			myCard.restAndAnimate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dtps2wa815evx"]
+[gd_scene format=3 uid="uid://dtps2wa815evx"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_mir7j"]
 [ext_resource type="Texture2D" uid="uid://cb7jl678hu751" path="res://Art/CardArt/Desert/card-art-creature-alhaja-bheith-nochti.jpg" id="2_ein2a"]
@@ -9,19 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/BattleArtTargeting.tscn" id="5_owoqt"]
 [ext_resource type="PackedScene" uid="uid://cfyhxpowqwla7" path="res://CardScriptsAndComponents/Actions/SkillDispelStatus.tscn" id="6_jkh75"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ig1vh"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j0atp"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_arj5f"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c7f1n"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_ig1vh")
+noise = SubResource("FastNoiseLite_j0atp")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eqnvv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_owoqt"]
 resource_local_to_scene = true
 shader = ExtResource("2_riat4")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_arj5f")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_c7f1n")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -29,27 +29,27 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-True-Name-Paladin" instance=ExtResource("1_mir7j")]
-material = SubResource("ShaderMaterial_eqnvv")
+[node name="Card-Cr-True-Name-Paladin" unique_id=991535166 instance=ExtResource("1_mir7j")]
+material = SubResource("ShaderMaterial_owoqt")
 cardName = "True Name Paladin"
 subTypeStr = "Pilgrim Warrior"
 group = 9
-flavorText = "“In the purity of the desert, the Bheith Nochti seek the place of utmost piety.”"
+flavorText = "The cultists seek the 'correction' of names: to return things to their True Names, true ways."
 manaCost = 3
 startingDamage = 2
 startingHealth = 4
 
-[node name="BattleArtTrigger" parent="Actions" index="0" instance=ExtResource("3_j0atp")]
+[node name="BattleArtTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=866282832 instance=ExtResource("3_j0atp")]
 
-[node name="CardAction" parent="Actions/BattleArtTrigger" index="1" instance=ExtResource("4_c7f1n")]
+[node name="CardAction" parent="Actions/BattleArtTrigger" index="1" unique_id=2128449263 instance=ExtResource("4_c7f1n")]
 customActionText = "Battle Art: dispel all buffs from the opponent."
 
-[node name="BattleArtTargComponent" parent="Actions/BattleArtTrigger/CardAction" index="1" instance=ExtResource("5_owoqt")]
+[node name="BattleArtTargComponent" parent="Actions/BattleArtTrigger/CardAction" index="1" unique_id=261187361 instance=ExtResource("5_owoqt")]
 
-[node name="SkillDispelStatus" parent="Actions/BattleArtTrigger/CardAction" index="2" instance=ExtResource("6_jkh75")]
+[node name="SkillDispelStatus" parent="Actions/BattleArtTrigger/CardAction" index="2" unique_id=347833977 instance=ExtResource("6_jkh75")]
 buffs = true
 
-[node name="Vanguard" parent="KeywordHandler/MyKeywords" index="0" instance=ExtResource("2_mir7j")]
+[node name="Vanguard" parent="KeywordHandler/MyKeywords" parent_id_path=PackedInt32Array(83486270) index="0" unique_id=535206619 instance=ExtResource("2_mir7j")]
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("2_ein2a")

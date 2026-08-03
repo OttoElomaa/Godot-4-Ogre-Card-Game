@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dr05imq2nqud7"]
+
+[ext_resource type="Texture2D" uid="uid://dbtq05rni8hg6" path="res://Art/CardComponents/card-action-particle-generic.png" id="1_tfgr2"]
+[ext_resource type="Script" uid="uid://ubvt4ypihn26" path="res://GameScenes/ParticlesAnimations/Scripts/oneshot_particle.gd" id="2_6gibp"]
+
+[sub_resource type="Curve" id="Curve_6gibp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kqbvo"]
+curve = SubResource("Curve_6gibp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p3pqr"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(60, 60, 20)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -205.9
+angle_max = 255.90001
+direction = Vector3(10, 10, 10)
+radial_velocity_min = 99.99998
+radial_velocity_max = 99.99998
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 47.76
+linear_accel_max = 83.52
+radial_accel_min = 11.249997
+radial_accel_max = 11.249997
+tangential_accel_min = 66.67
+tangential_accel_max = 66.67
+scale_min = 0.19999999
+scale_max = 0.5
+alpha_curve = SubResource("CurveTexture_kqbvo")
+
+[node name="GenericParticles" type="GPUParticles2D" unique_id=1861594198]
+emitting = false
+amount = 16
+texture = ExtResource("1_tfgr2")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_p3pqr")
+script = ExtResource("2_6gibp")

@@ -5,6 +5,7 @@
 
 [node name="Champion" type="Node2D" unique_id=1181374962]
 script = ExtResource("1_y1dmd")
-texture = ExtResource("2_tubnd")
 cardName = "Nameless Warrior"
+cardType = 2
+texture = ExtResource("2_tubnd")
 startingHealth = 5

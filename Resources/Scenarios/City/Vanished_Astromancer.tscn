@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://csanaqvtgc7hc"]
+
+[ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/Zone.tscn" id="1_jim2b"]
+[ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="2_jewtb"]
+[ext_resource type="Resource" uid="uid://bk3ont1i7ngu2" path="res://Resources/Dialog/Vanished Astromancer_1.dialogue" id="3_oe87p"]
+[ext_resource type="Resource" uid="uid://m82mkv15ve7i" path="res://Resources/Dialog/Vanished Astromancer_2.dialogue" id="4_xjuj7"]
+[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="5_3ft1n"]
+[ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="6_jewtb"]
+[ext_resource type="Texture2D" uid="uid://cfbb15lvephsf" path="res://Art/CardArt/Depths/card-art-cr-umug-magus-v2.jpg" id="7_sat8s"]
+[ext_resource type="PackedScene" uid="uid://df57edgdrwbbe" path="res://GameScenes/TravelMap/map_askelan.tscn" id="9_dba5n"]
+[ext_resource type="Resource" uid="uid://c6ujrcqxic4if" path="res://Resources/Dialog/Vanished Astromancer_Win.dialogue" id="11_oe87p"]
+
+[node name="Vanished_Astromancer" unique_id=997740947 instance=ExtResource("1_jim2b")]
+map_scene = ExtResource("9_dba5n")
+
+[node name="DialogueIcon" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="0" unique_id=25074373 instance=ExtResource("2_jewtb")]
+position = Vector2(1556, 731)
+dialogue = ExtResource("3_oe87p")
+node_name = "Camp"
+start_unlocked = true
+
+[node name="DialogueIcon2" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="1" unique_id=1848482860 instance=ExtResource("2_jewtb")]
+position = Vector2(1659, 609)
+dialogue = ExtResource("4_xjuj7")
+node_name = "Dilapidated Mansion"
+node_comments = "Is this where the Astromancer is being held?"
+
+[node name="UmugiteBattle" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="2" unique_id=681867639 node_paths=PackedStringArray("unlock_on_resolve") instance=ExtResource("5_3ft1n")]
+visible = false
+position = Vector2(1659, 609)
+board_name = "Inside the Mansion"
+game_board = ExtResource("6_jewtb")
+board_comments = "The Umugites use the Defy Death effect to survive mortal assaults and grow stronger in the process. Use strategy to defeat them quickly."
+deck_cards = Dictionary[String, int]({
+"Fate Guard": 2,
+"Magaal": 1,
+"Undying Kit": 2
+})
+art = ExtResource("7_sat8s")
+champ_name = "Magaal"
+unlock_on_resolve = [NodePath("../DialogueIcon3")]
+
+[node name="ThroneBattle" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="3" unique_id=1711706452 instance=ExtResource("5_3ft1n")]
+visible = false
+position = Vector2(1556, 731)
+board_name = "Throne Ambush"
+game_board = ExtResource("6_jewtb")
+
+[node name="DialogueIcon3" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="4" unique_id=1208017654 instance=ExtResource("2_jewtb")]
+position = Vector2(1556, 731)
+dialogue = ExtResource("11_oe87p")
+
+[node name="MapAskelan" parent="." index="2" unique_id=2040580641 instance=ExtResource("9_dba5n")]
+
+[editable path="MapAskelan"]

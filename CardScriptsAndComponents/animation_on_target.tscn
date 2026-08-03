@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dblhui0i328ur"]
+
+[ext_resource type="Script" uid="uid://cgkdwlemwiqto" path="res://CardScriptsAndComponents/Animations/Animation-OnTarget.gd" id="1_xrme7"]
+
+[node name="AnimationOnTarget" type="Node2D" unique_id=619397888]
+script = ExtResource("1_xrme7")
+
+[node name="SE Player" type="AudioStreamPlayer" parent="." unique_id=968422069]
+bus = &"SE"

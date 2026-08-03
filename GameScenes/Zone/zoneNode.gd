@@ -3,13 +3,23 @@ class_name ZoneNode
 
 var unlocked = false
 var resolved = false
-var zone:Scenario = null
+var travel_screen:TravelScreen = null
+
+## How many turns this node will linger. Once its duration is reached, it will be nuked (removed).
+@export var duration:int = 1:
+	set(value):
+		duration = value
+		print('changed duration to ', duration)
+var time_elapsed = 0
 
 @export var node_name = ''
 @export var node_comments = ''
 
 @export var start_unlocked = false
+
+## What nodes will be unlocked after this one is resolved. Can assign ZoneNode values.
 @export var unlock_on_resolve: Array[Node] 
+## What nodes will be unlocked after this one is resolved. Can assign String values; unlocks nodes with that node_name.
 @export var unlockOnResolveStrings: Array[String]
 
 func _ready():
@@ -21,7 +31,7 @@ func _ready():
 	update_state()
 
 func setup(zone:Node):
-	self.zone = zone
+	travel_screen = zone
 	toggleHoverInfo(false)
 
 
@@ -29,9 +39,8 @@ func setup(zone:Node):
 func _on_area_2d_input_event(viewport, event:InputEvent, shape_idx):
 	
 	if event.is_action_pressed("LMB"):
-		if not getNodeName() in GameInfo.playerWonBattleNames:
-			if not insta_resolve():  #### CHEAT MENU - SKIP NODE GAMEPLAY
-				handleClick()        #### PROCEED WITH NODE GAMEPLAY
+		if not insta_resolve():  #### CHEAT MENU - SKIP NODE GAMEPLAY
+			handleClick()        #### PROCEED WITH NODE GAMEPLAY
 
 
 
@@ -49,9 +58,8 @@ func update_state():
 ### when the conversation within it is completed.
 func resolve():
 	resolved = true
-	GameInfo.playerWonBattleNames.append(getNodeName())
-	showCompletionState()
 	unlock_connected()
+	queue_free()
 
 
 ### If 'insta-resolve' is checked in the Cheat menu, this will resolve the node
@@ -75,8 +83,10 @@ func getNodeName():
 			stringToCheck = battleName
 	return stringToCheck
 
-
-
+func process_turn():
+	time_elapsed += 1
+	if time_elapsed >= duration:
+		queue_free()
 	
 func _on_area_2d_mouse_entered() -> void:
 	toggleHoverInfo(true)
@@ -88,10 +98,12 @@ func _on_area_2d_mouse_exited() -> void:
 func toggleHoverInfo(enable:bool):
 	if enable:
 		$InfoPanel.show()
+		$InfoPanel.z_index = 1
 		$InfoPanel/HBox/NameLabel.text = getNodeName()
-		$InfoPanel/HBox/DescLabel.text = node_comments
+		$InfoPanel/HBox/DescLabel.text = str(node_comments, '\nWill disappear after ', duration - time_elapsed, ' turns')
 	else:
 		$InfoPanel.hide()
+		$InfoPanel.z_index = 0
 
 func showCompletionState():
 	$ClearedOverlay.visible = resolved
@@ -99,8 +111,8 @@ func showCompletionState():
 func unlock_connected():
 	for n:ZoneNode in unlock_on_resolve:
 		n.unlock()
-	for name:String in unlockOnResolveStrings:
-		zone.unlockNode(name)
+	for n:String in unlockOnResolveStrings:
+		travel_screen.unlockNode(n)
 
 
 ### A Zone Node is visible when unlocked. Nodes can be unlocked at the start,

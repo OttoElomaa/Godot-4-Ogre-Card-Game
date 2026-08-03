@@ -1,26 +1,26 @@
-[gd_scene load_steps=11 format=3 uid="uid://duihm5pjrc0e0"]
+[gd_scene format=3 uid="uid://duihm5pjrc0e0"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_x7boq"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_7sfnw"]
 [ext_resource type="PackedScene" uid="uid://bedta2s4xo6ro" path="res://CardScriptsAndComponents/Triggers/RitualTrigger.tscn" id="3_1mugf"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="4_a4ifc"]
-[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_xtcsi"]
 [ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="6_c0iy2"]
 [ext_resource type="PackedScene" uid="uid://c2r8x7dfnt45s" path="res://CardScriptsAndComponents/EffectCounters/EffectDefyDeath.tscn" id="7_b8i4u"]
+[ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="7_x7boq"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_txrdj"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_x7boq"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x8o4c"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7sfnw"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_txrdj")
+noise = SubResource("FastNoiseLite_x7boq")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hg45g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mugf"]
 resource_local_to_scene = true
 shader = ExtResource("2_7sfnw")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_x8o4c")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_7sfnw")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -28,8 +28,8 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Ri-Fate-Guard" instance=ExtResource("1_x7boq")]
-material = SubResource("ShaderMaterial_hg45g")
+[node name="Ri-Fate-Guard" unique_id=545468593 instance=ExtResource("1_x7boq")]
+material = SubResource("ShaderMaterial_1mugf")
 cardName = "Fate Guard"
 cardType = 1
 subTypeStr = "Umugite Spell"
@@ -37,13 +37,13 @@ group = 20
 flavorText = "\"An Umugite shall not die unless that be to his Lord's benefit.\""
 manaCost = 1
 
-[node name="RitualTrigger" parent="Actions" index="0" instance=ExtResource("3_1mugf")]
+[node name="RitualTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1418176750 instance=ExtResource("3_1mugf")]
 
-[node name="CardAction" parent="Actions/RitualTrigger" index="0" instance=ExtResource("4_a4ifc")]
+[node name="CardAction" parent="Actions/RitualTrigger" index="0" unique_id=596220409 instance=ExtResource("4_a4ifc")]
 customActionText = "Ritual. Grant Defy Death."
 
-[node name="ManualTargeting" parent="Actions/RitualTrigger/CardAction" index="1" instance=ExtResource("5_xtcsi")]
-
-[node name="SkillEffectCounters" parent="Actions/RitualTrigger/CardAction" index="2" instance=ExtResource("6_c0iy2")]
+[node name="SkillEffectCounters" parent="Actions/RitualTrigger/CardAction" index="1" unique_id=1188978823 instance=ExtResource("6_c0iy2")]
 grantEffect = ExtResource("7_b8i4u")
 grantAmount = 1
+
+[node name="TargetAllAllies" parent="Actions/RitualTrigger/CardAction" index="2" unique_id=1658432300 instance=ExtResource("7_x7boq")]

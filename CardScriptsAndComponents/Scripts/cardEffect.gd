@@ -13,6 +13,10 @@ var myCard: Card = null
 @export var id: String
 @export_multiline var description: String
 
+##Card suffering from this effect will not be able to take manual actions.
+@export var block_action := false
+##Card suffering from this effect will not be able to relatiate when struck.
+@export var block_retaliation := false
 
 func setup(holder: Card):
 #	self.sourceCard = sourceC

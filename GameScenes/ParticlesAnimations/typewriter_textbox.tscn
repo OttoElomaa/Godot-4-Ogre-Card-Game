@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://d2lky3krjjul4"]
+
+[ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="1_718ti"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="2_belcu"]
+[ext_resource type="Script" uid="uid://b2femu4hqkqb8" path="res://GameScenes/MainMenu/Typewriter.gd" id="2_k08e2"]
+[ext_resource type="AudioStream" uid="uid://dhuojolt6ampg" path="res://Audio/SE/Text_Typing.wav" id="3_belcu"]
+
+[node name="TypewriterTextbox" type="PanelContainer" unique_id=1601182355]
+z_index = -1
+custom_minimum_size = Vector2(450, 450)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -175.0
+offset_right = 150.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_718ti")
+theme_override_styles/panel = ExtResource("2_belcu")
+script = ExtResource("2_k08e2")
+delay = 0.1
+delay_variance = 1.5
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=206873500]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1888373850]
+modulate = Color(0.47113067, 0.47113067, 0.47113067, 1)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("1_718ti")
+theme_override_colors/default_color = Color(0.973535, 0.973535, 0.973535, 1)
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+visible_characters_behavior = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=627841380]
+stream = ExtResource("3_belcu")
+volume_db = -8.787
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1065641342]
+layout_mode = 2
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=1464315175]
+autostart = true

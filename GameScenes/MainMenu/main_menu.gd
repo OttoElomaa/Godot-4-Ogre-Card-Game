@@ -2,9 +2,9 @@ extends Node2D
 
 
 @onready var GameBoardScene: PackedScene = preload("res://GameScenes/GameBoard/GameBoard.tscn")
-
-@onready var ZoneScene: PackedScene = preload("res://Resources/Scenarios/Vanished_Astromancer.tscn")
-@onready var ArenaScene: PackedScene = preload("res://Resources/Scenarios/Arena.tscn")
+@onready var OptionsScreen: PackedScene = preload("res://GameScenes/OptionScreen/OptionsScreen.tscn")
+@onready var ZoneScene: PackedScene = preload("res://GameScenes/TravelMap/travel_screen.tscn")
+@onready var ArenaScene: PackedScene = preload('uid://cur0336ypyp8w')
 
 var bestiaryVisible := false
 
@@ -12,10 +12,12 @@ var bestiaryCards := []
 
 
 func _ready() -> void:
-	DataLoader.get_all_game_cards()
+	Options.load_options()
+	DataLoader.createAllGameCards()
 	DataLoader.load_text_data('res://Resources/Data/Terms.json', DataLoader.terms)
 	DataLoader.get_effect_descriptions()
 	GameInfo.playerOwnedCards = DataLoader.createDesertDeck()
+	GameInfo.enemyDeckCards = DataLoader.createDesertDeck()
 	GameInfo.current_champion = DataLoader.champions_by_name['Nameless Warrior']
 #	setupBestiary()
 	
@@ -23,9 +25,13 @@ func _ready() -> void:
 #	buttonPressedToggleBestiary()
 	
 	for child in $Decor/DancingCards.get_children():
-		child.initialize()
+		child.initialize(self)
+		await get_tree().create_timer(0.15).timeout
+	
 
-
+func put_on_top(node:Node2D):
+	var parent = node.get_parent()
+	parent.move_child(node, -1)
 
 func setupBestiary():
 	
@@ -78,7 +84,6 @@ func buttonPressedStartMatch() -> void:
 	bestiaryVisible = false
 	
 	GameInfo.isPreBattle = true
-	GameInfo.enemyDeckCards = DataLoader.createDesertDeck()
 	MyTools.setupAndOpenDeckEdit(GameBoardScene.instantiate())
 	
 
@@ -94,7 +99,7 @@ func toggleCardInfo(enable:bool, card:Card):
 	cardInfo.toggleCardInfo(enable, card)
 
 func _on_options_button_pressed():
-	pass # Replace with function body.
+	get_tree().root.add_child(OptionsScreen.instantiate())
 
 
 func _on_endless_button_pressed():

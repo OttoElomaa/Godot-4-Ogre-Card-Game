@@ -1,53 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://nmvym5570qtn"]
+[gd_scene format=3 uid="uid://nmvym5570qtn"]
 
 [ext_resource type="Script" uid="uid://d4bphbjg3snvs" path="res://GameScenes/TravelMap/travel_screen.gd" id="1_y1wuq"]
-[ext_resource type="PackedScene" uid="uid://dp73rr7k36k1f" path="res://GameScenes/TravelMap/level_select.tscn" id="2_reupg"]
+[ext_resource type="PackedScene" uid="uid://df57edgdrwbbe" path="res://GameScenes/TravelMap/map_askelan.tscn" id="2_7ckqu"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="3_vsusc"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="4_rxdwd"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="5_txlr3"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="6_cpily"]
+[ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="7_x7vqv"]
+[ext_resource type="PackedScene" uid="uid://8a68hh76lcve" path="res://GameScenes/DeckEditScreen/champion_container.tscn" id="7_xt4g0"]
+[ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="10_rg1pc"]
+[ext_resource type="AudioStream" uid="uid://mul6424e3fq3" path="res://Audio/BGM/Anghu Musica - Sun & The Lord; General's Theme.wav" id="10_vsusc"]
 
 [sub_resource type="Animation" id="Animation_reupg"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/SubViewportContainer/SubViewport/LevelSelect:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, 2)]
-}
 
 [sub_resource type="Animation" id="Animation_f8f2x"]
 resource_name = "zoom_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/SubViewportContainer/SubViewport/LevelSelect:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.966667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1.7, 1.7), Vector2(2.2, 2.2)]
-}
 
 [sub_resource type="Animation" id="Animation_y1wuq"]
 resource_name = "zoom_out"
 length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/SubViewportContainer/SubViewport/LevelSelect:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2, 2), Vector2(1.5, 1.5)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_reupg"]
 _data = {
@@ -56,30 +28,310 @@ _data = {
 &"zoom_out": SubResource("Animation_y1wuq")
 }
 
-[node name="TravelScreen" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0wri"]
+bg_color = Color(0.947752, 0.911757, 0.861921, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.188235, 0.105882, 0.0156863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8icc"]
+bg_color = Color(0.947752, 0.911757, 0.861921, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.188235, 0.105882, 0.0156863, 1)
+
+[node name="TravelScreen" type="Node2D" unique_id=800880545 node_paths=PackedStringArray("map")]
 script = ExtResource("1_y1wuq")
+map = NodePath("MapAskelan")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-offset_right = 1917.0
-offset_bottom = 1079.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1299235682]
+libraries/ = SubResource("AnimationLibrary_reupg")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer"]
-z_index = -5
+[node name="MapAskelan" parent="." unique_id=2040580641 instance=ExtResource("2_7ckqu")]
+
+[node name="MapNodes" type="Node2D" parent="." unique_id=2141938208]
+unique_name_in_owner = true
+
+[node name="PreBattleCanvas" type="CanvasLayer" parent="." unique_id=487244156]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1243581295]
+unique_name_in_owner = true
+offset = Vector2(-960, -540)
+transform = Transform2D(1, 0, 0, 1, -960, -540)
+follow_viewport_enabled = true
+
+[node name="ExitPane" type="MarginContainer" parent="UI" unique_id=1787017403]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 721.0
+offset_top = 547.0
+offset_right = 961.0
+offset_bottom = 667.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="PanelContainer" parent="UI/ExitPane" unique_id=1537020221]
+custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-stretch = true
-mouse_target = true
+theme_override_styles/panel = ExtResource("4_rxdwd")
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/SubViewportContainer"]
-disable_3d = true
-handle_input_locally = false
-physics_object_picking = true
-size = Vector2i(2, 2)
-render_target_update_mode = 4
+[node name="Label" type="Label" parent="UI/ExitPane/Panel" unique_id=1719995775]
+layout_mode = 2
+text = "Exit Game"
+label_settings = ExtResource("5_txlr3")
+horizontal_alignment = 1
 
-[node name="LevelSelect" parent="MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_reupg")]
-zoom = Vector2(2, 2)
+[node name="ExitButton" type="Button" parent="UI/ExitPane/Panel" unique_id=1703204022]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_cpily")
+theme_override_styles/hover = ExtResource("7_x7vqv")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_reupg")
-}
+[node name="PlayerInfoPanel" type="MarginContainer" parent="UI" unique_id=1140391129]
+custom_minimum_size = Vector2(400, 0)
+offset_left = 961.0
+offset_top = 547.0
+offset_right = 1361.0
+offset_bottom = 1067.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Hbox" type="HBoxContainer" parent="UI/PlayerInfoPanel" unique_id=2137793432]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ChampContainer" parent="UI/PlayerInfoPanel/Hbox" unique_id=334304769 instance=ExtResource("7_xt4g0")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Panel2" type="PanelContainer" parent="UI/PlayerInfoPanel/Hbox" unique_id=1747643747]
+custom_minimum_size = Vector2(340, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t0wri")
+
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/Hbox/Panel2" unique_id=1795534783]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/Hbox/Panel2/HBox" unique_id=1956279301]
+layout_mode = 2
+text = "  Glory  -"
+label_settings = ExtResource("3_vsusc")
+horizontal_alignment = 1
+
+[node name="GloryAmountLabel" type="Label" parent="UI/PlayerInfoPanel/Hbox/Panel2/HBox" unique_id=93841041]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("3_vsusc")
+horizontal_alignment = 1
+
+[node name="ZoneInfoPanel" type="MarginContainer" parent="UI/PlayerInfoPanel/Hbox" unique_id=930969400]
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Panel" type="PanelContainer" parent="UI/PlayerInfoPanel/Hbox/ZoneInfoPanel" unique_id=1718314835]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h8icc")
+
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/Hbox/ZoneInfoPanel/Panel" unique_id=659307026]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/Hbox/ZoneInfoPanel/Panel/HBox" unique_id=627782776]
+layout_mode = 2
+text = "  Zone  -"
+label_settings = ExtResource("3_vsusc")
+horizontal_alignment = 1
+
+[node name="ZoneNameLabel" type="Label" parent="UI/PlayerInfoPanel/Hbox/ZoneInfoPanel/Panel/HBox" unique_id=2137671914]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("3_vsusc")
+horizontal_alignment = 1
+
+[node name="BottomActions" type="MarginContainer" parent="UI" unique_id=313206057]
+custom_minimum_size = Vector2(1200, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 374.0
+offset_top = 657.0
+offset_right = 1574.0
+offset_bottom = 941.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="UI/BottomActions" unique_id=1544593506]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Description" type="PanelContainer" parent="UI/BottomActions/VBox" unique_id=2063165896]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h8icc")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/BottomActions/VBox/Description" unique_id=1303556962]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="HBox" type="HBoxContainer" parent="UI/BottomActions/VBox/Description/MarginContainer" unique_id=1856405645]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ActionNameLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox" unique_id=476485832]
+layout_mode = 2
+text = "  Zone  -"
+label_settings = ExtResource("3_vsusc")
+horizontal_alignment = 1
+
+[node name="ActionDescLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox" unique_id=106334236]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("3_vsusc")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="UI/BottomActions/VBox" unique_id=1690019063]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="BuildArmy" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=270675042]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("10_rg1pc")
+description = "Turn others to your cause: Purchase cards native to this land using Glory"
+
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" unique_id=1756828214]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_rxdwd")
+
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel" unique_id=690573687]
+layout_mode = 2
+text = "Build Army"
+label_settings = ExtResource("5_txlr3")
+horizontal_alignment = 1
+
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel" unique_id=859334079]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_cpily")
+theme_override_styles/hover = ExtResource("7_x7vqv")
+
+[node name="Scry" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=1861402209]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("10_rg1pc")
+description = "Seek the abyss for rare cards of all sorts"
+
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Scry" unique_id=2003768548]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_rxdwd")
+
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel" unique_id=1497052123]
+layout_mode = 2
+text = "Scry"
+label_settings = ExtResource("5_txlr3")
+horizontal_alignment = 1
+
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel" unique_id=700434053]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_cpily")
+theme_override_styles/hover = ExtResource("7_x7vqv")
+
+[node name="Travel" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=245256136]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("10_rg1pc")
+description = "Travel to a different land"
+
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Travel" unique_id=764190476]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_rxdwd")
+
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel" unique_id=68017451]
+layout_mode = 2
+text = "Travel"
+label_settings = ExtResource("5_txlr3")
+horizontal_alignment = 1
+
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel" unique_id=310105088]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_cpily")
+theme_override_styles/hover = ExtResource("7_x7vqv")
+
+[node name="Battle" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=1958055901]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("10_rg1pc")
+description = "Fight an opponent on one of the available game boards."
+
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Battle" unique_id=1509679919]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_rxdwd")
+
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel" unique_id=1819848458]
+layout_mode = 2
+text = "Battle"
+label_settings = ExtResource("5_txlr3")
+horizontal_alignment = 1
+
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel" unique_id=932578111]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_cpily")
+theme_override_styles/hover = ExtResource("7_x7vqv")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1212203822]
+stream = ExtResource("10_vsusc")
+bus = &"BGM"
+
+[connection signal="pressed" from="UI/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" method="buttonMouseEntered"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Scry" method="buttonMouseEntered"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Travel" method="buttonMouseEntered"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Battle" method="buttonMouseEntered"]

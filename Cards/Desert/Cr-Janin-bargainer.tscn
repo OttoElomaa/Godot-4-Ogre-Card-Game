@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqej1t0pa88fs"]
+[gd_scene format=3 uid="uid://cqej1t0pa88fs"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_6ny87"]
 [ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="2_tbg24"]
@@ -14,19 +14,19 @@
 [ext_resource type="Script" uid="uid://ct2d04rc5jy3" path="res://CardScriptsAndComponents/ScalingComponents/Scripts/scale_from_cost_card.gd" id="9_71q2j"]
 [ext_resource type="PackedScene" uid="uid://b5it2nbxjtkik" path="res://CardScriptsAndComponents/Keywords/Transient.tscn" id="11_udkeg"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_dfmyb"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_udkeg"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8lj54"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dfmyb"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_dfmyb")
+noise = SubResource("FastNoiseLite_udkeg")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_osbj1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8lj54"]
 resource_local_to_scene = true
 shader = ExtResource("2_u2phu")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_8lj54")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_dfmyb")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -34,8 +34,8 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-JaninBargain" instance=ExtResource("1_6ny87")]
-material = SubResource("ShaderMaterial_osbj1")
+[node name="Card-Cr-JaninBargain" unique_id=1042521129 instance=ExtResource("1_6ny87")]
+material = SubResource("ShaderMaterial_8lj54")
 cardName = "Janin Bargainer"
 subTypeStr = "Janin Spirit"
 flavorText = "The Spirit so spoke unto them:
@@ -45,35 +45,35 @@ startingDamage = 1
 startingHealth = 3
 priority = -1
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_tbg24")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1340705927 instance=ExtResource("2_tbg24")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("3_r07h0")]
-customActionText = "Cast: Sacrifice an ally"
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" unique_id=57926609 instance=ExtResource("3_r07h0")]
+customActionText = "Cast: sacrifice an ally."
 
-[node name="SkillSendToGraveyard" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_u2phu")]
+[node name="SkillSendToGraveyard" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=1164302346 instance=ExtResource("4_u2phu")]
 
-[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_udkeg")]
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=1860300275 instance=ExtResource("5_udkeg")]
 manualTargetGroup = 1
 
-[node name="IfNotSelf" parent="Actions/OnCastTrigger/CardAction/ManualTargeting" index="1" instance=ExtResource("7_udkeg")]
+[node name="IfNotSelf" parent="Actions/OnCastTrigger/CardAction/ManualTargeting" index="1" unique_id=278604521 instance=ExtResource("7_udkeg")]
 
-[node name="SaveTargets" parent="Actions/OnCastTrigger/CardAction" index="2" instance=ExtResource("6_dfmyb")]
+[node name="SaveTargets" parent="Actions/OnCastTrigger/CardAction" index="2" unique_id=884607477 instance=ExtResource("6_dfmyb")]
 
-[node name="CardAction2" parent="Actions/OnCastTrigger" index="1" instance=ExtResource("3_r07h0")]
-customActionText = "Gain mana equal to sacrificed creature's cost times two."
+[node name="CardAction2" parent="Actions/OnCastTrigger" index="1" unique_id=804289790 instance=ExtResource("3_r07h0")]
+customActionText = "Gain 2x worth of Mana, where x is the sacrificed card's mana cost."
 
-[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction2" index="0" instance=ExtResource("7_8lj54")]
+[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction2" index="0" unique_id=1263273763 instance=ExtResource("7_8lj54")]
 alterOwnerMana = 1
 
-[node name="ScaleFromSavedCard" parent="Actions/OnCastTrigger/CardAction2/SkillPlayerHealthMana" index="0" instance=ExtResource("8_osbj1")]
+[node name="ScaleFromSavedCard" parent="Actions/OnCastTrigger/CardAction2/SkillPlayerHealthMana" index="0" unique_id=1985934401 instance=ExtResource("8_osbj1")]
 script = ExtResource("9_71q2j")
 stat_to_use = 2
 multiplier = 2.0
 
-[node name="Transient" parent="KeywordHandler/MyKeywords" index="0" instance=ExtResource("11_udkeg")]
+[node name="Transient" parent="KeywordHandler/MyKeywords" parent_id_path=PackedInt32Array(83486270) index="0" unique_id=1916472071 instance=ExtResource("11_udkeg")]
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("3_ob4vk")
 
-[node name="EffectText" parent="Frontside" index="6"]
+[node name="EffectText" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="6" unique_id=233184557]
 text_overrun_behavior = 4

@@ -2,21 +2,29 @@ extends Node2D
 
 var all_cards = []
 
-
 #####################################################
 #### PLAYER PROFILE
-var current_champion:Champion = null
+var current_champion:Champion = null:
+	set(value):
+		current_champion = value
+		if currentZone:
+			currentZone.updateUI()
 var playerName := "The Player"
 var heroName: String = '':
 	get:
 		return current_champion.cardName
 var character_position: Map_Node
 
-var playerGlory := 0
+var playerGlory := 0:
+	set(value):
+		playerGlory = value
+		if currentZone:
+			currentZone.updateUI()
+
 var playerLives := 3
 
-var playerWonBattleNames := []
-var currentZone: Scenario = null
+var nodesToResolve: Array[ZoneNode] = []
+var currentZone: TravelScreen = null
 var currentBattleInfo: ZoneBattleIcon = null
 
 var playerIcon:Texture:
@@ -32,6 +40,8 @@ var playerOwnedChampions: Array[Champion] = []
 ## Used to generate playerRecruitmentPool. The game checks for cards whose subtype contains
 ## members of this array.
 var playerAlliances: Array[Card.Group] = []
+
+
 
 ## Cards available for purchase based on player alliances.
 var playerRecruitmentPool := []

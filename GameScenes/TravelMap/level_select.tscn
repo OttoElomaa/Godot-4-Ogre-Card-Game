@@ -1,48 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp73rr7k36k1f"]
+[gd_scene format=3 uid="uid://dp73rr7k36k1f"]
 
 [ext_resource type="Script" uid="uid://b2303t1wi46kv" path="res://GameScenes/TravelMap/level_select.gd" id="1_lx4vd"]
 [ext_resource type="PackedScene" uid="uid://b5iuilyek4ka8" path="res://GameScenes/TravelMap/map_character.tscn" id="3_2sqnl"]
 [ext_resource type="Texture2D" uid="uid://cmfxojwgfvey8" path="res://Art/ZoneComponents/path-of-achra-world-09-BIGLABELS-WEBSITE.jpg" id="4_2sqnl"]
 [ext_resource type="PackedScene" uid="uid://nuu3xo3eknpr" path="res://GameScenes/TravelMap/map_node.tscn" id="4_esctj"]
+[ext_resource type="Texture2D" uid="uid://d0ct4kwut877u" path="res://Art/CardArt/card-art-background-desert-mountain.png" id="5_t5pnt"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_72w8f"]
-vertices = PackedVector2Array(993.008, -988.023, 996.969, 995.961, -990, 989.031, -990, -992.969)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1000, -1003, 1003, -998, 1007, 1006, -1000, 999)])
-
-[node name="Level Select" type="Node2D"]
+[node name="Level Select" type="Node2D" unique_id=1511626640]
 script = ExtResource("1_lx4vd")
 
-[node name="BackGround" type="Control" parent="."]
+[node name="BackGround" type="Control" parent="." unique_id=507109136]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 999.0
+offset_top = 516.0
+offset_right = 1039.0
+offset_bottom = 556.0
 
-[node name="Sprite2D" type="Sprite2D" parent="BackGround"]
+[node name="Sprite2D" type="TextureRect" parent="BackGround" unique_id=1075985530]
+layout_mode = 0
+offset_left = -1101.0
+offset_top = -513.0
+offset_right = 899.0
+offset_bottom = 1487.0
 texture = ExtResource("4_2sqnl")
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(0, 1)
-navigation_polygon = SubResource("NavigationPolygon_72w8f")
+[node name="Character" parent="." unique_id=891503199 instance=ExtResource("3_2sqnl")]
 
-[node name="Character" parent="." instance=ExtResource("3_2sqnl")]
+[node name="Lines" type="Node2D" parent="." unique_id=359532637]
 
-[node name="Lines" type="Node2D" parent="."]
-
-[node name="Nodes" type="Node2D" parent="."]
+[node name="Nodes" type="Node2D" parent="." unique_id=586378885]
 top_level = true
 
-[node name="Map_Node" parent="Nodes" instance=ExtResource("4_esctj")]
-position = Vector2(432, 238)
+[node name="Map_Node" parent="Nodes" unique_id=1931538838 instance=ExtResource("4_esctj")]
+position = Vector2(1163, 608)
+texture = ExtResource("5_t5pnt")
 
-[node name="Map_Node2" parent="Nodes" instance=ExtResource("4_esctj")]
+[node name="Map_Node2" parent="Nodes" unique_id=308721423 instance=ExtResource("4_esctj")]
 position = Vector2(211, 530)
-index = "Salt Flats"
-connections = ["Desert of the Gods", "Eastern Desert"]
+texture = ExtResource("5_t5pnt")
 
-[node name="Map_Node6" parent="Nodes" instance=ExtResource("4_esctj")]
+[node name="Map_Node6" parent="Nodes" unique_id=558974886 instance=ExtResource("4_esctj")]
 position = Vector2(-70, 231)
-index = "Desert of the Gods"
-connections = ["Eastern Desert", "Salt Flats"]
-description = "Desert of the Gods"
+texture = ExtResource("5_t5pnt")

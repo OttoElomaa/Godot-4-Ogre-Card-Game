@@ -4,6 +4,19 @@ class_name CardContainer
 @onready var art = $Frontside/Art
 var card: Card = null
 
+## If true, shows the name of the card at all times.
+@export var show_name = false:
+	set(new):
+		%CardName.visible = new
+		show_name = new
+		
+## If true, shows the mana cost of the card at all times.
+@export var show_mana_cost = true:
+	set(new):
+		%ManaCost.visible = new
+		show_mana_cost = new
+
+@export var has_margin = false
 
 func _ready():
 	pass
@@ -11,6 +24,8 @@ func _ready():
 
 ## Puts a Card-class object into the container.
 func insert_card(new_card:Card):
+	if has_margin:
+		custom_minimum_size += Vector2(20, 20)
 	
 	card = new_card
 	#### NEED TO INSTANTIATE THE CREATED CARD, SO IT CAN HAVE ITS OWN get_children() CALLS
@@ -19,6 +34,10 @@ func insert_card(new_card:Card):
 	
 	art.texture = card.cardArt
 	
+	%CardName.visible = show_name
+	%ManaCost.visible = show_mana_cost
+	
+	$CardName/Label.text = card.cardName
 	$Frontside/ManaCost/ManaCostLabel.text = str(card.manaCost)
 	$Frontside/Resources/Panel/HBox/PowerLabel.text = str(card.startingDamage)
 	$Frontside/Resources/Panel/HBox/HealthLabel.text = str(card.startingHealth)
@@ -29,13 +48,23 @@ func insert_card(new_card:Card):
 		$Frontside/Background/Spell.show()
 		$Frontside/Resources/Panel/HBox/PowerLabel.hide()
 		$Frontside/Resources/Panel/HBox/HealthLabel.hide()
+		$Frontside/Resources/Panel/HBox/DashLabel.hide()
 		
 	remove_child(card)
 
 ## Puts a PackedScene-type object into the container.
-func display_card(new_card:PackedScene):
+func display_card_packed(new_card:PackedScene):
 	
-	var card = new_card.instantiate()
-	await MyTools.createTempCard(card)
-	insert_card(card.duplicate())
-	MyTools.removeTempCard(card)
+	var card:Card = new_card.instantiate()
+	display_card(card)
+	
+func display_card(new_card:Card):	
+	#await MyTools.createTempCard(card)
+	insert_card(new_card.duplicate())
+	#MyTools.removeTempCard(card)
+
+func face_up():
+	%Backside.hide()
+
+func face_down():
+	%Backside.show()

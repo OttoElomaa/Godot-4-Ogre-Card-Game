@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cobmode87mjfw"
+path="res://.godot/imported/General_Start.dialogue-ac25100e80fc638363107f548415b87b.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/General_Start.dialogue"
+dest_files=["res://.godot/imported/General_Start.dialogue-ac25100e80fc638363107f548415b87b.tres"]
+
+[params]
+
+defaults=true

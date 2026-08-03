@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://d0m41055ikape"]
 
 [ext_resource type="Script" uid="uid://b3w556kkvbcar" path="res://GameScenes/GameBoard/a1_gameBoard.gd" id="1_rf3o6"]
-[ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="3_1phva"]
-[ext_resource type="Texture2D" uid="uid://m57jecwha7ix" path="res://Art/Portraits/portrait-adversary-01.png" id="4_1qylb"]
+[ext_resource type="PackedScene" uid="uid://8a68hh76lcve" path="res://GameScenes/DeckEditScreen/champion_container.tscn" id="3_rkqvw"]
 [ext_resource type="Texture2D" uid="uid://dmu0xu1iuwhib" path="res://Art/BoardComponents/game-mana-health-holder-texture-v3.png" id="5_anhsg"]
 [ext_resource type="LabelSettings" uid="uid://ejet2eg4in1i" path="res://Fonts/LabelSettings/LabelSetHeaderHealth.tres" id="6_r88d6"]
 [ext_resource type="LabelSettings" uid="uid://bujre4bd418t" path="res://Fonts/LabelSettings/LabelSetHeaderMana.tres" id="7_vfgb4"]
@@ -21,13 +20,16 @@
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="19_j663k"]
 [ext_resource type="Script" uid="uid://cq33h3kryyrto" path="res://CardScriptsAndComponents/Scripts/table_card_slot.gd" id="20_7yxuf"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="20_tic85"]
-[ext_resource type="PackedScene" uid="uid://dtaqr72ueoeng" path="res://GameScenes/CardDisplayContainers/CardInfoPanel.tscn" id="21_ufaws"]
 [ext_resource type="AudioStream" uid="uid://0grfmidlhvlt" path="res://Audio/SE/Player-Damaged.wav" id="24_ikeh1"]
 [ext_resource type="Script" uid="uid://3gv0j2w8kq47" path="res://GameScenes/GameBoard/camera_main_board.gd" id="25_7yxuf"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
 [ext_resource type="AudioStream" uid="uid://cqryjjev655kv" path="res://Audio/BGM/Cards of Achra OST - Tunneler Lullaby.ogg" id="26_hysm7"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="26_ngg6u"]
+[ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="27_anhsg"]
+[ext_resource type="PackedScene" uid="uid://came4na503n5s" path="res://GameScenes/CardDisplayContainers/card_container.tscn" id="29_rkqvw"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="30_rkqvw"]
+[ext_resource type="PackedScene" uid="uid://bdw6fi1o8el8n" path="res://GameScenes/ParticlesAnimations/smoke.tscn" id="31_5f6ju"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0be"]
 size = Vector2(256, 305)
@@ -124,32 +126,54 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[node name="GameBoard" type="Node2D" unique_id=961223785 groups=["gameboard"]]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5f6ju"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o0nbp"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_5f6ju")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7kvl"]
+resource_local_to_scene = true
+shader = ExtResource("30_rkqvw")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_o0nbp")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="GameBoard" type="Node2D" unique_id=1271993025 groups=["gameboard"]]
 script = ExtResource("1_rf3o6")
 
-[node name="CameraMainBoard" type="Camera2D" parent="." unique_id=763234092]
+[node name="CameraMainBoard" type="Camera2D" parent="." unique_id=1095447748]
+unique_name_in_owner = true
 anchor_mode = 0
-zoom = Vector2(0.76, 0.76)
+zoom = Vector2(0.7, 0.7)
 script = ExtResource("25_7yxuf")
 
 [node name="Portraits" type="Node2D" parent="." unique_id=865813432]
 
-[node name="PlayerSprite" type="TextureRect" parent="Portraits" unique_id=211758377]
+[node name="PlayerSprite" parent="Portraits" unique_id=334304769 instance=ExtResource("3_rkqvw")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(210, 260)
-offset_left = 1018.0
-offset_top = 1121.0
-offset_right = 1245.0
-offset_bottom = 1386.0
-pivot_offset = Vector2(113.5, 152)
-texture = ExtResource("3_1phva")
-expand_mode = 1
-stretch_mode = 4
+offset_left = 1024.0
+offset_top = 1118.0
+offset_right = 1256.0
+offset_bottom = 1512.0
+scale = Vector2(0.9, 0.9)
+show_name = false
 
-[node name="EnemySprite" type="Sprite2D" parent="Portraits" unique_id=1302467631]
+[node name="EnemySprite" parent="Portraits" unique_id=735003844 instance=ExtResource("3_rkqvw")]
 unique_name_in_owner = true
-position = Vector2(1189.5, 135)
-texture = ExtResource("4_1qylb")
+offset_left = 1091.0
+offset_top = 6.0
+offset_right = 1323.0
+offset_bottom = 400.0
+scale = Vector2(0.9, 0.9)
+show_name = false
 
 [node name="PlayerResourceHolderSprite" type="Sprite2D" parent="Portraits" unique_id=1225120905]
 position = Vector2(1176.5, 1266)
@@ -379,18 +403,18 @@ bus = &"SE"
 [node name="CardsManager" type="Node2D" parent="." unique_id=1422854690 groups=["cardManager"]]
 script = ExtResource("15_h4god")
 
-[node name="PlayerDeck" type="Node2D" parent="CardsManager"]
+[node name="PlayerDeck" type="Node2D" parent="CardsManager" unique_id=278051598]
 unique_name_in_owner = true
 position = Vector2(-500, 0)
 
-[node name="EnemyDeck" type="Node2D" parent="CardsManager"]
+[node name="EnemyDeck" type="Node2D" parent="CardsManager" unique_id=718459274]
 unique_name_in_owner = true
 position = Vector2(-300, 0)
 
-[node name="PlayerHand" type="Node2D" parent="CardsManager"]
+[node name="PlayerHand" type="Node2D" parent="CardsManager" unique_id=88705802]
 unique_name_in_owner = true
 
-[node name="EnemyHand" type="Node2D" parent="CardsManager"]
+[node name="EnemyHand" type="Node2D" parent="CardsManager" unique_id=2123358451]
 unique_name_in_owner = true
 
 [node name="PlayerBoard" type="Node2D" parent="CardsManager" unique_id=353511353]
@@ -398,7 +422,7 @@ unique_name_in_owner = true
 [node name="EnemyBoard" type="Node2D" parent="CardsManager" unique_id=573317099]
 
 [node name="PlayerHandPosition" type="Marker2D" parent="CardsManager" unique_id=1764255656]
-position = Vector2(260, 1392)
+position = Vector2(260, 1350)
 
 [node name="EnemyHandPosition" type="Marker2D" parent="CardsManager" unique_id=1756878658]
 position = Vector2(1505, 109)
@@ -568,25 +592,6 @@ layout_mode = 2
 theme_override_styles/normal = ExtResource("20_tic85")
 theme_override_styles/hover = ExtResource("19_j663k")
 
-[node name="CardInfoPane" type="MarginContainer" parent="CanvasLayer" unique_id=1649571130]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -60.0
-offset_bottom = 60.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 20
-
-[node name="CardInfoPanel" parent="CanvasLayer/CardInfoPane" unique_id=106991370 instance=ExtResource("21_ufaws")]
-layout_mode = 2
-
 [node name="BattleLogPane" type="MarginContainer" parent="CanvasLayer" unique_id=1714224520]
 z_index = 10
 z_as_relative = false
@@ -640,33 +645,33 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EndTurnPane" unique_id=192922564]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/EndTurnPane" unique_id=192922564]
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBoxContainer" unique_id=2136838904]
+[node name="EndTurn" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBox" unique_id=2136838904]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel" unique_id=1496403999]
+[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBox/EndTurn" unique_id=1496403999]
 layout_mode = 2
 text = "End Turn"
 label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 
-[node name="EndTurnButton" type="Button" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel" unique_id=85611002]
+[node name="EndTurnButton" type="Button" parent="CanvasLayer/EndTurnPane/VBox/EndTurn" unique_id=85611002]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("20_tic85")
 theme_override_styles/hover = ExtResource("19_j663k")
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBoxContainer" unique_id=2141724960]
+[node name="Graveyard" type="PanelContainer" parent="CanvasLayer/EndTurnPane/VBox" unique_id=2141724960]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("12_i42kc")
 
-[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel2" unique_id=998206116]
+[node name="Label" type="Label" parent="CanvasLayer/EndTurnPane/VBox/Graveyard" unique_id=998206116]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Show / Hide Graveyard"
@@ -674,7 +679,7 @@ label_settings = ExtResource("18_tppv1")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ToggleGraveyardButton" type="Button" parent="CanvasLayer/EndTurnPane/VBoxContainer/Panel2" unique_id=360311511]
+[node name="ToggleGraveyardButton" type="Button" parent="CanvasLayer/EndTurnPane/VBox/Graveyard" unique_id=360311511]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("20_tic85")
 theme_override_styles/hover = ExtResource("19_j663k")
@@ -796,6 +801,10 @@ layout_mode = 2
 theme_override_styles/normal = ExtResource("20_tic85")
 theme_override_styles/hover = ExtResource("19_j663k")
 
+[node name="CardInfoPanel" parent="CanvasLayer" unique_id=1345369115 instance=ExtResource("27_anhsg")]
+unique_name_in_owner = true
+metadata/_edit_use_anchors_ = true
+
 [node name="ActionMenuCanvas" type="CanvasLayer" parent="." unique_id=258061817]
 
 [node name="CardActionMenu" type="PanelContainer" parent="ActionMenuCanvas" unique_id=2035205471]
@@ -882,13 +891,30 @@ position = Vector2(59, 34)
 [node name="ActionButton_4" type="Marker2D" parent="EnemyActionButtons" unique_id=1726559165]
 position = Vector2(-77, -36)
 
+[node name="AnimationLayer" type="CanvasLayer" parent="." unique_id=2025717798]
+
+[node name="RitualContainer" parent="AnimationLayer" unique_id=1429469794 instance=ExtResource("29_rkqvw")]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_y7kvl")
+offset_left = 915.0
+offset_top = 1650.0
+offset_right = 1045.0
+offset_bottom = 1850.0
+scale = Vector2(3, 3)
+show_name = true
+show_mana_cost = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Smoke" parent="AnimationLayer/RitualContainer" unique_id=652588044 instance=ExtResource("31_5f6ju")]
+
 [connection signal="mouse_entered" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_entered"]
 [connection signal="mouse_exited" from="Portraits/EnemyPortraitArea" to="BattleSystem" method="_on_enemy_portrait_area_mouse_exited"]
 [connection signal="timeout" from="BattleSystem/EnemyStartCombatTimer" to="BattleSystem" method="timeoutEnemyStartCombat"]
 [connection signal="timeout" from="BattleSystem/EndEnemyTurnTimer" to="BattleSystem" method="timeoutEndEnemyTurn"]
 [connection signal="pressed" from="CanvasLayer/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBoxContainer/Panel2/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
+[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBox/EndTurn/EndTurnButton" to="BattleSystem" method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndTurnPane/VBox/Graveyard/ToggleGraveyardButton" to="CardsManager" method="buttonPressedToggleGraveyard"]
 [connection signal="pressed" from="CanvasLayer/GameOverPane/Margin/VBox/Panel2/EndMatchButton" to="." method="buttonPressedEndMatch"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="." method="buttonPressedHideCardActionMenu"]
 [connection signal="pressed" from="ActionMenuCanvas/CardActionMenu/CastPanel/CastButton" to="BattleSystem" method="cardCastButtonPressed"]

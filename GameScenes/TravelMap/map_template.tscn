@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://duihqaq5jjwgc"]
+
+[ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="1_ikc43"]
+
+[node name="MapAskelan" type="TextureRect" unique_id=1259199010]
+offset_right = 1737.0
+offset_bottom = 1080.0
+texture = ExtResource("1_ikc43")

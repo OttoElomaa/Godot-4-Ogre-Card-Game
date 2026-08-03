@@ -16,12 +16,17 @@ var found_card: Card
 @onready var cardSearch := $GameBoard_Cheats/RightMenu/HBox/SearchCardsPanel
 @onready var topMenu := $GameBoard_Cheats/TopMenu
 
+
 var cheats_on = false
 
 var insta_resolve = false
 
 
 func _ready():
+	for node:Control in [%TopMenu, %RightMenu, %ZoneCheats]:
+		node.visible = cheats_on
+	$LevelMenuCanvas.visible = cheats_on
+	
 	SceneSwitcher.connect("scene_changed", display)
 
 func _input(event):
@@ -33,6 +38,7 @@ func display():
 	print('display called')
 	print(current_scene)
 	$GameBoard_Cheats.visible = cheats_on
+	$LevelMenuCanvas.visible = cheats_on
 	toggle_visibility(%RightMenu, current_scene is GameBoard)
 	toggle_visibility(%ZoneCheats, current_scene is Scenario)
 

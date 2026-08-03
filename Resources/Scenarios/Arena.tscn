@@ -1,13 +1,437 @@
 [gd_scene format=3 uid="uid://cur0336ypyp8w"]
 
-[ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/Zone.tscn" id="1_kwmog"]
-[ext_resource type="PackedScene" uid="uid://cu0e7fgg0vk3s" path="res://GameScenes/Zone/RandomizedBattleIcon.tscn" id="2_jpcrx"]
-[ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="3_iaren"]
+[ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/Zone.tscn" id="1_wedyk"]
+[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="2_1r4nk"]
+[ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="3_o5ehk"]
+[ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/Desert/card-art-creature-tugarTrainer.jpg" id="4_gn8v1"]
+[ext_resource type="Texture2D" uid="uid://c2bjj56a5uf7y" path="res://Art/CardArt/Desert/card-art-cr-pyre-flamebearer-v2.jpg" id="5_vwah0"]
+[ext_resource type="Texture2D" uid="uid://cfbb15lvephsf" path="res://Art/CardArt/Depths/card-art-cr-umug-magus-v2.jpg" id="6_fek70"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="7_t08rk"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="8_5ihu3"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="9_ihe5g"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="10_md3l4"]
+[ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="11_5gi67"]
+[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="12_q6jme"]
+[ext_resource type="Texture2D" uid="uid://6b1b3mtorr35" path="res://Art/BoardComponents/UI-border-ninepatchrect-texture.png" id="13_gvq5x"]
+[ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="14_ikhhn"]
 
-[node name="Zone" instance=ExtResource("1_kwmog")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6srwv"]
+bg_color = Color(0.947752, 0.911757, 0.861921, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.188235, 0.105882, 0.0156863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nfsq"]
+bg_color = Color(0.947752, 0.911757, 0.861921, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.188235, 0.105882, 0.0156863, 1)
+
+[node name="Arena" unique_id=1995080631 instance=ExtResource("1_wedyk")]
 zoneName = "Arena"
 
-[node name="BattleIcon" parent="Zones/GameBoards" index="0" instance=ExtResource("2_jpcrx")]
-position = Vector2(-62, -233)
-board_name = "Random Fight"
-game_board = ExtResource("3_iaren")
+[node name="BattleIconSalkhi" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="0" unique_id=1922959725 instance=ExtResource("2_1r4nk")]
+position = Vector2(201, -130)
+board_name = "Salkhi"
+game_board = ExtResource("3_o5ehk")
+board_comments = "An example Salkhi Horde battle. The Salkhi utilize their affinity with wind to attack quickly and escape before the opponent can react."
+deck_cards = Dictionary[String, int]({
+"Outrider": 1,
+"Thundercaller": 1,
+"Uurah": 1,
+"Zubar": 2
+})
+art = ExtResource("4_gn8v1")
+champ_name = "Trainer"
+start_unlocked = true
+
+[node name="BattleIconPyrecaller" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="1" unique_id=1114084280 instance=ExtResource("2_1r4nk")]
+position = Vector2(59, -366)
+board_name = "Pyrecaller"
+game_board = ExtResource("3_o5ehk")
+board_comments = "An example Pyrecaller battle. Pyrecallers invoke rituals that fill the battlefield with powerful Janins."
+deck_cards = Dictionary[String, int]({
+"Blast": 3,
+"Cantor": 2,
+"Flamebearer": 2
+})
+art = ExtResource("5_vwah0")
+champ_name = "Flamebearer"
+start_unlocked = true
+
+[node name="BattleIconVineman" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="2" unique_id=1689285608 instance=ExtResource("2_1r4nk")]
+position = Vector2(-314, -400)
+board_name = "Vineman"
+game_board = ExtResource("3_o5ehk")
+board_comments = "An example Vineman battle. Vinemen can generate Mana in preparation for the Knell ritual that will spell your doom as well as lock down your summoning with Vine Trap."
+deck_cards = Dictionary[String, int]({
+"Jade Vineman": 3,
+"Knell": 2,
+"Liana Man": 2,
+"Maol Skull Priest": 1
+})
+generic_champion = false
+champion = "Vineman Elder"
+start_unlocked = true
+
+[node name="BattleIconUmugite" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="3" unique_id=831585082 instance=ExtResource("2_1r4nk")]
+position = Vector2(-216, -93)
+board_name = "Umugite"
+game_board = ExtResource("3_o5ehk")
+board_comments = "An example Umugite battle. Umugites utilize the Defy Death effect to survive overwhelming odds and grow stronger from it."
+deck_cards = Dictionary[String, int]({
+"Fate Guard": 1,
+"Fleet Raider": 1,
+"Magaal": 1,
+"Undying Kit": 2
+})
+art = ExtResource("6_fek70")
+champ_name = "Magaal"
+start_unlocked = true
+
+[node name="UI" type="CanvasLayer" parent="." index="3" unique_id=2036437133]
+unique_name_in_owner = true
+offset = Vector2(-960, -540)
+transform = Transform2D(1, 0, 0, 1, -960, -540)
+follow_viewport_enabled = true
+
+[node name="ZoneInfoPanel" type="MarginContainer" parent="UI" index="0" unique_id=1095183885]
+custom_minimum_size = Vector2(500, 120)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 711.0
+offset_top = 547.0
+offset_right = 1211.0
+offset_bottom = 667.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="PanelContainer" parent="UI/ZoneInfoPanel" index="0" unique_id=2099914171]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6srwv")
+
+[node name="HBox" type="HBoxContainer" parent="UI/ZoneInfoPanel/Panel" index="0" unique_id=1261438025]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/ZoneInfoPanel/Panel/HBox" index="0" unique_id=1415185075]
+layout_mode = 2
+text = "  Zone  -"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+
+[node name="ZoneNameLabel" type="Label" parent="UI/ZoneInfoPanel/Panel/HBox" index="1" unique_id=361262300]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+
+[node name="ExitPane" type="MarginContainer" parent="UI" index="1" unique_id=1824195677]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 721.0
+offset_top = 547.0
+offset_right = 961.0
+offset_bottom = 667.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="PanelContainer" parent="UI/ExitPane" index="0" unique_id=1318214545]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("8_5ihu3")
+
+[node name="Label" type="Label" parent="UI/ExitPane/Panel" index="0" unique_id=1821941500]
+layout_mode = 2
+text = "Exit Game"
+label_settings = ExtResource("9_ihe5g")
+horizontal_alignment = 1
+
+[node name="ExitButton" type="Button" parent="UI/ExitPane/Panel" index="1" unique_id=366911627]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("10_md3l4")
+theme_override_styles/hover = ExtResource("11_5gi67")
+
+[node name="PlayerInfoPanel" type="MarginContainer" parent="UI" index="2" unique_id=1968456616]
+custom_minimum_size = Vector2(400, 0)
+offset_left = 961.0
+offset_top = 547.0
+offset_right = 1361.0
+offset_bottom = 1067.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="UI/PlayerInfoPanel" index="0" unique_id=690365472]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox" index="0" unique_id=624290169]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HeroPortrait" type="TextureRect" parent="UI/PlayerInfoPanel/VBox/PanelContainer" index="0" unique_id=1564660496]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("12_q6jme")
+expand_mode = 4
+stretch_mode = 6
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/PlayerInfoPanel/VBox/PanelContainer" index="1" unique_id=1741092000]
+layout_mode = 2
+texture = ExtResource("13_gvq5x")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox" index="1" unique_id=658438592]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4nfsq")
+
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/Panel" index="0" unique_id=1838385337]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel/HBox" index="0" unique_id=1162495541]
+layout_mode = 2
+text = "  Hero  -"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+
+[node name="HeroNameLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel/HBox" index="1" unique_id=388869495]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+
+[node name="Panel2" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox" index="2" unique_id=841390896]
+custom_minimum_size = Vector2(340, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4nfsq")
+
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/Panel2" index="0" unique_id=376879245]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel2/HBox" index="0" unique_id=1686267997]
+layout_mode = 2
+text = "  Glory  -"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+
+[node name="GloryAmountLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/Panel2/HBox" index="1" unique_id=8539681]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+
+[node name="LivesPanel" type="PanelContainer" parent="UI/PlayerInfoPanel/VBox" index="3" unique_id=2057172800]
+custom_minimum_size = Vector2(340, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4nfsq")
+
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/VBox/LivesPanel" index="0" unique_id=228333294]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/VBox/LivesPanel/HBox" index="0" unique_id=1385989961]
+layout_mode = 2
+text = "  Lives  -"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+
+[node name="LivesLabel" type="Label" parent="UI/PlayerInfoPanel/VBox/LivesPanel/HBox" index="1" unique_id=138658348]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+
+[node name="BottomActions" type="MarginContainer" parent="UI" index="3" unique_id=764000135]
+custom_minimum_size = Vector2(1200, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 390.0
+offset_top = 585.0
+offset_right = 1590.0
+offset_bottom = 869.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="UI/BottomActions" index="0" unique_id=1135427081]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Description" type="PanelContainer" parent="UI/BottomActions/VBox" index="0" unique_id=549592439]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6srwv")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/BottomActions/VBox/Description" index="0" unique_id=1195175699]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="HBox" type="HBoxContainer" parent="UI/BottomActions/VBox/Description/MarginContainer" index="0" unique_id=1624445370]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ActionNameLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox" index="0" unique_id=2079288890]
+layout_mode = 2
+text = "  Zone  -"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+
+[node name="ActionDescLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox" index="1" unique_id=384278455]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+text = "Goes Here"
+label_settings = ExtResource("7_t08rk")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="UI/BottomActions/VBox" index="1" unique_id=94638047]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="BuildArmy" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" index="0" unique_id=637157100]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("14_ikhhn")
+description = "Turn others to your cause: Purchase cards native to this land using Glory"
+
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" index="0" unique_id=842993916]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("8_5ihu3")
+
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel" index="0" unique_id=109505682]
+layout_mode = 2
+text = "Build Army"
+label_settings = ExtResource("9_ihe5g")
+horizontal_alignment = 1
+
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel" index="1" unique_id=249305642]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("10_md3l4")
+theme_override_styles/hover = ExtResource("11_5gi67")
+
+[node name="Scry" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" index="1" unique_id=1279646426]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("14_ikhhn")
+description = "Seek the abyss for rare cards of all sorts"
+
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Scry" index="0" unique_id=1954360887]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("8_5ihu3")
+
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel" index="0" unique_id=278936128]
+layout_mode = 2
+text = "Scry"
+label_settings = ExtResource("9_ihe5g")
+horizontal_alignment = 1
+
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel" index="1" unique_id=369842023]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("10_md3l4")
+theme_override_styles/hover = ExtResource("11_5gi67")
+
+[node name="Travel" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" index="2" unique_id=53149458]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("14_ikhhn")
+description = "Travel to a different land"
+
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Travel" index="0" unique_id=835767226]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("8_5ihu3")
+
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel" index="0" unique_id=679489174]
+layout_mode = 2
+text = "Travel"
+label_settings = ExtResource("9_ihe5g")
+horizontal_alignment = 1
+
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel" index="1" unique_id=1847763077]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("10_md3l4")
+theme_override_styles/hover = ExtResource("11_5gi67")
+
+[node name="Battle" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" index="3" unique_id=1110043262]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("14_ikhhn")
+description = "Fight an opponent on one of the available game boards."
+
+[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Battle" index="0" unique_id=1409067594]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("8_5ihu3")
+
+[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel" index="0" unique_id=1051288835]
+layout_mode = 2
+text = "Battle"
+label_settings = ExtResource("9_ihe5g")
+horizontal_alignment = 1
+
+[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel" index="1" unique_id=220224462]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("10_md3l4")
+theme_override_styles/hover = ExtResource("11_5gi67")
+
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" method="buttonMouseEntered"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Scry" method="buttonMouseEntered"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Travel" method="buttonMouseEntered"]
+[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Battle" method="buttonMouseEntered"]

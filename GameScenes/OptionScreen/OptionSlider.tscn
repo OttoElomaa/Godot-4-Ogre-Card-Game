@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dp4r52h5abw7u"]
+
+[ext_resource type="Script" uid="uid://du0tqxgskrtbi" path="res://GameScenes/OptionScreen/option_slider.gd" id="1_31laq"]
+[ext_resource type="Texture2D" uid="uid://dbtq05rni8hg6" path="res://Art/CardComponents/card-action-particle-generic.png" id="1_oy3gq"]
+
+[node name="OptionSlider" type="MarginContainer" unique_id=1180156959]
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 60
+script = ExtResource("1_31laq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1227704333]
+layout_mode = 2
+alignment = 1
+
+[node name="Prop_Name" type="Label" parent="HBoxContainer" unique_id=871253379]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(148, 0)
+layout_mode = 2
+text = "General Volume"
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=2114563211]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer/MarginContainer" unique_id=572099203]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/center_grabber = -1
+theme_override_constants/grabber_offset = 0
+theme_override_icons/grabber = ExtResource("1_oy3gq")
+theme_override_icons/grabber_highlight = ExtResource("1_oy3gq")
+max_value = 1.0
+step = 0.01
+
+[node name="Percentage" type="Label" parent="HBoxContainer" unique_id=1805729063]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "100%"
+
+[connection signal="value_changed" from="HBoxContainer/MarginContainer/HSlider" to="." method="_on_h_slider_value_changed"]

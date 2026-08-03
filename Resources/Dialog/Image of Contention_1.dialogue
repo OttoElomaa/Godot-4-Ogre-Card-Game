@@ -1,0 +1,52 @@
+~ start
+In the middle of a temple square, there stands a tall stone likeness of a woman, painted to resemble a live Ask'lani, brighly in pyrite. At the feet of the statue, the crowd is in an uproar. Having climbed on its pedestal, above everyone else, a bearded priest whips her leg, chanting.
+
+"May the Demons be purged, and ripped from the shameful image! May Gods smite those who oppose them!"
+
+A jackal-headed man approaches you, you cannot tell from where. "Ah, the old Archpriest found it, I see. Why, I expected no less of a reaction."
+
+~ sculptor
+#if GameInfo.heroName == 'General':
+	"Why, are you not of the King's Guard? You are just in time for what is shaping up to be a riot, unless quelled."
+#else:
+	"What are the chances that you would want to know the meaning of this, o traveller? I can regale you if so."
+
+- Ask what is happening
+	~ whathappun
+	"This statue was placed here under the King's orders, extruded from limestone by the best of craftsmen. The stodgy old priests take offense; who would have guessed! Their offense is all to familiar to us sculptors; but they seem intent to rally the nobles and their parasytes to mischief against the crown and the City."
+	- Ask him who he is
+		"A humble sculptor, something of a priest, something of a craftsman, something of a mercenary, as all of us are. The City cannot be what it is were it not for its Guilds, which raised me and my family likewise."
+		=> whathappun
+	- Ask why the priests are offended
+		"Everything offends them or their gods or what they say are their gods. For somebody with any gods on their side, they sure are irritable."
+		=> whathappun
+	- Ask about the King's orders
+		"We of the Guilds are always in need of gold. If gold is to be had, we ask no questions. The King ordered a giant statue of Unut, the old Goddess, to craft it in silence and to place it here when ready. We made it happen. We still have not received the entire pay. Would be a shame if our years' work goes down before the gold is delivered in full."
+		=> whathappun
+	- Stop your questioning
+		=> sculptor
+- Question the other side
+	You approach the booing crowd, throwing rocks at the statue's shining, unyielding shins. A middle-aged man in a red sash over his shoulder agrees to speak to you.
+	~ priest
+	"The blasphemers who made this blasted image must pay for what they've done!"
+	- Ask who he is
+		"I am but a humble priest of Cyr, the precious owl, wise as a hundred gods, preserver of propriety. Propriety which was so impudently dashed this day! They wish to defile us!"
+		=> priest
+	- Ask what is wrong with the image
+		"Why, it lets one peer into the workings of a truly godless mind! One, the goddess Unut is not to look like a common broad; not she of the hyracian head. To displace the lady of beauty with the scandalous beauty of the form is blasphemy! Two, she belongs not here, where respectable men of faith ply their humble ritual, but in the pleasure district! Three, all mercenary carvers are wretches."
+		=> priest
+	- Ask who is behind this
+		"Why, it's clear that the Guilds, funded by merchants, mercenaries and usurers have put this up to taunt us, or worse yet, threaten us! It is known that their statues' wont is to move on their own! Or else how to explain that it appeared here overnight?"
+		
+		"We have a grudge with them, yes, with their godless craft winning the heart of the King over ours. We priests all believe they must be redeemed."
+		=> priest
+	- Offer to help destroying the statue
+		A group of people suddenly rushes into the square. The man from before is among them. \n "Hands off our work! You loafers know not the cost of our labors! An attack on art is an attack on Unut and on the City herself!"
+		The statue suddenly shakes and her kick sends the priest flying off the pedestal.
+	- Return to the scuptor
+		=> sculptor
+- Agree to disperse the crowd
+	Seeing you draw arms, the priest stops whipping the statue and yells, \n
+	"They have made the first move! Let piety triumph over blasphemy this day!"
+
+=> END

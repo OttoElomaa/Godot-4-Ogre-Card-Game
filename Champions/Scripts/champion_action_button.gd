@@ -34,21 +34,6 @@ func _on_button_pressed():
 	if not isEnemy:
 		bound_action.handleCast()
 
-func get_cast_success() -> bool:
-	var success = false
-	
-	if isEnemy:
-		return success
-	
-	if bound_action.cost_display.has(ActionsNodeChamp.cost_types.Mana) and GameInfo.playerMana < bound_action.cost_display[bound_action.cost_types.Mana]:
-		return success
-	
-	if bound_action.cost_display.has(ActionsNodeChamp.cost_types.Health) and GameInfo.playerHealth < bound_action.cost_display[bound_action.cost_types.Health]:
-		return success
-		
-	success = true
-	return success
-
 func _on_button_mouse_entered():
 	%ActionName.show()
 

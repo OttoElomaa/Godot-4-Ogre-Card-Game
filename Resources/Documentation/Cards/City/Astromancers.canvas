@@ -20,9 +20,17 @@
 		{"id":"8cdb7fc4336ca74f","type":"text","text":"Benediction: player Buff. The next creature the player summons costs no Mana. Then Benediction is removed.","x":120,"y":600,"width":280,"height":120},
 		{"id":"8327e1e264c5c4de","type":"text","text":"Dépasser: Rare Ritual","x":-605,"y":780,"width":180,"height":60},
 		{"id":"54cc9e23d0b21eae","type":"text","text":"Trigger target creature's 'on turn' effects.","x":-214,"y":780,"width":250,"height":60},
-		{"id":"a43bbfd86e5b8eaf","type":"text","text":"Souffrant: Common Creature","x":-611,"y":887,"width":211,"height":73},
+		{"id":"a43bbfd86e5b8eaf","type":"text","text":"Souffrant: Rare Creature","x":-611,"y":887,"width":211,"height":73},
 		{"id":"dff8de7c9b662dcf","type":"text","text":"Main Mechanics: Time Magic, Attrition, Player Damage\nWeaknesses: Situational effects.","x":-460,"y":-420,"width":304,"height":120},
-		{"id":"f15ff6f223cb9975","type":"text","text":"On turn: enemy player loses 1 Health.","x":-214,"y":883,"width":250,"height":82}
+		{"id":"f15ff6f223cb9975","type":"text","text":"On turn: enemy player loses 1 Health.","x":-214,"y":883,"width":250,"height":82},
+		{"id":"900dc441d4be1259","x":737,"y":383,"width":463,"height":102,"type":"text","text":"In secret from everybody, Astromancers keep in contact with the Starwalkers, a flightly race from the realm of night. (Space elves?)"},
+		{"id":"a934688f8cca83b9","x":500,"y":600,"width":180,"height":60,"type":"text","text":"Starwalker Scout"},
+		{"id":"fc53a8a923f7ea97","x":780,"y":588,"width":250,"height":84,"type":"text","text":"Arrives: inflict Sleep on a chosen foe."},
+		{"id":"b574581bcca91f4a","x":1160,"y":528,"width":250,"height":60,"type":"text","text":"Upgrade 1: Kills: inflict Sleep on a chosen foe."},
+		{"id":"d559bb6877a49df8","x":1160,"y":642,"width":250,"height":60,"type":"text","text":"Upgrade 2: Survives: inflict Sleep on the attacker."},
+		{"id":"5e7706e845708ac8","x":1500,"y":583,"width":250,"height":89,"type":"text","text":"Sleep: cannot be controlled. Removed by damage."},
+		{"id":"db0423ed221db076","x":498,"y":832,"width":182,"height":60,"type":"text","text":"Dreaming Portent"},
+		{"id":"9cf7eccfad6adaff","x":780,"y":811,"width":250,"height":103,"type":"text","text":"Cast: shoot. Dream Assault: doesn't wake up sleeping enemies."}
 	],
 	"edges":[
 		{"id":"a7ee9c1bb4d6c2ab","fromNode":"b72a01c646dcbdab","fromSide":"right","toNode":"cbaac3bcf3f9ffb6","toSide":"left"},
@@ -35,6 +43,11 @@
 		{"id":"88a5ff2304239390","fromNode":"dc625ae0caaab548","fromSide":"right","toNode":"26e75b2998df61ad","toSide":"left"},
 		{"id":"7a170af75d16b3c2","fromNode":"26e75b2998df61ad","fromSide":"right","toNode":"8cdb7fc4336ca74f","toSide":"left"},
 		{"id":"9269987c33057ffa","fromNode":"8327e1e264c5c4de","fromSide":"right","toNode":"54cc9e23d0b21eae","toSide":"left"},
-		{"id":"74b3e9213fa007d7","fromNode":"a43bbfd86e5b8eaf","fromSide":"right","toNode":"f15ff6f223cb9975","toSide":"left"}
+		{"id":"74b3e9213fa007d7","fromNode":"a43bbfd86e5b8eaf","fromSide":"right","toNode":"f15ff6f223cb9975","toSide":"left"},
+		{"id":"b0df04e5a3ff7704","fromNode":"a934688f8cca83b9","fromSide":"right","toNode":"fc53a8a923f7ea97","toSide":"left"},
+		{"id":"bb8c77c96a916e2a","fromNode":"fc53a8a923f7ea97","fromSide":"right","toNode":"b574581bcca91f4a","toSide":"left"},
+		{"id":"22bfa240726006aa","fromNode":"fc53a8a923f7ea97","fromSide":"right","toNode":"d559bb6877a49df8","toSide":"left"},
+		{"id":"22998617c0119fca","fromNode":"fc53a8a923f7ea97","fromSide":"right","toNode":"5e7706e845708ac8","toSide":"left"},
+		{"id":"3ffe442ca231c74d","fromNode":"db0423ed221db076","fromSide":"right","toNode":"9cf7eccfad6adaff","toSide":"left"}
 	]
 }

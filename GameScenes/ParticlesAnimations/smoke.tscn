@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bdw6fi1o8el8n"]
+
+[ext_resource type="Texture2D" uid="uid://bcrois0xam8yl" path="res://Art/BoardComponents/SmokeParticle.png" id="1_7xwah"]
+[ext_resource type="Script" uid="uid://ubvt4ypihn26" path="res://GameScenes/ParticlesAnimations/Scripts/oneshot_particle.gd" id="2_2jkv2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gmnps"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_kjcnd"]
+_data = [Vector2(0, 0.8599222), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.2723742, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c8ak3"]
+curve = SubResource("Curve_kjcnd")
+
+[sub_resource type="Gradient" id="Gradient_rbdcs"]
+offsets = PackedFloat32Array(0, 0.99714285)
+colors = PackedColorArray(0.92297316, 0.39636666, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e4kpm"]
+gradient = SubResource("Gradient_rbdcs")
+
+[sub_resource type="Curve" id="Curve_cwl1g"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0.010416664, -0.7120621), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w4qif"]
+curve = SubResource("Curve_cwl1g")
+
+[sub_resource type="Curve" id="Curve_vdag7"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1.5), 0.0, 0.0, 0, 0, Vector2(1, 1.3365759), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mwt20"]
+curve = SubResource("Curve_vdag7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ikbju"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(60, 100, 1)
+gravity = Vector3(0, -98, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_mwt20")
+color_ramp = SubResource("GradientTexture1D_e4kpm")
+alpha_curve = SubResource("CurveTexture_c8ak3")
+hue_variation_curve = SubResource("CurveTexture_w4qif")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Smoke" type="GPUParticles2D" unique_id=652588044]
+z_index = 2
+material = SubResource("CanvasItemMaterial_gmnps")
+emitting = false
+amount = 12
+texture = ExtResource("1_7xwah")
+lifetime = 2.0
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_ikbju")
+script = ExtResource("2_2jkv2")

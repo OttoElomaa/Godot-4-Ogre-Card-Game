@@ -8,17 +8,23 @@ var silent = [' ', ',', ':', '.']
 @export_multiline var text = ""
 @export var sound_off = false
 @export var delay = 0.3
-@export_range(1, 3.0) var delay_variance
+@export_range(0.1, 3.0) var delay_variance
+
+func _ready():
+	start()
 
 func start():
 	$MarginContainer/RichTextLabel.text = text
-	visible_characters = 0
+	var darken = randf_range(0.35, 1.0)
+	$MarginContainer/RichTextLabel.add_theme_color_override("default_color", Color(darken, darken, darken, 1.0)) 
+	$MarginContainer/RichTextLabel.visible_characters = 0
+	
 	if not text:
 		return
 
 	for i in range(len(label.text) + 1):
 		label.visible_characters += 1
-		current_character = label.text[label.visible_characters - 1]
+		current_character = label.text[clamp(visible_characters - 1, 0, len(label.text))]
 		if not current_character in silent:
 			if not sound_off:
 				$AudioStreamPlayer.play()

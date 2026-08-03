@@ -1,30 +1,30 @@
 ~ start
 While you and your army camp in the outskirts of Aşk'lan, a veiled woman suddenly approaches you. You do not know how she managed to get past your watch, in broad daylight, in her heavy attire, made for parlors, not travel. Her veil is so thick you can barely see her face; on her fingers are long fake nails of cold iron. The hem of her dusky, glittering robe is not at all dirtied, though the roads are quite dusty at this time of the year. She speaks to you, with noble, headstrong bearing, standing straight as a trellis. 
 
-"I have come on the behalf on the Astomancers," she begins. "It has come to our attentiòn that you to us may be of much assistànce. We expect not you to render us this service our of sheer magnanimité; we have the informatiòn that may prevent your destructiòn. It is most unlikely that you should refuse, lest you will to part with your Life." 
+"I have come on the Behalf on the Astomancers," she begins. "It has come to our Attentiòn that you to us may be of much Assistànce. We expect not you to render us this Service out of sheer Magnanimité; we have the Informatiòn that may prevent your Destructiòn. It is most Unlikely that you should refuse, lest you will to part with your Life." 
 
 ~ choice
 - Ask her about her dialect
-	"My speech, strange? Pah! It is like an ignoramus to say that. 'Tis your speech that is most unrefined, as with the majoritè. Know that our speech is true, and yours is distorted -- by time. We speak as our ancestors spake. You speak like your contemporaries. You are a beholden to Time; and He is beholden to us. Were it not for a pressing necéssité, I would have not stood such fatuous enquiries."
+	"My Speech, strange? Pah! It is like an Ignoramus to say that. 'Tis your speech that is most Unrefined, as with the Majoritè. Know that our Speech is True, and yours is Distorted -- by Time. We speak as our Ancestors spake. You speak like your Contemporaries. You are a beholden to Time; and He is beholden to us. Were it not for a pressing Necéssité, I would have not stood such Fatuous Enquiries."
 	=> choice
 
 - Ask about her people
-	"We are the Astromancers of Aşk'lan, of course. Proprietors of lore, archivarii of éternité, the dextra 	of the King himself. The stars and beyond is the domain of our gods. It is not often that a like of you 	gets to speak to a like of me."
+	"We are the Astromancers of Aşk'lan, of course. Proprietors of Lore, Archivarii of éternité, the Dextra of the King himself. The Stars and Beyond is the Domain of our Gods. It is not Often that a like of you gets to speak to a like of me."
 	=> choice
 
 - Ask her what "destructiòn" she speaks of
-	"All shall be revealed in due time," she returns. "Alpha, I await your décision. To offer prudently 	assistancé, or fall, another victim to hubris."
+	"All shall be Revealed in due Time," she returns. "Alpha, I await your Décision. To offer prudently Assistancé, or fall, another Victim to Hubris."
 	=> choice
 
 - Agree to hear her out
 	~ agreed
-	"Why, I am most pleased with your love of reason," you can hear a smile in her voice. "It so happened that one of us had foolishly left the ivory tower and made a foray into the city below. We have not seen him since. We will you to rescue him, and terminate the Life of whomever is responsible. For the last part, we need someone such as you."
+	"Why, I am most pleased with your Love of Reason," you can hear a smile in her voice. "It so happened that one of us had Foolishly left the ivory tower and made a foray into the city below. We have not seen him since. We will you to rescue him, and terminate the Life of whomever is responsible. For the last part, we need someone such as you."
 	
 	- Ask why the Throne cannot deal with this
-		"We have determined that they may be involved with the threspass. Besiden, these muttonheads have long abandoned knowledge for hamfisted subjugation. By the fact that I am freely saying these things, you can surmise how they failed even at that."
+		"We have Determined that they may be involved with the threspass. Besides, these Muttonheads have long abandoned Knowledge for hamfisted Subjugation. By the fact that I am freely saying these things, you can surmise how they failed even at that."
 		=> agreed
 	- Ask who captured him
-		"Lowly felons, most like," she sneers. "Why does it matter? We have divined his location and I am to bring you to his tormentors' very threshold. "You are to penertate the premise and work your violence as you see fit."
+		"Lowly Felouns, most like," she sneers. "This is of no Relevancé, surely? We have divined his Location and I am to bring you to his Tormentors' very threshold. "You are to penertate the Premise and work your Violénce as you see fit."
 		=> agreed
 		
 	- Tell her to lead you
@@ -32,7 +32,7 @@ While you and your army camp in the outskirts of Aşk'lan, a veiled woman sudden
 		=> END!
 
 - Tell her to leave
-	"You shall regret this, you -- you ignorant buffoon," there is suddenly a tinge of desperation in her voice. For a moment, her feigned pomp is displaced by genune emotion. "Think with that calloused heart of yours! By morn, you all shall most likely perish! Your ignorance of the stars' omens shall cost you dearly."
+	"You shall regret this, you -- you ignorant Buffoon," there is suddenly a tinge of desperation in her voice. For a moment, her feigned pomp is displaced by genune emotion. "Think with that calloused Heart of yours! By Morn, you all shall most likely perish! Your Ignorance of the Stars' omens shall cost you dearly."
 	
 	- Tell her you've had it with her audacity
 		=> forced_out

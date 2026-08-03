@@ -1,16 +1,14 @@
+@tool
 extends ZoneBattleIcon
 
 var fight_number = 0
 
 func resolve():
-	generate_fight()
-	fight_number += 1
-	board_name = str(board_name, ' +', fight_number)
+	queue_free()
 
 func generate_fight():
-	board = game_board.instantiate().duplicate()
-	add_child(board)
-	await get_tree().process_frame
+	if game_board:
+		board = game_board.instantiate().duplicate()
 	board.boardName = board_name
 	board.AI_personality = ai_personality
 	
@@ -18,8 +16,8 @@ func generate_fight():
 	var mana_cost = 1
 	var cards_for_preview = []
 	
-	board.nuke_cards(true)
-	board.nuke_cards(false)
+	GameInfo.enemyDeckCards.clear()
+	print('Clearing enemyDeckCards')
 	
 	for i in range(4):
 		var cards_in_tier = []
@@ -30,7 +28,7 @@ func generate_fight():
 		var new_card:Card = cards_in_tier.pick_random()
 		cards_for_preview.append(new_card.duplicate())
 		for n in range(4):
-			board.add_card_to_enemy_deck(new_card.duplicate())
+			GameInfo.enemyDeckCards.append(new_card.duplicate())
 	
 	for i in range(2):
 		var rituals = []
@@ -40,10 +38,6 @@ func generate_fight():
 		var new_card:Card = rituals.pick_random()
 		cards_for_preview.append(new_card.duplicate())
 		for n in range(4):
-			board.add_card_to_enemy_deck(new_card.duplicate())
-	
-	board.setup_board()
-	board.turn_1_init()
-	remove_child(board)
+			GameInfo.enemyDeckCards.append(new_card.duplicate())
 	
 	return cards_for_preview

@@ -7,14 +7,15 @@
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="3_wqb3i"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="4_duqux"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="5_26mog"]
+[ext_resource type="Texture2D" uid="uid://13r4d8qxd1ja" path="res://Art/ZoneComponents/Logo.png" id="11_rf05g"]
 [ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="13_b4hlq"]
 [ext_resource type="PackedScene" uid="uid://pd7or3cigyqn" path="res://GameScenes/MainMenu/dancing_card.tscn" id="15_b4hlq"]
 [ext_resource type="PackedScene" uid="uid://yol344fkh60p" path="res://GameScenes/MainMenu/flicker_light.tscn" id="15_uifqy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_820ef"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rf05g"]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rf05g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkrw6"]
 resource_local_to_scene = true
 
 [node name="MainMenu" type="Node2D" unique_id=1388111977]
@@ -75,22 +76,6 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_26mog")
 theme_override_styles/hover = ExtResource("4_duqux")
-
-[node name="Label2" type="Label" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2" unique_id=2058892734]
-layout_mode = 2
-text = "Endless Mode"
-label_settings = ExtResource("3_wqb3i")
-horizontal_alignment = 1
-
-[node name="EndlessButton2" type="Button" parent="CanvasLayer/StartMatchPane/VBoxContainer/Panel2" unique_id=1460334535]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("5_26mog")
-theme_override_styles/hover = ExtResource("4_duqux")
-
-[node name="Panel3" type="PanelContainer" parent="CanvasLayer/StartMatchPane/VBoxContainer" unique_id=170997872]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("2_b8l8w")
 
 [node name="StartGamePane" type="MarginContainer" parent="CanvasLayer" unique_id=650320013]
 anchors_preset = 7
@@ -202,22 +187,21 @@ flip_h = true
 
 [node name="DancingCards" type="Node2D" parent="Decor" unique_id=543844429]
 z_index = 1
-y_sort_enabled = true
 
 [node name="DancingCard" parent="Decor/DancingCards" unique_id=364356307 instance=ExtResource("15_b4hlq")]
 light_mask = 0
-material = SubResource("ShaderMaterial_820ef")
-position = Vector2(1669, 424)
+material = SubResource("ShaderMaterial_rf05g")
+position = Vector2(1246, -193)
 
 [node name="DancingCard2" parent="Decor/DancingCards" unique_id=88608294 instance=ExtResource("15_b4hlq")]
-material = SubResource("ShaderMaterial_rf05g")
-position = Vector2(444, 674)
+material = SubResource("ShaderMaterial_kkrw6")
+position = Vector2(1233, -212)
 
 [node name="DancingCard3" parent="Decor/DancingCards" unique_id=1255174092 instance=ExtResource("15_b4hlq")]
-position = Vector2(653, 122)
+position = Vector2(1266, -166)
 
 [node name="DancingCard4" parent="Decor/DancingCards" unique_id=2139357782 instance=ExtResource("15_b4hlq")]
-position = Vector2(1315, 716)
+position = Vector2(1254, -221)
 
 [node name="FlickeringLIghts" type="Node2D" parent="Decor" unique_id=1347058747]
 z_index = -2
@@ -239,6 +223,11 @@ position = Vector2(1325, 641)
 position = Vector2(970, -194)
 energy = 0.61
 blend_mode = 1
+
+[node name="Logo" type="Sprite2D" parent="." unique_id=538729775]
+z_index = -2
+position = Vector2(1288, 540)
+texture = ExtResource("11_rf05g")
 
 [connection signal="pressed" from="CanvasLayer/StartMatchPane/VBoxContainer/Panel/StartButton" to="." method="buttonPressedStartMatch"]
 [connection signal="pressed" from="CanvasLayer/StartMatchPane/VBoxContainer/Panel2/EndlessButton" to="." method="_on_endless_button_pressed"]

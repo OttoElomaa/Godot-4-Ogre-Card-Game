@@ -19,6 +19,10 @@ run/main_scene="uid://dhgg2oefy2y6e"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/windows_native_icon="res://CoA.ico"
 
+[audio]
+
+buses/default_bus_layout="uid://dx7pxmsb6c5sb"
+
 [autoload]
 
 States="*res://GameAutoloads/States.tscn"
@@ -31,6 +35,9 @@ CardChecks="*res://GameAutoloads/CardChecks.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DataLoader="*uid://x5hp1ama1l5h"
 EffectAnimationQueue="*res://GameAutoloads/EffectAnimationQueue.tscn"
+CardAnimationQueue="*res://GameAutoloads/CardAnimationQueue.tscn"
+LevelLoader="*uid://cyon8t1pwfw2b"
+Options="*uid://bdfp88tc8xnig"
 
 [debug]
 
@@ -46,8 +53,9 @@ runtime/balloon_path="res://GameScenes/Zone/balloon.tscn"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1740
+window/size/viewport_height=979
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
@@ -87,7 +95,7 @@ CheatButton={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Resources/Dialog/Vineyards_1.dialogue", "res://Resources/Dialog/Vineyards_Win_1.dialogue", "res://Resources/Dialog/Vineyards_Win_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_1.dialogue", "res://Resources/Dialog/Vanished Astromancer_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_Win.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Resources/Dialog/Vineyards_1.dialogue", "res://Resources/Dialog/Vineyards_Win_1.dialogue", "res://Resources/Dialog/Vineyards_Win_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_1.dialogue", "res://Resources/Dialog/Vanished Astromancer_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_Win.dialogue", "res://Resources/Dialog/Image of Contention_1.dialogue", "res://Resources/Dialog/Image of Contention_Win_1.dialogue", "res://Resources/Dialog/Image of Contention_Win_2.dialogue", "res://Resources/Dialog/General_Start.dialogue")
 
 [layer_names]
 

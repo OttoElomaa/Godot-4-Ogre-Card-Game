@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://crk7pfo0mnvoa"]
+
+[ext_resource type="Script" uid="uid://cyai5jj2rdnj4" path="res://CardScriptsAndComponents/Scripts/keyword.gd" id="1_cnrdi"]
+
+[node name="DreamAssault" type="Node2D" unique_id=188041758]
+script = ExtResource("1_cnrdi")
+id = "Dream Assault"
+description = "This creature does not wake up sleeping targets."
+metadata/_custom_type_script = "uid://cyai5jj2rdnj4"

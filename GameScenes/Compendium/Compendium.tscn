@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccoor1shahiou"]
+[gd_scene format=3 uid="uid://ccoor1shahiou"]
 
 [ext_resource type="Script" uid="uid://q78svg7ccxcs" path="res://GameScenes/Compendium/compendium.gd" id="1_j4pqd"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="1_ocg8x"]
@@ -6,12 +6,12 @@
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="3_6srq2"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="4_r1t5t"]
 
-[node name="Compendium" type="Node2D"]
+[node name="Compendium" type="Node2D" unique_id=1009751867]
 script = ExtResource("1_j4pqd")
 
-[node name="SectionButtons" type="CanvasLayer" parent="."]
+[node name="SectionButtons" type="CanvasLayer" parent="." unique_id=1469539859]
 
-[node name="StartMatchPane" type="MarginContainer" parent="SectionButtons"]
+[node name="StartMatchPane" type="MarginContainer" parent="SectionButtons" unique_id=1985332842]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,93 +30,94 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SectionButtons/StartMatchPane"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SectionButtons/StartMatchPane" unique_id=116123348]
 layout_mode = 2
 
-[node name="Panel" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer"]
+[node name="Panel" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer" unique_id=1905013254]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_ocg8x")
 
-[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel"]
+[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel" unique_id=1812755090]
 layout_mode = 2
 text = "Book of Cards"
 label_settings = ExtResource("2_j4pqd")
 horizontal_alignment = 1
 
-[node name="BestiaryButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel"]
+[node name="BestiaryButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel" unique_id=965991676]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("3_6srq2")
 theme_override_styles/normal = ExtResource("4_r1t5t")
+theme_override_styles/hover = ExtResource("3_6srq2")
 
-[node name="Panel3" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer"]
+[node name="Panel3" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer" unique_id=1451225984]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_ocg8x")
 
-[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel3"]
+[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel3" unique_id=65885612]
 layout_mode = 2
 text = "Book of Rules"
 label_settings = ExtResource("2_j4pqd")
 horizontal_alignment = 1
 
-[node name="TutorialButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel3"]
+[node name="TutorialButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel3" unique_id=1055396986]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("3_6srq2")
 theme_override_styles/normal = ExtResource("4_r1t5t")
+theme_override_styles/hover = ExtResource("3_6srq2")
 
-[node name="Panel2" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer"]
+[node name="Panel2" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer" unique_id=1925819468]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_ocg8x")
 
-[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel2"]
+[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel2" unique_id=1167070504]
 layout_mode = 2
 text = "Glossary"
 label_settings = ExtResource("2_j4pqd")
 horizontal_alignment = 1
 
-[node name="GlossaryButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel2"]
+[node name="GlossaryButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel2" unique_id=2111410321]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("3_6srq2")
 theme_override_styles/normal = ExtResource("4_r1t5t")
+theme_override_styles/hover = ExtResource("3_6srq2")
 
-[node name="Panel4" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer"]
+[node name="Panel4" type="PanelContainer" parent="SectionButtons/StartMatchPane/VBoxContainer" unique_id=1441519222]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_ocg8x")
 
-[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel4"]
+[node name="Label" type="Label" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel4" unique_id=934084799]
 layout_mode = 2
 text = "Akashic Archive"
 label_settings = ExtResource("2_j4pqd")
 horizontal_alignment = 1
 
-[node name="LoreButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel4"]
+[node name="LoreButton" type="Button" parent="SectionButtons/StartMatchPane/VBoxContainer/Panel4" unique_id=1578246284]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("3_6srq2")
 theme_override_styles/normal = ExtResource("4_r1t5t")
+theme_override_styles/hover = ExtResource("3_6srq2")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1128969014]
+layer = 2
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer2"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer2" unique_id=1670121913]
 custom_minimum_size = Vector2(200, 80)
 offset_right = 200.0
 offset_bottom = 80.0
 theme_override_styles/panel = ExtResource("1_ocg8x")
 
-[node name="Label" type="Label" parent="CanvasLayer2/Panel"]
+[node name="Label" type="Label" parent="CanvasLayer2/Panel" unique_id=200045569]
 layout_mode = 2
 text = "Return"
 label_settings = ExtResource("2_j4pqd")
 horizontal_alignment = 1
 
-[node name="ReturnButton" type="Button" parent="CanvasLayer2/Panel"]
+[node name="ReturnButton" type="Button" parent="CanvasLayer2/Panel" unique_id=798015554]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("3_6srq2")
 theme_override_styles/normal = ExtResource("4_r1t5t")
+theme_override_styles/hover = ExtResource("3_6srq2")
 
-[node name="ActiveScene" type="Node2D" parent="."]
+[node name="ActiveScene" type="Node2D" parent="." unique_id=1509605597]
 
 [connection signal="pressed" from="SectionButtons/StartMatchPane/VBoxContainer/Panel/BestiaryButton" to="." method="_on_bestiary_button_pressed"]
 [connection signal="pressed" from="CanvasLayer2/Panel/ReturnButton" to="." method="_on_return_button_pressed"]

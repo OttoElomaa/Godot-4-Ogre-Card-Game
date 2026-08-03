@@ -5,21 +5,33 @@ const generic_groups:Array[Card.Group] = [Card.Group.GENERIC, Card.Group.GREEN_G
 Card.Group.CITY_GENERIC, Card.Group.DESERT_GENERIC, Card.Group.OUTCAST_GENERIC]
 
 const equipment_group:Card.Group = Card.Group.EQUIPMENT
+
+const scenes_by_name:Dictionary[String, PackedScene] = {
+	'TermTooltip': preload('uid://cn15aob5lrp56')
+}
+
 #endregion
 
+#region Databases
 ## Arranges all_cards to be referenced by their CardName. Used to instantiate
 ## cards during runtime.
 var cards_by_name:Dictionary[String, Card] = {}
 ## Arranges all_cards into arrays based on their group. Used to generate loot tables.
 var cards_by_group:Dictionary[Card.Group, Array] = {}
-	
+## Loads and arranges all champions by their CardName. Used to instantiate champions.
 var champions_by_name:Dictionary[String, Champion] = {}
-var scenes_by_name:Dictionary[String, Node] = {
-	
+
+var animations_by_filename:Dictionary[String, PackedScene] = {}
+
+var scenarios_by_location:Dictionary[PackedScene, String] = {}
+
+const boards_by_name:Dictionary[String, PackedScene] = {
+	'Default': preload('uid://be8n1sbdblr6g')
 }
 
-var boards_by_name:Dictionary[String, PackedScene] = {
-	'Default': preload('uid://be8n1sbdblr6g')
+## Preloads all ShaderMaterials to be dynamically assigned when a certain shader is needed.
+const materials_by_name:Dictionary[String, Material] = {
+	'destroy_card': preload("res://Resources/Shaders/destroy_card_material.tres")
 }
 
 
@@ -32,6 +44,19 @@ var effect_counters_desc:Dictionary[String,String] = {}
 var keywords_desc:Dictionary[String, String] = {}
 ## Contains verses, used in the Akashic Records as reward for unlocking achievements.
 var verses:Dictionary[String, String] = {}
+
+#endregion
+
+#region Initial Loading
+
+var all_cards_created:
+	get:
+		cards_by_name.is_empty()
+var has_initial_deck = false:
+	get:
+		GameInfo.playerDeckCards.is_empty()
+
+#endregion
 
 func createCard(path:String):
 	var cardPacked = load(path)
@@ -47,7 +72,7 @@ func createAllCardsByAmount(amount:int) -> Array:
 	return allCards
 
 
-func get_all_game_cards():
+func createAllGameCards():
 	var cardFolderPaths := ['res://Cards/City/', 'res://Cards/Desert/', 
 	'res://Cards/Outcasts/', 'res://Cards/GreenDefiance/']
 
@@ -64,9 +89,8 @@ func get_all_game_cards():
 	for card:Card in GameInfo.all_cards:
 		cards_by_name[card.cardName] = card
 		if not cards_by_group.has(card.group):
-			cards_by_group[card.group] = [card]
-		else:
-			cards_by_group[card.group].append(card)
+			cards_by_group[card.group] = []
+		cards_by_group[card.group].append(card)
 	
 	## Putting generic cards into the recruitment pool.
 	for idx:Card.Group in generic_groups:
@@ -80,6 +104,22 @@ func get_all_game_cards():
 		var new_champ:PackedScene = load(str(path, file))
 		var champ:Champion = new_champ.instantiate()
 		champions_by_name[champ.cardName] = champ
+		
+	## Filling out animations_by_filename.
+	load_scenes_from_directory('res://GameScenes/ParticlesAnimations/', animations_by_filename)
+	load_scenarios()
+
+func load_scenarios():
+	var path := 'res://Resources/Scenarios/City/'
+	var files := DirAccess.get_files_at(path)
+	for file:String in files:
+		scenarios_by_location[load(str(path, file)) as PackedScene] = 'City'
+		
+## Fills out a dictionary with loaded files from a chosen folder, in a style of filename: resource.
+func load_scenes_from_directory(path:String, dict:Dictionary):
+	var files := DirAccess.get_files_at(path)
+	for file:String in files:
+		dict[file] = load(str(path, file))
 
 func load_text_data(path:String, dict:Dictionary):
 		var file_path = path
@@ -89,7 +129,7 @@ func load_text_data(path:String, dict:Dictionary):
 		if parse_err == OK:
 			var data_received = json_object.data
 			if typeof(data_received) == TYPE_DICTIONARY:
-				print(data_received)
+#				print(data_received)
 				dict.assign(data_received)
 
 func get_effect_descriptions():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://xlvagiuf8en8"]
+[gd_scene format=3 uid="uid://xlvagiuf8en8"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_dvp65"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_ccxni"]
@@ -10,7 +10,7 @@ noise_type = 3
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
 noise = SubResource("FastNoiseLite_s5qc8")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ec0m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s5s5a"]
 resource_local_to_scene = true
 shader = ExtResource("2_ccxni")
 shader_parameter/percentage = 1.0
@@ -22,8 +22,8 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Cr-Maolmona" instance=ExtResource("1_dvp65")]
-material = SubResource("ShaderMaterial_7ec0m")
+[node name="Cr-Maolmona" unique_id=1372764134 instance=ExtResource("1_dvp65")]
+material = SubResource("ShaderMaterial_s5s5a")
 cardName = "Fuckin' Maolmona"
 subTypeStr = "Fungal Demon God"
 flavorText = "Beneath the Mozar’s reaching folds
@@ -33,6 +33,13 @@ We found the strain of Maolmona
 The flesh decays, the being frays. But we
 We ever live in death."
 startingHealth = 200
+action_mode = 0
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("3_s5s5a")
+
+[node name="Label" parent="Frontside/CardName" parent_id_path=PackedInt32Array(1865153195) index="1" unique_id=295689671]
+text = "Fuckin' Maolmona"
+
+[node name="HealthGlowDown" parent="Frontside/Resources/Glow" parent_id_path=PackedInt32Array(405272551) index="2" unique_id=1764133823]
+visible = true

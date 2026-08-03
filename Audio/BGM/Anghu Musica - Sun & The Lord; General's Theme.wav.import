@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://mul6424e3fq3"
+path="res://.godot/imported/Anghu Musica - Sun & The Lord; General's Theme.wav-5be91e0ebfb0a12b97c65aefbba00048.sample"
+
+[deps]
+
+source_file="res://Audio/BGM/Anghu Musica - Sun & The Lord; General's Theme.wav"
+dest_files=["res://.godot/imported/Anghu Musica - Sun & The Lord; General's Theme.wav-5be91e0ebfb0a12b97c65aefbba00048.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://df8wakx6h0mhe"]
+[gd_scene format=3 uid="uid://df8wakx6h0mhe"]
 
 [ext_resource type="Script" uid="uid://i63hgkosko0m" path="res://GameScenes/Zone/zoneNode_dialogue.gd" id="1_urlk5"]
 [ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="2_dp3na"]
 [ext_resource type="Texture2D" uid="uid://be0qsfcp2w37c" path="res://Art/CardComponents/zone-battle-icon-disabled-overlay.png" id="3_nry23"]
 [ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="4_la7db"]
-[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="5_nuadw"]
 [ext_resource type="LabelSettings" uid="uid://dhqgs5cdwbsp2" path="res://Fonts/LabelSettings/LabelSetMiniBrown.tres" id="6_8kwa5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aq0yd"]
@@ -19,41 +18,32 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[node name="DialogueIcon" type="Node2D"]
-scale = Vector2(1.5, 1.5)
+[node name="DialogueIcon" type="Node2D" unique_id=1118793145]
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_urlk5")
+duration = 3
 node_comments = "Someone approaches..."
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Icon" type="Sprite2D" parent="." unique_id=162639824]
 position = Vector2(0, 10)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("2_dp3na")
 
-[node name="ClearedOverlay" type="Sprite2D" parent="."]
+[node name="ClearedOverlay" type="Sprite2D" parent="." unique_id=280681110]
 position = Vector2(0, 10)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("3_nry23")
 
-[node name="Frame" type="Sprite2D" parent="."]
+[node name="Frame" type="Sprite2D" parent="." unique_id=1391133603]
 texture = ExtResource("4_la7db")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=306322641]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2086980774]
 position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_aq0yd")
 
-[node name="Button" type="Button" parent="."]
-custom_minimum_size = Vector2(100, 100)
-offset_left = -55.0
-offset_top = -45.0
-offset_right = 61.0
-offset_bottom = 68.0
-theme_override_styles/focus = ExtResource("5_nuadw")
-theme_override_styles/pressed = ExtResource("5_nuadw")
-theme_override_styles/normal = ExtResource("5_nuadw")
-
-[node name="InfoPanel" type="PanelContainer" parent="."]
+[node name="InfoPanel" type="PanelContainer" parent="." unique_id=889874860]
 custom_minimum_size = Vector2(200, 80)
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,18 +58,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4qtng")
 
-[node name="HBox" type="VBoxContainer" parent="InfoPanel"]
+[node name="HBox" type="VBoxContainer" parent="InfoPanel" unique_id=241472153]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="NameLabel" type="Label" parent="InfoPanel/HBox"]
+[node name="NameLabel" type="Label" parent="InfoPanel/HBox" unique_id=1796920251]
 texture_filter = 1
 layout_mode = 2
 text = "Battle Name"
 label_settings = ExtResource("6_8kwa5")
 horizontal_alignment = 1
 
-[node name="DescLabel" type="Label" parent="InfoPanel/HBox"]
+[node name="DescLabel" type="Label" parent="InfoPanel/HBox" unique_id=1978865931]
 texture_filter = 1
 layout_mode = 2
 text = "Description Goes Here"

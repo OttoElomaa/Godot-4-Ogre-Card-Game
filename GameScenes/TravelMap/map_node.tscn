@@ -1,24 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://nuu3xo3eknpr"]
+[gd_scene format=3 uid="uid://nuu3xo3eknpr"]
 
 [ext_resource type="Script" uid="uid://hi0gitvne1os" path="res://GameScenes/TravelMap/map_node.gd" id="1_g7uvm"]
-[ext_resource type="Texture2D" uid="uid://bvc2q36p55v57" path="res://Art/ZoneComponents/Map_Node_Empty.png" id="1_wp7i3"]
+[ext_resource type="StyleBox" uid="uid://87xd5etbn8y1" path="res://PanelStyles/circular_style_box.tres" id="2_3fkf6"]
+[ext_resource type="Texture2D" uid="uid://bidk6crinl008" path="res://Art/CardArt/card-art-background-desert.png" id="3_3fkf6"]
+[ext_resource type="StyleBox" uid="uid://bf24o3avwu6qh" path="res://PanelStyles/circular_style_box_inner.tres" id="4_nllas"]
+[ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="5_nllas"]
+[ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Fonts/stepalange-font/Stepalange-x3BLm.otf" id="6_ngylu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7uvm"]
-
-[node name="Map_Node" type="Node2D"]
+[node name="Map_Node" type="Node2D" unique_id=1981315400]
 z_index = 1
 z_as_relative = false
 script = ExtResource("1_g7uvm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_wp7i3")
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=933460447]
+clip_children = 2
+offset_left = -68.0
+offset_top = -176.75629
+offset_right = 92.0
+offset_bottom = 37.343765
+theme_override_styles/panel = ExtResource("2_3fkf6")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=108263112]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_3fkf6")
+expand_mode = 4
+stretch_mode = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-rotation = 0.802851
-shape = SubResource("RectangleShape2D_g7uvm")
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=626721461]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_nllas")
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[node name="NodeName" type="Node2D" parent="." unique_id=1538598445]
+unique_name_in_owner = true
+position = Vector2(-55, -3)
+
+[node name="Shadow" type="TextureRect" parent="NodeName" unique_id=1307513981]
+offset_left = -11.0
+offset_top = -14.0
+offset_right = 239.0
+offset_bottom = 76.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_nllas")
+
+[node name="NameLabel" type="Label" parent="NodeName" unique_id=1973218162]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -2.0
+offset_right = 134.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_ngylu")
+theme_override_font_sizes/font_size = 32
+text = "Place Name"
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="PanelContainer" to="." method="_on_panel_container_gui_input"]
+[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer" to="." method="_on_panel_container_mouse_exited"]

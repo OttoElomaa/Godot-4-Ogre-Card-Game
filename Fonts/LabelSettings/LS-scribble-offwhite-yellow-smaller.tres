@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bt6oe2y1xatyg"]
+
+[ext_resource type="FontFile" uid="uid://ws5ldmejn1u" path="res://Fonts/Inkverse.ttf" id="1_q8o52"]
+
+[resource]
+font = ExtResource("1_q8o52")
+font_size = 28
+font_color = Color(1, 1, 0.960784, 1)

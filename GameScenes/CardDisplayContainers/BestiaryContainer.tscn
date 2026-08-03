@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c84qv8p8c0mxd"]
+
+[ext_resource type="PackedScene" uid="uid://drnejrg0lhyf1" path="res://GameScenes/DeckEditScreen/card_container_draggable.tscn" id="1_f8hbt"]
+[ext_resource type="Script" uid="uid://dce3fx7be3af3" path="res://GameScenes/CardDisplayContainers/bestiary_container.gd" id="2_f8hbt"]
+
+[node name="CardContainer" unique_id=1050920320 instance=ExtResource("1_f8hbt")]
+z_index = 1
+script = ExtResource("2_f8hbt")
+has_margin = true

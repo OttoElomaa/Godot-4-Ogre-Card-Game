@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://snw70sjt1t0a"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_7kafp"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_v7ku7"]
+[ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="3_x5xgb"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="4_wwl2t"]
+[ext_resource type="PackedScene" uid="uid://0yevoktm0llg" path="res://CardScriptsAndComponents/Actions/SkillShoot.tscn" id="5_hmhx3"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="6_y86q4"]
+[ext_resource type="PackedScene" uid="uid://crk7pfo0mnvoa" path="res://CardScriptsAndComponents/Keywords/Dream Assault.tscn" id="7_yqht7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rw8b0"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tr2jy"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_rw8b0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w8y8r"]
+resource_local_to_scene = true
+shader = ExtResource("2_v7ku7")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_tr2jy")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-Dreaming-Portent" unique_id=1171307177 instance=ExtResource("1_7kafp")]
+material = SubResource("ShaderMaterial_w8y8r")
+cardName = "Dreaming Portent"
+subTypeStr = "Astral"
+flavorText = "I saw them again, in a dream, now their speech clear to me. They showed me the beautiful vistas of the land above all land, where weight holds no tyranny."
+manaCost = 4
+startingDamage = 4
+startingHealth = 2
+block_on_arrival = false
+action_mode = 2
+will_not_charge = true
+
+[node name="OnCastTrigger" type="Node" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=834374619]
+script = ExtResource("3_x5xgb")
+metadata/_custom_type_script = "uid://cdekh7m7g5vek"
+
+[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="0" unique_id=1822697578]
+script = ExtResource("4_wwl2t")
+customActionText = "Cast: shoot."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillShoot" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=581391036 instance=ExtResource("5_hmhx3")]
+
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=569004238 instance=ExtResource("6_y86q4")]
+manualTargetGroup = 2
+
+[node name="DreamAssault" parent="KeywordHandler/MyKeywords" parent_id_path=PackedInt32Array(83486270) index="0" unique_id=188041758 instance=ExtResource("7_yqht7")]

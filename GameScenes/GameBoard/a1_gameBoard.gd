@@ -3,13 +3,15 @@ extends Node2D
 class_name GameBoard
 
 
-
 @onready var cardsManager : CardsManager = $CardsManager
 @onready var battleSystem : BattleSystem = $BattleSystem
 
 @onready var cameraMainBoard := $CameraMainBoard
 
 @onready var battleNameLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel/HBox/BoardNameLabel
+@onready var turnCountLabel := $CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel
+@onready var endTurnLabel := $CanvasLayer/EndTurnPane/VBox/EndTurn/Label
+
 @onready var champActionButton := preload("res://Champions/Scripts/ChampionActionButton.tscn") 
 
 enum CardSlotTypes {
@@ -54,11 +56,9 @@ func _ready() -> void:
 	#### SETUP BOARD
 	##################################
 	States.statesPlay()
-	
 	setup_board()
-	#### THIS FUNC SETS UP PLAYER AND ENEMY DECKS BASED ON GameInfo
+	turn_1_init()
 
-#	turn_1_init()
 	###################################################
 	#### UI STUFF
 	$CanvasLayer/GameOverPane.hide()
@@ -72,8 +72,12 @@ func _ready() -> void:
 		slot.slotType = CardSlotTypes.PLAYER
 	for slot:CardSlot in $EnemySlots.get_children():
 		slot.slotType = CardSlotTypes.ENEMY
+	
+	print("GameBoard: First turn!")
+	
 
 
+#### CALLED IN ZONE ICON SCENE  ...????
 func setup_board():
 	print(name, ': Game Board set up')
 	$CardsManager.setup(self)
@@ -84,6 +88,15 @@ func setup_board():
 	setup_champions(GameInfo.current_champion, GameInfo.enemyChampion)
 	
 	MyTools.gameBoardSetup(self)
+
+
+#### CALLED IN ZONE ICON SCENE  ...????
+func turn_1_init():
+	#cardsManager.dealEnemyHand()
+	#cardsManager.dealPlayerHand()
+	pass
+
+
 
 func _unhandled_input(e: InputEvent) -> void:
 	if e is InputEventMouseButton: 
@@ -96,8 +109,8 @@ func setup_champions(player_champ:Champion, enemy_champ:Champion):
 	%EnemyChampSlot.add_child(enemy_champ.duplicate())
 	
 	## Set character portrait.
-	%PlayerSprite.texture = player_champ.texture
-	%EnemySprite.texture = enemy_champ.texture
+	%PlayerSprite.insert_champion(player_champ)
+	%EnemySprite.insert_champion(enemy_champ)
 	
 	## Setup player champion.
 	playerChampion().isEnemyCard = false
@@ -141,9 +154,7 @@ func add_card_to_enemy_deck(card:Card):
 	$CardsManager/EnemyDeck.add_child(card)
 	card.setup(self)
 
-func turn_1_init():
-	cardsManager.dealEnemyHand()
-	cardsManager.dealPlayerHand()
+
 
 func toggleCardActionMenu(enable:bool, card:Card):
 	
@@ -244,7 +255,7 @@ func _on_exit_button_pressed() -> void:
 
 
 func _on_toggle_defend_button_pressed() -> void:
-	actionMenuCard.switchStates()
+	actionMenuCard.switchBlockingState()
 	#toggleCardActionMenu(false, null)
 
 
@@ -262,7 +273,14 @@ func updateUi(turnCount:int):
 		battleNameLabel.text = GameInfo.currentBattleInfo.board_name
 		
 	
-	$CanvasLayer/LevelInfoPanel/VBox/Panel2/HBox/TurnCountLabel.text = "%d" % GameInfo.turnCount
+	turnCountLabel.text = "%d" % GameInfo.turnCount
+	
+	if GameInfo.enemy_turn:
+		endTurnLabel.text = "Enemy Turn"
+	else:
+		endTurnLabel.text = "End Turn"
+		
+		
 
 
 
@@ -291,20 +309,6 @@ func enemyChampion() -> Champion:
 	else:
 		return null
 
-func playAttackPortraitAnimation(attackingCard: Card):
-	var c = attackingCard
-	var isEnemy = c.isEnemyCard
-	var targetPos = Vector2(0,0)
-	
-	if isEnemy:
-		targetPos = $Portraits/PlayerSprite.position
-	else:
-		targetPos = $Portraits/EnemySprite.position
-	
-	var tween = create_tween()
-	tween.tween_property(c, "position", targetPos, 0.2)
-	await tween.finished
-
 
 
 func showPlayerTurnPopup():
@@ -313,9 +317,90 @@ func showPlayerTurnPopup():
 func shake_screen(intensity:float, time:float):
 	cameraMainBoard.screen_shake(intensity, time)
 
+func darken_screen(time:float):
+	States.ignoreMouseInput = true
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, 'modulate', Color(0.256, 0.256, 0.256, 1.0), time)
+	await tween.finished
+
+func brighten_screen(time:float):
+	States.ignoreMouseInput = false
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, 'modulate', Color(1.0, 1.0, 1.0, 1.0), time)
+	await tween.finished
+
+func unfold_ritual_container(card:Card):
+	var smoke = DataLoader.animations_by_filename['smoke.tscn'].instantiate()
+	var typewriter_textbox = DataLoader.animations_by_filename["temporary_textbox_fixed.tscn"].instantiate()
+	var typewriter_textbox2 = DataLoader.animations_by_filename["temporary_textbox_fixed.tscn"].instantiate()
+	var screen_flash = DataLoader.animations_by_filename["screen_flash.tscn"].instantiate()
+	
+	smoke.position += Vector2(%RitualContainer.size.x/2, %RitualContainer.size.y/2)
+	
+	%RitualContainer.insert_card(card.duplicate())
+	%RitualContainer.material.set_shader_parameter('percentage', 1.0)
+	%RitualContainer.show_name = false
+	
+	## Typewriter textboxes with the ritual's flavor text are set up.
+	typewriter_textbox.hide()
+	$AnimationLayer.add_child(typewriter_textbox)
+	typewriter_textbox.text = card.flavorText
+	typewriter_textbox.position.x = 200.0
+	typewriter_textbox.position.y = randi_range(600, 150)
+	var box_scale = randf_range(1.0, 2.0)
+	typewriter_textbox.scale = Vector2(box_scale, box_scale)
+	typewriter_textbox.rotation_degrees = randf_range(25, -25) 
+	
+	typewriter_textbox2.hide()
+	$AnimationLayer.add_child(typewriter_textbox2)
+	box_scale = randf_range(1.0, 3.0)
+	typewriter_textbox2.text = card.flavorText
+	typewriter_textbox2.position.x = 1000.0
+	typewriter_textbox2.position.y = randi_range(600, 150)
+	typewriter_textbox2.scale = Vector2(box_scale, box_scale)
+	typewriter_textbox2.rotation_degrees = randf_range(25, -25) 
+	
+	## The ritual container appears offscreen, either on top or at the bottom depending on whose card it is.
+	if card.isEnemyCard:
+		%RitualContainer.position.y = -465.0
+		%RitualContainer.face_down()
+	else:
+		%RitualContainer.position.y = 1650.0
+	%RitualContainer.show()
+	
+	## The ritual container moves to the middle of the screen and the card is turned face up.
+	var tween = get_tree().create_tween()
+	tween.tween_property(%RitualContainer, 'position', Vector2(%RitualContainer.position.x, 400), 2).set_ease(Tween.EASE_OUT)
+	await tween.finished
+	$AnimationLayer.add_child(screen_flash)
+	await screen_flash.tree_exited
+	%RitualContainer.face_up()
+	%RitualContainer.show_name = true
+	typewriter_textbox.show()
+	typewriter_textbox2.show()
+	
+	## How long the card stays face up on-screen, letting the player read its effects.
+	await get_tree().create_timer(3).timeout
+	%RitualContainer.add_child(smoke)
+	tween = get_tree().create_tween()
+	smoke.emitting = true
+	tween.tween_property(%RitualContainer.material, 'shader_parameter/percentage', 0.1, 2.0)
+	await tween.finished
+	%RitualContainer.hide()
+	smoke.queue_free()
+	typewriter_textbox.queue_free()
+	typewriter_textbox2.queue_free()
+	
+
 func toggleCardInfo(enable:bool, card:Card):
-	var cardInfo := $CanvasLayer/CardInfoPane/CardInfoPanel
+	var cardInfo := %CardInfoPanel
 	cardInfo.toggleCardInfo(enable, card)
+	
+	if enable:
+		var global_center:Vector2 = %CameraMainBoard.get_screen_center_position()
+		var screen_pos = card.get_global_transform_with_canvas().get_origin()
+		print(screen_pos)
+		cardInfo.show_at(screen_pos)
 	
 
 func addLogMessage(text:String, color:Color) -> void:
@@ -326,17 +411,17 @@ func addLogMessage(text:String, color:Color) -> void:
 # Cheat Functions
 
 func nuke_cards(isEnemy: bool):
-	var obj: Node = null
+	var board: Node = $CardsManager/PlayerBoard
+	var hand: Node = %PlayerHand
 	if isEnemy:
-		for child in %EnemyDeck.get_children():
-			obj.remove_child(child)
-		for child in %EnemyHand.get_children():
-			obj.remove_child(child)
-	else:
-		for child in %PlayerDeck.get_children():
-			obj.remove_child(child)
-		for child in %PlayerHand.get_children():
-			obj.remove_child(child)
+		board = $CardsManager/EnemyBoard
+		hand = %EnemyHand
+		
+	for child in board.get_children():
+		board.remove_child(child)
+	for child in hand.get_children():
+		hand.remove_child(child)
+	
 
 
 func nuke_all_cards():
@@ -344,18 +429,20 @@ func nuke_all_cards():
 	nuke_cards(false)
 
 
-
 func endGame(isWin:bool):
 	$CanvasLayer/GameOverPane.show()
 	if isWin:
 		$CanvasLayer/GameOverPane/Margin/VBox/WonHeader.show()
 		$CanvasLayer/GameOverPane/Margin/VBox/LostHeader.hide()
-		GameInfo.playerWonBattleNames.append(battleNameLabel.text)
 	else:
 		$CanvasLayer/GameOverPane/Margin/VBox/WonHeader.hide()
 		$CanvasLayer/GameOverPane/Margin/VBox/LostHeader.show()
-		GameInfo.playerLives -= 1
-		
+		lose_champion()
+
+func lose_champion():
+	GameInfo.playerOwnedChampions.erase(GameInfo.current_champion)
+	if not GameInfo.playerOwnedChampions.is_empty():
+		GameInfo.current_champion = GameInfo.playerOwnedChampions[0]
 
 func buttonPressedEndMatch() -> void:
 	if GameInfo.currentZone:
@@ -363,3 +450,9 @@ func buttonPressedEndMatch() -> void:
 		SceneSwitcher.switchToNewScene(GameInfo.currentZone)
 	else:
 		SceneSwitcher.returnToMainMenu()
+
+func getPortraitPosition(isEnemy:bool) -> Vector2:
+	if isEnemy:
+		return $Portraits/PlayerSprite.position
+	else:
+		return $Portraits/EnemySprite.position

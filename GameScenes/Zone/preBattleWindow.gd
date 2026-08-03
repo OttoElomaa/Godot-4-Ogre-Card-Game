@@ -1,10 +1,9 @@
-extends MarginContainer
+extends CanvasLayer
 
-@onready var CardContainerScene:PackedScene = preload("res://GameScenes/Compendium/BestiaryContainer.tscn")
+@onready var BestiaryContainerScene:PackedScene = preload("res://GameScenes/CardDisplayContainers/BestiaryContainer.tscn")
 
-@onready var cardInfoPanel := $MainPanel/Margin/MainHBox/Filler/VBox/CardInfoPanel
-@onready var flavorLabel := $MainPanel/Margin/MainHBox/Filler/VBox/FlavorLabel
-@onready var boardCommentsLabel := $MainPanel/Margin/MainHBox/Left/VBox/GB_Comments
+@onready var cardInfoPanel := %CardInfoPanel
+@onready var boardCommentsLabel := %GB_Comments
 
 var battleInfoIcon:ZoneBattleIcon = null
 var enemyDeck := []
@@ -17,38 +16,47 @@ func setup(icon:ZoneBattleIcon) -> void:
 
 
 
-func toggleWindow(enable:bool):
-	var enemyCardsHolder = $MainPanel/Margin/MainHBox/Left/VBox/Margin/EnemyCards
-	
+func toggleWindow(enable:bool):	
 	if enable:
 		show()
 		clearOldIcons()
-		var icon = battleInfoIcon
-		
-		if not battleInfoIcon.has_method('generate_fight'):
-			
-			await battleInfoIcon.createDeck()
-			#### GENERATE PREVIEW ICONS OF ENEMY DECK
-			for cardScene:PackedScene in icon.deck_cards:
-				var container = CardContainerScene.instantiate()
-				enemyCardsHolder.add_child(container)
-				container.display_card(cardScene)
-				container.infoPanel = cardInfoPanel
+		var icon:ZoneBattleIcon = battleInfoIcon
+		if not icon.has_method('generate_fight'):
+			generatePreview(icon, true)
 		else:
-			#### GENERATE PREVIEW ICONS OF ENEMY DECK
-			var cards_for_preview = await icon.generate_fight()
-			for cardScene:Card in cards_for_preview:
-				var container = CardContainerScene.instantiate()
-				enemyCardsHolder.add_child(container)
-				container.insert_card(cardScene)
-				container.infoPanel = cardInfoPanel
-
+			generatePreview(icon, false)
+			
 		boardCommentsLabel.text = icon.board_comments
-	
 	else:
 		hide()
 		clearOldIcons()
 		
+
+
+func generatePreview(icon:ZoneBattleIcon, isGenerated:bool):
+	var enemyCardsHolder = %EnemyCards
+	
+	if isGenerated:
+		await battleInfoIcon.createDeck()
+		#### GENERATE PREVIEW ICONS OF ENEMY DECK
+		for key:String in icon.deck_cards:
+			var newCard:Card = DataLoader.cards_by_name[key].duplicate()
+			var container:BestiaryContainer = BestiaryContainerScene.instantiate()
+			enemyCardsHolder.add_child(container)
+			container.display_card(newCard)
+			container.infoPanel = cardInfoPanel
+	else:
+		#### GENERATE PREVIEW ICONS OF ENEMY DECK
+		var cards_for_preview = await icon.generate_fight()
+		for cardScene:Card in cards_for_preview:
+			var container:BestiaryContainer = BestiaryContainerScene.instantiate()
+			enemyCardsHolder.add_child(container)
+			container.insert_card(cardScene)
+			container.infoPanel = cardInfoPanel
+	
+	%PChampionContainer.insert_champion(GameInfo.current_champion)
+	%EChampContainer.insert_champion(GameInfo.enemyChampion)
+
 
 func putCopiesOfCardIntoEnemyDeck(card:PackedScene, amount:int):
 	for i in range(amount):
@@ -58,14 +66,9 @@ func putCopiesOfCardIntoEnemyDeck(card:PackedScene, amount:int):
 
 func clearOldIcons():
 	#### CLEAR OLD ICONS
-	var enemyCardsHolder = $MainPanel/Margin/MainHBox/Left/VBox/Margin/EnemyCards
+	var enemyCardsHolder = %EnemyCards
 	for card:Card in enemyCardsHolder.get_children():
 		card.queue_free()
-
-
-#### CALLED FROM CardInfoPanel
-func setFlavorLabelText(flavor:String):
-	flavorLabel.text = flavor
 
 func cancelButtonPressed() -> void:
 	queue_free()
@@ -73,5 +76,6 @@ func cancelButtonPressed() -> void:
 func fightButtonPressed() -> void:
 	
 	MyTools.setupAndOpenDeckEdit(battleInfoIcon.board)
+	battleInfoIcon.resolve()
 	
 	queue_free()

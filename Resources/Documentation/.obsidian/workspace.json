@@ -74,9 +74,26 @@
               "icon": "lucide-layout-dashboard",
               "title": "Beasts"
             }
+          },
+          {
+            "id": "2e7d6aea36d7b080",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Cards/City/Guilds.canvas",
+                "viewState": {
+                  "x": 441.5,
+                  "y": 703.7434511434512,
+                  "zoom": -0.6860170532164257
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Guilds"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -224,19 +241,19 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "89bdf3e2e04ad65a",
+  "active": "2e7d6aea36d7b080",
   "lastOpenFiles": [
-    "Cards/Desert/High Kingdom.canvas",
-    "Cards/Desert/Beasts.canvas",
-    "Cards/Green Defiance/Woodwose.canvas",
-    "Cards/Green Defiance/Vinemen.canvas",
     "Cards/Green Defiance/Grove Clans.canvas",
-    "Cards/City/Priests.canvas",
-    "Cards/City/Guilds.canvas",
-    "Cards/City/Sea Peoples.canvas",
-    "Cards/Green Defiance/Skull Priests.canvas",
-    "Cards/Green Defiance/Gharch.canvas",
     "Cards/Desert/Salkhi Horde.canvas",
+    "Cards/Desert/Pyrecallers.canvas",
+    "Cards/Desert/Pilgrims.canvas",
+    "Cards/City/Priests.canvas",
+    "Cards/City/Sea Peoples.canvas",
+    "Cards/City/Throne.canvas",
+    "Cards/City/Slaves.canvas",
+    "Cards/Desert/Beasts.canvas",
+    "Cards/Desert/High Kingdom.canvas",
+    "Cards/Green Defiance/Woodwose.canvas",
     "Cards/City/Без названия.md",
     "Scenarios",
     "Cards/Outcasts",

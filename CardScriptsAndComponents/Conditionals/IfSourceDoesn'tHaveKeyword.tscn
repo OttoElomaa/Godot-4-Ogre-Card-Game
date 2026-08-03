@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dr6800mm8qc7j"]
+
+[ext_resource type="Script" uid="uid://cel155onqfjam" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_source_doesn't_have_keyword.gd" id="1_yuebk"]
+
+[node name="IfSourceDoesn\'tHaveKeyword" type="Node" unique_id=2093946286]
+script = ExtResource("1_yuebk")
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

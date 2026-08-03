@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://fdhkm8e65wmg"]
+[gd_scene format=3 uid="uid://fdhkm8e65wmg"]
 
-[ext_resource type="Script" uid="uid://clw4ws77usamx" path="res://GameAutoloads/effect_animation_queue.gd" id="1_x4rnw"]
+[ext_resource type="Script" uid="uid://clw4ws77usamx" path="res://GameAutoloads/Scripts/effect_animation_queue.gd" id="1_x4rnw"]
 
-[node name="EffectAnimationQueue" type="Node2D"]
+[node name="EffectAnimationQueue" type="Node2D" unique_id=1779641268]
 script = ExtResource("1_x4rnw")
 
-[node name="Canvas" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="." unique_id=480926118]
 
-[node name="Sprites" type="Node2D" parent="."]
+[node name="Sprites" type="Node2D" parent="." unique_id=839957041]

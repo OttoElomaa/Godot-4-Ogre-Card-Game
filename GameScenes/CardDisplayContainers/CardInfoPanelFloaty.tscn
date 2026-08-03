@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://d4hd17vynaptf"]
+
+[ext_resource type="Script" uid="uid://ccnp7aycda66" path="res://GameScenes/CardDisplayContainers/card_info_panel_floaty.gd" id="1_owy2s"]
+[ext_resource type="Texture2D" uid="uid://bvnmf54c4ye2n" path="res://Art/CardComponents/card-background-texture-V4b-ForInfoPane.jpg" id="3_bajmq"]
+[ext_resource type="Texture2D" uid="uid://bv6t2gvsftvsp" path="res://Art/BoardComponents/card-slot-empty-texture.png" id="4_68gqi"]
+[ext_resource type="LabelSettings" uid="uid://5ls01gsi27ws" path="res://Fonts/LabelSettings/LabelSet-Header-Brown.tres" id="5_umej5"]
+[ext_resource type="Texture2D" uid="uid://curoofw6c3veq" path="res://Art/CardArt/card-art-base-card-placeholder.jpg" id="6_oc4yc"]
+[ext_resource type="LabelSettings" uid="uid://qjlnlywf0ted" path="res://Fonts/LabelSettings/LabelSetSmallBrownCardText.tres" id="7_6byni"]
+[ext_resource type="LabelSettings" uid="uid://coeu828uaso2e" path="res://Fonts/LabelSettings/LS-scribble-offwhite-yellow.tres" id="8_52e1a"]
+
+[node name="CardInfoPanel" type="Node2D" unique_id=669207405]
+script = ExtResource("1_owy2s")
+disappearing = true
+
+[node name="MarginWithOuter" type="MarginContainer" parent="." unique_id=551882397]
+offset_right = 675.0
+offset_bottom = 517.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=821098112]
+offset_right = 675.0
+offset_bottom = 517.0
+
+[node name="CardMargin" type="MarginContainer" parent="HBoxContainer" unique_id=2144792257]
+custom_minimum_size = Vector2(345, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CardBackgroundTexture" type="TextureRect" parent="HBoxContainer/CardMargin" unique_id=220574376]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_bajmq")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="EmptySlot" type="TextureRect" parent="HBoxContainer/CardMargin" unique_id=986027413]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("4_68gqi")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Margin" type="MarginContainer" parent="HBoxContainer/CardMargin" unique_id=340755870]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="HBoxContainer/CardMargin/Margin" unique_id=1567262020]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="NameLabel" type="Label" parent="HBoxContainer/CardMargin/Margin/VBox" unique_id=1325996088]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Card Name"
+label_settings = ExtResource("5_umej5")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ArtMargin" type="MarginContainer" parent="HBoxContainer/CardMargin/Margin/VBox" unique_id=608544940]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="CardArt" type="TextureRect" parent="HBoxContainer/CardMargin/Margin/VBox/ArtMargin" unique_id=836676011]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("6_oc4yc")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Text_1" type="VBoxContainer" parent="HBoxContainer/CardMargin/Margin/VBox" unique_id=1407441477]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SubTypeLine" type="Label" parent="HBoxContainer/CardMargin/Margin/VBox/Text_1" unique_id=285487385]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Sub-type line goes here."
+label_settings = ExtResource("7_6byni")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CardMargin/Margin/VBox/Text_1" unique_id=254692535]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="EffectText" type="Label" parent="HBoxContainer/CardMargin/Margin/VBox/Text_1/MarginContainer" unique_id=1980011061]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Effect text goes here."
+label_settings = ExtResource("7_6byni")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VBoxWithOuterText" type="VBoxContainer" parent="HBoxContainer" unique_id=892016139]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="VBox" type="VBoxContainer" parent="HBoxContainer/VBoxWithOuterText" unique_id=1379295554]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="FlavorTextContainer" type="PanelContainer" parent="HBoxContainer/VBoxWithOuterText/VBox" unique_id=1604710629]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="FlavorLabel" type="Label" parent="HBoxContainer/VBoxWithOuterText/VBox/FlavorTextContainer" unique_id=1751756641]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "..."
+label_settings = ExtResource("8_52e1a")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TermTooltips" type="VBoxContainer" parent="HBoxContainer/VBoxWithOuterText/VBox" unique_id=1177089930]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="CardBottomMargin" type="MarginContainer" parent="." unique_id=2138089089]
+unique_name_in_owner = true
+offset_right = 675.0
+offset_bottom = 517.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 13
+
+[node name="AttackDefenseLabel" type="Label" parent="." unique_id=73014179]
+unique_name_in_owner = true
+offset_left = 6.0
+offset_top = 481.0
+offset_right = 338.0
+offset_bottom = 505.0
+text = "2 / 2"
+label_settings = ExtResource("7_6byni")
+horizontal_alignment = 1
+vertical_alignment = 1

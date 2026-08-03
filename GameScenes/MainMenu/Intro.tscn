@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://babshaacwyqaq"]
+[gd_scene format=3 uid="uid://babshaacwyqaq"]
 
 [ext_resource type="Script" uid="uid://cuh72cjn47ixc" path="res://GameScenes/MainMenu/intro.gd" id="1_knwgi"]
-[ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/MainMenu/typewriter_textbox.tscn" id="2_knwgi"]
+[ext_resource type="PackedScene" uid="uid://d2lky3krjjul4" path="res://GameScenes/ParticlesAnimations/typewriter_textbox.tscn" id="2_knwgi"]
 [ext_resource type="Texture2D" uid="uid://iro7vjuquihg" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-01.png" id="2_yaago"]
 [ext_resource type="Texture2D" uid="uid://dn8jedugya4ww" path="res://Art/BoardScenery/board-backdrop-texture-ruins-corner-02.png" id="3_vc82o"]
 [ext_resource type="Texture2D" uid="uid://sge30r6aur2x" path="res://Art/BoardScenery/board-backdrop-texture-jungle-leaves-01.png" id="4_irmk7"]
