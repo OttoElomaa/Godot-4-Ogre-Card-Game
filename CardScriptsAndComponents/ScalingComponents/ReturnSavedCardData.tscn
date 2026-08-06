@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b3nwj1o25tc34"]
+
+[ext_resource type="Script" uid="uid://dgfe87rl7oiy7" path="res://CardScriptsAndComponents/ScalingComponents/Scripts/return_saved_card_data.gd" id="1_yf4q2"]
+
+[node name="ReturnSavedCardData" type="Node" unique_id=1990749032]
+script = ExtResource("1_yf4q2")
+metadata/_custom_type_script = "uid://csj7f5s4vkrfe"

@@ -2,8 +2,102 @@
 
 [ext_resource type="PackedScene" uid="uid://chhff8h0vvfgs" path="res://Champions/Scripts/Champion.tscn" id="1_y8crd"]
 [ext_resource type="Texture2D" uid="uid://ct78whieh4eej" path="res://Art/CardArt/GreenDefiance/card-art-creature-vineman-elder-v2.jpg" id="2_sddjd"]
+[ext_resource type="Script" uid="uid://dw6ejtqnbwoh2" path="res://Champions/Scripts/ActionsNodeChamp.gd" id="3_0shos"]
+[ext_resource type="Texture2D" uid="uid://jpvq0u8pgm6" path="res://Art/icons/16x16/music.png" id="4_kjgam"]
+[ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="5_2gs3f"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="6_l3xd5"]
+[ext_resource type="PackedScene" uid="uid://d0s8i2byddp5k" path="res://CardScriptsAndComponents/Actions/SkillGainStats.tscn" id="7_ccpaj"]
+[ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="8_l3xd5"]
+[ext_resource type="PackedScene" uid="uid://b50qou0nvjrrv" path="res://CardScriptsAndComponents/Conditionals/IfSubtype.tscn" id="9_ccpaj"]
+[ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="10_4rpk5"]
+[ext_resource type="PackedScene" uid="uid://dm7l4ct0rvmig" path="res://CardScriptsAndComponents/ScalingComponents/ScaleFromOwnerChampion.tscn" id="11_0inyy"]
 
 [node name="Champion" unique_id=1181374962 instance=ExtResource("1_y8crd")]
-texture = ExtResource("2_sddjd")
 cardName = "Vineman Elder"
-cardType = 2
+texture = ExtResource("2_sddjd")
+flavorText = "O Nephilim, I have lived to see the late Sun..."
+startingHealth = 8
+
+[node name="Song of Lament" type="Node2D" parent="." index="0" unique_id=1391444774]
+script = ExtResource("3_0shos")
+action_name = "Song of Lament"
+texture = ExtResource("4_kjgam")
+cost_display = Dictionary[int, int]({
+2: 2
+})
+metadata/_custom_type_script = "uid://dw6ejtqnbwoh2"
+
+[node name="OnCastTrigger" type="Node" parent="Song of Lament" index="0" unique_id=1732853024]
+script = ExtResource("5_2gs3f")
+metadata/_custom_type_script = "uid://cdekh7m7g5vek"
+
+[node name="CardAction" type="Node2D" parent="Song of Lament/OnCastTrigger" index="0" unique_id=1279567787]
+script = ExtResource("6_l3xd5")
+customActionText = "Grant allied Wild forces 0/+1."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillGainStats" parent="Song of Lament/OnCastTrigger/CardAction" index="0" unique_id=971130325 instance=ExtResource("7_ccpaj")]
+change_health = 1
+
+[node name="TargetAllAllies" parent="Song of Lament/OnCastTrigger/CardAction" index="1" unique_id=1485309255 instance=ExtResource("8_l3xd5")]
+
+[node name="IfSubtype" parent="Song of Lament/OnCastTrigger/CardAction/TargetAllAllies" index="1" unique_id=1693281650 instance=ExtResource("9_ccpaj")]
+subtype = "Wild"
+
+[node name="Song of Vengeance" type="Node2D" parent="." index="1" unique_id=324993781]
+script = ExtResource("3_0shos")
+action_name = "Song of Lament"
+texture = ExtResource("4_kjgam")
+cost_display = Dictionary[int, int]({
+2: 2
+})
+metadata/_custom_type_script = "uid://dw6ejtqnbwoh2"
+
+[node name="OnCastTrigger" type="Node" parent="Song of Vengeance" index="0" unique_id=1034787887]
+script = ExtResource("5_2gs3f")
+metadata/_custom_type_script = "uid://cdekh7m7g5vek"
+
+[node name="CardAction" type="Node2D" parent="Song of Vengeance/OnCastTrigger" index="0" unique_id=2065653070]
+script = ExtResource("6_l3xd5")
+customActionText = "Grant allied Wild forces +1/0."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillGainStats" parent="Song of Vengeance/OnCastTrigger/CardAction" index="0" unique_id=16457068 instance=ExtResource("7_ccpaj")]
+change_damage = 1
+
+[node name="TargetAllAllies" parent="Song of Vengeance/OnCastTrigger/CardAction" index="1" unique_id=465469614 instance=ExtResource("8_l3xd5")]
+
+[node name="IfSubtype" parent="Song of Vengeance/OnCastTrigger/CardAction/TargetAllAllies" index="1" unique_id=2126610640 instance=ExtResource("9_ccpaj")]
+subtype = "Wild"
+
+[node name="Song of Nourishment" type="Node2D" parent="." index="2" unique_id=1161517655]
+script = ExtResource("3_0shos")
+action_name = "Song of Lament"
+texture = ExtResource("4_kjgam")
+metadata/_custom_type_script = "uid://dw6ejtqnbwoh2"
+
+[node name="OnCastTrigger" type="Node" parent="Song of Nourishment" index="0" unique_id=1281447560]
+script = ExtResource("5_2gs3f")
+metadata/_custom_type_script = "uid://cdekh7m7g5vek"
+
+[node name="CardAction" type="Node2D" parent="Song of Nourishment/OnCastTrigger" index="0" unique_id=573346138]
+script = ExtResource("6_l3xd5")
+customActionText = "Drain all Mana to restore an equal amount of Health."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillPlayerHealthMana" parent="Song of Nourishment/OnCastTrigger/CardAction" index="0" unique_id=461668112 instance=ExtResource("10_4rpk5")]
+alterOwnerHealth = 1
+
+[node name="ScaleFromOwnerChampion" parent="Song of Nourishment/OnCastTrigger/CardAction/SkillPlayerHealthMana" index="0" unique_id=1118225672 instance=ExtResource("11_0inyy")]
+stat_to_use = 1
+
+[node name="CardAction2" type="Node2D" parent="Song of Nourishment/OnCastTrigger" index="1" unique_id=8240670]
+script = ExtResource("6_l3xd5")
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillPlayerHealthMana" parent="Song of Nourishment/OnCastTrigger/CardAction2" index="0" unique_id=1778629769 instance=ExtResource("10_4rpk5")]
+alterOwnerMana = 1
+
+[node name="ScaleFromOwnerChampion" parent="Song of Nourishment/OnCastTrigger/CardAction2/SkillPlayerHealthMana" index="0" unique_id=464509400 instance=ExtResource("11_0inyy")]
+stat_to_use = 1
+multiplier = -1.0

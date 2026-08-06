@@ -284,7 +284,11 @@ func updateUi(turnCount:int):
 
 
 
-
+func attach_champ_custom_window(isEnemy:bool, window:Control):
+	if isEnemy:
+		window.global_position = %EnemySprite.global_position
+	else:
+		window.global_position = %PlayerSprite.global_position
 
 func updateResourceLabels():
 	$Portraits/PlayerHealthLabel.text = "%d" % GameInfo.playerHealth

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cls3nfmm14nfi"]
+
+[ext_resource type="Script" uid="uid://bkr3ynqcjeort" path="res://Champions/Scripts/custom_window.gd" id="1_hamyc"]
+
+[node name="CustomWindow" type="Control" unique_id=1520007029]
+z_index = 20
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_hamyc")

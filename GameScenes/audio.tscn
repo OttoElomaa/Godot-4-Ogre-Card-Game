@@ -1,8 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjwurlo7haie7"]
+[gd_scene format=3 uid="uid://cjwurlo7haie7"]
 
 [sub_resource type="GDScript" id="GDScript_r2wa1"]
 script/source = "extends Node2D
-class_name Audio
 
 @export var BGM = AudioStreamOggVorbis
 
@@ -11,7 +10,7 @@ func _ready():
 	$AudioStreamPlayer.play()
 "
 
-[node name="Audio" type="Node2D"]
+[node name="Audio" type="Node2D" unique_id=576542653]
 script = SubResource("GDScript_r2wa1")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=836523096]

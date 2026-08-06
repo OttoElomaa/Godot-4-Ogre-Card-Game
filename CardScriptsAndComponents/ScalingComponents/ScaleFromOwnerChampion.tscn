@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dm7l4ct0rvmig"]
+
+[ext_resource type="Script" uid="uid://5tsxnait172g" path="res://CardScriptsAndComponents/ScalingComponents/Scripts/scale_from_owner_champion.gd" id="1_tevnf"]
+
+[node name="ScaleFromOwnerChampion" type="Node" unique_id=1118225672]
+script = ExtResource("1_tevnf")
+metadata/_custom_type_script = "uid://dn66fakti1ju8"

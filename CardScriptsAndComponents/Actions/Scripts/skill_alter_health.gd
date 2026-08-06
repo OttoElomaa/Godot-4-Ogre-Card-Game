@@ -38,10 +38,24 @@ func activate(targets:Array) -> bool:
 			success = true
 		
 		#### BOLSTER
-		elif bolsterDamage > 0 or bolsterHealth > 0:
+		elif bolsterDamage > 0:
+			if isScaled():
+				bolsterDamage = get_scaling({'target': target})
 			target.tempDamage += bolsterDamage
+			
+			if bolsterDamage > 0:
+				MyTools.createCombatLogPrintout(str(target.cardName, "'s damage is bolstered by ", bolsterDamage), Color.STEEL_BLUE)
+			elif bolsterDamage < 0:
+				MyTools.createCombatLogPrintout(str(target.cardName, "'s damage is weakened by ", bolsterDamage), Color.STEEL_BLUE)
+			
+		elif bolsterHealth > 0:
+			if isScaled():
+				bolsterHealth = get_scaling({'target': target})
 			target.tempHealth += bolsterHealth
-			MyTools.createCombatLogPrintout(str(target.cardName, ' gains +', bolsterDamage, '/', bolsterHealth), Color.STEEL_BLUE)
+			if bolsterHealth > 0:
+				MyTools.createCombatLogPrintout(str(target.cardName, "'s health is bolstered by ", bolsterDamage), Color.STEEL_BLUE)
+			elif bolsterHealth < 0:
+				MyTools.createCombatLogPrintout(str(target.cardName, "'s health is weakened by ", bolsterDamage), Color.STEEL_BLUE)
 			success = true
 		
 	return success

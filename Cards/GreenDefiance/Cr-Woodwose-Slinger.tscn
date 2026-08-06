@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dduvg7qmdrd2j"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_tl4vc"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_vad7k"]
+[ext_resource type="Texture2D" uid="uid://chkd8lybeeuov" path="res://Art/CardArt/enemies_1.png" id="3_jitl4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f33b6"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ao780"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_f33b6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bi12c"]
+resource_local_to_scene = true
+shader = ExtResource("2_vad7k")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_ao780")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-Woodwose-Slinger" unique_id=1171307177 instance=ExtResource("1_tl4vc")]
+material = SubResource("ShaderMaterial_bi12c")
+cardName = "Woodwose Slinger"
+subTypeStr = "Wild Woodwose"
+texture = ExtResource("3_jitl4")
+group = 5
+flavorText = "Throws rocks. Ouch!"
+manaCost = 2
+startingDamage = 3
+startingHealth = 2
+
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
+texture = ExtResource("3_jitl4")

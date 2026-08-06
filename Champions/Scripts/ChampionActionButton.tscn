@@ -4,9 +4,11 @@
 [ext_resource type="Script" uid="uid://b2hj05ch66hwk" path="res://Champions/Scripts/champion_action_button.gd" id="1_yl403"]
 [ext_resource type="Texture2D" uid="uid://jyilkyb2wtn3" path="res://Art/CardComponents/player-mana-crystal-fortified.png" id="2_yl403"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Fonts/BasicSmallPixelFont.tres" id="3_wxab5"]
+[ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="5_ni21l"]
 [ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="5_wxab5"]
 
 [node name="ChampionActionButton" type="Control" unique_id=348148387]
+z_index = 7
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +25,7 @@ texture_normal = ExtResource("1_5cacd")
 
 [node name="ManaCostTexture" type="TextureRect" parent="Button" unique_id=1652476870]
 unique_name_in_owner = true
+visible = false
 z_index = 1
 layout_mode = 0
 offset_left = 30.0
@@ -32,31 +35,41 @@ offset_bottom = 69.0
 texture = ExtResource("2_yl403")
 expand_mode = 1
 
-[node name="Cost" type="Label" parent="Button" unique_id=1050312307]
+[node name="Cost" type="Label" parent="Button/ManaCostTexture" unique_id=1050312307]
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 0
-offset_left = 31.0
-offset_top = 39.0
-offset_right = 71.0
-offset_bottom = 62.0
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 41.0
+offset_bottom = 32.0
 theme = ExtResource("3_wxab5")
 text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ActionName" type="RichTextLabel" parent="Button" unique_id=595825037]
+[node name="NameBox" type="TextureRect" parent="Button" unique_id=917636527]
 unique_name_in_owner = true
-visible = false
+layout_mode = 0
+offset_left = -15.0
+offset_top = 53.0
+offset_right = 68.23333
+offset_bottom = 83.0
+texture = ExtResource("5_ni21l")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ActionName" type="RichTextLabel" parent="Button/NameBox" unique_id=595825037]
+unique_name_in_owner = true
 z_index = 1
 layout_mode = 0
-offset_left = -13.0
-offset_top = -26.0
-offset_right = 71.0
-offset_bottom = 23.0
+offset_top = -1.0
+offset_right = 84.0
+offset_bottom = 29.0
 theme = ExtResource("3_wxab5")
 text = "Big Boom"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Button" unique_id=1684154031]
 layout_mode = 0
@@ -71,4 +84,4 @@ stretch_mode = 4
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="mouse_exited" from="Button/ActionName" to="." method="_on_action_name_mouse_exited"]
+[connection signal="mouse_exited" from="Button/NameBox/ActionName" to="." method="_on_action_name_mouse_exited"]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://chea1vr14itsx"]
+
+[ext_resource type="Script" uid="uid://b0e8hgnn0e3pv" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_same_subtype_as_this.gd" id="1_b8kub"]
+
+[node name="IfSameSubtypeAsThis" type="Node" unique_id=25798774]
+script = ExtResource("1_b8kub")
+strict = null
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://biupftewnt4b5"]
+
+[ext_resource type="Script" uid="uid://btxhwbabo4chy" path="res://CardScriptsAndComponents/Actions/Scripts/skill_assign_custom_value.gd" id="1_fx2am"]
+
+[node name="SkillAssignCustomValue" type="Node2D" unique_id=824214862]
+script = ExtResource("1_fx2am")
+metadata/_custom_type_script = "uid://cxr3ippvyy8ii"

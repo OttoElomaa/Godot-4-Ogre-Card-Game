@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c1tdfcl47l1n5"]
+
+[ext_resource type="Script" uid="uid://pthsc5ub6g0x" path="res://CardScriptsAndComponents/ScalingComponents/Scripts/scale_from_skill_level.gd" id="1_tsatl"]
+
+[node name="ScaleFromSkillLevel" type="Node" unique_id=693289716]
+script = ExtResource("1_tsatl")
+metadata/_custom_type_script = "uid://dn66fakti1ju8"

@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://7xhkcpcrp5p1"]
+[gd_scene format=3 uid="uid://7xhkcpcrp5p1"]
 
-[ext_resource type="Script" uid="uid://dn66fakti1ju8" path="res://CardScriptsAndComponents/Scripts/scalingComponent.gd" id="1_5mply"]
+[ext_resource type="Script" uid="uid://ct2d04rc5jy3" path="res://CardScriptsAndComponents/ScalingComponents/Scripts/scale_from_cost_card.gd" id="1_vdf0a"]
 
-[node name="ScaleFromCostCard" type="Node"]
-script = ExtResource("1_5mply")
+[node name="ScaleFromCostCard" type="Node" unique_id=1593370962]
+script = ExtResource("1_vdf0a")
 metadata/_custom_type_script = "uid://dn66fakti1ju8"

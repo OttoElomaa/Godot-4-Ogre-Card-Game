@@ -56,6 +56,7 @@ material = SubResource("ShaderMaterial_lgw4w")
 script = ExtResource("2_lgw4w")
 
 [node name="Effects" type="Node2D" parent="." unique_id=1735946174]
+visible = false
 z_index = 1
 use_parent_material = true
 script = ExtResource("2_07jhh")
@@ -260,6 +261,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("5_6ma8t")
 
 [node name="ManaCostLabel" type="Label" parent="Frontside/ManaCost" unique_id=1527953317]
+unique_name_in_owner = true
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -272,7 +274,7 @@ offset_right = 28.5
 offset_bottom = 28.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "88"
+text = "0"
 label_settings = ExtResource("6_u70hd")
 horizontal_alignment = 1
 
@@ -324,6 +326,7 @@ label_settings = ExtResource("9_l781d")
 horizontal_alignment = 1
 
 [node name="ActionState" type="Node2D" parent="Frontside" unique_id=575468931]
+visible = false
 z_index = 1
 use_parent_material = true
 position = Vector2(0, -174)
@@ -411,6 +414,7 @@ theme_override_constants/separation = 7
 alignment = 1
 
 [node name="PowerLabel" type="Label" parent="Frontside/Resources/Panel/HBox" unique_id=975178878]
+unique_name_in_owner = true
 use_parent_material = true
 layout_mode = 2
 text = "0"
@@ -425,6 +429,7 @@ label_settings = ExtResource("4_7bc8n")
 horizontal_alignment = 1
 
 [node name="HealthLabel" type="Label" parent="Frontside/Resources/Panel/HBox" unique_id=1603050836]
+unique_name_in_owner = true
 use_parent_material = true
 layout_mode = 2
 text = "0"

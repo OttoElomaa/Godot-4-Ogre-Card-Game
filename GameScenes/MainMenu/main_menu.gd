@@ -18,7 +18,7 @@ func _ready() -> void:
 	DataLoader.get_effect_descriptions()
 	GameInfo.playerOwnedCards = DataLoader.createDesertDeck()
 	GameInfo.enemyDeckCards = DataLoader.createDesertDeck()
-	GameInfo.current_champion = DataLoader.champions_by_name['Nameless Warrior']
+	GameInfo.current_champion = DataLoader.champions_by_name['General']
 #	setupBestiary()
 	
 #	bestiaryVisible = true

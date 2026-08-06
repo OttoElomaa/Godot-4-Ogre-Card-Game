@@ -118,6 +118,10 @@ _data = {
 &"ShowPopup": SubResource("Animation_c0uhk")
 }
 
+[sub_resource type="Curve" id="Curve_rkqvw"]
+_data = [Vector2(0, 0.046153903), 0.0, 0.0, 0, 0, Vector2(0.13008131, 0.47692317), 0.0, 0.0, 0, 0, Vector2(0.20325206, 0.5076924), 0.21025634, 0.0, 0, 0, Vector2(0.4430895, 0.35384625), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0uhk"]
 bg_color = Color(0.947752, 0.911757, 0.861921, 1)
 border_width_left = 3
@@ -126,19 +130,19 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_5f6ju"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rkqvw"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o0nbp"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5f6ju"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_5f6ju")
+noise = SubResource("FastNoiseLite_rkqvw")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7kvl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0nbp"]
 resource_local_to_scene = true
 shader = ExtResource("30_rkqvw")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_o0nbp")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_5f6ju")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -152,7 +156,7 @@ script = ExtResource("1_rf3o6")
 [node name="CameraMainBoard" type="Camera2D" parent="." unique_id=1095447748]
 unique_name_in_owner = true
 anchor_mode = 0
-zoom = Vector2(0.7, 0.7)
+zoom = Vector2(0.66, 0.66)
 script = ExtResource("25_7yxuf")
 
 [node name="Portraits" type="Node2D" parent="." unique_id=865813432]
@@ -305,11 +309,6 @@ position = Vector2(1408, 20)
 [node name="BattleSystem" type="Node2D" parent="." unique_id=393630473]
 script = ExtResource("14_mv2fm")
 
-[node name="AttackLine" type="Line2D" parent="BattleSystem" unique_id=1721361774]
-z_index = 10
-points = PackedVector2Array(-287, 209, -492, 528)
-default_color = Color(1, 0.67451, 0.341176, 1)
-
 [node name="EnemyStartCombatTimer" type="Timer" parent="BattleSystem" unique_id=642770195]
 wait_time = 0.4
 one_shot = true
@@ -399,6 +398,17 @@ horizontal_alignment = 1
 [node name="SE_Player_Damaged" type="AudioStreamPlayer" parent="BattleSystem/SE" unique_id=1419250344]
 stream = ExtResource("24_ikeh1")
 bus = &"SE"
+
+[node name="AttackLine" type="Line2D" parent="BattleSystem" unique_id=1721361774]
+unique_name_in_owner = true
+z_index = 10
+points = PackedVector2Array(-272, 185, -492, 528)
+width = 40.0
+width_curve = SubResource("Curve_rkqvw")
+default_color = Color(0.7403147, 0.5718877, 0.34268117, 1)
+texture_mode = 2
+joint_mode = 2
+end_cap_mode = 2
 
 [node name="CardsManager" type="Node2D" parent="." unique_id=1422854690 groups=["cardManager"]]
 script = ExtResource("15_h4god")
@@ -862,19 +872,35 @@ autoplay = true
 bus = &"BGM"
 
 [node name="PlayerActionButtons" type="Node2D" parent="." unique_id=145877137]
-position = Vector2(1038, 1379)
+position = Vector2(1020, 1389)
 
 [node name="ActionButton_1" type="Marker2D" parent="PlayerActionButtons" unique_id=1583950859]
-position = Vector2(-7, -306)
+position = Vector2(25, 0)
+
+[node name="ChampionActionButton" parent="PlayerActionButtons/ActionButton_1" unique_id=348148387 instance_placeholder="res://Champions/Scripts/ChampionActionButton.tscn"]
 
 [node name="ActionButton_2" type="Marker2D" parent="PlayerActionButtons" unique_id=251573390]
-position = Vector2(137, -306)
+position = Vector2(105, 0)
+
+[node name="ChampionActionButton" parent="PlayerActionButtons/ActionButton_2" unique_id=1737010772 instance_placeholder="res://Champions/Scripts/ChampionActionButton.tscn"]
 
 [node name="ActionButton_3" type="Marker2D" parent="PlayerActionButtons" unique_id=584684755]
-position = Vector2(70, -305)
+position = Vector2(108, -101)
+
+[node name="ChampionActionButton" parent="PlayerActionButtons/ActionButton_3" unique_id=1816479048 instance_placeholder="res://Champions/Scripts/ChampionActionButton.tscn"]
+offset_left = -16.0
+offset_top = 35.0
+offset_right = -16.0
+offset_bottom = 35.0
 
 [node name="ActionButton_4" type="Marker2D" parent="PlayerActionButtons" unique_id=1454376773]
-position = Vector2(-70, -237)
+position = Vector2(34, -101)
+
+[node name="ChampionActionButton" parent="PlayerActionButtons/ActionButton_4" unique_id=848316916 instance_placeholder="res://Champions/Scripts/ChampionActionButton.tscn"]
+offset_left = -25.0
+offset_top = 35.0
+offset_right = -25.0
+offset_bottom = 35.0
 
 [node name="EnemyActionButtons" type="Node2D" parent="." unique_id=1495512634]
 position = Vector2(1123, 274)
@@ -896,7 +922,7 @@ position = Vector2(-77, -36)
 [node name="RitualContainer" parent="AnimationLayer" unique_id=1429469794 instance=ExtResource("29_rkqvw")]
 unique_name_in_owner = true
 z_index = 1
-material = SubResource("ShaderMaterial_y7kvl")
+material = SubResource("ShaderMaterial_o0nbp")
 offset_left = 915.0
 offset_top = 1650.0
 offset_right = 1045.0

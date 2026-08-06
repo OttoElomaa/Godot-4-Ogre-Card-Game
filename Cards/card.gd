@@ -110,20 +110,50 @@ var cardArt:
 		else:
 			return texture
 
-@export var manaCost := 0
-@export var startingDamage := 0
-@export var startingHealth := 0
+@export var manaCost := 0:
+	set(value):
+		manaCost = value
+		if Engine.is_editor_hint():
+			%ManaCostLabel.text = str(manaCost)
+
+@export var startingDamage := 0:
+	set(value):
+		startingDamage = value
+		if Engine.is_editor_hint():
+			%PowerLabel.text = str(startingDamage)
+		
+@export var startingHealth := 0:
+	set(value):
+		startingHealth = value
+		if Engine.is_editor_hint():
+			%HealthLabel.text = str(startingHealth)
+		
 @export var upgraded := UpgradeStates.UNUPGRADED
 
-var damage := 0
-var health := 0
-var tempDamage : int = 0
-var tempHealth : int = 0
+var damage := 0:
+	set(value):
+		damage = value
+		updateCardVisuals()
+var health := 0:
+	set(value):
+		health = value
+		updateCardLabels()
+var tempDamage : int = 0:
+	set(value):
+		tempDamage = value
+		updateCardVisuals()
+var tempHealth : int = 0:
+	set(value):
+		tempHealth = value
+		updateCardVisuals()
 
 var keywords = []
 #var counters = []
 
 var effectText := ""
+
+## This value can be modified by the SkillAssignCustomValue and accessed by ScaleFromCustomValue.
+var custom_values:Dictionary[String, Variant] = {}
 
 #region################################ AI VALUES
 
@@ -218,7 +248,7 @@ func _validate_property(property):
 			if property.name in ['startingHealth', 'startingDamage', 'block_on_arrival', 'will_not_charge', 'fearless', 'action_mode']:
 				property.usage = PROPERTY_USAGE_NO_EDITOR
 		CardTypes.CHAMPION:
-			if property.name in ['startingHealth', 'startingDamage', 'subTypeStr', 'group', 'upgraded', 'block_on_arrival', 'will_not_charge', 'fearless', 'action_mode']:
+			if property.name in ['startingDamage', 'subTypeStr', 'manaCost', 'group', 'upgraded', 'block_on_arrival', 'will_not_charge', 'fearless', 'action_mode']:
 				property.usage = PROPERTY_USAGE_NO_EDITOR
 		CardTypes.ITEM:
 			if property.name in ['startingHealth', 'startingDamage', 'block_on_arrival', 'will_not_charge', 'fearless', 'action_mode']:
@@ -231,7 +261,10 @@ func _validate_property(property):
 #region ######################################## STARTUP
 func _ready() -> void:
 	setup(null)
-	
+	var hide_in_editor = [$Effects, $Frontside/ActionState]
+	for i in hide_in_editor:
+		i.visible = !Engine.is_editor_hint()
+		
 	
 func setup_all_actions():
 	$Actions.setup(self)
@@ -250,7 +283,7 @@ func setup_all_actions():
 func setup(board: GameBoard):
 	
 	
-	print(cardName, ' sets up.')
+	#print(cardName, ' sets up.')
 	if board:
 		self.gameBoard = board
 		print(cardName, ' has gameboard')
@@ -291,6 +324,7 @@ func setup(board: GameBoard):
 	
 	toggleTraveling(false)
 	handleTurnStartReset()
+	
 
 
 
@@ -553,6 +587,12 @@ func removeMouseInteraction():
 
 
 func checkInteractAllowed() -> bool:
+	if GameInfo.enemy_turn:
+		return false
+	
+	if cardState == CardStates.LIMBO:
+		return false
+	
 	return allowInteract
 
 

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dvw12v0yuusag"]
+
+[ext_resource type="Script" uid="uid://cm1f78sv5kxbt" path="res://CardScriptsAndComponents/Conditionals/Scripts/if_has_subtypes.gd" id="1_2lff3"]
+
+[node name="IfHasSubtypes" type="Node" unique_id=1716551667]
+script = ExtResource("1_2lff3")
+metadata/_custom_type_script = "uid://bm6rkpvbs3c18"

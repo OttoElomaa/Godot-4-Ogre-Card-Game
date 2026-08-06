@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cnugr2ns6wtod"]
+
+[ext_resource type="Script" uid="uid://b04nqydwy1ox3" path="res://CardScriptsAndComponents/Actions/Scripts/skill_create_and_save_card.gd" id="1_vvtr7"]
+
+[node name="SkillCreateAndSaveCard" type="Node2D" unique_id=1599140331]
+script = ExtResource("1_vvtr7")
+metadata/_custom_type_script = "uid://cxr3ippvyy8ii"

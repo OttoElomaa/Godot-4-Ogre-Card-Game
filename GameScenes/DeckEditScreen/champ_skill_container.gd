@@ -1,7 +1,7 @@
 extends HBoxContainer
 class_name ChampSkillContainer
 
-func setup(action:Node):
+func setup(action:ActionsNodeChamp):
 	
 	%SkillTexture.texture = action.texture
 	
@@ -13,5 +13,6 @@ func setup(action:Node):
 			%Cost.text = str(action.cost_display[action.cost_types.Mana])
 	
 	%SkillTexture.tooltip_text += str(action.action_name, '\n') 
+	
 	for i in action.createActionText():
 		%SkillTexture.tooltip_text += i

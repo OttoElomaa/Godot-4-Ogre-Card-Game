@@ -1,0 +1,55 @@
+[gd_resource type="VisualShader" format=3 uid="uid://dg14wljsl0ecg"]
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_djhbk"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_rv0ot"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+input_name = "screen_uv"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rmd07"]
+noise_type = 2
+frequency = 0.0302
+fractal_type = 2
+fractal_octaves = 1
+cellular_return_type = 0
+domain_warp_fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ufoa3"]
+noise = SubResource("FastNoiseLite_rmd07")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ufoa3"]
+expanded_output_ports = [0]
+texture = SubResource("NoiseTexture2D_ufoa3")
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_rmd07"]
+operator = 1
+
+[sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_djhbk"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+
+[sub_resource type="VisualShaderNodeScreenUVToSDF" id="VisualShaderNodeScreenUVToSDF_rv0ot"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ufoa3"]
+input_name = "screen_uv"
+
+[resource]
+mode = 1
+flags/light_only = false
+nodes/vertex/0/position = Vector2(506.66666, 160)
+nodes/fragment/2/node = SubResource("VisualShaderNodeMix_djhbk")
+nodes/fragment/2/position = Vector2(53.333332, 213.33333)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_rv0ot")
+nodes/fragment/3/position = Vector2(-533.3333, 133.33333)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_ufoa3")
+nodes/fragment/4/position = Vector2(-400, 640)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatOp_rmd07")
+nodes/fragment/5/position = Vector2(53.333332, 453.33334)
+nodes/fragment/6/node = SubResource("VisualShaderNodeColorOp_djhbk")
+nodes/fragment/6/position = Vector2(-640, 213.33333)
+nodes/fragment/7/node = SubResource("VisualShaderNodeScreenUVToSDF_rv0ot")
+nodes/fragment/7/position = Vector2(-400, 426.66666)
+nodes/fragment/8/node = SubResource("VisualShaderNodeInput_ufoa3")
+nodes/fragment/8/position = Vector2(-320, 506.66666)
+nodes/fragment/connections = PackedInt32Array(5, 0, 0, 1, 4, 1, 5, 1, 6, 3, 7, 0)

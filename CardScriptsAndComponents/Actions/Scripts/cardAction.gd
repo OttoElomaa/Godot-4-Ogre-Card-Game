@@ -119,7 +119,7 @@ func activate(params:SignalParams) -> bool:
 			
 		success = await activateSkillAfterTargeting(targets)
 	else:
-		MyTools.createCombatLogPrintout(str(myCard.cardName), ": cannot target anybody!")
+		MyTools.createCombatLogPrintout(str(myCard.cardName, ": cannot target anybody!"), Color.RED)
 		return success
 	
 	return success

@@ -91,9 +91,26 @@
               "icon": "lucide-layout-dashboard",
               "title": "Guilds"
             }
+          },
+          {
+            "id": "1e041b8ed66391f9",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Cards/City/Throne.canvas",
+                "viewState": {
+                  "x": 398.5,
+                  "y": 140,
+                  "zoom": -0.5076819692594468
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Throne"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -113,7 +130,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Файловый менеджер"
@@ -241,19 +260,19 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "2e7d6aea36d7b080",
+  "active": "1e041b8ed66391f9",
   "lastOpenFiles": [
+    "Cards/Outcasts/Umugites.canvas",
+    "Cards/Outcasts/Necromancers.canvas",
+    "Cards/Outcasts/Morlocks.canvas",
+    "Cards/Green Defiance/Woodwose.canvas",
     "Cards/Green Defiance/Grove Clans.canvas",
+    "Cards/Green Defiance/Gharch.canvas",
     "Cards/Desert/Salkhi Horde.canvas",
     "Cards/Desert/Pyrecallers.canvas",
     "Cards/Desert/Pilgrims.canvas",
     "Cards/City/Priests.canvas",
     "Cards/City/Sea Peoples.canvas",
-    "Cards/City/Throne.canvas",
-    "Cards/City/Slaves.canvas",
-    "Cards/Desert/Beasts.canvas",
-    "Cards/Desert/High Kingdom.canvas",
-    "Cards/Green Defiance/Woodwose.canvas",
     "Cards/City/Без названия.md",
     "Scenarios",
     "Cards/Outcasts",

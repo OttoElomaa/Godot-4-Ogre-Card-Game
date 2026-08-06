@@ -4,5 +4,10 @@ class_name ScalingComponent
 
 @export var multiplier:float = 1.0
 
+##_args:
+##'target': the frontmost card this skill targets.
+##'targets': an Array of all cards this skill targets.
+##'saved_targets': any targets saved within this CardAction's siblings by SaveTargets skill.
+##'user': the user of this skill.
 func get_scaling(_args: Dictionary) -> int:
 	return 0

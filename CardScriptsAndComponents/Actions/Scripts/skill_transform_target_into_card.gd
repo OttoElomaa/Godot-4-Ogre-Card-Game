@@ -59,4 +59,5 @@ func activate(targets):
 		t.updateCardNameAndBasicInfo(true)
 		t.createEffectText()
 		MyTools.removeTempCard(new_card)
-		return true
+		
+	return true

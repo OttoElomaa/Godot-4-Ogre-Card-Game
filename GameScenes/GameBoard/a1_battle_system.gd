@@ -6,7 +6,7 @@ class_name  BattleSystem
 var main:GameBoard = null
 var cardsManager:CardsManager = null
 
-@onready var attackLine := $AttackLine
+@onready var attackLine := %AttackLine
 @onready var damageCalculator := $CanvasLayer/DamageCalculator
 
 var COLLISION_MASK_CARD := 1
@@ -54,8 +54,8 @@ func _input(e: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	
 	if playerAttackOngoing:
-		var mousePos := get_global_mouse_position()
-		attackLine.points[1] = mousePos
+		var mousePos = get_global_mouse_position()
+		attackLine.set_point_position(0, mousePos)
 		damageCalculator.position = (mousePos + Vector2(100,-50)) * main.cameraMainBoard.zoom.x
 		
 	
@@ -299,7 +299,7 @@ func togglePlayerAttackMode(enable:bool, card:Card) -> void:
 		States.statesPlay()
 		
 		playerAttackOngoing = enable
-		$AttackLine.hide()
+		attackLine.hide()
 		damageCalculator.hide()
 		return
 	
@@ -313,8 +313,8 @@ func togglePlayerAttackMode(enable:bool, card:Card) -> void:
 		States.gameState = States.GameStates.ATTACK
 		
 		playerAttackOngoing = enable
-		$AttackLine.show()
-		attackLine.points[0] = card.position
+		attackLine.show()
+		attackLine.set_point_position(1, card.position)
 		
 
 

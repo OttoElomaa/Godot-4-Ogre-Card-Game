@@ -15,19 +15,14 @@ func setup(parent_champ:Champion, action:Node):
 	
 	$Button.texture_normal = bound_action.texture
 	
-	if not bound_action.cost_display.is_empty():
-		if bound_action.cost_display.has(bound_action.cost_types.Mana):
-			%ManaCostTexture.show()
-			%Cost.show()
-			%ActionName.text = bound_action.action_name
-			%Cost.text = str(bound_action.cost_display[bound_action.cost_types.Mana])
+	if bound_action.cost_display.has(bound_action.cost_types.Mana):
+		%ManaCostTexture.show()
+		%Cost.show()
+		%Cost.text = str(bound_action.cost_display[bound_action.cost_types.Mana])
+	%ActionName.text = bound_action.action_name
 	$Button.tooltip_text += str(bound_action.action_name, '\n') 
 	for i in bound_action.createActionText():
 		$Button.tooltip_text += i
-	if isEnemy:
-		%ActionName.position.y = 63.0
-	else:
-		%ActionName.position.y = -26.0
 	
 	
 func _on_button_pressed():
@@ -35,7 +30,7 @@ func _on_button_pressed():
 		bound_action.handleCast()
 
 func _on_button_mouse_entered():
-	%ActionName.show()
+	%NameBox.show()
 
 func _on_button_mouse_exited():
-	%ActionName.hide()
+	%NameBox.hide()

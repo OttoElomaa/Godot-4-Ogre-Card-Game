@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://dsj8r64efi682"]
+
+[ext_resource type="Script" uid="uid://dwyj2ebmqyh2x" path="res://Champions/Scripts/champion.gd" id="1_x0svb"]
+[ext_resource type="Texture2D" uid="uid://xlhwwkbg5g0v" path="res://Art/Portraits/portrat-general-01.png" id="2_d0ldb"]
+[ext_resource type="Script" uid="uid://dw6ejtqnbwoh2" path="res://Champions/Scripts/ActionsNodeChamp.gd" id="3_d0ldb"]
+[ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="4_c3dhb"]
+[ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="5_w5ue0"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="6_vk6uu"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="7_px22a"]
+[ext_resource type="PackedScene" uid="uid://cf2buy6iocrt3" path="res://CardScriptsAndComponents/Actions/SkillSaveTargets.tscn" id="8_tg26q"]
+[ext_resource type="PackedScene" uid="uid://biupftewnt4b5" path="res://CardScriptsAndComponents/Actions/SkillAssignCustomValue.tscn" id="9_kqo68"]
+[ext_resource type="PackedScene" uid="uid://jyrj2f2h71w" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnTrigger.tscn" id="9_px22a"]
+[ext_resource type="PackedScene" uid="uid://b3nwj1o25tc34" path="res://CardScriptsAndComponents/ScalingComponents/ReturnSavedCardData.tscn" id="9_tg26q"]
+[ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="10_tg26q"]
+[ext_resource type="PackedScene" uid="uid://dvw12v0yuusag" path="res://CardScriptsAndComponents/Conditionals/IfHasSubtypes.tscn" id="12_kqo68"]
+[ext_resource type="PackedScene" uid="uid://c0p7dud2nyagj" path="res://CardScriptsAndComponents/ScalingComponents/ReturnCustomValue.tscn" id="13_31g6e"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="13_a3ci1"]
+[ext_resource type="PackedScene" uid="uid://c1tdfcl47l1n5" path="res://CardScriptsAndComponents/ScalingComponents/ScaleFromSkillLevel.tscn" id="16_4r2l7"]
+[ext_resource type="Texture2D" uid="uid://cdhdbiyao5vny" path="res://Art/CardComponents/card-effect-counter-texture-armor.png" id="16_nk8fw"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="17_4r2l7"]
+[ext_resource type="PackedScene" uid="uid://cvgj3stl7h3fy" path="res://CardScriptsAndComponents/EffectCounters/EffectArmor.tscn" id="18_qv6xn"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="20_4r2l7"]
+[ext_resource type="PackedScene" uid="uid://cls3nfmm14nfi" path="res://Champions/Scripts/custom_window.tscn" id="20_blitk"]
+[ext_resource type="Script" uid="uid://b5si38rbwq4y6" path="res://Champions/Scripts/custom_window_general.gd" id="21_blitk"]
+
+[node name="Ch-General" type="Node2D" unique_id=1617514015]
+script = ExtResource("1_x0svb")
+cardName = "General"
+cardType = 2
+texture = ExtResource("2_d0ldb")
+startingHealth = 10
+block_on_arrival = null
+action_mode = true
+targeting_mode = 1
+will_not_charge = 0
+metadata/_custom_type_script = "uid://dwyj2ebmqyh2x"
+
+[node name="Align" type="Node2D" parent="." unique_id=234890678]
+script = ExtResource("3_d0ldb")
+action_name = "Align"
+action_description = "\"On use: select an ally.
+On turn: bolster all allies of a the same subtype by %s/%s\" % [int(level*0.5), level]"
+level = 2
+texture = ExtResource("4_c3dhb")
+metadata/_custom_type_script = "uid://dw6ejtqnbwoh2"
+
+[node name="OnCastTrigger" type="Node" parent="Align" unique_id=662405597]
+script = ExtResource("5_w5ue0")
+metadata/_custom_type_script = "uid://cdekh7m7g5vek"
+
+[node name="CardAction2" type="Node2D" parent="Align/OnCastTrigger" unique_id=514809609]
+script = ExtResource("6_vk6uu")
+customActionText = "Aligned to a new subtype!"
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="ManualTargeting" parent="Align/OnCastTrigger/CardAction2" unique_id=180378663 instance=ExtResource("7_px22a")]
+manualTargetGroup = 1
+
+[node name="SkillSaveTargets" parent="Align/OnCastTrigger/CardAction2" unique_id=956660677 instance=ExtResource("8_tg26q")]
+
+[node name="CardAction" type="Node2D" parent="Align/OnCastTrigger" unique_id=173913202]
+script = ExtResource("6_vk6uu")
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillAssignCustomValue" parent="Align/OnCastTrigger/CardAction" unique_id=824214862 instance=ExtResource("9_kqo68")]
+value_name = "AlignParagon"
+
+[node name="ReturnSavedCardData" parent="Align/OnCastTrigger/CardAction/SkillAssignCustomValue" unique_id=1990749032 instance=ExtResource("9_tg26q")]
+
+[node name="OnAlliedTurnTrigger" parent="Align" unique_id=1268844405 instance=ExtResource("9_px22a")]
+
+[node name="CardAction" type="Node2D" parent="Align/OnAlliedTurnTrigger" unique_id=1288283128]
+script = ExtResource("6_vk6uu")
+customActionText = "Align!"
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="TargetAllAllies" parent="Align/OnAlliedTurnTrigger/CardAction" unique_id=1513314004 instance=ExtResource("10_tg26q")]
+
+[node name="IfHasSubtypes" parent="Align/OnAlliedTurnTrigger/CardAction/TargetAllAllies" unique_id=1716551667 instance=ExtResource("12_kqo68")]
+
+[node name="ReturnCustomValue" parent="Align/OnAlliedTurnTrigger/CardAction/TargetAllAllies/IfHasSubtypes" unique_id=1236744066 instance=ExtResource("13_31g6e")]
+value_name = "subTypes"
+
+[node name="SkillAlterHealth" parent="Align/OnAlliedTurnTrigger/CardAction" unique_id=1892484695 instance=ExtResource("13_a3ci1")]
+bolsterHealth = 1
+
+[node name="ScaleFromSkillLevel" parent="Align/OnAlliedTurnTrigger/CardAction/SkillAlterHealth" unique_id=693289716 instance=ExtResource("16_4r2l7")]
+
+[node name="SkillAlterDamage" parent="Align/OnAlliedTurnTrigger/CardAction" unique_id=1929337004 instance=ExtResource("13_a3ci1")]
+bolsterDamage = 1
+
+[node name="ScaleFromSkillLevel" parent="Align/OnAlliedTurnTrigger/CardAction/SkillAlterDamage" unique_id=1457377843 instance=ExtResource("16_4r2l7")]
+multiplier = 0.5
+
+[node name="Fortify" type="Node2D" parent="." unique_id=2127805130]
+script = ExtResource("3_d0ldb")
+action_name = "Fortify"
+action_description = "\"Apply %s Armor.\" % [level]"
+texture = ExtResource("16_nk8fw")
+cost_display = Dictionary[int, int]({
+2: 3
+})
+metadata/_custom_type_script = "uid://dw6ejtqnbwoh2"
+
+[node name="OnCastTrigger" type="Node" parent="Fortify" unique_id=854883528]
+script = ExtResource("5_w5ue0")
+metadata/_custom_type_script = "uid://cdekh7m7g5vek"
+
+[node name="CardAction" type="Node2D" parent="Fortify/OnCastTrigger" unique_id=1244322920]
+script = ExtResource("6_vk6uu")
+customActionText = "Fortify!"
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="ManualTargeting" parent="Fortify/OnCastTrigger/CardAction" unique_id=1918426148 instance=ExtResource("7_px22a")]
+manualTargetGroup = 1
+
+[node name="SkillEffectCounters" parent="Fortify/OnCastTrigger/CardAction" unique_id=2033858347 instance=ExtResource("17_4r2l7")]
+grantEffect = ExtResource("18_qv6xn")
+grantAmount = 1
+
+[node name="CustomWindow" parent="." unique_id=1604711385 instance=ExtResource("20_blitk")]
+z_index = 7
+anchors_preset = -1
+anchor_left = 0.47
+anchor_right = 0.47
+script = ExtResource("21_blitk")
+
+[node name="PanelContainer" type="PanelContainer" parent="CustomWindow" unique_id=1607073916]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.5
+offset_top = -10.0
+offset_right = 191.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("20_4r2l7")
+
+[node name="SubtypeLabel" type="RichTextLabel" parent="CustomWindow/PanelContainer" unique_id=734478507]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Aligned:
+None"
+horizontal_alignment = 1
+vertical_alignment = 1
