@@ -119,13 +119,13 @@ var cardArt:
 @export var startingDamage := 0:
 	set(value):
 		startingDamage = value
-		if Engine.is_editor_hint():
+		if Engine.is_editor_hint() and %PowerLabel:
 			%PowerLabel.text = str(startingDamage)
 		
 @export var startingHealth := 0:
 	set(value):
 		startingHealth = value
-		if Engine.is_editor_hint():
+		if Engine.is_editor_hint() and %HealthLabel:
 			%HealthLabel.text = str(startingHealth)
 		
 @export var upgraded := UpgradeStates.UNUPGRADED
@@ -260,10 +260,13 @@ func _validate_property(property):
 
 #region ######################################## STARTUP
 func _ready() -> void:
-	setup(null)
-	var hide_in_editor = [$Effects, $Frontside/ActionState]
-	for i in hide_in_editor:
-		i.visible = !Engine.is_editor_hint()
+	if not Engine.is_editor_hint():
+		setup(null)
+	else:
+		var hide_in_editor = [$Effects, $Frontside/ActionState]
+		for i in hide_in_editor:
+			i.visible = !Engine.is_editor_hint()
+
 		
 	
 func setup_all_actions():
