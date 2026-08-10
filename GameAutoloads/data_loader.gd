@@ -62,8 +62,8 @@ func createCard(path:String):
 	var cardPacked = load(path)
 	return cardPacked.instantiate()
 
-func createAllCardsByAmount(amount:int) -> Array:
-	var allCards := []
+func createAllCardsByAmount(amount:int) -> Array[Card]:
+	var allCards: Array[Card] = []
 	
 	for card:Card in GameInfo.all_cards:
 		for i in range(amount):
@@ -144,9 +144,9 @@ func get_effect_descriptions():
 		var effect:CardEffect = scene.instantiate()
 		keywords_desc[effect.id] = effect.description
 
-func createDesertDeck():
+func createDesertDeck() -> Array[Card]:
 	
-	var cards := []
+	var cards :Array[Card] = []
 	
 	cards = createAllCardsByAmount(3)
 

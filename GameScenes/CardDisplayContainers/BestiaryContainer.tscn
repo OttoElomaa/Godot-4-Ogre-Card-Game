@@ -6,4 +6,3 @@
 [node name="CardContainer" unique_id=1050920320 instance=ExtResource("1_f8hbt")]
 z_index = 1
 script = ExtResource("2_f8hbt")
-has_margin = true

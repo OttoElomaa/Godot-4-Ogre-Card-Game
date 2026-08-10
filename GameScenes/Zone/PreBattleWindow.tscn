@@ -7,7 +7,7 @@
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="4_u3657"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="5_gmchg"]
 [ext_resource type="StyleBox" uid="uid://bocokxxjamm42" path="res://PanelStyles/StyleBoxTiled.tres" id="5_wykmi"]
-[ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="6_wykmi"]
+[ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Fonts/stepalange-font/Stepalange-x3BLm.otf" id="8_u3657"]
 [ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="9_gmchg"]
 
 [node name="PreBattleWindow" type="CanvasLayer" unique_id=1599976500]
@@ -109,6 +109,23 @@ unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
+[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox" unique_id=851600900]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("5_wykmi")
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/PanelContainer3" unique_id=727049635]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="PlayerCards" type="HBoxContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/PanelContainer3/Margin" unique_id=1930303960]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox" unique_id=522111743]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -123,51 +140,24 @@ layout_mode = 2
 size_flags_vertical = 10
 alignment = 1
 
-[node name="Fight" type="PanelContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox" unique_id=1587050699]
+[node name="FightButton" type="Button" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox" unique_id=823711489]
+custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
-theme_override_styles/panel = ExtResource("2_6gtnb")
+theme_override_fonts/font = ExtResource("8_u3657")
+theme_override_styles/normal = ExtResource("2_6gtnb")
+text = "Fight"
 
-[node name="Margin" type="MarginContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/Fight" unique_id=21921376]
+[node name="CancelButton" type="Button" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox" unique_id=678696735]
+custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 20
-
-[node name="Label" type="Label" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/Fight/Margin" unique_id=487315419]
-layout_mode = 2
-text = "Fight!"
-label_settings = ExtResource("6_wykmi")
-
-[node name="Button" type="Button" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/Fight" unique_id=823711489]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("3_wykmi")
-
-[node name="Cancel" type="PanelContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox" unique_id=558126471]
-layout_mode = 2
-mouse_filter = 1
-theme_override_styles/panel = ExtResource("2_6gtnb")
-
-[node name="Margin" type="MarginContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/Cancel" unique_id=957668702]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 20
-
-[node name="Label" type="Label" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/Cancel/Margin" unique_id=1846770251]
-layout_mode = 2
+theme_override_fonts/font = ExtResource("8_u3657")
+theme_override_styles/normal = ExtResource("2_6gtnb")
 text = "Cancel"
-label_settings = ExtResource("6_wykmi")
-
-[node name="Button" type="Button" parent="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/Cancel" unique_id=678696735]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("3_wykmi")
 
 [node name="CardInfoPanel" parent="." unique_id=669207405 instance=ExtResource("9_gmchg")]
 unique_name_in_owner = true
 z_index = 3
 position = Vector2(1886, 8)
 
-[connection signal="pressed" from="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/Fight/Button" to="." method="fightButtonPressed"]
-[connection signal="pressed" from="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/Cancel/Button" to="." method="cancelButtonPressed"]
+[connection signal="pressed" from="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/FightButton" to="." method="fightButtonPressed"]
+[connection signal="pressed" from="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/CancelButton" to="." method="cancelButtonPressed"]

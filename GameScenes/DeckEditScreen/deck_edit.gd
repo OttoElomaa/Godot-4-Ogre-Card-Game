@@ -1,5 +1,5 @@
 extends CanvasLayer
-@onready var CardContainer = preload("res://GameScenes/DeckEditScreen/card_container_draggable.tscn")
+@onready var Card_Container = preload("res://GameScenes/DeckEditScreen/card_container_draggable.tscn")
 @onready var CardPanel = preload("res://GameScenes/DeckEditScreen/card_panel.tscn")
 @onready var ChampActionCont = preload("res://GameScenes/DeckEditScreen/champ_skill_container.tscn")
 @onready var ownedCardsContainer = %OwnedCardsContainer
@@ -29,18 +29,30 @@ func setup(board:GameBoard):
 		%Proceed.hide()
 
 func create_containers():
+	GameInfo.playerOwnedCards = CardChecks.filter_by_cost(GameInfo.playerOwnedCards)
+
 	#### EMPTY THE CARD LISTS BEFORE FILLING THEM
 	for child in activeCardsContainer.get_children():
 		child.queue_free()
 	for child in ownedCardsContainer.get_children():
 		child.queue_free()
 		
+	await get_tree().process_frame
+	
 	print('Creating containers')
 	for i:Card in GameInfo.playerOwnedCards:
-		var new_cont = CardContainer.instantiate()
-		ownedCardsContainer.add_child(new_cont)
-		new_cont.insert_card(i)
-		new_cont.infoPanel = cardInfoPanel
+		var has_same = false
+		for c:BestiaryContainer in ownedCardsContainer.get_children():
+			if c.stack_card(i):
+				has_same = true
+				break
+
+		if has_same == false:
+			var new_cont = Card_Container.instantiate() as BestiaryContainer
+			ownedCardsContainer.add_child(new_cont)
+			new_cont.insert_card(i)
+			new_cont.infoPanel = cardInfoPanel
+			
 	for i in GameInfo.playerDeckCards:
 		var new_cont = CardPanel.instantiate()
 		new_cont.card = i

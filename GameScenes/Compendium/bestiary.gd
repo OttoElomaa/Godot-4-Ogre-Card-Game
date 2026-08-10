@@ -2,7 +2,7 @@ extends Node2D
 @onready var BestiaryCardsContainer := %BestiaryCardsContainer
 @onready var cardInfoPanel := %CardInfoPanel
 
-var BestiaryContainer = preload("res://GameScenes/CardDisplayContainers/BestiaryContainer.tscn")
+var Bestiary_Container = preload("res://GameScenes/CardDisplayContainers/BestiaryContainer.tscn")
 
 func _ready():
 	create_containers()
@@ -16,7 +16,7 @@ func create_containers():
 		
 	print('Creating containers')
 	for i:Card in GameInfo.all_cards:
-		var new_cont = BestiaryContainer.instantiate()
+		var new_cont = Bestiary_Container.instantiate()
 		BestiaryCardsContainer.add_child(new_cont)
 		new_cont.insert_card(i)
 		new_cont.infoPanel = cardInfoPanel

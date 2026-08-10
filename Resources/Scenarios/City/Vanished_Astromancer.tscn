@@ -26,7 +26,6 @@ node_name = "Dilapidated Mansion"
 node_comments = "Is this where the Astromancer is being held?"
 
 [node name="UmugiteBattle" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="2" unique_id=681867639 node_paths=PackedStringArray("unlock_on_resolve") instance=ExtResource("5_3ft1n")]
-visible = false
 position = Vector2(1659, 609)
 board_name = "Inside the Mansion"
 game_board = ExtResource("6_jewtb")
@@ -41,7 +40,6 @@ champ_name = "Magaal"
 unlock_on_resolve = [NodePath("../DialogueIcon3")]
 
 [node name="ThroneBattle" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="3" unique_id=1711706452 instance=ExtResource("5_3ft1n")]
-visible = false
 position = Vector2(1556, 731)
 board_name = "Throne Ambush"
 game_board = ExtResource("6_jewtb")
@@ -49,6 +47,7 @@ game_board = ExtResource("6_jewtb")
 [node name="DialogueIcon3" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="4" unique_id=1208017654 instance=ExtResource("2_jewtb")]
 position = Vector2(1556, 731)
 dialogue = ExtResource("11_oe87p")
+node_comments = "Enjoy your Victory."
 
 [node name="MapAskelan" parent="." index="2" unique_id=2040580641 instance=ExtResource("9_dba5n")]
 

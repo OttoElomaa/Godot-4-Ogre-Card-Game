@@ -205,10 +205,10 @@ text = "Response example"
 unique_name_in_owner = true
 
 [node name="Cutscene" type="MarginContainer" parent="." unique_id=1369277661]
-z_index = -1
+z_index = 1
 offset_left = 1350.0
 offset_top = 95.0
-offset_right = 1466.0
+offset_right = 1468.0
 offset_bottom = 418.0
 scale = Vector2(2, 2)
 script = ExtResource("8_nsbs0")

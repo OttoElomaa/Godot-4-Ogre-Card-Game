@@ -55,7 +55,7 @@ func insert_card(new_card:Card):
 ## Puts a PackedScene-type object into the container.
 func display_card_packed(new_card:PackedScene):
 	
-	var card:Card = new_card.instantiate()
+	var card_to_show:Card = new_card.instantiate()
 	display_card(card)
 	
 func display_card(new_card:Card):	

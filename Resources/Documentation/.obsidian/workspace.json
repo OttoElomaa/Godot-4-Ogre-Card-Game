@@ -98,15 +98,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Cards/City/Throne.canvas",
+                "file": "Scenarios/Green Ray at the Vineyards.canvas",
                 "viewState": {
-                  "x": 398.5,
-                  "y": 140,
-                  "zoom": -0.5076819692594468
+                  "x": 181.5,
+                  "y": 627,
+                  "zoom": -1.1464736772544877
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Throne"
+              "title": "Green Ray at the Vineyards"
             }
           }
         ],
@@ -262,17 +262,17 @@
   },
   "active": "1e041b8ed66391f9",
   "lastOpenFiles": [
-    "Cards/Outcasts/Umugites.canvas",
-    "Cards/Outcasts/Necromancers.canvas",
-    "Cards/Outcasts/Morlocks.canvas",
-    "Cards/Green Defiance/Woodwose.canvas",
+    "Card Creation Process.canvas",
+    "Scenarios/Green Ray at the Vineyards.canvas",
+    "Cards/Green Defiance/Skull Priests.canvas",
     "Cards/Green Defiance/Grove Clans.canvas",
     "Cards/Green Defiance/Gharch.canvas",
-    "Cards/Desert/Salkhi Horde.canvas",
+    "Cards/Green Defiance/Woodwose.canvas",
+    "Cards/Green Defiance/Vinemen.canvas",
     "Cards/Desert/Pyrecallers.canvas",
-    "Cards/Desert/Pilgrims.canvas",
-    "Cards/City/Priests.canvas",
-    "Cards/City/Sea Peoples.canvas",
+    "Cards/City/Throne.canvas",
+    "Cards/Outcasts/Umugites.canvas",
+    "Cards/Outcasts/Necromancers.canvas",
     "Cards/City/Без названия.md",
     "Scenarios",
     "Cards/Outcasts",

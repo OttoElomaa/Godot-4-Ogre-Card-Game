@@ -15,7 +15,10 @@ var preBattleWindow:Node = null
 var active_scenario_nodes:Array[ZoneNode] = []
 var completed_scenarios = []
 
-var turn = 0
+var turn = 0:
+	set(value):
+		turn = value
+		%TurnLabel.text = turn
 
 func _ready():
 	for i:Marker2D in map.markers:
@@ -46,11 +49,13 @@ func load_scenario():
 	for i in DataLoader.scenarios_by_location:
 		if map_name_to_folder[map.name] == DataLoader.scenarios_by_location[i]:
 			possible_scenarios.append(i)
+	print('Travel screen: all scenarios for this locations: ', possible_scenarios)
 	possible_scenarios = possible_scenarios.filter(func(i): return not completed_scenarios.has(i))
-	var new = possible_scenarios.pick_random()
-	if not new:
+	print('Travel screen: filtered for completed: ', possible_scenarios)
+	if possible_scenarios.is_empty():
 		return
-	completed_scenarios.append(new.duplicate())
+	var new = possible_scenarios.pick_random()
+	completed_scenarios.append(new)
 	new = new.instantiate() as Scenario
 	MyTools.add_child(new)
 	print('Travel Screen: loaded scenario ', new.name)
@@ -61,8 +66,8 @@ func load_scenario():
 		active_scenario_nodes.append(i)
 	MyTools.remove_child(new)
 
-func toggleUI():
-	%UI.visible = !%UI.visible
+func toggleUI(on:bool):
+	%UI.visible = on
 
 func updateUI():
 	%ChampContainer.insert_champion(GameInfo.current_champion)
@@ -91,7 +96,7 @@ func resolveNode(zoneNodeID:String):
 
 func openPrebattle(b_node:Node2D):
 	print('Travel Screen: Opening Prebattle')
-	%UI.hide()
+	toggleUI(false)
 	preBattleWindow = PreBattleScreen.instantiate()
 	$PreBattleCanvas.add_child(preBattleWindow)
 	preBattleWindow.setup(b_node)
@@ -99,7 +104,7 @@ func openPrebattle(b_node:Node2D):
 func closePrebattle():
 	if preBattleWindow:
 		preBattleWindow.queue_free()
-		%UI.show()
+		toggleUI(false)
 
 func assign_node_to_marker(coords: Vector2, node:ZoneNode):
 	var new = node.duplicate()
@@ -121,6 +126,12 @@ func get_random_free_marker() -> Vector2:
 	var random_marker = free_nodes.pick_random()
 	print('placing node at ', random_marker)
 	return random_marker
+
+func node_exists_in_coords(coords:Vector2) -> bool:
+	if event_positions_events.has(coords):
+		if event_positions_events[coords] != null:
+			return true
+	return false
 
 func create_random_battle():
 	var new = randomBattleNodeScene.instantiate() as ZoneBattleIcon

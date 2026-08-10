@@ -260,12 +260,16 @@ func _validate_property(property):
 
 #region ######################################## STARTUP
 func _ready() -> void:
+	var hide_in_editor = [$Effects, $Frontside/ActionState]
+	for i in hide_in_editor:
+		i.visible = !Engine.is_editor_hint()
+		
 	if not Engine.is_editor_hint():
 		setup(null)
+		
 	else:
-		var hide_in_editor = [$Effects, $Frontside/ActionState]
-		for i in hide_in_editor:
-			i.visible = !Engine.is_editor_hint()
+		pass
+
 
 		
 	

@@ -114,27 +114,54 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Panel2" type="PanelContainer" parent="UI/PlayerInfoPanel/Hbox" unique_id=1747643747]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PlayerInfoPanel/Hbox" unique_id=2016749065]
+layout_mode = 2
+
+[node name="Panel2" type="PanelContainer" parent="UI/PlayerInfoPanel/Hbox/VBoxContainer" unique_id=1747643747]
 custom_minimum_size = Vector2(340, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_t0wri")
 
-[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/Hbox/Panel2" unique_id=1795534783]
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/Hbox/VBoxContainer/Panel2" unique_id=1795534783]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="UI/PlayerInfoPanel/Hbox/Panel2/HBox" unique_id=1956279301]
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/Hbox/VBoxContainer/Panel2/HBox" unique_id=1956279301]
 layout_mode = 2
 text = "  Glory  -"
 label_settings = ExtResource("3_vsusc")
 horizontal_alignment = 1
 
-[node name="GloryAmountLabel" type="Label" parent="UI/PlayerInfoPanel/Hbox/Panel2/HBox" unique_id=93841041]
+[node name="GloryAmountLabel" type="Label" parent="UI/PlayerInfoPanel/Hbox/VBoxContainer/Panel2/HBox" unique_id=93841041]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Goes Here"
+label_settings = ExtResource("3_vsusc")
+horizontal_alignment = 1
+
+[node name="Panel3" type="PanelContainer" parent="UI/PlayerInfoPanel/Hbox/VBoxContainer" unique_id=497332071]
+custom_minimum_size = Vector2(340, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t0wri")
+
+[node name="HBox" type="HBoxContainer" parent="UI/PlayerInfoPanel/Hbox/VBoxContainer/Panel3" unique_id=394813174]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/PlayerInfoPanel/Hbox/VBoxContainer/Panel3/HBox" unique_id=1195128210]
+layout_mode = 2
+text = "  Turn  -"
+label_settings = ExtResource("3_vsusc")
+horizontal_alignment = 1
+
+[node name="TurnLabel" type="Label" parent="UI/PlayerInfoPanel/Hbox/VBoxContainer/Panel3/HBox" unique_id=1199300311]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
 label_settings = ExtResource("3_vsusc")
 horizontal_alignment = 1
 
@@ -328,6 +355,7 @@ theme_override_styles/hover = ExtResource("7_x7vqv")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1212203822]
 stream = ExtResource("10_vsusc")
+autoplay = true
 bus = &"BGM"
 
 [connection signal="pressed" from="UI/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]

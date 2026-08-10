@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends Control
 class_name Map_Node
 
 @export var texture:Texture2D = preload("res://Art/CardArt/card-art-background-desert-mountain.png"):

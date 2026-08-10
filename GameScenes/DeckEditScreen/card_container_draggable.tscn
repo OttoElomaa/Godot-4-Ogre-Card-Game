@@ -177,6 +177,21 @@ layout_mode = 2
 theme_override_constants/margin_right = -20
 theme_override_constants/margin_bottom = -20
 
+[node name="CardNumber" type="Node2D" parent="." unique_id=1032106242]
+
+[node name="NumberLabel" type="Label" parent="CardNumber" unique_id=1591907026]
+unique_name_in_owner = true
+offset_left = 83.0
+offset_top = 124.0
+offset_right = 123.0
+offset_bottom = 144.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 6
+theme_override_font_sizes/font_size = 42
+text = "x10"
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="timeout" from="InfoPanelTimer" to="." method="_on_info_panel_timer_timeout"]

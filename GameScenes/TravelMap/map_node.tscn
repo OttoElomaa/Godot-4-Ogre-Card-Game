@@ -1,29 +1,30 @@
 [gd_scene format=3 uid="uid://nuu3xo3eknpr"]
 
-[ext_resource type="Script" uid="uid://hi0gitvne1os" path="res://GameScenes/TravelMap/map_node.gd" id="1_g7uvm"]
 [ext_resource type="StyleBox" uid="uid://87xd5etbn8y1" path="res://PanelStyles/circular_style_box.tres" id="2_3fkf6"]
-[ext_resource type="Texture2D" uid="uid://bidk6crinl008" path="res://Art/CardArt/card-art-background-desert.png" id="3_3fkf6"]
+[ext_resource type="Texture2D" uid="uid://d0ct4kwut877u" path="res://Art/CardArt/card-art-background-desert-mountain.png" id="2_yoyvm"]
 [ext_resource type="StyleBox" uid="uid://bf24o3avwu6qh" path="res://PanelStyles/circular_style_box_inner.tres" id="4_nllas"]
 [ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="5_nllas"]
 [ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Fonts/stepalange-font/Stepalange-x3BLm.otf" id="6_ngylu"]
 
-[node name="Map_Node" type="Node2D" unique_id=1981315400]
+[node name="Map_Node" type="Control" unique_id=758531101]
 z_index = 1
 z_as_relative = false
-script = ExtResource("1_g7uvm")
+layout_mode = 3
+anchors_preset = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=933460447]
 clip_children = 2
+layout_mode = 0
 offset_left = -68.0
 offset_top = -176.75629
-offset_right = 92.0
-offset_bottom = 37.343765
+offset_right = 100.0
+offset_bottom = 47.0
 theme_override_styles/panel = ExtResource("2_3fkf6")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=108263112]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("3_3fkf6")
+texture = ExtResource("2_yoyvm")
 expand_mode = 4
 stretch_mode = 6
 

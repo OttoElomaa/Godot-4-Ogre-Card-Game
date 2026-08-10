@@ -32,7 +32,7 @@ var playerIcon:Texture:
 		return current_champion.texture
 
 ## All cards owned by the player. The active deck is made of these.
-var playerOwnedCards := []
+var playerOwnedCards:Array[Card] = []
 
 ## All champions owned by the player. Only one can be active at a time.
 

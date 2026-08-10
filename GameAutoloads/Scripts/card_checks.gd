@@ -74,3 +74,14 @@ func getNonBlockersInList(list:Array) -> Array:
 			non_blockers.append(c)
 	CardChecks.sort_by_strongest(non_blockers)
 	return non_blockers
+
+##################################################
+##### STANDARD FILTER
+
+func filter_by_cost(list:Array[Card]):
+	list.sort_custom(func(a:Card, b:Card): return a.manaCost < b.manaCost)
+	return list
+	
+func filter_by_group(list:Array[Card]):
+	list.sort_custom(func(a:Card, b:Card): return a.group < b.group)
+	return list

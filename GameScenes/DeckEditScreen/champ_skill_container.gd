@@ -9,9 +9,9 @@ func setup(action:ActionsNodeChamp):
 		if action.cost_display.has(action.cost_types.Mana):
 			%ManaCostTexture.show()
 			%Cost.show()
-			%ActionName.text = action.action_name
 			%Cost.text = str(action.cost_display[action.cost_types.Mana])
-	
+			
+	%ActionName.text = action.action_name
 	%SkillTexture.tooltip_text += str(action.action_name, '\n') 
 	
 	for i in action.createActionText():

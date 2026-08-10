@@ -35,6 +35,7 @@ func toggleWindow(enable:bool):
 
 func generatePreview(icon:ZoneBattleIcon, isGenerated:bool):
 	var enemyCardsHolder = %EnemyCards
+	var playerCardsHolder = %PlayerCards
 	
 	if isGenerated:
 		await battleInfoIcon.createDeck()
@@ -53,6 +54,12 @@ func generatePreview(icon:ZoneBattleIcon, isGenerated:bool):
 			enemyCardsHolder.add_child(container)
 			container.insert_card(cardScene)
 			container.infoPanel = cardInfoPanel
+	
+	for card:Card in GameInfo.playerDeckCards:
+		var container:BestiaryContainer = BestiaryContainerScene.instantiate()
+		playerCardsHolder.add_child(container)
+		container.display_card(card)
+		container.infoPanel = cardInfoPanel
 	
 	%PChampionContainer.insert_champion(GameInfo.current_champion)
 	%EChampContainer.insert_champion(GameInfo.enemyChampion)
