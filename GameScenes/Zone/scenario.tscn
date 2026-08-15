@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://ctrvsaptdulhm"]
 
-[ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/Zone/zone.gd" id="1_fjd6i"]
+[ext_resource type="Script" uid="uid://veo6yl08cv03" path="res://GameScenes/Zone/scenario.gd" id="1_akmwn"]
 
 [node name="Zone" type="Node2D" unique_id=538685740]
-script = ExtResource("1_fjd6i")
+script = ExtResource("1_akmwn")
 zoneName = "The Vineyards"
 
 [node name="Map_Screen" type="MarginContainer" parent="." unique_id=2026431070]

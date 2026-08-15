@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bvgfsain6ond7"]
 
-[ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/Zone.tscn" id="1_8pn8i"]
+[ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/scenario.tscn" id="1_8pn8i"]
 [ext_resource type="PackedScene" uid="uid://cu0e7fgg0vk3s" path="res://GameScenes/Zone/RandomizedBattleIcon.tscn" id="2_87fg0"]
 [ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="3_8awkn"]
 

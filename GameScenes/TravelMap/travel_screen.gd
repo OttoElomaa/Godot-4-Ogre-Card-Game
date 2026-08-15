@@ -61,9 +61,25 @@ func load_scenario():
 	print('Travel Screen: loaded scenario ', new.name)
 	await get_tree().process_frame
 	var nodes = new.get_all_nodes()
+	
+	## Placing the scenario to a random position.
+	var new_pos: Vector2
+	if new.random_position:
+		
+		if not new.random_locations.is_empty():
+			new_pos = get_random_free_marker_in_list(new.random_locations)
+		else:
+			new_pos = get_random_free_marker()
+	
 	for i:ZoneNode in nodes:
-		assign_node_to_marker(i.position, i)
+		var pos:Vector2
+		if new_pos:
+			pos = new_pos
+		else:
+			pos = i.position
+		assign_node_to_marker(pos, i)
 		active_scenario_nodes.append(i)
+		
 	MyTools.remove_child(new)
 
 func toggleUI(on:bool):
@@ -123,6 +139,17 @@ func get_random_free_marker() -> Vector2:
 	for c in event_positions_events:
 		if event_positions_events[c] == null:
 			free_nodes.append(c)
+	var random_marker = free_nodes.pick_random()
+	print('placing node at ', random_marker)
+	return random_marker
+
+func get_random_free_marker_in_list(list:Array[Vector2]) -> Vector2:
+	print('getting random free marker')
+	var free_nodes:Array[Vector2] = []
+	for c in list:
+		if event_positions_events.has(c):
+			if event_positions_events[c] == null:
+				free_nodes.append(c)
 	var random_marker = free_nodes.pick_random()
 	print('placing node at ', random_marker)
 	return random_marker

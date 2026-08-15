@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://df8wakx6h0mhe"]
 
 [ext_resource type="Script" uid="uid://i63hgkosko0m" path="res://GameScenes/Zone/zoneNode_dialogue.gd" id="1_urlk5"]
-[ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="2_dp3na"]
+[ext_resource type="Texture2D" uid="uid://dyosit4er0eab" path="res://Art/CardComponents/card-effect-counter-texture-protection.png" id="2_0bgde"]
 [ext_resource type="Texture2D" uid="uid://be0qsfcp2w37c" path="res://Art/CardComponents/zone-battle-icon-disabled-overlay.png" id="3_nry23"]
 [ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="4_la7db"]
 [ext_resource type="LabelSettings" uid="uid://dhqgs5cdwbsp2" path="res://Fonts/LabelSettings/LabelSetMiniBrown.tres" id="6_8kwa5"]
@@ -24,12 +24,16 @@ script = ExtResource("1_urlk5")
 duration = 3
 node_comments = "Someone approaches..."
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=162639824]
-position = Vector2(0, 10)
+[node name="Icon" type="TextureRect" parent="." unique_id=2078753899]
+offset_left = -45.714287
+offset_top = -37.142853
+offset_right = 4.285713
+offset_bottom = 12.857147
 scale = Vector2(1.8, 1.8)
-texture = ExtResource("2_dp3na")
+texture = ExtResource("2_0bgde")
 
 [node name="ClearedOverlay" type="Sprite2D" parent="." unique_id=280681110]
+visible = false
 position = Vector2(0, 10)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("3_nry23")
@@ -44,6 +48,7 @@ position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_aq0yd")
 
 [node name="InfoPanel" type="PanelContainer" parent="." unique_id=889874860]
+visible = false
 custom_minimum_size = Vector2(200, 80)
 anchors_preset = 8
 anchor_left = 0.5

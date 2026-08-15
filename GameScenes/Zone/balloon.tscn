@@ -110,7 +110,6 @@ layer = 100
 script = ExtResource("1_08txh")
 dialogue_resource = ExtResource("2_mjxrt")
 auto_start = true
-will_block_other_input = false
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=80669529]
 anchors_preset = 15

@@ -83,5 +83,12 @@ func filter_by_cost(list:Array[Card]):
 	return list
 	
 func filter_by_group(list:Array[Card]):
-	list.sort_custom(func(a:Card, b:Card): return a.group < b.group)
+	list.sort_custom(func(a:Card, b:Card): 
+		if a.group == b.group:
+			if a.manaCost == b.manaCost:
+				return a.cardName < b.cardName
+			else:
+				return a.manaCost < b.manaCost
+		else:
+			return a.group < b.group)
 	return list

@@ -29,7 +29,7 @@ func setup(board:GameBoard):
 		%Proceed.hide()
 
 func create_containers():
-	GameInfo.playerOwnedCards = CardChecks.filter_by_cost(GameInfo.playerOwnedCards)
+	GameInfo.playerOwnedCards = CardChecks.filter_by_group(GameInfo.playerOwnedCards)
 
 	#### EMPTY THE CARD LISTS BEFORE FILLING THEM
 	for child in activeCardsContainer.get_children():

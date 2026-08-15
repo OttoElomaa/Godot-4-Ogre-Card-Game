@@ -34,7 +34,7 @@ material = SubResource("ShaderMaterial_owoqt")
 cardName = "True Name Paladin"
 subTypeStr = "Pilgrim Warrior"
 group = 9
-flavorText = "The cultists seek the 'correction' of names: to return things to their True Names, true ways."
+flavorText = "The cultists seek the 'correction' of names: for in distortion of time, language strays from the Truth."
 manaCost = 3
 startingDamage = 2
 startingHealth = 4
@@ -53,3 +53,12 @@ buffs = true
 
 [node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("2_ein2a")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "4"
