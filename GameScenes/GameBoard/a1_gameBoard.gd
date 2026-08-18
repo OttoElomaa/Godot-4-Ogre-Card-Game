@@ -13,6 +13,9 @@ class_name GameBoard
 @onready var endTurnLabel := $CanvasLayer/EndTurnPane/VBox/EndTurn/Label
 
 @onready var champActionButton := preload("res://Champions/Scripts/ChampionActionButton.tscn") 
+@onready var enemyChampPosition = %EnemyChampSlot.position
+@onready var playerChampPosition = %PlayerChampSlot.position
+
 
 enum CardSlotTypes {
 	PLAYER, ENEMY

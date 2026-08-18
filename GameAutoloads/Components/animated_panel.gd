@@ -12,6 +12,8 @@ func setupAndAnimate(card:Card, effect:CardAction):
 	nameLabel.text = card.cardName
 	effectTextLabel.text = effect.customActionText
 	
+	position.x -= size.x/2
+	
 	var newPos := position + Vector2(0,-200)
 	var tween = create_tween()
 	tween.tween_property(self, "position", newPos , 2)

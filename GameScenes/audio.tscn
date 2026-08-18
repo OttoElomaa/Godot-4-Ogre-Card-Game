@@ -8,7 +8,8 @@ extends Node2D
 @export var BGM = AudioStream
 
 func _ready():
-	MusicBus.play(BGM)
+	if BGM:
+		MusicBus.play(BGM)
 "
 
 [node name="Audio" type="Node2D" unique_id=576542653]

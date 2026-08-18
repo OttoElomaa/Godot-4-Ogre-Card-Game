@@ -34,7 +34,7 @@ func animateGenericTrigger(dict):
 	var effect:CardAction = dict['effect']
 	
 	var animatedPanel:QueueAnimatedPanel = AnimatedPanel.instantiate() as QueueAnimatedPanel
-	$Canvas.add_child(animatedPanel)
+	card.add_child(animatedPanel)
 	animatedPanel.setupAndAnimate(card, effect)
 	
 	if effect.particleTexture:

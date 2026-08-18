@@ -24,9 +24,10 @@
 [ext_resource type="Script" uid="uid://3gv0j2w8kq47" path="res://GameScenes/GameBoard/camera_main_board.gd" id="25_7yxuf"]
 [ext_resource type="Script" uid="uid://cixenybew8sdp" path="res://GameScenes/GameBoard/battle_log_pane.gd" id="25_gfnca"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Fonts/LabelSettings/LabelSettingSmallFontFaintGrey.tres" id="26_g4f50"]
-[ext_resource type="AudioStream" uid="uid://cqryjjev655kv" path="res://Audio/BGM/Cards of Achra OST - Tunneler Lullaby.ogg" id="26_hysm7"]
 [ext_resource type="LabelSettings" uid="uid://ckmjo8jpsxoud" path="res://Fonts/LabelSettings/LabelSet-Header-OffWhiteYellow50.tres" id="26_ngg6u"]
+[ext_resource type="PackedScene" uid="uid://cjwurlo7haie7" path="res://GameScenes/audio.tscn" id="27_5f6ju"]
 [ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="27_anhsg"]
+[ext_resource type="AudioStream" uid="uid://bugt0t77k55rj" path="res://Audio/BGM/Anghu Musica - Urban Combat.wav" id="28_o0nbp"]
 [ext_resource type="PackedScene" uid="uid://came4na503n5s" path="res://GameScenes/CardDisplayContainers/card_container.tscn" id="29_rkqvw"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="30_rkqvw"]
 [ext_resource type="PackedScene" uid="uid://bdw6fi1o8el8n" path="res://GameScenes/ParticlesAnimations/smoke.tscn" id="31_5f6ju"]
@@ -130,19 +131,19 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.188235, 0.105882, 0.0156863, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rkqvw"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y7kvl"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5f6ju"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q6lth"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_rkqvw")
+noise = SubResource("FastNoiseLite_y7kvl")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0nbp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6psvl"]
 resource_local_to_scene = true
 shader = ExtResource("30_rkqvw")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_5f6ju")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_q6lth")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -866,10 +867,8 @@ horizontal_alignment = 1
 
 [node name="Audio" type="Node" parent="." unique_id=1528477826]
 
-[node name="BGM" type="AudioStreamPlayer" parent="Audio" unique_id=424188395]
-stream = ExtResource("26_hysm7")
-autoplay = true
-bus = &"BGM"
+[node name="Audio" parent="Audio" unique_id=576542653 instance=ExtResource("27_5f6ju")]
+BGM = ExtResource("28_o0nbp")
 
 [node name="PlayerActionButtons" type="Node2D" parent="." unique_id=145877137]
 position = Vector2(1020, 1389)
@@ -922,7 +921,7 @@ position = Vector2(-77, -36)
 [node name="RitualContainer" parent="AnimationLayer" unique_id=1429469794 instance=ExtResource("29_rkqvw")]
 unique_name_in_owner = true
 z_index = 1
-material = SubResource("ShaderMaterial_o0nbp")
+material = SubResource("ShaderMaterial_6psvl")
 offset_left = 915.0
 offset_top = 1650.0
 offset_right = 1045.0
