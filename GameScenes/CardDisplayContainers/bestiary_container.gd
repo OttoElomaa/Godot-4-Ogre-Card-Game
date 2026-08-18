@@ -32,6 +32,10 @@ func stack_card(checking_card:Card) -> bool:
 		return true
 	return false
 
+func remove_topmost_card():
+	stacked_cards.pop_front()
+	update_card_stacks()
+
 func update_card_stacks():
 	if stack_number > 0:
 		%NumberLabel.text = str('x', stack_number + 1)

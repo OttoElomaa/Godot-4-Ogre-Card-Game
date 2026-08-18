@@ -9,6 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="7_x7vqv"]
 [ext_resource type="PackedScene" uid="uid://8a68hh76lcve" path="res://GameScenes/DeckEditScreen/champion_container.tscn" id="7_xt4g0"]
 [ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="10_rg1pc"]
+[ext_resource type="PackedScene" uid="uid://cjwurlo7haie7" path="res://GameScenes/audio.tscn" id="10_rxdwd"]
 [ext_resource type="AudioStream" uid="uid://mul6424e3fq3" path="res://Audio/BGM/Anghu Musica - Sun & The Lord; General's Theme.wav" id="10_vsusc"]
 
 [sub_resource type="Animation" id="Animation_reupg"]
@@ -353,10 +354,8 @@ layout_mode = 2
 theme_override_styles/normal = ExtResource("6_cpily")
 theme_override_styles/hover = ExtResource("7_x7vqv")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1212203822]
-stream = ExtResource("10_vsusc")
-autoplay = true
-bus = &"BGM"
+[node name="Audio" parent="." unique_id=576542653 instance=ExtResource("10_rxdwd")]
+BGM = ExtResource("10_vsusc")
 
 [connection signal="pressed" from="UI/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" method="buttonMouseEntered"]

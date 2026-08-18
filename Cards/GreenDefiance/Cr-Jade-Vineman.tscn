@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="4_bakgk"]
 [ext_resource type="Texture2D" uid="uid://b01fgy8k28uhs" path="res://Art/CardArt/GreenDefiance/card-art-creature-briarfolk.jpg" id="5_m240v"]
 
-[sub_resource type="Shader" id="Shader_hk35x"]
+[sub_resource type="Shader" id="Shader_vyxix"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -34,19 +34,19 @@ void fragment() {
 	COLOR.rgb = mix(COLOR.rgb, layer_1.rgb, step(percentage, noise + size_1));
 }"
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mvx7b"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oa8ls"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jh2k0"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jrncy"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_mvx7b")
+noise = SubResource("FastNoiseLite_oa8ls")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hxmlj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bakgk"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hk35x")
+shader = SubResource("Shader_vyxix")
 shader_parameter/percentage = 0.999999977648
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_jh2k0")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_jrncy")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -55,9 +55,10 @@ shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
 [node name="Card-Cr-Jade-Vineman" unique_id=223653070 instance=ExtResource("1_vyxix")]
-material = SubResource("ShaderMaterial_hxmlj")
+material = SubResource("ShaderMaterial_bakgk")
 cardName = "Jade Vineman"
 subTypeStr = "Wild Vineman"
+texture = ExtResource("5_m240v")
 group = 3
 flavorText = "Ah, child of the vine, green-clad, scion of Anghu..."
 manaCost = 1
@@ -77,3 +78,12 @@ alterOwnerMana = 1
 
 [node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("5_m240v")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "1"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "1"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "1"

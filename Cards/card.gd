@@ -84,7 +84,11 @@ var term_tooltip = DataLoader.scenes_by_name['TermTooltip']
 		notify_property_list_changed()
 		
 @export var subTypeStr := "Card Sub-Type"
-@export var texture: Texture2D
+@export var texture: Texture2D:
+	set(value):
+		texture = value
+		if Engine.is_editor_hint():
+			$Frontside/Art.texture = texture
 
 @export var group := Group.NONE
 

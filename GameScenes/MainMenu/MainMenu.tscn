@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dojtnp1c1qm5h" path="res://GameScenes/MainMenu/main_menu.gd" id="1_jd835"]
 [ext_resource type="PackedScene" uid="uid://cjwurlo7haie7" path="res://GameScenes/audio.tscn" id="2_18c0x"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="2_b8l8w"]
-[ext_resource type="AudioStream" uid="uid://b12p3w7ls8cpn" path="res://Audio/BGM/Cards of Achra OST - Main Menu Theme.ogg" id="3_3ew8u"]
+[ext_resource type="AudioStream" uid="uid://byx1jm7x2wkuy" path="res://Audio/BGM/Anghu Musica - The Lands Roll Forth.wav" id="3_rf05g"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="3_wqb3i"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="4_duqux"]
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="5_26mog"]
@@ -12,17 +12,17 @@
 [ext_resource type="PackedScene" uid="uid://pd7or3cigyqn" path="res://GameScenes/MainMenu/dancing_card.tscn" id="15_b4hlq"]
 [ext_resource type="PackedScene" uid="uid://yol344fkh60p" path="res://GameScenes/MainMenu/flicker_light.tscn" id="15_uifqy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rf05g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkrw6"]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkrw6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wtpnl"]
 resource_local_to_scene = true
 
 [node name="MainMenu" type="Node2D" unique_id=1388111977]
 script = ExtResource("1_jd835")
 
 [node name="Audio" parent="." unique_id=1318804510 instance=ExtResource("2_18c0x")]
-BGM = ExtResource("3_3ew8u")
+BGM = ExtResource("3_rf05g")
 
 [node name="MenuCamera" type="Camera2D" parent="." unique_id=616443089]
 position = Vector2(1299, 540)
@@ -190,11 +190,11 @@ z_index = 1
 
 [node name="DancingCard" parent="Decor/DancingCards" unique_id=364356307 instance=ExtResource("15_b4hlq")]
 light_mask = 0
-material = SubResource("ShaderMaterial_rf05g")
+material = SubResource("ShaderMaterial_kkrw6")
 position = Vector2(1246, -193)
 
 [node name="DancingCard2" parent="Decor/DancingCards" unique_id=88608294 instance=ExtResource("15_b4hlq")]
-material = SubResource("ShaderMaterial_kkrw6")
+material = SubResource("ShaderMaterial_wtpnl")
 position = Vector2(1233, -212)
 
 [node name="DancingCard3" parent="Decor/DancingCards" unique_id=1255174092 instance=ExtResource("15_b4hlq")]

@@ -6,6 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="4_la7db"]
 [ext_resource type="LabelSettings" uid="uid://dhqgs5cdwbsp2" path="res://Fonts/LabelSettings/LabelSetMiniBrown.tres" id="6_8kwa5"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62yky"]
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aq0yd"]
 radius = 69.3333
 height = 138.667
@@ -24,12 +30,17 @@ script = ExtResource("1_urlk5")
 duration = 3
 node_comments = "Someone approaches..."
 
-[node name="Icon" type="TextureRect" parent="." unique_id=2078753899]
-offset_left = -45.714287
-offset_top = -37.142853
-offset_right = 4.285713
-offset_bottom = 12.857147
-scale = Vector2(1.8, 1.8)
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2066150119]
+clip_children = 1
+offset_left = -40.0
+offset_top = -30.0
+offset_right = 40.0
+offset_bottom = 50.0
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_62yky")
+
+[node name="Icon" type="TextureRect" parent="PanelContainer" unique_id=2078753899]
+layout_mode = 2
 texture = ExtResource("2_0bgde")
 
 [node name="ClearedOverlay" type="Sprite2D" parent="." unique_id=280681110]
@@ -81,6 +92,7 @@ text = "Description Goes Here"
 label_settings = ExtResource("6_8kwa5")
 horizontal_alignment = 1
 
+[connection signal="gui_input" from="PanelContainer" to="." method="_on_panel_container_gui_input"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

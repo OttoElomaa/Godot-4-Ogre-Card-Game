@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dsj8r64efi682"]
 
 [ext_resource type="Script" uid="uid://dwyj2ebmqyh2x" path="res://Champions/Scripts/champion.gd" id="1_x0svb"]
-[ext_resource type="Texture2D" uid="uid://xlhwwkbg5g0v" path="res://Art/Portraits/portrat-general-01.png" id="2_d0ldb"]
+[ext_resource type="Texture2D" uid="uid://cva3je3c25qqt" path="res://Art/Portraits/generalb4.png" id="2_blitk"]
 [ext_resource type="Script" uid="uid://dw6ejtqnbwoh2" path="res://Champions/Scripts/ActionsNodeChamp.gd" id="3_d0ldb"]
 [ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="4_c3dhb"]
 [ext_resource type="Script" uid="uid://cdekh7m7g5vek" path="res://CardScriptsAndComponents/Triggers/Scripts/OnCastTrigger.gd" id="5_w5ue0"]
@@ -27,7 +27,7 @@
 script = ExtResource("1_x0svb")
 cardName = "General"
 cardType = 2
-texture = ExtResource("2_d0ldb")
+texture = ExtResource("2_blitk")
 startingHealth = 10
 block_on_arrival = null
 action_mode = true
@@ -40,7 +40,6 @@ script = ExtResource("3_d0ldb")
 action_name = "Align"
 action_description = "\"On use: select an ally.
 On turn: bolster all allies of a the same subtype by %s/%s\" % [int(level*0.5), level]"
-level = 2
 texture = ExtResource("4_c3dhb")
 metadata/_custom_type_script = "uid://dw6ejtqnbwoh2"
 
@@ -67,6 +66,29 @@ value_name = "AlignParagon"
 
 [node name="ReturnSavedCardData" parent="Align/OnCastTrigger/CardAction/SkillAssignCustomValue" unique_id=1990749032 instance=ExtResource("9_tg26q")]
 
+[node name="CardAction3" type="Node2D" parent="Align/OnCastTrigger" unique_id=838546174]
+script = ExtResource("6_vk6uu")
+customActionText = "Align!"
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="TargetAllAllies" parent="Align/OnCastTrigger/CardAction3" unique_id=2050816564 instance=ExtResource("10_tg26q")]
+
+[node name="IfHasSubtypes" parent="Align/OnCastTrigger/CardAction3/TargetAllAllies" unique_id=1716551667 instance=ExtResource("12_kqo68")]
+
+[node name="ReturnCustomValue" parent="Align/OnCastTrigger/CardAction3/TargetAllAllies/IfHasSubtypes" unique_id=1236744066 instance=ExtResource("13_31g6e")]
+value_name = "subTypes"
+
+[node name="SkillAlterHealth" parent="Align/OnCastTrigger/CardAction3" unique_id=2085990351 instance=ExtResource("13_a3ci1")]
+bolsterHealth = 1
+
+[node name="ScaleFromSkillLevel" parent="Align/OnCastTrigger/CardAction3/SkillAlterHealth" unique_id=693289716 instance=ExtResource("16_4r2l7")]
+
+[node name="SkillAlterDamage" parent="Align/OnCastTrigger/CardAction3" unique_id=183782092 instance=ExtResource("13_a3ci1")]
+bolsterDamage = 1
+
+[node name="ScaleFromSkillLevel" parent="Align/OnCastTrigger/CardAction3/SkillAlterDamage" unique_id=1156983771 instance=ExtResource("16_4r2l7")]
+multiplier = 0.5
+
 [node name="OnAlliedTurnTrigger" parent="Align" unique_id=1268844405 instance=ExtResource("9_px22a")]
 
 [node name="CardAction" type="Node2D" parent="Align/OnAlliedTurnTrigger" unique_id=1288283128]
@@ -76,15 +98,15 @@ metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
 [node name="TargetAllAllies" parent="Align/OnAlliedTurnTrigger/CardAction" unique_id=1513314004 instance=ExtResource("10_tg26q")]
 
-[node name="IfHasSubtypes" parent="Align/OnAlliedTurnTrigger/CardAction/TargetAllAllies" unique_id=1716551667 instance=ExtResource("12_kqo68")]
+[node name="IfHasSubtypes" parent="Align/OnAlliedTurnTrigger/CardAction/TargetAllAllies" unique_id=1799570504 instance=ExtResource("12_kqo68")]
 
-[node name="ReturnCustomValue" parent="Align/OnAlliedTurnTrigger/CardAction/TargetAllAllies/IfHasSubtypes" unique_id=1236744066 instance=ExtResource("13_31g6e")]
+[node name="ReturnCustomValue" parent="Align/OnAlliedTurnTrigger/CardAction/TargetAllAllies/IfHasSubtypes" unique_id=1039343268 instance=ExtResource("13_31g6e")]
 value_name = "subTypes"
 
 [node name="SkillAlterHealth" parent="Align/OnAlliedTurnTrigger/CardAction" unique_id=1892484695 instance=ExtResource("13_a3ci1")]
 bolsterHealth = 1
 
-[node name="ScaleFromSkillLevel" parent="Align/OnAlliedTurnTrigger/CardAction/SkillAlterHealth" unique_id=693289716 instance=ExtResource("16_4r2l7")]
+[node name="ScaleFromSkillLevel" parent="Align/OnAlliedTurnTrigger/CardAction/SkillAlterHealth" unique_id=1629580993 instance=ExtResource("16_4r2l7")]
 
 [node name="SkillAlterDamage" parent="Align/OnAlliedTurnTrigger/CardAction" unique_id=1929337004 instance=ExtResource("13_a3ci1")]
 bolsterDamage = 1
@@ -96,6 +118,7 @@ multiplier = 0.5
 script = ExtResource("3_d0ldb")
 action_name = "Fortify"
 action_description = "\"Apply %s Armor.\" % [level]"
+level = 0
 texture = ExtResource("16_nk8fw")
 cost_display = Dictionary[int, int]({
 2: 3

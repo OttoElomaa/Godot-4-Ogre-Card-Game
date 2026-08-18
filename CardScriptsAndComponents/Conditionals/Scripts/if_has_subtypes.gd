@@ -14,6 +14,7 @@ func check(card_to_check:Card, myCard:Card) -> bool:
 	if strict:
 		return card_to_check.subTypes == subtypes
 	else:
+		print('ConditionalComponent: checking if ', card_to_check, ' has subtypes ', subtypes)
 		for i in card_to_check.subTypes:
 			if subtypes.has(i):
 				return true

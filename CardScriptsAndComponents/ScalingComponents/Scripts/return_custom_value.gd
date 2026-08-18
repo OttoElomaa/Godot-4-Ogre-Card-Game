@@ -6,7 +6,10 @@ extends ReturningComponent
 
 func get_return_value(_args:Dictionary) -> Variant:
 	var card:Card = _args['user']
-	if card.custom_values.has('value_name'):
+	print(card.name, ' queries a return')
+	if card.custom_values.has(value_name):
+		print('Returning component returns ', card.custom_values[value_name])
 		return card.custom_values[value_name]
 	else:
+		print('Returning component: no such custom value ', value_name)
 		return null

@@ -28,32 +28,40 @@ content_margin_top = 3.0
 content_margin_right = 3.0
 content_margin_bottom = 3.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
 border_color = Color(0.976471, 0.819608, 0.447059, 1)
 corner_radius_top_left = 124
 corner_radius_top_right = 125
 corner_radius_bottom_right = 125
 corner_radius_bottom_left = 125
 corner_detail = 20
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
 [node name="PanelContainer" type="VBoxContainer" unique_id=334304769]
-offset_right = 232.0
-offset_bottom = 292.0
+anchors_preset = -1
+anchor_right = 0.133
+anchor_bottom = 0.402
+offset_right = 0.58000183
+offset_bottom = -101.558014
 script = ExtResource("2_vmjbk")
 show_name = true
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=322412716]
 clip_children = 1
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_pfnwv")
 
 [node name="ChampionTexture" type="TextureRect" parent="PanelContainer" unique_id=1898590618]
 unique_name_in_owner = true
-clip_contents = true
 custom_minimum_size = Vector2(220, 280)
+clip_contents = true
 layout_mode = 2
 texture = ExtResource("2_1gan8")
 expand_mode = 4
@@ -61,17 +69,20 @@ stretch_mode = 6
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer" unique_id=1231744694]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfpk2")
 
 [node name="NameContainer" type="PanelContainer" parent="." unique_id=633895378]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("3_vmjbk")
 
 [node name="ChampionName" type="RichTextLabel" parent="NameContainer" unique_id=472341527]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("4_vy0to")
 text = "Nameless Warrior"
 horizontal_alignment = 1

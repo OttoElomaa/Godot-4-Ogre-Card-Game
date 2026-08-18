@@ -13,4 +13,5 @@ func get_return_value(new_args: Dictionary) -> Variant:
 	return null
 
 func isChanged():
+	print('Conditional component ', name, ' is changed.')
 	return not get_children().is_empty()

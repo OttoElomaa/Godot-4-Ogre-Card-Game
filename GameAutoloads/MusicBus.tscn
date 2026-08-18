@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://bxrc5yvd44yda"]
 
+[ext_resource type="Script" uid="uid://5ed1kjmt5vr0" path="res://GameAutoloads/music_bus.gd" id="1_uyb88"]
+
 [node name="MusicBus" type="Node2D" unique_id=290525951]
+script = ExtResource("1_uyb88")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=65204484]
+bus = &"BGM"

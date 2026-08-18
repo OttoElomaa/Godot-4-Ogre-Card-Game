@@ -7,8 +7,10 @@
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="4_u3657"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Fonts/LabelSettings/LabelSettingSmallFontWhite.tres" id="5_gmchg"]
 [ext_resource type="StyleBox" uid="uid://bocokxxjamm42" path="res://PanelStyles/StyleBoxTiled.tres" id="5_wykmi"]
+[ext_resource type="FontFile" uid="uid://dbdpwrj1wq4d6" path="res://Fonts/stepalange-font/StepalangeShort-p7GZd.otf" id="6_gmchg"]
 [ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Fonts/stepalange-font/Stepalange-x3BLm.otf" id="8_u3657"]
 [ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="9_gmchg"]
+[ext_resource type="Script" uid="uid://b3xrqok3dl2f2" path="res://GameScenes/CardDisplayContainers/army_container.gd" id="10_i3hud"]
 
 [node name="PreBattleWindow" type="CanvasLayer" unique_id=1599976500]
 script = ExtResource("1_2waxm")
@@ -76,7 +78,16 @@ theme_override_styles/panel = ExtResource("3_wykmi")
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left" unique_id=1225135875]
 layout_mode = 2
 
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox" unique_id=1541625149]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_gmchg")
+bbcode_enabled = true
+text = "Enemy Cards:"
+fit_content = true
+horizontal_alignment = 2
+
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox" unique_id=1693328313]
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_6gtnb")
 
@@ -93,6 +104,7 @@ label_settings = ExtResource("5_gmchg")
 autowrap_mode = 2
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox" unique_id=396474806]
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("5_wykmi")
@@ -109,22 +121,49 @@ unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox" unique_id=851600900]
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox" unique_id=1888652528]
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("8_u3657")
+text = "VS"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox" unique_id=1867303391]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_gmchg")
+bbcode_enabled = true
+text = "Your Deck:"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox" unique_id=39760161]
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/HBoxContainer" unique_id=851600900]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("5_wykmi")
 
-[node name="Margin" type="MarginContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/PanelContainer3" unique_id=727049635]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/HBoxContainer/PanelContainer3" unique_id=727049635]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 20
 
-[node name="PlayerCards" type="HBoxContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/PanelContainer3/Margin" unique_id=1930303960]
+[node name="PlayerCards" type="HBoxContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/HBoxContainer/PanelContainer3/Margin" unique_id=1930303960]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
+script = ExtResource("10_i3hud")
+
+[node name="AdjustDeck" type="Button" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/HBoxContainer" unique_id=1958801476]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_6gtnb")
+text = "Adjust Deck"
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox" unique_id=522111743]
 layout_mode = 2
@@ -159,5 +198,6 @@ unique_name_in_owner = true
 z_index = 3
 position = Vector2(1886, 8)
 
+[connection signal="pressed" from="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/HBoxContainer/AdjustDeck" to="." method="_on_adjust_deck_pressed"]
 [connection signal="pressed" from="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/FightButton" to="." method="fightButtonPressed"]
 [connection signal="pressed" from="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/CancelButton" to="." method="cancelButtonPressed"]

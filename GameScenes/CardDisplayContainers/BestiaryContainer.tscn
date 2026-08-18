@@ -5,4 +5,11 @@
 
 [node name="CardContainer" unique_id=1050920320 instance=ExtResource("1_f8hbt")]
 z_index = 1
+mouse_default_cursor_shape = 2
 script = ExtResource("2_f8hbt")
+
+[node name="EffectsLabel" parent="Frontside" parent_id_path=PackedInt32Array(361414676) index="3" unique_id=1147455050]
+mouse_filter = 1
+
+[node name="Panel" parent="Frontside/Resources" parent_id_path=PackedInt32Array(702020287) index="0" unique_id=382828402]
+mouse_filter = 1

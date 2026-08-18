@@ -62,6 +62,14 @@ func createCard(path:String):
 	var cardPacked = load(path)
 	return cardPacked.instantiate()
 
+func createCardByAmount(c_name:String, amount:int) -> Array[Card]:
+	var array:Array[Card] = []
+	for i in range(amount):
+		array.append(cards_by_name[c_name].duplicate())
+	
+	return array
+	
+
 func createAllCardsByAmount(amount:int) -> Array[Card]:
 	var allCards: Array[Card] = []
 	

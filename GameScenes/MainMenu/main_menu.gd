@@ -5,6 +5,7 @@ extends Node2D
 @onready var OptionsScreen: PackedScene = preload("res://GameScenes/OptionScreen/OptionsScreen.tscn")
 @onready var ZoneScene: PackedScene = preload("res://GameScenes/TravelMap/travel_screen.tscn")
 @onready var ArenaScene: PackedScene = preload('uid://cur0336ypyp8w')
+@onready var CharacterSelect: PackedScene = preload('uid://b6v47wy1xusll')
 
 var bestiaryVisible := false
 
@@ -12,13 +13,6 @@ var bestiaryCards := []
 
 
 func _ready() -> void:
-	Options.load_options()
-	DataLoader.createAllGameCards()
-	DataLoader.load_text_data('res://Resources/Data/Terms.json', DataLoader.terms)
-	DataLoader.get_effect_descriptions()
-	GameInfo.playerOwnedCards = DataLoader.createDesertDeck()
-	GameInfo.enemyDeckCards = DataLoader.createDesertDeck()
-	GameInfo.current_champion = DataLoader.champions_by_name['General']
 #	setupBestiary()
 	
 #	bestiaryVisible = true
@@ -109,6 +103,6 @@ func _on_endless_button_pressed():
 
 func _on_start_game_button_pressed():
 	bestiaryVisible = false
-	var newZone:Node = ZoneScene.instantiate()
+	var newZone:Node = CharacterSelect.instantiate()
 	SceneSwitcher.switchToNewScene(newZone)
 	#get_tree().change_scene_to_packed(ZoneScene)

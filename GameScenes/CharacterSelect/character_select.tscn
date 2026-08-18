@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b6v47wy1xusll"]
 
+[ext_resource type="Script" uid="uid://chkm52ti5aqnq" path="res://GameScenes/CharacterSelect/character_select.gd" id="1_gheqn"]
 [ext_resource type="Theme" uid="uid://7mo4t86mxlx6" path="res://Storytime.tres" id="1_ocd86"]
 [ext_resource type="PackedScene" uid="uid://8a68hh76lcve" path="res://GameScenes/DeckEditScreen/champion_container.tscn" id="2_gheqn"]
 [ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Fonts/FancyPixelFontWhite.tres" id="3_0p1xs"]
@@ -10,12 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://c4ti1m63bwec" path="res://Art/CardComponents/card-name-background-shadow.png" id="8_o0gq5"]
 [ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Fonts/stepalange-font/Stepalange-x3BLm.otf" id="9_ix78e"]
 [ext_resource type="FontFile" uid="uid://dbdpwrj1wq4d6" path="res://Fonts/stepalange-font/StepalangeShort-p7GZd.otf" id="10_n1vdo"]
-[ext_resource type="PackedScene" uid="uid://cc07uuuw1gknl" path="res://GameScenes/DeckEditScreen/champ_skill_container.tscn" id="11_lcbd2"]
+[ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="12_0p1xs"]
+[ext_resource type="Script" uid="uid://b3xrqok3dl2f2" path="res://GameScenes/CardDisplayContainers/army_container.gd" id="12_78lhs"]
 
 [node name="Character Select" type="CanvasLayer" unique_id=1191508708]
+script = ExtResource("1_gheqn")
 
 [node name="SelectCause" type="MarginContainer" parent="." unique_id=2092295341]
-visible = false
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,9 +26,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="SelectCause" unique_id=792036859]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SelectCause/VBoxContainer2" unique_id=314323407]
 layout_mode = 2
@@ -43,19 +48,25 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -50)
+offset_transform_visual_only = false
+mouse_filter = 2
 alignment = 1
 
 [node name="PlayableCharacters" type="HBoxContainer" parent="SelectCause/VBoxContainer2/VBoxContainer" unique_id=1258081649]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters" unique_id=1848445316]
+[node name="Margin" type="MarginContainer" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters" unique_id=1848445316]
 layout_mode = 2
-theme_override_constants/margin_left = 0
+mouse_filter = 2
 theme_override_constants/margin_right = 30
 
-[node name="PanelContainer" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/MarginContainer" unique_id=334304769 instance=ExtResource("2_gheqn")]
+[node name="General" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/Margin" unique_id=334304769 instance=ExtResource("2_gheqn")]
+unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters" unique_id=1365036375]
 layout_mode = 2
@@ -90,6 +101,8 @@ theme_override_styles/normal = ExtResource("4_78lhs")
 text = "Back"
 
 [node name="CharacterPreview" type="HBoxContainer" parent="." unique_id=535138821]
+unique_name_in_owner = true
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,16 +120,52 @@ theme_override_constants/margin_top = 100
 layout_mode = 2
 alignment = 1
 
-[node name="PanelContainer" parent="CharacterPreview/MarginContainer/HBoxContainer" unique_id=1854246928 instance=ExtResource("2_gheqn")]
+[node name="Panel" type="PanelContainer" parent="CharacterPreview/MarginContainer/HBoxContainer" unique_id=2105552187]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("4_78lhs")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CharacterPreview/MarginContainer/HBoxContainer/Panel" unique_id=905566784]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CharacterPreview/MarginContainer/HBoxContainer/Panel/VBoxContainer2" unique_id=1201896862]
+layout_mode = 2
+theme = ExtResource("3_0p1xs")
+theme_override_fonts/normal_font = ExtResource("9_ix78e")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "Your champion shall be the"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChampContainer" parent="CharacterPreview/MarginContainer/HBoxContainer/Panel/VBoxContainer2" unique_id=1854246928 instance=ExtResource("2_gheqn")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CharacterPreview/MarginContainer/HBoxContainer" unique_id=833403065]
+[node name="PanelContainer" type="PanelContainer" parent="CharacterPreview/MarginContainer/HBoxContainer" unique_id=653971276]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = ExtResource("4_78lhs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer" unique_id=833403065]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="PanelContainer3" type="PanelContainer" parent="CharacterPreview/MarginContainer/HBoxContainer/VBoxContainer" unique_id=324161173]
+[node name="RichTextLabel" type="RichTextLabel" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=966110534]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("9_ix78e")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "You shall begin in the"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="PanelContainer3" type="PanelContainer" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=324161173]
 clip_children = 2
 custom_minimum_size = Vector2(232, 286)
 layout_mode = 2
@@ -124,24 +173,27 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("5_qp1eo")
 
-[node name="TextureRect" type="TextureRect" parent="CharacterPreview/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3" unique_id=270696651]
+[node name="TextureRect" type="TextureRect" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer3" unique_id=270696651]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("6_ofrts")
 expand_mode = 4
 stretch_mode = 6
 
-[node name="PanelContainer" type="PanelContainer" parent="CharacterPreview/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3" unique_id=1758849710]
+[node name="PanelContainer" type="PanelContainer" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer3" unique_id=1758849710]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("7_uvaps")
 
-[node name="Shadow" type="TextureRect" parent="CharacterPreview/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1725868892]
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer3" unique_id=832535222]
 layout_mode = 2
-offset_transform_enabled = true
+
+[node name="Shadow" type="TextureRect" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer" unique_id=1725868892]
+layout_mode = 2
+size_flags_vertical = 8
 offset_transform_position = Vector2(0, -100)
 texture = ExtResource("8_o0gq5")
 
-[node name="NameLabel" type="RichTextLabel" parent="CharacterPreview/MarginContainer/HBoxContainer/VBoxContainer/Shadow" unique_id=1108881785]
+[node name="NameLabel" type="RichTextLabel" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer/Shadow" unique_id=1108881785]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -162,7 +214,26 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer2" parent="CharacterPreview/MarginContainer/HBoxContainer" unique_id=1256595766 instance=ExtResource("2_gheqn")]
+[node name="PanelContainer3" type="PanelContainer" parent="CharacterPreview/MarginContainer/HBoxContainer" unique_id=1078979833]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("4_78lhs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer3" unique_id=861164304]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer3/VBoxContainer" unique_id=968188696]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("9_ix78e")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "You shall be allied with"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" parent="CharacterPreview/MarginContainer/HBoxContainer/PanelContainer3/VBoxContainer" unique_id=1256595766 instance=ExtResource("2_gheqn")]
 layout_mode = 2
 size_flags_vertical = 4
 
@@ -181,6 +252,7 @@ theme_override_styles/panel = ExtResource("4_78lhs")
 layout_mode = 2
 
 [node name="CharacterName" type="Label" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1846484492]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("9_ix78e")
@@ -189,6 +261,7 @@ text = "The City"
 horizontal_alignment = 1
 
 [node name="CharacterTitle" type="Label" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1486498752]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_n1vdo")
 theme_override_font_sizes/font_size = 42
@@ -203,14 +276,13 @@ theme_override_styles/panel = ExtResource("4_78lhs")
 [node name="VBoxContainer" type="VBoxContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer2" unique_id=2145111133]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=925907467]
+[node name="Description" type="RichTextLabel" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=925907467]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("9_ix78e")
 bbcode_enabled = true
-text = "Campaign for the [color=antique_white]City[/color], whose [color=GOLD]Generals[/color] champion [color=TURQUOISE]order[/color] and [color=coral]law[/color] across the continent, who fight for [color=]peace...
-You shall begin in... [color=GOLD] the Golden City of Ask'lan[/color]
-You are an ally of the [color=GOLD]Throne[/color]
-Your champion is the [color=GOLD]General[/color]"
+text = "Campaign for the [color=antique_white]City[/color], whose [color=GOLD]King[/color] champions [color=TURQUOISE]order[/color] and [color=coral]law[/color] across the continent, whose men fight for [color=]peace on earth and beyond...
+"
 fit_content = true
 
 [node name="PanelContainer3" type="PanelContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer" unique_id=2072172497]
@@ -224,7 +296,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("10_n1vdo")
 bbcode_enabled = true
-text = "You start with the following troops:[hr]"
+text = "You shall start with the following troops:[hr]"
 fit_content = true
 
 [node name="MarginContainer" type="MarginContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer3/VBoxContainer" unique_id=255598258]
@@ -234,50 +306,81 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer3/VBoxContainer/MarginContainer" unique_id=775865651]
+[node name="ArmyContainer" type="HBoxContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer3/VBoxContainer/MarginContainer" unique_id=775865651]
+unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("12_78lhs")
 
-[node name="CardContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer3/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1050920320 instance_placeholder="res://GameScenes/CardDisplayContainers/BestiaryContainer.tscn"]
+[node name="CardContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer3/VBoxContainer/MarginContainer/ArmyContainer" unique_id=1050920320 instance_placeholder="res://GameScenes/CardDisplayContainers/BestiaryContainer.tscn"]
 layout_mode = 2
 
 [node name="PanelContainer4" type="PanelContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer" unique_id=312253596]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_78lhs")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4" unique_id=1895424699]
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4" unique_id=1833989506]
 layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4/VBoxContainer" unique_id=595366396]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("10_n1vdo")
 bbcode_enabled = true
-text = "You possess the following powers:
+text = "You shall possess the following powers:
 [hr]"
 fit_content = true
 
-[node name="Skill_1" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4/VBoxContainer" unique_id=1231671677 instance=ExtResource("11_lcbd2")]
+[node name="ChampSkillContainer" type="VBoxContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4/VBoxContainer" unique_id=1895424699]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Skill_2" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4/VBoxContainer" unique_id=582226626 instance=ExtResource("11_lcbd2")]
+[node name="Skill_1" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4/VBoxContainer/ChampSkillContainer" unique_id=1231671677 instance_placeholder="res://GameScenes/DeckEditScreen/champ_skill_container.tscn"]
+unique_name_in_owner = true
 layout_mode = 2
+show_description = true
 
-[node name="Skill_3" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4/VBoxContainer" unique_id=1686542206 instance=ExtResource("11_lcbd2")]
+[node name="Skill_2" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4/VBoxContainer/ChampSkillContainer" unique_id=582226626 instance_placeholder="res://GameScenes/DeckEditScreen/champ_skill_container.tscn"]
+unique_name_in_owner = true
 layout_mode = 2
+show_description = true
+
+[node name="Skill_3" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4/VBoxContainer/ChampSkillContainer" unique_id=1686542206 instance_placeholder="res://GameScenes/DeckEditScreen/champ_skill_container.tscn"]
+unique_name_in_owner = true
+layout_mode = 2
+show_description = true
+
+[node name="Skill_4" parent="CharacterPreview/MarginContainer2/VBoxContainer/PanelContainer4/VBoxContainer/ChampSkillContainer" unique_id=1654381708 instance_placeholder="res://GameScenes/DeckEditScreen/champ_skill_container.tscn"]
+unique_name_in_owner = true
+layout_mode = 2
+show_description = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CharacterPreview/MarginContainer2/VBoxContainer" unique_id=1139805405]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=28842471]
+[node name="StartGameButton" type="Button" parent="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=28842471]
+custom_minimum_size = Vector2(432, 134)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 theme = ExtResource("3_0p1xs")
 theme_override_styles/normal = ExtResource("4_78lhs")
 text = "Enter Anghu"
 
-[node name="Button2" type="Button" parent="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=2138421909]
+[node name="Back" type="Button" parent="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=2138421909]
+custom_minimum_size = Vector2(432, 134)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 theme = ExtResource("3_0p1xs")
 theme_override_styles/normal = ExtResource("4_78lhs")
 text = "Back"
+
+[node name="CardInfoPanel" parent="." unique_id=669207405 instance=ExtResource("12_0p1xs")]
+unique_name_in_owner = true
+visible = false
+z_index = 5
+
+[connection signal="gui_input" from="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/Margin/General" to="." method="_on_general_gui_input"]
+[connection signal="pressed" from="SelectCause/VBoxContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]

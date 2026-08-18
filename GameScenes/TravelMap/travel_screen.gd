@@ -20,6 +20,10 @@ var turn = 0:
 		turn = value
 		%TurnLabel.text = turn
 
+## Called before _ready.
+func setup(myMap: Map):
+	map = myMap
+
 func _ready():
 	for i:Marker2D in map.markers:
 		event_positions_events[i.global_position] = null
@@ -34,10 +38,7 @@ func _ready():
 func process_turn():
 	for i:ZoneNode in %MapNodes.get_children():
 		i.process_turn()
-	if turn == 0 or turn % 4 == 0:
-		load_scenario()
-	if turn % 2 == 0:
-		create_random_battle()
+	load_scenario()
 
 func increment_turn():
 	turn += 1

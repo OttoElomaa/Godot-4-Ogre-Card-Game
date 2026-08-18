@@ -55,11 +55,7 @@ func generatePreview(icon:ZoneBattleIcon, isGenerated:bool):
 			container.insert_card(cardScene)
 			container.infoPanel = cardInfoPanel
 	
-	for card:Card in GameInfo.playerDeckCards:
-		var container:BestiaryContainer = BestiaryContainerScene.instantiate()
-		playerCardsHolder.add_child(container)
-		container.display_card(card)
-		container.infoPanel = cardInfoPanel
+	%PlayerCards.insert_army(GameInfo.playerDeckCards, %CardInfoPanel)
 	
 	%PChampionContainer.insert_champion(GameInfo.current_champion)
 	%EChampContainer.insert_champion(GameInfo.enemyChampion)
@@ -82,7 +78,12 @@ func cancelButtonPressed() -> void:
 
 func fightButtonPressed() -> void:
 	
-	MyTools.setupAndOpenDeckEdit(battleInfoIcon.board)
+#	MyTools.setupAndOpenDeckEdit(battleInfoIcon.board)
+	SceneSwitcher.switchToNewScene(battleInfoIcon.board)
 	battleInfoIcon.resolve()
 	
 	queue_free()
+
+
+func _on_adjust_deck_pressed():
+	MyTools.openDeckEdit()

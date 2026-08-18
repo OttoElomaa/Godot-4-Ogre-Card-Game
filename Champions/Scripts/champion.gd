@@ -7,12 +7,14 @@ var custom_window:CustomWindow
 var level = 1
 
 var usable_actions:Array = []
+var all_actions:Array = []
 
 func _ready() -> void:
 	for child in get_children():
 		if child is ActionsNodeChamp:
 			for i in child.get_children():
-				if i is OnCastTrigger:
+				all_actions.append(i)
+				if i is OnCastTrigger and child.level > 0:
 					usable_actions.append(child)
 					break
 		if child is CustomWindow:

@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://cjwurlo7haie7"]
 
 [sub_resource type="GDScript" id="GDScript_r2wa1"]
-script/source = "extends Node2D
+script/source = "@icon(\"res://Art/icons/16x16/sound.png\")
 
-@export var BGM = AudioStreamOggVorbis
+extends Node2D
+
+@export var BGM = AudioStream
 
 func _ready():
-	$AudioStreamPlayer.stream = BGM
-	$AudioStreamPlayer.play()
+	MusicBus.play(BGM)
 "
 
 [node name="Audio" type="Node2D" unique_id=576542653]

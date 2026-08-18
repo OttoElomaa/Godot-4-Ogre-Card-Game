@@ -38,7 +38,8 @@ cardName = "Blast"
 cardType = 1
 subTypeStr = "Spell"
 group = 1
-flavorText = "O Janins! Visit immolation on our enemies!"
+flavorText = "May Ataric flame judge your sins!"
+manaCost = 2
 alt_card_name_1 = "Blaze"
 alt_actions_node_1 = NodePath("Actions2")
 alt_mana_cost_1 = 3
@@ -77,3 +78,6 @@ to_display = Array[Resource]([ExtResource("9_2kp1v"), ExtResource("10_j7fkx")])
 
 [node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("8_q4hcx")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "2"

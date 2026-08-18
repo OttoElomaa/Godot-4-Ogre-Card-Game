@@ -8,6 +8,8 @@
 
 [node name="Skill_1" type="HBoxContainer" unique_id=1231671677]
 custom_minimum_size = Vector2(0, 40)
+offset_right = 495.0
+offset_bottom = 66.0
 script = ExtResource("1_ht37o")
 
 [node name="SkillBorder" type="TextureRect" parent="." unique_id=953554711]
@@ -39,14 +41,14 @@ offset_bottom = 61.0
 texture = ExtResource("3_u35y2")
 expand_mode = 1
 
-[node name="Cost" type="Label" parent="SkillBorder/SkillTexture" unique_id=262093771]
+[node name="Cost" type="Label" parent="SkillBorder/SkillTexture/ManaCostTexture" unique_id=262093771]
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 0
-offset_left = 29.0
-offset_top = 30.0
-offset_right = 69.0
-offset_bottom = 53.0
+offset_left = 1.0
+offset_top = 8.0
+offset_right = 41.0
+offset_bottom = 31.0
 theme = ExtResource("4_jkb7v")
 text = "2"
 horizontal_alignment = 1
@@ -55,10 +57,22 @@ vertical_alignment = 1
 [node name="ActionName" type="RichTextLabel" parent="." unique_id=60054506]
 unique_name_in_owner = true
 z_index = 1
+custom_minimum_size = Vector2(200, 66)
 layout_mode = 2
 theme = ExtResource("4_jkb7v")
 bbcode_enabled = true
-text = "Big Boom"
+text = "Song of Nourishment"
 fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="." unique_id=1873830354]
+visible = false
+layout_mode = 2
+
+[node name="SkillDescription" type="RichTextLabel" parent="." unique_id=1116223176]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+fit_content = true
