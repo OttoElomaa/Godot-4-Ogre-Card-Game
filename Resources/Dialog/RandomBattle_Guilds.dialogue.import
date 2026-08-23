@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://cyondv2qrbea0"
+path="res://.godot/imported/RandomBattle_Guilds.dialogue-a8d2fd85eacf750007d66c94754ea4ae.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/RandomBattle_Guilds.dialogue"
+dest_files=["res://.godot/imported/RandomBattle_Guilds.dialogue-a8d2fd85eacf750007d66c94754ea4ae.tres"]
+
+[params]
+
+defaults=true

@@ -1,8 +1,8 @@
 ~ start
 The King’s Men are brought down. The slaves scatter and hide, you do not pursue them. Exultant Vinemen dance and chant all around you, their once-rigid limbs swinging everywhere. Eventually, their dance slows, and one Vineman approaches you.
-do SignalBus.disp_card.emit('Vineman Elder')
-“Ah, I thank you, kind one, for the service you rendered us – we were, in truth, plenty scared when we could hear all of a sudden, and heard our kin calling. These men – they reap and rend us with sickles, do they not? It is better then that they are gone.
-We have heard the call of home, and of our distant, orphaned kin. The Mangrove Sun… how could we have so soundly slept! Know this, o kind one: we Vinemen fight with you now, one with the vengeance, for the joy of sight and hearing.”
+do SignalBus.disp_card.emit('Jade Vineman')
+“Ah, I thank you, kind one, for the service you rendered us – an act more than worthy for one such as you. We slept in slavery to these men who reaped and rent us with sickles. No longer! We heard the long song of our kin, and took our freedom at last... Thanks to you as well.
+We have heard the call of home, and of our distant, orphaned kin. The Mangrove Sun… how could we have so soundly slept! Rejoice! We newly-born Vinemen shall fight alongside you, one with the vengeance, for the joy of our sight and hearing.”
 do GameInfo.add_alliance(Card.Group.VINEMEN)
 
 => END

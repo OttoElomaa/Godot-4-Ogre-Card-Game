@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://cfrg3ow7cftxj"
+path="res://.godot/imported/RandomBattle_Robbers.dialogue-9110d80e2f1026b68c66d921bf790cef.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/RandomBattle_Robbers.dialogue"
+dest_files=["res://.godot/imported/RandomBattle_Robbers.dialogue-9110d80e2f1026b68c66d921bf790cef.tres"]
+
+[params]
+
+defaults=true

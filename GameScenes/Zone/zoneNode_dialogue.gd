@@ -7,7 +7,7 @@ func _on_panel_container_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("LMB"):
 			travel_screen.toggleUI(false)
-			DialogueManager.show_dialogue_balloon(dialogue)
+			DialogueManager.show_dialogue_balloon(dialogue, "", [self])
 			await DialogueManager.dialogue_ended
 			resolve()
 			print('Travel Screen: resolved ', name)

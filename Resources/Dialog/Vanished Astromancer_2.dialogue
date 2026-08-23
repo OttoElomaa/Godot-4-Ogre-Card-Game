@@ -12,12 +12,9 @@ You approach an overgrown mansion, once belonging to a highly-esteemed kingling,
 	
 	do SignalBus.disp_card.emit('Magaal')
 	
-	if GameInfo.heroName == 'General':
-		"A kingling!" he sneers. "I will bring your heads to Umug!"
-		
 	else:
 		~ neutral
-		"I don't recognize you," says he. "You don't look like a kingling. What is your pleasure?"
+		"I don't recognize you," says he. "What is your pleasure?"
 	
 		- Ask him about his people
 			"We are but wandering warrior-priests. We answer to Umug, the martyr-god."

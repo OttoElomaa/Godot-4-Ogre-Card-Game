@@ -6,9 +6,9 @@ In the middle of a temple square, there stands a tall stone likeness of a woman,
 A jackal-headed man approaches you, you cannot tell from where. "Ah, the old Archpriest found it, I see. Why, I expected no less of a reaction."
 
 ~ sculptor
-#if GameInfo.heroName == 'General':
+if GameInfo.heroName == 'General':
 	"Why, are you not of the King's Guard? You are just in time for what is shaping up to be a riot, unless quelled."
-#else:
+else:
 	"What are the chances that you would want to know the meaning of this, o traveller? I can regale you if so."
 
 - Ask what is happening

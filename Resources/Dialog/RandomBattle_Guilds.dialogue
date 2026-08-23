@@ -1,0 +1,14 @@
+~ start
+The Guilds of Ask'lan ply more than just arts and crafts -- their clandestine ways offer freedom to traffic forbidden goods, such as poisons, medicines, weapons, tools for preparing the dead and even war golems. Such groups are known as the Amenti -- and you have received news of one such group. You may choose to trade with them, or to take their goods by force.
+
+- Attack them
+
+- Trade with them
+
+if GameInfo.playerAlliances.has(Card.Group.GUILDS)
+	Your name is widely known within the Amenti, and you are offered the best deals.
+	=> END
+
+- Leave them be
+
+=> END

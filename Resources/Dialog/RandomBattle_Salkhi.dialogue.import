@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://sgf0kg6pd6"
+path="res://.godot/imported/RandomBattle_Salkhi.dialogue-07128cff957b7d2f30c974bf58d6521b.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/RandomBattle_Salkhi.dialogue"
+dest_files=["res://.godot/imported/RandomBattle_Salkhi.dialogue-07128cff957b7d2f30c974bf58d6521b.tres"]
+
+[params]
+
+defaults=true

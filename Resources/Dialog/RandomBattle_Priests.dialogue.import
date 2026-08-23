@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://doth2kgtdacx0"
+path="res://.godot/imported/RandomBattle_Priests.dialogue-6f5dbf78ad90f279862ce3a8c8d820f3.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/RandomBattle_Priests.dialogue"
+dest_files=["res://.godot/imported/RandomBattle_Priests.dialogue-6f5dbf78ad90f279862ce3a8c8d820f3.tres"]
+
+[params]
+
+defaults=true

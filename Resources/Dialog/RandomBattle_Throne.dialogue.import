@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dngsnfrxklwjr"
+path="res://.godot/imported/RandomBattle_Throne.dialogue-94fa7cbabcab9273508e2ad705d02bf9.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/RandomBattle_Throne.dialogue"
+dest_files=["res://.godot/imported/RandomBattle_Throne.dialogue-94fa7cbabcab9273508e2ad705d02bf9.tres"]
+
+[params]
+
+defaults=true

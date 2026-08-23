@@ -32,13 +32,13 @@ SceneSwitcher="*res://GameAutoloads/SceneSwitcher.tscn"
 Cheat="*res://GameAutoloads/cheat_menu.tscn"
 SignalBus="*res://GameAutoloads/SignalBus.gd"
 CardChecks="*res://GameAutoloads/CardChecks.tscn"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DataLoader="*uid://x5hp1ama1l5h"
 EffectAnimationQueue="*res://GameAutoloads/EffectAnimationQueue.tscn"
 CardAnimationQueue="*res://GameAutoloads/CardAnimationQueue.tscn"
 LevelLoader="*uid://cyon8t1pwfw2b"
 Options="*uid://bdfp88tc8xnig"
 MusicBus="*uid://bxrc5yvd44yda"
+DialogueManager="*uid://c3rodes2l3gxb"
 
 [debug]
 
@@ -100,7 +100,7 @@ CheatButton={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Resources/Dialog/Vineyards_1.dialogue", "res://Resources/Dialog/Vineyards_Win_1.dialogue", "res://Resources/Dialog/Vineyards_Win_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_1.dialogue", "res://Resources/Dialog/Vanished Astromancer_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_Win.dialogue", "res://Resources/Dialog/Image of Contention_1.dialogue", "res://Resources/Dialog/Image of Contention_Win_1.dialogue", "res://Resources/Dialog/Image of Contention_Win_2.dialogue", "res://Resources/Dialog/General_Start.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Resources/Dialog/Vineyards_1.dialogue", "res://Resources/Dialog/Vineyards_Win_1.dialogue", "res://Resources/Dialog/Vineyards_Win_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_1.dialogue", "res://Resources/Dialog/Vanished Astromancer_2.dialogue", "res://Resources/Dialog/Vanished Astromancer_Win.dialogue", "res://Resources/Dialog/Image of Contention_1.dialogue", "res://Resources/Dialog/Image of Contention_Win_1.dialogue", "res://Resources/Dialog/Image of Contention_Win_2.dialogue", "res://Resources/Dialog/General_Start.dialogue", "res://Resources/Dialog/RandomBattle_Astromancers.dialogue", "res://Resources/Dialog/RandomBattle_Guilds.dialogue", "res://Resources/Dialog/RandomBattle_Priests.dialogue", "res://Resources/Dialog/RandomBattle_Robbers.dialogue", "res://Resources/Dialog/RandomBattle_Salkhi.dialogue", "res://Resources/Dialog/RandomBattle_SeaPeoples.dialogue", "res://Resources/Dialog/RandomBattle_Throne.dialogue", "res://Resources/Dialog/RandomBattle_Umugites.dialogue")
 
 [layer_names]
 

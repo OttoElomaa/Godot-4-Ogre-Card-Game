@@ -34,7 +34,17 @@ func setup(zone:Node):
 	travel_screen = zone
 	toggleHoverInfo(false)
 
+func get_siblings() -> Array[ZoneNode]:
+	var array: Array[ZoneNode] = []
+	for child in get_parent().get_children():
+		array.append(child)
+	return array
 
+func node(n:ZoneNode):
+	if get_siblings().has(n):
+		return n
+	else:
+		return null
 
 func _on_area_2d_input_event(viewport, event:InputEvent, shape_idx):
 	

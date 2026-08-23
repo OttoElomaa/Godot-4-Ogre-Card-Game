@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://bptuo872ssli2"
+path="res://.godot/imported/RandomBattle_Astromancers.dialogue-a2ed23243207c4af1a41c05c8dc46140.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/RandomBattle_Astromancers.dialogue"
+dest_files=["res://.godot/imported/RandomBattle_Astromancers.dialogue-a2ed23243207c4af1a41c05c8dc46140.tres"]
+
+[params]
+
+defaults=true

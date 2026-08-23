@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://lwpg3jgtu33b"
+path="res://.godot/imported/RandomBattle_Umugites.dialogue-f3cbe133e13ed8fa08ce2732027d562c.tres"
+
+[deps]
+
+source_file="res://Resources/Dialog/RandomBattle_Umugites.dialogue"
+dest_files=["res://.godot/imported/RandomBattle_Umugites.dialogue-f3cbe133e13ed8fa08ce2732027d562c.tres"]
+
+[params]
+
+defaults=true
