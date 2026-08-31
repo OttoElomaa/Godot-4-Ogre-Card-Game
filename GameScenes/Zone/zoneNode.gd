@@ -4,12 +4,24 @@ class_name ZoneNode
 var unlocked = false
 var resolved = false
 var travel_screen:TravelScreen = null
+var myScenario: String = ''
+@export var input_active = true:
+	set(value):
+		input_active = value
+		if %PanelContainer:
+			if input_active:
+				%PanelContainer.mouse_filter = Control.MouseFilter.MOUSE_FILTER_STOP
+			else:
+				%PanelContainer.mouse_filter = Control.MouseFilter.MOUSE_FILTER_IGNORE
 
 ## How many turns this node will linger. Once its duration is reached, it will be nuked (removed).
 @export var duration:int = 1:
 	set(value):
 		duration = value
 		print('changed duration to ', duration)
+
+## If true, this node will never time out. Elite nodes don't time out even if this is off.
+@export var no_timeout = false
 var time_elapsed = 0
 
 @export var node_name = ''
@@ -19,20 +31,29 @@ var time_elapsed = 0
 
 ## What nodes will be unlocked after this one is resolved. Can assign ZoneNode values.
 @export var unlock_on_resolve: Array[Node] 
-## What nodes will be unlocked after this one is resolved. Can assign String values; unlocks nodes with that node_name.
-@export var unlockOnResolveStrings: Array[String]
+
+## What nodes will be unlocked if this one is allowed to time out. Assign ZoneNodes.
+@export var unlock_on_timeout: Array[Node]
+
+## If true, resolving this node will not advance a turn.
+@export var free_action = false
+
+## If true, new nodes won't appear before this one is resolved; elite nodes also do not time out.
+@export var elite_node = false
 
 func _ready():
 	unlocked = start_unlocked
-	if unlocked:
-		show()
-	else:
+	if not start_unlocked:
 		hide()
-	update_state()
+	if unlocked:
+		unlock()
 
-func setup(zone:Node):
+func setup(zone:Node, scenario:String):
 	travel_screen = zone
+	myScenario = scenario
+	unlocked = start_unlocked
 	toggleHoverInfo(false)
+	travel_screen.updateZoneVisuals()
 
 func get_siblings() -> Array[ZoneNode]:
 	var array: Array[ZoneNode] = []
@@ -40,24 +61,12 @@ func get_siblings() -> Array[ZoneNode]:
 		array.append(child)
 	return array
 
-func node(n:ZoneNode):
-	if get_siblings().has(n):
-		return n
-	else:
-		return null
-
-func _on_area_2d_input_event(viewport, event:InputEvent, shape_idx):
-	
-	if event.is_action_pressed("LMB"):
-		if not insta_resolve():  #### CHEAT MENU - SKIP NODE GAMEPLAY
-			handleClick()        #### PROCEED WITH NODE GAMEPLAY
-
-
+func node(n_name:String):
+	return travel_screen.get_node_from_same_scenario(myScenario, n_name)
 
 #### EMPTY: OVERWRITTEN IN INHERITED SCRIPTS
 func handleClick():
 	pass
-	
 	
 #### EMPTY: OVERWRITTEN IN INHERITED SCRIPTS
 func update_state():
@@ -68,9 +77,19 @@ func update_state():
 ### when the conversation within it is completed.
 func resolve():
 	resolved = true
+	print('Resolved node ', name)
 	unlock_connected()
-	queue_free()
-
+	
+	if not free_action:
+		travel_screen.increment_turn()
+	else:
+		travel_screen.updateZoneVisuals()
+	
+### If a node is freed due to running out of time, it triggers its timeout function.
+func timeout():
+	print(name, ' timed out')
+	for n:ZoneNode in unlock_on_timeout:
+		n.unlock()
 
 ### If 'insta-resolve' is checked in the Cheat menu, this will resolve the node
 ### when it's run.
@@ -84,7 +103,6 @@ func insta_resolve() -> bool:
 	return false
 
 
-
 func getNodeName():
 	var stringToCheck = node_name
 	if has_method("getBoardName"):
@@ -93,24 +111,27 @@ func getNodeName():
 			stringToCheck = battleName
 	return stringToCheck
 
+func can_timeout() -> bool:
+	if elite_node:
+		return false
+	if no_timeout:
+		return false
+	return true
+
 func process_turn():
-	time_elapsed += 1
+	if can_timeout():
+		time_elapsed += 1
 	if time_elapsed >= duration:
+		timeout()
 		queue_free()
-	
-func _on_area_2d_mouse_entered() -> void:
-	toggleHoverInfo(true)
-
-
-func _on_area_2d_mouse_exited() -> void:
-	toggleHoverInfo(false)
 
 func toggleHoverInfo(enable:bool):
 	if enable:
 		$InfoPanel.show()
 		$InfoPanel.z_index = 1
 		$InfoPanel/HBox/NameLabel.text = getNodeName()
-		$InfoPanel/HBox/DescLabel.text = str(node_comments, '\nWill disappear after ', duration - time_elapsed, ' turns')
+		if can_timeout():
+			$InfoPanel/HBox/DescLabel.text = str(node_comments, '\nWill disappear after ', duration - time_elapsed, ' turns')
 	else:
 		$InfoPanel.hide()
 		$InfoPanel.z_index = 0
@@ -121,11 +142,31 @@ func showCompletionState():
 func unlock_connected():
 	for n:ZoneNode in unlock_on_resolve:
 		n.unlock()
-	for n:String in unlockOnResolveStrings:
-		travel_screen.unlockNode(n)
 
 
 ### A Zone Node is visible when unlocked. Nodes can be unlocked at the start,
 ### by resolving other nodes, or by making right dialogue choices.
 func unlock():
-	show()
+	print('Unlocked ZoneNode ', self)
+	unlocked = true
+
+
+func _on_panel_container_mouse_entered():
+	toggleHoverInfo(true)
+
+func _on_panel_container_mouse_exited():
+	toggleHoverInfo(false)
+
+
+func _on_panel_container_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_action_pressed("LMB"):
+			handleClick()
+
+func AnimateUnlock():
+	%AnimationPlayer.play("unlock")
+	await %AnimationPlayer.animation_finished
+	
+func AnimateResolve():
+	%AnimationPlayer.play("resolve")
+	await %AnimationPlayer.animation_finished

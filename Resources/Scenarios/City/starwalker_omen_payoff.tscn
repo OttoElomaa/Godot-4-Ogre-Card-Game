@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://brksam31mot7w"]
+
+[ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/scenario.tscn" id="1_bfudg"]
+[ext_resource type="PackedScene" uid="uid://df57edgdrwbbe" path="res://GameScenes/TravelMap/map_askelan.tscn" id="2_r6b35"]
+[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="3_jyaby"]
+[ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="4_oxyt4"]
+[ext_resource type="Texture2D" uid="uid://bxb5pb37cma0m" path="res://Art/Portraits/portrait-hero-01.png" id="5_eoxgg"]
+
+[node name="StarwalkerOmenPayoff" unique_id=538685740 instance=ExtResource("1_bfudg")]
+map_scene = ExtResource("2_r6b35")
+random_position = true
+required_flags = Array[String](["Starwalker Omen"])
+
+[node name="StarwalkerBattle" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="0" unique_id=1158483326 instance=ExtResource("3_jyaby")]
+position = Vector2(-563, -402)
+board_name = "Starwalker Ambush"
+game_board = ExtResource("4_oxyt4")
+board_comments = "The Starwalkers can put your army to sleep and destroy you gently as they invade your dreams."
+deck_cards = Dictionary[String, int]({
+"Blast": 3,
+"Dreaming Portent": 2,
+"Starwalker Beast": 4,
+"Starwalker Scout": 3
+})
+art = ExtResource("5_eoxgg")
+champ_name = "Starwalker"
+health = 20
+node_name = "A Visit from the Stars"
+node_comments = "Face your failings!"
+start_unlocked = true
+elite_node = true
+
+[node name="MapAskelan" parent="." index="2" unique_id=2040580641 instance=ExtResource("2_r6b35")]
+
+[editable path="MapAskelan"]

@@ -104,5 +104,5 @@ func _on_endless_button_pressed():
 func _on_start_game_button_pressed():
 	bestiaryVisible = false
 	var newZone:Node = CharacterSelect.instantiate()
-	SceneSwitcher.switchToNewScene(newZone)
+	SceneSwitcher.switchToNewScene(newZone, SceneSwitcher.TransitionTypes.SHUTTER)
 	#get_tree().change_scene_to_packed(ZoneScene)

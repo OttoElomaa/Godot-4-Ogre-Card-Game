@@ -12,6 +12,132 @@
 [ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="9_gmchg"]
 [ext_resource type="Script" uid="uid://b3xrqok3dl2f2" path="res://GameScenes/CardDisplayContainers/army_container.gd" id="10_i3hud"]
 
+[sub_resource type="Animation" id="Animation_i3hud"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1670, 939)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:custom_minimum_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/MainPanel/Margin:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bj07x"]
+resource_name = "fold"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1670, 939), Vector2(1670, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/MainPanel/Margin:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1670, 939), Vector2(1670, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aq3cc"]
+resource_name = "unfold"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1670, 0), Vector2(1670, 939)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:custom_minimum_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1670, 0), Vector2(1670, 939)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/MainPanel/Margin:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gpr6j"]
+_data = {
+&"RESET": SubResource("Animation_i3hud"),
+&"fold": SubResource("Animation_bj07x"),
+&"unfold": SubResource("Animation_aq3cc")
+}
+
 [node name="PreBattleWindow" type="CanvasLayer" unique_id=1599976500]
 script = ExtResource("1_2waxm")
 
@@ -26,6 +152,9 @@ size_flags_vertical = 3
 color = Color(0.105882354, 0.105882354, 0.105882354, 0.5176471)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1890195880]
+top_level = true
+clip_children = 2
+propagate_maximum_size = false
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 1690.0
@@ -197,6 +326,10 @@ text = "Cancel"
 unique_name_in_owner = true
 z_index = 3
 position = Vector2(1886, 8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=889117437]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_gpr6j")
 
 [connection signal="pressed" from="MarginContainer/MainPanel/Margin/VBoxContainer/MainHBox/Left/VBox/HBoxContainer/AdjustDeck" to="." method="_on_adjust_deck_pressed"]
 [connection signal="pressed" from="MarginContainer/MainPanel/Margin/VBoxContainer/ButtonsHBox/FightButton" to="." method="fightButtonPressed"]

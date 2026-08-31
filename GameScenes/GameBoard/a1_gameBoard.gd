@@ -453,8 +453,7 @@ func lose_champion():
 
 func buttonPressedEndMatch() -> void:
 	if GameInfo.currentZone:
-		GameInfo.currentZone.visualsUpdateNeeded = true
-		SceneSwitcher.switchToNewScene(GameInfo.currentZone)
+		SceneSwitcher.switchToNewScene(GameInfo.currentZone, SceneSwitcher.TransitionTypes.CITY_STYLE)
 	else:
 		SceneSwitcher.returnToMainMenu()
 

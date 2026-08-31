@@ -17,6 +17,13 @@
 [node name="Character Select" type="CanvasLayer" unique_id=1191508708]
 script = ExtResource("1_gheqn")
 
+[node name="AnimatedContainer" parent="." unique_id=334304769 instance=ExtResource("2_gheqn")]
+visible = false
+offset_left = 55.0
+offset_top = 376.0
+offset_right = 55.58
+offset_bottom = 376.442
+
 [node name="SelectCause" type="MarginContainer" parent="." unique_id=2092295341]
 unique_name_in_owner = true
 anchors_preset = 15
@@ -62,7 +69,7 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_right = 30
 
-[node name="General" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/Margin" unique_id=334304769 instance=ExtResource("2_gheqn")]
+[node name="General" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/Margin" unique_id=1766100251 instance=ExtResource("2_gheqn")]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 0
@@ -73,7 +80,8 @@ layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="PanelContainer2" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/MarginContainer2" unique_id=688402410 instance=ExtResource("2_gheqn")]
+[node name="Prophet" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/MarginContainer2" unique_id=688402410 instance=ExtResource("2_gheqn")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters" unique_id=1984124226]
@@ -81,7 +89,8 @@ layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="PanelContainer3" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/MarginContainer3" unique_id=1127989967 instance=ExtResource("2_gheqn")]
+[node name="Hero" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/MarginContainer3" unique_id=1127989967 instance=ExtResource("2_gheqn")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="MarginContainer4" type="MarginContainer" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters" unique_id=486316971]
@@ -89,10 +98,11 @@ layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="PanelContainer3" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/MarginContainer4" unique_id=593714983 instance=ExtResource("2_gheqn")]
+[node name="Avatar" parent="SelectCause/VBoxContainer2/VBoxContainer/PlayableCharacters/MarginContainer4" unique_id=593714983 instance=ExtResource("2_gheqn")]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Button" type="Button" parent="SelectCause/VBoxContainer2" unique_id=235539337]
+[node name="Button" type="Button" parent="SelectCause/VBoxContainer2" unique_id=235539337 groups=["buttons"]]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -357,7 +367,7 @@ show_description = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="StartGameButton" type="Button" parent="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=28842471]
+[node name="StartGameButton" type="Button" parent="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=28842471 groups=["buttons"]]
 custom_minimum_size = Vector2(432, 134)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -366,7 +376,7 @@ theme = ExtResource("3_0p1xs")
 theme_override_styles/normal = ExtResource("4_78lhs")
 text = "Enter Anghu"
 
-[node name="Back" type="Button" parent="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=2138421909]
+[node name="Back" type="Button" parent="CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=2138421909 groups=["buttons"]]
 custom_minimum_size = Vector2(432, 134)
 layout_mode = 2
 size_flags_horizontal = 3

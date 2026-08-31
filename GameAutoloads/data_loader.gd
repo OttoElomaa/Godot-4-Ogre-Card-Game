@@ -23,7 +23,7 @@ var champions_by_name:Dictionary[String, Champion] = {}
 
 var animations_by_filename:Dictionary[String, PackedScene] = {}
 
-var scenarios_by_location:Dictionary[PackedScene, String] = {}
+var scenarios_by_location:Dictionary[Scenario, String] = {}
 
 const boards_by_name:Dictionary[String, PackedScene] = {
 	'Default': preload('uid://be8n1sbdblr6g')
@@ -33,7 +33,6 @@ const boards_by_name:Dictionary[String, PackedScene] = {
 const materials_by_name:Dictionary[String, Material] = {
 	'destroy_card': preload("res://Resources/Shaders/destroy_card_material.tres")
 }
-
 
 ## Contains important terms such as 'inflict' or 'battle art' and their explanations,
 ## found in the terms.json file.
@@ -121,7 +120,7 @@ func load_scenarios():
 	var path := 'res://Resources/Scenarios/City/'
 	var files := DirAccess.get_files_at(path)
 	for file:String in files:
-		scenarios_by_location[load(str(path, file)) as PackedScene] = 'City'
+		scenarios_by_location[load(str(path, file)).instantiate() as Scenario] = 'City'
 		
 ## Fills out a dictionary with loaded files from a chosen folder, in a style of filename: resource.
 func load_scenes_from_directory(path:String, dict:Dictionary):

@@ -19,3 +19,7 @@ func insert_champion(champ:Champion):
 	champion = champ
 	%ChampionTexture.texture = champion.cardArt
 	%ChampionName.text = champion.cardName
+
+func insert_image(image:Texture, text:String = ''):
+	%ChampionTexture.texture = image
+	%ChampionName.text = text

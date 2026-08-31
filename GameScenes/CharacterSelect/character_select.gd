@@ -26,8 +26,15 @@ func _ready():
 	%General.insert_champion(DataLoader.champions_by_name['General'])
 
 func toggle_select_cause():
-	%SelectCause.show()
+	await MyTools.tweenFadeOut(%CharacterPreview, 1.5) 
 	%CharacterPreview.hide()
+	%SelectCause.show()
+	%General.show()
+	%Prophet.show()
+	%Hero.show()
+	%Avatar.show()
+	await MyTools.tweenFadeIn(%SelectCause, 1.5) 
+
 
 
 
@@ -54,12 +61,10 @@ func toggle_character_preview(champ:String):
 			new_cont.remove_topmost_card()
 		new_cont.infoPanel = %CardInfoPanel
 	
-	var action_number = cause_champ.all_actions.size()
-	
 	for child in %ChampSkillContainer.get_children():
 		child.queue_free()
 	
-	for i in cause_champ.usable_actions:
+	for i in cause_champ.all_actions:
 		var node = champ_skill_container.instantiate() as ChampSkillContainer
 		await get_tree().process_frame
 		node.setup(i)
@@ -84,19 +89,18 @@ func _on_start_game_button_pressed():
 	new_trav_screen.setup(cause['map'].instantiate() as Map)
 	
 	## Animate UI fade out and start intro.
-	var tween = get_tree().create_tween()
 	$CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer/StartGameButton.disabled = true
 	$CharacterPreview/MarginContainer2/VBoxContainer/HBoxContainer/Back.disabled = true
 	MusicBus.play(cause['bgm'])
 	
-	tween.tween_property(%CharacterPreview, 'modulate', Color(0.0, 0.0, 0.0, 0.0), 3.0)
-	await tween.finished
+	SceneSwitcher.disable_buttons()
+	await MyTools.tweenFadeOut(%CharacterPreview, 3.0)
 	%CharacterPreview.hide()
 	
 	DialogueManager.show_dialogue_balloon(Causes[chosen_cause]['starting_dialogue'])
 	await DialogueManager.dialogue_ended
 	
-	SceneSwitcher.switchToNewScene(new_trav_screen)
+	SceneSwitcher.switchToNewScene(new_trav_screen, SceneSwitcher.TransitionTypes.CITY_STYLE)
 
 func _on_back_pressed():
 	toggle_select_cause()
@@ -104,12 +108,27 @@ func _on_back_pressed():
 
 func _on_button_pressed():
 	
-	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/MainMenu/MainMenu.tscn")
+	SceneSwitcher.switchToNewSceneFromFile("res://GameScenes/MainMenu/MainMenu.tscn", SceneSwitcher.TransitionTypes.SHUTTER)
 
+
+func animate_character_chosen(chosen_char: CanvasItem):
+	var starting_pos = chosen_char.global_position
+	chosen_char.hide()
+	MyTools.tweenFadeOut(%SelectCause, 1.5)
+	$AnimatedContainer.position = starting_pos
+	$AnimatedContainer.insert_champion(Causes[chosen_cause]['champion'])
+	$AnimatedContainer.show()
+	var tween = get_tree().create_tween()
+	tween.tween_property($AnimatedContainer, 'position', Vector2(55, 376), 1.5).set_ease(Tween.EASE_OUT)
+	await tween.finished
+	toggle_character_preview(chosen_cause)
+	await MyTools.tweenFadeIn(%CharacterPreview, 1.5)
+	$AnimatedContainer.hide()
 
 func _on_general_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("LMB"):
 			
-			toggle_character_preview('City')
 			chosen_cause = 'City'
+			await animate_character_chosen(%General)
+			

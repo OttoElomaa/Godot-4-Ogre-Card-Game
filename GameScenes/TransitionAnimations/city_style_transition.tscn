@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d1qdaj85ukqwy"]
+
+[ext_resource type="Script" uid="uid://b6r3jhuj61fro" path="res://GameScenes/TransitionAnimations/Scripts/transition_animation_city_style.gd" id="1_am4hq"]
+
+[node name="TransitionAnimation" type="CanvasLayer" unique_id=1226747901]
+layer = 999
+script = ExtResource("1_am4hq")
+shutter_time = 1.5
+wait_time = 0.3
+metadata/_custom_type_script = "uid://t14lq5486w2"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=182665388]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.90588236, 0.7764706, 0.6039216, 1)

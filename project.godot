@@ -70,6 +70,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 cardManager=""
 gameboard=""
+buttons="All Buttons go into this group"
 
 [gui]
 

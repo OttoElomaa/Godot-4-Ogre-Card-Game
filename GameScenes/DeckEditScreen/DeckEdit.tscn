@@ -16,12 +16,75 @@
 [ext_resource type="PackedScene" uid="uid://d4hd17vynaptf" path="res://GameScenes/CardDisplayContainers/CardInfoPanelFloaty.tscn" id="14_wnc1h"]
 [ext_resource type="AudioStream" uid="uid://bwy5cuxuto872" path="res://Audio/SE/Card-Played.wav" id="15_wnc1h"]
 
+[sub_resource type="Animation" id="Animation_wnc1h"]
+resource_name = "fold_2"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel2:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.6372803, 1),
+"update": 0,
+"values": [Vector2(1740, 979), Vector2(1740, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel2/MarginContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_v2u3k"]
+resource_name = "unfold_2"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel2:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.75785834, 0.49999997),
+"update": 0,
+"values": [Vector2(1740, 0), Vector2(1740, 979)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel2/MarginContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5yocu"]
+_data = {
+&"fold_2": SubResource("Animation_wnc1h"),
+&"unfold_2": SubResource("Animation_v2u3k")
+}
+
 [node name="DeckEdit" type="CanvasLayer" unique_id=313935886]
 layer = 100
 script = ExtResource("1_2aanx")
 
 [node name="Panel2" type="Panel" parent="." unique_id=939798735]
 show_behind_parent = true
+clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -238,6 +301,10 @@ unique_name_in_owner = true
 stream = ExtResource("15_wnc1h")
 volume_db = 10.0
 bus = &"SE"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1021903980]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_5yocu")
 
 [connection signal="button_up" from="Panel2/MarginContainer/HBoxContainer/VBoxContainer3/Buttons/VBox/Proceed/Button" to="." method="_on_proceed_button_button_up"]
 [connection signal="button_up" from="Panel2/MarginContainer/HBoxContainer/VBoxContainer3/Buttons/VBox/BackToWorld/Button" to="." method="_button_up_back_to_world"]

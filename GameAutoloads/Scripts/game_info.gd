@@ -41,11 +41,11 @@ var playerOwnedChampions: Array[Champion] = []
 ## members of this array.
 var playerAlliances: Array[Card.Group] = []
 
-
-
 ## Cards available for purchase based on player alliances.
 var playerRecruitmentPool := []
 
+## Add string values here from dialogue; flags last for a run and may be required for certain events to happen.
+var flags: Array[String] = []
 
 ######################################################
 #### ZONE STATE
@@ -85,3 +85,6 @@ func remove_alliance(alliance:Card.Group):
 	var group_array = DataLoader.cards_by_group[alliance]
 	for card:Card in group_array:
 		playerRecruitmentPool.erase(card)
+
+func has_flag(flag:String):
+	return flags.has(flag)

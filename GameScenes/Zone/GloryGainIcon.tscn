@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dbwdtx171654k"]
+
+[ext_resource type="PackedScene" uid="uid://nfa3rqo1oyuu" path="res://GameScenes/Zone/zoneNodeBase.tscn" id="1_jqnre"]
+[ext_resource type="Script" uid="uid://dwdeoitvv4350" path="res://GameScenes/Zone/glory_gain_node.gd" id="2_oww2m"]
+[ext_resource type="Texture2D" uid="uid://btfn7s0yo33kt" path="res://Art/icons/16x16/coins.png" id="3_xbfd6"]
+
+[node name="GloryGainNode" unique_id=1158483326 instance=ExtResource("1_jqnre")]
+script = ExtResource("2_oww2m")
+glory = 0
+duration = 2
+node_name = "A Glorious Victory"
+free_action = true
+
+[node name="Icon" parent="PanelContainer" parent_id_path=PackedInt32Array(1253845527) index="0" unique_id=1553335485]
+texture = ExtResource("3_xbfd6")

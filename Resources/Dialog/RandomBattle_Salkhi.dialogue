@@ -1,8 +1,10 @@
 ~ start
-The braying of beasts and the holler of the steppe-men can be heard for miles. They'd appeared suddenly, no grass trampled behind them. It is unknown what brought them here, to Ask'lan -- but their beasts graze on [Balhadad's temenoi|a nobleman's pastures|sanctified grounds]. The nomads, seemingly unaware of the concept of owned lands, are nonchalant.
+The braying of beasts and the holler of the steppe-men can be heard for miles. They'd appeared suddenly, no grass trampled behind them. It is unknown what brought them here, to Ask'lan -- but their beasts graze on [[Balhadad's temenoi|a nobleman's pastures|sanctified grounds]]. The nomads, seemingly unaware of the concept of owned lands, are nonchalant.
 
 - Attack them
-
+	$> node('DialogueNode').resolve()
+	=> END
 - Leave them be
-
+	=> END
+	
 => END

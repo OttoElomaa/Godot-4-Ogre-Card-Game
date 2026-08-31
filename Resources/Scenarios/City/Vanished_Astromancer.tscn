@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="6_jewtb"]
 [ext_resource type="Texture2D" uid="uid://cfbb15lvephsf" path="res://Art/CardArt/Depths/card-art-cr-umug-magus-v2.jpg" id="7_sat8s"]
 [ext_resource type="PackedScene" uid="uid://df57edgdrwbbe" path="res://GameScenes/TravelMap/map_askelan.tscn" id="9_dba5n"]
+[ext_resource type="PackedScene" uid="uid://dbwdtx171654k" path="res://GameScenes/Zone/GloryGainIcon.tscn" id="10_lnt3t"]
 [ext_resource type="Resource" uid="uid://c6ujrcqxic4if" path="res://Resources/Dialog/Vanished Astromancer_Win.dialogue" id="11_oe87p"]
 
 [node name="Vanished_Astromancer" unique_id=997740947 instance=ExtResource("1_jim2b")]
@@ -16,10 +17,12 @@ map_scene = ExtResource("9_dba5n")
 [node name="DialogueIcon" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="0" unique_id=25074373 instance=ExtResource("2_jewtb")]
 position = Vector2(1556, 731)
 dialogue = ExtResource("3_oe87p")
+duration = 3
 node_name = "Camp"
 start_unlocked = true
 
 [node name="DialogueIcon2" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="1" unique_id=1848482860 instance=ExtResource("2_jewtb")]
+visible = false
 position = Vector2(1659, 609)
 dialogue = ExtResource("4_xjuj7")
 node_name = "Dilapidated Mansion"
@@ -38,18 +41,22 @@ deck_cards = Dictionary[String, int]({
 })
 art = ExtResource("7_sat8s")
 champ_name = "Magaal"
+no_timeout = null
 unlock_on_resolve = [NodePath("../DialogueIcon3")]
 
-[node name="ThroneBattle" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="3" unique_id=1711706452 instance=ExtResource("5_3ft1n")]
+[node name="DialogueIcon3" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="3" unique_id=1208017654 instance=ExtResource("2_jewtb")]
 visible = false
 position = Vector2(1556, 731)
-board_name = "Throne Ambush"
-game_board = ExtResource("6_jewtb")
-
-[node name="DialogueIcon3" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="4" unique_id=1208017654 instance=ExtResource("2_jewtb")]
-position = Vector2(1556, 731)
 dialogue = ExtResource("11_oe87p")
+no_timeout = true
+node_name = "Dilapidated Mansion"
 node_comments = "Enjoy your Victory."
+
+[node name="UmugiteHoard" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="4" unique_id=1158483326 instance=ExtResource("10_lnt3t")]
+visible = false
+position = Vector2(1556, 731)
+glory = 120
+node_name = "A Heaped Reward"
 
 [node name="MapAskelan" parent="." index="2" unique_id=2040580641 instance=ExtResource("9_dba5n")]
 

@@ -8,7 +8,6 @@
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://PanelStyles/EmptyStyleBox.tres" id="6_cpily"]
 [ext_resource type="StyleBox" uid="uid://rj60koevpf8" path="res://PanelStyles/LabelTransparentBasicDark.tres" id="7_x7vqv"]
 [ext_resource type="PackedScene" uid="uid://8a68hh76lcve" path="res://GameScenes/DeckEditScreen/champion_container.tscn" id="7_xt4g0"]
-[ext_resource type="Script" uid="uid://dagoc6ae563ru" path="res://GameScenes/Zone/zoneButton.gd" id="10_rg1pc"]
 [ext_resource type="PackedScene" uid="uid://cjwurlo7haie7" path="res://GameScenes/audio.tscn" id="10_rxdwd"]
 [ext_resource type="AudioStream" uid="uid://mul6424e3fq3" path="res://Audio/BGM/Anghu Musica - Sun & The Lord; General's Theme.wav" id="10_vsusc"]
 
@@ -101,6 +100,7 @@ offset_left = 961.0
 offset_top = 547.0
 offset_right = 1361.0
 offset_bottom = 1067.0
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -108,6 +108,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="Hbox" type="HBoxContainer" parent="UI/PlayerInfoPanel" unique_id=2137793432]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="ChampContainer" parent="UI/PlayerInfoPanel/Hbox" unique_id=334304769 instance=ExtResource("7_xt4g0")]
@@ -117,6 +118,7 @@ size_flags_horizontal = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/PlayerInfoPanel/Hbox" unique_id=2016749065]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Panel2" type="PanelContainer" parent="UI/PlayerInfoPanel/Hbox/VBoxContainer" unique_id=1747643747]
 custom_minimum_size = Vector2(340, 80)
@@ -203,10 +205,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 374.0
-offset_top = 657.0
-offset_right = 1574.0
-offset_bottom = 941.0
+offset_left = -353.0
+offset_top = 419.0
+offset_right = 847.0
+offset_bottom = 703.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -216,149 +218,26 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Description" type="PanelContainer" parent="UI/BottomActions/VBox" unique_id=2063165896]
-custom_minimum_size = Vector2(0, 140)
-layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_h8icc")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/BottomActions/VBox/Description" unique_id=1303556962]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 30
-
-[node name="HBox" type="HBoxContainer" parent="UI/BottomActions/VBox/Description/MarginContainer" unique_id=1856405645]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="ActionNameLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox" unique_id=476485832]
-layout_mode = 2
-text = "  Zone  -"
-label_settings = ExtResource("3_vsusc")
-horizontal_alignment = 1
-
-[node name="ActionDescLabel" type="Label" parent="UI/BottomActions/VBox/Description/MarginContainer/HBox" unique_id=106334236]
-custom_minimum_size = Vector2(800, 0)
-layout_mode = 2
-text = "Goes Here"
-label_settings = ExtResource("3_vsusc")
-horizontal_alignment = 1
-autowrap_mode = 2
-
 [node name="ButtonsHBox" type="HBoxContainer" parent="UI/BottomActions/VBox" unique_id=1690019063]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="BuildArmy" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=270675042]
+[node name="ViewDeck" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=859334079]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-script = ExtResource("10_rg1pc")
-description = "Turn others to your cause: Purchase cards native to this land using Glory"
-
-[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" unique_id=1756828214]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_rxdwd")
-
-[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel" unique_id=690573687]
-layout_mode = 2
-text = "Build Army"
-label_settings = ExtResource("5_txlr3")
-horizontal_alignment = 1
-
-[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel" unique_id=859334079]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("6_cpily")
+theme_override_styles/normal = ExtResource("4_rxdwd")
 theme_override_styles/hover = ExtResource("7_x7vqv")
+text = "View Deck"
 
-[node name="Scry" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=1861402209]
+[node name="ViewDeck2" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=1183085290]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-script = ExtResource("10_rg1pc")
-description = "Seek the abyss for rare cards of all sorts"
-
-[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Scry" unique_id=2003768548]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_rxdwd")
-
-[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel" unique_id=1497052123]
-layout_mode = 2
-text = "Scry"
-label_settings = ExtResource("5_txlr3")
-horizontal_alignment = 1
-
-[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel" unique_id=700434053]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("6_cpily")
+theme_override_styles/normal = ExtResource("4_rxdwd")
 theme_override_styles/hover = ExtResource("7_x7vqv")
-
-[node name="Travel" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=245256136]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-script = ExtResource("10_rg1pc")
-description = "Travel to a different land"
-
-[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Travel" unique_id=764190476]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_rxdwd")
-
-[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel" unique_id=68017451]
-layout_mode = 2
-text = "Travel"
-label_settings = ExtResource("5_txlr3")
-horizontal_alignment = 1
-
-[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel" unique_id=310105088]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("6_cpily")
-theme_override_styles/hover = ExtResource("7_x7vqv")
-
-[node name="Battle" type="MarginContainer" parent="UI/BottomActions/VBox/ButtonsHBox" unique_id=1958055901]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-script = ExtResource("10_rg1pc")
-description = "Fight an opponent on one of the available game boards."
-
-[node name="Panel" type="PanelContainer" parent="UI/BottomActions/VBox/ButtonsHBox/Battle" unique_id=1509679919]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_rxdwd")
-
-[node name="NameLabel" type="Label" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel" unique_id=1819848458]
-layout_mode = 2
-text = "Battle"
-label_settings = ExtResource("5_txlr3")
-horizontal_alignment = 1
-
-[node name="ActionPress" type="Button" parent="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel" unique_id=932578111]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("6_cpily")
-theme_override_styles/hover = ExtResource("7_x7vqv")
+text = "View Factions"
 
 [node name="Audio" parent="." unique_id=576542653 instance=ExtResource("10_rxdwd")]
+position = Vector2(-31, -156)
 BGM = ExtResource("10_vsusc")
 
 [connection signal="pressed" from="UI/ExitPane/Panel/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/BuildArmy/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/BuildArmy" method="buttonMouseEntered"]
-[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Scry/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Scry" method="buttonMouseEntered"]
-[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Travel/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Travel" method="buttonMouseEntered"]
-[connection signal="mouse_entered" from="UI/BottomActions/VBox/ButtonsHBox/Battle/Panel/ActionPress" to="UI/BottomActions/VBox/ButtonsHBox/Battle" method="buttonMouseEntered"]
+[connection signal="button_down" from="UI/BottomActions/VBox/ButtonsHBox/ViewDeck" to="." method="_on_view_deck_button_down"]

@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://cqm7gjywp6kfk"]
+
+[ext_resource type="PackedScene" uid="uid://ctrvsaptdulhm" path="res://GameScenes/Zone/scenario.tscn" id="1_6o2yi"]
+[ext_resource type="PackedScene" uid="uid://df57edgdrwbbe" path="res://GameScenes/TravelMap/map_askelan.tscn" id="2_3vmbk"]
+[ext_resource type="PackedScene" uid="uid://df8wakx6h0mhe" path="res://GameScenes/Zone/DialogueIcon.tscn" id="3_nptk8"]
+[ext_resource type="Resource" uid="uid://dngsnfrxklwjr" path="res://Resources/Dialog/RandomBattle_Throne.dialogue" id="4_l6hnk"]
+[ext_resource type="PackedScene" uid="uid://cq8mqxsw7pqjg" path="res://GameScenes/Zone/ZoneBattleIcon.tscn" id="5_756qv"]
+[ext_resource type="PackedScene" uid="uid://be8n1sbdblr6g" path="res://GameBoards/vinemen_vineyards.tscn" id="6_67q0t"]
+[ext_resource type="PackedScene" uid="uid://dbwdtx171654k" path="res://GameScenes/Zone/GloryGainIcon.tscn" id="7_jlpna"]
+[ext_resource type="Texture2D" uid="uid://cgrm16t4xuxvl" path="res://Art/ZoneComponents/cards-achra-zones-eastern-desert.jpg" id="8_nptk8"]
+[ext_resource type="Script" uid="uid://dndfijp64kjv" path="res://GameScenes/TravelMap/Map.gd" id="9_l6hnk"]
+
+[node name="Zone" unique_id=538685740 instance=ExtResource("1_6o2yi")]
+map_scene = ExtResource("2_3vmbk")
+scenario_type = 2
+random_position = true
+
+[node name="DialogueNode" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="0" unique_id=1158483326 node_paths=PackedStringArray("unlock_on_resolve") instance=ExtResource("3_nptk8")]
+dialogue = ExtResource("4_l6hnk")
+duration = 3
+node_name = "A Feud"
+node_comments = "A short-lived skirmish..."
+start_unlocked = true
+unlock_on_resolve = [NodePath("../ThroneBattle")]
+
+[node name="ThroneBattle" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="1" unique_id=975356505 node_paths=PackedStringArray("unlock_on_resolve") instance=ExtResource("5_756qv")]
+visible = false
+board_name = "City"
+game_board = ExtResource("6_67q0t")
+board_comments = "King's men fight in formation, powering each other up with bolster effects. Find and dispatch the source of the nuisance before the enemy becomes too strong to defeat."
+deck_cards = Dictionary[String, int]({
+"Ahati": 2,
+"Guardmaster": 2,
+"Kalasirios": 4
+})
+generic_champion = false
+champion = "General"
+duration = 3
+node_name = "A Feud"
+node_comments = "Prepare for Battle"
+unlock_on_resolve = [NodePath("../GloryGainNode")]
+
+[node name="GloryGainNode" parent="Zones/GameBoards" parent_id_path=PackedInt32Array(541473321) index="2" unique_id=61139421 instance=ExtResource("7_jlpna")]
+glory = 60
+
+[node name="MapAskelan" parent="." index="2" unique_id=2040580641 instance=ExtResource("2_3vmbk")]
+offset_right = 1737.0
+offset_bottom = 1080.0
+texture = ExtResource("8_nptk8")
+script = ExtResource("9_l6hnk")
+map_name = "Golden City of Ask'lan"
+
+[node name="Royal Palace Entrance" parent="MapAskelan" index="0" unique_id=597345683]
+position = Vector2(864, 225)
+
+[node name="Royal Palace Inner Sanctum" parent="MapAskelan" index="1" unique_id=1973844]
+position = Vector2(860, 109)
+
+[node name="Temple of Balhadad" parent="MapAskelan" index="2" unique_id=688431630]
+position = Vector2(977, 154)
+
+[node name="Guardhouse" parent="MapAskelan" index="3" unique_id=162049153]
+position = Vector2(1025, 493)
+
+[node name="Temple of Cyr" parent="MapAskelan" index="4" unique_id=311710893]
+position = Vector2(1213, 352)
+
+[node name="Temple of Atash" parent="MapAskelan" index="5" unique_id=2028173367]
+position = Vector2(568, 388)
+
+[node name="Backstreet" parent="MapAskelan" index="6" unique_id=675761380]
+position = Vector2(294, 628)
+
+[node name="Tavern" parent="MapAskelan" index="7" unique_id=957213204]
+position = Vector2(712, 570)
+
+[node name="River_1" parent="MapAskelan" index="8" unique_id=1191733862]
+position = Vector2(1438, 379)
+
+[node name="River_2" parent="MapAskelan" index="9" unique_id=1482601432]
+position = Vector2(1218, 789)
+
+[node name="Vineyards" parent="MapAskelan" index="10" unique_id=1917674988]
+position = Vector2(1453, 587)
+
+[node name="Villas" parent="MapAskelan" index="11" unique_id=526025477]
+position = Vector2(1556, 731)
+
+[node name="Abandoned Villa" parent="MapAskelan" index="12" unique_id=937377223]
+position = Vector2(1659, 609)
+
+[node name="City Square" parent="MapAskelan" index="13" unique_id=1995288186]
+position = Vector2(860, 377)
+
+[node name="Slums" parent="MapAskelan" index="14" unique_id=699304664]
+position = Vector2(356, 390)
+
+[node name="Guild Hideout" parent="MapAskelan" index="15" unique_id=928923066]
+position = Vector2(236, 199)
+
+[editable path="MapAskelan"]

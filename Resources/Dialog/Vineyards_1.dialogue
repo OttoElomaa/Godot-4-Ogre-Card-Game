@@ -19,7 +19,7 @@ if 'Vinemen' in GameInfo.playerAlliances
 	do SignalBus.disp_card.emit('Jade Vineman')
 	do SignalBus.disp_card.emit('Jade Vineman')
 	Before you is a mess of violence; wild vines skittering around, slaves running in panic, tools littering the ground.
-	do SignalBus.unlock_node.emit('Board1')
+	$> node('Board1').unlock()
 	
 - Slay him and step into the vineyards
 	

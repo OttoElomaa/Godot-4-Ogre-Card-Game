@@ -10,6 +10,7 @@ var prepared_board: GameBoard = null
 
 
 func _ready():
+	%AnimationPlayer.play("unfold_2")
 #	prepared_board = null
 	update_champion()
 	create_containers()
@@ -84,4 +85,6 @@ func update_champion():
 
 func _button_up_back_to_world() -> void:
 	GameInfo.isPreBattle = false
+	%AnimationPlayer.play("fold_2")
+	await %AnimationPlayer.animation_finished
 	MyTools.closeDeckEdit()

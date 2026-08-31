@@ -1,4 +1,5 @@
 @tool
+@icon('uid://blw1bcc1bu66o')
 
 extends ZoneNode
 
@@ -48,11 +49,10 @@ func _validate_property(property):
 		if generic_champion:
 			property.usage = PROPERTY_USAGE_NO_EDITOR
 
-func setup(zone:Node):
-	travel_screen = zone
+func setup(zone:Node, scenario:String):
+	super(zone, scenario)
 	node_name = board_name
 #	node_comments = board_comments
-	toggleHoverInfo(false)
 
 
 func createDeck():

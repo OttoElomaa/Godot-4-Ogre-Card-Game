@@ -1,8 +1,10 @@
 ~ start
-Despite all being under the King's employ, lords of Ask'lan often fight over land. One such lord, unhappy with his share of land cut to him by the King, attacks his neighbor. You may join the fight to preserve the lands as written in the King's books.
+A battle rages here between a renegade lord and another, in dispute over lands. For bringing down both sides and reining their lands in accord with the King's books, you are offered a reward.
 
 - Attack the rebel
-
+	$> node('DialogueNode').resolve()
+	=> END
 - Ignore him
+	=> END
 
 => END

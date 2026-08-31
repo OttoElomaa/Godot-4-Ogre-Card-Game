@@ -2,7 +2,9 @@
 According to your sources, a group of grey monks hides out here. While the true role of these monks remains hidden from the public, you have heard that they are at odds with the Throne. They are known to steal treasures for transport into their outer lair -- you may want to see if you can intercept some.
 
 - Attack them
-
+	$> node('DialogueNode').resolve()
+	=> END
 - Leave them be
-
+	=> END
+	
 => END

@@ -1,4 +1,5 @@
 @tool
+@icon('uid://dlh4p662b056r')
 extends Node2D
 class_name Scenario
 
@@ -7,8 +8,10 @@ enum ScenarioTypes {
 	ELITE_QUEST, ## An important quest which locks all other nodes from appearing until it is completed or failed. Elite quests appear every 15 turns.
 	RANDOM_BATTLE, ## A short scenario with a battle and a reward. Random battles appear every 2-3 turns and last 3 turns.
 	SHOP, ## A short scenario with a shop. Shops appear every 4 turns and last 1 turn.
-	BONUS, ## A short scenario which offers a reward for free. Bonus appearance rate depends on whether .
+	BONUS, ## A short scenario which offers a reward for free. Bonus appearance rate depends on what alliances the player has.
 }
+
+const Repeatable = [ScenarioTypes.RANDOM_BATTLE, ScenarioTypes.SHOP, ScenarioTypes.BONUS]
 
 @export var zoneName := "The Lands"
 @export var map_scene:PackedScene = null
@@ -22,6 +25,12 @@ enum ScenarioTypes {
 		notify_property_list_changed()
 
 @export var random_locations: Array[Vector2] = []
+
+## If anything is set, this scenario will only spawn on the map if you are allied with these groups.
+@export var required_alliances: Array[Card.Group] = []
+
+## If anything is set, this scenario will only spawn if these flags have been set in GameInfo.flags.
+@export var required_flags: Array[String] = []
 
 var editor_only_instance: Map:
 	get():

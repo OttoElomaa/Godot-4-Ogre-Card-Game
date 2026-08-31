@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://nfa3rqo1oyuu"]
+
+[ext_resource type="Script" uid="uid://cxibr1su6mx2o" path="res://GameScenes/Zone/zoneNode.gd" id="1_io0tu"]
+[ext_resource type="Texture2D" uid="uid://dyosit4er0eab" path="res://Art/CardComponents/card-effect-counter-texture-protection.png" id="2_kx7v2"]
+[ext_resource type="Texture2D" uid="uid://be0qsfcp2w37c" path="res://Art/CardComponents/zone-battle-icon-disabled-overlay.png" id="3_0njxy"]
+[ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="4_y17gd"]
+[ext_resource type="LabelSettings" uid="uid://dhqgs5cdwbsp2" path="res://Fonts/LabelSettings/LabelSetMiniBrown.tres" id="5_7syt2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4wg2"]
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8quhu"]
+bg_color = Color(0.947752, 0.911757, 0.861921, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.188235, 0.105882, 0.0156863, 1)
+
+[sub_resource type="Animation" id="Animation_kx7v2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:input_active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_0njxy"]
+resource_name = "resolve"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.48296767, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.001358e-05, 1.001358e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.40026158, 0.24363649, 0.12671578, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:input_active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_y17gd"]
+resource_name = "unlock"
+length = 0.7
+step = 0.0333
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7),
+"transitions": PackedFloat32Array(1.8025011, 0.933033, 1),
+"update": 2,
+"values": [Vector2(0, 0.8), Vector2(1, 1.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:input_active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7syt2"]
+_data = {
+&"RESET": SubResource("Animation_kx7v2"),
+&"resolve": SubResource("Animation_0njxy"),
+&"unlock": SubResource("Animation_y17gd")
+}
+
+[node name="ZoneNodeBase" type="Node2D" unique_id=1158483326]
+script = ExtResource("1_io0tu")
+metadata/_custom_type_script = "uid://cxibr1su6mx2o"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1253845527]
+unique_name_in_owner = true
+clip_children = 1
+offset_left = -40.0
+offset_top = -30.0
+offset_right = 40.0
+offset_bottom = 50.0
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s4wg2")
+
+[node name="Icon" type="TextureRect" parent="PanelContainer" unique_id=1553335485]
+layout_mode = 2
+texture = ExtResource("2_kx7v2")
+expand_mode = 1
+
+[node name="ClearedOverlay" type="Sprite2D" parent="." unique_id=1965114696]
+visible = false
+position = Vector2(0, 10)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("3_0njxy")
+
+[node name="Frame" type="Sprite2D" parent="." unique_id=322272209]
+texture = ExtResource("4_y17gd")
+
+[node name="InfoPanel" type="PanelContainer" parent="." unique_id=384398957]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 80)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -150.0
+offset_right = 137.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8quhu")
+
+[node name="HBox" type="VBoxContainer" parent="InfoPanel" unique_id=319860051]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="NameLabel" type="Label" parent="InfoPanel/HBox" unique_id=1523516997]
+texture_filter = 1
+layout_mode = 2
+text = "Battle Name"
+label_settings = ExtResource("5_7syt2")
+horizontal_alignment = 1
+
+[node name="DescLabel" type="Label" parent="InfoPanel/HBox" unique_id=1850053161]
+texture_filter = 1
+layout_mode = 2
+text = "Description Goes Here"
+label_settings = ExtResource("5_7syt2")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=482395856]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_7syt2")
+
+[connection signal="gui_input" from="PanelContainer" to="." method="_on_panel_container_gui_input"]
+[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer" to="." method="_on_panel_container_mouse_exited"]

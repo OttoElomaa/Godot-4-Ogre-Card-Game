@@ -309,3 +309,14 @@ func fetch_terms_and_explanations(string:String) -> Array[String]:
 			var excerpt = str(key, ': ', terms[key])
 			all_terms.append(excerpt)
 	return all_terms
+
+func tweenFadeOut(node:CanvasItem, time:float = 1.0):
+	var tween = get_tree().create_tween()
+	tween.tween_property(node, 'modulate', Color(0.0, 0.0, 0.0, 0.0), time)
+	await tween.finished
+
+func tweenFadeIn(node:CanvasItem, time:float = 1.0):
+	node.modulate = Color(0.0, 0.0, 0.0, 0.0)
+	var tween = get_tree().create_tween()
+	tween.tween_property(node, 'modulate', Color(1.0, 1.0, 1.0, 1.0), time)
+	await tween.finished

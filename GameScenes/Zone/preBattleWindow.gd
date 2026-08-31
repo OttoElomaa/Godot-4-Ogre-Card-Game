@@ -16,9 +16,10 @@ func setup(icon:ZoneBattleIcon) -> void:
 
 
 
-func toggleWindow(enable:bool):	
+func toggleWindow(enable:bool):
 	if enable:
 		show()
+		%AnimationPlayer.play('unfold')
 		clearOldIcons()
 		var icon:ZoneBattleIcon = battleInfoIcon
 		if not icon.has_method('generate_fight'):
@@ -28,8 +29,9 @@ func toggleWindow(enable:bool):
 			
 		boardCommentsLabel.text = icon.board_comments
 	else:
-		hide()
-		clearOldIcons()
+		%AnimationPlayer.play('fold')
+		await %AnimationPlayer.animation_finished
+		GameInfo.currentZone.closePrebattle()
 		
 
 
@@ -74,13 +76,13 @@ func clearOldIcons():
 		card.queue_free()
 
 func cancelButtonPressed() -> void:
-	queue_free()
+	toggleWindow(false)
 
 func fightButtonPressed() -> void:
 	
 #	MyTools.setupAndOpenDeckEdit(battleInfoIcon.board)
-	SceneSwitcher.switchToNewScene(battleInfoIcon.board)
 	battleInfoIcon.resolve()
+	SceneSwitcher.switchToNewScene(battleInfoIcon.board, SceneSwitcher.TransitionTypes.SHUTTER)
 	
 	queue_free()
 

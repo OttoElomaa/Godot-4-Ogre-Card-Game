@@ -22,7 +22,7 @@ While you and your army camp in the outskirts of Aşk'lan, a veiled woman sudden
 		=> agreed
 		
 	- Tell her to lead you along
-		do SignalBus.unlock_node.emit('DialogueIcon2')
+		$> node('DialogueIcon2').unlock()
 		=> END!
 
 - Tell her to leave
@@ -40,13 +40,6 @@ While you and your army camp in the outskirts of Aşk'lan, a veiled woman sudden
 ~ forced_out
 You can hear the woman cursing in barely intelligible names as she is forced out of the camp. You cannot shake the feeling of impending doom -- was it possible that the woman's gods truly gave an omen for you? To know of an omen and yet to know not from where it would come; what could be worse? 
 	
-- Get on the move and try to escape
-	You order your troops to pack camp and get on the move before dusk. You are held back by many unexpected, unfortunate circumstances, not the least of which is a small fire. Anxiety rises. It is already almost dark when your troops are finally in a condition to move. It is then that you see a group moving directly at you. It seems like the omen had caught up with you!
-	do SignalBus.unlock_node.emit('ThroneBattle')
-	=> END!
+$> GameInfo.flags.append('Starwalker Omen')
 
-- Stay and await the omen
-	As the night falls, fires continue to burn in your camp. Anxiety rises. At last, your watchmen report a group approaching your camp. These news come almost as a relief. You rally your troops for combat.
-	do SignalBus.unlock_node.emit('ThroneBattle')
-	=> END!
 => END

@@ -1,98 +1,13 @@
 [gd_scene format=3 uid="uid://df8wakx6h0mhe"]
 
+[ext_resource type="PackedScene" uid="uid://nfa3rqo1oyuu" path="res://GameScenes/Zone/zoneNodeBase.tscn" id="1_hrgn5"]
 [ext_resource type="Script" uid="uid://i63hgkosko0m" path="res://GameScenes/Zone/zoneNode_dialogue.gd" id="1_urlk5"]
-[ext_resource type="Texture2D" uid="uid://dyosit4er0eab" path="res://Art/CardComponents/card-effect-counter-texture-protection.png" id="2_0bgde"]
-[ext_resource type="Texture2D" uid="uid://be0qsfcp2w37c" path="res://Art/CardComponents/zone-battle-icon-disabled-overlay.png" id="3_nry23"]
-[ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="4_la7db"]
-[ext_resource type="LabelSettings" uid="uid://dhqgs5cdwbsp2" path="res://Fonts/LabelSettings/LabelSetMiniBrown.tres" id="6_8kwa5"]
+[ext_resource type="Texture2D" uid="uid://b4o5ynx401rvf" path="res://Art/icons/16x16/dialogue.png" id="3_pfay1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62yky"]
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aq0yd"]
-radius = 69.3333
-height = 138.667
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qtng"]
-bg_color = Color(0.947752, 0.911757, 0.861921, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.188235, 0.105882, 0.0156863, 1)
-
-[node name="DialogueIcon" type="Node2D" unique_id=1118793145]
-scale = Vector2(0.7, 0.7)
+[node name="DialogueNode" unique_id=1158483326 instance=ExtResource("1_hrgn5")]
 script = ExtResource("1_urlk5")
-duration = 3
-node_comments = "Someone approaches..."
+dialogue = null
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2066150119]
-clip_children = 1
-offset_left = -40.0
-offset_top = -30.0
-offset_right = 40.0
-offset_bottom = 50.0
-mouse_default_cursor_shape = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_62yky")
-
-[node name="Icon" type="TextureRect" parent="PanelContainer" unique_id=2078753899]
-layout_mode = 2
-texture = ExtResource("2_0bgde")
-
-[node name="ClearedOverlay" type="Sprite2D" parent="." unique_id=280681110]
-visible = false
-position = Vector2(0, 10)
-scale = Vector2(1.8, 1.8)
-texture = ExtResource("3_nry23")
-
-[node name="Frame" type="Sprite2D" parent="." unique_id=1391133603]
-texture = ExtResource("4_la7db")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=306322641]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2086980774]
-position = Vector2(0, 10)
-shape = SubResource("CapsuleShape2D_aq0yd")
-
-[node name="InfoPanel" type="PanelContainer" parent="." unique_id=889874860]
-visible = false
-custom_minimum_size = Vector2(200, 80)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -137.0
-offset_top = -150.0
-offset_right = 137.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4qtng")
-
-[node name="HBox" type="VBoxContainer" parent="InfoPanel" unique_id=241472153]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="NameLabel" type="Label" parent="InfoPanel/HBox" unique_id=1796920251]
-texture_filter = 1
-layout_mode = 2
-text = "Battle Name"
-label_settings = ExtResource("6_8kwa5")
-horizontal_alignment = 1
-
-[node name="DescLabel" type="Label" parent="InfoPanel/HBox" unique_id=1978865931]
-texture_filter = 1
-layout_mode = 2
-text = "Description Goes Here"
-label_settings = ExtResource("6_8kwa5")
-horizontal_alignment = 1
-
-[connection signal="gui_input" from="PanelContainer" to="." method="_on_panel_container_gui_input"]
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[node name="Icon" parent="PanelContainer" parent_id_path=PackedInt32Array(1253845527) index="0" unique_id=1553335485]
+mouse_filter = 2
+texture = ExtResource("3_pfay1")

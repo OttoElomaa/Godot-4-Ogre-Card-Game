@@ -1,83 +1,26 @@
 [gd_scene format=3 uid="uid://cq8mqxsw7pqjg"]
 
-[ext_resource type="Texture2D" uid="uid://26wdyjiqohtp" path="res://Art/CardComponents/card-effect-counter-texture-doom.png" id="1_0vns5"]
+[ext_resource type="PackedScene" uid="uid://nfa3rqo1oyuu" path="res://GameScenes/Zone/zoneNodeBase.tscn" id="1_0obbp"]
 [ext_resource type="Script" uid="uid://b4jucpsg4wr8b" path="res://GameScenes/Zone/zoneNode_battle.gd" id="1_ge5wy"]
-[ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="2_ge5wy"]
-[ext_resource type="Texture2D" uid="uid://be0qsfcp2w37c" path="res://Art/CardComponents/zone-battle-icon-disabled-overlay.png" id="3_4qtng"]
-[ext_resource type="LabelSettings" uid="uid://dhqgs5cdwbsp2" path="res://Fonts/LabelSettings/LabelSetMiniBrown.tres" id="5_nqyb1"]
+[ext_resource type="Texture2D" uid="uid://dshhcmglifdvl" path="res://Art/icons/16x16/swords.png" id="3_gjeqv"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aq0yd"]
-radius = 69.3333
-height = 138.667
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qtng"]
-bg_color = Color(0.947752, 0.911757, 0.861921, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.188235, 0.105882, 0.0156863, 1)
-
-[node name="BattleIcon" type="Node2D" unique_id=1922959725]
-scale = Vector2(0.7, 0.7)
+[node name="BattleIcon" unique_id=1158483326 instance=ExtResource("1_0obbp")]
 script = ExtResource("1_ge5wy")
-duration = 4
-node_comments = "A battle awaits!"
+board_name = ""
+game_board = null
+ai_personality = 0
+board_comments = ""
+use_as_is = false
+deck_cards = Dictionary[String, int]({})
+presummoned_cards = Array[String]([])
+enemy_presummon = false
+ally_presummon = false
+presummon_sparcity = 0
+generic_champion = true
+art = null
+champ_name = ""
+health = 5
+champion = ""
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=1239497548]
-position = Vector2(0, 10)
-scale = Vector2(1.8, 1.8)
-texture = ExtResource("1_0vns5")
-
-[node name="ClearedOverlay" type="Sprite2D" parent="." unique_id=1414202680]
-visible = false
-position = Vector2(0, 10)
-scale = Vector2(1.8, 1.8)
-texture = ExtResource("3_4qtng")
-
-[node name="Frame" type="Sprite2D" parent="." unique_id=1156251464]
-texture = ExtResource("2_ge5wy")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=1733694412]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=969412838]
-position = Vector2(0, 10)
-shape = SubResource("CapsuleShape2D_aq0yd")
-
-[node name="InfoPanel" type="PanelContainer" parent="." unique_id=128407108]
-visible = false
-custom_minimum_size = Vector2(200, 80)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -137.0
-offset_top = -150.0
-offset_right = 137.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4qtng")
-
-[node name="HBox" type="VBoxContainer" parent="InfoPanel" unique_id=108606091]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="NameLabel" type="Label" parent="InfoPanel/HBox" unique_id=1808543102]
-texture_filter = 1
-layout_mode = 2
-text = "Battle Name"
-label_settings = ExtResource("5_nqyb1")
-horizontal_alignment = 1
-
-[node name="DescLabel" type="Label" parent="InfoPanel/HBox" unique_id=2084757761]
-texture_filter = 1
-layout_mode = 2
-text = "Description Goes Here"
-label_settings = ExtResource("5_nqyb1")
-horizontal_alignment = 1
-
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[node name="Icon" parent="PanelContainer" parent_id_path=PackedInt32Array(1253845527) index="0" unique_id=1553335485]
+texture = ExtResource("3_gjeqv")

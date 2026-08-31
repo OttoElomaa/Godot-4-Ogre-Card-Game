@@ -13,12 +13,13 @@ func _ready() -> void:
 	for child in get_children():
 		if child is ActionsNodeChamp:
 			for i in child.get_children():
-				all_actions.append(i)
+				all_actions.append(child)
 				if i is OnCastTrigger and child.level > 0:
 					usable_actions.append(child)
 					break
 		if child is CustomWindow:
 			custom_window = child
+			custom_window.hide()
 	
 
 static func make_generic_champion(c_name:String, art:Texture2D, c_health:int) -> Champion:

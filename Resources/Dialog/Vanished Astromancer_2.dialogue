@@ -5,7 +5,7 @@ You approach an overgrown mansion, once belonging to a highly-esteemed kingling,
 
 - Rush in before the enemy can react
 	The house does not seem be fortified in any way. You decide to use that for a quick assault. 
-	do SignalBus.unlock_node.emit('UmugiteBattle')
+	$> node('UmugiteBattle').unlock()
 	
 - Cry out for the enemy leader
 	The noise you've made no doubt attracted attention. Many curious eyes peek at you from the window-holes. At last, a imposing figure, with a large collar, appears in the window.
@@ -23,13 +23,13 @@ You approach an overgrown mansion, once belonging to a highly-esteemed kingling,
 		- Ask about their purpose here
 			"We camp out here as a part of our pilgrimage. We wish nobody no harm."
 			
-			"Damned Lies!" the Astromancer yells. "I know you hold Daleth prisoner, you vile Thieves!"
+			"Damned lies!" the Astromancer yells. "I know you hold Daleth prisoner, you thieves!"
 			
 			"Ah, so that's who brought you here," the Umugite sneers. "Listen up. If you agree to give us a wide berth for a while, you will have your man. Else, you will have to go through us. If you must find that out, we Umugites are not easily killed. Perhaps you would rather be on our good side."
 			~ offer
 			
 			- Ask the Astromancer about the Umugites
-				"'Tis most Absurd that Umugites should be at large! The Legende speaks of them, and their God likewise, being Banished to the Deepest of Hells! The very Memorie of Umug's people was so Deleted, quoth it, that only an Astromancer should even remember of their Existéncé. Listen not to this Brute's Lies!"
+				"'Tis most absurd that Umugites should be at large! The legend speaks of them, and their god likewise, being banished to the deepest of hells! The very memory of Umug's people was so deleted that only an Astromancer should even remember this story. Listen not to this brute's lies!"
 				=> offer
 			
 			- Agree to the Umugite's offer
@@ -37,20 +37,18 @@ You approach an overgrown mansion, once belonging to a highly-esteemed kingling,
 				"You have your man, as promised!" screeches a voice from inside the house.
 				It is pointless to give chase now. As you waited, the Umugites have all managed to escape.
 				~ failure
-				"You dastards!" the woman is breathless with anger. "Forsooth, no better than those damned Vagabonds! I utter upon you a Hundred Curses! Your Life is forfeit."
+				"You dastards!" the woman is breathless with anger. "No better than those damned Vagabonds! I utter upon you a hundred curses! Your life is forfeit."
 				With that, she storms off.
 				
 				As you return to camp, you see a heap of treasure at the center; this must be Umug's gratitude.
-				
-				Next day, a group of King's Men attacks your camp.
-				do SignalBus.unlock_node.emit('ThroneBattle')
+				$> node('UmugiteHoard').unlock()
 				
 				
 			- Decline the Umugite's offer
 				
 				"Umug shall have your heads!" shouts the Umugite.
 				Despite the fact that you have no more advantage of surprise, you prepare for combat.
-				do SignalBus.unlock_node.emit('UmugiteBattle')
+				$> node('UmugiteBattle').unlock()
 
 			- Offer the betray the Astromancer
 				"I see that you wish to be helpful to Umug?" the Umugite intones. "Why, I will keep this in mind. Umug shall remember your gesture."

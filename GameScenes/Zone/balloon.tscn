@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://nlh51xk2popv"]
 
 [ext_resource type="Script" uid="uid://dm0o5r3sgn0xa" path="res://GameScenes/Zone/balloon.gd" id="1_08txh"]
-[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_4r60f"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/nodes/dialogue_label/dialogue_label.tscn" id="2_4r60f"]
 [ext_resource type="Resource" uid="uid://datllcfc5jbo3" path="res://Resources/Dialog/Vineyards_1.dialogue" id="2_mjxrt"]
-[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_mjxrt"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/nodes/responses_menu/dialogue_responses_menu.gd" id="3_mjxrt"]
 [ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Fonts/FancyPixelFontWhite.tres" id="5_q6va3"]
 [ext_resource type="FontFile" uid="uid://dbdpwrj1wq4d6" path="res://Fonts/stepalange-font/StepalangeShort-p7GZd.otf" id="6_nsbs0"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="7_q6va3"]
