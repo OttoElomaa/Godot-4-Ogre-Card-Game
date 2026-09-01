@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://7v0eomlw47ve"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_nigql"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_2mmmc"]
+[ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="3_28axv"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="4_4bqoq"]
+[ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_rg1m1"]
+[ext_resource type="PackedScene" uid="uid://dpj5peh2lud61" path="res://CardScriptsAndComponents/EffectCounters/EffectCommand.tscn" id="6_lltbj"]
+[ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="7_6u87w"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uf7bs"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pcrpj"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_uf7bs")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ch7ul"]
+resource_local_to_scene = true
+shader = ExtResource("2_2mmmc")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_pcrpj")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-SpearPrince" unique_id=1171307177 instance=ExtResource("1_nigql")]
+material = SubResource("ShaderMaterial_ch7ul")
+cardName = "Spear-Prince"
+subTypeStr = "Ask'lani Soldier"
+group = 14
+flavorText = "This one has the commanding presence of a little king."
+manaCost = 3
+startingDamage = 2
+startingHealth = 3
+block_on_arrival = false
+action_mode = 2
+
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1898649951 instance=ExtResource("3_28axv")]
+
+[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="0" unique_id=604671926]
+script = ExtResource("4_4bqoq")
+customActionText = "Cast: grant an ally 1 Command and bolster +1/0."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=88344705 instance=ExtResource("5_rg1m1")]
+grantEffect = ExtResource("6_lltbj")
+grantAmount = 1
+
+[node name="SkillAlterHealth" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=1579192506 instance=ExtResource("7_6u87w")]
+bolsterDamage = 1
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "3"

@@ -29,9 +29,11 @@ board_name = "Salkhi Intruders"
 game_board = ExtResource("6_wtebf")
 board_comments = "The Salkhi attack in quick charges then vanish like the wind. Their thunder magic can disable your defences!"
 deck_cards = Dictionary[String, int]({
-"Outrider": 3,
+"Outrider": 2,
+"Qaraul": 2,
 "Thundercaller": 1,
-"Uurah": 3
+"Uurah": 3,
+"Wandering Bow": 1
 })
 art = ExtResource("7_hy0yj")
 champ_name = "Tugar"

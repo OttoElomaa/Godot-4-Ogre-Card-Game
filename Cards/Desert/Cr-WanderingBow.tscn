@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://c573wc1pmcudr"]
+
+[ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_dmvpf"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_2172x"]
+[ext_resource type="PackedScene" uid="uid://d0e807arj0ef" path="res://CardScriptsAndComponents/Triggers/ArrivalTrigger.tscn" id="3_hw0ic"]
+[ext_resource type="Script" uid="uid://dfqyywxg05ds" path="res://CardScriptsAndComponents/Actions/Scripts/cardAction.gd" id="4_43l1b"]
+[ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_o5mul"]
+[ext_resource type="PackedScene" uid="uid://0yevoktm0llg" path="res://CardScriptsAndComponents/Actions/SkillShoot.tscn" id="6_vv2ji"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pj1bf"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dnvwe"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_pj1bf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ho2k"]
+resource_local_to_scene = true
+shader = ExtResource("2_2172x")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_dnvwe")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="Cr-Wandering Bow" unique_id=1171307177 instance=ExtResource("1_dmvpf")]
+material = SubResource("ShaderMaterial_6ho2k")
+cardName = "Wandering Bow"
+subTypeStr = "Salkhi Warrior"
+group = 10
+flavorText = "These archers loose arrows from beasts' back, elusive and rapid."
+manaCost = 3
+startingDamage = 3
+startingHealth = 2
+block_on_arrival = false
+action_mode = 2
+will_not_charge = true
+
+[node name="ArrivalTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1588031108 instance=ExtResource("3_hw0ic")]
+
+[node name="CardAction" type="Node2D" parent="Actions/ArrivalTrigger" index="1" unique_id=396676298]
+script = ExtResource("4_43l1b")
+customActionText = "Arrival: shoot."
+metadata/_custom_type_script = "uid://dfqyywxg05ds"
+
+[node name="ManualTargeting" parent="Actions/ArrivalTrigger/CardAction" index="0" unique_id=794650979 instance=ExtResource("5_o5mul")]
+manualTargetGroup = 2
+
+[node name="SkillShoot" parent="Actions/ArrivalTrigger/CardAction" index="1" unique_id=581391036 instance=ExtResource("6_vv2ji")]
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "3"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "2"

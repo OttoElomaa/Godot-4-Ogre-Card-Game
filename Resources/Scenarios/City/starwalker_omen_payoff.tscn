@@ -19,6 +19,8 @@ board_comments = "The Starwalkers can put your army to sleep and destroy you gen
 deck_cards = Dictionary[String, int]({
 "Blast": 3,
 "Dreaming Portent": 2,
+"Occasional": 1,
+"Sinistral": 1,
 "Starwalker Beast": 4,
 "Starwalker Scout": 3
 })

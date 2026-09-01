@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dpj5peh2lud61"]
+
+[ext_resource type="Script" uid="uid://5c42sqov344m" path="res://CardScriptsAndComponents/Scripts/effect_counter.gd" id="1_i4may"]
+[ext_resource type="Texture2D" uid="uid://dyosit4er0eab" path="res://Art/CardComponents/card-effect-counter-texture-protection.png" id="2_as3ge"]
+
+[node name="EffectCommand" type="Node2D" unique_id=522781548]
+script = ExtResource("1_i4may")
+effectType = 1
+max_counter = 5
+id = "Command"
+description = "Max 5 stacks. Per stack, all bolster effects grant this card 1 more damage."
+metadata/_custom_type_script = "uid://5c42sqov344m"
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1805944367]
+texture = ExtResource("2_as3ge")

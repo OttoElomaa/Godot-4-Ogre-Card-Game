@@ -1,6 +1,7 @@
 @icon("res://Art/icons/16x16/arrow_left.png")
 extends Node
 class_name ScalingComponent
+## A scaling component returns an integer values and replaces all non-zero values of its Skill or Conditional parent's properties.
 
 @export var multiplier:float = 1.0
 
