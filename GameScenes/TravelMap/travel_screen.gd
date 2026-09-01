@@ -14,6 +14,10 @@ var preBattleWindow:Node = null
 var active_scenario_nodes:Array[ZoneNode] = []
 var completed_scenarios = []
 
+var quest_cooldown = 4
+var bonus_cooldown = 6
+var shop_cooldown = 4
+
 var turn = 0:
 	set(value):
 		turn = value
@@ -47,10 +51,11 @@ func process_turn():
 		choose_scenarios_to_spawn()
 	
 	await updateZoneVisuals()
-#	garbage_collect()
+	
+	garbage_collect()
 
 func choose_scenarios_to_spawn():
-	if turn == 1 or turn % 6 == 0:
+	if turn == 1 or turn % 5 == 0:
 		load_scenario(Scenario.ScenarioTypes.QUEST)
 	if turn % 15 == 0:
 		load_scenario(Scenario.ScenarioTypes.ELITE_QUEST)
@@ -89,6 +94,8 @@ func load_scenario(type: Scenario.ScenarioTypes):
 	if not type in Scenario.Repeatable:
 		possible_scenarios = possible_scenarios.filter(func(i): return not completed_scenarios.has(i))
 		print('Travel screen: filtered for completed: ', possible_scenarios)
+	else:
+		possible_scenarios = possible_scenarios.filter(func(i:Scenario): return not scenario_already_active(i.name))
 	
 	possible_scenarios = possible_scenarios.filter(func(i:Scenario): 
 		if i.required_alliances.is_empty():
@@ -152,6 +159,12 @@ func get_node_from_same_scenario(scenario:String, n_name:String):
 	## if everything fails, return null
 	print('Travel Screen: no node found by the name ', n_name)
 	return null
+
+func scenario_already_active(scenario:String):
+	for n:ZoneNode in %MapNodes.get_children():
+		if n.myScenario == scenario:
+			return true
+	return false
 
 ## Removes all scenarios with no unlocked nodes. Done every turn.
 func garbage_collect():
