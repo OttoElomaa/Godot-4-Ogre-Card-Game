@@ -132,17 +132,19 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=1894762801]
 layout_mode = 2
-text = "Animation Speed (WIP! Does nothing)"
+text = "Animation Speed"
 
 [node name="AnimationSpeed" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=1842940833]
 layout_mode = 2
 size_flags_horizontal = 10
 selected = 0
-item_count = 2
+item_count = 3
 popup/item_0/text = "Normal"
 popup/item_0/id = 0
-popup/item_1/text = "Double"
+popup/item_1/text = "Fast"
 popup/item_1/id = 1
+popup/item_2/text = "Turbo"
+popup/item_2/id = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=951491191]
 layout_mode = 2

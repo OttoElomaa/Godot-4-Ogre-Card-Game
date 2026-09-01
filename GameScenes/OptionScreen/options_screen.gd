@@ -30,9 +30,11 @@ func _on_display_options_item_selected(index):
 func _on_animation_speed_item_selected(index):
 	match index:
 		0:
-			Options.animation_speed = 1.0
+			Options.animation_speed = Options.AnimationSpeeds.NORMAL
 		1:
-			Options.animation_speed = 2.0
+			Options.animation_speed = Options.AnimationSpeeds.FAST
+		2:
+			Options.animation_speed = Options.AnimationSpeeds.TURBO
 
 
 func _on_confirm_pressed():

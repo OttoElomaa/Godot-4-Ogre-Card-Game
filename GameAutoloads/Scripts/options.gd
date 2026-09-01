@@ -20,7 +20,17 @@ const settings_directory = "user://settings.ini"
 		display_mode = value
 		DisplayServer.window_set_mode(display_mode)
 
-var animation_speed := 1.0
+enum AnimationSpeeds {NORMAL, FAST, TURBO}
+var animation_speed := AnimationSpeeds.NORMAL:
+	set(value):
+		animation_speed = value
+		match animation_speed:
+			AnimationSpeeds.NORMAL:
+				Engine.time_scale = 1.0
+			AnimationSpeeds.FAST:
+				Engine.time_scale = 2.0
+			AnimationSpeeds.TURBO:
+				Engine.time_scale = 4.0
 
 
 func save_options():
