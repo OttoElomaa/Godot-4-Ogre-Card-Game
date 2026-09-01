@@ -40,7 +40,7 @@ func display():
 	$GameBoard_Cheats.visible = cheats_on
 	$LevelMenuCanvas.visible = cheats_on
 	toggle_visibility(%RightMenu, current_scene is GameBoard)
-	toggle_visibility(%ZoneCheats, current_scene is Scenario)
+	toggle_visibility(%ZoneCheats, current_scene is TravelScreen)
 
 func toggle_visibility(control:Control, toShow:bool):
 	if cheats_on:

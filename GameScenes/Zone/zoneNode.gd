@@ -80,10 +80,7 @@ func resolve():
 	print('Resolved node ', name)
 	unlock_connected()
 	
-	if not free_action:
-		travel_screen.increment_turn()
-	else:
-		travel_screen.updateZoneVisuals()
+	travel_screen.increment_turn()
 	
 ### If a node is freed due to running out of time, it triggers its timeout function.
 func timeout():
@@ -141,7 +138,7 @@ func showCompletionState():
 
 func unlock_connected():
 	for n:ZoneNode in unlock_on_resolve:
-		n.unlock()
+		node(n.name).unlock()
 
 
 ### A Zone Node is visible when unlocked. Nodes can be unlocked at the start,

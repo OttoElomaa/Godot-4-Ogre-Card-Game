@@ -113,6 +113,9 @@ func load_scenario(type: Scenario.ScenarioTypes):
 	if possible_scenarios.is_empty():
 		return
 	var new:Scenario = possible_scenarios.pick_random()
+	place_scenario(new)
+
+func place_scenario(new:Scenario):
 	completed_scenarios.append(new)
 	MyTools.add_child(new)
 	print('Travel Screen: loaded scenario ', new.name)

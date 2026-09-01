@@ -25,7 +25,7 @@ func _build_buttons() -> void:
 	for child in rows.get_children():
 		child.queue_free()
 
-	var levels = LevelLoader.getAllLevels()
+	var levels = DataLoader.scenarios_by_location
 	if levels.is_empty():
 		$VBox/NoLevelsLabel.show()
 		return
@@ -36,13 +36,13 @@ func _build_buttons() -> void:
 		rows.add_child(listButton)
 
 
-func _make_button(level: Dictionary) -> ClickableListItem:
+func _make_button(scenario: Scenario) -> ClickableListItem:
 	var listButton: ClickableListItem = ListButtonScene.instantiate()
 	#### PASS A FUNCTION WITH THE ID SET AS PARAM
-	var pressedFunction:Callable = func(): LevelLoader.changeTo(level.id) 
-	var description := "%s: %s" % [level.category, level.display_name]
+	var pressedFunction:Callable = func(): GameInfo.currentZone.place_scenario(scenario)
+	var description := "%s: %s" % [scenario.name, scenario.scenario_type]
 	
-	listButton.setup(level.display_name, pressedFunction, description)
+	listButton.setup(scenario.name, pressedFunction, description)
 	return listButton
 
 

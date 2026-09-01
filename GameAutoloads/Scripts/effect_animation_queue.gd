@@ -42,6 +42,7 @@ func animateGenericTrigger(dict):
 			var particles:Node = GenericParticles.instantiate()
 			target.add_child(particles)
 	
-	await animatedPanel.tree_exited
+	if Options.animation_speed == Options.AnimationSpeeds.NORMAL:
+		await animatedPanel.animationDone
 	
 	
