@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://qd3ll6tcjlep"]
+[gd_scene format=3 uid="uid://qd3ll6tcjlep"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_hhsm2"]
 [ext_resource type="Texture2D" uid="uid://cpje3wokp2ij1" path="res://Art/CardArt/card-art-creature-debug-placeholder.jpg" id="2_d68ha"]
@@ -13,19 +13,19 @@
 [ext_resource type="PackedScene" uid="uid://w0gk04ursfij" path="res://CardScriptsAndComponents/TargetingComponents/AllyFetch.tscn" id="9_c3bds"]
 [ext_resource type="PackedScene" uid="uid://botbjqrlvbhcq" path="res://CardScriptsAndComponents/Conditionals/IfType.tscn" id="10_0l6fb"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_klw2k"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lq8tf"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c3bds"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_klw2k"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_klw2k")
+noise = SubResource("FastNoiseLite_lq8tf")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0l6fb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3bds"]
 resource_local_to_scene = true
 shader = ExtResource("2_lq8tf")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_c3bds")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_klw2k")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -33,12 +33,13 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-Outrider" node_paths=PackedStringArray("alt_actions_node_1") instance=ExtResource("1_hhsm2")]
-material = SubResource("ShaderMaterial_0l6fb")
+[node name="Card-Cr-Outrider" unique_id=344900446 node_paths=PackedStringArray("alt_actions_node_1") instance=ExtResource("1_hhsm2")]
+material = SubResource("ShaderMaterial_c3bds")
 cardName = "Outrider"
 subTypeStr = "Salkhi Scout"
 group = 9
 flavorText = "Ah Outrider, sibling of barkhans, carrier of omens!"
+flavorTextShort = "Ah Outrider, sibling of barkhans, carrier of omens!"
 manaCost = 2
 startingDamage = 2
 startingHealth = 2
@@ -49,31 +50,40 @@ alt_damage_1 = 2
 alt_health_1 = 2
 alt_mana_cost_1 = 2
 
-[node name="OnSelfArrivalTrigger" parent="Actions" index="0" instance=ExtResource("2_hhsm2")]
+[node name="OnSelfArrivalTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=990565883 instance=ExtResource("2_hhsm2")]
 
-[node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" instance=ExtResource("3_q156q")]
+[node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" unique_id=1876451397 instance=ExtResource("3_q156q")]
 customActionText = "Arrival: Bolster Allies 1/1"
 
-[node name="SkillAlterHealth" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("4_bokjc")]
+[node name="SkillAlterHealth" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" unique_id=741375037 instance=ExtResource("4_bokjc")]
 bolsterDamage = 1
 bolsterHealth = 1
 
-[node name="TargetAllAllies" parent="Actions/OnSelfArrivalTrigger/CardAction" index="1" instance=ExtResource("5_d68ha")]
+[node name="TargetAllAllies" parent="Actions/OnSelfArrivalTrigger/CardAction" index="1" unique_id=225024755 instance=ExtResource("5_d68ha")]
 
-[node name="Actions2" type="Node2D" parent="." index="2"]
+[node name="Actions2" type="Node2D" parent="." index="2" unique_id=1672609149]
 script = ExtResource("7_lq8tf")
 
-[node name="OnSelfArrivalTrigger" parent="Actions2" index="0" instance=ExtResource("2_hhsm2")]
+[node name="OnSelfArrivalTrigger" parent="Actions2" index="0" unique_id=1611401490 instance=ExtResource("2_hhsm2")]
 
-[node name="CardAction" parent="Actions2/OnSelfArrivalTrigger" index="1" instance=ExtResource("3_q156q")]
+[node name="CardAction" parent="Actions2/OnSelfArrivalTrigger" index="1" unique_id=1701954297 instance=ExtResource("3_q156q")]
 customActionText = "Arrival: Fetch a Ritual."
 
-[node name="SkillDrawCardToHand" parent="Actions2/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("8_klw2k")]
+[node name="SkillDrawCardToHand" parent="Actions2/OnSelfArrivalTrigger/CardAction" index="0" unique_id=1473279815 instance=ExtResource("8_klw2k")]
 
-[node name="AllyFetch" parent="Actions2/OnSelfArrivalTrigger/CardAction" index="1" instance=ExtResource("9_c3bds")]
+[node name="AllyFetch" parent="Actions2/OnSelfArrivalTrigger/CardAction" index="1" unique_id=848856492 instance=ExtResource("9_c3bds")]
 
-[node name="IfType" parent="Actions2/OnSelfArrivalTrigger/CardAction/AllyFetch" index="1" instance=ExtResource("10_0l6fb")]
+[node name="IfType" parent="Actions2/OnSelfArrivalTrigger/CardAction/AllyFetch" index="1" unique_id=1954635053 instance=ExtResource("10_0l6fb")]
 card_type = "Ritual"
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("7_klw2k")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "2"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "2"

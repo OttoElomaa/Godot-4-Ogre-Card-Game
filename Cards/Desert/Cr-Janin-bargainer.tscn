@@ -11,22 +11,21 @@
 [ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="7_8lj54"]
 [ext_resource type="PackedScene" uid="uid://ekehndpcsqm3" path="res://CardScriptsAndComponents/Conditionals/IfNotSelf.tscn" id="7_udkeg"]
 [ext_resource type="PackedScene" uid="uid://7xhkcpcrp5p1" path="res://CardScriptsAndComponents/ScalingComponents/ScaleFromCostCard.tscn" id="8_osbj1"]
-[ext_resource type="Script" uid="uid://ct2d04rc5jy3" path="res://CardScriptsAndComponents/ScalingComponents/Scripts/scale_from_cost_card.gd" id="9_71q2j"]
 [ext_resource type="PackedScene" uid="uid://b5it2nbxjtkik" path="res://CardScriptsAndComponents/Keywords/Transient.tscn" id="11_udkeg"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_udkeg"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u2phu"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dfmyb"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_udkeg"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_udkeg")
+noise = SubResource("FastNoiseLite_u2phu")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8lj54"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dfmyb"]
 resource_local_to_scene = true
 shader = ExtResource("2_u2phu")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_dfmyb")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_udkeg")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -35,11 +34,12 @@ shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
 [node name="Card-Cr-JaninBargain" unique_id=1042521129 instance=ExtResource("1_6ny87")]
-material = SubResource("ShaderMaterial_8lj54")
+material = SubResource("ShaderMaterial_dfmyb")
 cardName = "Janin Bargainer"
 subTypeStr = "Janin Spirit"
 flavorText = "The Spirit so spoke unto them:
 \"If you are pious, you shall give me your most devoted slave.\""
+flavorTextShort = "\"If you are pious, you shall give me your most devoted slave.\""
 manaCost = 3
 startingDamage = 1
 startingHealth = 3
@@ -66,7 +66,6 @@ customActionText = "Gain 2x worth of Mana, where x is the sacrificed card's mana
 alterOwnerMana = 1
 
 [node name="ScaleFromSavedCard" parent="Actions/OnCastTrigger/CardAction2/SkillPlayerHealthMana" index="0" unique_id=1985934401 instance=ExtResource("8_osbj1")]
-script = ExtResource("9_71q2j")
 stat_to_use = 2
 multiplier = 2.0
 
@@ -75,5 +74,14 @@ multiplier = 2.0
 [node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("3_ob4vk")
 
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"
+
 [node name="EffectText" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="6" unique_id=233184557]
 text_overrun_behavior = 4
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "1"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "3"

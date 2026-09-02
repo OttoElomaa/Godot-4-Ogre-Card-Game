@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8h8fv1enpgpb"]
+[gd_scene format=3 uid="uid://c8h8fv1enpgpb"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m612s"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_2la6j"]
@@ -28,22 +28,33 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-DeathKnight" instance=ExtResource("1_m612s")]
+[node name="Card-Cr-DeathKnight" unique_id=2094376071 instance=ExtResource("1_m612s")]
 material = SubResource("ShaderMaterial_jttgo")
 cardName = "Death Knight"
-subTypeStr = "Brud Warrior"
-flavorText = "This unholy knight bears the horns of a death beetle, wields the opened ankh... "
+subTypeStr = "Wild Warrior"
+texture = ExtResource("2_m612s")
+flavorText = "It bears the horns of a death beetle, wields the opened ankh... "
+flavorTextShort = "It bears the horns of a death beetle, wields the opened ankh... "
 manaCost = 4
 startingDamage = 3
 startingHealth = 3
 
-[node name="ArrivalTrigger" parent="Actions" index="0" instance=ExtResource("2_id566")]
+[node name="ArrivalTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1828578217 instance=ExtResource("2_id566")]
 
-[node name="CardAction" parent="Actions/ArrivalTrigger" index="1" instance=ExtResource("3_2la6j")]
+[node name="CardAction" parent="Actions/ArrivalTrigger" index="1" unique_id=1529896742 instance=ExtResource("3_2la6j")]
 customActionText = "Arrival: Summon a 1/2 skeleton"
 
-[node name="SkillDeckActions" parent="Actions/ArrivalTrigger/CardAction" index="0" instance=ExtResource("4_dwvwn")]
+[node name="SkillDeckActions" parent="Actions/ArrivalTrigger/CardAction" index="0" unique_id=902453122 instance=ExtResource("4_dwvwn")]
 summonScene = ExtResource("5_jttgo")
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("2_m612s")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "4"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "3"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "3"

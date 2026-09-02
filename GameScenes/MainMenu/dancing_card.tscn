@@ -50,10 +50,8 @@ sound_off = true
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_7x407")
 custom_minimum_size = Vector2(110, 165)
-offset_right = 55.0
 offset_bottom = 76.0
 scale = Vector2(2, 2)
-mouse_filter = 0
 script = ExtResource("3_66xn2")
 show_mana_cost = false
 

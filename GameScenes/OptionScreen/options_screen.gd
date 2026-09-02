@@ -44,3 +44,13 @@ func _on_confirm_pressed():
 
 func _on_cancel_pressed():
 	queue_free()
+
+
+func _on_text_speed_item_selected(index):
+	match index:
+		0:
+			Options.text_speed = Options.TextSpeeds.NORMAL
+		1:
+			Options.text_speed = Options.TextSpeeds.FAST
+		2:
+			Options.text_speed = Options.TextSpeeds.INSTANT

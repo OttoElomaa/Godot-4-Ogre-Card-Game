@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://druxynrevb85d"]
+[gd_scene format=3 uid="uid://druxynrevb85d"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m0645"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_v7t4b"]
@@ -9,19 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://bjvo1v4qvl7v2" path="res://CardScriptsAndComponents/EffectCounters/EffectRage.tscn" id="7_68qju"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="8_helts"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_i2xmp"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m0645"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hv7rm"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v7t4b"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_i2xmp")
+noise = SubResource("FastNoiseLite_m0645")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5n8dm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ueob1"]
 resource_local_to_scene = true
 shader = ExtResource("2_v7t4b")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_hv7rm")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_v7t4b")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -29,11 +29,15 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Cr_Soothing_Nymph" instance=ExtResource("1_m0645")]
-material = SubResource("ShaderMaterial_5n8dm")
+[node name="Cr_Soothing_Nymph" unique_id=2121424795 instance=ExtResource("1_m0645")]
+material = SubResource("ShaderMaterial_ueob1")
 cardName = "Soothing Nymph"
 subTypeStr = "Woodwose Nymph"
 group = 5
+flavorText = "Rest, o warrior, rest! For tomorrow,
+Further revelry, further wrath will await."
+flavorTextShort = "Rest, o warrior, rest! For tomorrow,
+Further revelry, further wrath will await."
 manaCost = 2
 startingDamage = 1
 startingHealth = 1
@@ -41,16 +45,25 @@ action_mode = 2
 targeting_mode = 1
 priority = 1
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("3_ueob1")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1477014451 instance=ExtResource("3_ueob1")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("4_04jhv")]
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" unique_id=1394169435 instance=ExtResource("4_04jhv")]
 customActionText = "Cast: make an ally Rest and grant it 2 Rage."
 
-[node name="SkillRestAndTravel" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_jy2og")]
+[node name="SkillRestAndTravel" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=1362037189 instance=ExtResource("5_jy2og")]
 rest = true
 
-[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="2" instance=ExtResource("6_l2rqf")]
+[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="2" unique_id=1730890758 instance=ExtResource("6_l2rqf")]
 grantEffect = ExtResource("7_68qju")
 grantAmount = 2
 
-[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="3" instance=ExtResource("8_helts")]
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="3" unique_id=2008806027 instance=ExtResource("8_helts")]
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "2"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "1"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "1"

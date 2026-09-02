@@ -34,7 +34,8 @@ cardName = "Fate Guard"
 cardType = 1
 subTypeStr = "Umugite Spell"
 group = 20
-flavorText = "\"An Umugite shall not die unless that be to his Lord's benefit.\""
+flavorText = "An Umugite shall not die unless that be to his Lord's benefit."
+flavorTextShort = "An Umugite shall not die unless that be to his Lord's benefit."
 manaCost = 1
 
 [node name="RitualTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1418176750 instance=ExtResource("3_1mugf")]
@@ -47,3 +48,6 @@ grantEffect = ExtResource("7_b8i4u")
 grantAmount = 1
 
 [node name="TargetAllAllies" parent="Actions/RitualTrigger/CardAction" index="2" unique_id=1658432300 instance=ExtResource("7_x7boq")]
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "1"

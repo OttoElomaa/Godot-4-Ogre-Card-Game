@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://colad8r6pikh2"]
+[gd_scene format=3 uid="uid://colad8r6pikh2"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_yof0k"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_c2w3y"]
@@ -8,19 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_c2w3y"]
 [ext_resource type="Texture2D" uid="uid://ww0b4xqte60o" path="res://Art/CardArt/GreenDefiance/card-art-cr-pasar.jpg" id="7_c2w3y"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_286kw"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c2w3y"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nu4pp"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_286kw"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_286kw")
+noise = SubResource("FastNoiseLite_c2w3y")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mc7g8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nu4pp"]
 resource_local_to_scene = true
 shader = ExtResource("2_c2w3y")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_nu4pp")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_286kw")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -28,36 +28,43 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Cr-Pasar" instance=ExtResource("1_yof0k")]
-material = SubResource("ShaderMaterial_mc7g8")
+[node name="Cr-Pasar" unique_id=661601772 instance=ExtResource("1_yof0k")]
+material = SubResource("ShaderMaterial_nu4pp")
 cardName = "Pasar"
 subTypeStr = "Algae Changeling"
 flavorText = "O Life! Your forms are beyond counting!"
+flavorTextShort = "O Life! Your forms are beyond counting!"
 startingDamage = 1
 startingHealth = 1
 targeting_mode = 1
 priority = 5
 
-[node name="OnCastTrigger" type="Node" parent="Actions" index="0"]
+[node name="OnCastTrigger" type="Node" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=318480992]
 script = ExtResource("2_fhqbh")
 situation_text = "Cast"
 metadata/_custom_type_script = "uid://cdekh7m7g5vek"
 
-[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="0"]
+[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="0" unique_id=166018123]
 script = ExtResource("3_b1ycd")
 customActionText = "Cast: Transform into target creature."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillTransformIntoTarget" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("5_b1ycd")]
+[node name="SkillTransformIntoTarget" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=1453043018 instance=ExtResource("5_b1ycd")]
 card_name = true
 subtype = true
 flavor_text = true
 effect_counters = true
 equipment = true
 
-[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_c2w3y")]
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=1435336281 instance=ExtResource("5_c2w3y")]
 manualTargetGroup = 3
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 z_index = 1
 texture = ExtResource("7_c2w3y")
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "1"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "1"

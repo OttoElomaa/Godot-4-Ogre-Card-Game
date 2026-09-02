@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgj73nnbhfgfk"]
+[gd_scene format=3 uid="uid://cgj73nnbhfgfk"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_0ukc4"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_1rpqg"]
@@ -7,19 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="5_k8ltm"]
 [ext_resource type="Script" uid="uid://dk3jm4ajc4d2" path="res://CardScriptsAndComponents/TargetingComponents/Scripts/automatic_targeting_component.gd" id="6_wjmtk"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_l3k67"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ukc4"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qlufl"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1rpqg"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_l3k67")
+noise = SubResource("FastNoiseLite_0ukc4")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lsj0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x0w0h"]
 resource_local_to_scene = true
 shader = ExtResource("2_1rpqg")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_qlufl")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_1rpqg")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -27,8 +27,8 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Ri-Megiddo" instance=ExtResource("1_0ukc4")]
-material = SubResource("ShaderMaterial_2lsj0")
+[node name="Ri-Megiddo" unique_id=1594298610 instance=ExtResource("1_0ukc4")]
+material = SubResource("ShaderMaterial_x0w0h")
 cardName = "Megiddo"
 cardType = 1
 subTypeStr = "Ritual"
@@ -36,16 +36,20 @@ group = 12
 flavorText = "They say it all started with a flash in the sky and a ripple through the clouds. 
 
 The horror, the horror of long-dead gods falling from the sky, like speared birds."
+flavorTextShort = "The horror of long-dead gods falling from the sky, like speared birds!"
 manaCost = 5
 
-[node name="RitualTrigger" parent="Actions" index="0" instance=ExtResource("3_x0w0h")]
+[node name="RitualTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1265107695 instance=ExtResource("3_x0w0h")]
 
-[node name="CardAction" parent="Actions/RitualTrigger" index="0" instance=ExtResource("4_kyaah")]
+[node name="CardAction" parent="Actions/RitualTrigger" index="0" unique_id=628772784 instance=ExtResource("4_kyaah")]
 customActionText = "Ritual: inflict 4 on all creatures."
 
-[node name="SkillAlterHealth" parent="Actions/RitualTrigger/CardAction" index="1" instance=ExtResource("5_k8ltm")]
+[node name="SkillAlterHealth" parent="Actions/RitualTrigger/CardAction" index="1" unique_id=2118790985 instance=ExtResource("5_k8ltm")]
 inflictCreature = 4
 
-[node name="AutoTargetingComponent" type="Node2D" parent="Actions/RitualTrigger/CardAction" index="2"]
+[node name="AutoTargetingComponent" type="Node2D" parent="Actions/RitualTrigger/CardAction" index="2" unique_id=67428735]
 script = ExtResource("6_wjmtk")
 metadata/_custom_type_script = "uid://dk3jm4ajc4d2"
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "5"

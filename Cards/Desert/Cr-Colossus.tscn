@@ -1,22 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccbs0m4pq5nbi"]
+[gd_scene format=3 uid="uid://ccbs0m4pq5nbi"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_cw6g5"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_hyloh"]
 [ext_resource type="Texture2D" uid="uid://d3bbyx5b4uahh" path="res://Art/CardArt/Desert/card-art-cr-colossus.jpg" id="3_cw6g5"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_g2ju6"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cw6g5"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xn38x"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hyloh"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_g2ju6")
+noise = SubResource("FastNoiseLite_cw6g5")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4nkfu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s6xe7"]
 resource_local_to_scene = true
 shader = ExtResource("2_hyloh")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_xn38x")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_hyloh")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -24,38 +24,25 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-Ogre" instance=ExtResource("1_cw6g5")]
-material = SubResource("ShaderMaterial_4nkfu")
+[node name="Card-Cr-Ogre" unique_id=2042448335 instance=ExtResource("1_cw6g5")]
+material = SubResource("ShaderMaterial_s6xe7")
 cardName = "Colossus"
-cardType = 0
 subTypeStr = "Giant"
 group = 9
-flavorText = "Big guy"
+flavorText = "We know not from whence it fell in ages past, to rise again from beneath the dunes."
+flavorTextShort = "We know not from whence it fell in ages past, to rise again from beneath the dunes."
 manaCost = 2
 startingDamage = 10
 startingHealth = 8
-upgraded = 0
-block_on_arrival = true
-action_mode = 1
-targeting_mode = 0
-priority = 0
-will_not_charge = false
-fearless = false
-alt_card_name_1 = ""
-alt_keywords_1 = PackedStringArray()
-alt_damage_1 = 0
-alt_health_1 = 0
-alt_mana_cost_1 = 0
-alt_card_name_2 = ""
-alt_keywords_2 = PackedStringArray()
-alt_damage_2 = 0
-alt_health_2 = 0
-alt_mana_cost_2 = 0
-alt_card_name_3 = ""
-alt_keywords_3 = PackedStringArray()
-alt_damage_3 = 0
-alt_health_3 = 0
-alt_mana_cost_3 = 0
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("3_cw6g5")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "2"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "10"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "8"

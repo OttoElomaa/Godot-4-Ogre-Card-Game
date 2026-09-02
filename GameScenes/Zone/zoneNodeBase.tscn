@@ -1,10 +1,17 @@
 [gd_scene format=3 uid="uid://nfa3rqo1oyuu"]
 
+[ext_resource type="Shader" uid="uid://b0r8vadh04m41" path="res://Resources/Shaders/sand_dissolve.tres" id="1_0njxy"]
 [ext_resource type="Script" uid="uid://cxibr1su6mx2o" path="res://GameScenes/Zone/zoneNode.gd" id="1_io0tu"]
 [ext_resource type="Texture2D" uid="uid://dyosit4er0eab" path="res://Art/CardComponents/card-effect-counter-texture-protection.png" id="2_kx7v2"]
 [ext_resource type="Texture2D" uid="uid://be0qsfcp2w37c" path="res://Art/CardComponents/zone-battle-icon-disabled-overlay.png" id="3_0njxy"]
 [ext_resource type="Texture2D" uid="uid://ccx2ko1eonipr" path="res://Art/CardComponents/card-action-state-indicator-frame-texture.png" id="4_y17gd"]
 [ext_resource type="LabelSettings" uid="uid://dhqgs5cdwbsp2" path="res://Fonts/LabelSettings/LabelSetMiniBrown.tres" id="5_7syt2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vsxbk"]
+resource_local_to_scene = true
+shader = ExtResource("1_0njxy")
+shader_parameter/percentage_1 = 1.0
+shader_parameter/FloatParameter = 0.20000000298024
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4wg2"]
 corner_radius_top_left = 40
@@ -58,6 +65,59 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PanelContainer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:material:shader_parameter/percentage_1")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_7syt2"]
+resource_name = "about_to_expire"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.5821682, 0.42178053, 1), Color(1, 0.5821682, 0.42178053, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.35000008, 0.70000005, 0.9500001, 1.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.5821682, 0.42178053, 1), Color(1, 0.5821682, 0.42178053, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_0njxy"]
 resource_name = "resolve"
@@ -99,6 +159,35 @@ tracks/2/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_s4wg2"]
+resource_name = "timeout"
+length = 1.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/percentage_1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.37881652, 0.19163844, 9.62615e-08, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_y17gd"]
 resource_name = "unlock"
 length = 0.7
@@ -132,25 +221,32 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7syt2"]
 _data = {
 &"RESET": SubResource("Animation_kx7v2"),
+&"about_to_expire": SubResource("Animation_7syt2"),
 &"resolve": SubResource("Animation_0njxy"),
+&"timeout": SubResource("Animation_s4wg2"),
 &"unlock": SubResource("Animation_y17gd")
 }
 
 [node name="ZoneNodeBase" type="Node2D" unique_id=1158483326]
+material = SubResource("ShaderMaterial_vsxbk")
 script = ExtResource("1_io0tu")
 metadata/_custom_type_script = "uid://cxibr1su6mx2o"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1253845527]
 unique_name_in_owner = true
-clip_children = 1
+clip_children = 2
+use_parent_material = true
 offset_left = -40.0
 offset_top = -30.0
 offset_right = 40.0
 offset_bottom = 50.0
+pivot_offset_ratio = Vector2(0, 0.1)
+offset_transform_position_ratio = Vector2(-0.05, -0.05)
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_s4wg2")
 
 [node name="Icon" type="TextureRect" parent="PanelContainer" unique_id=1553335485]
+use_parent_material = true
 layout_mode = 2
 texture = ExtResource("2_kx7v2")
 expand_mode = 1
@@ -162,6 +258,7 @@ scale = Vector2(1.8, 1.8)
 texture = ExtResource("3_0njxy")
 
 [node name="Frame" type="Sprite2D" parent="." unique_id=322272209]
+use_parent_material = true
 texture = ExtResource("4_y17gd")
 
 [node name="InfoPanel" type="PanelContainer" parent="." unique_id=384398957]

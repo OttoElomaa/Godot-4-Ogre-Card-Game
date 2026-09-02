@@ -35,6 +35,7 @@ cardName = "True Name Paladin"
 subTypeStr = "Pilgrim Warrior"
 group = 9
 flavorText = "The cultists seek the 'correction' of names: for in distortion of time, language strays from the Truth."
+flavorTextShort = "The correction of names is carried out by axe-edge..."
 manaCost = 3
 startingDamage = 2
 startingHealth = 4

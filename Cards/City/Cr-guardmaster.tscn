@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://drfjmc3awv6y7"]
+[gd_scene format=3 uid="uid://drfjmc3awv6y7"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m82sg"]
 [ext_resource type="PackedScene" uid="uid://jyrj2f2h71w" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnTrigger.tscn" id="2_m15dn"]
@@ -9,19 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_gwvip"]
 [ext_resource type="PackedScene" uid="uid://cvgj3stl7h3fy" path="res://CardScriptsAndComponents/EffectCounters/EffectArmor.tscn" id="6_m15dn"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_e7i22"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qprtf"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gwvip"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e7i22"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_e7i22")
+noise = SubResource("FastNoiseLite_qprtf")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cyrk5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwvip"]
 resource_local_to_scene = true
 shader = ExtResource("2_qprtf")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_gwvip")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_e7i22")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -29,27 +29,37 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Guardmaster" instance=ExtResource("1_m82sg")]
-material = SubResource("ShaderMaterial_cyrk5")
+[node name="Guardmaster" unique_id=1891502820 instance=ExtResource("1_m82sg")]
+material = SubResource("ShaderMaterial_gwvip")
 cardName = "Guardmaster"
 subTypeStr = "Human Soldier"
 group = 14
 flavorText = "This one is privy to numbers, and knows Ur-Tekton's scriptures."
+flavorTextShort = "This one is privy to numbers, and knows Ur-Tekton's scriptures."
 manaCost = 4
 startingDamage = 2
 startingHealth = 1
 action_mode = 0
 
-[node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("2_m15dn")]
+[node name="OnAlliedTurnTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=584615375 instance=ExtResource("2_m15dn")]
 
-[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" instance=ExtResource("3_qprtf")]
+[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" unique_id=88720228 instance=ExtResource("3_qprtf")]
 customActionText = "On turn, gain 1 Armor."
 
-[node name="TargetSelf" parent="Actions/OnAlliedTurnTrigger/CardAction" index="0" instance=ExtResource("4_e7i22")]
+[node name="TargetSelf" parent="Actions/OnAlliedTurnTrigger/CardAction" index="0" unique_id=727371381 instance=ExtResource("4_e7i22")]
 
-[node name="SkillEffectCounters" parent="Actions/OnAlliedTurnTrigger/CardAction" index="1" instance=ExtResource("5_gwvip")]
+[node name="SkillEffectCounters" parent="Actions/OnAlliedTurnTrigger/CardAction" index="1" unique_id=1914776161 instance=ExtResource("5_gwvip")]
 grantEffect = ExtResource("6_m15dn")
 grantAmount = 1
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("2_mpk4d")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "4"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "1"

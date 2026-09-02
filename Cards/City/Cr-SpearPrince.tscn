@@ -8,19 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://dpj5peh2lud61" path="res://CardScriptsAndComponents/EffectCounters/EffectCommand.tscn" id="6_lltbj"]
 [ext_resource type="PackedScene" uid="uid://o0gequpe617g" path="res://CardScriptsAndComponents/Actions/SkillAlterHealth.tscn" id="7_6u87w"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_uf7bs"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nigql"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pcrpj"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2mmmc"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_uf7bs")
+noise = SubResource("FastNoiseLite_nigql")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ch7ul"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28axv"]
 resource_local_to_scene = true
 shader = ExtResource("2_2mmmc")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_pcrpj")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_2mmmc")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -29,11 +29,12 @@ shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
 [node name="Cr-SpearPrince" unique_id=1171307177 instance=ExtResource("1_nigql")]
-material = SubResource("ShaderMaterial_ch7ul")
+material = SubResource("ShaderMaterial_28axv")
 cardName = "Spear-Prince"
 subTypeStr = "Ask'lani Soldier"
 group = 14
 flavorText = "This one has the commanding presence of a little king."
+flavorTextShort = "This one has the commanding presence of a little king."
 manaCost = 3
 startingDamage = 2
 startingHealth = 3

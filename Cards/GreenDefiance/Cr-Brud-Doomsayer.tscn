@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://0rv6qotxbvyy"]
+[gd_scene format=3 uid="uid://0rv6qotxbvyy"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_jhoc5"]
 [ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="2_efnvc"]
@@ -9,19 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://nr3rtlgag5sv" path="res://CardScriptsAndComponents/Actions/SkillEffectCounters.tscn" id="5_efnvc"]
 [ext_resource type="PackedScene" uid="uid://b7ebpdx20rjh6" path="res://CardScriptsAndComponents/EffectCounters/EffectDoom.tscn" id="6_qb0jj"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_nn21i"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_henv4"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fgm2b"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nn21i"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_nn21i")
+noise = SubResource("FastNoiseLite_henv4")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_akg3p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fgm2b"]
 resource_local_to_scene = true
 shader = ExtResource("2_henv4")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_fgm2b")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_nn21i")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -29,49 +29,36 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-Doomsayer" instance=ExtResource("1_jhoc5")]
-material = SubResource("ShaderMaterial_akg3p")
+[node name="Card-Cr-Doomsayer" unique_id=1632269092 instance=ExtResource("1_jhoc5")]
+material = SubResource("ShaderMaterial_fgm2b")
 cardName = "Maol Skull Priest"
-cardType = 0
 subTypeStr = "Skull Priest"
 group = 5
-flavorText = "Wearing mossy skulls from the ancient earth, they command the wrath of Extinction onto their enemies."
+flavorText = "May Extinction take thee and thy kin and kindred! Your doom runs!"
+flavorTextShort = "May Extinction take thee and thy kin and kindred! Your doom runs!"
 manaCost = 3
-startingDamage = 0
 startingHealth = 4
-upgraded = 0
 block_on_arrival = false
 action_mode = 2
 targeting_mode = 1
-priority = 0
-will_not_charge = false
-alt_card_name_1 = ""
-alt_keywords_1 = PackedStringArray()
-alt_damage_1 = 0
-alt_health_1 = 0
-alt_mana_cost_1 = 0
-alt_card_name_2 = ""
-alt_keywords_2 = PackedStringArray()
-alt_damage_2 = 0
-alt_health_2 = 0
-alt_mana_cost_2 = 0
-alt_card_name_3 = ""
-alt_keywords_3 = PackedStringArray()
-alt_damage_3 = 0
-alt_health_3 = 0
-alt_mana_cost_3 = 0
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_efnvc")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=138853700 instance=ExtResource("2_efnvc")]
 
-[node name="CardAction2" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("3_qb0jj")]
+[node name="CardAction2" parent="Actions/OnCastTrigger" index="0" unique_id=1603663884 instance=ExtResource("3_qb0jj")]
 customActionText = "Cast: Add 2 Doom to target"
 
-[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction2" index="0" instance=ExtResource("4_henv4")]
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction2" index="0" unique_id=1866065837 instance=ExtResource("4_henv4")]
 manualTargetGroup = 2
 
-[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction2" index="1" instance=ExtResource("5_efnvc")]
+[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction2" index="1" unique_id=1163452946 instance=ExtResource("5_efnvc")]
 grantEffect = ExtResource("6_qb0jj")
 grantAmount = 2
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("3_jhoc5")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "4"

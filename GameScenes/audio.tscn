@@ -10,6 +10,9 @@ extends Node2D
 func _ready():
 	if BGM:
 		MusicBus.play(BGM)
+
+func play(bgm:AudioStream):
+	MusicBus.play(bgm)
 "
 
 [node name="Audio" type="Node2D" unique_id=576542653]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvy7elkjsgcxn"]
+[gd_scene format=3 uid="uid://dvy7elkjsgcxn"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_804mc"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_w4rxy"]
@@ -7,19 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="5_ggk3f"]
 [ext_resource type="Texture2D" uid="uid://dbw1qf7epxuht" path="res://Art/CardArt/GreenDefiance/card-art-ri-knell.png" id="6_ln4x7"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_q0x0d"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ln4x7"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cva7b"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ggk3f"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_q0x0d")
+noise = SubResource("FastNoiseLite_ln4x7")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ln4x7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ua2b"]
 resource_local_to_scene = true
 shader = ExtResource("2_w4rxy")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_cva7b")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_ggk3f")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -27,30 +27,31 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Ri-Knell" instance=ExtResource("1_804mc")]
-material = SubResource("ShaderMaterial_ln4x7")
+[node name="Ri-Knell" unique_id=768337257 instance=ExtResource("1_804mc")]
+material = SubResource("ShaderMaterial_7ua2b")
 cardName = "Knell"
 cardType = 1
 subTypeStr = "Spell"
 group = 3
 flavorText = "\"Extinction erases all... in Anghu, he alone presides over the skulls.\""
+flavorTextShort = "\"Extinction erases all... in Anghu, he alone presides over the skulls.\""
 manaCost = 4
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("3_cva7b")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=932400940 instance=ExtResource("3_cva7b")]
 
-[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="0"]
+[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="0" unique_id=989753584]
 script = ExtResource("4_ln4x7")
 customActionText = "Ritual: Deal 3 damage to the enemy player."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("5_ggk3f")]
+[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=1607101487 instance=ExtResource("5_ggk3f")]
 alterOpponentHealth = -3
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("6_ln4x7")
 
-[node name="ManaCost" parent="Frontside" index="2"]
+[node name="ManaCost" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="2" unique_id=63420725]
 visible = false
 
-[node name="ActionState" parent="Frontside" index="5"]
-visible = false
+[node name="ManaCostLabel" parent="Frontside/ManaCost" index="1" unique_id=1527953317]
+text = "4"

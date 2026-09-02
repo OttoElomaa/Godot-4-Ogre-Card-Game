@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://o4288fvn3jsd"]
+[gd_scene format=3 uid="uid://o4288fvn3jsd"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_tm7ws"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_vkpnd"]
@@ -15,7 +15,7 @@ noise_type = 3
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
 noise = SubResource("FastNoiseLite_s5qc8")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qiy7j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkpnd"]
 resource_local_to_scene = true
 shader = ExtResource("2_vkpnd")
 shader_parameter/percentage = 1.0
@@ -27,26 +27,27 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Ri-Fronds of Madar" instance=ExtResource("1_tm7ws")]
-material = SubResource("ShaderMaterial_qiy7j")
+[node name="Ri-Fronds of Madar" unique_id=1574198742 instance=ExtResource("1_tm7ws")]
+material = SubResource("ShaderMaterial_vkpnd")
 cardName = "Risheh Pasar"
 cardType = 1
 subTypeStr = "Gharch Spell"
 group = 6
 flavorText = "Come, o Life! Reclaim thy wayward child!"
+flavorTextShort = "Come, o Life! Reclaim thy wayward child!"
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_vqnwm")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=417855928 instance=ExtResource("2_vqnwm")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("3_006rp")]
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" unique_id=1616983130 instance=ExtResource("3_006rp")]
 customActionText = "Reveal target ally as a shapeshifting Pasar."
 
-[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("4_gmrsd")]
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=319524531 instance=ExtResource("4_gmrsd")]
 manualTargetGroup = 1
 
-[node name="SkillTransformTargetIntoCard" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_gmrsd")]
+[node name="SkillTransformTargetIntoCard" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=158603194 instance=ExtResource("5_gmrsd")]
 transform_into = ExtResource("6_vkpnd")
 effect_counters = true
 equipment = true
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("8_vkpnd")

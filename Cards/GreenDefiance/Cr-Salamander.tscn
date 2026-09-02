@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1xv0gbf1tp4m"]
+[gd_scene format=3 uid="uid://c1xv0gbf1tp4m"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_fxh2v"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_form8"]
@@ -8,19 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://cfyhxpowqwla7" path="res://CardScriptsAndComponents/Actions/SkillDispelStatus.tscn" id="6_76ehl"]
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="7_q30ep"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_eerp6"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fxh2v"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_usfen"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_form8"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_eerp6")
+noise = SubResource("FastNoiseLite_fxh2v")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6eh04"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cau8g"]
 resource_local_to_scene = true
 shader = ExtResource("2_form8")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_usfen")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_form8")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -28,27 +28,37 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Cr-Salamander" instance=ExtResource("1_fxh2v")]
-material = SubResource("ShaderMaterial_6eh04")
+[node name="Cr-Salamander" unique_id=1738877978 instance=ExtResource("1_fxh2v")]
+material = SubResource("ShaderMaterial_cau8g")
 cardName = "Salamander"
 subTypeStr = "Beast"
 group = 3
-flavorText = "This tiny beast possesses unrivaled healing powers. Its slime, if collected, can seal any wound and return youth to the skin.
+flavorText = "This tiny beast possesses unrivaled healing powers. Its slime can seal any wound and return youth to the skin.
 
 ~ Ask'lani Bestiarium"
+flavorTextShort = "Its slime can seal any wound and return youth to the skin."
 manaCost = 1
 startingDamage = 1
 startingHealth = 3
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("3_cau8g")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1056743400 instance=ExtResource("3_cau8g")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("4_1a1st")]
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" unique_id=345359307 instance=ExtResource("4_1a1st")]
 customActionText = "Cast: heal and dispel all debuffs."
 
-[node name="SkillHeal" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_dtb70")]
+[node name="SkillHeal" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=110503536 instance=ExtResource("5_dtb70")]
 
-[node name="SkillDispelStatus" parent="Actions/OnCastTrigger/CardAction" index="2" instance=ExtResource("6_76ehl")]
+[node name="SkillDispelStatus" parent="Actions/OnCastTrigger/CardAction" index="2" unique_id=412948188 instance=ExtResource("6_76ehl")]
 debuffs = true
 
-[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="3" instance=ExtResource("7_q30ep")]
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="3" unique_id=1381482504 instance=ExtResource("7_q30ep")]
 manualTargetGroup = 1
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "1"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "1"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "3"

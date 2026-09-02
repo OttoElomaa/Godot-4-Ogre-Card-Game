@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_qqwmo"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_c7ar3"]
+[ext_resource type="PackedScene" uid="uid://cm3ciubhc18jw" path="res://CardScriptsAndComponents/Keywords/Haste.tscn" id="3_c7ar3"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dgjs0"]
 resource_local_to_scene = true
@@ -33,6 +34,8 @@ manaCost = 2
 startingDamage = 1
 startingHealth = 2
 priority = 1
+
+[node name="Haste" parent="KeywordHandler/MyKeywords" parent_id_path=PackedInt32Array(83486270) index="0" unique_id=2047415150 instance=ExtResource("3_c7ar3")]
 
 [node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
 text = "2"

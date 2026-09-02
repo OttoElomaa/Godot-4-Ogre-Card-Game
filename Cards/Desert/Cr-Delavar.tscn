@@ -32,9 +32,11 @@ material = SubResource("ShaderMaterial_1w66u")
 cardName = "Delavar"
 subTypeStr = "Soldier"
 group = 12
+flavorText = "The vigorous paladins of the High Kingdom pledge their service to prophets beneath the Blue Lotus."
+flavorTextShort = "For the Lotus, my Life I kindle."
 manaCost = 2
 startingDamage = 2
-startingHealth = 2
+startingHealth = 3
 
 [node name="OnSelfSurvivalTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=18194385 instance=ExtResource("3_5cfuv")]
 
@@ -46,3 +48,12 @@ change_health = 1
 
 [node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("6_73jba")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "2"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "3"

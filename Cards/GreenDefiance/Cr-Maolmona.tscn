@@ -26,12 +26,6 @@ shader_parameter/size_3 = 0.05
 material = SubResource("ShaderMaterial_s5s5a")
 cardName = "Fuckin' Maolmona"
 subTypeStr = "Fungal Demon God"
-flavorText = "Beneath the Mozar’s reaching folds
-Of failing mind, of cloying smell
-Of ancient growth, the Second Hell
-We found the strain of Maolmona
-The flesh decays, the being frays. But we
-We ever live in death."
 startingHealth = 200
 action_mode = 0
 
@@ -43,3 +37,6 @@ text = "Fuckin' Maolmona"
 
 [node name="HealthGlowDown" parent="Frontside/Resources/Glow" parent_id_path=PackedInt32Array(405272551) index="2" unique_id=1764133823]
 visible = true
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "200"

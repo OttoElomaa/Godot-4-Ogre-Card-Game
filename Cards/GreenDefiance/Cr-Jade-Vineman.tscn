@@ -61,6 +61,7 @@ subTypeStr = "Wild Vineman"
 texture = ExtResource("5_m240v")
 group = 3
 flavorText = "Ah, child of the vine, green-clad, scion of Anghu..."
+flavorTextShort = "Ah, child of the vine, green-clad, scion of Anghu..."
 manaCost = 1
 startingDamage = 1
 startingHealth = 1

@@ -1,22 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://ds7yqwico71ks"]
+[gd_scene format=3 uid="uid://ds7yqwico71ks"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_p6y1s"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_1gxju"]
 [ext_resource type="Texture2D" uid="uid://cq588jgcvxryv" path="res://Art/CardArt/Depths/card-art-creature-Kull-assassin.jpg" id="2_31yp1"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0fnt6"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1gxju"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7ytln"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0fnt6"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_0fnt6")
+noise = SubResource("FastNoiseLite_1gxju")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lyna0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ytln"]
 resource_local_to_scene = true
 shader = ExtResource("2_1gxju")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_7ytln")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_0fnt6")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -24,14 +24,26 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-KullAssassin" instance=ExtResource("1_p6y1s")]
-material = SubResource("ShaderMaterial_lyna0")
-cardName = "Kull Assassin"
-subTypeStr = "Kull Warrior"
+[node name="Card-Cr-KullAssassin" unique_id=1412323906 instance=ExtResource("1_p6y1s")]
+material = SubResource("ShaderMaterial_7ytln")
+cardName = "Shadow Assassin"
+subTypeStr = "Scout"
+texture = ExtResource("2_31yp1")
 group = 18
+flavorText = "She claims to have taken the life of three underground kings."
+flavorTextShort = "She claims to have taken the life of three underground kings."
 manaCost = 3
 startingDamage = 2
 startingHealth = 2
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("2_31yp1")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "2"

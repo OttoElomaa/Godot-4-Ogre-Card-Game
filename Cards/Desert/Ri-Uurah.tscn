@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://fh64qlwvxrp5"]
+[gd_scene format=3 uid="uid://fh64qlwvxrp5"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_hxcfu"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_jtg7p"]
@@ -7,19 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://bnjmuo0d5grgs" path="res://CardScriptsAndComponents/TargetingComponents/TargetAllAllies.tscn" id="5_l1kj7"]
 [ext_resource type="PackedScene" uid="uid://c1q8muh6pjecq" path="res://CardScriptsAndComponents/Actions/SkillShuffleToDeck.tscn" id="6_1y7dg"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xoext"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hxcfu"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ftmq3"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jtg7p"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_xoext")
+noise = SubResource("FastNoiseLite_hxcfu")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lnlbm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r46af"]
 resource_local_to_scene = true
 shader = ExtResource("2_jtg7p")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_ftmq3")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_jtg7p")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -27,21 +27,26 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card" instance=ExtResource("1_hxcfu")]
-material = SubResource("ShaderMaterial_lnlbm")
+[node name="Card" unique_id=2146293221 instance=ExtResource("1_hxcfu")]
+material = SubResource("ShaderMaterial_r46af")
 cardName = "Uurah"
 cardType = 1
 subTypeStr = "Salkhi Tactic"
 group = 10
 flavorText = "They vanish like the wind...
 In silence, only the dunes speak their names."
+flavorTextShort = "They vanish like the wind...
+In silence, only the dunes speak their names."
 manaCost = 3
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("3_r46af")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1753573426 instance=ExtResource("3_r46af")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("4_pvvi3")]
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" unique_id=1421983862 instance=ExtResource("4_pvvi3")]
 customActionText = "Ritual: Return all your cards from the board to your deck."
 
-[node name="TargetAllAllies" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_l1kj7")]
+[node name="TargetAllAllies" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=236434620 instance=ExtResource("5_l1kj7")]
 
-[node name="SkillShuffleToDeck" parent="Actions/OnCastTrigger/CardAction" index="2" instance=ExtResource("6_1y7dg")]
+[node name="SkillShuffleToDeck" parent="Actions/OnCastTrigger/CardAction" index="2" unique_id=411919576 instance=ExtResource("6_1y7dg")]
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"

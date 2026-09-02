@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ufufchgvc1q8"]
+[gd_scene format=3 uid="uid://ufufchgvc1q8"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_mtfp6"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_1ri44"]
@@ -24,15 +24,25 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-Tugar" instance=ExtResource("1_mtfp6")]
+[node name="Card-Cr-Tugar" unique_id=1956863704 instance=ExtResource("1_mtfp6")]
 material = SubResource("ShaderMaterial_ol1gr")
 cardName = "Zubar"
 subTypeStr = "Tugar Beast"
 flavorText = "The Salkhi claim that the Zubar is quite intelligent, able to show piety to gods and process numbers. Let not yourself be deceived:  no intelligent being would let itself be ridden!
 ~ Ask'lani Bestiarium"
+flavorTextShort = "Let not yourself be deceived:  no intelligent being would let itself be ridden!"
 manaCost = 3
 startingDamage = 2
 startingHealth = 3
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("2_mtfp6")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "3"

@@ -35,6 +35,7 @@ subTypeStr = "Soldier"
 texture = ExtResource("3_aps78")
 group = 14
 flavorText = "These holy slingers lob the City's own stones; that way, the Ur-Tekton's work goes beyond defense."
+flavorTextShort = "Ur-Tekton strikes down enemies even beyond the outer wall."
 manaCost = 3
 startingDamage = 2
 startingHealth = 2

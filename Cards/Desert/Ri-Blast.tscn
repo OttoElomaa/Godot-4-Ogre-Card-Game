@@ -39,6 +39,7 @@ cardType = 1
 subTypeStr = "Spell"
 group = 1
 flavorText = "May Ataric flame judge your sins!"
+flavorTextShort = "May Ataric flame judge your sins!"
 manaCost = 2
 alt_card_name_1 = "Blaze"
 alt_actions_node_1 = NodePath("Actions2")

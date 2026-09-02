@@ -7,19 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://3l3w5jk5cfnx" path="res://CardScriptsAndComponents/TargetingComponents/TargetSelf.tscn" id="5_ccqna"]
 [ext_resource type="PackedScene" uid="uid://q8jsd36b5cyh" path="res://CardScriptsAndComponents/Actions/SkillHeal.tscn" id="6_ms0s1"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_esx4j"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hadet"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8nrvt"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_754ow"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_esx4j")
+noise = SubResource("FastNoiseLite_hadet")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3mkj3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gukea"]
 resource_local_to_scene = true
 shader = ExtResource("2_754ow")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_8nrvt")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_754ow")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -28,11 +28,12 @@ shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
 [node name="Cr-Immortal" unique_id=1171307177 instance=ExtResource("1_hadet")]
-material = SubResource("ShaderMaterial_3mkj3")
+material = SubResource("ShaderMaterial_gukea")
 cardName = "Immortal"
 subTypeStr = "Ask'lani Elite"
 group = 14
 flavorText = "These elites of the Guard are said to have no souls of men beneath their masks."
+flavorTextShort = "Immortals have no souls beneath their masks."
 manaCost = 5
 startingDamage = 3
 startingHealth = 5

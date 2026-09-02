@@ -13,7 +13,9 @@ func _ready() -> void:
 	for child in get_children():
 		if child is ActionsNodeChamp:
 			for i in child.get_children():
-				all_actions.append(child)
+				var preview = child.duplicate()
+				preview.level = 1
+				all_actions.append(preview)
 				if i is OnCastTrigger and child.level > 0:
 					usable_actions.append(child)
 					break

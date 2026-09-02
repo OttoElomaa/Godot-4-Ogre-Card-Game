@@ -7,19 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_o5mul"]
 [ext_resource type="PackedScene" uid="uid://0yevoktm0llg" path="res://CardScriptsAndComponents/Actions/SkillShoot.tscn" id="6_vv2ji"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pj1bf"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dmvpf"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dnvwe"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2172x"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_pj1bf")
+noise = SubResource("FastNoiseLite_dmvpf")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ho2k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hw0ic"]
 resource_local_to_scene = true
 shader = ExtResource("2_2172x")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_dnvwe")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_2172x")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -28,11 +28,12 @@ shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
 [node name="Cr-Wandering Bow" unique_id=1171307177 instance=ExtResource("1_dmvpf")]
-material = SubResource("ShaderMaterial_6ho2k")
+material = SubResource("ShaderMaterial_hw0ic")
 cardName = "Wandering Bow"
 subTypeStr = "Salkhi Warrior"
 group = 10
-flavorText = "These archers loose arrows from beasts' back, elusive and rapid."
+flavorText = "Ah Baytuur the killing shot, whose string sings as the wind."
+flavorTextShort = "Ah Baytuur the killing shot, whose string sings as the wind."
 manaCost = 3
 startingDamage = 3
 startingHealth = 2

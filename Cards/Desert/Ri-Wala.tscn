@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuv0oahpdcxew"]
+[gd_scene format=3 uid="uid://cuv0oahpdcxew"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_j7nje"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_pd8kk"]
@@ -13,7 +13,7 @@ noise_type = 3
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
 noise = SubResource("FastNoiseLite_s5qc8")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ok14u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j7nje"]
 resource_local_to_scene = true
 shader = ExtResource("2_pd8kk")
 shader_parameter/percentage = 1.0
@@ -25,22 +25,26 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Ri-Wala" instance=ExtResource("1_j7nje")]
-material = SubResource("ShaderMaterial_ok14u")
+[node name="Card-Ri-Wala" unique_id=107501463 instance=ExtResource("1_j7nje")]
+material = SubResource("ShaderMaterial_j7nje")
 cardName = "Wala"
 cardType = 1
 subTypeStr = "Spell"
 group = 9
 flavorText = "\"His breath wind, his voice thunder, his eyes lightning.\""
+flavorTextShort = "\"His breath wind, his voice thunder, his eyes lightning.\""
 manaCost = 3
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("3_8gi67")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1969018501 instance=ExtResource("3_8gi67")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("4_j6p17")]
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" unique_id=805379987 instance=ExtResource("4_j6p17")]
 customActionText = "Ritual: Draw 2"
 
-[node name="SkillDeckActions" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("5_m8ltg")]
+[node name="SkillDeckActions" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=22214959 instance=ExtResource("5_m8ltg")]
 drawCards = 2
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("6_1k4ua")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"

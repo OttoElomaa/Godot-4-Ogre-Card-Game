@@ -106,6 +106,7 @@ var subTypes := []
 var cardTypeStr := ""
 
 @export_multiline var flavorText := ""
+@export_multiline var flavorTextShort := ""
 
 var cardArt:
 	get:

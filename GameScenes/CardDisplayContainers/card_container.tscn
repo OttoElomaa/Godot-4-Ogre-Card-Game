@@ -213,5 +213,15 @@ label_settings = ExtResource("13_yh587")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="CardShadow" type="ColorRect" parent="." unique_id=1985945409]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 10)
+mouse_filter = 2
+color = Color(0.043328803, 0.043328803, 0.043328803, 0.36862746)
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

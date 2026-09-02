@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bde1dj0svh85p"]
+[gd_scene format=3 uid="uid://bde1dj0svh85p"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_feg3q"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_3uq5a"]
@@ -8,19 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="6_3uq5a"]
 [ext_resource type="Texture2D" uid="uid://cwm1sioqh8l2c" path="res://Art/CardArt/Depths/card-art-cr-umug-magus-v4.jpg" id="7_qosoe"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_iem55"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qosoe"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hlk34"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oeap1"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_iem55")
+noise = SubResource("FastNoiseLite_qosoe")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_byirq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lg7p8"]
 resource_local_to_scene = true
 shader = ExtResource("2_3uq5a")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_hlk34")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_oeap1")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -28,27 +28,31 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Ri-Ordeal" instance=ExtResource("1_feg3q")]
-material = SubResource("ShaderMaterial_byirq")
+[node name="Ri-Ordeal" unique_id=1884683022 instance=ExtResource("1_feg3q")]
+material = SubResource("ShaderMaterial_lg7p8")
 cardName = "Ordeal"
 cardType = 1
 subTypeStr = "Umugite Ritual"
 group = 20
-flavorText = "\"If you have the strength, you shall rise. Otherwise, you shall fall.\""
+flavorText = "Now you prove your worth before Umug. Those who are worthless should be spared of a disgraceful Life, as you know."
+flavorTextShort = "Those who are worthless should be spared of a disgraceful Life."
 manaCost = 2
 
-[node name="RitualTrigger" parent="Actions" index="0" instance=ExtResource("3_qosoe")]
+[node name="RitualTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1149589672 instance=ExtResource("3_qosoe")]
 
-[node name="CardAction" parent="Actions/RitualTrigger" index="0" instance=ExtResource("4_oeap1")]
+[node name="CardAction" parent="Actions/RitualTrigger" index="0" unique_id=868997143 instance=ExtResource("4_oeap1")]
 customActionText = "Chosen creature dies and gains +1/+1 for the duration of the battle."
 
-[node name="SkillAlterHealth" parent="Actions/RitualTrigger/CardAction" index="1" instance=ExtResource("5_lg7p8")]
+[node name="SkillAlterHealth" parent="Actions/RitualTrigger/CardAction" index="1" unique_id=1949253200 instance=ExtResource("5_lg7p8")]
 bolsterDamage = 1
 bolsterHealth = 1
 inflictCreature = 999
 
-[node name="ManualTargeting" parent="Actions/RitualTrigger/CardAction" index="2" instance=ExtResource("6_3uq5a")]
+[node name="ManualTargeting" parent="Actions/RitualTrigger/CardAction" index="2" unique_id=1039887346 instance=ExtResource("6_3uq5a")]
 manualTargetGroup = 1
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("7_qosoe")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "2"

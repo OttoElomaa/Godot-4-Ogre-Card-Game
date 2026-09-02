@@ -3,6 +3,7 @@ class_name ZoneNode
 
 var unlocked = false
 var resolved = false
+var timed_out = false
 var travel_screen:TravelScreen = null
 var myScenario: String = ''
 @export var input_active = true:
@@ -35,11 +36,15 @@ var time_elapsed = 0
 ## What nodes will be unlocked if this one is allowed to time out. Assign ZoneNodes.
 @export var unlock_on_timeout: Array[Node]
 
+## If this is set, the player will be forced into a dialogue should this node time out.
+@export var dialogue_on_timeout: DialogueResource
+
 ## If true, resolving this node will not advance a turn.
 @export var free_action = false
 
 ## If true, new nodes won't appear before this one is resolved; elite nodes also do not time out.
 @export var elite_node = false
+
 
 func _ready():
 	unlocked = start_unlocked
@@ -85,8 +90,12 @@ func resolve():
 ### If a node is freed due to running out of time, it triggers its timeout function.
 func timeout():
 	print(name, ' timed out')
+	%AnimationPlayer.play("timeout")
+	await %AnimationPlayer.animation_finished
 	for n:ZoneNode in unlock_on_timeout:
 		n.unlock()
+	if dialogue_on_timeout:
+		DialogueManager.show_dialogue_balloon(dialogue_on_timeout)
 
 ### If 'insta-resolve' is checked in the Cheat menu, this will resolve the node
 ### when it's run.
@@ -118,9 +127,10 @@ func can_timeout() -> bool:
 func process_turn():
 	if can_timeout():
 		time_elapsed += 1
+		if duration - time_elapsed < 2:
+			%AnimationPlayer.play("about_to_expire")
 	if time_elapsed >= duration:
-		timeout()
-		queue_free()
+		timed_out = true
 
 func toggleHoverInfo(enable:bool):
 	if enable:
@@ -129,6 +139,7 @@ func toggleHoverInfo(enable:bool):
 		$InfoPanel/HBox/NameLabel.text = getNodeName()
 		if can_timeout():
 			$InfoPanel/HBox/DescLabel.text = str(node_comments, '\nWill disappear after ', duration - time_elapsed, ' turns')
+		
 	else:
 		$InfoPanel.hide()
 		$InfoPanel.z_index = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://sabsll1jexsg"]
+[gd_scene format=3 uid="uid://sabsll1jexsg"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_6d3me"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_atp1s"]
@@ -11,19 +11,19 @@
 [ext_resource type="Script" uid="uid://yys4316b4p1r" path="res://CardScriptsAndComponents/Actions/Scripts/cardActionsNode.gd" id="8_qgbag"]
 [ext_resource type="Texture2D" uid="uid://bbhksk2xfgxlx" path="res://Art/CardArt/Desert/card-art-creature-tugarTrainer.jpg" id="12_1vwwr"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_klw2k"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7gt2k"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c3bds"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4va3l"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_klw2k")
+noise = SubResource("FastNoiseLite_7gt2k")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0l6fb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6d3me"]
 resource_local_to_scene = true
 shader = ExtResource("2_atp1s")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_c3bds")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_4va3l")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -31,12 +31,13 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-BeastHerder" node_paths=PackedStringArray("alt_actions_node_1") instance=ExtResource("1_6d3me")]
-material = SubResource("ShaderMaterial_0l6fb")
+[node name="Card-Cr-BeastHerder" unique_id=378710028 node_paths=PackedStringArray("alt_actions_node_1") instance=ExtResource("1_6d3me")]
+material = SubResource("ShaderMaterial_6d3me")
 cardName = "Beast Herder"
 subTypeStr = "Salkhi Scout"
 group = 9
 flavorText = "The desert clans draw the strength of mighty beasts for their cause."
+flavorTextShort = "I speak in the language of Anger -- and the beasts listen."
 manaCost = 2
 startingDamage = 2
 startingHealth = 2
@@ -47,22 +48,31 @@ alt_damage_1 = 2
 alt_health_1 = 2
 alt_mana_cost_1 = 2
 
-[node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("4_7gt2k")]
+[node name="OnAlliedTurnTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=741612666 instance=ExtResource("4_7gt2k")]
 
-[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" instance=ExtResource("5_0fyxx")]
+[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" unique_id=1909138916 instance=ExtResource("5_0fyxx")]
 customActionText = "On Turn: Bolster Allied Beasts 1/1"
 
-[node name="SkillAlterHealth" parent="Actions/OnAlliedTurnTrigger/CardAction" index="0" instance=ExtResource("6_o803r")]
+[node name="SkillAlterHealth" parent="Actions/OnAlliedTurnTrigger/CardAction" index="0" unique_id=940752304 instance=ExtResource("6_o803r")]
 bolsterDamage = 1
 bolsterHealth = 1
 
-[node name="TargetAllAllies" parent="Actions/OnAlliedTurnTrigger/CardAction" index="1" instance=ExtResource("7_jfmqp")]
+[node name="TargetAllAllies" parent="Actions/OnAlliedTurnTrigger/CardAction" index="1" unique_id=131174886 instance=ExtResource("7_jfmqp")]
 
-[node name="IfSubtype" parent="Actions/OnAlliedTurnTrigger/CardAction/TargetAllAllies" index="1" instance=ExtResource("8_4va3l")]
+[node name="IfSubtype" parent="Actions/OnAlliedTurnTrigger/CardAction/TargetAllAllies" index="1" unique_id=1207304059 instance=ExtResource("8_4va3l")]
 subtype = "Beast"
 
-[node name="Actions2" type="Node2D" parent="." index="2"]
+[node name="Actions2" type="Node2D" parent="." index="2" unique_id=2057030891]
 script = ExtResource("8_qgbag")
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("12_1vwwr")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "2"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "2"

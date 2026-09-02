@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctjoy83adq33o"]
+[gd_scene format=3 uid="uid://ctjoy83adq33o"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_lcboh"]
 [ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="2_5jlh2"]
@@ -8,19 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://by12snxaew5eu" path="res://CardScriptsAndComponents/TargetingComponents/ManualTargeting.tscn" id="5_5jlh2"]
 [ext_resource type="Texture2D" uid="uid://2n1ywullykye" path="res://Art/CardArt/card-art-cr-freeslayer-mounted-hiisi.jpg" id="7_kn400"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8tngq"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kn400"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ae333"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8tngq"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_8tngq")
+noise = SubResource("FastNoiseLite_kn400")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xoxae"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ae333"]
 resource_local_to_scene = true
 shader = ExtResource("2_kn400")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_ae333")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_8tngq")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -28,12 +28,14 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-SlaghRider" instance=ExtResource("1_lcboh")]
-material = SubResource("ShaderMaterial_xoxae")
+[node name="Card-Cr-SlaghRider" unique_id=1211287748 instance=ExtResource("1_lcboh")]
+material = SubResource("ShaderMaterial_ae333")
 cardName = "Mounted Hiisi"
 subTypeStr = "Freeslayer Rider"
 group = 17
 flavorText = "\"O leaf-clad rider, carrier of mountain's ills! Who rules thee?\"
+\"No god nor man! No god nor man!\""
+flavorTextShort = "\"O leaf-clad rider, carrier of mountain's ills! Who rules thee?\"
 \"No god nor man! No god nor man!\""
 manaCost = 2
 startingDamage = 1
@@ -42,16 +44,25 @@ targeting_mode = 1
 priority = 1
 will_not_charge = true
 
-[node name="OnCastTrigger" parent="Actions" index="0" instance=ExtResource("2_5jlh2")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1637265584 instance=ExtResource("2_5jlh2")]
 
-[node name="CardAction" parent="Actions/OnCastTrigger" index="0" instance=ExtResource("2_y63ad")]
+[node name="CardAction" parent="Actions/OnCastTrigger" index="0" unique_id=374295205 instance=ExtResource("2_y63ad")]
 customActionText = "Cast: Bolster Ally +2/0"
 
-[node name="SkillAlterHealth" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("2_16jdu")]
+[node name="SkillAlterHealth" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=1540591274 instance=ExtResource("2_16jdu")]
 bolsterDamage = 2
 
-[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("5_5jlh2")]
+[node name="ManualTargeting" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=326174250 instance=ExtResource("5_5jlh2")]
 manualTargetGroup = 1
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("7_kn400")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "2"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "1"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "2"

@@ -32,6 +32,9 @@ var animation_speed := AnimationSpeeds.NORMAL:
 			AnimationSpeeds.TURBO:
 				Engine.time_scale = 4.0
 
+enum TextSpeeds {NORMAL, FAST, INSTANT}
+var text_speed := TextSpeeds.NORMAL
+
 
 func save_options():
 	var config = ConfigFile.new()
@@ -43,6 +46,7 @@ func save_options():
 	config.set_value('video', 'display mode', display_mode)
 	
 	config.set_value('gameplay', 'animation_speed', animation_speed)
+	config.set_value('gameplay', 'text_speed', text_speed)
 	print(config.save(settings_directory))
 	
 func load_options():
@@ -61,4 +65,4 @@ func load_options():
 	display_mode = config.get_value('video', 'display mode', display_mode)
 	
 	animation_speed = config.get_value('gameplay', 'animation_speed', animation_speed)
-	
+	animation_speed = config.get_value('gameplay', 'text_speed', text_speed)

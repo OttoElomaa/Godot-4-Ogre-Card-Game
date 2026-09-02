@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bl47bd1r1tcdm"]
+[gd_scene format=3 uid="uid://bl47bd1r1tcdm"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_m871f"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_m8l2f"]
@@ -10,19 +10,19 @@
 [ext_resource type="PackedScene" uid="uid://bo03aq3860x4c" path="res://CardScriptsAndComponents/Triggers/OnSelfCastTrigger.tscn" id="8_qu13p"]
 [ext_resource type="PackedScene" uid="uid://cd1bgbw3nwn36" path="res://CardScriptsAndComponents/Actions/SkillPlayerHealthMana.tscn" id="9_m8l2f"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xknej"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m8l2f"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3twyr"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_21wop"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_xknej")
+noise = SubResource("FastNoiseLite_m8l2f")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8vup"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qu13p"]
 resource_local_to_scene = true
 shader = ExtResource("2_m8l2f")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_3twyr")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_21wop")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -30,47 +30,57 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Cr-Liana_Man" instance=ExtResource("1_m871f")]
-material = SubResource("ShaderMaterial_u8vup")
+[node name="Cr-Liana_Man" unique_id=346581673 instance=ExtResource("1_m871f")]
+material = SubResource("ShaderMaterial_qu13p")
 cardName = "Liana Man"
 subTypeStr = "Wild Vineman"
 group = 4
 flavorText = "\"If any of you see a comeling's slinking, extend thine arms, and beat it and smother!\""
+flavorTextShort = "\"If any of you see a comeling's slinking, extend thine arms, and beat it and smother!\""
 manaCost = 4
 startingDamage = 1
 startingHealth = 3
 action_mode = 2
 will_not_charge = true
 
-[node name="OnSelfArrivalTrigger" parent="Actions" index="0" instance=ExtResource("8_nbqp0")]
+[node name="OnSelfArrivalTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=315998895 instance=ExtResource("8_nbqp0")]
 
-[node name="CardAction" type="Node2D" parent="Actions/OnSelfArrivalTrigger" index="1"]
+[node name="CardAction" type="Node2D" parent="Actions/OnSelfArrivalTrigger" index="1" unique_id=335305017]
 script = ExtResource("5_vaeiv")
 customActionText = "Arrival: Gain 2 Vine Trap."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillEffectCounters" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("5_m871f")]
+[node name="SkillEffectCounters" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" unique_id=1465963609 instance=ExtResource("5_m871f")]
 grantEffect = ExtResource("6_m8l2f")
 grantAmount = 2
 
-[node name="TargetSelf" parent="Actions/OnSelfArrivalTrigger/CardAction" index="1" instance=ExtResource("7_21wop")]
+[node name="TargetSelf" parent="Actions/OnSelfArrivalTrigger/CardAction" index="1" unique_id=1445130135 instance=ExtResource("7_21wop")]
 
-[node name="OnCastTrigger" parent="Actions" index="1" instance=ExtResource("8_qu13p")]
+[node name="OnCastTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="1" unique_id=1983960955 instance=ExtResource("8_qu13p")]
 
-[node name="CardAction2" type="Node2D" parent="Actions/OnCastTrigger" index="0"]
+[node name="CardAction2" type="Node2D" parent="Actions/OnCastTrigger" index="0" unique_id=239149005]
 script = ExtResource("5_vaeiv")
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction2" index="0" instance=ExtResource("9_m8l2f")]
+[node name="SkillPlayerHealthMana" parent="Actions/OnCastTrigger/CardAction2" index="0" unique_id=1290835677 instance=ExtResource("9_m8l2f")]
 alterOwnerMana = -4
 
-[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="1"]
+[node name="CardAction" type="Node2D" parent="Actions/OnCastTrigger" index="1" unique_id=1908490736]
 script = ExtResource("5_vaeiv")
 customActionText = "Pay 4 Mana to gain 2 Vine Trap."
 metadata/_custom_type_script = "uid://dfqyywxg05ds"
 
-[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="0" instance=ExtResource("5_m871f")]
+[node name="SkillEffectCounters" parent="Actions/OnCastTrigger/CardAction" index="0" unique_id=1624129080 instance=ExtResource("5_m871f")]
 grantEffect = ExtResource("6_m8l2f")
 grantAmount = 2
 
-[node name="TargetSelf" parent="Actions/OnCastTrigger/CardAction" index="1" instance=ExtResource("7_21wop")]
+[node name="TargetSelf" parent="Actions/OnCastTrigger/CardAction" index="1" unique_id=1722054687 instance=ExtResource("7_21wop")]
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "4"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "1"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "3"

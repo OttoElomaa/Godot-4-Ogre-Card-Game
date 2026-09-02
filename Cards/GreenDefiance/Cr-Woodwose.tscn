@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://rmnwpdla01k4"]
+[gd_scene format=3 uid="uid://rmnwpdla01k4"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_c5v68"]
 [ext_resource type="PackedScene" uid="uid://jyrj2f2h71w" path="res://CardScriptsAndComponents/Triggers/OnAlliedTurnTrigger.tscn" id="2_o47dh"]
@@ -15,7 +15,7 @@ noise_type = 3
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
 noise = SubResource("FastNoiseLite_s5qc8")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_877ti"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o47dh"]
 resource_local_to_scene = true
 shader = ExtResource("2_t4qyw")
 shader_parameter/percentage = 1.0
@@ -27,28 +27,38 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Cr-Woodwose" instance=ExtResource("1_c5v68")]
-material = SubResource("ShaderMaterial_877ti")
+[node name="Cr-Woodwose" unique_id=405208908 instance=ExtResource("1_c5v68")]
+material = SubResource("ShaderMaterial_o47dh")
 cardName = "Woodwose"
 subTypeStr = "Woodwose Warrior"
 group = 4
 flavorText = "\"What is the nature of the hairy man? Some say, a person, degraded by overindulgent vice. Some say, our ancestor. The Woodwose does not appear to know or care.\"
 ~ Astromancer"
+flavorTextShort = "The woodwose was the ancestor of man, they say!"
 manaCost = 3
 startingDamage = 2
 startingHealth = 3
 block_on_arrival = false
 
-[node name="OnAlliedTurnTrigger" parent="Actions" index="0" instance=ExtResource("2_o47dh")]
+[node name="OnAlliedTurnTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=1614684418 instance=ExtResource("2_o47dh")]
 
-[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" instance=ExtResource("3_t4qyw")]
+[node name="CardAction" parent="Actions/OnAlliedTurnTrigger" index="1" unique_id=602324366 instance=ExtResource("3_t4qyw")]
 customActionText = "On turn, gain 1 Rage."
 
-[node name="TargetSelf" parent="Actions/OnAlliedTurnTrigger/CardAction" index="0" instance=ExtResource("4_877ti")]
+[node name="TargetSelf" parent="Actions/OnAlliedTurnTrigger/CardAction" index="0" unique_id=467299639 instance=ExtResource("4_877ti")]
 
-[node name="SkillEffectCounters" parent="Actions/OnAlliedTurnTrigger/CardAction" index="1" instance=ExtResource("5_gtvc7")]
+[node name="SkillEffectCounters" parent="Actions/OnAlliedTurnTrigger/CardAction" index="1" unique_id=2136570642 instance=ExtResource("5_gtvc7")]
 grantEffect = ExtResource("6_1ywc3")
 grantAmount = 1
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("8_o47dh")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "3"

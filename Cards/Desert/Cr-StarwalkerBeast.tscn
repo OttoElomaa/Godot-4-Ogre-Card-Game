@@ -8,19 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://duie7et41fnb6" path="res://CardScriptsAndComponents/TargetingComponents/BattleArtTargeting.tscn" id="6_x33f7"]
 [ext_resource type="Texture2D" uid="uid://n1kqgxe3iukd" path="res://Art/CardArt/card-art-creature-blinkbeast.jpg" id="7_cgp86"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_tck54"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8enxe"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q2oda"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l04t8"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_tck54")
+noise = SubResource("FastNoiseLite_8enxe")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jt532"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tnc2g"]
 resource_local_to_scene = true
 shader = ExtResource("2_l04t8")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_q2oda")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_l04t8")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -29,11 +29,12 @@ shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
 [node name="Card-Cr-Starwalker Beast" unique_id=126521111 instance=ExtResource("1_8enxe")]
-material = SubResource("ShaderMaterial_jt532")
+material = SubResource("ShaderMaterial_tnc2g")
 cardName = "Starwalker Beast"
 subTypeStr = "Astral Beast"
 group = 17
 flavorText = "In the night, a saw two stars come falling down; next night, I saw two starry beasts streak through the steppe."
+flavorTextShort = "In the night, a saw two stars come falling down."
 manaCost = 1
 startingDamage = 1
 startingHealth = 3
@@ -52,6 +53,9 @@ rest = true
 [node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("7_cgp86")
 
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "1"
+
 [node name="Label" parent="Frontside/CardName" parent_id_path=PackedInt32Array(1865153195) index="1" unique_id=295689671]
 text = "Blinkbeast"
 
@@ -60,3 +64,9 @@ visible = true
 
 [node name="HealthGlowDown" parent="Frontside/Resources/Glow" parent_id_path=PackedInt32Array(405272551) index="2" unique_id=1764133823]
 visible = true
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "1"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "3"

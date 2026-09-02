@@ -146,6 +146,30 @@ popup/item_1/id = 1
 popup/item_2/text = "Turbo"
 popup/item_2/id = 2
 
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=647638807]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 60
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer3" unique_id=1460243531]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer" unique_id=205176456]
+layout_mode = 2
+text = "Text Speed"
+
+[node name="TextSpeed" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer" unique_id=735415671]
+layout_mode = 2
+size_flags_horizontal = 10
+selected = 0
+item_count = 3
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Fast"
+popup/item_1/id = 1
+popup/item_2/text = "Instant"
+popup/item_2/id = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=951491191]
 layout_mode = 2
 size_flags_vertical = 10
@@ -168,5 +192,6 @@ text = "Cancel"
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OptionSlider_SFXVolume" to="." method="_on_option_slider_sfx_volume_value_changed"]
 [connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/DisplayOptions" to="." method="_on_display_options_item_selected"]
 [connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/AnimationSpeed" to="." method="_on_animation_speed_item_selected"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/TextSpeed" to="." method="_on_text_speed_item_selected"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7v3m7qb227jv"]
+[gd_scene format=3 uid="uid://c7v3m7qb227jv"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_r1jg0"]
 [ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="2_g3gfo"]
@@ -15,7 +15,7 @@ noise_type = 3
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5riqg"]
 noise = SubResource("FastNoiseLite_s5qc8")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tc6oo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8jrlo"]
 resource_local_to_scene = true
 shader = ExtResource("2_g3gfo")
 shader_parameter/percentage = 1.0
@@ -27,28 +27,38 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-FleetRaider" instance=ExtResource("1_r1jg0")]
-material = SubResource("ShaderMaterial_tc6oo")
+[node name="Card-Cr-FleetRaider" unique_id=157927100 instance=ExtResource("1_r1jg0")]
+material = SubResource("ShaderMaterial_8jrlo")
 cardName = "Fleet Raider"
-subTypeStr = "Umugite Warrior"
+subTypeStr = "Warrior Priest"
 group = 20
-flavorText = "A warrior-priest of Umug, body and mind in perfect confluence, wields their god's undying blessing as easily as they breathe."
+flavorText = "We shall dance with Umug now, and you know he prefers my dancing."
+flavorTextShort = "We shall dance with Umug now, and you know he prefers my dancing."
 manaCost = 4
 startingDamage = 4
 startingHealth = 2
 action_mode = 0
 targeting_mode = 1
 
-[node name="OnKillingEnemyInCombat" parent="Actions" index="0" instance=ExtResource("3_8jrlo")]
+[node name="OnKillingEnemyInCombat" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=97770018 instance=ExtResource("3_8jrlo")]
 
-[node name="CardAction" parent="Actions/OnKillingEnemyInCombat" index="1" instance=ExtResource("4_8c0j5")]
+[node name="CardAction" parent="Actions/OnKillingEnemyInCombat" index="1" unique_id=440995867 instance=ExtResource("4_8c0j5")]
 customActionText = "Kills: Gain Defy Death."
 
-[node name="SkillEffectCounters" parent="Actions/OnKillingEnemyInCombat/CardAction" index="1" instance=ExtResource("6_fnk75")]
+[node name="SkillEffectCounters" parent="Actions/OnKillingEnemyInCombat/CardAction" index="1" unique_id=972594958 instance=ExtResource("6_fnk75")]
 grantEffect = ExtResource("7_yccni")
 grantAmount = 1
 
-[node name="TargetSelf" parent="Actions/OnKillingEnemyInCombat/CardAction" index="2" instance=ExtResource("5_4f6kp")]
+[node name="TargetSelf" parent="Actions/OnKillingEnemyInCombat/CardAction" index="2" unique_id=683280086 instance=ExtResource("5_4f6kp")]
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("4_ertre")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "4"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "4"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "2"

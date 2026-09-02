@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvshdygyjpncb"]
+[gd_scene format=3 uid="uid://dvshdygyjpncb"]
 
 [ext_resource type="PackedScene" uid="uid://mxfejwivkelm" path="res://Cards/card.tscn" id="1_6in3p"]
 [ext_resource type="PackedScene" uid="uid://boieos0xdflds" path="res://CardScriptsAndComponents/Actions/CardAction.tscn" id="2_6jpba"]
@@ -7,19 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://14fl88rpfs16" path="res://CardScriptsAndComponents/Actions/SkillDeckActions.tscn" id="3_et0df"]
 [ext_resource type="Texture2D" uid="uid://b0hp5ejpxal7t" path="res://Art/CardArt/Desert/card-art-creature-alhaja-Pious.jpg" id="4_aqcq5"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gcvai"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_et0df"]
 resource_local_to_scene = true
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hup8j"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aqcq5"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_gcvai")
+noise = SubResource("FastNoiseLite_et0df")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a5782"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gcvai"]
 resource_local_to_scene = true
 shader = ExtResource("2_aqcq5")
 shader_parameter/percentage = 1.0
-shader_parameter/burn_texture = SubResource("NoiseTexture2D_hup8j")
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_aqcq5")
 shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
 shader_parameter/size_1 = 0.05
 shader_parameter/layer_2 = Color(1, 0, 0, 1)
@@ -27,23 +27,33 @@ shader_parameter/size_2 = 0.05
 shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
 shader_parameter/size_3 = 0.05
 
-[node name="Card-Cr-PiousAlhaja" instance=ExtResource("1_6in3p")]
-material = SubResource("ShaderMaterial_a5782")
+[node name="Card-Cr-PiousAlhaja" unique_id=2075321912 instance=ExtResource("1_6in3p")]
+material = SubResource("ShaderMaterial_gcvai")
 cardName = "Starry-Eyed Initiate"
 subTypeStr = "Worshipper"
 group = 8
 flavorText = "\"The kind Magus opened my eyes! I can finally see those — those unearthly sights!\""
+flavorTextShort = "\"The kind Magus opened my eyes! I can finally see those — those unearthly sights!\""
 manaCost = 3
 startingDamage = 2
 startingHealth = 2
 
-[node name="OnSelfArrivalTrigger" parent="Actions" index="0" instance=ExtResource("2_et0df")]
+[node name="OnSelfArrivalTrigger" parent="Actions" parent_id_path=PackedInt32Array(997573591) index="0" unique_id=729479520 instance=ExtResource("2_et0df")]
 
-[node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" instance=ExtResource("2_6jpba")]
+[node name="CardAction" parent="Actions/OnSelfArrivalTrigger" index="1" unique_id=1062764904 instance=ExtResource("2_6jpba")]
 customActionText = "Arrival: Draw 1"
 
-[node name="SkillDeckActions" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" instance=ExtResource("3_et0df")]
+[node name="SkillDeckActions" parent="Actions/OnSelfArrivalTrigger/CardAction" index="0" unique_id=1188874290 instance=ExtResource("3_et0df")]
 drawCards = 1
 
-[node name="Art" parent="Frontside" index="1"]
+[node name="Art" parent="Frontside" parent_id_path=PackedInt32Array(1002614824) index="1" unique_id=1730576632]
 texture = ExtResource("4_aqcq5")
+
+[node name="ManaCostLabel" parent="Frontside/ManaCost" parent_id_path=PackedInt32Array(63420725) index="1" unique_id=1527953317]
+text = "3"
+
+[node name="PowerLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="0" unique_id=975178878]
+text = "2"
+
+[node name="HealthLabel" parent="Frontside/Resources/Panel/HBox" parent_id_path=PackedInt32Array(1845894744) index="2" unique_id=1603050836]
+text = "2"

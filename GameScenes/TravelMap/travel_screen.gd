@@ -2,6 +2,8 @@ extends Node2D
 class_name TravelScreen
 
 const map_name_to_folder = {'MapAskelan': 'City', 'MapDesert': 'Desert', 'MapMoutains': 'Outcasts', 'MapJungle': 'GD'}
+const music_to_map = {'MapAskelan': preload("res://Audio/BGM/Anghu Musica - Sun & The Lord; General's Theme.wav"),
+'MapDesert': preload("res://Audio/BGM/Anghu Musica - In Presence of Piety.ogg"), 'MapMoutains': 'Outcasts', 'MapJungle': 'GD'}
 
 @export var map:Map
 var event_positions_events:Dictionary[Vector2, ZoneNode] = {}
@@ -52,7 +54,7 @@ func process_turn():
 	
 	await updateZoneVisuals()
 	
-	garbage_collect()
+#	garbage_collect()
 
 func choose_scenarios_to_spawn():
 	if turn == 1 or turn % 5 == 0:
@@ -213,18 +215,23 @@ func updateZoneVisuals():
 	
 	await get_tree().process_frame
 	
+	$Audio.play(music_to_map[map.name])
+	
 	for zoneNode:ZoneNode in %MapNodes.get_children():
 		zoneNode.input_active = false
 	
 	for zoneNode:ZoneNode in %MapNodes.get_children():
+		if zoneNode.timed_out:
+			await zoneNode.timeout()
+			zoneNode.queue_free()
+		if zoneNode.resolved:
+			await zoneNode.AnimateResolve()
+			zoneNode.queue_free()
 		if zoneNode.unlocked:
 			if not zoneNode.visible:
 				zoneNode.show()
 				await zoneNode.AnimateUnlock()
-		if zoneNode.resolved:
-			await zoneNode.AnimateResolve()
-			zoneNode.queue_free()
-			
+
 	for zoneNode:ZoneNode in %MapNodes.get_children():
 		zoneNode.input_active = true
 	
