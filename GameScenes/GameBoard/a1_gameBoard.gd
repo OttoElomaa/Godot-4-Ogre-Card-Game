@@ -377,7 +377,7 @@ func unfold_ritual_container(card:Card):
 	
 	## The ritual container moves to the middle of the screen and the card is turned face up.
 	var tween = get_tree().create_tween()
-	tween.tween_property(%RitualContainer, 'position', Vector2(%RitualContainer.position.x, 400), 2).set_ease(Tween.EASE_OUT)
+	tween.tween_property(%RitualContainer, 'position', Vector2(%RitualContainer.position.x, 400), 1.2).set_ease(Tween.EASE_OUT)
 	await tween.finished
 	$AnimationLayer.add_child(screen_flash)
 	await screen_flash.tree_exited
@@ -398,6 +398,8 @@ func unfold_ritual_container(card:Card):
 	typewriter_textbox.queue_free()
 	typewriter_textbox2.queue_free()
 	
+func se_ritual_drums():
+	$Audio/RitualDrums.play()
 
 func toggleCardInfo(enable:bool, card:Card):
 	var cardInfo := %CardInfoPanel

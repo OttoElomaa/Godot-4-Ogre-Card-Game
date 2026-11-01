@@ -222,17 +222,21 @@ func updateZoneVisuals():
 	
 	for zoneNode:ZoneNode in %MapNodes.get_children():
 		if zoneNode.timed_out:
-			await zoneNode.timeout()
+			print('Travel screen: node timeout animations playing')
+			zoneNode.timeout()
 			zoneNode.queue_free()
 		if zoneNode.resolved:
-			await zoneNode.AnimateResolve()
+			print('Travel screen: node resolution animations playing')
+			zoneNode.AnimateResolve()
 			zoneNode.queue_free()
 		if zoneNode.unlocked:
+			print('Travel screen: node unlock animations playing')
 			if not zoneNode.visible:
 				zoneNode.show()
-				await zoneNode.AnimateUnlock()
+				zoneNode.AnimateUnlock()
 
 	for zoneNode:ZoneNode in %MapNodes.get_children():
+		print('Travel screen: node animations finished, input on')
 		zoneNode.input_active = true
 	
 

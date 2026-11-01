@@ -117,6 +117,7 @@ func presummon(isEnemyCard):
 
 #### START THE PRE-BATTLE PROCESS IN ORDER TO FIGHT A BATTLE
 func handleClick():
+	print('Travel Screen:', name, ' clicked')
 	GameInfo.currentZone = travel_screen
 	
 	travel_screen.openPrebattle(self)

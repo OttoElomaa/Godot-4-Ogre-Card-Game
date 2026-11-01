@@ -7,3 +7,5 @@ script = ExtResource("1_uyb88")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=65204484]
 bus = &"BGM"
+
+[node name="ME_Player" type="AudioStreamPlayer" parent="." unique_id=1036758815]

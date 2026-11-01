@@ -1,0 +1,301 @@
+[gd_scene format=3 uid="uid://dvuq4mtoecsjb"]
+
+[ext_resource type="StyleBox" uid="uid://bocokxxjamm42" path="res://PanelStyles/StyleBoxTiled.tres" id="1_prf63"]
+[ext_resource type="PackedScene" uid="uid://8a68hh76lcve" path="res://GameScenes/DeckEditScreen/champion_container.tscn" id="2_x687x"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://PanelStyles/SkillBarBoxStyle.tres" id="3_sx5d5"]
+[ext_resource type="FontFile" uid="uid://ws5ldmejn1u" path="res://Fonts/Inkverse.ttf" id="3_x687x"]
+[ext_resource type="PackedScene" uid="uid://came4na503n5s" path="res://GameScenes/CardDisplayContainers/card_container.tscn" id="4_vxn77"]
+[ext_resource type="Shader" uid="uid://kvl8vx1tho8j" path="res://Resources/Shaders/destroy_card.gdshader" id="5_7nu7a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m26m4"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.159132, 0.123224, 0.0711235, 1)
+border_blend = true
+anti_aliasing = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sx5d5"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vxn77"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_sx5d5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nu7a"]
+resource_local_to_scene = true
+shader = ExtResource("5_7nu7a")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_vxn77")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m26m4"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ehxmu"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_m26m4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8cdll"]
+resource_local_to_scene = true
+shader = ExtResource("5_7nu7a")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_ehxmu")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_amiqy"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fg5ox"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_amiqy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qplws"]
+resource_local_to_scene = true
+shader = ExtResource("5_7nu7a")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_fg5ox")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_acnms"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gg4sg"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_acnms")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjkac"]
+resource_local_to_scene = true
+shader = ExtResource("5_7nu7a")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_gg4sg")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_65llm"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rv2ju"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_65llm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3p7gb"]
+resource_local_to_scene = true
+shader = ExtResource("5_7nu7a")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_rv2ju")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ejy3c"]
+resource_local_to_scene = true
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6iovp"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_ejy3c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u6tff"]
+resource_local_to_scene = true
+shader = ExtResource("5_7nu7a")
+shader_parameter/percentage = 1.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_6iovp")
+shader_parameter/layer_1 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(1, 0, 0, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(1, 0.5, 0, 1)
+shader_parameter/size_3 = 0.05
+
+[node name="ShopScene" type="CanvasLayer" unique_id=1419535748]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=931403945]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1183288552]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_prf63")
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer" unique_id=745786193]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m26m4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/PanelContainer" unique_id=551674656]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer" unique_id=715542248]
+layout_mode = 2
+
+[node name="PlayerChampion" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer" unique_id=334304769 instance=ExtResource("2_x687x")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Glory Amount" type="PanelContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer" unique_id=494809066]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_prf63")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer/Glory Amount" unique_id=1394076684]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_x687x")
+bbcode_enabled = true
+text = "Glory: 100"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ViewDeck" type="Button" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/VBoxContainer" unique_id=271143735]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_sx5d5")
+text = "View Deck"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer" unique_id=1131535686]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="ItemList" type="GridContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer" unique_id=715614407]
+custom_minimum_size = Vector2(1100, 0)
+layout_mode = 2
+columns = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList" unique_id=883499461]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -30)
+offset_transform_scale = Vector2(1.7, 1.7)
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 120
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer" unique_id=1629009669]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer/VBoxContainer" unique_id=355310961]
+layout_mode = 2
+
+[node name="CardContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer/VBoxContainer/PanelContainer2" unique_id=1429469794 instance=ExtResource("4_vxn77")]
+material = SubResource("ShaderMaterial_7nu7a")
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer/VBoxContainer" unique_id=699302150]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList" unique_id=120062609]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(2, 2)
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 120
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer2" unique_id=1083574882]
+layout_mode = 2
+
+[node name="CardContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer2/PanelContainer2" unique_id=491227447 instance=ExtResource("4_vxn77")]
+material = SubResource("ShaderMaterial_8cdll")
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList" unique_id=1584303459]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(2, 2)
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 120
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer3" unique_id=220796206]
+layout_mode = 2
+
+[node name="CardContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer3/PanelContainer2" unique_id=752367960 instance=ExtResource("4_vxn77")]
+material = SubResource("ShaderMaterial_qplws")
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList" unique_id=2100768208]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(2, 2)
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 120
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer4" unique_id=1962947190]
+layout_mode = 2
+
+[node name="CardContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer4/PanelContainer2" unique_id=461743413 instance=ExtResource("4_vxn77")]
+material = SubResource("ShaderMaterial_qjkac")
+layout_mode = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList" unique_id=23501463]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(2, 2)
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 120
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer5" unique_id=890907328]
+layout_mode = 2
+
+[node name="CardContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer5/PanelContainer2" unique_id=1200107311 instance=ExtResource("4_vxn77")]
+material = SubResource("ShaderMaterial_3p7gb")
+layout_mode = 2
+
+[node name="MarginContainer6" type="MarginContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList" unique_id=500187176]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(2, 2)
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 120
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer6" unique_id=1941271217]
+layout_mode = 2
+
+[node name="CardContainer" parent="MarginContainer/PanelContainer/PanelContainer/HBoxContainer/MarginContainer/ItemList/MarginContainer6/PanelContainer2" unique_id=820214129 instance=ExtResource("4_vxn77")]
+material = SubResource("ShaderMaterial_u6tff")
+layout_mode = 2

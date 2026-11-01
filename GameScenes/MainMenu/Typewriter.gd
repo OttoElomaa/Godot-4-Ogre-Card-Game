@@ -9,13 +9,22 @@ var silent = [' ', ',', ':', '.']
 @export var sound_off = false
 @export var delay = 0.3
 @export_range(0.1, 3.0) var delay_variance
+@export var ochre_shadows = false
+const text_to_shadow_colors = [[Color.ANTIQUE_WHITE, Color.CHOCOLATE],
+	[Color(0.269, 0.076, 0.013, 1.0), Color(0.972, 0.4, 0.205, 1.0)],
+	[Color.NAVAJO_WHITE, Color(0.09, 0.029, 0.005, 1.0)],
+	[Color.ANTIQUE_WHITE, Color.FIREBRICK]]
 
 func _ready():
 	start()
 
 func start():
 	$MarginContainer/RichTextLabel.text = text
-	$MarginContainer/RichTextLabel.add_theme_color_override("default_color", Color(2.117, 2.117, 2.117, 1.0)) 
+	var color_scheme = text_to_shadow_colors.pick_random()
+	var text_color = color_scheme[0]
+	var shadow_color = color_scheme[1]
+	$MarginContainer/RichTextLabel.add_theme_color_override("default_color", text_color) 
+	$MarginContainer/RichTextLabel.add_theme_color_override("font_shadow_color", shadow_color) 
 	$MarginContainer/RichTextLabel.visible_characters = 0
 	
 	if not text:

@@ -10,5 +10,6 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.976471, 0.819608, 0.447059, 1)
+border_color = Color(0.8117647, 0.7137255, 0.42745098, 1)
+border_blend = true
 anti_aliasing = false

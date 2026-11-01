@@ -25,3 +25,12 @@ func fade_in(time:float):
 	var tween = get_tree().create_tween()
 	tween.tween_property($AudioStreamPlayer, 'volume_linear', 1.0, time)
 	await tween.finished
+
+func play_ME(stream:AudioStream):
+	var bgm_volume = AudioServer.get_bus_volume_linear(1)
+	$ME_Player.stream = stream
+	$ME_Player.play()
+	AudioServer.set_bus_volume_linear(1, bgm_volume / 2)
+	await $ME_Player.finished
+	AudioServer.set_bus_volume_linear(1, bgm_volume)
+	

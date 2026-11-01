@@ -173,8 +173,6 @@ func _on_panel_container_gui_input(event):
 
 func AnimateUnlock():
 	%AnimationPlayer.play("unlock")
-	await %AnimationPlayer.animation_finished
 	
 func AnimateResolve():
 	%AnimationPlayer.play("resolve")
-	await %AnimationPlayer.animation_finished

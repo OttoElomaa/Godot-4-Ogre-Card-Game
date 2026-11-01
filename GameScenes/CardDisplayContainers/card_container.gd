@@ -1,3 +1,4 @@
+@tool
 extends MarginContainer
 class_name CardContainer
 
@@ -16,7 +17,7 @@ var card: Card = null
 		%ManaCost.visible = new
 		show_mana_cost = new
 
-@export var has_margin = false
+@export  var has_margin = false
 
 func _ready():
 	pass

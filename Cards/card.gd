@@ -1230,7 +1230,9 @@ func animateRitualCast() -> Tween:
 	if isEnemyCard:
 		side_number = -1
 	
-	tween.tween_property(self, "position", position + (side_number * Vector2(0, 400)), 0.5)
+	MusicBus.play_ME(preload("res://Audio/ME/Ritual-Drums.ogg"))
+	
+	tween.tween_property(self, "position", position + (side_number * Vector2(0, 400)), 0.3)
 	await tween.finished
 	hide()
 	

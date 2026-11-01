@@ -24,7 +24,7 @@ func initialize(Main:Node):
 	
 	if randf() > 0.3:
 		$TypewriterTextbox.hide()
-	$TypewriterTextbox.text = $CardContainer.card.flavorText
+	$TypewriterTextbox.text = $CardContainer.card.flavorTextShort
 	$TypewriterTextbox.global_position = Vector2(randi_range(500, 1100), 
 	randi_range(0, 600))
 	$TypewriterTextbox.rotation_degrees += randf_range(25, -25) 

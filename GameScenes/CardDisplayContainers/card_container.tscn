@@ -46,10 +46,10 @@ pivot_offset = Vector2(55, 89)
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 script = ExtResource("2_s2vvh")
+has_margin = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2025334723]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_right = -20

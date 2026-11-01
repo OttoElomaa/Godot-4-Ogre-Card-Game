@@ -2,9 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://nfa3rqo1oyuu" path="res://GameScenes/Zone/zoneNodeBase.tscn" id="1_0obbp"]
 [ext_resource type="Script" uid="uid://b4jucpsg4wr8b" path="res://GameScenes/Zone/zoneNode_battle.gd" id="1_ge5wy"]
+[ext_resource type="Shader" uid="uid://b0r8vadh04m41" path="res://Resources/Shaders/sand_dissolve.tres" id="2_a7yn6"]
 [ext_resource type="Texture2D" uid="uid://dshhcmglifdvl" path="res://Art/icons/16x16/swords.png" id="3_gjeqv"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_upsve"]
+resource_local_to_scene = true
+shader = ExtResource("2_a7yn6")
+shader_parameter/percentage_1 = 1.0
+shader_parameter/FloatParameter = 0.20000000298024
+
 [node name="BattleIcon" unique_id=1158483326 instance=ExtResource("1_0obbp")]
+material = SubResource("ShaderMaterial_upsve")
 script = ExtResource("1_ge5wy")
 board_name = ""
 game_board = null

@@ -10,6 +10,10 @@ var prepared_board: GameBoard = null
 
 
 func _ready():
+	SceneSwitcher.scene_changed.connect(open)
+
+
+func open():
 	%AnimationPlayer.play("unfold_2")
 #	prepared_board = null
 	update_champion()
@@ -20,7 +24,7 @@ func _ready():
 		%Proceed.show()
 	else:
 		%Proceed.hide()
-		
+
 func setup(board:GameBoard):
 	print('Deck Edit Sets Up. Board is ', board)
 	prepared_board = board
@@ -31,6 +35,9 @@ func setup(board:GameBoard):
 
 func create_containers():
 	GameInfo.playerOwnedCards = CardChecks.filter_by_group(GameInfo.playerOwnedCards)
+	
+	if not is_inside_tree():
+		return
 
 	#### EMPTY THE CARD LISTS BEFORE FILLING THEM
 	for child in activeCardsContainer.get_children():
@@ -77,6 +84,8 @@ func update_champion():
 	await MyTools.createTempCard(champion)
 	%ChampionContainer.insert_champion(champion)
 	%ChampionName.text = champion.cardName
+	for child in %SkillContainer.get_children():
+		child.queue_free()
 	for action in champion.usable_actions:
 		var new_cont:ChampSkillContainer = ChampActionCont.instantiate()
 		new_cont.setup(action)

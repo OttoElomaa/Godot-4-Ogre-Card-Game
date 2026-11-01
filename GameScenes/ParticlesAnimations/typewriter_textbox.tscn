@@ -36,11 +36,15 @@ theme_override_constants/margin_bottom = 20
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1888373850]
 modulate = Color(0.47113067, 0.47113067, 0.47113067, 1)
+clip_contents = false
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("1_718ti")
-theme_override_colors/default_color = Color(0.973535, 0.973535, 0.973535, 1)
+theme_override_colors/default_color = Color(1.348, 1.348, 1.348, 1)
+theme_override_colors/font_shadow_color = Color(0.8, 0.46666667, 0.13333334, 1)
+theme_override_constants/shadow_outline_size = 50
 bbcode_enabled = true
+text = "Shinparo"
 fit_content = true
 scroll_active = false
 visible_characters_behavior = 1
